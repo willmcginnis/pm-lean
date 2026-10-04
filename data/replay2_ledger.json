@@ -1,0 +1,1757 @@
+[
+ {
+  "id": "*2.64",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*2.63"
+  ],
+  "extra_used": [
+   "*2.05",
+   "*2.06"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱1·4, ✱2·63 (q,p/p,q)]"
+ },
+ {
+  "id": "*2.65",
+  "method": "explicit",
+  "cited_used": [
+   "*2.64"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·64 (∼p/p)]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*2.69",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*2.62",
+   "*2.68"
+  ],
+  "extra_used": [
+   "*2.05"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·68, ✱1·4, ✱2·62 (q,p/p,q)]"
+ },
+ {
+  "id": "*2.73",
+  "method": "explicit",
+  "cited_used": [
+   "*2.38",
+   "*2.621"
+  ],
+  "extra_used": [
+   "*2.05"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·621, ✱2·38]"
+ },
+ {
+  "id": "*2.74",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05",
+   "*2.06",
+   "*2.73"
+  ],
+  "extra_used": [
+   "*1.4",
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.5"
+  ],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·73, ✱1·4, ✱2·38, ✱2·06]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*2.75",
+  "method": "explicit",
+  "cited_used": [
+   "*2.31",
+   "*2.53",
+   "*2.74"
+  ],
+  "extra_used": [
+   "*1.4",
+   "*2.05",
+   "*2.06"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·74, ✱2·53, ✱2·31]"
+ },
+ {
+  "id": "*2.76",
+  "method": "explicit",
+  "cited_used": [
+   "*2.04",
+   "*2.75"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·75, ✱2·04]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*2.77",
+  "method": "explicit",
+  "cited_used": [
+   "*2.76"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·76 (∼p/p)]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*2.81",
+  "method": "explicit",
+  "cited_used": [
+   "*1.6",
+   "*2.05",
+   "*2.76"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*2.06"
+  ],
+  "note": "direct Hilbert-style term. Proof annotation: [✱1·6, ✱2·76, ✱2·05]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*2.82",
+  "method": "explicit",
+  "cited_used": [
+   "*2.8",
+   "*2.81"
+  ],
+  "extra_used": [
+   "*1.1",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.31",
+   "*2.32",
+   "*2.77"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·8, ✱2·81; ✱2·31/✱2·32 for the bracketing]"
+ },
+ {
+  "id": "*2.83",
+  "method": "explicit",
+  "cited_used": [
+   "*2.82"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.31",
+   "*2.32",
+   "*2.77"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·82 (∼p,∼q/p,q); ✱2·31/✱2·32 for the bracketing]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*3.3",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05",
+   "*2.08"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.03",
+   "*2.04",
+   "*2.06",
+   "*2.15",
+   "*2.16",
+   "*2.17"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: exportation [✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*3.37",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05"
+  ],
+  "extra_used": [
+   "*2.01",
+   "*2.02",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*2.03",
+   "*2.06",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.3",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱2·01, ✱2·24]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*3.43",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05",
+   "*2.77",
+   "*3.2"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.08",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*2.06",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: composition [✱3·2, ✱3·26, ✱3·27]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*3.44",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.08",
+   "*2.77",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*2.04",
+   "*2.06",
+   "*2.53",
+   "*2.6",
+   "*3.3",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ∨-elimination (✱1·6, ✱1·4, ✱1·2)]"
+ },
+ {
+  "id": "*3.47",
+  "method": "explicit",
+  "cited_used": [
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.83",
+   "*3.22",
+   "*3.45"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]"
+ },
+ {
+  "id": "*3.48",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*1.6",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77"
+  ],
+  "cited_unused": [
+   "*2.83"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]"
+ },
+ {
+  "id": "*4.11",
+  "method": "explicit",
+  "cited_used": [
+   "*2.16",
+   "*2.17"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.22",
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·16, ✱2·17, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*4.12",
+  "method": "explicit",
+  "cited_used": [
+   "*2.03",
+   "*2.15"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·03, ✱2·15, ✱3·2, ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.14",
+  "method": "explicit",
+  "cited_used": [
+   "*3.37"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.18",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.13"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·37 (→); ← by reductio ✱2·18]"
+ },
+ {
+  "id": "*4.15",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.22",
+   "*4.13",
+   "*4.14"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱2·01, ✱2·24]"
+ },
+ {
+  "id": "*4.22",
+  "method": "explicit",
+  "cited_used": [
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.83",
+   "*3.43"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]"
+ },
+ {
+  "id": "*4.32",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.11",
+   "*4.12",
+   "*4.15"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*4.36",
+  "method": "explicit",
+  "cited_used": [
+   "*3.45"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·45, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.37",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.38",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*1.6",
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·38 (the ✱1·6 analogue for the left disjunct), ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.38",
+  "method": "explicit",
+  "cited_used": [
+   "*3.47"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.22",
+   "*4.32"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·47, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*4.39",
+  "method": "explicit",
+  "cited_used": [
+   "*3.48"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.22",
+   "*3.47",
+   "*4.32"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·48, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*4.4",
+  "method": "explicit",
+  "cited_used": [
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77"
+  ],
+  "cited_unused": [
+   "*3.31",
+   "*3.43",
+   "*3.44",
+   "*3.48"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.41",
+  "method": "explicit",
+  "cited_used": [
+   "*1.6",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.53",
+   "*2.54",
+   "*3.43",
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.42",
+  "method": "explicit",
+  "cited_used": [
+   "*2.11"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77",
+   "*3.2",
+   "*3.26"
+  ],
+  "cited_unused": [
+   "*3.21",
+   "*4.4"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.43",
+  "method": "explicit",
+  "cited_used": [
+   "*2.2"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*2.53",
+   "*2.65",
+   "*3.31",
+   "*3.43",
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·2, ✱3·26, ✱3·27, ✱2·24]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.44",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*2.2",
+   "*3.26"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.77"
+  ],
+  "cited_unused": [
+   "*3.44"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·26, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.45",
+  "method": "explicit",
+  "cited_used": [
+   "*2.2",
+   "*3.26"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.52",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.18",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.13",
+   "*4.5"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·5 (q/∼q), ✱4·13: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.53",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.18",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.12",
+   "*4.52"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·52, ✱4·12: proved directly by cases and reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.56",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.13",
+   "*4.54"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·54, ✱4·13: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.57",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.18",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.12",
+   "*4.56"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·56, ✱4·12: proved directly by reductio]"
+ },
+ {
+  "id": "*4.61",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.18",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.11",
+   "*4.52",
+   "*4.6"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·6, ✱4·52: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.65",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*4.61"
+  ],
+  "cited_unused": [
+   "*4.11",
+   "*4.56",
+   "*4.64"
+  ],
+  "note": "direct Hilbert-style term. Proof annotation: [✱4·61 (∼p/p)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.7",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.71",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*4.72",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77",
+   "*3.2",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·3, ✱2·2, ∨-elimination, ✱3·2]"
+ },
+ {
+  "id": "*4.73",
+  "method": "explicit",
+  "cited_used": [
+   "*2.02",
+   "*3.26"
+  ],
+  "extra_used": [
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*3.27",
+   "*4.71"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26 (cf. ✱4·71)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.74",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.21",
+   "*4.72"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·3, ✱2·24, ∨-elimination, ✱3·2 (cf. ✱4·72)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.76",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27",
+   "*3.43"
+  ],
+  "cited_unused": [
+   "*4.41"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·43 (→); ← by ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.77",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*2.2",
+   "*3.44"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·44 (→); ← by ✱1·3, ✱2·2, ✱3·2]"
+ },
+ {
+  "id": "*4.78",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱2·24]"
+ },
+ {
+  "id": "*4.79",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+ },
+ {
+  "id": "*4.82",
+  "method": "explicit",
+  "cited_used": [
+   "*2.21",
+   "*2.65"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.31",
+   "*3.43"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·65 (→); ← by ✱2·21]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.83",
+  "method": "explicit",
+  "cited_used": [
+   "*2.02",
+   "*2.61",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*3.31",
+   "*3.43"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·61 (→); ← by ✱2·02]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.84",
+  "method": "explicit",
+  "cited_used": [
+   "*2.06"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·06, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.85",
+  "method": "explicit",
+  "cited_used": [
+   "*2.05"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.47"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·05, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*4.86",
+  "method": "explicit",
+  "cited_used": [
+   "*4.21",
+   "*4.22"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱4·21, ✱4·22, ✱3·2]"
+ },
+ {
+  "id": "*4.87",
+  "method": "explicit",
+  "cited_used": [
+   "*2.04",
+   "*3.3",
+   "*3.31"
+  ],
+  "extra_used": [
+   "*3.2"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱3·3, ✱3·31, ✱2·04, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.1",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.22",
+   "*3.4"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱2·02, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.15",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱2·24, ✱3·2, ✱1·3, ✱2·2]"
+ },
+ {
+  "id": "*5.16",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.24",
+   "*2.77",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·01, ✱2·11 (cases), ✱2·24, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.17",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.18",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱2·01, ✱2·18, ✱3·2]"
+ },
+ {
+  "id": "*5.18",
+  "method": "explicit",
+  "cited_used": [
+   "*5.15",
+   "*5.16"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*5.17"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·15, ✱5·16]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.19",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*5.18"
+  ],
+  "extra_used": [
+   "*1.1",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱5·18 (p/q), ✱4·2]"
+ },
+ {
+  "id": "*5.21",
+  "method": "explicit",
+  "cited_used": [
+   "*4.11",
+   "*5.1"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·1 (∼p,∼q/p,q), ✱4·11]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.22",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.39",
+   "*4.51",
+   "*4.61"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱2·01, ✱2·24, ∨-elimination, ✱3·2]"
+ },
+ {
+  "id": "*5.23",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27",
+   "*5.1",
+   "*5.21"
+  ],
+  "cited_unused": [
+   "*4.13",
+   "*4.36",
+   "*5.18",
+   "*5.22"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases); ← by ✱5·1, ✱5·21]"
+ },
+ {
+  "id": "*5.24",
+  "method": "explicit",
+  "cited_used": [
+   "*5.22",
+   "*5.23"
+  ],
+  "extra_used": [
+   "*2.01",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·22, ✱5·23]"
+ },
+ {
+  "id": "*5.3",
+  "method": "explicit",
+  "cited_used": [
+   "*2.02",
+   "*2.05",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*2.06",
+   "*3.33",
+   "*3.34",
+   "*3.43"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.31",
+  "method": "explicit",
+  "cited_used": [
+   "*2.02",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*3.43"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.32",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.3",
+   "*3.31",
+   "*4.76",
+   "*5.3"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.33",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.73",
+   "*4.84",
+   "*5.32"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.35",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.43",
+   "*5.1"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.36",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*3.35",
+   "*4.38"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.41",
+  "method": "explicit",
+  "cited_used": [
+   "*2.77",
+   "*2.86"
+  ],
+  "extra_used": [
+   "*3.2"
+  ],
+  "cited_unused": [],
+  "note": "direct Hilbert-style term. Proof annotation: [✱2·86 (→), ✱2·77 (←)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.42",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.87",
+   "*5.3"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]"
+ },
+ {
+  "id": "*5.44",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.76",
+   "*5.3",
+   "*5.32"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.5",
+  "method": "explicit",
+  "cited_used": [
+   "*2.02"
+  ],
+  "extra_used": [
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*3.26",
+   "*3.27",
+   "*3.3",
+   "*3.35"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·1 under hypotheses, ✱2·02, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.501",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26"
+  ],
+  "cited_unused": [
+   "*3.3",
+   "*3.35",
+   "*5.1"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·02, ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.53",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.77"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·77: ∨-elimination, ✱1·3, ✱2·2, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.54",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.37",
+   "*4.1",
+   "*4.11",
+   "*4.44",
+   "*4.73",
+   "*5.1"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+ },
+ {
+  "id": "*5.55",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2"
+  ],
+  "cited_unused": [
+   "*4.74",
+   "*5.1"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24]"
+ },
+ {
+  "id": "*5.6",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.64",
+   "*4.85",
+   "*4.87"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+ },
+ {
+  "id": "*5.61",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.74",
+   "*5.32"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·2, ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+ },
+ {
+  "id": "*5.63",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.77",
+   "*3.2",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*5.62"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱5·62: ∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+ },
+ {
+  "id": "*5.7",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3"
+  ],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.11",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*4.37",
+   "*4.74",
+   "*5.1"
+  ],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24, ✱3·2]"
+ },
+ {
+  "id": "*5.71",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.2",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·2, ✱2·24, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.74",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·1 under hypotheses, ✱3·2, ✱3·26, ✱3·27]"
+ },
+ {
+  "id": "*5.75",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*1.6",
+   "*2.02",
+   "*2.05",
+   "*2.08",
+   "*2.24",
+   "*2.77",
+   "*3.2",
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱1·3, ✱2·24, ✱3·2, ✱3·26, ✱3·27]"
+ }
+]

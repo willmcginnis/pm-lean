@@ -1,0 +1,2706 @@
+[
+ {
+  "id": "*2.01",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.02",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.3"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.03",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.04",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.5"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.05",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.06",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.05"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.07",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.3"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.08",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.2",
+   "*2.05"
+  ],
+  "extra": [
+   "*1.3",
+   "*1.5"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.1",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.08"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.11",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*2.1"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.12",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.11"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.13",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.6",
+   "*2.11",
+   "*2.12"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.14",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*2.13"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.15",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.05",
+   "*2.12",
+   "*2.14"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.16",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.05",
+   "*2.06",
+   "*2.12"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.17",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.05",
+   "*2.06",
+   "*2.14"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.18",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.01",
+   "*2.05",
+   "*2.06",
+   "*2.12",
+   "*2.14"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.2",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.3",
+   "*1.4",
+   "*2.05",
+   "*2.06"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.21",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.24",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.21"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.25",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.5",
+   "*2.1"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.26",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.25"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.27",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.26"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.3",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*1.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.31",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*1.5",
+   "*2.05",
+   "*2.06",
+   "*2.3"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.32",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.4",
+   "*1.5",
+   "*2.3"
+  ],
+  "extra": [
+   "*2.06"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "elkind"
+  ]
+ },
+ {
+  "id": "*2.36",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*1.6",
+   "*2.05",
+   "*2.06"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.37",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*1.6",
+   "*2.05",
+   "*2.06"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.38",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.4",
+   "*1.6",
+   "*2.05",
+   "*2.06"
+  ],
+  "extra": [
+   "*2.3",
+   "*2.31",
+   "*2.32",
+   "*2.37"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.4",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.2",
+   "*2.31",
+   "*2.38"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.41",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.2",
+   "*1.5",
+   "*1.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.42",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.4"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.43",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.42"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.45",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*2.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.46",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.3",
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.47",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*2.2",
+   "*2.45"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.48",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.3",
+   "*2.05",
+   "*2.06",
+   "*2.46"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.49",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*2.2",
+   "*2.45"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.5",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.47"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.51",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.48"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.52",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.49"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.521",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.17",
+   "*2.52"
+  ],
+  "extra": [
+   "*1.3",
+   "*1.5",
+   "*2.15",
+   "*2.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.53",
+  "tag": "REPAIRED",
+  "cited": [],
+  "extra": [
+   "*2.12",
+   "*2.38"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "elkind"
+  ]
+ },
+ {
+  "id": "*2.54",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.14",
+   "*2.38"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.55",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.53"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.56",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.4",
+   "*2.55"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.11",
+   "*2.31"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.6",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.2",
+   "*2.05",
+   "*2.06",
+   "*2.38"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.61",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.62",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*2.53",
+   "*2.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.621",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.62"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.63",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.62"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.64",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.4",
+   "*2.63"
+  ]
+ },
+ {
+  "id": "*2.65",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.64"
+  ],
+  "extra": [],
+  "uses_unresolved": [
+   "*2.64"
+  ],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*2.67",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*2.24",
+   "*2.54"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.68",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.54",
+   "*2.67"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.06"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.69",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.4",
+   "*2.62",
+   "*2.68"
+  ]
+ },
+ {
+  "id": "*2.73",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.38",
+   "*2.621"
+  ]
+ },
+ {
+  "id": "*2.74",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.5",
+   "*2.05",
+   "*2.06",
+   "*2.73"
+  ],
+  "extra": [
+   "*2.31",
+   "*2.32"
+  ],
+  "uses_unresolved": [
+   "*2.73"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "elkind"
+  ]
+ },
+ {
+  "id": "*2.75",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.31",
+   "*2.53",
+   "*2.74"
+  ]
+ },
+ {
+  "id": "*2.76",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*2.75"
+  ],
+  "extra": [],
+  "uses_unresolved": [
+   "*2.75"
+  ],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*2.77",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.76"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*2.8",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*2.38",
+   "*2.53"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*2.81",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.6",
+   "*2.05",
+   "*2.06",
+   "*2.76"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*2.82",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.8",
+   "*2.81"
+  ]
+ },
+ {
+  "id": "*2.83",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.82"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.06",
+   "*2.81"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.85",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.3",
+   "*2.04",
+   "*2.05",
+   "*2.06",
+   "*2.54",
+   "*2.55",
+   "*2.83"
+  ],
+  "extra": [
+   "*1.5",
+   "*1.6"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*2.86",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.85"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.1",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.08"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.11",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.08"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.12",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.11"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.13",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.11"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.14",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.1"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.2",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.12"
+  ],
+  "extra": [
+   "*2.32"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "elkind"
+  ]
+ },
+ {
+  "id": "*3.21",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.04",
+   "*3.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.22",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*1.4",
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.13",
+   "*3.14"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.24",
+  "tag": "REPAIRED",
+  "cited": [],
+  "extra": [
+   "*2.11",
+   "*3.14"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "elkind"
+  ]
+ },
+ {
+  "id": "*3.26",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.02",
+   "*2.31",
+   "*2.53"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.27",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.22",
+   "*3.26"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*2.36"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*3.3",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.03",
+   "*2.04",
+   "*2.05",
+   "*2.06",
+   "*2.08",
+   "*2.15",
+   "*2.16",
+   "*2.17"
+  ],
+  "extra": [
+   "*1.5",
+   "*2.83",
+   "*2.85",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*3.31",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.08",
+   "*2.31",
+   "*2.53"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*1.6"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*3.33",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*3.31"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.34",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*3.31",
+   "*3.33"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.35",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.27",
+   "*3.31"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.37",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.05",
+   "*2.06",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.3",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*3.4",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*2.51",
+   "*3.37"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.41",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*3.26",
+   "*3.33",
+   "*3.34"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.42",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*3.27",
+   "*3.33",
+   "*3.34"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.43",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.05",
+   "*2.06",
+   "*2.77",
+   "*3.2",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": []
+ },
+ {
+  "id": "*3.44",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.04",
+   "*2.05",
+   "*2.06",
+   "*2.53",
+   "*2.6",
+   "*3.3",
+   "*3.31",
+   "*3.33",
+   "*3.34"
+  ]
+ },
+ {
+  "id": "*3.45",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.03",
+   "*2.05",
+   "*2.06",
+   "*2.08",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.33",
+   "*3.34",
+   "*3.37"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*3.47",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.83",
+   "*3.22",
+   "*3.26",
+   "*3.27",
+   "*3.45"
+  ]
+ },
+ {
+  "id": "*3.48",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.4",
+   "*1.6",
+   "*2.83",
+   "*3.26",
+   "*3.27"
+  ]
+ },
+ {
+  "id": "*4.1",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.16",
+   "*2.17"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.11",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.16",
+   "*2.17",
+   "*3.22",
+   "*3.47"
+  ]
+ },
+ {
+  "id": "*4.12",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.03",
+   "*2.15"
+  ],
+  "extra": [
+   "*1.4",
+   "*3.2",
+   "*3.47"
+  ],
+  "uses_unresolved": [
+   "*3.47"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.13",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.12",
+   "*2.14"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.11",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.14",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.37",
+   "*4.13"
+  ]
+ },
+ {
+  "id": "*4.15",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.22",
+   "*4.13",
+   "*4.14"
+  ]
+ },
+ {
+  "id": "*4.2",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.08",
+   "*3.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.21",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.22"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.22",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.83",
+   "*3.26",
+   "*3.27",
+   "*3.43"
+  ]
+ },
+ {
+  "id": "*4.24",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.43",
+   "*3.2",
+   "*3.26"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.25",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.2",
+   "*1.3"
+  ],
+  "extra": [
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.3",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.22"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.31",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.4"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.32",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.11",
+   "*4.12",
+   "*4.15"
+  ]
+ },
+ {
+  "id": "*4.33",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.31",
+   "*2.32"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.36",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.45",
+   "*3.47"
+  ],
+  "extra": [
+   "*2.08",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*3.47"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.37",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.6",
+   "*3.47"
+  ],
+  "extra": [
+   "*2.08",
+   "*2.38",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*3.47"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.38",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.22",
+   "*3.47",
+   "*4.32"
+  ]
+ },
+ {
+  "id": "*4.39",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.22",
+   "*3.47",
+   "*3.48",
+   "*4.32"
+  ]
+ },
+ {
+  "id": "*4.4",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.2",
+   "*3.26",
+   "*3.27",
+   "*3.31",
+   "*3.43",
+   "*3.44",
+   "*3.48"
+  ],
+  "extra": [
+   "*2.06"
+  ],
+  "uses_unresolved": [
+   "*3.44",
+   "*3.48"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.41",
+  "tag": "REPAIRED",
+  "cited": [
+   "*1.6",
+   "*2.53",
+   "*2.54",
+   "*3.26",
+   "*3.27",
+   "*3.43",
+   "*3.47"
+  ],
+  "extra": [
+   "*2.02",
+   "*2.81",
+   "*3.2",
+   "*3.31"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.42",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.11",
+   "*3.21",
+   "*4.4"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.02",
+   "*3.26",
+   "*4.22"
+  ],
+  "uses_unresolved": [
+   "*4.22"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "elkind",
+   "search"
+  ]
+ },
+ {
+  "id": "*4.43",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.2",
+   "*2.53",
+   "*2.65",
+   "*3.31",
+   "*3.43",
+   "*3.47"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.02",
+   "*2.64",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*2.64"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.44",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.08",
+   "*2.2",
+   "*3.26",
+   "*3.44"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.02",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*3.44"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.45",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.2",
+   "*3.26"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*1.4",
+   "*2.64",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*2.64"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.5",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*4.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.51",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.12",
+   "*4.5"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.11",
+   "*2.14",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.52",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.13",
+   "*4.5"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.08",
+   "*2.14",
+   "*2.16",
+   "*3.2",
+   "*3.35",
+   "*3.37"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.53",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.12",
+   "*4.52"
+  ],
+  "extra": [
+   "*1.4",
+   "*1.6",
+   "*2.14",
+   "*2.53",
+   "*3.2",
+   "*3.35",
+   "*3.37"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.54",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.13",
+   "*4.5"
+  ],
+  "extra": [
+   "*2.08",
+   "*2.16",
+   "*2.53",
+   "*2.54",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.55",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.12",
+   "*4.54"
+  ],
+  "extra": [
+   "*1.4",
+   "*2.08",
+   "*2.16",
+   "*2.53",
+   "*2.54",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.56",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.13",
+   "*4.54"
+  ],
+  "extra": [
+   "*2.45",
+   "*2.46",
+   "*2.55",
+   "*3.2",
+   "*3.31",
+   "*3.37",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.57",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.12",
+   "*4.56"
+  ]
+ },
+ {
+  "id": "*4.6",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*4.2"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.61",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.11",
+   "*4.52",
+   "*4.6"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.22"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.62",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*4.6"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.63",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*4.11",
+   "*4.5",
+   "*4.62"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.64",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.53",
+   "*2.54"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.65",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.11",
+   "*4.56",
+   "*4.64"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.08",
+   "*4.61"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.66",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*4.64"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*4.67",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.11",
+   "*4.54",
+   "*4.66"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.08",
+   "*4.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.7",
+  "tag": "REPAIRED",
+  "cited": [],
+  "extra": [
+   "*1.6",
+   "*2.08",
+   "*2.3",
+   "*2.64",
+   "*3.2",
+   "*3.27"
+  ],
+  "uses_unresolved": [
+   "*2.64"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.71",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*4.72",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*4.73",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*3.26",
+   "*3.27",
+   "*4.71"
+  ],
+  "extra": [
+   "*1.3",
+   "*1.5",
+   "*3.2",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.74",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.21",
+   "*4.72"
+  ],
+  "extra": [
+   "*1.3",
+   "*1.5",
+   "*2.53",
+   "*3.2",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.76",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.41"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.22"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.77",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.3",
+   "*2.2",
+   "*3.44"
+  ]
+ },
+ {
+  "id": "*4.78",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*4.79",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*4.8",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.01",
+   "*2.02",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.81",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*2.18",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.82",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.21",
+   "*2.65",
+   "*3.31",
+   "*3.43"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.22",
+   "*4.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.83",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*2.61",
+   "*3.26",
+   "*3.27",
+   "*3.31",
+   "*3.43"
+  ],
+  "extra": [
+   "*1.3",
+   "*2.08",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.84",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.06",
+   "*3.47"
+  ],
+  "extra": [
+   "*3.2",
+   "*3.41",
+   "*3.42",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.85",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.05",
+   "*3.47"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.08",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*3.47"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*4.86",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.21",
+   "*4.22"
+  ]
+ },
+ {
+  "id": "*4.87",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.04",
+   "*3.3",
+   "*3.31"
+  ],
+  "extra": [
+   "*1.5",
+   "*2.08",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.1",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.22",
+   "*3.4"
+  ],
+  "extra": [
+   "*1.3",
+   "*2.08",
+   "*3.2",
+   "*3.41",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.11",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.5",
+   "*2.54"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*5.12",
+  "tag": "FAITHFUL",
+  "cited": [
+   "*2.51",
+   "*2.54"
+  ],
+  "extra": [],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": []
+ },
+ {
+  "id": "*5.13",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.521"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.54"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.14",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*2.21",
+   "*3.26",
+   "*3.27",
+   "*3.37",
+   "*4.1",
+   "*4.11"
+  ],
+  "extra": [
+   "*1.3",
+   "*1.5",
+   "*2.2",
+   "*2.32"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.15",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*5.16",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*5.17",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*5.18",
+  "tag": "REPAIRED",
+  "cited": [
+   "*5.15",
+   "*5.16",
+   "*5.17"
+  ],
+  "extra": [
+   "*2.08",
+   "*2.14",
+   "*2.16",
+   "*3.2"
+  ],
+  "uses_unresolved": [
+   "*5.15",
+   "*5.16"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.19",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.2",
+   "*5.18"
+  ]
+ },
+ {
+  "id": "*5.21",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.11",
+   "*5.1"
+  ],
+  "extra": [
+   "*2.08",
+   "*2.2",
+   "*3.2",
+   "*3.47"
+  ],
+  "uses_unresolved": [
+   "*3.47"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.22",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.39",
+   "*4.51",
+   "*4.61"
+  ]
+ },
+ {
+  "id": "*5.23",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.13",
+   "*4.36",
+   "*5.18",
+   "*5.22"
+  ]
+ },
+ {
+  "id": "*5.24",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*5.22",
+   "*5.23"
+  ]
+ },
+ {
+  "id": "*5.25",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.62",
+   "*2.68"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.3",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*2.05",
+   "*2.06",
+   "*3.26",
+   "*3.27",
+   "*3.33",
+   "*3.34",
+   "*3.43"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.08",
+   "*2.76",
+   "*3.2",
+   "*3.41"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.31",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.02",
+   "*3.26",
+   "*3.27",
+   "*3.43"
+  ]
+ },
+ {
+  "id": "*5.32",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.3",
+   "*3.31",
+   "*4.76",
+   "*5.3"
+  ]
+ },
+ {
+  "id": "*5.33",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.73",
+   "*4.84",
+   "*5.32"
+  ]
+ },
+ {
+  "id": "*5.35",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.43",
+   "*5.1"
+  ],
+  "extra": [
+   "*2.81",
+   "*3.3",
+   "*3.31"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.36",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*3.35",
+   "*4.38"
+  ]
+ },
+ {
+  "id": "*5.4",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*2.43",
+   "*3.26",
+   "*3.27"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.4",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.41",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.77",
+   "*2.86"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.76",
+   "*2.85",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.42",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.87",
+   "*5.3"
+  ]
+ },
+ {
+  "id": "*5.44",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.76",
+   "*5.3",
+   "*5.32"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.81",
+   "*3.2",
+   "*3.27",
+   "*5.31"
+  ],
+  "uses_unresolved": [
+   "*5.31"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.5",
+  "tag": "REPAIRED",
+  "cited": [
+   "*2.02",
+   "*3.26",
+   "*3.27",
+   "*3.3",
+   "*3.35"
+  ],
+  "extra": [
+   "*1.3",
+   "*2.08",
+   "*2.25",
+   "*3.2",
+   "*5.31"
+  ],
+  "uses_unresolved": [
+   "*5.31"
+  ],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.501",
+  "tag": "REPAIRED",
+  "cited": [
+   "*3.3",
+   "*3.35",
+   "*5.1"
+  ],
+  "extra": [
+   "*1.5",
+   "*3.2",
+   "*3.26",
+   "*3.43"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.53",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.77"
+  ]
+ },
+ {
+  "id": "*5.54",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*2.03",
+   "*2.15",
+   "*2.16",
+   "*2.17",
+   "*3.37",
+   "*4.1",
+   "*4.11",
+   "*4.44",
+   "*4.73",
+   "*5.1"
+  ]
+ },
+ {
+  "id": "*5.55",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.3",
+   "*4.74",
+   "*5.1"
+  ]
+ },
+ {
+  "id": "*5.6",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.64",
+   "*4.85",
+   "*4.87"
+  ]
+ },
+ {
+  "id": "*5.61",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*4.74",
+   "*5.32"
+  ]
+ },
+ {
+  "id": "*5.62",
+  "tag": "REPAIRED",
+  "cited": [
+   "*4.7"
+  ],
+  "extra": [
+   "*1.2",
+   "*1.3",
+   "*2.62",
+   "*2.68",
+   "*3.2"
+  ],
+  "uses_unresolved": [],
+  "in_lean": true,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.63",
+  "tag": "REPAIRED",
+  "cited": [
+   "*5.62"
+  ],
+  "extra": [
+   "*1.6",
+   "*2.08",
+   "*2.54",
+   "*2.76",
+   "*3.2",
+   "*3.27"
+  ],
+  "uses_unresolved": [],
+  "in_lean": false,
+  "repair_src": [
+   "search"
+  ]
+ },
+ {
+  "id": "*5.7",
+  "tag": "UNRESOLVED",
+  "cited": [
+   "*1.3",
+   "*4.37",
+   "*4.74",
+   "*5.1"
+  ]
+ },
+ {
+  "id": "*5.71",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*5.74",
+  "tag": "UNRESOLVED",
+  "cited": []
+ },
+ {
+  "id": "*5.75",
+  "tag": "UNRESOLVED",
+  "cited": []
+ }
+]
