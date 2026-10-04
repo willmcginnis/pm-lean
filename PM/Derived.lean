@@ -211,6 +211,11 @@ theorem dni {Γ : List F} {a : F} (h : Pf Γ a) : Pf Γ (.neg (.neg a)) := app (
 
 end Pf
 
+/-- `intro_`: deduction theorem, `⊢ Γ ⊃ (h ⊃ φ)` from `Γ, h ⊢ φ`. -/
+macro "intro_" : tactic => `(tactic| apply PM.Pf.intro)
+/-- `split_iff`: prove `a ≡ b` as `a ⊢ b` and `b ⊢ a`. -/
+macro "split_iff" : tactic => `(tactic| (apply PM.Pf.iffI <;> apply PM.Pf.intro))
+
 /-- Run a natural-deduction proof with no hypotheses. -/
 theorem ofPf {φ : F} (h : Pf [] φ) : Thm φ := h
 
