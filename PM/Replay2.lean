@@ -306,4 +306,212 @@ theorem t4_87 (p : F) (q : F) (r : F) : Thm (s4_87 p q r) :=
   andIh (andIh (iffIh (t3_3 p q r) (t3_31 p q r)) (iffIh (t2_04 p q r) (t2_04 q p r)))
     (iffIh (t3_31 q p r) (t3_3 q p r))
 
+/-- *5.1 — [✱3·26, ✱3·27, ✱2·02, ✱3·2] -/
+theorem t5_1 (p : F) (q : F) : Thm (s5_1 p q) := ofPf <| by
+  unfold s5_1; intro_
+  exact iffI (Pf.intro (andE2 (hy 0))) (Pf.intro (andE1 (hy 0)))
+
+/-- *5.15 — [✱2·11 (cases), ✱2·24, ✱3·2, ✱1·3, ✱2·2] -/
+theorem t5_15 (p : F) (q : F) : Thm (s5_15 p q) := ofPf <| by
+  unfold s5_15
+  exact Pf.cases p
+    (Pf.cases q (orIL (iffI (Pf.intro (hy 1)) (Pf.intro (hy 0))))
+      (orIR (iffI (Pf.intro (hy 1)) (Pf.intro (hy 0)))))
+    (Pf.cases q
+      (orIR (iffI (Pf.intro (absurd _ (hy 2) (hy 0))) (Pf.intro (absurd _ (hy 1) (hy 2)))))
+      (orIL (iffI (Pf.intro (absurd _ (hy 2) (hy 0))) (Pf.intro (absurd _ (hy 2) (hy 1))))))
+
+/-- *5.16 — [✱2·01, ✱2·11 (cases), ✱2·24, ✱3·26, ✱3·27] -/
+theorem t5_16 (p : F) (q : F) : Thm (s5_16 p q) := ofPf <| by
+  unfold s5_16
+  exact negI (absurd _
+    (Pf.cases q (mp (hy 1) (iffMpr (andE1 (hy 0)))) (mp (hy 1) (iffMpr (andE2 (hy 0)))))
+    (negI' q (mp (hy 1) (iffMp (andE1 (hy 0)))) (mp (hy 1) (iffMp (andE2 (hy 0))))))
+
+/-- *5.17 — [∨-elimination, ✱2·11 (cases), ✱2·01, ✱2·18, ✱3·2] -/
+theorem t5_17 (p : F) (q : F) : Thm (s5_17 p q) := ofPf <| by
+  unfold s5_17; split_iff
+  · exact iffI (Pf.intro (negI (absurd _ (andI (hy 1) (hy 2)) (andE2 (hy 0)))))
+      (Pf.intro (orE (andE1 (hy 0)) (hy 2) (absurd _ (hy 2) (hy 1))))
+  · exact andI
+      (Pf.cases p (orIL (hy 1)) (orIR (byContra (absurd _ (mp (hy 2) (iffMpr (hy 0))) (hy 1)))))
+      (negI (absurd _ (andE2 (hy 1)) (mp (andE1 (hy 1)) (iffMp (hy 0)))))
+
+/-- *5.18 — [✱5·15, ✱5·16] -/
+theorem t5_18 (p : F) (q : F) : Thm (s5_18 p q) := ofPf <| by
+  unfold s5_18; split_iff
+  · exact negI (absurd _ (andI (hy 0) (hy 1)) (ofThm (t5_16 p q)))
+  · exact orE (ofThm (t5_15 p q)) (hy 1) (absurd _ (hy 1) (hy 0))
+
+/-- *5.19 — [✱5·18 (p/q), ✱4·2] -/
+theorem t5_19 (p : F) : Thm (s5_19 p) := Thm.mp (t4_2 p) (iffMph (t5_18 p p))
+
+/-- *5.21 — [✱5·1 (∼p,∼q/p,q), ✱4·11] -/
+theorem t5_21 (p : F) (q : F) : Thm (s5_21 p q) := ofPf <| by
+  unfold s5_21; intro_
+  exact iffE' (ofThm (t4_11 p q)) (app (t5_1 (.neg p) (.neg q)) (hy 0))
+
+/-- *5.22 — [✱2·11 (cases), ✱2·01, ✱2·24, ∨-elimination, ✱3·2] -/
+theorem t5_22 (p : F) (q : F) : Thm (s5_22 p q) := ofPf <| by
+  unfold s5_22; split_iff
+  · exact Pf.cases p
+      (Pf.cases q (absurd _ (iffI (Pf.intro (hy 2)) (Pf.intro (hy 1))) (hy 0))
+        (orIL (andI (hy 1) (hy 2))))
+      (Pf.cases q (orIR (andI (hy 2) (hy 1)))
+        (absurd _ (iffI (Pf.intro (absurd _ (hy 3) (hy 1))) (Pf.intro (absurd _ (hy 3) (hy 2))))
+          (hy 0)))
+  · exact negI (orE (hy 0) (absurd _ (mp (andE1 (hy 2)) (iffMp (hy 1))) (andE2 (hy 2)))
+      (absurd _ (mp (andE1 (hy 2)) (iffMpr (hy 1))) (andE2 (hy 2))))
+
+/-- *5.23 — [✱2·11 (cases); ← by ✱5·1, ✱5·21] -/
+theorem t5_23 (p : F) (q : F) : Thm (s5_23 p q) := ofPf <| by
+  unfold s5_23; split_iff
+  · exact Pf.cases p (orIL (andI (hy 1) (mp (hy 1) (iffMp (hy 0)))))
+      (orIR (andI (hy 1) (negI (absurd _ (mp (hy 2) (iffMpr (hy 0))) (hy 1)))))
+  · exact orE (hy 0) (app (t5_1 p q) (hy 1)) (app (t5_21 p q) (hy 1))
+
+/-- *5.24 — [✱5·22, ✱5·23] -/
+theorem t5_24 (p : F) (q : F) : Thm (s5_24 p q) := ofPf <| by
+  unfold s5_24; split_iff
+  · exact iffE (ofThm (t5_22 p q)) (negI (absurd _ (iffE (ofThm (t5_23 p q)) (hy 1)) (hy 0)))
+  · exact negI (absurd _ (iffE' (ofThm (t5_23 p q)) (hy 1)) (iffE' (ofThm (t5_22 p q)) (hy 0)))
+
+/-- *5.3 — [✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_3 (p : F) (q : F) (r : F) : Thm (s5_3 p q r) := ofPf <| by
+  unfold s5_3; split_iff
+  · exact Pf.intro (andI (andE1 (hy 1)) (mp (hy 1) (hy 0)))
+  · exact Pf.intro (andE2 (mp (hy 1) (hy 0)))
+
+/-- *5.31 — [✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_31 (p : F) (q : F) (r : F) : Thm (s5_31 p q r) := ofPf <| by
+  unfold s5_31; intro_; intro_
+  exact andI (mp (hy 1) (andE2 (hy 0))) (andE1 (hy 0))
+
+/-- *5.32 — [✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_32 (p : F) (q : F) (r : F) : Thm (s5_32 p q r) := ofPf <| by
+  unfold s5_32; split_iff
+  · exact iffI
+      (Pf.intro (andI (andE1 (hy 1)) (mp (andE2 (hy 1)) (iffMp (mp (andE1 (hy 1)) (hy 0))))))
+      (Pf.intro (andI (andE1 (hy 1)) (mp (andE2 (hy 1)) (iffMpr (mp (andE1 (hy 1)) (hy 0))))))
+  · exact Pf.intro (iffI (Pf.intro (andE2 (mp (andI (hy 1) (hy 2)) (iffMp (hy 0)))))
+      (Pf.intro (andE2 (mp (andI (hy 1) (hy 2)) (iffMpr (hy 0))))))
+
+/-- *5.33 — [✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_33 (p : F) (q : F) (r : F) : Thm (s5_33 p q r) := ofPf <| by
+  unfold s5_33; split_iff
+  · exact andI (andE1 (hy 0)) (Pf.intro (mp (andE2 (hy 1)) (andE2 (hy 0))))
+  · exact andI (andE1 (hy 0)) (Pf.intro (mp (andI (andE1 (hy 0)) (hy 1)) (andE2 (hy 0))))
+
+/-- *5.35 — [✱3·26, ✱3·27, ✱3·2] -/
+theorem t5_35 (p : F) (q : F) (r : F) : Thm (s5_35 p q r) := ofPf <| by
+  unfold s5_35; intro_; intro_
+  exact iffI (Pf.intro (mp (hy 1) (andE2 (hy 0)))) (Pf.intro (mp (hy 1) (andE1 (hy 0))))
+
+/-- *5.36 — [✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_36 (p : F) (q : F) : Thm (s5_36 p q) := ofPf <| by
+  unfold s5_36; split_iff
+  · exact andI (mp (andE1 (hy 0)) (iffMp (andE2 (hy 0)))) (andE2 (hy 0))
+  · exact andI (mp (andE1 (hy 0)) (iffMpr (andE2 (hy 0)))) (andE2 (hy 0))
+
+/-- *5.41 — [✱2·86 (→), ✱2·77 (←)] -/
+theorem t5_41 (p : F) (q : F) (r : F) : Thm (s5_41 p q r) := iffIh (t2_86 p q r) (t2_77 p q r)
+
+/-- *5.42 — [✱3·2, ✱3·27] -/
+theorem t5_42 (p : F) (q : F) (r : F) : Thm (s5_42 p q r) := ofPf <| by
+  unfold s5_42; split_iff
+  · exact Pf.intro (Pf.intro (andI (hy 1) (mp (hy 2) (mp (hy 1) (hy 0)))))
+  · exact Pf.intro (Pf.intro (andE2 (mp (hy 2) (mp (hy 1) (hy 0)))))
+
+/-- *5.44 — [✱3·2, ✱3·27] -/
+theorem t5_44 (p : F) (q : F) (r : F) : Thm (s5_44 p q r) := ofPf <| by
+  unfold s5_44; intro_
+  exact iffI (Pf.intro (Pf.intro (andI (mp (hy 2) (hy 0)) (mp (hy 2) (hy 1)))))
+    (Pf.intro (Pf.intro (andE2 (mp (hy 2) (hy 1)))))
+
+/-- *5.5 — [✱1·1 under hypotheses, ✱2·02, ✱3·2] -/
+theorem t5_5 (p : F) (q : F) : Thm (s5_5 p q) := ofPf <| by
+  unfold s5_5; intro_
+  exact iffI (Pf.intro (mp (hy 0) (hy 1))) (Pf.intro (Pf.intro (hy 1)))
+
+/-- *5.501 — [✱2·02, ✱3·2, ✱3·26] -/
+theorem t5_501 (p : F) (q : F) : Thm (s5_501 p q) := ofPf <| by
+  unfold s5_501; intro_
+  exact iffI (Pf.intro (iffI (Pf.intro (hy 1)) (Pf.intro (hy 0))))
+    (Pf.intro (mp (hy 0) (iffMp (hy 1))))
+
+/-- *5.53 — [cf. ✱4·77: ∨-elimination, ✱1·3, ✱2·2, ✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_53 (p : F) (q : F) (r : F) (s : F) : Thm (s5_53 p q r s) := ofPf <| by
+  unfold s5_53; split_iff
+  · exact andI (andI (Pf.intro (mp (orIL (orIL (hy 1))) (hy 0)))
+      (Pf.intro (mp (orIL (orIR (hy 1))) (hy 0)))) (Pf.intro (mp (orIR (hy 1)) (hy 0)))
+  · exact Pf.intro (orE (hy 1)
+      (orE (hy 2) (mp (hy 3) (andE1 (andE1 (hy 0)))) (mp (hy 3) (andE2 (andE1 (hy 0)))))
+      (mp (hy 2) (andE2 (hy 0))))
+
+/-- *5.54 — [✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24] -/
+theorem t5_54 (p : F) (q : F) : Thm (s5_54 p q) := ofPf <| by
+  unfold s5_54
+  exact Pf.cases p
+    (orIR (iffI (Pf.intro (andE2 (hy 1))) (Pf.intro (andI (hy 0) (hy 1)))))
+    (orIL (iffI (Pf.intro (andE1 (hy 1))) (Pf.intro (absurd _ (hy 1) (hy 0)))))
+
+/-- *5.55 — [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24] -/
+theorem t5_55 (p : F) (q : F) : Thm (s5_55 p q) := ofPf <| by
+  unfold s5_55
+  exact Pf.cases p
+    (orIL (iffI (Pf.intro (hy 0)) (Pf.intro (orIL (hy 1)))))
+    (orIR (iffI (Pf.intro (orE (hy 1) (absurd _ (hy 2) (hy 0)) (hy 2))) (Pf.intro (orIR (hy 1)))))
+
+/-- *5.6 — [✱2·11 (cases), ∨-elimination, ✱3·2, ✱3·26, ✱3·27, ✱2·24] -/
+theorem t5_6 (p : F) (q : F) (r : F) : Thm (s5_6 p q r) := ofPf <| by
+  unfold s5_6; split_iff
+  · exact Pf.intro (Pf.cases q (orIL (hy 2)) (orIR (mp (andI (hy 1) (hy 2)) (hy 0))))
+  · exact Pf.intro (orE (mp (andE1 (hy 1)) (hy 0)) (absurd _ (hy 2) (andE2 (hy 1))) (hy 2))
+
+/-- *5.61 — [∨-elimination, ✱2·2, ✱3·2, ✱3·26, ✱3·27, ✱2·24] -/
+theorem t5_61 (p : F) (q : F) : Thm (s5_61 p q) := ofPf <| by
+  unfold s5_61; split_iff
+  · exact andI (orE (andE1 (hy 0)) (hy 1) (absurd _ (hy 1) (andE2 (hy 0)))) (andE2 (hy 0))
+  · exact andI (orIL (andE1 (hy 0))) (andE2 (hy 0))
+
+/-- *5.63 — [cf. ✱5·62: ∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱3·2, ✱3·27] -/
+theorem t5_63 (p : F) (q : F) : Thm (s5_63 p q) := ofPf <| by
+  unfold s5_63; split_iff
+  · exact orE (hy 0) (orIL (hy 1)) (Pf.cases p (orIL (hy 2)) (orIR (andI (hy 2) (hy 1))))
+  · exact orE (hy 0) (orIL (hy 1)) (orIR (andE2 (hy 1)))
+
+/-- *5.7 — [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24, ✱3·2] -/
+theorem t5_7 (p : F) (q : F) (r : F) : Thm (s5_7 p q r) := ofPf <| by
+  unfold s5_7; split_iff
+  · exact Pf.cases r (orIL (hy 1)) (orIR (iffI
+      (Pf.intro (orE (mp (orIL (hy 2)) (iffMp (hy 0))) (hy 3) (absurd _ (hy 3) (hy 1))))
+      (Pf.intro (orE (mp (orIL (hy 2)) (iffMpr (hy 0))) (hy 3) (absurd _ (hy 3) (hy 1))))))
+  · exact orE (hy 0) (iffI (Pf.intro (orIR (hy 1))) (Pf.intro (orIR (hy 1))))
+      (iffI (Pf.intro (orE (hy 2) (orIL (mp (hy 3) (iffMp (hy 1)))) (orIR (hy 3))))
+        (Pf.intro (orE (hy 2) (orIL (mp (hy 3) (iffMpr (hy 1)))) (orIR (hy 3)))))
+
+/-- *5.71 — [∨-elimination, ✱2·2, ✱2·24, ✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_71 (p : F) (q : F) (r : F) : Thm (s5_71 p q r) := ofPf <| by
+  unfold s5_71; intro_
+  exact iffI
+    (Pf.intro (andI (orE (andE1 (hy 1)) (hy 2) (absurd _ (andE2 (hy 1)) (mp (hy 2) (hy 0))))
+      (andE2 (hy 1))))
+    (Pf.intro (andI (orIL (andE1 (hy 1))) (andE2 (hy 1))))
+
+/-- *5.74 — [✱1·1 under hypotheses, ✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_74 (p : F) (q : F) (r : F) : Thm (s5_74 p q r) := ofPf <| by
+  unfold s5_74; split_iff
+  · exact iffI (Pf.intro (Pf.intro (mp (mp (hy 2) (hy 1)) (iffMp (mp (hy 2) (hy 0))))))
+      (Pf.intro (Pf.intro (mp (mp (hy 2) (hy 1)) (iffMpr (mp (hy 2) (hy 0))))))
+  · exact Pf.intro (iffI (Pf.intro (mp (hy 1) (mp (Pf.intro (hy 2)) (iffMp (hy 0)))))
+      (Pf.intro (mp (hy 1) (mp (Pf.intro (hy 2)) (iffMpr (hy 0))))))
+
+/-- *5.75 — [∨-elimination, ✱1·3, ✱2·24, ✱3·2, ✱3·26, ✱3·27] -/
+theorem t5_75 (p : F) (q : F) (r : F) : Thm (s5_75 p q r) := ofPf <| by
+  unfold s5_75; intro_
+  exact iffI
+    (Pf.intro (orE (mp (andE1 (hy 1)) (iffMp (andE2 (hy 0)))) (absurd _ (hy 2) (andE2 (hy 1)))
+      (hy 2)))
+    (Pf.intro (andI (mp (orIR (hy 1)) (iffMpr (andE2 (hy 0)))) (mp (hy 1) (andE1 (hy 0)))))
+
 end PM

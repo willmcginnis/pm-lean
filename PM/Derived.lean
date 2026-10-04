@@ -2,7 +2,7 @@ import PM.Replay
 /-!
   Derived rules for the ✱1 Hilbert system. Every rule here is a meta-level Lean lemma of the shape
   `Thm a → … → Thm c` (or a theorem schema), built only from `Thm`'s constructors and the
-  already-replayed `t…` theorems of PM.Replay. No axioms, no `sorry`.
+  already-replayed `t…` theorems of PM.Replay. Nothing is assumed: `#print axioms` is empty.
 
   Part 1: Hilbert-level rules (syllogism, ∧/≡ introduction and elimination).
   Part 2: PM's chain ✱2·73 → ✱2·77 (Frege's "S" axiom), proved following PM's citations. The
@@ -82,17 +82,16 @@ def Pf (Γ : List F) (φ : F) : Prop := Thm (ctx Γ φ)
 
 namespace Pf
 
-theorem ctx_append (Γ : List F) (h φ : F) : ctx (Γ ++ [h]) φ = ctx Γ (imp h φ) := by
-  induction Γ with
-  | nil => rfl
-  | cons g Γ ih => simp [ctx, ih]
+theorem ctx_append : ∀ (Γ : List F) (h φ : F), ctx (Γ ++ [h]) φ = ctx Γ (imp h φ)
+  | [], _, _ => rfl
+  | g :: Γ, h, φ => congrArg (imp g) (ctx_append Γ h φ)
 
 /-- Deduction theorem (definitional for concrete Γ). -/
-theorem intro {Γ : List F} {h φ : F} (d : Pf (Γ ++ [h]) φ) : Pf Γ (imp h φ) := by
-  unfold Pf at *; rwa [ctx_append] at d
+theorem intro {Γ : List F} {h φ : F} (d : Pf (Γ ++ [h]) φ) : Pf Γ (imp h φ) :=
+  Eq.mp (congrArg Thm (ctx_append Γ h φ)) d
 
-theorem unintro {Γ : List F} {h φ : F} (d : Pf Γ (imp h φ)) : Pf (Γ ++ [h]) φ := by
-  unfold Pf at *; rwa [ctx_append]
+theorem unintro {Γ : List F} {h φ : F} (d : Pf Γ (imp h φ)) : Pf (Γ ++ [h]) φ :=
+  Eq.mpr (congrArg Thm (ctx_append Γ h φ)) d
 
 /-- A theorem holds in any context (✱2·02). -/
 theorem ofThm {Γ : List F} {φ : F} (h : Thm φ) : Pf Γ φ := by
@@ -124,17 +123,25 @@ theorem self_ctx (Γ : List F) (φ : F) : Thm (imp φ (ctx Γ φ)) := by
   | cons g Γ ih => exact syl ih (t2_02 g _)
 
 /-- Use a hypothesis. -/
-theorem hyp {Γ : List F} {φ : F} (h : φ ∈ Γ) : Pf Γ φ := by
-  induction Γ with
-  | nil => cases h
-  | cons g Γ ih =>
-    rcases List.mem_cons.mp h with rfl | h
-    · exact self_ctx Γ φ
-    · exact kI (ih h)
+theorem hyp {Γ : List F} {φ : F} : φ ∈ Γ → Pf Γ φ
+  | .head Γ => self_ctx Γ φ
+  | .tail _ h => kI (hyp h)
 
-/-- Use the `n`-th hypothesis (0-based, oldest first). -/
-theorem hy {Γ : List F} (n : Nat) (h : n < Γ.length := by simp) : Pf Γ (Γ.getD n (.var "")) :=
-  hyp (by simp [List.getD_eq_getElem?_getD, List.getElem?_eq_getElem h])
+/-- The `n`-th hypothesis of a context (0-based, oldest first). -/
+def nth : List F → Nat → F
+  | [], _ => .var ""
+  | a :: _, 0 => a
+  | _ :: l, n + 1 => nth l n
+
+theorem hyN : ∀ (Γ : List F) (n : Nat), n < Γ.length → Pf Γ (nth Γ n)
+  | [], n, h => absurd h (Nat.not_lt_zero n)
+  | g :: Γ, 0, _ => self_ctx Γ g
+  | _ :: Γ, n + 1, h => kI (hyN Γ n (Nat.lt_of_succ_lt_succ h))
+
+/-- Use the `n`-th hypothesis (0-based, oldest first). The bound is checked by evaluation. -/
+theorem hy {Γ : List F} (n : Nat) (h : n < Γ.length := by exact Nat.le_of_ble_eq_true rfl) :
+    Pf Γ (nth Γ n) :=
+  hyN Γ n h
 
 /-- Weaken by an extra (last) hypothesis. -/
 theorem weaken {Γ : List F} {h φ : F} (d : Pf Γ φ) : Pf (Γ ++ [h]) φ :=
@@ -165,9 +172,9 @@ theorem orIL {Γ : List F} {a b : F} (h : Pf Γ a) : Pf Γ (.or a b) := app (t2_
 /-- Proof by cases, as a schema: `(a ⊃ c) ⊃ ((b ⊃ c) ⊃ (a ∨ b ⊃ c))` [✱1·6, ✱1·4, ✱1·2]. -/
 theorem orE_schema (a b c : F) : Thm (imp (imp a c) (imp (imp b c) (imp (.or a b) c))) :=
   -- under [a ⊃ c, b ⊃ c, a ∨ b]
-  have hac : Pf [imp a c, imp b c, .or a b] (imp a c) := hyp (by simp)
-  have hbc : Pf [imp a c, imp b c, .or a b] (imp b c) := hyp (by simp)
-  have hab : Pf [imp a c, imp b c, .or a b] (.or a b) := hyp (by simp)
+  have hac : Pf [imp a c, imp b c, .or a b] (imp a c) := hy 0
+  have hbc : Pf [imp a c, imp b c, .or a b] (imp b c) := hy 1
+  have hab : Pf [imp a c, imp b c, .or a b] (.or a b) := hy 2
   have h1 : Pf [imp a c, imp b c, .or a b] (.or a c) := app2 (Thm.sum a b c) hbc hab
   have h2 : Pf [imp a c, imp b c, .or a b] (.or c a) := app (Thm.perm a c) h1
   have h3 : Pf [imp a c, imp b c, .or a b] (.or c c) := app2 (Thm.sum c a c) hac h2
