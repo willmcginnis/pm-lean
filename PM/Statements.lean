@@ -1,0 +1,777 @@
+import PM.Basic
+namespace PM
+open F
+
+/-- *1.2 -/
+def s1_2 (p : F) : F := (F.imp (.or p p) p)
+example : (s1_2 (.var "p")).isTaut = true := by decide
+
+/-- *1.3 -/
+def s1_3 (p : F) (q : F) : F := (F.imp q (.or p q))
+example : (s1_3 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *1.4 -/
+def s1_4 (p : F) (q : F) : F := (F.imp (.or p q) (.or q p))
+example : (s1_4 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *1.5 -/
+def s1_5 (p : F) (q : F) (r : F) : F := (F.imp (.or p (.or q r)) (.or q (.or p r)))
+example : (s1_5 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *1.6 -/
+def s1_6 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (.or p q) (.or p r)))
+example : (s1_6 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.01 -/
+def s2_01 (p : F) : F := (F.imp (F.imp p (.neg p)) (.neg p))
+example : (s2_01 (.var "p")).isTaut = true := by decide
+
+/-- *2.02 -/
+def s2_02 (p : F) (q : F) : F := (F.imp q (F.imp p q))
+example : (s2_02 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.03 -/
+def s2_03 (p : F) (q : F) : F := (F.imp (F.imp p (.neg q)) (F.imp q (.neg p)))
+example : (s2_03 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.04 -/
+def s2_04 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p (F.imp q r)) (F.imp q (F.imp p r)))
+example : (s2_04 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.05 -/
+def s2_05 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (F.imp p q) (F.imp p r)))
+example : (s2_05 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.06 -/
+def s2_06 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p q) (F.imp (F.imp q r) (F.imp p r)))
+example : (s2_06 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.07 -/
+def s2_07 (p : F) : F := (F.imp p (.or p p))
+example : (s2_07 (.var "p")).isTaut = true := by decide
+
+/-- *2.08 -/
+def s2_08 (p : F) : F := (F.imp p p)
+example : (s2_08 (.var "p")).isTaut = true := by decide
+
+/-- *2.1 -/
+def s2_1 (p : F) : F := (.or (.neg p) p)
+example : (s2_1 (.var "p")).isTaut = true := by decide
+
+/-- *2.11 -/
+def s2_11 (p : F) : F := (.or p (.neg p))
+example : (s2_11 (.var "p")).isTaut = true := by decide
+
+/-- *2.12 -/
+def s2_12 (p : F) : F := (F.imp p (.neg (.neg p)))
+example : (s2_12 (.var "p")).isTaut = true := by decide
+
+/-- *2.13 -/
+def s2_13 (p : F) : F := (.or p (.neg (.neg (.neg p))))
+example : (s2_13 (.var "p")).isTaut = true := by decide
+
+/-- *2.14 -/
+def s2_14 (p : F) : F := (F.imp (.neg (.neg p)) p)
+example : (s2_14 (.var "p")).isTaut = true := by decide
+
+/-- *2.15 -/
+def s2_15 (p : F) (q : F) : F := (F.imp (F.imp (.neg p) q) (F.imp (.neg q) p))
+example : (s2_15 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.16 -/
+def s2_16 (p : F) (q : F) : F := (F.imp (F.imp p q) (F.imp (.neg q) (.neg p)))
+example : (s2_16 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.17 -/
+def s2_17 (p : F) (q : F) : F := (F.imp (F.imp (.neg q) (.neg p)) (F.imp p q))
+example : (s2_17 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.18 -/
+def s2_18 (p : F) : F := (F.imp (F.imp (.neg p) p) p)
+example : (s2_18 (.var "p")).isTaut = true := by decide
+
+/-- *2.2 -/
+def s2_2 (p : F) (q : F) : F := (F.imp p (.or p q))
+example : (s2_2 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.21 -/
+def s2_21 (p : F) (q : F) : F := (F.imp (.neg p) (F.imp p q))
+example : (s2_21 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.24 -/
+def s2_24 (p : F) (q : F) : F := (F.imp p (F.imp (.neg p) q))
+example : (s2_24 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.25 -/
+def s2_25 (p : F) (q : F) : F := (.or p (F.imp (.or p q) q))
+example : (s2_25 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.26 -/
+def s2_26 (p : F) (q : F) : F := (.or (.neg p) (F.imp (F.imp p q) q))
+example : (s2_26 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.27 -/
+def s2_27 (p : F) (q : F) : F := (F.imp p (F.imp (F.imp p q) q))
+example : (s2_27 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.3 -/
+def s2_3 (p : F) (q : F) (r : F) : F := (F.imp (.or p (.or q r)) (.or p (.or r q)))
+example : (s2_3 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.31 -/
+def s2_31 (p : F) (q : F) (r : F) : F := (F.imp (.or p (.or q r)) (.or (.or p q) r))
+example : (s2_31 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.32 -/
+def s2_32 (p : F) (q : F) (r : F) : F := (F.imp (.or (.or p q) r) (.or p (.or q r)))
+example : (s2_32 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.36 -/
+def s2_36 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (.or p q) (.or r p)))
+example : (s2_36 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.37 -/
+def s2_37 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (.or q p) (.or p r)))
+example : (s2_37 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.38 -/
+def s2_38 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (.or q p) (.or r p)))
+example : (s2_38 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.4 -/
+def s2_4 (p : F) (q : F) : F := (F.imp (.or p (.or p q)) (.or p q))
+example : (s2_4 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.41 -/
+def s2_41 (p : F) (q : F) : F := (F.imp (.or q (.or p q)) (.or p q))
+example : (s2_41 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.42 -/
+def s2_42 (p : F) (q : F) : F := (F.imp (.or (.neg p) (F.imp p q)) (F.imp p q))
+example : (s2_42 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.43 -/
+def s2_43 (p : F) (q : F) : F := (F.imp (F.imp p (F.imp p q)) (F.imp p q))
+example : (s2_43 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.45 -/
+def s2_45 (p : F) (q : F) : F := (F.imp (.neg (.or p q)) (.neg p))
+example : (s2_45 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.46 -/
+def s2_46 (p : F) (q : F) : F := (F.imp (.neg (.or p q)) (.neg q))
+example : (s2_46 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.47 -/
+def s2_47 (p : F) (q : F) : F := (F.imp (.neg (.or p q)) (.or (.neg p) q))
+example : (s2_47 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.48 -/
+def s2_48 (p : F) (q : F) : F := (F.imp (.neg (.or p q)) (.or p (.neg q)))
+example : (s2_48 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.49 -/
+def s2_49 (p : F) (q : F) : F := (F.imp (.neg (.or p q)) (.or (.neg p) (.neg q)))
+example : (s2_49 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.5 -/
+def s2_5 (p : F) (q : F) : F := (F.imp (.neg (F.imp p q)) (F.imp (.neg p) q))
+example : (s2_5 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.51 -/
+def s2_51 (p : F) (q : F) : F := (F.imp (.neg (F.imp p q)) (F.imp p (.neg q)))
+example : (s2_51 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.52 -/
+def s2_52 (p : F) (q : F) : F := (F.imp (.neg (F.imp p q)) (F.imp (.neg p) (.neg q)))
+example : (s2_52 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.521 -/
+def s2_521 (p : F) (q : F) : F := (F.imp (.neg (F.imp p q)) (F.imp q p))
+example : (s2_521 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.53 -/
+def s2_53 (p : F) (q : F) : F := (F.imp (.or p q) (F.imp (.neg p) q))
+example : (s2_53 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.54 -/
+def s2_54 (p : F) (q : F) : F := (F.imp (F.imp (.neg p) q) (.or p q))
+example : (s2_54 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.55 -/
+def s2_55 (p : F) (q : F) : F := (F.imp (.neg p) (F.imp (.or p q) q))
+example : (s2_55 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.56 -/
+def s2_56 (p : F) (q : F) : F := (F.imp (.neg q) (F.imp (.or p q) p))
+example : (s2_56 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.6 -/
+def s2_6 (p : F) (q : F) : F := (F.imp (F.imp (.neg p) q) (F.imp (F.imp p q) q))
+example : (s2_6 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.61 -/
+def s2_61 (p : F) (q : F) : F := (F.imp (F.imp p q) (F.imp (F.imp (.neg p) q) q))
+example : (s2_61 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.62 -/
+def s2_62 (p : F) (q : F) : F := (F.imp (.or p q) (F.imp (F.imp p q) q))
+example : (s2_62 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.621 -/
+def s2_621 (p : F) (q : F) : F := (F.imp (F.imp p q) (F.imp (.or p q) q))
+example : (s2_621 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.63 -/
+def s2_63 (p : F) (q : F) : F := (F.imp (.or p q) (F.imp (.or (.neg p) q) q))
+example : (s2_63 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.64 -/
+def s2_64 (p : F) (q : F) : F := (F.imp (.or p q) (F.imp (.or p (.neg q)) p))
+example : (s2_64 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.65 -/
+def s2_65 (p : F) (q : F) : F := (F.imp (F.imp p q) (F.imp (F.imp p (.neg q)) (.neg p)))
+example : (s2_65 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.67 -/
+def s2_67 (p : F) (q : F) : F := (F.imp (F.imp (.or p q) q) (F.imp p q))
+example : (s2_67 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.68 -/
+def s2_68 (p : F) (q : F) : F := (F.imp (F.imp (F.imp p q) q) (.or p q))
+example : (s2_68 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.69 -/
+def s2_69 (p : F) (q : F) : F := (F.imp (F.imp (F.imp p q) q) (F.imp (F.imp q p) p))
+example : (s2_69 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *2.73 -/
+def s2_73 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p q) (F.imp (.or (.or p q) r) (.or q r)))
+example : (s2_73 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.74 -/
+def s2_74 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q p) (F.imp (.or (.or p q) r) (.or p r)))
+example : (s2_74 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.75 -/
+def s2_75 (p : F) (q : F) (r : F) : F := (F.imp (.or p q) (F.imp (.or p (F.imp q r)) (.or p r)))
+example : (s2_75 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.76 -/
+def s2_76 (p : F) (q : F) (r : F) : F := (F.imp (.or p (F.imp q r)) (F.imp (.or p q) (.or p r)))
+example : (s2_76 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.77 -/
+def s2_77 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p (F.imp q r)) (F.imp (F.imp p q) (F.imp p r)))
+example : (s2_77 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.8 -/
+def s2_8 (q : F) (r : F) (s : F) : F := (F.imp (.or q r) (F.imp (.or (.neg r) s) (.or q s)))
+example : (s2_8 (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *2.81 -/
+def s2_81 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.imp q (F.imp r s)) (F.imp (.or p q) (F.imp (.or p r) (.or p s))))
+example : (s2_81 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *2.82 -/
+def s2_82 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (.or (.or p q) r) (F.imp (.or (.or p (.neg r)) s) (.or (.or p q) s)))
+example : (s2_82 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *2.83 -/
+def s2_83 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.imp p (F.imp q r)) (F.imp (F.imp p (F.imp r s)) (F.imp p (F.imp q s))))
+example : (s2_83 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *2.85 -/
+def s2_85 (p : F) (q : F) (r : F) : F := (F.imp (F.imp (.or p q) (.or p r)) (.or p (F.imp q r)))
+example : (s2_85 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *2.86 -/
+def s2_86 (p : F) (q : F) (r : F) : F := (F.imp (F.imp (F.imp p q) (F.imp p r)) (F.imp p (F.imp q r)))
+example : (s2_86 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.1 -/
+def s3_1 (p : F) (q : F) : F := (F.imp (F.and p q) (.neg (.or (.neg p) (.neg q))))
+example : (s3_1 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.11 -/
+def s3_11 (p : F) (q : F) : F := (F.imp (.neg (.or (.neg p) (.neg q))) (F.and p q))
+example : (s3_11 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.12 -/
+def s3_12 (p : F) (q : F) : F := (.or (.or (.neg p) (.neg q)) (F.and p q))
+example : (s3_12 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.13 -/
+def s3_13 (p : F) (q : F) : F := (F.imp (.neg (F.and p q)) (.or (.neg p) (.neg q)))
+example : (s3_13 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.14 -/
+def s3_14 (p : F) (q : F) : F := (F.imp (.or (.neg p) (.neg q)) (.neg (F.and p q)))
+example : (s3_14 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.2 -/
+def s3_2 (p : F) (q : F) : F := (F.imp p (F.imp q (F.and p q)))
+example : (s3_2 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.21 -/
+def s3_21 (p : F) (q : F) : F := (F.imp q (F.imp p (F.and p q)))
+example : (s3_21 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.22 -/
+def s3_22 (p : F) (q : F) : F := (F.imp (F.and p q) (F.and q p))
+example : (s3_22 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.24 -/
+def s3_24 (p : F) : F := (.neg (F.and p (.neg p)))
+example : (s3_24 (.var "p")).isTaut = true := by decide
+
+/-- *3.26 -/
+def s3_26 (p : F) (q : F) : F := (F.imp (F.and p q) p)
+example : (s3_26 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.27 -/
+def s3_27 (p : F) (q : F) : F := (F.imp (F.and p q) q)
+example : (s3_27 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.3 -/
+def s3_3 (p : F) (q : F) (r : F) : F := (F.imp (F.imp (F.and p q) r) (F.imp p (F.imp q r)))
+example : (s3_3 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.31 -/
+def s3_31 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p (F.imp q r)) (F.imp (F.and p q) r))
+example : (s3_31 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.33 -/
+def s3_33 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp p q) (F.imp q r)) (F.imp p r))
+example : (s3_33 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.34 -/
+def s3_34 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp q r) (F.imp p q)) (F.imp p r))
+example : (s3_34 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.35 -/
+def s3_35 (p : F) (q : F) : F := (F.imp (F.and p (F.imp p q)) q)
+example : (s3_35 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.37 -/
+def s3_37 (p : F) (q : F) (r : F) : F := (F.imp (F.imp (F.and p q) r) (F.imp (F.and p (.neg r)) (.neg q)))
+example : (s3_37 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.4 -/
+def s3_4 (p : F) (q : F) : F := (F.imp (F.and p q) (F.imp p q))
+example : (s3_4 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *3.41 -/
+def s3_41 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p r) (F.imp (F.and p q) r))
+example : (s3_41 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.42 -/
+def s3_42 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q r) (F.imp (F.and p q) r))
+example : (s3_42 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.43 -/
+def s3_43 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp p q) (F.imp p r)) (F.imp p (F.and q r)))
+example : (s3_43 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.44 -/
+def s3_44 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp q p) (F.imp r p)) (F.imp (.or q r) p))
+example : (s3_44 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.45 -/
+def s3_45 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p q) (F.imp (F.and p r) (F.and q r)))
+example : (s3_45 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *3.47 -/
+def s3_47 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.and (F.imp p r) (F.imp q s)) (F.imp (F.and p q) (F.and r s)))
+example : (s3_47 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *3.48 -/
+def s3_48 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.and (F.imp p r) (F.imp q s)) (F.imp (.or p q) (.or r s)))
+example : (s3_48 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *4.1 -/
+def s4_1 (p : F) (q : F) : F := (F.iff (F.imp p q) (F.imp (.neg q) (.neg p)))
+example : (s4_1 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.11 -/
+def s4_11 (p : F) (q : F) : F := (F.iff (F.iff p q) (F.iff (.neg p) (.neg q)))
+example : (s4_11 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.12 -/
+def s4_12 (p : F) (q : F) : F := (F.iff (F.iff p (.neg q)) (F.iff q (.neg p)))
+example : (s4_12 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.13 -/
+def s4_13 (p : F) : F := (F.iff p (.neg (.neg p)))
+example : (s4_13 (.var "p")).isTaut = true := by decide
+
+/-- *4.14 -/
+def s4_14 (p : F) (q : F) (r : F) : F := (F.iff (F.imp (F.and p q) r) (F.imp (F.and p (.neg r)) (.neg q)))
+example : (s4_14 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.15 -/
+def s4_15 (p : F) (q : F) (r : F) : F := (F.iff (F.imp (F.and p q) (.neg r)) (F.imp (F.and q r) (.neg p)))
+example : (s4_15 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.2 -/
+def s4_2 (p : F) : F := (F.iff p p)
+example : (s4_2 (.var "p")).isTaut = true := by decide
+
+/-- *4.21 -/
+def s4_21 (p : F) (q : F) : F := (F.iff (F.iff p q) (F.iff q p))
+example : (s4_21 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.22 -/
+def s4_22 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.iff p q) (F.iff q r)) (F.iff p r))
+example : (s4_22 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.24 -/
+def s4_24 (p : F) : F := (F.iff p (F.and p p))
+example : (s4_24 (.var "p")).isTaut = true := by decide
+
+/-- *4.25 -/
+def s4_25 (p : F) : F := (F.iff p (.or p p))
+example : (s4_25 (.var "p")).isTaut = true := by decide
+
+/-- *4.3 -/
+def s4_3 (p : F) (q : F) : F := (F.iff (F.and p q) (F.and q p))
+example : (s4_3 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.31 -/
+def s4_31 (p : F) (q : F) : F := (F.iff (.or p q) (.or q p))
+example : (s4_31 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.32 -/
+def s4_32 (p : F) (q : F) (r : F) : F := (F.iff (F.and (F.and p q) r) (F.and p (F.and q r)))
+example : (s4_32 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.33 -/
+def s4_33 (p : F) (q : F) (r : F) : F := (F.iff (.or (.or p q) r) (.or p (.or q r)))
+example : (s4_33 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.36 -/
+def s4_36 (p : F) (q : F) (r : F) : F := (F.imp (F.iff p q) (F.iff (F.and p r) (F.and q r)))
+example : (s4_36 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.37 -/
+def s4_37 (p : F) (q : F) (r : F) : F := (F.imp (F.iff p q) (F.iff (.or p r) (.or q r)))
+example : (s4_37 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.38 -/
+def s4_38 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.and (F.iff p r) (F.iff q s)) (F.iff (F.and p q) (F.and r s)))
+example : (s4_38 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *4.39 -/
+def s4_39 (p : F) (q : F) (r : F) (s : F) : F := (F.imp (F.and (F.iff p r) (F.iff q s)) (F.iff (.or p q) (.or r s)))
+example : (s4_39 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *4.4 -/
+def s4_4 (p : F) (q : F) (r : F) : F := (F.iff (F.and p (.or q r)) (.or (F.and p q) (F.and p r)))
+example : (s4_4 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.41 -/
+def s4_41 (p : F) (q : F) (r : F) : F := (F.iff (.or p (F.and q r)) (F.and (.or p q) (.or p r)))
+example : (s4_41 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.42 -/
+def s4_42 (p : F) (q : F) : F := (F.iff p (.or (F.and p q) (F.and p (.neg q))))
+example : (s4_42 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.43 -/
+def s4_43 (p : F) (q : F) : F := (F.iff p (F.and (.or p q) (.or p (.neg q))))
+example : (s4_43 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.44 -/
+def s4_44 (p : F) (q : F) : F := (F.iff p (.or p (F.and p q)))
+example : (s4_44 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.45 -/
+def s4_45 (p : F) (q : F) : F := (F.iff p (F.and p (.or p q)))
+example : (s4_45 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.5 -/
+def s4_5 (p : F) (q : F) : F := (F.iff (F.and p q) (.neg (.or (.neg p) (.neg q))))
+example : (s4_5 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.51 -/
+def s4_51 (p : F) (q : F) : F := (F.iff (.neg (F.and p q)) (.or (.neg p) (.neg q)))
+example : (s4_51 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.52 -/
+def s4_52 (p : F) (q : F) : F := (F.iff (F.and p (.neg q)) (.neg (.or (.neg p) q)))
+example : (s4_52 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.53 -/
+def s4_53 (p : F) (q : F) : F := (F.iff (.neg (F.and p (.neg q))) (.or (.neg p) q))
+example : (s4_53 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.54 -/
+def s4_54 (p : F) (q : F) : F := (F.iff (F.and (.neg p) q) (.neg (.or p (.neg q))))
+example : (s4_54 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.55 -/
+def s4_55 (p : F) (q : F) : F := (F.iff (.neg (F.and (.neg p) q)) (.or p (.neg q)))
+example : (s4_55 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.56 -/
+def s4_56 (p : F) (q : F) : F := (F.iff (F.and (.neg p) (.neg q)) (.neg (.or p q)))
+example : (s4_56 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.57 -/
+def s4_57 (p : F) (q : F) : F := (F.iff (.neg (F.and (.neg p) (.neg q))) (.or p q))
+example : (s4_57 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.6 -/
+def s4_6 (p : F) (q : F) : F := (F.iff (F.imp p q) (.or (.neg p) q))
+example : (s4_6 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.61 -/
+def s4_61 (p : F) (q : F) : F := (F.iff (.neg (F.imp p q)) (F.and p (.neg q)))
+example : (s4_61 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.62 -/
+def s4_62 (p : F) (q : F) : F := (F.iff (F.imp p (.neg q)) (.or (.neg p) (.neg q)))
+example : (s4_62 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.63 -/
+def s4_63 (p : F) (q : F) : F := (F.iff (.neg (F.imp p (.neg q))) (F.and p q))
+example : (s4_63 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.64 -/
+def s4_64 (p : F) (q : F) : F := (F.iff (F.imp (.neg p) q) (.or p q))
+example : (s4_64 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.65 -/
+def s4_65 (p : F) (q : F) : F := (F.iff (.neg (F.imp (.neg p) q)) (F.and (.neg p) (.neg q)))
+example : (s4_65 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.66 -/
+def s4_66 (p : F) (q : F) : F := (F.iff (F.imp (.neg p) (.neg q)) (.or p (.neg q)))
+example : (s4_66 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.67 -/
+def s4_67 (p : F) (q : F) : F := (F.iff (.neg (F.imp (.neg p) (.neg q))) (F.and (.neg p) q))
+example : (s4_67 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.7 -/
+def s4_7 (p : F) (q : F) : F := (F.iff (F.imp p q) (F.imp p (F.and p q)))
+example : (s4_7 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.71 -/
+def s4_71 (p : F) (q : F) : F := (F.iff (F.imp p q) (F.iff p (F.and p q)))
+example : (s4_71 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.72 -/
+def s4_72 (p : F) (q : F) : F := (F.iff (F.imp p q) (F.iff q (.or p q)))
+example : (s4_72 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.73 -/
+def s4_73 (p : F) (q : F) : F := (F.imp q (F.iff p (F.and p q)))
+example : (s4_73 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.74 -/
+def s4_74 (p : F) (q : F) : F := (F.imp (.neg p) (F.iff q (.or p q)))
+example : (s4_74 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.76 -/
+def s4_76 (p : F) (q : F) (r : F) : F := (F.iff (F.and (F.imp p q) (F.imp p r)) (F.imp p (F.and q r)))
+example : (s4_76 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.77 -/
+def s4_77 (p : F) (q : F) (r : F) : F := (F.iff (F.and (F.imp q p) (F.imp r p)) (F.imp (.or q r) p))
+example : (s4_77 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.78 -/
+def s4_78 (p : F) (q : F) (r : F) : F := (F.iff (.or (F.imp p q) (F.imp p r)) (F.imp p (.or q r)))
+example : (s4_78 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.79 -/
+def s4_79 (p : F) (q : F) (r : F) : F := (F.iff (.or (F.imp q p) (F.imp r p)) (F.imp (F.and q r) p))
+example : (s4_79 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.8 -/
+def s4_8 (p : F) : F := (F.iff (F.imp p (.neg p)) (.neg p))
+example : (s4_8 (.var "p")).isTaut = true := by decide
+
+/-- *4.81 -/
+def s4_81 (p : F) : F := (F.iff (F.imp (.neg p) p) p)
+example : (s4_81 (.var "p")).isTaut = true := by decide
+
+/-- *4.82 -/
+def s4_82 (p : F) (q : F) : F := (F.iff (F.and (F.imp p q) (F.imp p (.neg q))) (.neg p))
+example : (s4_82 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.83 -/
+def s4_83 (p : F) (q : F) : F := (F.iff (F.and (F.imp p q) (F.imp (.neg p) q)) q)
+example : (s4_83 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *4.84 -/
+def s4_84 (p : F) (q : F) (r : F) : F := (F.imp (F.iff p q) (F.iff (F.imp p r) (F.imp q r)))
+example : (s4_84 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.85 -/
+def s4_85 (p : F) (q : F) (r : F) : F := (F.imp (F.iff p q) (F.iff (F.imp r p) (F.imp r q)))
+example : (s4_85 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.86 -/
+def s4_86 (p : F) (q : F) (r : F) : F := (F.imp (F.iff p q) (F.iff (F.iff p r) (F.iff q r)))
+example : (s4_86 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *4.87 -/
+def s4_87 (p : F) (q : F) (r : F) : F := (F.and (F.and (F.iff (F.imp (F.and p q) r) (F.imp p (F.imp q r))) (F.iff (F.imp p (F.imp q r)) (F.imp q (F.imp p r)))) (F.iff (F.imp q (F.imp p r)) (F.imp (F.and q p) r)))
+example : (s4_87 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.1 -/
+def s5_1 (p : F) (q : F) : F := (F.imp (F.and p q) (F.iff p q))
+example : (s5_1 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.11 -/
+def s5_11 (p : F) (q : F) : F := (.or (F.imp p q) (F.imp (.neg p) q))
+example : (s5_11 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.12 -/
+def s5_12 (p : F) (q : F) : F := (.or (F.imp p q) (F.imp p (.neg q)))
+example : (s5_12 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.13 -/
+def s5_13 (p : F) (q : F) : F := (.or (F.imp p q) (F.imp q p))
+example : (s5_13 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.14 -/
+def s5_14 (p : F) (q : F) (r : F) : F := (.or (F.imp p q) (F.imp q r))
+example : (s5_14 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.15 -/
+def s5_15 (p : F) (q : F) : F := (.or (F.iff p q) (F.iff p (.neg q)))
+example : (s5_15 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.16 -/
+def s5_16 (p : F) (q : F) : F := (.neg (F.and (F.iff p q) (F.iff p (.neg q))))
+example : (s5_16 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.17 -/
+def s5_17 (p : F) (q : F) : F := (F.iff (F.and (.or p q) (.neg (F.and p q))) (F.iff p (.neg q)))
+example : (s5_17 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.18 -/
+def s5_18 (p : F) (q : F) : F := (F.iff (F.iff p q) (.neg (F.iff p (.neg q))))
+example : (s5_18 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.19 -/
+def s5_19 (p : F) : F := (.neg (F.iff p (.neg p)))
+example : (s5_19 (.var "p")).isTaut = true := by decide
+
+/-- *5.21 -/
+def s5_21 (p : F) (q : F) : F := (F.imp (F.and (.neg p) (.neg q)) (F.iff p q))
+example : (s5_21 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.22 -/
+def s5_22 (p : F) (q : F) : F := (F.iff (.neg (F.iff p q)) (.or (F.and p (.neg q)) (F.and q (.neg p))))
+example : (s5_22 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.23 -/
+def s5_23 (p : F) (q : F) : F := (F.iff (F.iff p q) (.or (F.and p q) (F.and (.neg p) (.neg q))))
+example : (s5_23 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.24 -/
+def s5_24 (p : F) (q : F) : F := (F.iff (.neg (.or (F.and p q) (F.and (.neg p) (.neg q)))) (.or (F.and p (.neg q)) (F.and q (.neg p))))
+example : (s5_24 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.25 -/
+def s5_25 (p : F) (q : F) : F := (F.iff (.or p q) (F.imp (F.imp p q) q))
+example : (s5_25 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.3 -/
+def s5_3 (p : F) (q : F) (r : F) : F := (F.iff (F.imp (F.and p q) r) (F.imp (F.and p q) (F.and p r)))
+example : (s5_3 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.31 -/
+def s5_31 (p : F) (q : F) (r : F) : F := (F.imp (F.and r (F.imp p q)) (F.imp p (F.and q r)))
+example : (s5_31 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.32 -/
+def s5_32 (p : F) (q : F) (r : F) : F := (F.iff (F.imp p (F.iff q r)) (F.iff (F.and p q) (F.and p r)))
+example : (s5_32 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.33 -/
+def s5_33 (p : F) (q : F) (r : F) : F := (F.iff (F.and p (F.imp q r)) (F.and p (F.imp (F.and p q) r)))
+example : (s5_33 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.35 -/
+def s5_35 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp p q) (F.imp p r)) (F.imp p (F.iff q r)))
+example : (s5_35 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.36 -/
+def s5_36 (p : F) (q : F) : F := (F.iff (F.and p (F.iff p q)) (F.and q (F.iff p q)))
+example : (s5_36 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.4 -/
+def s5_4 (p : F) (q : F) : F := (F.iff (F.imp p (F.imp p q)) (F.imp p q))
+example : (s5_4 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.41 -/
+def s5_41 (p : F) (q : F) (r : F) : F := (F.iff (F.imp (F.imp p q) (F.imp p r)) (F.imp p (F.imp q r)))
+example : (s5_41 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.42 -/
+def s5_42 (p : F) (q : F) (r : F) : F := (F.iff (F.imp p (F.imp q r)) (F.imp p (F.imp q (F.and p r))))
+example : (s5_42 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.44 -/
+def s5_44 (p : F) (q : F) (r : F) : F := (F.imp (F.imp p q) (F.iff (F.imp p r) (F.imp p (F.and q r))))
+example : (s5_44 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.5 -/
+def s5_5 (p : F) (q : F) : F := (F.imp p (F.iff (F.imp p q) q))
+example : (s5_5 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.501 -/
+def s5_501 (p : F) (q : F) : F := (F.imp p (F.iff q (F.iff p q)))
+example : (s5_501 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.53 -/
+def s5_53 (p : F) (q : F) (r : F) (s : F) : F := (F.iff (F.imp (.or (.or p q) r) s) (F.and (F.and (F.imp p s) (F.imp q s)) (F.imp r s)))
+example : (s5_53 (.var "p") (.var "q") (.var "r") (.var "s")).isTaut = true := by decide
+
+/-- *5.54 -/
+def s5_54 (p : F) (q : F) : F := (.or (F.iff (F.and p q) p) (F.iff (F.and p q) q))
+example : (s5_54 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.55 -/
+def s5_55 (p : F) (q : F) : F := (.or (F.iff (.or p q) p) (F.iff (.or p q) q))
+example : (s5_55 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.6 -/
+def s5_6 (p : F) (q : F) (r : F) : F := (F.iff (F.imp (F.and p (.neg q)) r) (F.imp p (.or q r)))
+example : (s5_6 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.61 -/
+def s5_61 (p : F) (q : F) : F := (F.iff (F.and (.or p q) (.neg q)) (F.and p (.neg q)))
+example : (s5_61 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.62 -/
+def s5_62 (p : F) (q : F) : F := (F.iff (.or (F.and p q) (.neg q)) (.or p (.neg q)))
+example : (s5_62 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.63 -/
+def s5_63 (p : F) (q : F) : F := (F.iff (.or p q) (.or p (F.and (.neg p) q)))
+example : (s5_63 (.var "p") (.var "q")).isTaut = true := by decide
+
+/-- *5.7 -/
+def s5_7 (p : F) (q : F) (r : F) : F := (F.iff (F.iff (.or p r) (.or q r)) (.or r (F.iff p q)))
+example : (s5_7 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.71 -/
+def s5_71 (p : F) (q : F) (r : F) : F := (F.imp (F.imp q (.neg r)) (F.iff (F.and (.or p q) r) (F.and p r)))
+example : (s5_71 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.74 -/
+def s5_74 (p : F) (q : F) (r : F) : F := (F.iff (F.imp p (F.iff q r)) (F.iff (F.imp p q) (F.imp p r)))
+example : (s5_74 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+/-- *5.75 -/
+def s5_75 (p : F) (q : F) (r : F) : F := (F.imp (F.and (F.imp r (.neg q)) (F.iff p (.or q r))) (F.iff (F.and p (.neg q)) r))
+example : (s5_75 (.var "p") (.var "q") (.var "r")).isTaut = true := by decide
+
+end PM
