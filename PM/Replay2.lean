@@ -6,6 +6,19 @@ import PM.Derived
   the primitive propositions, earlier `t…` theorems and the derived rules of PM.Derived. Proofs named
   `ofPf` are natural-deduction derivations; `hy n` is the n-th hypothesis, and `intro_` is the
   deduction theorem (definitional; see PM.Derived).
+
+  Proofs written as `have` lines follow PM's own Dem. (or, where PM prints only a bracketed hint, the
+  propositions of the hint in PM's order), one Lean line per PM line; the comment above each line is
+  PM's line. Every proposition such a proof cites appears literally (`tX_Y`, `Thm.perm`, …). The only
+  steps PM leaves tacit that are done by helpers are:
+  * ✱1·1 / ✱1·11 (`Thm.mp`); the definitions ✱1·01, ✱3·01, ✱4·01 (definitional in Lean);
+  * ✱3·03, joining two asserted propositions (`andIh`, and `iffIh` for `≡`);
+  * Syll in PM's `⊃`-chains `⊢ : a . ⊃ . b : ⊃ . c`, and for a bracketed citation `[✱x·y]` applied to the
+    consequent or antecedent of the previous line (`syl`, `sylEnd`, `sylMid`: ✱2·05, ✱2·06);
+  * an asserted equivalence used in either direction, and PM's `≡`-chains (`iffMph`, `iffMprh`,
+    `iffSymmh`, `iffTransh`).
+  Any other proposition PM does not cite is marked `extra` in the docstring, with the reason; the
+  same information is in data/replay2_ledger.json.
 -/
 namespace PM
 open F Pf
@@ -24,8 +37,19 @@ theorem t2_69 (p : F) (q : F) : Thm (s2_69 p q) :=
 /-- *2.73 — [✱2·621, ✱2·38] -/
 theorem t2_73 (p : F) (q : F) (r : F) : Thm (s2_73 p q r) := pm2_73 p q r
 
-/-- *2.74 — [✱2·73, ✱1·4, ✱2·38, ✱2·06] -/
-theorem t2_74 (p : F) (q : F) (r : F) : Thm (s2_74 p q r) := pm2_74 p q r
+/-- *2.74 — PM: [✱2·73 (q,p/p,q) . Assoc . Syll].
+    extra ✱2·31, ✱2·32: Assoc permutes `p ∨ (q ∨ r)`, but the statement has `p ∨ q ∨ r`, i.e.
+    `(p ∨ q) ∨ r` (✱2·33); PM moves the brackets tacitly. -/
+theorem t2_74 (p : F) (q : F) (r : F) : Thm (s2_74 p q r) :=
+  -- ⊢ . ✱2·73 (q,p/p,q) . ⊃ ⊢ :. q ⊃ p . ⊃ : q ∨ p ∨ r . ⊃ . p ∨ r
+  have h1 : Thm (imp (imp q p) (imp (.or (.or q p) r) (.or p r))) := t2_73 q p r
+  -- ⊢ . Assoc . ⊃ ⊢ : p ∨ (q ∨ r) . ⊃ . q ∨ (p ∨ r)
+  have h2 : Thm (imp (.or p (.or q r)) (.or q (.or p r))) := Thm.assoc p q r
+  -- [✱2·32 . ✱2·31] ⊢ : p ∨ q ∨ r . ⊃ . q ∨ p ∨ r
+  have h3 : Thm (imp (.or (.or p q) r) (.or (.or q p) r)) :=
+    syl (syl (t2_32 p q r) h2) (t2_31 q p r)
+  -- ⊢ . (1) . (2) . Syll . ⊃ ⊢ . Prop
+  sylMid h1 h3
 
 /-- *2.75 — [✱2·74, ✱2·53, ✱2·31] -/
 theorem t2_75 (p : F) (q : F) (r : F) : Thm (s2_75 p q r) := pm2_75 p q r
@@ -36,9 +60,15 @@ theorem t2_76 (p : F) (q : F) (r : F) : Thm (s2_76 p q r) := comm (t2_75 p q r)
 /-- *2.77 — [✱2·76 (∼p/p)] -/
 theorem t2_77 (p : F) (q : F) (r : F) : Thm (s2_77 p q r) := t2_76 (.neg p) q r
 
-/-- *2.81 — [✱1·6, ✱2·76, ✱2·05] -/
+/-- *2.81 — PM Dem.: Sum; ✱2·76 . Syll; (1) . (2). -/
 theorem t2_81 (p : F) (q : F) (r : F) (s : F) : Thm (s2_81 p q r s) :=
-  sylEnd (Thm.sum p q (imp r s)) (t2_76 p r s)
+  -- ⊢ . Sum . ⊃ ⊢ :: q . ⊃ . r ⊃ s : ⊃ :. p ∨ q . ⊃ : p . ∨ . r ⊃ s   (1)
+  have h1 : Thm (imp (imp q (imp r s)) (imp (.or p q) (.or p (imp r s)))) := Thm.sum p q (imp r s)
+  -- ⊢ . ✱2·76 . Syll . ⊃ ⊢ :: p ∨ q . ⊃ : p . ∨ . r ⊃ s :. ⊃ :. p ∨ q . ⊃ : p ∨ r . ⊃ . p ∨ s   (2)
+  have h2 : Thm (imp (imp (.or p q) (.or p (imp r s))) (imp (.or p q) (imp (.or p r) (.or p s)))) :=
+    Thm.mp (t2_76 p r s) (t2_05 (.or p q) _ _)
+  -- ⊢ . (1) . (2) . ⊃ ⊢ . Prop
+  syl h1 h2
 
 /-- *2.82 — [✱2·8, ✱2·81; ✱2·31/✱2·32 for the bracketing] -/
 theorem t2_82 (p : F) (q : F) (r : F) (s : F) : Thm (s2_82 p q r s) := ofPf <| by
@@ -54,35 +84,102 @@ theorem t2_83 (p : F) (q : F) (r : F) (s : F) : Thm (s2_83 p q r s) := ofPf <| b
     (app2 (t2_82 (.neg p) (.neg q) r s)
       (app (t2_31 (.neg p) (.neg q) r) (hy 0)) (app (t2_31 (.neg p) (.neg r) s) (hy 1)))
 
-/-- *3.3 — exportation [✱3·2] -/
-theorem t3_3 (p : F) (q : F) (r : F) : Thm (s3_3 p q r) := ofPf <| by
-  unfold s3_3; intro_; intro_; intro_
-  exact mp (andI (hy 1) (hy 2)) (hy 0)
+/-- *3.3 — Exp. PM Dem.: Id (✱3·01); Transp; Id (✱1·01); Comm; Transp . Syll. -/
+theorem t3_3 (p : F) (q : F) (r : F) : Thm (s3_3 p q r) :=
+  -- [Id . (✱3·01)] ⊢ :. p . q . ⊃ . r : ⊃ : ∼(∼p ∨ ∼q) . ⊃ . r :
+  have l1 : Thm (imp (imp (and p q) r) (imp (.neg (.or (.neg p) (.neg q))) r)) := t2_08 _
+  -- [Transp] ⊃ : ∼r . ⊃ . ∼p ∨ ∼q :
+  have l2 : Thm (imp (imp (.neg (.or (.neg p) (.neg q))) r) (imp (.neg r) (.or (.neg p) (.neg q)))) :=
+    t2_15 (.or (.neg p) (.neg q)) r
+  -- [Id . (✱1·01)] ⊃ : ∼r . ⊃ . p ⊃ ∼q :
+  have l3 : Thm (imp (imp (.neg r) (.or (.neg p) (.neg q))) (imp (.neg r) (imp p (.neg q)))) := t2_08 _
+  -- [Comm] ⊃ : p . ⊃ . ∼r ⊃ ∼q :
+  have l4 : Thm (imp (imp (.neg r) (imp p (.neg q))) (imp p (imp (.neg r) (.neg q)))) :=
+    t2_04 (.neg r) p (.neg q)
+  -- [Transp . Syll] ⊃ : p . ⊃ . q ⊃ r :. ⊃ ⊢ . Prop
+  have l5 : Thm (imp (imp p (imp (.neg r) (.neg q))) (imp p (imp q r))) :=
+    Thm.mp (t2_17 q r) (t2_05 p _ _)
+  syl (syl (syl (syl l1 l2) l3) l4) l5
 
-/-- *3.37 — [✱3·2, ✱3·26, ✱3·27, ✱2·01, ✱2·24] -/
-theorem t3_37 (p : F) (q : F) (r : F) : Thm (s3_37 p q r) := ofPf <| by
-  unfold s3_37; intro_; intro_
-  exact negI' r (mp (andI (andE1 (hy 1)) (hy 2)) (hy 0)) (andE2 (hy 1))
+/-- *3.37 — PM Dem.: Transp; Syll (1); Exp (2); Imp (3); (2) . (1) . (3) . Syll. -/
+theorem t3_37 (p : F) (q : F) (r : F) : Thm (s3_37 p q r) :=
+  -- ⊢ . Transp . ⊃ ⊢ : q ⊃ r . ⊃ . ∼r ⊃ ∼q :
+  have l1 : Thm (imp (imp q r) (imp (.neg r) (.neg q))) := t2_16 q r
+  -- [Syll] ⊃ ⊢ :. p . ⊃ . q ⊃ r : ⊃ : p . ⊃ . ∼r ⊃ ∼q   (1)
+  have h1 : Thm (imp (imp p (imp q r)) (imp p (imp (.neg r) (.neg q)))) := Thm.mp l1 (t2_05 p _ _)
+  -- ⊢ . Exp . ⊃ ⊢ :. p . q . ⊃ . r : ⊃ : p . ⊃ . q ⊃ r   (2)
+  have h2 : Thm (imp (imp (and p q) r) (imp p (imp q r))) := t3_3 p q r
+  -- ⊢ . Imp . ⊃ ⊢ :. p . ⊃ . ∼r ⊃ ∼q : ⊃ : p . ∼r . ⊃ . ∼q   (3)
+  have h3 : Thm (imp (imp p (imp (.neg r) (.neg q))) (imp (and p (.neg r)) (.neg q))) :=
+    t3_31 p (.neg r) (.neg q)
+  -- ⊢ . (2) . (1) . (3) . Syll . ⊃ ⊢ . Prop
+  syl (syl h2 h1) h3
 
-/-- *3.43 — composition [✱3·2, ✱3·26, ✱3·27] -/
-theorem t3_43 (p : F) (q : F) (r : F) : Thm (s3_43 p q r) := ofPf <| by
-  unfold s3_43; intro_; intro_
-  exact andI (mp (hy 1) (andE1 (hy 0))) (mp (hy 1) (andE2 (hy 0)))
+/-- *3.43 — Comp. PM Dem.: ✱3·2 (1); (1) . Syll; ✱2·77 (2); (2) . Imp. -/
+theorem t3_43 (p : F) (q : F) (r : F) : Thm (s3_43 p q r) :=
+  -- ⊢ . ✱3·2 . ⊃ ⊢ :. q . ⊃ : r . ⊃ . q . r   (1)
+  have h1 : Thm (imp q (imp r (and q r))) := t3_2 q r
+  -- ⊢ . (1) . Syll . ⊃ ⊢ :: p ⊃ q . ⊃ :. p . ⊃ : r . ⊃ . q . r :.
+  have l1 : Thm (imp (imp p q) (imp p (imp r (and q r)))) := Thm.mp h1 (t2_05 p q _)
+  -- [✱2·77] ⊃ :. p ⊃ r . ⊃ : p . ⊃ . q . r   (2)
+  have h2 : Thm (imp (imp p q) (imp (imp p r) (imp p (and q r)))) := syl l1 (t2_77 p r (and q r))
+  -- ⊢ . (2) . Imp . ⊃ ⊢ . Prop
+  Thm.mp h2 (t3_31 (imp p q) (imp p r) (imp p (and q r)))
 
-/-- *3.44 — [✱3·26, ✱3·27, ∨-elimination (✱1·6, ✱1·4, ✱1·2)] -/
-theorem t3_44 (p : F) (q : F) (r : F) : Thm (s3_44 p q r) := ofPf <| by
-  unfold s3_44; intro_; intro_
-  exact orE (hy 1) (mp (hy 2) (andE1 (hy 0))) (mp (hy 2) (andE2 (hy 0)))
+/-- *3.44 — PM Dem.: Syll; ✱2·6 (1); (1) . Exp; Comm . Imp (2); (2) . Comm; ✱2·53 . Syll. -/
+theorem t3_44 (p : F) (q : F) (r : F) : Thm (s3_44 p q r) :=
+  -- ⊢ . Syll . ⊃ ⊢ :. ∼q ⊃ r . r ⊃ p . ⊃ : ∼q ⊃ p :
+  have l1 : Thm (imp (and (imp (.neg q) r) (imp r p)) (imp (.neg q) p)) := t3_33 (.neg q) r p
+  -- [✱2·6] ⊃ : q ⊃ p . ⊃ . p   (1)
+  have h1 : Thm (imp (and (imp (.neg q) r) (imp r p)) (imp (imp q p) p)) := syl l1 (t2_6 q p)
+  -- ⊢ . (1) . Exp . ⊃ ⊢ :: ∼q ⊃ r . ⊃ :. r ⊃ p . ⊃ : q ⊃ p . ⊃ . p :.
+  have l2 : Thm (imp (imp (.neg q) r) (imp (imp r p) (imp (imp q p) p))) :=
+    Thm.mp h1 (t3_3 (imp (.neg q) r) (imp r p) (imp (imp q p) p))
+  -- [Comm . Imp] ⊃ :. q ⊃ p . r ⊃ p . ⊃ . p   (2)
+  have h2 : Thm (imp (imp (.neg q) r) (imp (and (imp q p) (imp r p)) p)) :=
+    syl (syl l2 (t2_04 (imp r p) (imp q p) p)) (t3_31 (imp q p) (imp r p) p)
+  -- ⊢ . (2) . Comm . ⊃ ⊢ :. q ⊃ p . r ⊃ p . ⊃ : ∼q ⊃ r . ⊃ . p :.
+  have l3 : Thm (imp (and (imp q p) (imp r p)) (imp (imp (.neg q) r) p)) :=
+    Thm.mp h2 (t2_04 (imp (.neg q) r) (and (imp q p) (imp r p)) p)
+  -- [✱2·53 . Syll] ⊃ ⊢ . Prop
+  sylMid l3 (t2_53 q r)
 
-/-- *3.47 — [✱3·26, ✱3·27, ✱3·2] -/
-theorem t3_47 (p : F) (q : F) (r : F) (s : F) : Thm (s3_47 p q r s) := ofPf <| by
-  unfold s3_47; intro_; intro_
-  exact andI (mp (andE1 (hy 1)) (andE1 (hy 0))) (mp (andE2 (hy 1)) (andE2 (hy 0)))
+/-- *3.47 — PM Dem.: ✱3·26; Fact; ✱3·22 (1); ✱3·27; Fact; ✱3·22 (2); (1) . (2) . ✱3·03 . ✱2·83. -/
+theorem t3_47 (p : F) (q : F) (r : F) (s : F) : Thm (s3_47 p q r s) :=
+  -- ⊢ . ✱3·26 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : p ⊃ r :
+  have l1 : Thm (imp (and (imp p r) (imp q s)) (imp p r)) := t3_26 (imp p r) (imp q s)
+  -- [Fact] ⊃ : p . q . ⊃ . r . q :
+  have l2 : Thm (imp (and (imp p r) (imp q s)) (imp (and p q) (and r q))) := syl l1 (t3_45 p r q)
+  -- [✱3·22] ⊃ : p . q . ⊃ . q . r   (1)
+  have h1 : Thm (imp (and (imp p r) (imp q s)) (imp (and p q) (and q r))) := sylEnd l2 (t3_22 r q)
+  -- ⊢ . ✱3·27 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : q ⊃ s :
+  have l3 : Thm (imp (and (imp p r) (imp q s)) (imp q s)) := t3_27 (imp p r) (imp q s)
+  -- [Fact] ⊃ : q . r . ⊃ . s . r :
+  have l4 : Thm (imp (and (imp p r) (imp q s)) (imp (and q r) (and s r))) := syl l3 (t3_45 q s r)
+  -- [✱3·22] ⊃ : q . r . ⊃ . r . s   (2)
+  have h2 : Thm (imp (and (imp p r) (imp q s)) (imp (and q r) (and r s))) := sylEnd l4 (t3_22 s r)
+  -- ⊢ . (1) . (2) . ✱3·03 . ✱2·83 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : p . q . ⊃ . r . s :. ⊃ ⊢ . Prop
+  Thm.mp h2 (Thm.mp h1 (t2_83 (and (imp p r) (imp q s)) (and p q) (and q r) (and r s)))
 
-/-- *3.48 — [✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination] -/
-theorem t3_48 (p : F) (q : F) (r : F) (s : F) : Thm (s3_48 p q r s) := ofPf <| by
-  unfold s3_48; intro_; intro_
-  exact orE (hy 1) (orIL (mp (hy 2) (andE1 (hy 0)))) (orIR (mp (hy 2) (andE2 (hy 0))))
+/-- *3.48 — PM Dem.: ✱3·26; Sum; Perm (1); ✱3·27; Sum; Perm (2); (1) . (2) . ✱2·83.
+    The intermediate lines as transcribed (`p ∨ q . ⊃ . r ∨ q`, `q ∨ r . ⊃ . s ∨ r`) are not what Sum
+    gives (`q ∨ p . ⊃ . q ∨ r`, `r ∨ q . ⊃ . r ∨ s`); with Perm on the antecedent the numbered lines
+    (1) and (2) come out exactly as printed. -/
+theorem t3_48 (p : F) (q : F) (r : F) (s : F) : Thm (s3_48 p q r s) :=
+  -- ⊢ . ✱3·26 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : p ⊃ r :
+  have l1 : Thm (imp (and (imp p r) (imp q s)) (imp p r)) := t3_26 (imp p r) (imp q s)
+  -- [Sum] ⊃ : q ∨ p . ⊃ . q ∨ r :
+  have l2 : Thm (imp (and (imp p r) (imp q s)) (imp (.or q p) (.or q r))) := syl l1 (Thm.sum q p r)
+  -- [Perm] ⊃ : p ∨ q . ⊃ . q ∨ r   (1)
+  have h1 : Thm (imp (and (imp p r) (imp q s)) (imp (.or p q) (.or q r))) := sylMid l2 (Thm.perm p q)
+  -- ⊢ . ✱3·27 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : q ⊃ s :
+  have l3 : Thm (imp (and (imp p r) (imp q s)) (imp q s)) := t3_27 (imp p r) (imp q s)
+  -- [Sum] ⊃ : r ∨ q . ⊃ . r ∨ s :
+  have l4 : Thm (imp (and (imp p r) (imp q s)) (imp (.or r q) (.or r s))) := syl l3 (Thm.sum r q s)
+  -- [Perm] ⊃ : q ∨ r . ⊃ . r ∨ s   (2)
+  have h2 : Thm (imp (and (imp p r) (imp q s)) (imp (.or q r) (.or r s))) := sylMid l4 (Thm.perm q r)
+  -- ⊢ . (1) . (2) . ✱2·83 . ⊃ ⊢ :. p ⊃ r . q ⊃ s . ⊃ : p ∨ q . ⊃ . r ∨ s :. ⊃ ⊢ . Prop
+  Thm.mp h2 (Thm.mp h1 (t2_83 (and (imp p r) (imp q s)) (.or p q) (.or q r) (.or r s)))
 
 /-- *4.11 — [✱2·16, ✱2·17, ✱3·2, ✱3·26, ✱3·27] -/
 theorem t4_11 (p : F) (q : F) : Thm (s4_11 p q) := ofPf <| by

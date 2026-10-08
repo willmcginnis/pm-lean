@@ -51,6 +51,12 @@ theorem iffMph {a b : F} (h : Thm (iff a b)) : Thm (imp a b) := andE1h h
 /-- ✱4·01 + ✱3·27 as a rule. -/
 theorem iffMprh {a b : F} (h : Thm (iff a b)) : Thm (imp b a) := andE2h h
 
+/-- An asserted equivalence read right to left (✱4·01; its halves recombined by ✱3·03). -/
+theorem iffSymmh {a b : F} (h : Thm (iff a b)) : Thm (iff b a) := iffIh (iffMprh h) (iffMph h)
+/-- PM's chain `⊢ : a . ≡ . b : ≡ . c`: the two halves joined by Syll, as for a `⊃`-chain. -/
+theorem iffTransh {a b c : F} (h1 : Thm (iff a b)) (h2 : Thm (iff b c)) : Thm (iff a c) :=
+  iffIh (syl (iffMph h1) (iffMph h2)) (syl (iffMprh h2) (iffMprh h1))
+
 /-! ## Part 2: PM ✱2·73 – ✱2·77 -/
 
 /-- ✱2·73 [✱2·621, ✱2·38]. -/
