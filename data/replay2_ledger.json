@@ -436,7 +436,15 @@
    "≡ used as ⊃",
    "≡-chain"
   ],
-  "reason": "the step `q . r . ⊃ . ∼p : ≡ : p . ⊃ . ∼(q . r)` cited as ✱4·12 (`p ≡ ∼q . ≡ . q ≡ ∼p`) is not an instance of ✱4·12; it is ✱2·03 taken both ways (the ⊃-analogue of ✱4·12). ✱4·12 itself cannot be used, so it stays uncited in the Lean proof."
+  "reason": "the step `q . r . ⊃ . ∼p : ≡ : p . ⊃ . ∼(q . r)` cited as ✱4·12 (`p ≡ ∼q . ≡ . q ≡ ∼p`) is not an instance of ✱4·12; it is ✱2·03 taken both ways (the ⊃-analogue of ✱4·12). ✱4·12 itself cannot be used, so it stays uncited in the Lean proof.",
+  "scan_check": {
+   "page": 123,
+   "djvu": 145,
+   "print": "[✱4·12]   ≡ : p . ⊃ . ∼(q . r)   (1)",
+   "classification": "PM's own slip (in the 1910 print)",
+   "note": "The 1910 print cites ✱4·12 here, as the transcription does. No published erratum (Vol I, II, III lists) touches p. 123.",
+   "crop": "data/anomaly_crops/4.32_p123_djvu145.png"
+  }
  },
  {
   "id": "*4.36",
@@ -572,20 +580,27 @@
   "cited_used": [
    "*2.11",
    "*3.21",
+   "*3.26",
    "*4.4"
   ],
-  "extra_used": [
-   "*3.26"
-  ],
+  "extra_used": [],
   "cited_unused": [],
   "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
-  "fidelity": "pm-lines+extra",
+  "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
    "*3.03",
    "≡-chain"
   ],
-  "reason": "line (2) `p . q ∨ ∼q . ⊃ . p` carries no citation in the transcription; it is ✱3·26 (Simp)."
+  "reason": "line (2) is ✱3·26, as the 1910 print cites it (the transcription drops the citation).",
+  "scan_check": {
+   "page": 124,
+   "djvu": 146,
+   "print": "⊢ . ✱3·26 .   ⊃ ⊢ : p . q ∨ ∼q . ⊃ . p   (2)",
+   "classification": "transcription error (Gutenberg differs from print)",
+   "note": "The 1910 print cites ✱3·26 for line (2); Gutenberg #78050 drops the hint `⊢ . ✱3·26 .`, so ✱3·26 is PM's citation, not an extra. No published erratum touches p. 124. Candidate filed in pm-text-audit data/vol1/proof_anomaly_candidates.json.",
+   "crop": "data/anomaly_crops/4.42_p124_djvu146.png"
+  }
  },
  {
   "id": "*4.43",
@@ -609,7 +624,15 @@
    "Syll",
    "*3.03"
   ],
-  "reason": "✱2·65 (∼p/p) ends in `∼(∼p)`, not `p` as the line prints it; PM drops the double negation."
+  "reason": "✱2·65 (∼p/p) ends in `∼(∼p)`, not `p` as the line prints it; PM drops the double negation.",
+  "scan_check": {
+   "page": 125,
+   "djvu": 147,
+   "print": "⊢ . ✱2·65 (∼p/p) .   ⊃ ⊢ :. ∼p ⊃ q . ⊃ : ∼p ⊃ ∼q . ⊃ . p :.",
+   "classification": "PM's own slip (in the 1910 print)",
+   "note": "The 1910 print ends the line in `p`, as the transcription does; the tacit ∼(∼p) ⊃ p step (✱2·14) is PM's. No published erratum touches p. 125.",
+   "crop": "data/anomaly_crops/4.43_p125_djvu147.png"
+  }
  },
  {
   "id": "*4.44",

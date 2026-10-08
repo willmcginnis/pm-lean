@@ -303,7 +303,8 @@ theorem t4_22 (p : F) (q : F) (r : F) : Thm (s4_22 p q r) :=
 /-- *4.32 — PM Dem.: ✱4·15; ✱4·12 (1); (1) . ✱4·11; (✱1·01 . ✱3·01).
     extra ✱2·03: the step `q . r . ⊃ . ∼p : ≡ : p . ⊃ . ∼(q . r)` cited as ✱4·12
     (`p ≡ ∼q . ≡ . q ≡ ∼p`) is not an instance of ✱4·12; it is ✱2·03 taken both ways (the
-    ⊃-analogue of ✱4·12). ✱4·12 itself cannot be used, so it stays uncited in the Lean proof. -/
+    ⊃-analogue of ✱4·12). ✱4·12 itself cannot be used, so it stays uncited in the Lean proof.
+    The 1910 print (p. 123) reads `[✱4·12]` too, and no published erratum corrects it: PM's own slip. -/
 theorem t4_32 (p : F) (q : F) (r : F) : Thm (s4_32 p q r) :=
   -- ⊢ . ✱4·15 . ⊃ ⊢ :. p . q . ⊃ . ∼r : ≡ : q . r . ⊃ . ∼p :
   have l1 : Thm (iff (imp (and p q) (.neg r)) (imp (and q r) (.neg p))) := t4_15 p q r
@@ -453,15 +454,14 @@ theorem t4_41 (p : F) (q : F) (r : F) : Thm (s4_41 p q r) :=
   -- ⊢ . (3) . (4) . ⊃ ⊢ . Prop
   iffIh h3 h4
 
-/-- *4.42 — PM Dem.: ✱3·21; ✱2·11 (1); (2); (1) . (2); ✱4·4.
-    extra ✱3·26: line (2) `p . q ∨ ∼q . ⊃ . p` carries no citation in the transcription; it is ✱3·26
-    (Simp). -/
+/-- *4.42 — PM Dem.: ✱3·21; ✱2·11 (1); ✱3·26 (2); (1) . (2); ✱4·4.
+    The 1910 print (p. 124) cites ✱3·26 for line (2); the Gutenberg transcription drops that citation. -/
 theorem t4_42 (p : F) (q : F) : Thm (s4_42 p q) :=
   -- ⊢ . ✱3·21 . ⊃ ⊢ :. q ∨ ∼q . ⊃ : p . ⊃ . p . q ∨ ∼q :.
   have l1 : Thm (imp (.or q (.neg q)) (imp p (and p (.or q (.neg q))))) := t3_21 p (.or q (.neg q))
   -- [✱2·11] ⊃ ⊢ : p . ⊃ . p . q ∨ ∼q   (1)
   have h1 : Thm (imp p (and p (.or q (.neg q)))) := Thm.mp (t2_11 q) l1
-  -- [✱3·26] ⊢ : p . q ∨ ∼q . ⊃ . p   (2)
+  -- ⊢ . ✱3·26 . ⊃ ⊢ : p . q ∨ ∼q . ⊃ . p   (2)
   have h2 : Thm (imp (and p (.or q (.neg q))) p) := t3_26 p (.or q (.neg q))
   -- ⊢ . (1) . (2) . ⊃ ⊢ :. p . ≡ : p . q ∨ ∼q :
   have l2 : Thm (iff p (and p (.or q (.neg q)))) := iffIh h1 h2
@@ -470,7 +470,7 @@ theorem t4_42 (p : F) (q : F) : Thm (s4_42 p q) :=
 
 /-- *4.43 — PM Dem.: ✱2·2; Comp (1); ✱2·65 (∼p/p); Imp; ✱2·53 . ✱3·47 (2); (1) . (2).
     extra ✱2·14: ✱2·65 (∼p/p) ends in `∼(∼p)`, not `p` as the line prints it; PM drops the
-    double negation. -/
+    double negation. The 1910 print (p. 125) also ends the line in `p`; no published erratum corrects it. -/
 theorem t4_43 (p : F) (q : F) : Thm (s4_43 p q) :=
   -- ⊢ . ✱2·2 . ⊃ ⊢ : p . ⊃ . p ∨ q : p . ⊃ . p ∨ ∼q :
   have l1 : Thm (and (imp p (.or p q)) (imp p (.or p (.neg q)))) := andIh (t2_2 p q) (t2_2 p (.neg q))
