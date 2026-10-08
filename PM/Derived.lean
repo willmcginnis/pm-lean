@@ -64,6 +64,15 @@ theorem iffSymmh {a b : F} (h : Thm (iff a b)) : Thm (iff b a) := iffIh (iffMprh
 /-- PM's chain `⊢ : a . ≡ . b : ≡ . c`: the two halves joined by Syll, as for a `⊃`-chain. -/
 theorem iffTransh {a b c : F} (h1 : Thm (iff a b)) (h2 : Thm (iff b c)) : Thm (iff a c) :=
   iffIh (syl (iffMph h1) (iffMph h2)) (syl (iffMprh h2) (iffMprh h1))
+/-- Syll (✱2·05) applied to the consequent of a consequent, in a `⊃`-chain under a hypothesis `h`. -/
+theorem sylUnder {h y z : F} (x : F) (d : Thm (imp h (imp y z))) :
+    Thm (imp h (imp (imp x y) (imp x z))) :=
+  syl d (t2_05 x y z)
+/-- The links of a printed chain `⊢ : a . ≡ . b : ≡ . c : ≡ . d` (✱4·87), which Lean states as the
+    conjunction `(a ≡ b . b ≡ c) . c ≡ d`. -/
+theorem link1 {a b c : F} (h : Thm (and (and a b) c)) : Thm a := andE1h (andE1h h)
+theorem link2 {a b c : F} (h : Thm (and (and a b) c)) : Thm b := andE2h (andE1h h)
+theorem link3 {a b c : F} (h : Thm (and (and a b) c)) : Thm c := andE2h h
 /-- An asserted equivalence applied, by Syll both ways, to an antecedent. -/
 theorem iffSylAnt {a b : F} (c : F) (h : Thm (iff a b)) : Thm (iff (imp a c) (imp b c)) :=
   iffIh (sylAnt (iffMprh h)) (sylAnt (iffMph h))
