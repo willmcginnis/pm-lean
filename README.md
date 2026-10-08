@@ -11,6 +11,8 @@ A deep embedding of the propositional part of Whitehead & Russell's *Principia M
 
 Status: all 188 ✱2–✱5 propositions are proved. Every theorem, and `complete`, reports "does not depend on any axioms" under `#print axioms`. The project contains no `sorry`, no `native_decide` and no added axioms.
 
-`data/replay_ledger.json` and `data/replay2_ledger.json` record, for each proposition, which of PM's cited propositions the Lean proof uses. Only some of the newer proofs reproduce PM's own proof lines; the rest are valid derivations that take a different route.
+`data/replay_ledger.json` and `data/replay2_ledger.json` record, for each proposition, which of PM's cited propositions the Lean proof uses.
+
+In `PM/Replay2.lean`, 74 of the 85 proofs follow PM's own proof. Each has one Lean line per Dem. line, or, where PM prints only a bracketed hint, one per hinted proposition in PM's order. The only steps done silently are the ones PM itself leaves tacit; the file header lists them. The ledger's `fidelity` field is `pm-lines` for 39 proofs. It is `pm-lines+extra` for 35 proofs, which also need a proposition PM does not cite; `extra_used` and `reason` say which one and why. It is `unchanged` for 11 proofs whose transcription has no Dem. or hint to follow.
 
 Companion audit of the digital texts: willmcginnis/pm-text-audit (private).

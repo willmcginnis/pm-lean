@@ -6,12 +6,15 @@
    "*1.4",
    "*2.63"
   ],
-  "extra_used": [
-   "*2.05",
-   "*2.06"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱1·4, ✱2·63 (q,p/p,q)]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*2.65",
@@ -21,7 +24,11 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·64 (∼p/p)]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [],
+  "reason": ""
  },
  {
   "id": "*2.69",
@@ -31,11 +38,15 @@
    "*2.62",
    "*2.68"
   ],
-  "extra_used": [
-   "*2.05"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·68, ✱1·4, ✱2·62 (q,p/p,q)]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*2.73",
@@ -44,28 +55,36 @@
    "*2.38",
    "*2.621"
   ],
-  "extra_used": [
-   "*2.05"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·621, ✱2·38]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*2.74",
   "method": "explicit",
   "cited_used": [
+   "*1.5",
    "*2.05",
-   "*2.06",
    "*2.73"
   ],
   "extra_used": [
-   "*1.4",
-   "*2.38"
+   "*2.31",
+   "*2.32"
   ],
-  "cited_unused": [
-   "*1.5"
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
   ],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·73, ✱1·4, ✱2·38, ✱2·06]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "reason": "Assoc permutes `p ∨ (q ∨ r)`, but the statement has `p ∨ q ∨ r`, i.e. `(p ∨ q) ∨ r` (✱2·33); PM moves the brackets tacitly."
  },
  {
   "id": "*2.75",
@@ -76,12 +95,16 @@
    "*2.74"
   ],
   "extra_used": [
-   "*1.4",
-   "*2.05",
-   "*2.06"
+   "*1.4"
   ],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·74, ✱2·53, ✱2·31]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": "✱2·53 turns `q ∨ p` into `∼q ⊃ p`; from the hypothesis `p ∨ q` this needs Perm first."
  },
  {
   "id": "*2.76",
@@ -92,7 +115,11 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·75, ✱2·04]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [],
+  "reason": ""
  },
  {
   "id": "*2.77",
@@ -102,7 +129,11 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·76 (∼p/p)]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [],
+  "reason": ""
  },
  {
   "id": "*2.81",
@@ -113,10 +144,14 @@
    "*2.76"
   ],
   "extra_used": [],
-  "cited_unused": [
-   "*2.06"
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
   ],
-  "note": "direct Hilbert-style term. Proof annotation: [✱1·6, ✱2·76, ✱2·05]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "reason": ""
  },
  {
   "id": "*2.82",
@@ -126,16 +161,17 @@
    "*2.81"
   ],
   "extra_used": [
-   "*1.1",
-   "*2.02",
-   "*2.05",
-   "*2.08",
    "*2.31",
-   "*2.32",
-   "*2.77"
+   "*2.32"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·8, ✱2·81; ✱2·31/✱2·32 for the bracketing]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": "✱2·81 gives `p ∨ (q ∨ r) . ⊃ : p ∨ (∼r ∨ s) . ⊃ . p ∨ (q ∨ s)`; the statement brackets `p ∨ q ∨ r` as `(p ∨ q) ∨ r` (✱2·33), which PM changes tacitly."
  },
  {
   "id": "*2.83",
@@ -144,66 +180,56 @@
    "*2.82"
   ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
    "*2.31",
-   "*2.32",
-   "*2.77"
+   "*2.32"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·82 (∼p,∼q/p,q); ✱2·31/✱2·32 for the bracketing]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": "the instance of ✱2·82 is bracketed `(∼p ∨ ∼q) ∨ r`, the statement `∼p ∨ (∼q ∨ r)` (✱1·01); PM changes the brackets tacitly."
  },
  {
   "id": "*3.3",
   "method": "explicit",
   "cited_used": [
-   "*2.05",
-   "*2.08"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
-   "*2.03",
    "*2.04",
-   "*2.06",
+   "*2.05",
+   "*2.08",
    "*2.15",
-   "*2.16",
    "*2.17"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: exportation [✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*3.37",
   "method": "explicit",
   "cited_used": [
-   "*2.05"
-  ],
-  "extra_used": [
-   "*2.01",
-   "*2.02",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
-   "*2.03",
-   "*2.06",
-   "*2.15",
+   "*2.05",
    "*2.16",
-   "*2.17",
    "*3.3",
-   "*3.31",
-   "*3.33",
-   "*3.34"
+   "*3.31"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱2·01, ✱2·24]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*3.43",
@@ -211,70 +237,59 @@
   "cited_used": [
    "*2.05",
    "*2.77",
-   "*3.2"
+   "*3.2",
+   "*3.31"
   ],
-  "extra_used": [
-   "*2.02",
-   "*2.08",
-   "*3.26",
-   "*3.27"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
   ],
-  "cited_unused": [
-   "*2.06",
-   "*3.31",
-   "*3.33",
-   "*3.34"
-  ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: composition [✱3·2, ✱3·26, ✱3·27]. Ledger tag was FAITHFUL (no Lean theorem in Replay.lean)"
+  "reason": ""
  },
  {
   "id": "*3.44",
   "method": "explicit",
   "cited_used": [
-   "*2.05"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.08",
-   "*2.77",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
    "*2.04",
-   "*2.06",
    "*2.53",
    "*2.6",
    "*3.3",
    "*3.31",
-   "*3.33",
-   "*3.34"
+   "*3.33"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ∨-elimination (✱1·6, ✱1·4, ✱1·2)]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*3.47",
   "method": "explicit",
   "cited_used": [
-   "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
    "*2.83",
    "*3.22",
+   "*3.26",
+   "*3.27",
    "*3.45"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*3.48",
@@ -282,44 +297,39 @@
   "cited_used": [
    "*1.4",
    "*1.6",
+   "*2.83",
    "*3.26",
    "*3.27"
   ],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.77"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll"
   ],
-  "cited_unused": [
-   "*2.83"
-  ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]"
+  "reason": ""
  },
  {
   "id": "*4.11",
   "method": "explicit",
   "cited_used": [
    "*2.16",
-   "*2.17"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*2.17",
    "*3.22",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·16, ✱2·17, ✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.12",
@@ -329,183 +339,186 @@
    "*2.15"
   ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
+   "*3.47"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·03, ✱2·15, ✱3·2, ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": "✱2·03 and ✱2·15 transform the two halves of each equivalence; carrying both through the product is ✱3·47, which PM leaves tacit."
  },
  {
   "id": "*4.14",
   "method": "explicit",
   "cited_used": [
-   "*3.37"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.18",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*3.37",
    "*4.13"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·37 (→); ← by reductio ✱2·18]"
+  "extra_used": [
+   "*2.16"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "✱3·37 (∼r,∼q/q,r) gives `p . ∼∼q . ⊃ . ∼∼r`; ✱4·13 turns `∼∼r` into `r` by Syll, but replacing `∼∼q` by `q` inside the product `p . (…)` needs Transp, since `p . q = ∼(p ⊃ ∼q)` (✱3·01). PM leaves this replacement tacit."
  },
  {
   "id": "*4.15",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*3.22",
    "*4.13",
    "*4.14"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱2·01, ✱2·24]"
+  "extra_used": [
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱4·14 (q,p,∼r/p,q,r) gives `q . ∼∼r . ⊃ . ∼p`; replacing `∼∼r` by `r` inside the product `q . (…)` needs ✱4·11, since `q . r = ∼(q ⊃ ∼r)` (✱3·01). PM leaves this tacit."
  },
  {
   "id": "*4.22",
   "method": "explicit",
   "cited_used": [
-   "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
    "*2.83",
+   "*3.26",
+   "*3.27",
    "*3.43"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.32",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.11",
-   "*4.12",
    "*4.15"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*2.03"
+  ],
+  "cited_unused": [
+   "*4.12"
+  ],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "*3.03",
+   "≡ used as ⊃",
+   "≡-chain"
+  ],
+  "reason": "the step `q . r . ⊃ . ∼p : ≡ : p . ⊃ . ∼(q . r)` cited as ✱4·12 (`p ≡ ∼q . ≡ . q ≡ ∼p`) is not an instance of ✱4·12; it is ✱2·03 taken both ways (the ⊃-analogue of ✱4·12). ✱4·12 itself cannot be used, so it stays uncited in the Lean proof."
  },
  {
   "id": "*4.36",
   "method": "explicit",
   "cited_used": [
-   "*3.45"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*3.45",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·45, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.37",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.38",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*1.6",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·38 (the ✱1·6 analogue for the left disjunct), ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*1.4"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "Sum adds the new disjunct on the left (`r ∨ p . ⊃ . r ∨ q`), but the statement has it on the right (`p ∨ r . ≡ . q ∨ r`); Perm is needed at both ends (✱2·38 would replace Sum)."
  },
  {
   "id": "*4.38",
   "method": "explicit",
   "cited_used": [
-   "*3.47"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
    "*3.22",
+   "*3.47",
    "*4.32"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·47, ✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*2.08"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "✱4·32 and ✱3·22 bring the hypothesis `(p ⊃ r . r ⊃ p) . (q ⊃ s . s ⊃ q)` into the form `(p ⊃ r . q ⊃ s) . (r ⊃ p . s ⊃ q)` only if they may be applied to one factor of a product; that replacement is done here with ✱3·47 and Id."
  },
  {
   "id": "*4.39",
   "method": "explicit",
   "cited_used": [
-   "*3.48"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
    "*3.22",
    "*3.47",
+   "*3.48",
    "*4.32"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·48, ✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*2.08"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "as for ✱4·38, the hypothesis is rearranged by ✱4·32 and ✱3·22 inside a factor, which is done here with ✱3·47 and Id."
  },
  {
   "id": "*4.4",
@@ -513,106 +526,90 @@
   "cited_used": [
    "*3.2",
    "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.77"
-  ],
-  "cited_unused": [
+   "*3.27",
    "*3.31",
    "*3.43",
    "*3.44",
    "*3.48"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.41",
   "method": "explicit",
   "cited_used": [
    "*1.6",
-   "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
    "*2.53",
    "*2.54",
+   "*3.26",
+   "*3.27",
    "*3.43",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27, ✱1·3, ✱2·2, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.42",
   "method": "explicit",
   "cited_used": [
-   "*2.11"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.77",
-   "*3.2",
-   "*3.26"
-  ],
-  "cited_unused": [
+   "*2.11",
    "*3.21",
    "*4.4"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "*3.03",
+   "≡-chain"
+  ],
+  "reason": "line (2) `p . q ∨ ∼q . ⊃ . p` carries no citation in the transcription; it is ✱3·26 (Simp)."
  },
  {
   "id": "*4.43",
   "method": "explicit",
   "cited_used": [
-   "*2.2"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*2.2",
    "*2.53",
    "*2.65",
    "*3.31",
    "*3.43",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·2, ✱3·26, ✱3·27, ✱2·24]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*2.14"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "✱2·65 (∼p/p) ends in `∼(∼p)`, not `p` as the line prints it; PM drops the double negation."
  },
  {
   "id": "*4.44",
@@ -620,20 +617,18 @@
   "cited_used": [
    "*2.08",
    "*2.2",
-   "*3.26"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.77"
-  ],
-  "cited_unused": [
+   "*3.26",
    "*3.44"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·26, ∨-elimination]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem.",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.45",
@@ -643,159 +638,137 @@
    "*3.26"
   ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
    "*2.08",
-   "*2.77",
-   "*3.2"
+   "*3.43"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·2, ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": "`p . ⊃ . p . p ∨ q` joins Id with ✱2·2 by Comp."
  },
  {
   "id": "*4.52",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.18",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.13",
    "*4.5"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·5 (q/∼q), ✱4·13: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱4·5 (∼q/q) gives `∼(∼p ∨ ∼∼q)`; replacing `∼∼q` by `q` under the negation needs ✱4·11 (inside `∼p ∨ (…)`, i.e. `p ⊃ (…)`, Syll suffices). PM leaves this tacit."
  },
  {
   "id": "*4.53",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.18",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.12",
    "*4.52"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·52, ✱4·12: proved directly by cases and reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃",
+   "≡ read right to left"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.56",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.13",
    "*4.54"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·54, ✱4·13: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*1.6",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡ used as ⊃",
+   "≡-chain"
+  ],
+  "reason": "✱4·54 (∼q/q) gives `∼(p ∨ ∼∼q)`; replacing `∼∼q` by `q` inside `p ∨ (…)` needs Sum, and under the negation ✱4·11. PM leaves this tacit."
  },
  {
   "id": "*4.57",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.18",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.12",
    "*4.56"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·56, ✱4·12: proved directly by reductio]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃",
+   "≡ read right to left"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.61",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.18",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.11",
    "*4.52",
    "*4.6"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·6, ✱4·52: proved directly by reductio]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.65",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*4.61"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.11",
    "*4.56",
    "*4.64"
   ],
-  "note": "direct Hilbert-style term. Proof annotation: [✱4·61 (∼p/p)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.7",
@@ -810,7 +783,10 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*4.71",
@@ -826,7 +802,10 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*4.72",
@@ -846,67 +825,62 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·3, ✱2·2, ∨-elimination, ✱3·2]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·3, ✱2·2, ∨-elimination, ✱3·2]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*4.73",
   "method": "explicit",
   "cited_used": [
    "*2.02",
-   "*3.26"
-  ],
-  "extra_used": [
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
-   "*3.27",
    "*4.71"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26 (cf. ✱4·71)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "≡ used as ⊃"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.74",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*2.21",
    "*4.72"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·3, ✱2·24, ∨-elimination, ✱3·2 (cf. ✱4·72)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "≡ used as ⊃"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.76",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27",
-   "*3.43"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.41"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·43 (→); ← by ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ read right to left"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.77",
@@ -917,14 +891,17 @@
    "*3.44"
   ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
+   "*3.43"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·44 (→); ← by ✱1·3, ✱2·2, ✱3·2]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "from right to left, `q ∨ r . ⊃ . p` gives `q ⊃ p` (✱2·2) and `r ⊃ p` (Add); joining them is Comp."
  },
  {
   "id": "*4.78",
@@ -944,7 +921,10 @@
    "*2.77"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱2·24]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱2·24]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*4.79",
@@ -967,29 +947,29 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*4.82",
   "method": "explicit",
   "cited_used": [
    "*2.21",
-   "*2.65"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*2.65",
    "*3.31",
    "*3.43"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·65 (→); ← by ✱2·21]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.83",
@@ -997,59 +977,55 @@
   "cited_used": [
    "*2.02",
    "*2.61",
-   "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
    "*3.31",
    "*3.43"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·61 (→); ← by ✱2·02]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.84",
   "method": "explicit",
   "cited_used": [
-   "*2.06"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*2.06",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·06, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.22"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "✱2·06 pairs `p ⊃ q` with `q ⊃ r . ⊃ . p ⊃ r`, so ✱3·47 yields `p ≡ q . ⊃ : q ⊃ r . ⊃ . p ⊃ r : p ⊃ r . ⊃ . q ⊃ r`, the two halves of `p ⊃ r . ≡ . q ⊃ r` in the wrong order. (✱4·85, with ✱2·05, comes out in the right order.)"
  },
  {
   "id": "*4.85",
   "method": "explicit",
   "cited_used": [
-   "*2.05"
-  ],
-  "extra_used": [
-   "*2.02",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*2.05",
    "*3.47"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·05, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*4.86",
@@ -1059,15 +1035,19 @@
    "*4.22"
   ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26"
+   "*3.3",
+   "*3.43"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱4·21, ✱4·22, ✱3·2]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "✱4·22 is in conjunctive form; using it under the hypothesis `p ≡ q` needs Exp, and the two halves are joined under that hypothesis by Comp."
  },
  {
   "id": "*4.87",
@@ -1077,30 +1057,35 @@
    "*3.3",
    "*3.31"
   ],
-  "extra_used": [
-   "*3.2"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱3·3, ✱3·31, ✱2·04, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.1",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*3.22",
    "*3.4"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱2·02, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "✱3·4 and ✱3·22 give `p . q . ⊃ . p ⊃ q` and `p . q . ⊃ . q ⊃ p`; joining them into `p . q . ⊃ . p ≡ q` is Comp, which PM leaves tacit."
  },
  {
   "id": "*5.15",
@@ -1121,7 +1106,10 @@
    "*3.2"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱2·24, ✱3·2, ✱1·3, ✱2·2]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱2·24, ✱3·2, ✱1·3, ✱2·2]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*5.16",
@@ -1142,7 +1130,10 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·01, ✱2·11 (cases), ✱2·24, ✱3·26, ✱3·27]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·01, ✱2·11 (cases), ✱2·24, ✱3·26, ✱3·27]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*5.17",
@@ -1167,31 +1158,29 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱2·01, ✱2·18, ✱3·2]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·11 (cases), ✱2·01, ✱2·18, ✱3·2]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*5.18",
   "method": "explicit",
   "cited_used": [
    "*5.15",
-   "*5.16"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
+   "*5.16",
    "*5.17"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·15, ✱5·16]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.19",
@@ -1200,12 +1189,15 @@
    "*4.2",
    "*5.18"
   ],
-  "extra_used": [
-   "*1.1",
-   "*3.26"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱5·18 (p/q), ✱4·2]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.21",
@@ -1214,74 +1206,59 @@
    "*4.11",
    "*5.1"
   ],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.27"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·1 (∼p,∼q/p,q), ✱4·11]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "≡ used as ⊃"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.22",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.39",
    "*4.51",
    "*4.61"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱2·01, ✱2·24, ∨-elimination, ✱3·2]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡-chain"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.23",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27",
-   "*5.1",
-   "*5.21"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.13",
    "*4.36",
    "*5.18",
    "*5.22"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases); ← by ✱5·1, ✱5·21]"
+  "extra_used": [
+   "*4.3",
+   "*4.39"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱5·22 (∼q/q) gives `p . ∼∼q . ∨ . ∼q . ∼p`; to reach `p . q . ∨ . ∼p . ∼q` both products must be commuted (✱4·3: ✱4·36 replaces only a left factor) and the results put back into the disjunction (✱4·39). PM leaves these replacements tacit."
  },
  {
   "id": "*5.24",
@@ -1291,17 +1268,18 @@
    "*5.23"
   ],
   "extra_used": [
-   "*2.01",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.24",
-   "*2.77",
-   "*3.26",
-   "*3.27"
+   "*4.11"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱5·22, ✱5·23]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱5·23 has to be negated on both sides before ✱5·22 can be applied."
  },
  {
   "id": "*5.3",
@@ -1310,20 +1288,21 @@
    "*2.02",
    "*2.05",
    "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
-   "*2.06",
-   "*3.33",
-   "*3.34",
+   "*3.27",
    "*3.43"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*2.08"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "Comp joins `p . q ⊃ r . ⊃ . p . q ⊃ p` (Simp) with `p . q ⊃ r . ⊃ . p . q ⊃ r`, which is Id."
  },
  {
   "id": "*5.31",
@@ -1331,97 +1310,105 @@
   "cited_used": [
    "*2.02",
    "*3.26",
-   "*3.27"
-  ],
-  "extra_used": [
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
+   "*3.27",
    "*3.43"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.32",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*3.3",
    "*3.31",
    "*4.76",
    "*5.3"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*4.38"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱3·3·31 and ✱5·3 transform each factor of `p ⊃ (q ⊃ r) . p ⊃ (r ⊃ q)` separately; replacing both factors of the product is ✱4·38, which PM leaves tacit."
  },
  {
   "id": "*5.33",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.73",
    "*4.84",
    "*5.32"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*4.11",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "≡ used as ⊃",
+   "≡-chain"
+  ],
+  "reason": "✱4·73 (q,p/p,q) gives `p . ⊃ . q ≡ q . p`, so ✱4·84 and ✱5·32 lead to `p . q ⊃ r . ≡ . p . (q . p ⊃ r)`, not `p . (p . q ⊃ r)`. Commuting `q . p` (✱4·3, put into the implication by ✱4·84) and replacing the factor of the product (✱4·11, since `p . x = ∼(p ⊃ ∼x)`) are left tacit by PM."
  },
  {
   "id": "*5.35",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*3.43",
    "*5.1"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·26, ✱3·27, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.36",
   "method": "explicit",
-  "cited_used": [],
+  "cited_used": [
+   "*3.35"
+  ],
   "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
    "*3.26",
-   "*3.27"
+   "*3.27",
+   "*3.43"
   ],
   "cited_unused": [
-   "*3.35",
    "*4.38"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·26, ✱3·27]"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "the proof goes by Ass from `p . p ≡ q` to `q` (and back), which needs `p ⊃ q` out of `p ≡ q` (✱3·26/✱3·27 under the hypothesis) and Comp to rebuild the products. ✱4·38 (p, p ≡ q, q, p ≡ q) would need the hypotheses `p ≡ q` and `(p ≡ q) ≡ (p ≡ q)` and is not used."
  },
  {
   "id": "*5.41",
@@ -1430,271 +1417,268 @@
    "*2.77",
    "*2.86"
   ],
-  "extra_used": [
-   "*3.2"
-  ],
+  "extra_used": [],
   "cited_unused": [],
-  "note": "direct Hilbert-style term. Proof annotation: [✱2·86 (→), ✱2·77 (←)]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.42",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.87",
    "*5.3"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "link of a printed ≡-chain",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.44",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.76",
    "*5.3",
    "*5.32"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "by ✱5·32 the statement is `p ⊃ q . p ⊃ r : ≡ : p ⊃ q . p ⊃ q . r`; ✱4·76 and ✱5·3 give `⊃` from left to right, but from right to left `p ⊃ r` has to be taken back out of `p ⊃ q . r`, which is Simp (✱3·27)."
  },
  {
   "id": "*5.5",
   "method": "explicit",
   "cited_used": [
-   "*2.02"
-  ],
-  "extra_used": [
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
-   "*3.26",
-   "*3.27",
+   "*2.02",
    "*3.3",
    "*3.35"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·1 under hypotheses, ✱2·02, ✱3·2]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03"
+  ],
+  "reason": "Ass . Exp give `p . ⊃ : p ⊃ q . ⊃ . q` and Simp gives `p . ⊃ : q . ⊃ . p ⊃ q`; joining the two halves under the hypothesis `p` is Comp, which PM leaves tacit."
  },
  {
   "id": "*5.501",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.77",
-   "*3.2",
-   "*3.26"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*3.3",
    "*3.35",
    "*5.1"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·02, ✱3·2, ✱3·26]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*3.26",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "Ass gives `p . ⊃ : p ⊃ q . ⊃ . q`, so `p ⊃ q` must first be taken out of `p ≡ q` (✱3·26); and the two halves are joined under the hypothesis `p` by Comp."
  },
  {
   "id": "*5.53",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.77"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱4·77: ∨-elimination, ✱1·3, ✱2·2, ✱3·2, ✱3·26, ✱3·27]"
+  "extra_used": [
+   "*4.36"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱4·77 is used twice, the second time inside the left factor of the product `p ∨ q . ⊃ . s : r ⊃ s`; that replacement is ✱4·36, left tacit by PM."
  },
  {
   "id": "*5.54",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
-   "*2.03",
-   "*2.15",
+  "cited_used": [
    "*2.16",
-   "*2.17",
-   "*3.37",
-   "*4.1",
    "*4.11",
-   "*4.44",
    "*4.73",
    "*5.1"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+  "extra_used": [
+   "*2.08",
+   "*2.54",
+   "*3.22",
+   "*3.27",
+   "*3.43"
+  ],
+  "cited_unused": [
+   "*4.44"
+  ],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃"
+  ],
+  "reason": "✱4·73 gives `q . ⊃ : p ≡ p . q`, the halves in the other order (✱3·22); `∼q . ⊃ . ∼(p . q)` (Transp of ✱3·27) has to be joined with `∼q` (Comp, Id) before ✱5·1 applies; and the two cases `q`, `∼q` are combined into the disjunction by Transp and ✱2·54. ✱4·44 (`p ≡ p ∨ p . q`) has no evident place in the proof and is not used."
  },
  {
   "id": "*5.55",
   "method": "explicit",
   "cited_used": [
-   "*1.3"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2"
-  ],
-  "cited_unused": [
+   "*1.3",
    "*4.74",
    "*5.1"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24]"
+  "extra_used": [
+   "*1.4",
+   "*2.08",
+   "*2.16",
+   "*2.54",
+   "*3.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "Add gives `p . ⊃ . q ∨ p`, not `p ∨ q` (Perm); `p ∨ q` has to be joined with `p` (Comp, Id) before ✱5·1 applies; ✱4·74 gives the halves of `p ∨ q . ≡ . q` in the other order (✱3·22); and the two cases `p`, `∼p` are combined into the disjunction by Transp and ✱2·54."
  },
  {
   "id": "*5.6",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.64",
    "*4.85",
    "*4.87"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "link of a printed ≡-chain",
+   "≡-chain"
+  ],
+  "reason": ""
  },
  {
   "id": "*5.61",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*4.74",
    "*5.32"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·2, ✱3·2, ✱3·26, ✱3·27, ✱2·24]"
+  "extra_used": [
+   "*1.4",
+   "*3.47",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03",
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "✱4·74 (q,p/p,q) gives `∼q . ⊃ : p . ≡ . q ∨ p`; turning `q ∨ p` into `p ∨ q` inside the equivalence takes Perm both ways and ✱3·47, and ✱5·32 then yields `∼q . p . ≡ . ∼q . (p ∨ q)`, whose factors must be commuted (✱4·3). PM leaves these tacit."
  },
  {
   "id": "*5.63",
   "method": "explicit",
-  "cited_used": [],
-  "extra_used": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.77",
-   "*3.2",
-   "*3.27"
-  ],
-  "cited_unused": [
+  "cited_used": [
    "*5.62"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [cf. ✱5·62: ∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱3·2, ✱3·27]. Ledger tag was REPAIRED (no Lean theorem in Replay.lean)"
+  "extra_used": [
+   "*1.6",
+   "*3.22",
+   "*4.13",
+   "*4.31"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "*3.03",
+   "≡ used as ⊃",
+   "≡ read right to left",
+   "≡-chain"
+  ],
+  "reason": "the instance of ✱5·62 is `q . ∼p . ∨ . ∼∼p : ≡ . q ∨ ∼∼p`; it becomes the statement only after `∼∼p` is replaced by `p` (✱4·13, inside a sum by Sum), the sums are permuted (✱4·31) and the product `q . ∼p` is commuted (✱3·22, inside a sum by Sum)."
  },
  {
   "id": "*5.7",
   "method": "explicit",
   "cited_used": [
-   "*1.3"
-  ],
-  "extra_used": [
-   "*1.2",
-   "*1.4",
-   "*1.6",
-   "*2.02",
-   "*2.05",
-   "*2.08",
-   "*2.11",
-   "*2.2",
-   "*2.24",
-   "*2.77",
-   "*3.2",
-   "*3.26",
-   "*3.27"
-  ],
-  "cited_unused": [
+   "*1.3",
    "*4.37",
    "*4.74",
    "*5.1"
   ],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱2·11 (cases), ∨-elimination, ✱1·3, ✱2·2, ✱2·24, ✱3·2]"
+  "extra_used": [
+   "*1.4",
+   "*2.04",
+   "*2.54",
+   "*3.26",
+   "*3.27",
+   "*3.43",
+   "*3.44"
+  ],
+  "cited_unused": [],
+  "note": "explicit Hilbert term following the propositions of PM's bracketed hint, in PM's order (PM prints no Dem. lines)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.03"
+  ],
+  "reason": "right to left, `r` gives both sums by Add, which Comp joins for ✱5·1, and ✱3·44 joins this case with ✱4·37; left to right, under `∼r` ✱4·74 removes `r` from `r ∨ p`, `r ∨ q` (with Perm, and ✱3·27 to use the equivalence under the hypothesis), the halves of `p ∨ r . ≡ . q ∨ r` are taken out by ✱3·26, ✱3·27, recombined by Comp, and the case `∼r` is turned into the disjunction by Comm and ✱2·54. The hint names only the four main propositions."
  },
  {
   "id": "*5.71",
@@ -1715,7 +1699,10 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·2, ✱2·24, ✱3·2, ✱3·26, ✱3·27]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱2·2, ✱2·24, ✱3·2, ✱3·26, ✱3·27]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*5.74",
@@ -1731,7 +1718,10 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·1 under hypotheses, ✱3·2, ✱3·26, ✱3·27]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [✱1·1 under hypotheses, ✱3·2, ✱3·26, ✱3·27]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  },
  {
   "id": "*5.75",
@@ -1752,6 +1742,9 @@
    "*3.27"
   ],
   "cited_unused": [],
-  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱1·3, ✱2·24, ✱3·2, ✱3·26, ✱3·27]"
+  "note": "natural deduction in PM.Derived (Pf); framework props *2.02 *2.05 *2.08 *2.77 included in extra_used. Proof annotation: [∨-elimination, ✱1·3, ✱2·24, ✱3·2, ✱3·26, ✱3·27]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "reason": "the transcription has neither Dem. lines nor a bracketed hint for this proposition, so there is no PM proof to follow; the earlier natural-deduction proof is kept"
  }
 ]
