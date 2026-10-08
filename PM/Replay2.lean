@@ -478,40 +478,59 @@ theorem t4_45 (p : F) (q : F) : Thm (s4_45 p q) := ofPf <| by
   · exact andI (hy 0) (orIL (hy 0))
   · exact andE1 (hy 0)
 
-/-- *4.52 — [cf. ✱4·5 (q/∼q), ✱4·13: proved directly by reductio] -/
-theorem t4_52 (p : F) (q : F) : Thm (s4_52 p q) := ofPf <| by
-  unfold s4_52; split_iff
-  · exact negI (orE (hy 1) (absurd _ (andE1 (hy 0)) (hy 2)) (absurd _ (hy 2) (andE2 (hy 0))))
-  · exact andI (byContra (absurd _ (orIL (hy 1)) (hy 0))) (negI (absurd _ (orIR (hy 1)) (hy 0)))
+/-- *4.52 — PM: [✱4·5 (∼q/q) . ✱4·13] (hint only).
+    extra ✱4·11: ✱4·5 (∼q/q) gives `∼(∼p ∨ ∼∼q)`; replacing `∼∼q` by `q` under the negation needs
+    ✱4·11 (inside `∼p ∨ (…)`, i.e. `p ⊃ (…)`, Syll suffices). PM leaves this tacit. -/
+theorem t4_52 (p : F) (q : F) : Thm (s4_52 p q) :=
+  -- ⊢ . ✱4·5 (∼q/q) . ⊃ ⊢ : p . ∼q . ≡ . ∼(∼p ∨ ∼∼q) :
+  have l1 : Thm (iff (and p (.neg q)) (.neg (.or (.neg p) (.neg (.neg q))))) := t4_5 p (.neg q)
+  -- [✱4·13] ≡ . ∼(∼p ∨ q)
+  have l2 : Thm (iff (.neg (.or (.neg p) (.neg (.neg q)))) (.neg (.or (.neg p) q))) :=
+    Thm.mp (iffSylCons p (iffSymmh (t4_13 q))) (iffMph (t4_11 _ _))
+  iffTransh l1 l2
 
-/-- *4.53 — [cf. ✱4·52, ✱4·12: proved directly by cases and reductio] -/
-theorem t4_53 (p : F) (q : F) : Thm (s4_53 p q) := ofPf <| by
-  unfold s4_53; split_iff
-  · exact Pf.cases p (orIR (byContra (absurd _ (andI (hy 1) (hy 2)) (hy 0)))) (orIL (hy 1))
-  · exact negI (orE (hy 0) (absurd _ (andE1 (hy 1)) (hy 2)) (absurd _ (hy 2) (andE2 (hy 1))))
+/-- *4.53 — PM: [✱4·52·12] (hint only). -/
+theorem t4_53 (p : F) (q : F) : Thm (s4_53 p q) :=
+  -- ⊢ . ✱4·52 . ⊃ ⊢ : p . ∼q . ≡ . ∼(∼p ∨ q) :
+  have l1 : Thm (iff (and p (.neg q)) (.neg (.or (.neg p) q))) := t4_52 p q
+  -- [✱4·12] ⊃ ⊢ : ∼p ∨ q . ≡ . ∼(p . ∼q) : ⊃ ⊢ . Prop
+  iffSymmh (Thm.mp l1 (iffMph (t4_12 (and p (.neg q)) (.or (.neg p) q))))
 
-/-- *4.56 — [cf. ✱4·54, ✱4·13: proved directly by reductio] -/
-theorem t4_56 (p : F) (q : F) : Thm (s4_56 p q) := ofPf <| by
-  unfold s4_56; split_iff
-  · exact negI (orE (hy 1) (absurd _ (hy 2) (andE1 (hy 0))) (absurd _ (hy 2) (andE2 (hy 0))))
-  · exact andI (negI (absurd _ (orIL (hy 1)) (hy 0))) (negI (absurd _ (orIR (hy 1)) (hy 0)))
+/-- *4.56 — PM: [✱4·54 (∼q/q) . ✱4·13] (hint only).
+    extra ✱1·6, ✱4·11: ✱4·54 (∼q/q) gives `∼(p ∨ ∼∼q)`; replacing `∼∼q` by `q` inside `p ∨ (…)` needs
+    Sum, and under the negation ✱4·11. PM leaves this tacit. -/
+theorem t4_56 (p : F) (q : F) : Thm (s4_56 p q) :=
+  -- ⊢ . ✱4·54 (∼q/q) . ⊃ ⊢ : ∼p . ∼q . ≡ . ∼(p ∨ ∼∼q) :
+  have l1 : Thm (iff (and (.neg p) (.neg q)) (.neg (.or p (.neg (.neg q))))) := t4_54 p (.neg q)
+  -- [✱4·13 . Sum] p ∨ ∼∼q . ≡ . p ∨ q
+  have l2 : Thm (iff (.or p (.neg (.neg q))) (.or p q)) :=
+    iffIh (Thm.mp (iffMprh (t4_13 q)) (Thm.sum p (.neg (.neg q)) q))
+      (Thm.mp (iffMph (t4_13 q)) (Thm.sum p q (.neg (.neg q))))
+  -- [✱4·11] ≡ . ∼(p ∨ q)
+  iffTransh l1 (Thm.mp l2 (iffMph (t4_11 _ _)))
 
-/-- *4.57 — [cf. ✱4·56, ✱4·12: proved directly by reductio] -/
-theorem t4_57 (p : F) (q : F) : Thm (s4_57 p q) := ofPf <| by
-  unfold s4_57; split_iff
-  · exact byContra (absurd _
-      (andI (negI (absurd _ (orIL (hy 2)) (hy 1))) (negI (absurd _ (orIR (hy 2)) (hy 1)))) (hy 0))
-  · exact negI (orE (hy 0) (absurd _ (hy 2) (andE1 (hy 1))) (absurd _ (hy 2) (andE2 (hy 1))))
+/-- *4.57 — PM: [✱4·56·12] (hint only). -/
+theorem t4_57 (p : F) (q : F) : Thm (s4_57 p q) :=
+  -- ⊢ . ✱4·56 . ⊃ ⊢ : ∼p . ∼q . ≡ . ∼(p ∨ q) :
+  have l1 : Thm (iff (and (.neg p) (.neg q)) (.neg (.or p q))) := t4_56 p q
+  -- [✱4·12] ⊃ ⊢ : p ∨ q . ≡ . ∼(∼p . ∼q) : ⊃ ⊢ . Prop
+  iffSymmh (Thm.mp l1 (iffMph (t4_12 (and (.neg p) (.neg q)) (.or p q))))
 
-/-- *4.61 — [cf. ✱4·6, ✱4·52: proved directly by reductio] -/
-theorem t4_61 (p : F) (q : F) : Thm (s4_61 p q) := ofPf <| by
-  unfold s4_61; split_iff
-  · exact andI (byContra (absurd _ (Pf.intro (absurd _ (hy 2) (hy 1))) (hy 0)))
-      (negI (absurd _ (Pf.intro (hy 1)) (hy 0)))
-  · exact negI (absurd _ (mp (andE1 (hy 0)) (hy 1)) (andE2 (hy 0)))
+/-- *4.61 — PM: [✱4·6·11·52] (hint only). -/
+theorem t4_61 (p : F) (q : F) : Thm (s4_61 p q) :=
+  -- ⊢ . ✱4·6 . ✱4·11 . ⊃ ⊢ : ∼(p ⊃ q) . ≡ . ∼(∼p ∨ q) :
+  have l1 : Thm (iff (.neg (imp p q)) (.neg (.or (.neg p) q))) :=
+    Thm.mp (t4_6 p q) (iffMph (t4_11 (imp p q) (.or (.neg p) q)))
+  -- [✱4·52] ≡ . p . ∼q
+  iffTransh l1 (iffSymmh (t4_52 p q))
 
-/-- *4.65 — [✱4·61 (∼p/p)] -/
-theorem t4_65 (p : F) (q : F) : Thm (s4_65 p q) := t4_61 (.neg p) q
+/-- *4.65 — PM: [✱4·64·11·56] (hint only). -/
+theorem t4_65 (p : F) (q : F) : Thm (s4_65 p q) :=
+  -- ⊢ . ✱4·64 . ✱4·11 . ⊃ ⊢ : ∼(∼p ⊃ q) . ≡ . ∼(p ∨ q) :
+  have l1 : Thm (iff (.neg (imp (.neg p) q)) (.neg (.or p q))) :=
+    Thm.mp (t4_64 p q) (iffMph (t4_11 (imp (.neg p) q) (.or p q)))
+  -- [✱4·56] ≡ . ∼p . ∼q
+  iffTransh l1 (iffSymmh (t4_56 p q))
 
 /-- *4.7 — [✱3·2, ✱3·27] -/
 theorem t4_7 (p : F) (q : F) : Thm (s4_7 p q) := ofPf <| by
@@ -531,21 +550,26 @@ theorem t4_72 (p : F) (q : F) : Thm (s4_72 p q) := ofPf <| by
   · exact iffI (Pf.intro (orIR (hy 1))) (Pf.intro (orE (hy 1) (mp (hy 2) (hy 0)) (hy 2)))
   · exact Pf.intro (mp (orIL (hy 1)) (iffMpr (hy 0)))
 
-/-- *4.73 — [✱3·2, ✱3·26 (cf. ✱4·71)] -/
-theorem t4_73 (p : F) (q : F) : Thm (s4_73 p q) := ofPf <| by
-  unfold s4_73; intro_
-  exact iffI (Pf.intro (andI (hy 1) (hy 0))) (Pf.intro (andE1 (hy 1)))
+/-- *4.73 — PM: [Simp . ✱4·71] (hint only). -/
+theorem t4_73 (p : F) (q : F) : Thm (s4_73 p q) :=
+  -- ⊢ . Simp . ⊃ ⊢ :. q . ⊃ : p ⊃ q :
+  have l1 : Thm (imp q (imp p q)) := t2_02 p q
+  -- [✱4·71] ⊃ : p . ≡ . p . q
+  syl l1 (iffMph (t4_71 p q))
 
-/-- *4.74 — [✱1·3, ✱2·24, ∨-elimination, ✱3·2 (cf. ✱4·72)] -/
-theorem t4_74 (p : F) (q : F) : Thm (s4_74 p q) := ofPf <| by
-  unfold s4_74; intro_
-  exact iffI (Pf.intro (orIR (hy 1))) (Pf.intro (orE (hy 1) (absurd _ (hy 2) (hy 0)) (hy 2)))
+/-- *4.74 — PM: [✱2·21 . ✱4·72] (hint only). -/
+theorem t4_74 (p : F) (q : F) : Thm (s4_74 p q) :=
+  -- ⊢ . ✱2·21 . ⊃ ⊢ :. ∼p . ⊃ : p ⊃ q :
+  have l1 : Thm (imp (.neg p) (imp p q)) := t2_21 p q
+  -- [✱4·72] ⊃ : q . ≡ . p ∨ q
+  syl l1 (iffMph (t4_72 p q))
 
-/-- *4.76 — [✱3·43 (→); ← by ✱3·26, ✱3·27] -/
-theorem t4_76 (p : F) (q : F) (r : F) : Thm (s4_76 p q r) := ofPf <| by
-  unfold s4_76; split_iff
-  · exact app (t3_43 p q r) (hy 0)
-  · exact andI (Pf.intro (andE1 (mp (hy 1) (hy 0)))) (Pf.intro (andE2 (mp (hy 1) (hy 0))))
+/-- *4.76 — PM: [✱4·41 (∼p/p) . (✱1·01)] (hint only). -/
+theorem t4_76 (p : F) (q : F) (r : F) : Thm (s4_76 p q r) :=
+  -- ⊢ . ✱4·41 (∼p/p) . ⊃ ⊢ :. ∼p . ∨ . q . r : ≡ . ∼p ∨ q . ∼p ∨ r :.
+  have l1 : Thm (iff (.or (.neg p) (and q r)) (and (.or (.neg p) q) (.or (.neg p) r))) := t4_41 (.neg p) q r
+  -- [(✱1·01)] ⊃ ⊢ :. p . ⊃ . q . r : ≡ : p ⊃ q . p ⊃ r :. ⊃ ⊢ . Prop
+  iffSymmh l1
 
 /-- *4.77 — [✱3·44 (→); ← by ✱1·3, ✱2·2, ✱3·2] -/
 theorem t4_77 (p : F) (q : F) (r : F) : Thm (s4_77 p q r) := ofPf <| by
@@ -567,27 +591,49 @@ theorem t4_79 (p : F) (q : F) (r : F) : Thm (s4_79 p q r) := ofPf <| by
   · exact Pf.cases q (orIR (Pf.intro (mp (andI (hy 1) (hy 2)) (hy 0))))
       (orIL (Pf.intro (absurd _ (hy 2) (hy 1))))
 
-/-- *4.82 — [✱2·65 (→); ← by ✱2·21] -/
-theorem t4_82 (p : F) (q : F) : Thm (s4_82 p q) := ofPf <| by
-  unfold s4_82; split_iff
-  · exact app2 (t2_65 p q) (andE1 (hy 0)) (andE2 (hy 0))
-  · exact andI (app (t2_21 p q) (hy 0)) (app (t2_21 p (.neg q)) (hy 0))
+/-- *4.82 — PM: [✱2·65 . Imp . ✱2·21 . Comp] (hint only). -/
+theorem t4_82 (p : F) (q : F) : Thm (s4_82 p q) :=
+  -- ⊢ . ✱2·65 . Imp . ⊃ ⊢ : p ⊃ q . p ⊃ ∼q . ⊃ . ∼p   (1)
+  have h1 : Thm (imp (and (imp p q) (imp p (.neg q))) (.neg p)) :=
+    Thm.mp (t2_65 p q) (t3_31 (imp p q) (imp p (.neg q)) (.neg p))
+  -- ⊢ . ✱2·21 . Comp . ⊃ ⊢ : ∼p . ⊃ . p ⊃ q . p ⊃ ∼q   (2)
+  have h2 : Thm (imp (.neg p) (and (imp p q) (imp p (.neg q)))) :=
+    Thm.mp (andIh (t2_21 p q) (t2_21 p (.neg q))) (t3_43 (.neg p) (imp p q) (imp p (.neg q)))
+  -- ⊢ . (1) . (2) . ⊃ ⊢ . Prop
+  iffIh h1 h2
 
-/-- *4.83 — [✱2·61 (→); ← by ✱2·02] -/
-theorem t4_83 (p : F) (q : F) : Thm (s4_83 p q) := ofPf <| by
-  unfold s4_83; split_iff
-  · exact app2 (t2_61 p q) (andE1 (hy 0)) (andE2 (hy 0))
-  · exact andI (app (t2_02 p q) (hy 0)) (app (t2_02 (.neg p) q) (hy 0))
+/-- *4.83 — PM: [✱2·61 . Imp . Simp . Comp] (hint only). -/
+theorem t4_83 (p : F) (q : F) : Thm (s4_83 p q) :=
+  -- ⊢ . ✱2·61 . Imp . ⊃ ⊢ : p ⊃ q . ∼p ⊃ q . ⊃ . q   (1)
+  have h1 : Thm (imp (and (imp p q) (imp (.neg p) q)) q) :=
+    Thm.mp (t2_61 p q) (t3_31 (imp p q) (imp (.neg p) q) q)
+  -- ⊢ . Simp . Comp . ⊃ ⊢ : q . ⊃ . p ⊃ q . ∼p ⊃ q   (2)
+  have h2 : Thm (imp q (and (imp p q) (imp (.neg p) q))) :=
+    Thm.mp (andIh (t2_02 p q) (t2_02 (.neg p) q)) (t3_43 q (imp p q) (imp (.neg p) q))
+  -- ⊢ . (1) . (2) . ⊃ ⊢ . Prop
+  iffIh h1 h2
 
-/-- *4.84 — [✱2·06, ✱3·2] -/
-theorem t4_84 (p : F) (q : F) (r : F) : Thm (s4_84 p q r) := ofPf <| by
-  unfold s4_84; intro_
-  exact iffI (app (t2_06 q p r) (iffMpr (hy 0))) (app (t2_06 p q r) (iffMp (hy 0)))
+/-- *4.84 — PM: [✱2·06 . ✱3·47] (hint only).
+    extra ✱3·22: ✱2·06 pairs `p ⊃ q` with `q ⊃ r . ⊃ . p ⊃ r`, so ✱3·47 yields
+    `p ≡ q . ⊃ : q ⊃ r . ⊃ . p ⊃ r : p ⊃ r . ⊃ . q ⊃ r`, the two halves of `p ⊃ r . ≡ . q ⊃ r` in the
+    wrong order. (✱4·85, with ✱2·05, comes out in the right order.) -/
+theorem t4_84 (p : F) (q : F) (r : F) : Thm (s4_84 p q r) :=
+  -- ⊢ . ✱2·06 . ✱3·03 . ⊃ ⊢ :. p ⊃ q . ⊃ : q ⊃ r . ⊃ . p ⊃ r :. q ⊃ p . ⊃ : p ⊃ r . ⊃ . q ⊃ r :.
+  have l1 : Thm (and (imp (imp p q) (imp (imp q r) (imp p r))) (imp (imp q p) (imp (imp p r) (imp q r)))) :=
+    andIh (t2_06 p q r) (t2_06 q p r)
+  -- [✱3·47] ⊃ ⊢ :. p ≡ q . ⊃ : q ⊃ r . ⊃ . p ⊃ r : p ⊃ r . ⊃ . q ⊃ r :
+  have l2 : Thm (imp (iff p q) (and (imp (imp q r) (imp p r)) (imp (imp p r) (imp q r)))) :=
+    Thm.mp l1 (t3_47 (imp p q) (imp q p) (imp (imp q r) (imp p r)) (imp (imp p r) (imp q r)))
+  -- [✱3·22] ⊃ : p ⊃ r . ≡ . q ⊃ r
+  syl l2 (t3_22 (imp (imp q r) (imp p r)) (imp (imp p r) (imp q r)))
 
-/-- *4.85 — [✱2·05, ✱3·2] -/
-theorem t4_85 (p : F) (q : F) (r : F) : Thm (s4_85 p q r) := ofPf <| by
-  unfold s4_85; intro_
-  exact iffI (app (t2_05 r p q) (iffMp (hy 0))) (app (t2_05 r q p) (iffMpr (hy 0)))
+/-- *4.85 — PM: [✱2·05 . ✱3·47] (hint only). -/
+theorem t4_85 (p : F) (q : F) (r : F) : Thm (s4_85 p q r) :=
+  -- ⊢ . ✱2·05 . ✱3·03 . ⊃ ⊢ :. p ⊃ q . ⊃ : r ⊃ p . ⊃ . r ⊃ q :. q ⊃ p . ⊃ : r ⊃ q . ⊃ . r ⊃ p :.
+  have l1 : Thm (and (imp (imp p q) (imp (imp r p) (imp r q))) (imp (imp q p) (imp (imp r q) (imp r p)))) :=
+    andIh (t2_05 r p q) (t2_05 r q p)
+  -- [✱3·47] ⊃ ⊢ :. p ≡ q . ⊃ : r ⊃ p . ≡ . r ⊃ q
+  Thm.mp l1 (t3_47 (imp p q) (imp q p) (imp (imp r p) (imp r q)) (imp (imp r q) (imp r p)))
 
 /-- *4.86 — [✱4·21, ✱4·22, ✱3·2] -/
 theorem t4_86 (p : F) (q : F) (r : F) : Thm (s4_86 p q r) := ofPf <| by
