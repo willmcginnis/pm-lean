@@ -5,8 +5,8 @@ import PM.Replay
   already-replayed `t…` theorems of PM.Replay. Nothing is assumed: `#print axioms` is empty.
 
   Part 1: Hilbert-level rules (syllogism, ∧/≡ introduction and elimination).
-  Part 2: PM's chain ✱2·73 → ✱2·77 (Frege's "S" axiom), proved following PM's citations. The
-          `t2_73 … t2_77` theorems of PM.Replay2 are these lemmas.
+  Part 2: PM's chain ✱2·73 → ✱2·77 (Frege's "S" axiom), needed here for the deduction layer.
+          PM.Replay2 proves `t2_73 … t2_77` again, line by line after PM.
   Part 3: a natural-deduction layer. `Pf Γ φ` is *defined* as the theorem `Thm (h₁ ⊃ (h₂ ⊃ … ⊃ φ))`,
           so the deduction theorem is definitional (`Pf (Γ ++ [h]) φ` is `Pf Γ (h ⊃ φ)`), and
           `Pf [] φ` is `Thm φ`. The rules lift PM's propositions into a context.
