@@ -37,6 +37,14 @@ theorem sylEnd {a x y z : F} (h : Thm (imp a (imp x y))) (hz : Thm (imp y z)) :
     Thm (imp a (imp x z)) :=
   syl h (Thm.mp hz (t2_05 x y z))
 
+/-- Syll (✱2·06) applied to an antecedent: from `a ⊃ b` infer `(b ⊃ c) ⊃ (a ⊃ c)`. -/
+theorem sylAnt {a b c : F} (h : Thm (imp a b)) : Thm (imp (imp b c) (imp a c)) :=
+  Thm.mp h (t2_06 a b c)
+
+/-- Syll (✱2·05) applied to a consequent: from `b ⊃ c` infer `(a ⊃ b) ⊃ (a ⊃ c)`. -/
+theorem sylCons {a b c : F} (h : Thm (imp b c)) : Thm (imp (imp a b) (imp a c)) :=
+  Thm.mp h (t2_05 a b c)
+
 /-- ✱3·2 as a rule. -/
 theorem andIh {a b : F} (ha : Thm a) (hb : Thm b) : Thm (and a b) := Thm.mp hb (Thm.mp ha (t3_2 a b))
 /-- ✱3·26 as a rule. -/
@@ -56,6 +64,12 @@ theorem iffSymmh {a b : F} (h : Thm (iff a b)) : Thm (iff b a) := iffIh (iffMprh
 /-- PM's chain `⊢ : a . ≡ . b : ≡ . c`: the two halves joined by Syll, as for a `⊃`-chain. -/
 theorem iffTransh {a b c : F} (h1 : Thm (iff a b)) (h2 : Thm (iff b c)) : Thm (iff a c) :=
   iffIh (syl (iffMph h1) (iffMph h2)) (syl (iffMprh h2) (iffMprh h1))
+/-- An asserted equivalence applied, by Syll both ways, to an antecedent. -/
+theorem iffSylAnt {a b : F} (c : F) (h : Thm (iff a b)) : Thm (iff (imp a c) (imp b c)) :=
+  iffIh (sylAnt (iffMprh h)) (sylAnt (iffMph h))
+/-- An asserted equivalence applied, by Syll both ways, to a consequent. -/
+theorem iffSylCons {a b : F} (c : F) (h : Thm (iff a b)) : Thm (iff (imp c a) (imp c b)) :=
+  iffIh (sylCons (iffMph h)) (sylCons (iffMprh h))
 
 /-! ## Part 2: PM ✱2·73 – ✱2·77 -/
 
