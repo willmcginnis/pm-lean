@@ -9,3 +9,9 @@ import PM.Quant
 import PM.QuantLift
 import PM.Star10
 import PM.Star11
+import PM.Star12
+import PM.Star13
+import PM.Star14
+import PM.Star20
+import PM.Orders
+import PM.Trap

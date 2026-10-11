@@ -1,6 +1,7 @@
 import PM.Basic
 /-!
-  Principia Mathematica ✱9–✱10: propositions containing apparent variables.
+  Principia Mathematica ✱9–✱10: propositions containing apparent variables; with the ramified types,
+  comprehension and the axiom of reducibility of ✱12, and the semantics (soundness, consistency).
 
   This file follows PM's "alternative method" of ✱10 (pp. 143–144): `∼`, `∨` and `(x).φx` are primitive
   for propositions of any order, and the primitive propositions of ✱1 hold for them. ✱10 states:
@@ -16,11 +17,12 @@ import PM.Basic
   (This binding style is known as PHOAS. It needs no substitution and no renaming of variables, so the
   apparent variable is "only nominal", as in PM.)
 
-  Types. For now `Ty` has one element, `ind`, the type of individuals: nothing in ✱9–✱11 needs another.
-  The family `V : Ty → Type` is there so that the ramified types of ✱12 can be added as further
-  constructors of `Ty` (with their own atoms and primitive propositions) without restating ✱9–✱11:
-  every theorem of ✱9–✱11 is stated for an arbitrary type τ of each apparent variable, so it will hold
-  at every type that is added. No function types, orders, ✱12·1 or ✱12·11 are formalized yet.
+  Types (✱12, pp. 168–175; Introduction pp. 53–56). `Ty` has individuals and the ramified types of
+  functions of one and of two arguments, with orders: `fn1 a k` is a function of an argument of type `a`
+  whose order is k above the lowest order compatible with that argument (`Ty.ord`, Introduction p. 56);
+  `pred1 a = fn1 a 0` is the type of predicative functions φ!x̂ of an `a`. Every theorem of ✱9–✱11 is
+  stated for an arbitrary type τ of each apparent variable, so it holds at every one of these types
+  (typical ambiguity as Lean parameters). docs/TYPES_DESIGN.md gives each choice and the page it rests on.
 
   Primitive ideas and definitions:
     ∼, ∨, (x).φx                                     primitive (✱10, alternative method)
@@ -38,17 +40,47 @@ import PM.Basic
     ✱10·121 (significance of φa for a of the same type as x) and ✱10·122 (if there is a proposition φa
     there is a function φx̂) are built into the syntax: every `φ : V τ → QF V` is a function, and every
     `φ a` with `a : V τ` is a formula.
+    Comprehension at a function type (`QThm.compr1`, `QThm.compr2`): a formula ψx of order at most m
+    determines a function variable of order m formally equivalent to it. This is our reading of ✱10·122
+    together with ✱10·24 at a function type; the order condition is `Lvl` (Introduction p. 56).
+    ✱12·1   ⊢ : (∃f) : φx . ≡ₓ . f!x            Pp (p. 174)   (`QThm.red1`)
+    ✱12·11  ⊢ : (∃f) : φ(x, y) . ≡ₓ,ᵧ . f!(x, y)  Pp (p. 174)   (`QThm.red2`)
+    φ is a real variable of any order (a Lean function `V a → QF V`, as for every real function variable
+    of ✱9–✱11); f is an apparent variable of the predicative type. RedCheck.lean lists which theorems
+    depend on `red1`/`red2`.
 -/
 namespace PM
 
-/-- Types of arguments. For now only individuals (see the header). -/
+/-- Types of arguments (✱12; Introduction pp. 53–56). `fn1 a k` is the type of functions of one
+    argument of type `a` whose order exceeds the lowest order compatible with that argument by `k`;
+    `fn2 a b k` likewise for two arguments. There is no type of propositions (✱12, p. 172: propositions
+    "will no longer" occur as variables). -/
 inductive Ty where
   | ind : Ty
+  | fn1 : Ty → Nat → Ty
+  | fn2 : Ty → Ty → Nat → Ty
   deriving DecidableEq
+
+/-- The order of a type (Introduction p. 56): individuals 0; a function one above the highest order of
+    its arguments, plus its excess `k`. -/
+def Ty.ord : Ty → Nat
+  | .ind => 0
+  | .fn1 a k => a.ord + 1 + k
+  | .fn2 a b k => max a.ord b.ord + 1 + k
+
+/-- The predicative functions of an `a`: "of the next order above that of its argument, i.e. of the
+    lowest order compatible with its having that argument" (Introduction p. 56). φ!x̂ in PM. -/
+abbrev Ty.pred1 (a : Ty) : Ty := .fn1 a 0
+/-- The predicative functions of an `a` and a `b` (the lowest order compatible with both; p. 56). -/
+abbrev Ty.pred2 (a b : Ty) : Ty := .fn2 a b 0
 
 /-- Formulas of ✱10 over a family `V` of variables, `V τ` being the variables of type τ. -/
 inductive QF (V : Ty → Type) where
   | atom : String → List (V .ind) → QF V
+  /-- `app1 f x` is f x (f!x when f is predicative). -/
+  | app1 {a : Ty} {k : Nat} : V (.fn1 a k) → V a → QF V
+  /-- `app2 f x y` is f(x, y) (f!(x, y) when f is predicative). -/
+  | app2 {a b : Ty} {k : Nat} : V (.fn2 a b k) → V a → V b → QF V
   | neg  : QF V → QF V
   | or   : QF V → QF V → QF V
   | all  {τ : Ty} : (V τ → QF V) → QF V
@@ -63,8 +95,23 @@ variable {V : Ty → Type}
 @[reducible] def fiff {τ : Ty} (φ ψ : V τ → QF V) : QF V := .all fun x => QF.iff (φ x) (ψ x)  -- ✱10·03
 end QF
 
+/-- `Lvl p n`: p may be a value of a function of order n (Introduction p. 56: a function is of order
+    n + 1 when the highest order of the variables in it, "whether as argument or as apparent variable",
+    is n). Each apparent variable has order below n, and each function variable applied in p has
+    order at most n: a real variable counts with its own order, since assigning it a value gives a
+    function of that order (p. 55). Individuals have order 0, so every formula needs n ≥ 1. -/
+inductive Lvl {V : Ty → Type} : QF V → Nat → Prop where
+  | atom {P : String} {xs : List (V .ind)} {n : Nat} : 0 < n → Lvl (.atom P xs) n
+  | app1 {a : Ty} {k n : Nat} {f : V (.fn1 a k)} {x : V a} : (Ty.fn1 a k).ord ≤ n → Lvl (.app1 f x) n
+  | app2 {a b : Ty} {k n : Nat} {f : V (.fn2 a b k)} {x : V a} {y : V b} :
+      (Ty.fn2 a b k).ord ≤ n → Lvl (.app2 f x y) n
+  | neg {p : QF V} {n : Nat} : Lvl p n → Lvl (.neg p) n
+  | or {p q : QF V} {n : Nat} : Lvl p n → Lvl q n → Lvl (.or p q) n
+  | all {τ : Ty} {n : Nat} {φ : V τ → QF V} : τ.ord < n → (∀ y, Lvl (φ y) n) → Lvl (.all φ) n
+
 open QF in
-/-- Asserted propositions of ✱10's alternative method. -/
+/-- Asserted propositions of ✱10's alternative method, with comprehension at function types and the
+    axiom of reducibility (✱12·1, ✱12·11). -/
 inductive QThm {V : Ty → Type} : QF V → Prop where
   | mp      {p q : QF V} : QThm p → QThm (imp p q) → QThm q                       -- ✱1·1, ✱9·12
   | taut    (p : QF V)     : QThm (imp (.or p p) p)                                -- ✱1·2
@@ -76,17 +123,37 @@ inductive QThm {V : Ty → Type} : QF V → Prop where
   | gen     {τ : Ty} {φ : V τ → QF V} : (∀ y, QThm (φ y)) → QThm (.all φ)         -- ✱10·11
   | distrib {τ : Ty} (p : QF V) (φ : V τ → QF V) :
       QThm (imp (.all fun x => .or p (φ x)) (.or p (.all φ)))                      -- ✱10·12
+  /-- Comprehension: a formula ψx of order at most that of `fn1 a k` is formally equivalent to some
+      function of that type (✱10·122 with ✱10·24; the order condition is Introduction p. 56). -/
+  | compr1  {a : Ty} {k : Nat} (ψ : V a → QF V) (_ : ∀ x, Lvl (ψ x) (Ty.fn1 a k).ord) :
+      QThm (ex (τ := .fn1 a k) fun f => fiff ψ fun x => .app1 f x)
+  /-- Comprehension for functions of two arguments. -/
+  | compr2  {a b : Ty} {k : Nat} (ψ : V a → V b → QF V) (_ : ∀ x y, Lvl (ψ x y) (Ty.fn2 a b k).ord) :
+      QThm (ex (τ := .fn2 a b k) fun f => .all fun x => .all fun y => iff (ψ x y) (.app2 f x y))
+  /-- ✱12·1 `⊢ : (∃f) : φx . ≡ₓ . f!x` Pp (p. 174). φ of any order; f predicative. -/
+  | red1    {a : Ty} (φ : V a → QF V) :
+      QThm (ex (τ := Ty.pred1 a) fun f => fiff φ fun x => .app1 f x)
+  /-- ✱12·11 `⊢ : (∃f) : φ(x, y) . ≡ₓ,ᵧ . f!(x, y)` Pp (p. 174). -/
+  | red2    {a b : Ty} (φ : V a → V b → QF V) :
+      QThm (ex (τ := Ty.pred2 a b) fun f => .all fun x => .all fun y => iff (φ x y) (.app2 f x y))
 
-/-! ## Semantics and soundness -/
+/-! ## Semantics and soundness
 
-/-- What a variable of each type ranges over, given a domain `D` of individuals. -/
+  The collapse model: a function of any order denotes a Boolean function of its arguments, so all the
+  orders of a type denote the same function space. With the axiom of reducibility this is a model of
+  PM 1910 (docs/TYPES_DESIGN.md, decision 11). It cannot see orders: `qsound` never uses `Lvl`, so the
+  order discipline is tested syntactically (PM/Orders.lean), not by this model. -/
+
+/-- What a variable of each type ranges over, given a domain `D` of individuals. The order is ignored. -/
 def Ty.den (D : Type) : Ty → Type
   | .ind => D
+  | .fn1 a _ => Ty.den D a → Bool
+  | .fn2 a b _ => Ty.den D a → Ty.den D b → Bool
 
-/-- A structure for ✱10: a domain, a truth value for each elementary proposition, and for each type τ
+/-- A structure: a domain, a truth value for each elementary proposition, and for each type τ
     the universal quantifier as a Boolean oracle `A τ` (`A τ f` is true iff `f` is true of everything
-    of type τ). Every classical structure has such oracles; for a finite domain they are computable,
-    which is what the counter-models below use. -/
+    of type τ). Every classical structure has such oracles (`classicalAll`); at the type of
+    individuals of a finite domain they are computable, which is what the counter-models below use. -/
 structure QModel where
   D  : Type
   R  : String → List D → Bool
@@ -99,9 +166,22 @@ abbrev QModel.den (M : QModel) : Ty → Type := Ty.den M.D
 /-- Truth value of a formula whose real variables are already elements of the structure. -/
 def QF.eval (M : QModel) : QF M.den → Bool
   | .atom P xs    => M.R P xs
+  | .app1 f x     => f x
+  | .app2 f x y   => f x y
   | .neg p        => !(QF.eval M p)
   | .or p q       => QF.eval M p || QF.eval M q
   | @QF.all _ τ φ => M.A τ (fun d => QF.eval M (φ d))
+
+/-- An existential is true when it has a true instance (the witness used for comprehension and
+    ✱12·1 / ✱12·11 in `qsound`). -/
+private theorem eval_ex_of (M : QModel) (τ : Ty) (g : τ.den M.D → Bool) (d : τ.den M.D)
+    (h : g d = true) : (!(M.A τ fun x => !(g x))) = true := by
+  cases hA : M.A τ (fun x => !(g x)) with
+  | false => rfl
+  | true => have := (M.hA _ _).mp hA d; rw [h] at this; cases this
+
+private theorem iff_refl_bool (b : Bool) : (!(!(!b || b) || !(!b || b))) = true := by
+  cases b <;> rfl
 
 /-- Soundness: every `QThm` is true in every structure, at the structure's own variables. -/
 theorem qsound (M : QModel) {p : QF M.den} (h : QThm p) : p.eval M = true := by
@@ -139,32 +219,62 @@ theorem qsound (M : QModel) {p : QF M.den} (h : QThm p) : p.eval M = true := by
     | false =>
       show (!(M.A τ fun d => (φ d).eval M) || M.A τ fun d => (φ d).eval M) = true
       cases M.A τ (fun d => (φ d).eval M) <;> rfl
+  -- The witness for comprehension and for ✱12·1 / ✱12·11 is the function x ↦ ⟦φx⟧ itself; its
+  -- order is forgotten by the collapse, and the `Lvl` condition is not used.
+  | @compr1 a k ψ _ =>
+    exact eval_ex_of M (.fn1 a k) _ (fun x => (ψ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
+  | @compr2 a b k ψ _ =>
+    exact eval_ex_of M (.fn2 a b k) _ (fun x y => (ψ x y).eval M)
+      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
+  | @red1 a φ =>
+    exact eval_ex_of M (Ty.pred1 a) _ (fun x => (φ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
+  | @red2 a b φ =>
+    exact eval_ex_of M (Ty.pred2 a b) _ (fun x y => (φ x y).eval M)
+      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
 
 /-- A formula false in some structure is not a theorem (at that structure's variables). -/
 theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) : ¬ QThm p :=
   fun h => by have := qsound M h; rw [hv] at this; cases this
 
-/-- Two individuals, `false` and `true`; every letter is true of its first argument, so "φ" holds of `true` only. -/
-def twoModel : QModel where
+/-- The classical universal quantifier over any type, as a Boolean (uses `Classical.propDecidable`). -/
+noncomputable def classicalAll {T : Type} (f : T → Bool) : Bool :=
+  @decide (∀ d, f d = true) (Classical.propDecidable _)
+
+theorem classicalAll_spec {T : Type} (f : T → Bool) : classicalAll f = true ↔ ∀ d, f d = true :=
+  ⟨fun h => @of_decide_eq_true _ (Classical.propDecidable _) h,
+   fun h => @decide_eq_true _ (Classical.propDecidable _) h⟩
+
+/-- Two individuals, `false` and `true`; every letter is true of its first argument, so "φ" holds of
+    `true` only. Quantifiers over individuals are computed; over functions they are classical. -/
+noncomputable def twoModel : QModel where
   D := Bool
   R := fun _ xs => xs.headD false
-  A := fun | .ind => fun f => f false && f true
+  A := fun
+    | .ind => fun f => f false && f true
+    | _ => classicalAll
   hA := fun τ f => by
-    cases τ
-    constructor
-    · intro h (d : Bool)
-      change (f false && f true) = true at h
-      cases h0 : f false <;> cases h1 : f true <;> rw [h0, h1] at h <;> cases h <;> cases d <;>
-        first | exact h0 | exact h1
-    · intro h; show (f false && f true) = true; rw [h false, h true]; rfl
+    cases τ with
+    | ind =>
+      constructor
+      · intro h (d : Bool)
+        change (f false && f true) = true at h
+        cases h0 : f false <;> cases h1 : f true <;> rw [h0, h1] at h <;> cases h <;> cases d <;>
+          first | exact h0 | exact h1
+      · intro h; show (f false && f true) = true; rw [h false, h true]; rfl
+    | fn1 => exact classicalAll_spec f
+    | fn2 => exact classicalAll_spec f
 
-/-- Consistency of ✱10's alternative method: the letter `p` is not a theorem. It is stated at the
-    variables of a structure (`twoModel.den`), not at an arbitrary family `V`: once types whose
-    variable families may be empty are added, `QThm` at an arbitrary `V` can be degenerate (an empty
-    type makes ✱10·11 hold vacuously), so a consistency claim must
-    name a structure's own variables. -/
+/-- Consistency: the letter `p` is not a theorem. It is stated at the variables of a structure
+    (`twoModel.den`), not at an arbitrary family `V`: `QThm` at an arbitrary `V` can be degenerate (an
+    empty or one-element type of functions makes ✱10·11 too strong, and ✱12·1 then contradicts it;
+    PM/Trap.lean), so a consistency claim must name a structure's own variables. -/
 theorem consistent : ¬ QThm (V := twoModel.den) (.atom "p" []) :=
   not_qthm_of_countermodel twoModel rfl
+
+/-- Consistency of the theorems that hold for every family of variables (which is how every PM
+    theorem in this project is stated): `p` is not one of them. -/
+theorem consistent_all : ¬ ∀ V : Ty → Type, QThm (V := V) (.atom "p" []) :=
+  fun h => consistent (h _)
 
 /-- PM p. 137: "⊢ : φy . ⊃ . (x) . φx … means 'However y may be chosen, φy implies (x).φx,' which is in
     general false." It is not a theorem: `twoModel` falsifies it. This is why ✱9·13 / ✱10·11 is a rule
@@ -182,12 +292,18 @@ theorem not_qthm_ex_imp_all :
     (p := QF.imp (QF.ex fun x => .atom "φ" [x]) (.all fun x => .atom "φ" [x])) rfl
     (h twoModel.den (fun x => .atom "φ" [x]))
 
-/-- The structure with no individuals. -/
-def emptyModel : QModel where
+/-- The structure with no individuals (functions of individuals still exist: the empty function). -/
+noncomputable def emptyModel : QModel where
   D := Empty
   R := fun _ _ => false
-  A := fun _ _ => true
-  hA := fun τ _ => by cases τ; exact ⟨fun _ d => Empty.elim d, fun _ => rfl⟩
+  A := fun
+    | .ind => fun _ => true
+    | _ => classicalAll
+  hA := fun τ f => by
+    cases τ with
+    | ind => exact ⟨fun _ d => Empty.elim d, fun _ => rfl⟩
+    | fn1 => exact classicalAll_spec f
+    | fn2 => exact classicalAll_spec f
 
 /-- ✱10·25 `(x) . φx . ⊃ . (∃x) . φx` needs an individual: it is false in `emptyModel`. So the Lean
     statement of ✱10·25 (PM/Star10.lean) takes the real variable y that PM's proof uses. -/
