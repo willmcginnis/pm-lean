@@ -71,7 +71,8 @@ measured.
 
 ### (c) ✱10's alternative method (chosen)
 
-- Syntax: formulas with ∼, ∨, (x) primitive at every order; ✱10·01–✱10·03 as macros.
+- Syntax: formulas with ∼, ∨, (x) primitive for all `QF` formulas, with or without apparent variables (individual
+  variables only; no ramified orders); ✱10·01–✱10·03 as macros.
 - Primitives: ✱1·1–✱1·6 for all formulas, ✱10·1, ✱10·11, ✱10·12. ✱10·121, ✱10·122 built into the syntax.
 - ✱9·1 and ✱9·11 become theorems (✱9·1 is ✱10·24). ✱9·2 is ✱10·1, ✱9·13 is ✱10·11, ✱9·25 is ✱10·12.
 - Fidelity: this is PM's own alternative, and the one ✱10 is written for (PM gives "alternative method"
@@ -89,9 +90,12 @@ later as a separate file that proves ✱9's claim for prefixes of fixed length.
 - `QF V`: formulas over a type `V` of individual variables. `atom "R" [x, y]` is an elementary
   proposition; `atom "p" []` is a propositional letter. `.all φ` is (x).φx, where `φ : V → QF V` is the
   function φx̂ and `φ y` is its value at y.
-- This binding style (PHOAS) has no substitution and no variable capture. So ✱10·1 is just
-  `(x).φx ⊃ φy`, and ✱10·12's "p does not contain x" holds by construction. **[MEAS]** No substitution
-  or freshness lemma was needed.
+- This binding style (higher-order abstract syntax) has no substitution and no variable capture. So ✱10·1
+  is just `(x).φx ⊃ φy`, and ✱10·12's "p does not contain x" holds by construction. **[MEAS]** No
+  substitution or freshness lemma was needed.
+- Caveat: because φ is any Lean function, `QF V` also contains "exotic" terms that correspond to no finite
+  PM formula. `qsound` covers them, so nothing false becomes provable, but there is no adequacy theorem
+  yet. See README, "Scope of the ✱9–✱10 semantics".
 - ✱10·11 is the rule `(∀ y, QThm (φ y)) → QThm (.all φ)`: "if φy is true whatever possible argument y
   may be". Not the implication φy ⊃ (x).φx, which PM calls "in general false" (p. 137).
 - Semantics: a domain, Boolean predicate letters, and ∀ given as a Boolean oracle with its specification.
