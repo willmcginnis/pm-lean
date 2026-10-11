@@ -68,15 +68,19 @@ PM's text has two definitions.
 
 **Rejected: the matrix reading.**
 - "Matrix" is a property of an expression ("contains no apparent variables"), not a range of values.
-  So it cannot be the type of an apparent variable φ!.
+  So it cannot by itself be the type of an apparent variable φ!: a matrix condition can restrict which
+  formulas comprehension accepts, but it does not give a range of values. (As an external review noted, this is not
+  to say that the values of matrices cannot form a quantified range; the types `pred1 a` are such a
+  range.)
 - PM's own examples show the two readings come apart. Take (x) . φ!x as a function of φ!ẑ (p. 171,
   (1)). It is of order 2, the lowest order possible for an argument of order 1, so it is predicative
   by p. 56. It is not a matrix, so it is not predicative by p. 172.
 - PM/Orders.lean records this case as a golden test (`predicativeP56 … = true` beside `isMatrix … =
   false`). Holmes calls the matrix definition "completely destructive" (Notes p. 4).
 
-**What the choice changes.** With reducibility, nothing about which theorems hold: ✱12·1 gives a
-predicative equivalent of every function under either reading. The choice only decides which formulas
+**What the choice changes.** With reducibility, ✱12·1 gives a predicative equivalent of every
+function under either reading. That the two readings then derive the same theorems needs a translation
+argument, not just this remark (after an external review); it is not claimed here. The choice only decides which formulas
 predicative *comprehension* accepts without ✱12·1 (decision 6).
 
 **Arguments of a predicative function need not be predicative.** p. 174: "Let φx̂ be a function, of
@@ -87,7 +91,11 @@ all *variables* will be individuals or matrices. Our types allow that practice w
 **Rejected:** KLN's restriction of contexts to predicative types. In that system reducibility "cannot
 even" be stated (KLN 2002, Rem. 42).
 
-**The second clause of p. 56 is not used.** It says: "A function of several arguments is predicative
+**The second clause of p. 56 is not used.** p. 56 gives the lowest-order rule for one argument, and,
+right before the clause, "If the highest order of variable occurring in a function, whether as
+argument or as apparent variable, is a function of the nth order, then the function in which it
+occurs is of the n + 1th order": the maximum argument order plus one, for any number of arguments.
+So `pred2` is directly supported by p. 56 itself (after an external review). The clause says: "A function of several arguments is predicative
 if there is one of its arguments such that, when the other arguments have values assigned to them, we
 obtain a predicative function of the one undetermined argument". `pred2 a b` takes instead the lowest
 order compatible with *both* arguments, as ✱12·11's "a predicative function of those variables, i.e.
@@ -161,8 +169,10 @@ decision 5).
 **If it were dropped:** every ✱13–✱20 theorem here would still be provable, since all go through
 ✱12·1, as PM's do. Two things would be lost:
 1. the check `q12_1_of_var`: "✱12·1 for a function variable of order m" plus comprehension at order
-   m gives ✱12·1 for every formula of that order, without `red1`. This shows that taking φ as a
-   formula (decision 4) adds nothing beyond "✱12·1 at every order";
+   m gives ✱12·1 for every formula of that order, without `red1`. This shows that, assuming
+   comprehension, taking φ as a formula (decision 4) adds nothing beyond "✱12·1 at every order", for
+   formulas that are uniformly order-bounded (one order m bounds ψx for every x). Exotic HOAS bodies
+   whose order is not uniformly bounded are not covered (after an external review);
 2. a predicative fragment (the rules without `red1`/`red2`) that can say anything about function
    variables. That fragment matters for the 1925 pass.
 
@@ -278,7 +288,8 @@ much, and ✱12·1 then proves everything (PM/Trap.lean):
 - `trap_unit`: every type has exactly one variable.
 
 `trap_unit` shows that requiring non-empty function types (a natural repair) would
-not help.
+not help. `trap_unit_compr` (from an external review) does the same at `U` with comprehension in place of
+✱12·1, so the limitation also affects the comprehension-only fragment, not only reducibility.
 
 **Decision.** The rule is not repaired.
 - Every PM theorem is a Lean theorem *for every* V, so it holds at every structure's variables.
@@ -299,7 +310,9 @@ header, and a class that supplies the proof:
 
 A theorem that uses a rule takes the class in its signature (`theorem q13_101 [Reducibility S] …`). For
 an arbitrary `S` there is no other way to get `S.red = true`, so Lean enforces the dependency, and the
-signature shows it. A theorem without a class holds in every system, including later ones (the 1925
+signature shows it. Reaching a rule shows that a proof uses it, not that the rule is logically necessary for the theorem
+(after an external review); the absence of a cycle in the constant graph only makes the reachability exact. A
+theorem without a class holds in every system, including later ones (the 1925
 pass will add an `Extensionality` capability). `QThm.mono` lifts a derivation to any system with more
 rules and a more permissive style. `PM/Systems.lean` names four systems: `Sys.full` (both rules),
 `Sys.reducibility` (PM's own route), `Sys.predicative` (comprehension only) and `Sys.base` (neither).
@@ -408,12 +421,13 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 585 names; 583 report no axioms. The other 2 are `classicalAll_spec` and
+`AxiomCheck.lean`: 587 names; 585 report no axioms. The other 2 are `classicalAll_spec` and
 `QModel.classical` (below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`,
 `qsound`, `consistent`, `consistent_all`, the five counter-models, the finite model, `lvl_iff_order`,
 `trap_empty` and `trap_unit` are axiom-free.
 
-`AllAxioms.lean`: 1271 declarations under `PM`. Exactly 23 use an axiom:
+`AllAxioms.lean`: all 1273 declarations under `PM` and all 30 private declarations of the PM modules
+(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 23 use an axiom:
 
 | Declarations | Axioms | Why |
 |---|---|---|
@@ -430,7 +444,7 @@ search).
    reducibility, the theorems are the same either way. The choice only moves the line between what
    needs ✱12·1 and what comprehension gives. Should comprehension at a predicative type instead accept
    only matrices (p. 172: no apparent variables at all)? That would be a small change: a matrix
-   condition in place of `Lvl` in `compr1` when k = 0.
+   condition conjoined with `Lvl` in `compr1` when k = 0 (not replacing it; after an external review).
 2. **Keep comprehension?** DECIDED by Will (2026-10-11): keep it, "mark it for what it's for", as its
    own module imported where needed. Done: `PM/Rules/Comprehension.lean`, class `Comprehension S`
    (decisions 6 and 13).

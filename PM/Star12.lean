@@ -18,9 +18,10 @@ import PM.Rules.Comprehension
   - `q12_1_var`: ✱12·1 for φ a function *variable* of any order (the shape "φx̂ a function, of any order,
     of an argument x", p. 174, with the order made explicit);
   - `q12_1_of_var`: conversely, the variable form of ✱12·1 plus comprehension at the order of φ gives
-    ✱12·1 for every formula φ of that order, without `red1`. So taking φ as a schema (a Lean function,
-    like every real function variable of ✱9–✱11) adds nothing beyond "✱12·1 at every order" for
-    formulas of finite order.
+    ✱12·1 for every formula φ of that order, without `red1`. So, assuming comprehension, taking φ as a
+    schema (a Lean function, like every real function variable of ✱9–✱11) adds nothing beyond "✱12·1 at
+    every order" for formulas that are uniformly order-bounded (one order bounds φx for every x);
+    exotic HOAS bodies without such a bound are not covered.
 
   "This assumption with regard to functions is to be made whatever may be the type of their arguments"
   (p. 174): the argument types `a`, `b` are Lean parameters, so each theorem is a schema over types

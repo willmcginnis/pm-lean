@@ -586,3 +586,5 @@ import PM
 #print axioms PM.lvl_iff_order
 #print axioms PM.trap_empty
 #print axioms PM.trap_unit
+#print axioms PM.trap_unit_compr
+#print axioms PM.trap_unit_compr_lowest

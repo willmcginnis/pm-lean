@@ -13,6 +13,8 @@ import PM.Orders
   - `trap_unit`: every type has one variable (the family `U` used by the order checker). Then all
     predicative functions of individuals are "the same", so φx and ∼φx, both formally equivalent to
     some predicative function by ✱12·1, are equivalent to each other.
+  - `trap_unit_compr`: the same at `U` with comprehension in place of ✱12·1, so the limitation also
+    affects the comprehension-only fragment (after an external review).
   The second example shows that requiring every function type to be non-empty would not repair the
   rule. So this project never presents `QThm` at an arbitrary `V` as PM's system:
   - a PM theorem is a Lean theorem *for every* `V` (all of ✱9–✱20 here), which holds in particular at
@@ -59,5 +61,28 @@ theorem trap_unit [Reducibility S] (p : QF U) : QThm S p :=
   have h2 : QThm S (iff (.neg q) A) := QThm.mp (elim _ (q12_1 fun x => .neg (.atom "q" [x])))
     (q10_1 (V := U) (fun x => iff (.neg (.atom "q" [x])) (.app1 (a := .ind) (k := 0) () x)) ())
   QThm.mp h2 (QThm.mp h1 (liftThm glue_thm fun s => if s = "a" then q else if s = "b" then A else p))
+
+/-- The same collapse without ✱12·1, by comprehension alone (from an external review):
+    at `U` comprehension at the predicative type gives the same two equivalences. So
+    the limitation is not a matter of reducibility: it also affects the comprehension-only (predicative)
+    fragment. The hypotheses say that the style admits the two matrices qx and ∼qx at the type of
+    predicative functions of individuals; every style here does (PM/Pred/). -/
+theorem trap_unit_compr [Comprehension S]
+    (hq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .atom "q" [x])
+    (hnq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .neg (.atom "q" [x])) (p : QF U) : QThm S p :=
+  let q : QF U := .atom "q" [()]
+  let A : QF U := .app1 (a := .ind) (k := 0) () ()
+  have elim : ∀ P : U (Ty.pred1 .ind) → QF U, QThm S (ex P) → QThm S (P ()) := fun P h =>
+    QThm.mp h (qiffMp (q10_23 P (P ())) |> QThm.mp (q10_11 fun f => QL.t2_08 (P f)))
+  have h1 : QThm S (iff q A) := QThm.mp (elim _ (comprehension1 (k := 0) (fun x => .atom "q" [x]) hq))
+    (q10_1 (V := U) (fun x => iff (.atom "q" [x]) (.app1 (a := .ind) (k := 0) () x)) ())
+  have h2 : QThm S (iff (.neg q) A) := QThm.mp (elim _ (comprehension1 (k := 0)
+      (fun x => .neg (.atom "q" [x])) hnq))
+    (q10_1 (V := U) (fun x => iff (.neg (.atom "q" [x])) (.app1 (a := .ind) (k := 0) () x)) ())
+  QThm.mp h2 (QThm.mp h1 (liftThm glue_thm fun s => if s = "a" then q else if s = "b" then A else p))
+
+/-- `trap_unit_compr` in the predicative fragment with the lowest-order style. -/
+theorem trap_unit_compr_lowest (p : QF U) : QThm (Sys.predicative (Style.lowestOrder Lvl)) p :=
+  trap_unit_compr (fun _ => .atom (by decide)) (fun _ => .neg (.atom (by decide))) p
 
 end PM

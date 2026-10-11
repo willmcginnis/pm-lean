@@ -93,14 +93,15 @@ theorem q14_21 (φ ψ : V a → QF V) : QThm S (imp (desc φ ψ) (exists1 φ)) :
   qsyl (qiffMp (q14_1 φ ψ))                                                      -- ✱14·1
     (qsyl (q10_5 _ ψ) (QL.t3_26 _ _))                                            -- [✱10·5] [✱14·11]
 
-/-- ✱14·21 with the smallest scope inside a negation: `∼χ(ιx)(φx)`, i.e. [(ιx)(φx)] . ∼χ(ιx)(φx),
-    also implies E!(ιx)(φx). With the larger scope, ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not (PM p. 190:
+/-- ✱14·21 for `∼χ(ιx)(φx)` with the description's scope wider than the negation (a primary
+    occurrence), i.e. [(ιx)(φx)] . ∼χ(ιx)(φx): it also implies E!(ιx)(φx). When the negation has the wider
+    scope (the description the narrower, a secondary occurrence), ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not (PM p. 190:
     when the description does not exist there are true propositions in which it has a secondary
     occurrence); see `not_qthm_neg_desc_imp_exists1`. -/
 theorem q14_21_neg (φ χ : V a → QF V) : QThm S (imp (desc φ fun z => .neg (χ z)) (exists1 φ)) :=
   q14_21 φ fun z => .neg (χ z)
 
-/-! ## A counter-model for the larger scope -/
+/-! ## A counter-model for the negation with the wider scope -/
 
 /-- In every structure, x = x is true (✱13·01 evaluated). -/
 theorem eval_ident_refl (M : QModel) {a : Ty} (x : M.den a) : (ident x x).eval M = true :=
@@ -111,9 +112,10 @@ theorem eval_ident_refl (M : QModel) {a : Ty} (x : M.den a) : (ident x x).eval M
 /-- `φ0 x` is `qx . ∼qx`, false of every individual. -/
 def φ0 {V : Ty → Type} (x : V .ind) : QF V := QF.and (.atom "q" [x]) (.neg (.atom "q" [x]))
 
-/-- Scope matters (PM pp. 181–182, 190): with the larger scope, ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not imply
-    E!(ιx)(φx), whereas [(ιx)(φx)] . ∼χ(ιx)(φx) does (`q14_21_neg`). In `twoModel` nothing satisfies
-    φ0, so (ιx)(φ0 x) does not exist, the description with the larger scope is false and its negation true.
+/-- Scope matters (PM pp. 181–182, 190): when the negation has the wider scope (the description the
+    narrower), ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not imply E!(ιx)(φx), whereas [(ιx)(φx)] . ∼χ(ιx)(φx), with
+    the description's scope wider than the negation, does (`q14_21_neg`). In `twoModel` nothing
+    satisfies φ0, so (ιx)(φ0 x) does not exist: [(ιx)(φ0 x)] . φ0(ιx)(φ0 x) is false and its negation true.
     `twoModel` is the finite coded model (PM/Models/Finite.lean), so the formula is evaluated by
     computation, including the quantifier over the four predicative functions in ✱13·01. -/
 theorem not_qthm_neg_desc_imp_exists1 :
