@@ -1,0 +1,1430 @@
+[
+ {
+  "id": "*11.07",
+  "page": 159,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*11.1",
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "derived rule, not assumed",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "none",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM takes *11.07 as a primitive proposition (p. 159; p. 158). In the alternative method as formalized it is derivable: *11.1 gives phi(x, y) for real x, y, and *10.11 turns them into apparent variables in either order."
+ },
+ {
+  "id": "*11.1",
+  "page": 159,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.11",
+  "page": 159,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [
+   "*10.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "rule; PM's Dem. is *10.11 twice",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.12",
+  "page": 159,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.12",
+   "*10.11",
+   "*10.27"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.13",
+  "page": 159,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [
+   "*10.13"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "rule; 'Proof as in *10.13'",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.14",
+  "page": 159,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.14"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.2",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.1",
+   "*11.07",
+   "*11.11",
+   "*11.12"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "*11.07 is the derived rule q11_07",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.21",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.2",
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.22",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.252",
+   "*4.12",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "Transp read as *4.12",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Line 2 replaces (x) : ~(Ey) . phi(x, y) by (x) : (y) . ~phi(x, y) inside a negation; the negation of the *10.271 equivalence needs *4.11."
+ },
+ {
+  "id": "*11.23",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.22",
+   "*11.2",
+   "*4.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Transp read as *4.11",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.24",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.23",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.25",
+  "page": 160,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.22",
+   "*4.12"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Transp read as *4.12",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.26",
+  "page": 161,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*10.28",
+   "*10.11",
+   "*10.21"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.27",
+  "page": 161,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*10.11",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "chain A == B == C stated as A == B . B == C",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.3",
+  "page": 161,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.21",
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.31",
+  "page": 161,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.22",
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.311",
+  "page": 162,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [
+   "*10.13"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "rule; repeats *11.13",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.32",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.27"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.33",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "*10.271 twice; the inner use is carried under (x) by *10.11.27, as PM's pattern of pp. 161-162 allows",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.34",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.27",
+   "*10.28"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.341",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.281"
+  ],
+  "extra_used": [
+   "*10.27"
+  ],
+  "cited_unused": [
+   "*10.271"
+  ],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Carrying the inner *10.281 under (x) needs *10.27 (an implication under (x)); the cited *10.271 is not used. Compare *11.34's hint [*10.27.28]."
+ },
+ {
+  "id": "*11.35",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.23",
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.36",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.1",
+   "*2.03"
+  ],
+  "extra_used": [
+   "*11.22"
+  ],
+  "cited_unused": [],
+  "note": "Transp read as *2.03",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1).Transp gives phi(z, w) . ⊃ . ~(x, y) . ~phi(x, y); with *11.03 read literally, (Ex, y) . phi(x, y) is ~(x) . ~~(y) . ~phi(x, y), so *11.22 is needed to reach it."
+ },
+ {
+  "id": "*11.37",
+  "page": 162,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31",
+   "*3.33",
+   "*11.11",
+   "*11.32"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Syll read as *3.33",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.371",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31",
+   "*11.11"
+  ],
+  "extra_used": [
+   "*4.22",
+   "*11.32"
+  ],
+  "cited_unused": [
+   "*11.33"
+  ],
+  "note": "hint [*11.31.11.33] read as *11.31, *11.11, *11.33",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Done as *11.37 with *4.22 for Syll. Passing from (x, y) : A . ⊃ . B to (x, y) . A . ⊃ . (x, y) . B is *11.32; the cited *11.33 does not give it."
+ },
+ {
+  "id": "*11.38",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*3.45",
+   "*11.11",
+   "*11.32"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Fact = *3.45",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.39",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*3.47",
+   "*11.11",
+   "*11.32"
+  ],
+  "extra_used": [
+   "*11.31"
+  ],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The two factors of the hypothesis are first combined into one (x, y) by *11.31 (as in line (1) of *11.37); the hint omits it."
+ },
+ {
+  "id": "*11.391",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.76",
+   "*11.11",
+   "*11.33",
+   "*11.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.4",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31",
+   "*4.38",
+   "*11.11",
+   "*11.32"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.401",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.4",
+   "*4.2"
+  ],
+  "extra_used": [
+   "*11.11",
+   "*3.3",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "Id read as *4.2",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Id gives chi ≡ chi (*4.2), generalized by *11.11; dropping that asserted factor from the hypothesis of *11.4 uses Exp (*3.3) and Comm (*2.04)."
+ },
+ {
+  "id": "*11.41",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.42",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.42",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.5"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "*10.5 twice with *10.28 (pattern)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.421",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.42",
+   "*2.16",
+   "*4.56"
+  ],
+  "extra_used": [
+   "*11.25",
+   "*11.11",
+   "*11.33",
+   "*4.13",
+   "*4.11",
+   "*4.51",
+   "*4.39"
+  ],
+  "cited_unused": [],
+  "note": "Transp read as *2.16",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM reads ~(Ex, y) . ~phi(x, y) as (x, y) . phi(x, y) tacitly; with *11.03 read literally this needs *11.25 and double negation (*4.13 under *11.11.33), and *4.51/*4.39 to pass through the negated product; *4.56 is negated by *4.11."
+ },
+ {
+  "id": "*11.43",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.34",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes real variables z, w (as *10.34)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.44",
+  "page": 163,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.2",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*4.31"
+  ],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.2 has p as the first disjunct, *11.44 as the second: both uses permuted by *4.31."
+ },
+ {
+  "id": "*11.45",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.35",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.46",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.37",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes real variables z, w (as *10.37)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.47",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.33",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes real variables z, w (as *10.33)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.33 has p as the second factor, *11.47 as the first: both uses commuted by *4.3."
+ },
+ {
+  "id": "*11.5",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.253",
+   "*10.11",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "chain stated as A == B . B == C",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.51",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.252",
+   "*4.12",
+   "*10.253",
+   "*10.11",
+   "*10.271",
+   "*4.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "first Transp read as *4.12, second as *4.11",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.52",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.51",
+   "*4.62",
+   "*11.11",
+   "*11.33",
+   "*4.11",
+   "*11.22"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Transp read as *4.11",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.521",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.52",
+   "*4.12"
+  ],
+  "extra_used": [
+   "*2.14",
+   "*2.12",
+   "*2.05",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "Transp read as *4.12; not in vol1.jsonl (added to the ladder list from the Gutenberg HTML), read from the scan",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The substitution ~psi/psi gives phi . ⊃ . ~~psi; PM drops the double negation tacitly."
+ },
+ {
+  "id": "*11.53",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.21",
+   "*10.271",
+   "*10.23"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "not in vol1.jsonl (its Dem. is appended to *11.52 there), read from the scan",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.54",
+  "page": 164,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.35",
+   "*10.11",
+   "*10.281"
+  ],
+  "extra_used": [
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The last line needs *10.35 with p as the second factor: commuted by *4.3."
+ },
+ {
+  "id": "*11.55",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.35",
+   "*10.11",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.56",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.33",
+   "*10.11",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes real variables z, w (as *10.33)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The second *10.33 line has p as the first factor: commuted by *4.3."
+ },
+ {
+  "id": "*11.57",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.56",
+   "*4.24"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes a real variable (via *11.56)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.58",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.54",
+   "*4.24"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.59",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.57",
+   "*3.47",
+   "*11.32",
+   "*11.1",
+   "*4.24",
+   "*10.11",
+   "*10.21"
+  ],
+  "extra_used": [
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "takes a real variable (via *11.57)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Line (1) generalizes *3.47 by *11.11 before *11.32; the hint omits it."
+ },
+ {
+  "id": "*11.6",
+  "page": 165,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.35",
+   "*10.11",
+   "*10.281",
+   "*11.23",
+   "*11.341"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.32",
+   "*4.38",
+   "*4.2",
+   "*11.11"
+  ],
+  "cited_unused": [
+   "Perm (*1.4)"
+  ],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.35 is needed with p as the second factor (*4.3). 'Perm' in line 4 rearranges a product, phi . psi . chi ≡ phi . chi . psi, which is not *1.4 (a disjunction); done by *4.32, *4.38 (with *4.2, *4.3), generalized by *11.11."
+ },
+ {
+  "id": "*11.61",
+  "page": 166,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.26",
+   "*10.37",
+   "*10.11",
+   "*10.27"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes a real variable w (as *10.37)",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.62",
+  "page": 166,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.87",
+   "*11.11",
+   "*11.33",
+   "*10.21",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*4.87 is a product of three equivalences; its first factor is taken by *3.26 (twice)."
+ },
+ {
+  "id": "*11.63",
+  "page": 166,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.21",
+   "*11.11",
+   "*11.32",
+   "*11.25"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*11.7",
+  "page": 166,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.41",
+   "*11.23",
+   "*4.25"
+  ],
+  "extra_used": [
+   "*4.39",
+   "*4.2"
+  ],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Replacing the second disjunct by *11.23 uses *4.39 with *4.2."
+ },
+ {
+  "id": "*11.71",
+  "page": 167,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*3.47",
+   "*11.11",
+   "*11.3",
+   "*10.28",
+   "*10.35",
+   "*2.04",
+   "*3.26",
+   "*10.21",
+   "*3.43"
+  ],
+  "extra_used": [
+   "*3.3",
+   "*11.2",
+   "*4.3",
+   "*3.27",
+   "*3.22",
+   "*2.02"
+  ],
+  "cited_unused": [],
+  "note": "Comm = *2.04, Comp = *3.43",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(4) needs Exp (*3.3) before Comm; 'Similarly' (6) takes (w) : (z) from Hp by *11.2, uses *10.35 with p second (*4.3) and *3.27 for *3.26; in (7) the *3.47 factors are commuted by *3.22 before Comp; (2).(7) adds Hp to (2) by *2.02."
+ }
+]
