@@ -11,8 +11,7 @@ import PM.Models.Finite
 
   Definitions. ✱11·01–✱11·06 are macros (`QF.all2`, `QF.all3`, `QF.ex2`, `QF.ex3`, `QF.fimp2`,
   `QF.fiff2`), so "(x, y) . φ(x, y)" is literally "(x) : (y) . φ(x, y)", as ✱11·01 says. The two
-  variables may have different types (`x : V σ`, `y : V τ`); with only individuals in `Ty` so far, the
-  generality costs nothing and is what ✱12 onward needs.
+  variables may have different types (`x : V σ`, `y : V τ`), which ✱12 onward uses for function types.
 
   Steps done silently, as in PM/Star10.lean and PM/Replay2.lean (the ones PM leaves tacit everywhere):
   - joining two lines by ✱3·2 (or ✱4·01 for "≡"), and chaining "⊃" or "≡" lines (Syll, ✱4·22);

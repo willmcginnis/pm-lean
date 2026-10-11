@@ -2,7 +2,8 @@ import PM.Star12
 /-!
   ✱13: identity (1910 print, pp. 176–180).
 
-  Statements are read from the scans. As in PM/Star11.lean, each proof follows PM's Dem. line by line,
+  Statements are read from the Gutenberg #78050 transcription of the 1910 print (its formula source), not
+  from the scan images. As in PM/Star11.lean, each proof follows PM's Dem. line by line,
   or uses the propositions of PM's bracketed hint in PM's order; the comment on each Lean line gives
   PM's line or hint, and any step PM leaves tacit beyond those listed in PM/Star11.lean's header is
   named in the docstring.
