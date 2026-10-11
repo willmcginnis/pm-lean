@@ -31,21 +31,21 @@ def QF.order : QF U → Nat
   | @QF.all _ τ φ => max (τ.ord + 1) (φ ()).order
 
 /-! `max` lemmas proved from `Nat`'s definition of `max` (core's versions use `propext`). -/
-private theorem max_le' {a b c : Nat} (h1 : a ≤ c) (h2 : b ≤ c) : max a b ≤ c := by
+theorem max_le' {a b c : Nat} (h1 : a ≤ c) (h2 : b ≤ c) : max a b ≤ c := by
   show (if a ≤ b then b else a) ≤ c
   split <;> assumption
-private theorem le_max_left' (a b : Nat) : a ≤ max a b := by
+theorem le_max_left' (a b : Nat) : a ≤ max a b := by
   show a ≤ (if a ≤ b then b else a)
   split
   · assumption
   · exact Nat.le_refl a
-private theorem le_max_right' (a b : Nat) : b ≤ max a b := by
+theorem le_max_right' (a b : Nat) : b ≤ max a b := by
   show b ≤ (if a ≤ b then b else a)
   split
   · exact Nat.le_refl b
   · next h => exact Nat.le_of_lt (Nat.lt_of_not_le h)
-private theorem max_le_l {a b c : Nat} (h : max a b ≤ c) : a ≤ c := Nat.le_trans (le_max_left' a b) h
-private theorem max_le_r {a b c : Nat} (h : max a b ≤ c) : b ≤ c := Nat.le_trans (le_max_right' a b) h
+theorem max_le_l {a b c : Nat} (h : max a b ≤ c) : a ≤ c := Nat.le_trans (le_max_left' a b) h
+theorem max_le_r {a b c : Nat} (h : max a b ≤ c) : b ≤ c := Nat.le_trans (le_max_right' a b) h
 
 theorem lvl_iff_order (p : QF U) (n : Nat) : Lvl p n ↔ p.order ≤ n := by
   induction p generalizing n with

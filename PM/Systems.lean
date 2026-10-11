@@ -27,5 +27,7 @@ instance (st : Style) : Comprehension (Sys.full st) := ⟨rfl⟩
 instance (st : Style) : Reducibility (Sys.full st) := ⟨rfl⟩
 instance (st : Style) : Reducibility (Sys.reducibility st) := ⟨rfl⟩
 instance (st : Style) : Comprehension (Sys.predicative st) := ⟨rfl⟩
+/-- Any system written out with `red := true`. -/
+instance (c : Bool) (st : Style) : Reducibility ⟨c, true, st⟩ := ⟨rfl⟩
 
 end PM

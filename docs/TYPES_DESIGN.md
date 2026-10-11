@@ -107,8 +107,21 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   matrix φ!x ⊃ ψ!x, are admitted by both; (φ) . φ!x as a predicative function of x is refused by both.
   `p171_lowestOrder_predicative` (lowest-order style only, comprehension without ✱12·1) and
   `p171_reducibility` (every style, by ✱12·1) are the same statement in the two styles.
+- **With reducibility the styles derive exactly the same theorems: `styles_equiv`** (PM/StylesEquiv.lean;
+  Will's item (i)). For either setting of comprehension `c` and any two styles,
+  `QThm ⟨c, true, Style.of P R⟩ p ↔ QThm ⟨c, true, Style.of P' R'⟩ p`. The proof is an induction over
+  derivations (`restyle`): at a predicative type the conclusion of comprehension is literally ✱12·1
+  (✱12·11); at `fn1 a (k+1)`, ✱12·1 gives a predicative g with ψx ≡ₓ g!x, every style admits g!x there
+  (`admitsPredApp_of`), comprehension in the target style gives f with g!x ≡ₓ f x, and ✱10·301
+  (✱11·371) joins them. It uses no axioms, and it USES ✱12·1 / ✱12·11: it takes `[Reducibility S']`,
+  and RedCheck.lean reports that `restyle`, `styles_equiv` and `styles_equiv_full` reach
+  `Reducibility.red` (and `restyle` cites `QThm.red1` directly). This replaces the earlier unproved
+  remark "same theorems either way" (after an external review) with a proof, for the system as built.
 - Without reducibility, whether the matrix style is strictly weaker (`p171` not derivable at all in
   the matrix-style predicative fragment) is not proved: it needs a model that sees orders (test F4).
+  Skipped: neither the collapse model nor the finite model sees orders, and an order-aware model of the
+  whole hierarchy (restricted ranges at every type, closed under comprehension) is not cheap. Only the
+  syntactic half is proved: the matrix style admits less (`QThm.matrix_to_lowestOrder`, golden tests).
 - "Both must pass": every PM theorem (✱1–✱20 so far) is stated for an arbitrary system, so for both
   styles; `StyleCheck.lean` instantiates each of the 351 PM propositions under each style and named
   system and reports the result (§3, test S1). Consistency is proved for both styles in both models
@@ -131,8 +144,9 @@ the sentence this note quoted before, "If the highest order of variable occurrin
 a paragraph earlier on the same page and says the same for orders in general). ✱12·11's "a predicative
 function of those variables, i.e. to a matrix" (p. 174) agrees. The clause that follows, "A function of
 several arguments is predicative if there is one of its arguments such that, when the other arguments
-have values assigned to them, we obtain a predicative function of the one undetermined argument", is
-discussed under Q4 (§5).
+have values assigned to them, we obtain a predicative function of the one undetermined argument",
+agrees with that rule on every function of our types (Will's item (iii), searched): see Q4 (§5) and
+PM/Pred/Curry.lean.
 
 ### 4. Real and apparent function variables
 
@@ -174,6 +188,17 @@ It is decided at the one-element variable family `U` (`lvl_iff_order`, with a `D
 
 **Rejected:** counting a real variable φ as an argument that raises the order of φ!x to 2. That is the
 order of φ!x as a function of φ *and* x (pp. 54, 170). It would forbid g := φ above.
+
+**The p. 55 reading is partial application** (Will's item (ii): "syntactic sugar"?). φ!x seen as a
+function of (φ, x) and φ!x with φ fixed, seen as a function of x, are the same body as a
+two-parameter function and as a one-parameter closure. `curry_order` (PM/Pred/Curry.lean) makes this a
+checked fact: `fnOrder2 a b ψ = max (a.ord + 1) (fnOrder b (ψ φ))`, the order of the two-argument
+function is the larger of the first argument's lowest compatible order and the order of the partial
+application. `phi_x_two_views`: φ!x has order 2 as a function of (φ!ẑ, x) (pp. 54, 170) and is
+predicative as a function of x with φ fixed (p. 55). Golden tests add p. 55's other case: with a
+first-order function as apparent variable the partial application is of order 2. Partial application
+is also exactly what p. 56's second clause is about ("when the other arguments have values assigned to
+them"), which links this to Q4.
 
 ### 6. (b) Comprehension
 
@@ -414,6 +439,9 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
 | **S1** every PM theorem under both styles of "predicative" (Will, Q1) | **pass** | `StyleCheck.lean`: each of the 351 PM propositions instantiates in `Sys.full` of the matrix style and of the lowest-order style (351/351 each); 0 without a parameter `S`; per system: reducibility 350, predicative 322, base 321 in both styles (the 29 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency: `consistent_of_style`, `consistent_collapse_of_style` |
+| **S2** `styles_equiv` (Will, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
+| **S3** currying (Will, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
+| **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements. Not added as a style |
 
 ### U6: cost numbers
 
@@ -484,8 +512,20 @@ search).
    (decisions 6 and 13).
 3. **Real variables count with their own order** (decision 5, p. 55). The alternative reading of p. 54
    counts them as arguments, giving φ!x order 2. That would make even (∃g) : g!x ≡ₓ φ!x need ✱12·1.
-4. **Several-argument predicativity.** p. 56's second clause ("if there is one of its arguments such
-   that …") is weaker than the lowest-order reading used for `pred2`. Is it worth a separate type?
+4. **Several-argument predicativity.** Proceeding on the recommended default (no separate type; Will has
+   not objected, 2026-10-11), and SEARCHED as Will asked (item (iii), 2026-10-11 evening): is there a
+   function of our types on which p. 56's second clause ("if there is one of its arguments such that,
+   when the other arguments have values assigned to them, we obtain a predicative function of the one
+   undetermined argument") and the lowest-order rule stated just before it disagree? **None exists.**
+   `second_clause_iff_lowestOrder` proves it for every two-argument function (fixed arguments counted
+   at their own order, p. 55), `second_clause_matrix_iff` for the matrix reading, and
+   `anyLe_iff_le_maxL` for any number of arguments. The reason: the order of the function of argument
+   i, the others fixed, is max (oᵢ + 1) O with O the order of the body, so "some i gives oᵢ + 1" is
+   "O ≤ oᵢ + 1 for some i", which is O ≤ max oᵢ + 1, the lowest-order rule. The concrete search
+   (`ClauseSearch.lean`: 34,380 bodies of depth ≤ 2 over 9 types × 81 pairs of argument types,
+   2,784,780 cases) found 0 disagreements. So the clause is not added as a style. The earlier note that
+   the clause is "weaker" was wrong for these types. It could differ only in a hierarchy where the order
+   of a function is not determined by the maximum of its argument and body orders.
 5. **Axiom-free consistency.** DECIDED by Will (2026-10-11): yes, "its own little module". Done:
    PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
    classical collapse model is kept as the general one (decision 11).

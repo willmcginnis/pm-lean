@@ -19,6 +19,8 @@ import PM.Pred.RealOwnOrder
 import PM.Pred.LowestOrder
 import PM.Pred.Matrix
 import PM.Pred.Styles
+import PM.Pred.Curry
+import PM.StylesEquiv
 import PM.Systems
 -- semantics: the general (classical collapse) model and the finite coded model
 import PM.Models.Collapse

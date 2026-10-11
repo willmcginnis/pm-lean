@@ -10,7 +10,7 @@ names = []
 for f in ["PM/Replay.lean", "PM/Replay2.lean"]:
     names += [f"PM.{n}" for n in re.findall(r"^theorem (t[2-5]_\w+)", (root / f).read_text(), re.M)]
 names.append("PM.complete")
-THM = r"^(?:private )?theorem ([\w.]+)"
+THM = r"^(?:private )?theorem ([\w.']+)"
 DEF = r"^(?:noncomputable )?(?:def|abbrev) ([\w.]+)"
 names += [f"PM.QL.{n}" for n in re.findall(r"^theorem (\w+)", (root / "PM/QuantLift.lean").read_text(), re.M)]
 files = ["PM/Quant.lean", "PM/Rules/Comprehension.lean", "PM/Rules/Reducibility.lean", "PM/Systems.lean"]
