@@ -1,4 +1,7 @@
 import PM.Quant
+import PM.Pred.RealOwnOrder
+import PM.Pred.LowestOrder
+import PM.Systems
 /-!
   Orders: a decidable order checker and golden tests (docs/TYPES_DESIGN.md, tests F1 and F2).
 
@@ -155,14 +158,16 @@ example : Lvl (V := U) (ex (τ := Ty.pred1 .ind) fun ψ' => iff (.app1 (a := .in
 
 /-! ## Comprehension uses the check (at an arbitrary variable family)
 
-  The side condition of `QThm.compr1` is `Lvl`, proved by its constructors. Predicative comprehension
-  accepts (x) . φ!x as a function of φ (p. 56 reading), and refuses (φ) . φ!x as a predicative function
-  of x (an order-2 function of an individual; that needs ✱12·1). -/
+  In the lowest-order style the side condition of `QThm.compr1` is `Lvl`, proved by its constructors.
+  Predicative comprehension then accepts (x) . φ!x as a function of φ (p. 56 reading), and refuses
+  (φ) . φ!x as a predicative function of x (an order-2 function of an individual; that needs ✱12·1). -/
 
-/-- (∃f) : (x) . φ!x . ≡_φ . f!(φ!ẑ), f predicative, by comprehension alone. -/
-example {V : Ty → Type} : QThm (V := V) (ex (τ := Ty.pred1 (Ty.pred1 .ind)) fun f =>
+/-- (∃f) : (x) . φ!x . ≡_φ . f!(φ!ẑ), f predicative, by comprehension alone, in the lowest-order style
+    (holds in that style only, without ✱12·1). -/
+example {V : Ty → Type} : QThm (V := V) (Sys.predicative (Style.lowestOrder Lvl))
+    (ex (τ := Ty.pred1 (Ty.pred1 .ind)) fun f =>
     fiff (fun φ => .all fun x => .app1 φ x) fun φ => .app1 f φ) :=
-  QThm.compr1 _ fun _ => .all (by decide) fun _ => .app1 (by decide)
+  comprehension1 _ fun _ => .all (by decide) fun _ => .app1 (by decide)
 
 /-- (φ) . φ!x is not of the order of a predicative function of x, so `compr1` cannot give a predicative
     f with f!x ≡ (φ) . φ!x. -/

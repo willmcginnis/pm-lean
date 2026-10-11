@@ -1,12 +1,17 @@
--- Which declarations under `PM` depend on the axiom of reducibility (✱12·1 / ✱12·11, the constructors
--- `PM.QThm.red1` / `PM.QThm.red2`) or on comprehension (`PM.QThm.compr1` / `PM.QThm.compr2`).
+-- Cross-check of the rule signatures: which declarations under `PM` use the axiom of reducibility
+-- (✱12·1 / ✱12·11) or comprehension, found from the proofs, compared with what their signatures ask for.
 -- Run with `lake env lean RedCheck.lean`.
 --
--- Like `#print axioms`, this follows the constants used in the type and the value of each declaration,
--- transitively. A proof of `QThm p` that does not reach `red1` or `red2` is a derivation without
--- reducibility. The check over-approximates (anything using the recursor `QThm.rec`, such as `qsound`,
--- reaches every constructor through the recursor's type), so "does not use" is reliable; the check
--- reports whether the constant graph had a cycle, in which case the results would not be exact.
+-- The rules are opt-in: a theorem that uses ✱12·1 / ✱12·11 must take `[Reducibility S]`, one that uses
+-- comprehension `[Comprehension S]` (PM/Rules/), and Lean enforces this. This file checks the same
+-- thing independently, from the proof terms:
+-- - "uses" = the declaration reaches, transitively through the constants of its type and value, the
+--   class field `PM.Reducibility.red` (resp. `PM.Comprehension.compr`), which is the only way to obtain
+--   `S.red = true` (resp. `S.compr = true`) for an arbitrary system `S`. (The constructors `QThm.red1`
+--   etc. are not used as the test: every proof by induction on `QThm` reaches all constructors through
+--   the recursor's type.)
+-- - "asks" = the class `PM.Reducibility` (resp. `PM.Comprehension`) occurs in the declaration's type.
+-- A PM proposition that uses a rule without asking for it, or asks without using it, is reported.
 import Lean
 import PM
 open Lean Elab Command
@@ -41,15 +46,23 @@ def isPMProp (n : Name) : Bool :=
 
 #eval show CommandElabM Unit from do
   let env ← getEnv
-  let tg : Array Name := #[`PM.QThm.red1, `PM.QThm.red2, `PM.QThm.compr1, `PM.QThm.compr2]
+  let tg : Array Name := #[`PM.Reducibility.red, `PM.Comprehension.compr]
   let names := (env.constants.fold (init := #[]) fun acc c _ =>
     if (`PM).isPrefixOf c && !c.isInternal then acc.push c else acc).qsort Name.lt
   let (res, st) ← liftCoreM <| (names.mapM fun c => do return (c, ← reach tg c)).run {}
+  let asks (c : Name) (cls : Name) : Bool :=
+    match env.find? c with
+    | some ci => ci.type.getUsedConstants.contains cls
+    | none => false
   let props := res.filter fun (c, _) => isPMProp c
-  let red := props.filter fun (_, m) => m &&& 3 != 0
-  let compr := props.filter fun (_, m) => m &&& 12 != 0
-  let allRed := res.filter fun (_, m) => m &&& 3 != 0
+  let red := props.filter fun (_, m) => m &&& 1 != 0
+  let compr := props.filter fun (_, m) => m &&& 2 != 0
   logInfo m!"checked {names.size} declarations under PM ({props.size} PM propositions); constant graph has a cycle: {st.cycle}"
   logInfo m!"{red.size} PM propositions use ✱12·1 or ✱12·11: {red.map (·.1)}"
   logInfo m!"{compr.size} PM propositions use comprehension: {compr.map (·.1)}"
-  logInfo m!"other declarations reaching red1/red2: {(allRed.filter fun (c, _) => !isPMProp c).map (·.1)}"
+  let mism := props.filter fun (c, m) =>
+    ((m &&& 1 != 0) != asks c `PM.Reducibility) || ((m &&& 2 != 0) != asks c `PM.Comprehension)
+  logInfo m!"PM propositions whose signature disagrees with their proof: {mism.size} {mism.map (·.1)}"
+  let others := res.filter fun (c, m) => !isPMProp c && m != 0
+  let tag (m : Nat) : String := (if m &&& 1 != 0 then "red " else "") ++ (if m &&& 2 != 0 then "compr" else "")
+  logInfo m!"other declarations using a rule: {others.map fun (c, m) => (c, tag m)}"

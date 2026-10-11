@@ -42,12 +42,20 @@ This part follows the 1910 edition: ramified types with the axiom of reducibilit
 
 - *Types.* `Ty` (in `PM/Quant.lean`) has individuals and the ramified types of functions of one and of two arguments. `fn1 a k` has order `a.ord + 1 + k` (Introduction p. 56). The predicative functions φ!x̂ of an `a` have the type `pred1 a = fn1 a 0`, the lowest order compatible with the argument. Arguments may be of any type and order (p. 174). There is no type of propositions (p. 172). Apparent function variables are applied by `app1` and `app2`. PM's real function variables of unassigned order (φx̂, p. 173) are Lean functions `V a → QF V`, as in ✱9–✱11.
 - *Orders.* `Lvl p n` is the order condition. `PM/Orders.lean` decides it and checks 32 order facts taken from the Introduction (pp. 54–56) and ✱12 (pp. 170–171).
-- *Rules.* `QThm` gains comprehension (`compr1`, `compr2`: a formula of order at most m is formally equivalent to a function variable of order m) and the axiom of reducibility as PM states it on p. 174: ✱12·1 (`red1`) and ✱12·11 (`red2`), for φ of any order and f predicative. Comprehension is our reading of ✱9·15/✱10·122; PM's own proofs use ✱12·1 instead. `RedCheck.lean` lists which theorems depend on reducibility (`red1`/`red2`) and which on comprehension.
+- *Rules as opt-in modules.* The proof system is `QThm S`, for a system `S : Sys` that says which rules beyond ✱1–✱11 it has and its style of predicativity. Each rule is its own module with its PM warrant in the header: `PM/Rules/Reducibility.lean` (✱12·1 `red1` and ✱12·11 `red2`, p. 174, for φ of any order and f predicative; class `Reducibility S`) and `PM/Rules/Comprehension.lean` (a formula the style admits at a function type is formally equivalent to a function variable of that type; our reading of ✱9·15/✱10·122, marked for what it is for; class `Comprehension S`). A theorem that uses a rule takes the class in its signature, so Lean enforces the dependency and shows it; a theorem without a class holds in every system. `PM/Systems.lean` names four systems (`Sys.full`, `Sys.reducibility`, `Sys.predicative`, `Sys.base`). `PM/Vol1.lean` is the entry file for Volume I (`PM.lean` imports it; Vol. II and III will get their own). `RedCheck.lean` cross-checks the signatures against the proofs (see the table below).
 - `PM/Star12.lean`: ✱12·1 and ✱12·11, stated with PM's macros, and a check that the variable form of ✱12·1 plus comprehension gives the formula form without `red1`.
 - `PM/Star13.lean`: identity. ✱13·01–✱13·03 are macros. All numbered propositions ✱13·1–✱13·22 are proved except ✱13·3 (a significance proposition that rests on ✱10·221). ✱13·101 follows PM's proof through ✱12·1.
 - `PM/Star14.lean` (partial): ✱14·01 and ✱14·02 as macros that take the description's scope explicitly; ✱14·1, ✱14·101, ✱14·11, ✱14·12, ✱14·121, ✱14·2, ✱14·201 and ✱14·21. It also proves that with the larger scope, ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not imply E!(ιx)(φx).
 - `PM/Star20.lean` (partial): ✱20·01 and ✱20·02 as macros; ✱20·1, ✱20·13, ✱20·14, ✱20·15 (two functions determine the same class iff they are formally equivalent) and ✱20·3. Identity of classes is ✱13·01 at the type of predicative functions, so ✱13 is used there at a higher type (typical ambiguity as Lean parameters).
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem (see the scope note).
+
+**Which theorem needs which rule** (from the signatures; `RedCheck.lean` finds the same from the proofs, 0 disagreements):
+
+| Rule | Theorems that take it |
+|---|---|
+| none (hold in every system) | all 188 lifted ✱2–✱5 (`QL.t…`); all of ✱9–✱11; ✱13·1, ✱13·15, ✱13·17, ✱13·18, ✱13·19; ✱14·1, ✱14·101, ✱14·11, ✱14·121, ✱14·201, ✱14·21, `q14_21_neg`; ✱20·1 |
+| `Reducibility` (✱12·1, ✱12·11) | `q12_1`, `q12_11`, `q12_1_var`, `q12_11_var`; ✱13·101, ✱13·11, ✱13·12, ✱13·13, ✱13·14, ✱13·16, ✱13·171, ✱13·172, ✱13·181, ✱13·182, ✱13·183, ✱13·191–✱13·196, ✱13·21, ✱13·22; ✱14·12, ✱14·2; ✱20·13, ✱20·14, ✱20·15, ✱20·3; `trap_empty`, `trap_unit` |
+| `Comprehension` | `q12_1_of_var` (and the rule statements `comprehension1`, `comprehension2`) |
 
 Fidelity: proofs follow PM's Dem. lines or bracketed hints. Steps PM leaves tacit are named in each docstring. There is no per-proposition ledger for ✱12–✱20 yet. Of the 38 formalized ✱13, ✱14 and ✱20 propositions (counting one variant of ✱14·21), 25 depend on ✱12·1. Three cite it directly (✱13·101, ✱20·13, ✱20·3), as PM's proofs do; the others depend on it through ✱13·101.
 
@@ -70,7 +78,7 @@ Requires the Lean toolchain named in `lean-toolchain` (via [elan](https://github
 lake build                      # builds every file
 lake env lean AxiomCheck.lean   # 577 selected declarations; 567 report "does not depend on any axioms"
 lake env lean AllAxioms.lean    # every declaration under PM; lists the few that use an axiom
-lake env lean RedCheck.lean     # which declarations depend on ✱12·1 / ✱12·11, and on comprehension
+lake env lean RedCheck.lean     # which declarations use ✱12·1 / ✱12·11 or comprehension; cross-check with their signatures
 ```
 
 ## License

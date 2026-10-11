@@ -278,19 +278,38 @@ not help.
 **Rejected:** an eigenvariable form of ✱10·11 over explicit contexts. It would change the statement or
 proof of every ✱10–✱11 theorem.
 
-### 13. Tracking reducibility
+### 13. Rules as opt-in capabilities (revised 2026-10-11, Will's decision on Q2)
 
-`RedCheck.lean` follows the constants used by each declaration, transitively, as `#print axioms`
-does. It reports which ones reach `QThm.red1` or `QThm.red2` (✱12·1, ✱12·11), and which reach
-comprehension.
-- QThm's type is unchanged, so ✱1–✱11 are untouched.
-- The check over-approximates. Anything using `QThm.rec`, such as `qsound`, reaches every constructor.
-  So "does not use reducibility" is reliable.
-- It also reports whether the constant graph has a cycle (it has none), which is what makes the
-  results exact.
+The proof system is `QThm S` for a system `S : Sys` (PM/Quant.lean): two flags, `compr` and `red`, and a
+style of predicativity (decision 3). The constructors `compr1`/`compr2` need a proof of `S.compr = true`,
+and `red1`/`red2` a proof of `S.red = true`. Each rule is its own module with its PM warrant in the
+header, and a class that supplies the proof:
+- `PM/Rules/Reducibility.lean`: `class Reducibility S` (✱12·1, ✱12·11, p. 174);
+- `PM/Rules/Comprehension.lean`: `class Comprehension S` (✱9·15, ✱10·122; our reading, decision 6).
 
-**Rejected:** a second inductive, or a flag index on `QThm`. Either would require duplicating every
-rule-lemma of ✱10–✱11 (`qsyl`, `q10_11_27`, …).
+A theorem that uses a rule takes the class in its signature (`theorem q13_101 [Reducibility S] …`). For
+an arbitrary `S` there is no other way to get `S.red = true`, so Lean enforces the dependency, and the
+signature shows it. A theorem without a class holds in every system, including later ones (the 1925
+pass will add an `Extensionality` capability). `QThm.mono` lifts a derivation to any system with more
+rules and a more permissive style. `PM/Systems.lean` names four systems: `Sys.full` (both rules),
+`Sys.reducibility` (PM's own route), `Sys.predicative` (comprehension only) and `Sys.base` (neither).
+
+Every ✱1–✱11 proof is unchanged; their statements gained the parameter `S`. The ✱12–✱20 theorems that
+use ✱12·1 gained `[Reducibility S]`, found by compiling (Lean refuses the proof without it); the list
+is the same 29 that the old after-the-fact scan found.
+
+`RedCheck.lean` is kept as an independent cross-check. It follows the constants used by each
+declaration, transitively, as `#print axioms` does, and reports which reach the class field
+`Reducibility.red` or `Comprehension.compr`, then compares that with whether the class occurs in the
+declaration's type. Result: 29 PM propositions use reducibility, 1 uses comprehension, and 0 disagree
+with their signatures. (The constructors themselves are not the test, because every proof by induction
+on `QThm`, such as `qsound`, reaches all constructors through the recursor's type.)
+
+**Rejected:**
+- the earlier after-the-fact scan alone, with `QThm`'s type unchanged: the dependency was invisible in
+  the statements;
+- a second inductive per system: it would duplicate every rule-lemma of ✱10–✱11 (`qsyl`, `q10_11_27`, …).
+  With one parameterised inductive, those lemmas are stated once for every `S`.
 
 ## 2. What was built
 
@@ -403,8 +422,9 @@ search).
    needs ✱12·1 and what comprehension gives. Should comprehension at a predicative type instead accept
    only matrices (p. 172: no apparent variables at all)? That would be a small change: a matrix
    condition in place of `Lvl` in `compr1` when k = 0.
-2. **Keep comprehension?** (decision 6) It has textual support (✱9·15, ✱10·122) but no direct PM use.
-   It matters for the 1925 pass (no reducibility).
+2. **Keep comprehension?** DECIDED by Will (2026-10-11): keep it, "mark it for what it's for", as its
+   own module imported where needed. Done: `PM/Rules/Comprehension.lean`, class `Comprehension S`
+   (decisions 6 and 13).
 3. **Real variables count with their own order** (decision 5, p. 55). The alternative reading of p. 54
    counts them as arguments, giving φ!x order 2. That would make even (∃g) : g!x ≡ₓ φ!x need ✱12·1.
 4. **Several-argument predicativity.** p. 56's second clause ("if there is one of its arguments such

@@ -40,14 +40,16 @@ import PM.Basic
     ✱10·121 (significance of φa for a of the same type as x) and ✱10·122 (if there is a proposition φa
     there is a function φx̂) are built into the syntax: every `φ : V τ → QF V` is a function, and every
     `φ a` with `a : V τ` is a formula.
-    Comprehension at a function type (`QThm.compr1`, `QThm.compr2`): a formula ψx of order at most m
-    determines a function variable of order m formally equivalent to it. This is our reading of ✱10·122
-    together with ✱10·24 at a function type; the order condition is `Lvl` (Introduction p. 56).
-    ✱12·1   ⊢ : (∃f) : φx . ≡ₓ . f!x            Pp (p. 174)   (`QThm.red1`)
+  Opt-in rules, only in a system `S` that has them (`QThm S`; PM/Rules/, PM/Systems.lean):
+    Comprehension at a function type (`QThm.compr1`, `QThm.compr2`; class `Comprehension S`): a formula
+    ψx that the system's style admits at a function type determines a function variable of that type
+    formally equivalent to it. This is our reading of ✱10·122 together with ✱10·24 at a function type;
+    the styles (what is admitted) are the modules under PM/Pred/.
+    ✱12·1   ⊢ : (∃f) : φx . ≡ₓ . f!x            Pp (p. 174)   (`QThm.red1`; class `Reducibility S`)
     ✱12·11  ⊢ : (∃f) : φ(x, y) . ≡ₓ,ᵧ . f!(x, y)  Pp (p. 174)   (`QThm.red2`)
     φ is a real variable of any order (a Lean function `V a → QF V`, as for every real function variable
-    of ✱9–✱11); f is an apparent variable of the predicative type. RedCheck.lean lists which theorems
-    depend on `red1`/`red2`.
+    of ✱9–✱11); f is an apparent variable of the predicative type. A theorem that uses a rule takes its
+    class in its signature; RedCheck.lean cross-checks this against the proofs.
 -/
 namespace PM
 
@@ -95,47 +97,79 @@ variable {V : Ty → Type}
 @[reducible] def fiff {τ : Ty} (φ ψ : V τ → QF V) : QF V := .all fun x => QF.iff (φ x) (ψ x)  -- ✱10·03
 end QF
 
-/-- `Lvl p n`: p may be a value of a function of order n (Introduction p. 56: a function is of order
-    n + 1 when the highest order of the variables in it, "whether as argument or as apparent variable",
-    is n). Each apparent variable has order below n, and each function variable applied in p has
-    order at most n: a real variable counts with its own order, since assigning it a value gives a
-    function of that order (p. 55). Individuals have order 0, so every formula needs n ≥ 1. -/
-inductive Lvl {V : Ty → Type} : QF V → Nat → Prop where
-  | atom {P : String} {xs : List (V .ind)} {n : Nat} : 0 < n → Lvl (.atom P xs) n
-  | app1 {a : Ty} {k n : Nat} {f : V (.fn1 a k)} {x : V a} : (Ty.fn1 a k).ord ≤ n → Lvl (.app1 f x) n
-  | app2 {a b : Ty} {k n : Nat} {f : V (.fn2 a b k)} {x : V a} {y : V b} :
-      (Ty.fn2 a b k).ord ≤ n → Lvl (.app2 f x y) n
-  | neg {p : QF V} {n : Nat} : Lvl p n → Lvl (.neg p) n
-  | or {p q : QF V} {n : Nat} : Lvl p n → Lvl q n → Lvl (.or p q) n
-  | all {τ : Ty} {n : Nat} {φ : V τ → QF V} : τ.ord < n → (∀ y, Lvl (φ y) n) → Lvl (.all φ) n
+/-- A style of predicativity: what comprehension accepts. `adm1 k ψ` holds when the formula ψx (x of
+    type `a`) may be taken as the values of a function variable of type `fn1 a k`; `adm2 k ψ` likewise
+    for `fn2 a b k`. Each reading of PM's text is its own module under PM/Pred/ (docs/TYPES_DESIGN.md,
+    decisions 3 and 5). -/
+structure Style where
+  adm1 : {V : Ty → Type} → {a : Ty} → Nat → (V a → QF V) → Prop
+  adm2 : {V : Ty → Type} → {a b : Ty} → Nat → (V a → V b → QF V) → Prop
+
+/-- An order check: `L p n` when p may be a value of a function of order n. Two readings of how a
+    real function variable counts (p. 55, p. 54) are the modules PM/Pred/RealOwnOrder.lean and
+    PM/Pred/RealAsArgument.lean. -/
+abbrev OrderCheck : Type 1 := {V : Ty → Type} → QF V → Nat → Prop
+
+/-- A proof system: which rules beyond ✱1–✱11 it has, and its style of predicativity. The rules are
+    opt-in capabilities, each its own module with its PM warrant (PM/Rules/): `compr` is comprehension
+    (class `Comprehension S`), `red` the axiom of reducibility ✱12·1, ✱12·11 (class `Reducibility S`).
+    A theorem that uses a rule takes its class in its signature, so Lean enforces and shows the
+    dependency; a theorem without such a class holds in every system. -/
+structure Sys where
+  compr : Bool
+  red : Bool
+  style : Style
 
 open QF in
-/-- Asserted propositions of ✱10's alternative method, with comprehension at function types and the
-    axiom of reducibility (✱12·1, ✱12·11). -/
-inductive QThm {V : Ty → Type} : QF V → Prop where
-  | mp      {p q : QF V} : QThm p → QThm (imp p q) → QThm q                       -- ✱1·1, ✱9·12
-  | taut    (p : QF V)     : QThm (imp (.or p p) p)                                -- ✱1·2
-  | add     (p q : QF V)   : QThm (imp q (.or p q))                                -- ✱1·3
-  | perm    (p q : QF V)   : QThm (imp (.or p q) (.or q p))                        -- ✱1·4
-  | assoc   (p q r : QF V) : QThm (imp (.or p (.or q r)) (.or q (.or p r)))        -- ✱1·5
-  | sum     (p q r : QF V) : QThm (imp (imp q r) (imp (.or p q) (.or p r)))        -- ✱1·6
-  | inst    {τ : Ty} (φ : V τ → QF V) (y : V τ) : QThm (imp (.all φ) (φ y))         -- ✱10·1
-  | gen     {τ : Ty} {φ : V τ → QF V} : (∀ y, QThm (φ y)) → QThm (.all φ)         -- ✱10·11
+/-- Asserted propositions of ✱10's alternative method in the system `S`: ✱1·1–✱1·6, ✱10·1, ✱10·11,
+    ✱10·12 always; comprehension at function types if `S.compr`; the axiom of reducibility (✱12·1,
+    ✱12·11) if `S.red`. -/
+inductive QThm {V : Ty → Type} (S : Sys) : QF V → Prop where
+  | mp      {p q : QF V} : QThm S p → QThm S (imp p q) → QThm S q                 -- ✱1·1, ✱9·12
+  | taut    (p : QF V)     : QThm S (imp (.or p p) p)                              -- ✱1·2
+  | add     (p q : QF V)   : QThm S (imp q (.or p q))                              -- ✱1·3
+  | perm    (p q : QF V)   : QThm S (imp (.or p q) (.or q p))                      -- ✱1·4
+  | assoc   (p q r : QF V) : QThm S (imp (.or p (.or q r)) (.or q (.or p r)))      -- ✱1·5
+  | sum     (p q r : QF V) : QThm S (imp (imp q r) (imp (.or p q) (.or p r)))      -- ✱1·6
+  | inst    {τ : Ty} (φ : V τ → QF V) (y : V τ) : QThm S (imp (.all φ) (φ y))       -- ✱10·1
+  | gen     {τ : Ty} {φ : V τ → QF V} : (∀ y, QThm S (φ y)) → QThm S (.all φ)     -- ✱10·11
   | distrib {τ : Ty} (p : QF V) (φ : V τ → QF V) :
-      QThm (imp (.all fun x => .or p (φ x)) (.or p (.all φ)))                      -- ✱10·12
-  /-- Comprehension: a formula ψx of order at most that of `fn1 a k` is formally equivalent to some
-      function of that type (✱10·122 with ✱10·24; the order condition is Introduction p. 56). -/
-  | compr1  {a : Ty} {k : Nat} (ψ : V a → QF V) (_ : ∀ x, Lvl (ψ x) (Ty.fn1 a k).ord) :
-      QThm (ex (τ := .fn1 a k) fun f => fiff ψ fun x => .app1 f x)
+      QThm S (imp (.all fun x => .or p (φ x)) (.or p (.all φ)))                    -- ✱10·12
+  /-- Comprehension: a formula ψx that the style admits at `fn1 a k` is formally equivalent to some
+      function of that type (✱10·122 with ✱10·24; PM/Rules/Comprehension.lean). -/
+  | compr1  {a : Ty} {k : Nat} (_ : S.compr = true) (ψ : V a → QF V) (_ : S.style.adm1 k ψ) :
+      QThm S (ex (τ := .fn1 a k) fun f => fiff ψ fun x => .app1 f x)
   /-- Comprehension for functions of two arguments. -/
-  | compr2  {a b : Ty} {k : Nat} (ψ : V a → V b → QF V) (_ : ∀ x y, Lvl (ψ x y) (Ty.fn2 a b k).ord) :
-      QThm (ex (τ := .fn2 a b k) fun f => .all fun x => .all fun y => iff (ψ x y) (.app2 f x y))
-  /-- ✱12·1 `⊢ : (∃f) : φx . ≡ₓ . f!x` Pp (p. 174). φ of any order; f predicative. -/
-  | red1    {a : Ty} (φ : V a → QF V) :
-      QThm (ex (τ := Ty.pred1 a) fun f => fiff φ fun x => .app1 f x)
+  | compr2  {a b : Ty} {k : Nat} (_ : S.compr = true) (ψ : V a → V b → QF V) (_ : S.style.adm2 k ψ) :
+      QThm S (ex (τ := .fn2 a b k) fun f => .all fun x => .all fun y => iff (ψ x y) (.app2 f x y))
+  /-- ✱12·1 `⊢ : (∃f) : φx . ≡ₓ . f!x` Pp (p. 174). φ of any order; f predicative
+      (PM/Rules/Reducibility.lean). -/
+  | red1    {a : Ty} (_ : S.red = true) (φ : V a → QF V) :
+      QThm S (ex (τ := Ty.pred1 a) fun f => fiff φ fun x => .app1 f x)
   /-- ✱12·11 `⊢ : (∃f) : φ(x, y) . ≡ₓ,ᵧ . f!(x, y)` Pp (p. 174). -/
-  | red2    {a b : Ty} (φ : V a → V b → QF V) :
-      QThm (ex (τ := Ty.pred2 a b) fun f => .all fun x => .all fun y => iff (φ x y) (.app2 f x y))
+  | red2    {a b : Ty} (_ : S.red = true) (φ : V a → V b → QF V) :
+      QThm S (ex (τ := Ty.pred2 a b) fun f => .all fun x => .all fun y => iff (φ x y) (.app2 f x y))
+
+/-- Monotonicity: a system with more rules, and a style that admits more, proves more. -/
+theorem QThm.mono {V : Ty → Type} {S S' : Sys} (hc : S.compr = true → S'.compr = true)
+    (hr : S.red = true → S'.red = true)
+    (h1 : ∀ {a : Ty} {k : Nat} (ψ : V a → QF V), S.style.adm1 k ψ → S'.style.adm1 k ψ)
+    (h2 : ∀ {a b : Ty} {k : Nat} (ψ : V a → V b → QF V), S.style.adm2 k ψ → S'.style.adm2 k ψ)
+    {p : QF V} (h : QThm S p) : QThm S' p := by
+  induction h with
+  | mp _ _ ih1 ih2 => exact .mp ih1 ih2
+  | taut p => exact .taut p
+  | add p q => exact .add p q
+  | perm p q => exact .perm p q
+  | assoc p q r => exact .assoc p q r
+  | sum p q r => exact .sum p q r
+  | inst φ y => exact .inst φ y
+  | gen _ ih => exact .gen ih
+  | distrib p φ => exact .distrib p φ
+  | compr1 hS ψ hψ => exact .compr1 (hc hS) ψ (h1 ψ hψ)
+  | compr2 hS ψ hψ => exact .compr2 (hc hS) ψ (h2 ψ hψ)
+  | red1 hS φ => exact .red1 (hr hS) φ
+  | red2 hS φ => exact .red2 (hr hS) φ
 
 /-! ## Semantics and soundness
 
@@ -184,7 +218,7 @@ private theorem iff_refl_bool (b : Bool) : (!(!(!b || b) || !(!b || b))) = true 
   cases b <;> rfl
 
 /-- Soundness: every `QThm` is true in every structure, at the structure's own variables. -/
-theorem qsound (M : QModel) {p : QF M.den} (h : QThm p) : p.eval M = true := by
+theorem qsound (M : QModel) {S : Sys} {p : QF M.den} (h : QThm S p) : p.eval M = true := by
   induction h with
   | @mp p q _ _ ih1 ih2 =>
     have h2 : (!(p.eval M) || q.eval M) = true := ih2
@@ -221,19 +255,19 @@ theorem qsound (M : QModel) {p : QF M.den} (h : QThm p) : p.eval M = true := by
       cases M.A τ (fun d => (φ d).eval M) <;> rfl
   -- The witness for comprehension and for ✱12·1 / ✱12·11 is the function x ↦ ⟦φx⟧ itself; its
   -- order is forgotten by the collapse, and the `Lvl` condition is not used.
-  | @compr1 a k ψ _ =>
+  | @compr1 a k _ ψ _ =>
     exact eval_ex_of M (.fn1 a k) _ (fun x => (ψ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
-  | @compr2 a b k ψ _ =>
+  | @compr2 a b k _ ψ _ =>
     exact eval_ex_of M (.fn2 a b k) _ (fun x y => (ψ x y).eval M)
       ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
-  | @red1 a φ =>
+  | @red1 a _ φ =>
     exact eval_ex_of M (Ty.pred1 a) _ (fun x => (φ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
-  | @red2 a b φ =>
+  | @red2 a b _ φ =>
     exact eval_ex_of M (Ty.pred2 a b) _ (fun x y => (φ x y).eval M)
       ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
 
 /-- A formula false in some structure is not a theorem (at that structure's variables). -/
-theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) : ¬ QThm p :=
+theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) {S : Sys} : ¬ QThm S p :=
   fun h => by have := qsound M h; rw [hv] at this; cases this
 
 /-- The classical universal quantifier over any type, as a Boolean (uses `Classical.propDecidable`). -/
@@ -268,26 +302,26 @@ noncomputable def twoModel : QModel where
     (`twoModel.den`), not at an arbitrary family `V`: `QThm` at an arbitrary `V` can be degenerate (an
     empty or one-element type of functions makes ✱10·11 too strong, and ✱12·1 then contradicts it;
     PM/Trap.lean), so a consistency claim must name a structure's own variables. -/
-theorem consistent : ¬ QThm (V := twoModel.den) (.atom "p" []) :=
+theorem consistent (S : Sys) : ¬ QThm (V := twoModel.den) S (.atom "p" []) :=
   not_qthm_of_countermodel twoModel rfl
 
 /-- Consistency of the theorems that hold for every family of variables (which is how every PM
     theorem in this project is stated): `p` is not one of them. -/
-theorem consistent_all : ¬ ∀ V : Ty → Type, QThm (V := V) (.atom "p" []) :=
-  fun h => consistent (h _)
+theorem consistent_all (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) :=
+  fun h => consistent S (h _)
 
 /-- PM p. 137: "⊢ : φy . ⊃ . (x) . φx … means 'However y may be chosen, φy implies (x).φx,' which is in
     general false." It is not a theorem: `twoModel` falsifies it. This is why ✱9·13 / ✱10·11 is a rule
     of inference and not an implication. -/
-theorem not_qthm_phiy_imp_all :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V) (y : V .ind), QThm (QF.imp (φ y) (.all φ)) :=
+theorem not_qthm_phiy_imp_all {S : Sys} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V) (y : V .ind), QThm S (QF.imp (φ y) (.all φ)) :=
   fun h => not_qthm_of_countermodel twoModel
     (p := QF.imp (.atom "φ" [true]) (.all fun x => .atom "φ" [x])) rfl
     (h twoModel.den (fun x => .atom "φ" [x]) true)
 
 /-- ✱10·25 cannot be reversed: `(∃x).φx ⊃ (x).φx` is not a theorem. -/
-theorem not_qthm_ex_imp_all :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm (QF.imp (QF.ex φ) (.all φ)) :=
+theorem not_qthm_ex_imp_all {S : Sys} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (QF.ex φ) (.all φ)) :=
   fun h => not_qthm_of_countermodel twoModel
     (p := QF.imp (QF.ex fun x => .atom "φ" [x]) (.all fun x => .atom "φ" [x])) rfl
     (h twoModel.den (fun x => .atom "φ" [x]))
@@ -307,8 +341,8 @@ noncomputable def emptyModel : QModel where
 
 /-- ✱10·25 `(x) . φx . ⊃ . (∃x) . φx` needs an individual: it is false in `emptyModel`. So the Lean
     statement of ✱10·25 (PM/Star10.lean) takes the real variable y that PM's proof uses. -/
-theorem not_qthm_all_imp_ex_empty :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm (QF.imp (.all φ) (QF.ex φ)) :=
+theorem not_qthm_all_imp_ex_empty {S : Sys} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (.all φ) (QF.ex φ)) :=
   fun h => not_qthm_of_countermodel emptyModel
     (p := QF.imp (.all fun x => .atom "φ" [x]) (QF.ex fun x => .atom "φ" [x])) rfl
     (h emptyModel.den (fun x => .atom "φ" [x]))
@@ -326,7 +360,7 @@ def F.toQ {V : Ty → Type} (σ : String → QF V) : F → QF V
   | .neg p  => .neg (F.toQ σ p)
   | .or p q => .or (F.toQ σ p) (F.toQ σ q)
 
-theorem liftThm {V : Ty → Type} {p : F} (h : Thm p) (σ : String → QF V) : QThm (p.toQ σ) := by
+theorem liftThm {V : Ty → Type} {S : Sys} {p : F} (h : Thm p) (σ : String → QF V) : QThm S (p.toQ σ) := by
   induction h with
   | mp _ _ ih1 ih2 => exact QThm.mp ih1 ih2
   | taut p => exact QThm.taut _

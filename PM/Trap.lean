@@ -23,6 +23,8 @@ import PM.Orders
 namespace PM
 open QF
 
+variable {S : Sys}
+
 /-- A family in which (ι)/1, the predicative functions of individuals, is empty. (Written with
     `casesOn`: the equation compiler's version of this match uses `propext`.) -/
 def Vbad (τ : Ty) : Type :=
@@ -32,10 +34,10 @@ def Vbad (τ : Ty) : Type :=
     (fun _ _ _ => Unit)
 
 /-- At `Vbad` every formula is a theorem. -/
-theorem trap_empty (p : QF Vbad) : QThm p :=
+theorem trap_empty [Reducibility S] (p : QF Vbad) : QThm S p :=
   let φ : Vbad .ind → QF Vbad := fun x => .atom "q" [x]
   have h1 := q12_1 φ                                                       -- (∃f) : qx ≡ₓ f!x
-  have h2 : QThm (V := Vbad) (.all (τ := Ty.pred1 .ind) fun f =>
+  have h2 : QThm S (V := Vbad) (.all (τ := Ty.pred1 .ind) fun f =>
       .neg (fiff φ fun x => .app1 f x)) := QThm.gen fun f => nomatch f    -- ✱10·11, vacuously
   QThm.mp h2 (QThm.mp h1 (QL.t2_21 _ p))
 
@@ -46,15 +48,15 @@ private def glue : F :=
 private theorem glue_thm : Thm glue := complete _ (by decide)
 
 /-- At the one-element family `U` every formula is a theorem. -/
-theorem trap_unit (p : QF U) : QThm p :=
+theorem trap_unit [Reducibility S] (p : QF U) : QThm S p :=
   let q : QF U := .atom "q" [()]
   let A : QF U := .app1 (a := .ind) (k := 0) () ()
   -- from (∃f) . P f, P () (every f is ()): ✱10·11 and ✱10·23
-  have elim : ∀ P : U (Ty.pred1 .ind) → QF U, QThm (ex P) → QThm (P ()) := fun P h =>
+  have elim : ∀ P : U (Ty.pred1 .ind) → QF U, QThm S (ex P) → QThm S (P ()) := fun P h =>
     QThm.mp h (qiffMp (q10_23 P (P ())) |> QThm.mp (q10_11 fun f => QL.t2_08 (P f)))
-  have h1 : QThm (iff q A) := QThm.mp (elim _ (q12_1 fun x => .atom "q" [x]))
+  have h1 : QThm S (iff q A) := QThm.mp (elim _ (q12_1 fun x => .atom "q" [x]))
     (q10_1 (V := U) (fun x => iff (.atom "q" [x]) (.app1 (a := .ind) (k := 0) () x)) ())
-  have h2 : QThm (iff (.neg q) A) := QThm.mp (elim _ (q12_1 fun x => .neg (.atom "q" [x])))
+  have h2 : QThm S (iff (.neg q) A) := QThm.mp (elim _ (q12_1 fun x => .neg (.atom "q" [x])))
     (q10_1 (V := U) (fun x => iff (.neg (.atom "q" [x])) (.app1 (a := .ind) (k := 0) () x)) ())
   QThm.mp h2 (QThm.mp h1 (liftThm glue_thm fun s => if s = "a" then q else if s = "b" then A else p))
 

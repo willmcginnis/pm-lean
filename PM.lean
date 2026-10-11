@@ -1,17 +1,2 @@
-import PM.Basic
-import PM.Star2
-import PM.Statements
-import PM.Replay
-import PM.Derived
-import PM.Replay2
-import PM.Complete
-import PM.Quant
-import PM.QuantLift
-import PM.Star10
-import PM.Star11
-import PM.Star12
-import PM.Star13
-import PM.Star14
-import PM.Star20
-import PM.Orders
-import PM.Trap
+-- Principia Mathematica in Lean 4. One entry file per volume; Vol. II and III to follow.
+import PM.Vol1

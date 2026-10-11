@@ -26,7 +26,7 @@ for m in re.finditer(r"^/-- \*(\S+) -/\ndef s(\w+) ((?:\(\w+ : F\) )*): F := (.*
     get = lambda v: v if v in vs else vs[0]
     args = " ".join(f'(.var "{v}")' for v in vs)
     out.append(f"/-- ✱{pid.replace('.', '·')} -/")
-    out.append(f"theorem t{name} {{V : Ty → Type}} {' '.join(f'({v} : QF V)' for v in vs)} : QThm ({body}) :=")
+    out.append(f"theorem t{name} {{V : Ty → Type}} {{S : Sys}} {' '.join(f'({v} : QF V)' for v in vs)} : QThm S ({body}) :=")
     out.append(f"  liftThm (_root_.PM.t{name} {args}) (subst4 {get('p')} {get('q')} {get('r')} {get('s')})")
     n += 1
 out += ["", "end PM.QL", ""]
