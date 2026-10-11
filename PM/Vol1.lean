@@ -18,6 +18,9 @@ import PM.Rules.Reducibility
 import PM.Pred.RealOwnOrder
 import PM.Pred.LowestOrder
 import PM.Systems
+-- semantics: the general (classical collapse) model and the finite coded model
+import PM.Models.Collapse
+import PM.Models.Finite
 -- ✱12–✱20
 import PM.Star12
 import PM.Star13

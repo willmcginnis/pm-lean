@@ -105,36 +105,19 @@ theorem q14_21_neg (φ χ : V a → QF V) : QThm S (imp (desc φ fun z => .neg (
 /-- In every structure, x = x is true (✱13·01 evaluated). -/
 theorem eval_ident_refl (M : QModel) {a : Ty} (x : M.den a) : (ident x x).eval M = true :=
   (M.hA _ _).mpr fun f => by
-    show (!(f x) || f x) = true
-    cases f x <;> rfl
+    show (!(M.ap1 f x) || M.ap1 f x) = true
+    cases M.ap1 f x <;> rfl
 
 /-- `φ0 x` is `qx . ∼qx`, false of every individual. -/
 def φ0 {V : Ty → Type} (x : V .ind) : QF V := QF.and (.atom "q" [x]) (.neg (.atom "q" [x]))
 
 /-- Scope matters (PM pp. 181–182, 190): with the larger scope, ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not imply
     E!(ιx)(φx), whereas [(ιx)(φx)] . ∼χ(ιx)(φx) does (`q14_21_neg`). In `twoModel` nothing satisfies
-    φ0, so (ιx)(φ0 x) does not exist, the description with the larger scope is false and its negation true. -/
+    φ0, so (ιx)(φ0 x) does not exist, the description with the larger scope is false and its negation true.
+    `twoModel` is the finite coded model (PM/Models/Finite.lean), so the formula is evaluated by
+    computation, including the quantifier over the four predicative functions in ✱13·01. -/
 theorem not_qthm_neg_desc_imp_exists1 :
-    ¬ ∀ (V : Ty → Type) (φ χ : V .ind → QF V), QThm S (imp (.neg (desc φ χ)) (exists1 φ)) := by
-  intro h
-  have hF : ∀ b : Bool, (fiff φ0 (fun x => ident x b)).eval twoModel = false := by
-    intro b
-    cases hb : (fiff φ0 (fun x => ident x b)).eval twoModel with
-    | false => rfl
-    | true =>
-      have h1 := (twoModel.hA .ind _).mp hb b
-      have h2 : (φ0 (V := twoModel.den) b).eval twoModel = false := by cases b <;> rfl
-      have h3 := eval_ident_refl twoModel (a := .ind) b
-      change (!(!(!((φ0 (V := twoModel.den) b).eval twoModel) || (ident (V := twoModel.den) (a := .ind) b b).eval twoModel) ||
-        !(!((ident (V := twoModel.den) (a := .ind) b b).eval twoModel) || (φ0 (V := twoModel.den) b).eval twoModel))) = true at h1
-      rw [h2, h3] at h1
-      cases h1
-  apply not_qthm_of_countermodel twoModel (p := imp (.neg (desc φ0 φ0)) (exists1 φ0)) _ (h _ φ0 φ0)
-  show (!(!(!((fun b => !(!(!((fiff φ0 fun x => ident x b).eval twoModel) || !((φ0 b).eval twoModel)))) false &&
-      (fun b => !(!(!((fiff φ0 fun x => ident x b).eval twoModel) || !((φ0 b).eval twoModel)))) true))) ||
-    !((fun b => !((fiff φ0 fun x => ident x b).eval twoModel)) false &&
-      (fun b => !((fiff φ0 fun x => ident x b).eval twoModel)) true)) = false
-  simp only [hF]
-  rfl
+    ¬ ∀ (V : Ty → Type) (φ χ : V .ind → QF V), QThm S (imp (.neg (desc φ χ)) (exists1 φ)) :=
+  fun h => not_qthm_of_countermodel twoModel (p := imp (.neg (desc φ0 φ0)) (exists1 φ0)) rfl (h _ φ0 φ0)
 
 end PM

@@ -240,25 +240,35 @@ constructor. Their macros take the condition and the context:
 
 ### 11. Soundness and consistency
 
-**The collapse model.** `Ty.den`: a function of any order denotes a Boolean function of its
-arguments, so the order is forgotten. Each structure gives a Boolean quantifier for each type, with
-its specification.
-- `qsound` covers every constructor, including `compr1`, `compr2`, `red1` and `red2`. The witness is
-  the function x ↦ ⟦φx⟧. The proof uses no axioms.
-- With reducibility, PM 1910 is no stronger than the simple theory of types (Holmes 2023), so
-  forgetting orders gives a model.
+**Structures.** A `QModel` (PM/Quant.lean) gives each type a set of values, application `ap1`/`ap2`
+of function values, abstraction `lam1`/`lam2` with `ap (lam g) x = g x`, the letters, and a Boolean
+quantifier for each type with its specification. Orders are not seen.
+- `qsound` covers every constructor, including `compr1`, `compr2`, `red1` and `red2`, for every system
+  `S` (every combination of rules and every style). The witness is the value `lam (x ↦ ⟦φx⟧)`. The
+  proof uses no axioms.
 
-**Consistency** is stated at a structure's own variables (`consistent`, at `twoModel.den`), and for
-the theorems that hold at every V (`consistent_all`), which is how every PM theorem here is stated.
+**The collapse model** (PM/Models/Collapse.lean), the general one: `Ty.den D`, a function of any order
+denotes a Boolean function of its arguments. `QModel.collapse` builds a structure from any domain,
+letters and quantifier oracles; `QModel.classical` supplies classical oracles (`classicalAll`) at every
+type, for any domain. With reducibility, PM 1910 is no stronger than the simple theory of types
+(Holmes 2023), so forgetting orders gives a model. `classicalAll`, its specification and
+`QModel.classical` use `propext`, `Classical.choice` and `Quot.sound`, necessarily.
 
-**The concrete structures now need classical logic.** `twoModel` and `emptyModel` quantify over
-function types with `classicalAll` (`Classical.propDecidable`). So they, the counter-model theorems
-and `consistent` depend on `propext`, `Classical.choice` and `Quot.sound`. Before function types were
-added they were axiom-free.
+**The finite coded model** (PM/Models/Finite.lean; Will's decision on Q5, 2026-10-11). Values are
+coded by shapes (empty, unit, Booleans, pairs); the values of a function type are the truth tables of
+the Boolean functions of its argument values (`Sh.pow`, with `Sh.ap`, `Sh.lam`, `Sh.ap_lam`), and every
+quantifier is computed by enumeration (`Sh.all`, `Sh.all_spec`). `finModel D R` is the structure with
+individuals of shape D; `twoModel` has two individuals and `emptyModel` none. About 150 lines, as
+estimated. Everything in it uses no axioms.
 
-**Rejected (for now):** a finite coded model, in which function types are truth tables and every
-quantifier is decided by enumeration. It would make consistency axiom-free. Estimated at about 150
-lines of careful proofs. It is noted as future work.
+**Consistency** is stated at a structure's own variables (`consistent S`, at `twoModel.den`), and for
+the theorems that hold at every V (`consistent_all S`), which is how every PM theorem here is stated.
+Both are proved for every system `S`, so for every combination of rules and styles, and both use no
+axioms. So do the five counter-model theorems, which evaluate in `twoModel` or `emptyModel` by
+computation (the ✱14 one includes a quantifier over the four predicative functions of individuals).
+
+The model is a consistency proof relative to Lean's type theory with no axioms. It forgets orders like
+the collapse model, so it cannot show that comprehension without ✱12·1 is weaker (F4).
 
 ### 12. Degenerate variable families (Trap 1)
 
@@ -343,7 +353,7 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 | Test | Result | Lean names / evidence |
 |---|---|---|
 | **C1** soundness covers every constructor, axiom-free | **pass** | `qsound`: "does not depend on any axioms" |
-| **C2** consistency at a model's own V | **pass** | `consistent` (at `twoModel.den`), `consistent_all` (∀ V). Axioms: propext, Classical.choice, Quot.sound, from `classicalAll` (decision 11) |
+| **C2** consistency at a model's own V | **pass** | `consistent S` (at `twoModel.den`, the finite coded model), `consistent_all S` (∀ V), for every system `S`. No axioms (decision 11) |
 | **C3** degenerate V documented or removed | **pass (documented, not removed)** | `trap_empty`, `trap_unit` in PM/Trap.lean; header of `consistent` and README |
 | **C4** old counter-models still refute | **pass** | `not_qthm_phiy_imp_all` (φy ⊃ (x).φx), `not_qthm_ex_imp_all` ((∃x).φx ⊃ (x).φx), `not_qthm_all_imp_ex_empty` ((x).φx ⊃ (∃x).φx, empty D); also `not_qthm_converse_11_26` and the new `not_qthm_neg_desc_imp_exists1` |
 | **U1** ✱2–✱5, ✱9–✱11 unchanged | **pass** | PM/QuantLift.lean, PM/Star10.lean, PM/Star11.lean: no line changed; all compile against the new `QF`/`QThm` |
@@ -398,19 +408,18 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 577 names; 567 report no axioms. The other 10 are listed below. Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…`
-theorems), `complete`, `qsound`, `lvl_iff_order`, `trap_empty` and `trap_unit` are axiom-free.
+`AxiomCheck.lean`: 585 names; 583 report no axioms. The other 2 are `classicalAll_spec` and
+`QModel.classical` (below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`,
+`qsound`, `consistent`, `consistent_all`, the five counter-models, the finite model, `lvl_iff_order`,
+`trap_empty` and `trap_unit` are axiom-free.
 
-`AllAxioms.lean`: 1159 declarations under `PM`. Exactly 29 use an axiom:
+`AllAxioms.lean`: 1271 declarations under `PM`. Exactly 23 use an axiom:
 
 | Declarations | Axioms | Why |
 |---|---|---|
-| `classicalAll`, `classicalAll_spec` | propext, Classical.choice, Quot.sound | the classical Boolean quantifier (`Classical.propDecidable`) |
-| `twoModel`, `emptyModel` | propext, Classical.choice, Quot.sound | quantifiers over function types are `classicalAll` |
-| `consistent`, `consistent_all`, `not_qthm_phiy_imp_all`, `not_qthm_ex_imp_all`, `not_qthm_all_imp_ex_empty`, `not_qthm_converse_11_26`, `not_qthm_neg_desc_imp_exists1` | propext, Classical.choice, Quot.sound | evaluate in `twoModel` / `emptyModel` |
-| `twoModel.match_1` | propext | the equation compiler's match on `Ty` with a wildcard |
+| `classicalAll`, `classicalAll_spec`, `QModel.classical` | propext, Classical.choice, Quot.sound | the general collapse model, kept: classical quantifiers over arbitrary function spaces (`Classical.propDecidable`) |
 | `PM.sound`, `PM.not_thm_of_countermodel`, `PM.gutenberg_1_4_refuted` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
-| `injEq` lemmas of `F`, `QF`, `Ty`, `QModel` (12), `instReprF`, `instReprF.repr` | propext | compiler-generated |
+| `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel` (15), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
 No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` anywhere (checked by
 search).
@@ -429,8 +438,9 @@ search).
    counts them as arguments, giving φ!x order 2. That would make even (∃g) : g!x ≡ₓ φ!x need ✱12·1.
 4. **Several-argument predicativity.** p. 56's second clause ("if there is one of its arguments such
    that …") is weaker than the lowest-order reading used for `pred2`. Is it worth a separate type?
-5. **Axiom-free consistency.** Is a finite coded model (decision 11, about 150 lines) worth doing so
-   that `consistent` uses no axioms?
+5. **Axiom-free consistency.** DECIDED by Will (2026-10-11): yes, "its own little module". Done:
+   PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
+   classical collapse model is kept as the general one (decision 11).
 
 ## 6. Not done
 

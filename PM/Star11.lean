@@ -1,4 +1,5 @@
 import PM.Star10
+import PM.Models.Finite
 /-!
   ✱11: theory of two apparent variables (1910 print, pp. 157–167; summary pp. 157–158, numbered
   propositions pp. 159–167), in ✱10's alternative method (PM/Quant.lean).

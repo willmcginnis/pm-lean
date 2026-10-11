@@ -173,42 +173,43 @@ theorem QThm.mono {V : Ty → Type} {S S' : Sys} (hc : S.compr = true → S'.com
 
 /-! ## Semantics and soundness
 
-  The collapse model: a function of any order denotes a Boolean function of its arguments, so all the
-  orders of a type denote the same function space. With the axiom of reducibility this is a model of
-  PM 1910 (docs/TYPES_DESIGN.md, decision 11). It cannot see orders: `qsound` never uses `Lvl`, so the
-  order discipline is tested syntactically (PM/Orders.lean), not by this model. -/
+  A structure gives each type a set of values, application of a function value to arguments, and, for
+  every Boolean function of the arguments, a value that applies as that function (`lam1`, `lam2`). Such
+  structures cannot see orders: `qsound` never uses a style's side condition, so the order discipline is
+  tested syntactically (PM/Orders.lean, PM/Pred/), not by a model. Two kinds of structure are built:
+  - the collapse model (PM/Models/Collapse.lean): every type of functions is the full function space,
+    with classical quantifiers over it; the general model, for any domain of individuals;
+  - the finite coded model (PM/Models/Finite.lean): function values are truth tables and every
+    quantifier is computed by enumeration, so consistency and the counter-models use no axioms. -/
 
-/-- What a variable of each type ranges over, given a domain `D` of individuals. The order is ignored. -/
-def Ty.den (D : Type) : Ty → Type
-  | .ind => D
-  | .fn1 a _ => Ty.den D a → Bool
-  | .fn2 a b _ => Ty.den D a → Ty.den D b → Bool
-
-/-- A structure: a domain, a truth value for each elementary proposition, and for each type τ
-    the universal quantifier as a Boolean oracle `A τ` (`A τ f` is true iff `f` is true of everything
-    of type τ). Every classical structure has such oracles (`classicalAll`); at the type of
-    individuals of a finite domain they are computable, which is what the counter-models below use. -/
+/-- A structure: values for each type, application and abstraction for function types, a truth
+    value for each elementary proposition, and for each type τ the universal quantifier as a Boolean
+    oracle `A τ` (`A τ f` is true iff `f` is true of every value of type τ). -/
 structure QModel where
-  D  : Type
-  R  : String → List D → Bool
-  A  : (τ : Ty) → (τ.den D → Bool) → Bool
-  hA : ∀ τ f, A τ f = true ↔ ∀ d, f d = true
+  den  : Ty → Type
+  R    : String → List (den .ind) → Bool
+  ap1  : {a : Ty} → {k : Nat} → den (.fn1 a k) → den a → Bool
+  ap2  : {a b : Ty} → {k : Nat} → den (.fn2 a b k) → den a → den b → Bool
+  lam1 : {a : Ty} → {k : Nat} → (den a → Bool) → den (.fn1 a k)
+  lam2 : {a b : Ty} → {k : Nat} → (den a → den b → Bool) → den (.fn2 a b k)
+  ap_lam1 : ∀ {a : Ty} {k : Nat} (g : den a → Bool) (x : den a), ap1 (lam1 (k := k) g) x = g x
+  ap_lam2 : ∀ {a b : Ty} {k : Nat} (g : den a → den b → Bool) (x : den a) (y : den b),
+    ap2 (lam2 (k := k) g) x y = g x y
+  A    : (τ : Ty) → (den τ → Bool) → Bool
+  hA   : ∀ τ f, A τ f = true ↔ ∀ d, f d = true
 
-/-- The variable family of a structure: a variable of type τ is an element of `τ.den M.D`. -/
-abbrev QModel.den (M : QModel) : Ty → Type := Ty.den M.D
-
-/-- Truth value of a formula whose real variables are already elements of the structure. -/
+/-- Truth value of a formula whose real variables are already values of the structure. -/
 def QF.eval (M : QModel) : QF M.den → Bool
   | .atom P xs    => M.R P xs
-  | .app1 f x     => f x
-  | .app2 f x y   => f x y
+  | .app1 f x     => M.ap1 f x
+  | .app2 f x y   => M.ap2 f x y
   | .neg p        => !(QF.eval M p)
   | .or p q       => QF.eval M p || QF.eval M q
   | @QF.all _ τ φ => M.A τ (fun d => QF.eval M (φ d))
 
 /-- An existential is true when it has a true instance (the witness used for comprehension and
     ✱12·1 / ✱12·11 in `qsound`). -/
-private theorem eval_ex_of (M : QModel) (τ : Ty) (g : τ.den M.D → Bool) (d : τ.den M.D)
+private theorem eval_ex_of (M : QModel) (τ : Ty) (g : M.den τ → Bool) (d : M.den τ)
     (h : g d = true) : (!(M.A τ fun x => !(g x))) = true := by
   cases hA : M.A τ (fun x => !(g x)) with
   | false => rfl
@@ -217,7 +218,8 @@ private theorem eval_ex_of (M : QModel) (τ : Ty) (g : τ.den M.D → Bool) (d :
 private theorem iff_refl_bool (b : Bool) : (!(!(!b || b) || !(!b || b))) = true := by
   cases b <;> rfl
 
-/-- Soundness: every `QThm` is true in every structure, at the structure's own variables. -/
+/-- Soundness: every `QThm S` is true in every structure, at the structure's own variables, for every
+    system `S` (every combination of rules and every style). -/
 theorem qsound (M : QModel) {S : Sys} {p : QF M.den} (h : QThm S p) : p.eval M = true := by
   induction h with
   | @mp p q _ _ ih1 ih2 =>
@@ -253,99 +255,34 @@ theorem qsound (M : QModel) {S : Sys} {p : QF M.den} (h : QThm S p) : p.eval M =
     | false =>
       show (!(M.A τ fun d => (φ d).eval M) || M.A τ fun d => (φ d).eval M) = true
       cases M.A τ (fun d => (φ d).eval M) <;> rfl
-  -- The witness for comprehension and for ✱12·1 / ✱12·11 is the function x ↦ ⟦φx⟧ itself; its
-  -- order is forgotten by the collapse, and the `Lvl` condition is not used.
+  -- The witness for comprehension and for ✱12·1 / ✱12·11 is the value that applies as x ↦ ⟦φx⟧; its
+  -- order is not seen by the structure, and the style's side condition is not used.
   | @compr1 a k _ ψ _ =>
-    exact eval_ex_of M (.fn1 a k) _ (fun x => (ψ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
+    refine eval_ex_of M (.fn1 a k) _ (M.lam1 fun x => (ψ x).eval M) ((M.hA _ _).mpr fun x => ?_)
+    show (!(!(!((ψ x).eval M) || M.ap1 (M.lam1 fun x => (ψ x).eval M) x) ||
+      !(!(M.ap1 (M.lam1 fun x => (ψ x).eval M) x) || (ψ x).eval M))) = true
+    rw [M.ap_lam1]; exact iff_refl_bool _
   | @compr2 a b k _ ψ _ =>
-    exact eval_ex_of M (.fn2 a b k) _ (fun x y => (ψ x y).eval M)
-      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
+    refine eval_ex_of M (.fn2 a b k) _ (M.lam2 fun x y => (ψ x y).eval M)
+      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => ?_)
+    show (!(!(!((ψ x y).eval M) || M.ap2 (M.lam2 fun x y => (ψ x y).eval M) x y) ||
+      !(!(M.ap2 (M.lam2 fun x y => (ψ x y).eval M) x y) || (ψ x y).eval M))) = true
+    rw [M.ap_lam2]; exact iff_refl_bool _
   | @red1 a _ φ =>
-    exact eval_ex_of M (Ty.pred1 a) _ (fun x => (φ x).eval M) ((M.hA _ _).mpr fun x => iff_refl_bool _)
+    refine eval_ex_of M (Ty.pred1 a) _ (M.lam1 fun x => (φ x).eval M) ((M.hA _ _).mpr fun x => ?_)
+    show (!(!(!((φ x).eval M) || M.ap1 (M.lam1 fun x => (φ x).eval M) x) ||
+      !(!(M.ap1 (M.lam1 fun x => (φ x).eval M) x) || (φ x).eval M))) = true
+    rw [M.ap_lam1]; exact iff_refl_bool _
   | @red2 a b _ φ =>
-    exact eval_ex_of M (Ty.pred2 a b) _ (fun x y => (φ x y).eval M)
-      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => iff_refl_bool _)
+    refine eval_ex_of M (Ty.pred2 a b) _ (M.lam2 fun x y => (φ x y).eval M)
+      ((M.hA _ _).mpr fun x => (M.hA _ _).mpr fun y => ?_)
+    show (!(!(!((φ x y).eval M) || M.ap2 (M.lam2 fun x y => (φ x y).eval M) x y) ||
+      !(!(M.ap2 (M.lam2 fun x y => (φ x y).eval M) x y) || (φ x y).eval M))) = true
+    rw [M.ap_lam2]; exact iff_refl_bool _
 
-/-- A formula false in some structure is not a theorem (at that structure's variables). -/
+/-- A formula false in some structure is not a theorem (at that structure's variables), in any system. -/
 theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) {S : Sys} : ¬ QThm S p :=
   fun h => by have := qsound M h; rw [hv] at this; cases this
-
-/-- The classical universal quantifier over any type, as a Boolean (uses `Classical.propDecidable`). -/
-noncomputable def classicalAll {T : Type} (f : T → Bool) : Bool :=
-  @decide (∀ d, f d = true) (Classical.propDecidable _)
-
-theorem classicalAll_spec {T : Type} (f : T → Bool) : classicalAll f = true ↔ ∀ d, f d = true :=
-  ⟨fun h => @of_decide_eq_true _ (Classical.propDecidable _) h,
-   fun h => @decide_eq_true _ (Classical.propDecidable _) h⟩
-
-/-- Two individuals, `false` and `true`; every letter is true of its first argument, so "φ" holds of
-    `true` only. Quantifiers over individuals are computed; over functions they are classical. -/
-noncomputable def twoModel : QModel where
-  D := Bool
-  R := fun _ xs => xs.headD false
-  A := fun
-    | .ind => fun f => f false && f true
-    | _ => classicalAll
-  hA := fun τ f => by
-    cases τ with
-    | ind =>
-      constructor
-      · intro h (d : Bool)
-        change (f false && f true) = true at h
-        cases h0 : f false <;> cases h1 : f true <;> rw [h0, h1] at h <;> cases h <;> cases d <;>
-          first | exact h0 | exact h1
-      · intro h; show (f false && f true) = true; rw [h false, h true]; rfl
-    | fn1 => exact classicalAll_spec f
-    | fn2 => exact classicalAll_spec f
-
-/-- Consistency: the letter `p` is not a theorem. It is stated at the variables of a structure
-    (`twoModel.den`), not at an arbitrary family `V`: `QThm` at an arbitrary `V` can be degenerate (an
-    empty or one-element type of functions makes ✱10·11 too strong, and ✱12·1 then contradicts it;
-    PM/Trap.lean), so a consistency claim must name a structure's own variables. -/
-theorem consistent (S : Sys) : ¬ QThm (V := twoModel.den) S (.atom "p" []) :=
-  not_qthm_of_countermodel twoModel rfl
-
-/-- Consistency of the theorems that hold for every family of variables (which is how every PM
-    theorem in this project is stated): `p` is not one of them. -/
-theorem consistent_all (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) :=
-  fun h => consistent S (h _)
-
-/-- PM p. 137: "⊢ : φy . ⊃ . (x) . φx … means 'However y may be chosen, φy implies (x).φx,' which is in
-    general false." It is not a theorem: `twoModel` falsifies it. This is why ✱9·13 / ✱10·11 is a rule
-    of inference and not an implication. -/
-theorem not_qthm_phiy_imp_all {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V) (y : V .ind), QThm S (QF.imp (φ y) (.all φ)) :=
-  fun h => not_qthm_of_countermodel twoModel
-    (p := QF.imp (.atom "φ" [true]) (.all fun x => .atom "φ" [x])) rfl
-    (h twoModel.den (fun x => .atom "φ" [x]) true)
-
-/-- ✱10·25 cannot be reversed: `(∃x).φx ⊃ (x).φx` is not a theorem. -/
-theorem not_qthm_ex_imp_all {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (QF.ex φ) (.all φ)) :=
-  fun h => not_qthm_of_countermodel twoModel
-    (p := QF.imp (QF.ex fun x => .atom "φ" [x]) (.all fun x => .atom "φ" [x])) rfl
-    (h twoModel.den (fun x => .atom "φ" [x]))
-
-/-- The structure with no individuals (functions of individuals still exist: the empty function). -/
-noncomputable def emptyModel : QModel where
-  D := Empty
-  R := fun _ _ => false
-  A := fun
-    | .ind => fun _ => true
-    | _ => classicalAll
-  hA := fun τ f => by
-    cases τ with
-    | ind => exact ⟨fun _ d => Empty.elim d, fun _ => rfl⟩
-    | fn1 => exact classicalAll_spec f
-    | fn2 => exact classicalAll_spec f
-
-/-- ✱10·25 `(x) . φx . ⊃ . (∃x) . φx` needs an individual: it is false in `emptyModel`. So the Lean
-    statement of ✱10·25 (PM/Star10.lean) takes the real variable y that PM's proof uses. -/
-theorem not_qthm_all_imp_ex_empty {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (.all φ) (QF.ex φ)) :=
-  fun h => not_qthm_of_countermodel emptyModel
-    (p := QF.imp (.all fun x => .atom "φ" [x]) (QF.ex fun x => .atom "φ" [x])) rfl
-    (h emptyModel.den (fun x => .atom "φ" [x]))
 
 /-! ## ✱1–✱5 apply to propositions containing apparent variables
 
