@@ -79,25 +79,38 @@ theorem restyle {S S' : Sys} [Reducibility S'] (hc : S.compr = true → S'.compr
 private theorem le_succ_excess (n k : Nat) : n + 0 ≤ n + (k + 1) :=
   Nat.add_le_add_left (Nat.zero_le _) n
 
+private theorem lt_succ_excess (n k : Nat) : n + 0 < n + (k + 1) :=
+  Nat.add_lt_add_left (Nat.succ_pos k) n
+
 /-- Every style here admits predicative applications at non-predicative types. -/
 theorem admitsPredApp_of (P : PredReading) (R : RealReading) : (Style.of P R).AdmitsPredApp := by
   cases P <;> cases R
   · exact ⟨fun _ _ => ⟨.app1 (le_succ_excess _ _), fun h => nomatch h⟩,
       fun _ _ _ => ⟨.app2 (le_succ_excess _ _), fun h => nomatch h⟩⟩
+  · exact ⟨fun _ _ => ⟨.app1 (lt_succ_excess _ _), fun h => nomatch h⟩,
+      fun _ _ _ => ⟨.app2 (lt_succ_excess _ _), fun h => nomatch h⟩⟩
   · exact ⟨fun _ _ => .app1 (le_succ_excess _ _), fun _ _ _ => .app2 (le_succ_excess _ _)⟩
+  · exact ⟨fun _ _ => .app1 (lt_succ_excess _ _), fun _ _ _ => .app2 (lt_succ_excess _ _)⟩
 
 /-- **styles_equiv.** With reducibility, the styles of predicativity derive exactly the same theorems:
-    for either setting of comprehension `c`, any two styles `Style.of P R` and `Style.of P' R'` (matrix or
-    lowest order; the readings of real function variables) have the same `QThm`. -/
+    for either setting of comprehension `c`, any two of the four styles `Style.of P R` (matrix or lowest
+    order; a real function variable at its own order, p. 55, or as an argument, p. 54) have the same
+    `QThm`. -/
 theorem styles_equiv (c : Bool) (P P' : PredReading) (R R' : RealReading) (p : QF V) :
     QThm (⟨c, true, Style.of P R⟩ : Sys) p ↔ QThm (⟨c, true, Style.of P' R'⟩ : Sys) p :=
   ⟨restyle (S := ⟨c, true, Style.of P R⟩) (S' := ⟨c, true, Style.of P' R'⟩) id (admitsPredApp_of P' R'),
    restyle (S := ⟨c, true, Style.of P' R'⟩) (S' := ⟨c, true, Style.of P R⟩) id (admitsPredApp_of P R)⟩
 
-/-- The case Will asked for: in PM 1910 as built here (`Sys.full`), the matrix style and the
+/-- The case Will asked for (Q1): in PM 1910 as built here (`Sys.full`), the matrix style and the
     lowest-order style derive the same theorems. -/
 theorem styles_equiv_full (R : RealReading) (p : QF V) :
     QThm (Sys.full (Style.of .matrix R)) p ↔ QThm (Sys.full (Style.of .lowestOrder R)) p :=
   styles_equiv true .matrix .lowestOrder R R p
+
+/-- The sibling for Q3: in `Sys.full`, the p. 55 reading (a real function variable at its own order) and
+    the p. 54 reading (as an argument) derive the same theorems. -/
+theorem styles_equiv_real (P : PredReading) (p : QF V) :
+    QThm (Sys.full (Style.of P .ownOrder)) p ↔ QThm (Sys.full (Style.of P .asArgument)) p :=
+  styles_equiv true P P .ownOrder .asArgument p
 
 end PM

@@ -67,6 +67,6 @@ def isPMProp (n : Name) : Bool :=
   let tag (m : Nat) : String := (if m &&& 1 != 0 then "red " else "") ++ (if m &&& 2 != 0 then "compr" else "")
   logInfo m!"other declarations using a rule: {others.map fun (c, m) => (c, tag m)}"
   -- styles_equiv (PM/StylesEquiv.lean) must use reducibility: its proof replays comprehension by ✱12·1.
-  for c in [`PM.restyle, `PM.styles_equiv, `PM.styles_equiv_full] do
+  for c in [`PM.restyle, `PM.styles_equiv, `PM.styles_equiv_full, `PM.styles_equiv_real] do
     let m := (res.find? (·.1 == c)).map (·.2) |>.getD 0
     logInfo m!"{c} uses ✱12·1 / ✱12·11 (reaches Reducibility.red): {m &&& 1 != 0}; reaches QThm.red1 in its proof term: {(env.find? c).bind (·.value? (allowOpaque := true)) |>.map (·.getUsedConstants.contains `PM.QThm.red1) |>.getD false}"

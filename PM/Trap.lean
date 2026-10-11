@@ -88,6 +88,9 @@ theorem trap_unit_compr_of (P : PredReading) (R : RealReading) (p : QF U) :
   cases P <;> cases R
   · exact trap_unit_compr (fun _ => ⟨.atom (by decide), fun _ => .atom⟩)
       (fun _ => ⟨.neg (.atom (by decide)), fun _ => .neg .atom⟩) p
+  · exact trap_unit_compr (fun _ => ⟨.atom (by decide), fun _ => .atom⟩)
+      (fun _ => ⟨.neg (.atom (by decide)), fun _ => .neg .atom⟩) p
+  · exact trap_unit_compr (fun _ => .atom (by decide)) (fun _ => .neg (.atom (by decide))) p
   · exact trap_unit_compr (fun _ => .atom (by decide)) (fun _ => .neg (.atom (by decide))) p
 
 end PM

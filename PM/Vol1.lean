@@ -16,6 +16,7 @@ import PM.Rules.Comprehension
 import PM.Rules.Reducibility
 -- styles of predicativity
 import PM.Pred.RealOwnOrder
+import PM.Pred.RealAsArgument
 import PM.Pred.LowestOrder
 import PM.Pred.Matrix
 import PM.Pred.Styles

@@ -1,4 +1,5 @@
--- "Both must pass": every PM proposition instantiated under every style and every named system.
+-- "Both must pass": every PM proposition instantiated under every style (matrix / lowest order ×
+-- p. 55 / p. 54) and every named system.
 -- Run with `lake env lean StyleCheck.lean`.
 --
 -- For each PM proposition (`q…`, ✱9–✱20, and the lifted ✱2–✱5 `QL.t…`) and each pair (style, system),
@@ -47,7 +48,9 @@ partial def instAt (c : Name) (sys : Expr) : MetaM (Option Bool) := do
     if isPMProp c && !c.isInternal then acc.push c else acc).qsort Name.lt
   let styles : List (String × Expr) := [
     ("matrix, p. 55 (primary)", mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.matrix) (mkConst ``RealReading.ownOrder)),
-    ("lowest order, p. 55",     mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.lowestOrder) (mkConst ``RealReading.ownOrder))]
+    ("lowest order, p. 55",     mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.lowestOrder) (mkConst ``RealReading.ownOrder)),
+    ("matrix, p. 54",           mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.matrix) (mkConst ``RealReading.asArgument)),
+    ("lowest order, p. 54",     mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.lowestOrder) (mkConst ``RealReading.asArgument))]
   let systems : List (String × Name) :=
     [("full", ``Sys.full), ("reducibility", ``Sys.reducibility), ("predicative", ``Sys.predicative), ("base", ``Sys.base)]
   let mut noS : Array Name := #[]

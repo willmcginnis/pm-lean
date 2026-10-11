@@ -8,10 +8,13 @@ Page numbers are those of the **1910 print** (Vol. I). They were read from the D
 transcription (Gutenberg #78050, `pg78050-images.html`), whose page markers follow the scan images, with
 the formulas taken from its LaTeX source. The scan images themselves were not consulted (see test F3).
 
-Code: `PM/Quant.lean` (types, syntax, rules, model, soundness), `PM/Star12.lean`, `PM/Star13.lean`,
-`PM/Star14.lean` (partial), `PM/Star20.lean` (partial), `PM/Orders.lean` (order checker and golden
-tests), `PM/Trap.lean` (degenerate variable families), `RedCheck.lean` (which theorems use
-reducibility).
+Code: `PM/Quant.lean` (types, syntax, styles and systems, rules, structures, soundness), `PM/Rules/`
+(the opt-in rules), `PM/Pred/` (the styles of predicativity, currying and p. 56's second clause),
+`PM/Systems.lean`, `PM/StylesEquiv.lean`, `PM/Models/` (the collapse model and the finite coded model),
+`PM/Star12.lean`, `PM/Star13.lean`, `PM/Star14.lean` (partial), `PM/Star20.lean` (partial),
+`PM/Orders.lean` (order checker and golden tests), `PM/Trap.lean` (degenerate variable families),
+`PM/Vol1.lean` (entry file); checks `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean`,
+`AxiomCheck.lean`, `AllAxioms.lean`.
 
 ## 1. Decisions
 
@@ -172,9 +175,31 @@ x = b, …) would then need three extra steps:
 PM does none of this; it substitutes. `q12_1_var` keeps that shape as a corollary, and `q12_1_of_var`
 shows the two shapes agree (decision 7).
 
-### 5. The order check `Lvl`
+### 5. The order check: two readings of a real function variable (revised 2026-10-11, Will's decision on Q3)
 
-`Lvl p n` holds when p may be a value of a function of order n:
+**Decision (Will, 2026-10-11 ~19:00): both readings, as styles; both must pass.** Each is its own
+module, and it combines with either reading of "predicative" (decision 3), giving four styles
+`Style.of P R` (PM/Pred/Styles.lean):
+- `PM/Pred/RealOwnOrder.lean`, `Lvl`: a real function variable counts with its own order (p. 55). The
+  default.
+- `PM/Pred/RealAsArgument.lean`, `LvlArg`: it counts as an argument and raises the order (p. 54, p. 170:
+  "φ!x" is "a function of two variables, namely φ!ẑ and x"). The only difference from `Lvl` is a strict
+  inequality for applied function variables, which matters only for the free ones (parameters): an
+  apparent variable's quantifier already requires its order to be below n, and the function's own
+  argument is always of lower order than the function.
+- Golden tests (PM/Pred/Styles.lean): φ!x with φ real of order 1 is admitted at `pred1 ind` in the
+  p. 55 styles and refused in the p. 54 styles; at `fn1 ind 1` both admit it; (x) . φ!x as a function
+  of φ passes both order checks. `realPhi_ownOrder_predicative` ((∃g) : φ!x ≡ₓ g!x by comprehension
+  alone, p. 55 styles only) and `realPhi_reducibility` (every style, by ✱12·1) are the same statement.
+- `styles_equiv` covers all four styles: with reducibility they derive the same theorems;
+  `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 351 PM
+  propositions pass in `Sys.full` of each of the four styles.
+
+The p. 55 reading is the default because it is what p. 55 says outright about the case at issue, and
+because it is partial application (below): the p. 54 order is that of the same body as a function of φ
+and x together.
+
+`Lvl p n` (p. 55 reading) holds when p may be a value of a function of order n:
 - every apparent variable in p has order below n;
 - every function variable applied in p has order at most n;
 - n ≥ 1, since individuals have order 0.
@@ -186,8 +211,10 @@ f!(φ!ẑ, x) is φ!x, the assignment of a value to φ gives us a predicative fu
 The order of the *function* x̂ ↦ ψx is `fnOrder a ψ = max (a.ord + 1) (order of ψx)` (PM/Orders.lean).
 It is decided at the one-element variable family `U` (`lvl_iff_order`, with a `Decidable` instance).
 
-**Rejected:** counting a real variable φ as an argument that raises the order of φ!x to 2. That is the
-order of φ!x as a function of φ *and* x (pp. 54, 170). It would forbid g := φ above.
+The p. 54 reading (`LvlArg`) counts a real variable φ as an argument that raises the order of φ!x to 2.
+That is the order of φ!x as a function of φ *and* x (pp. 54, 170), and it refuses g := φ above to
+comprehension without ✱12·1. Before Will's decision it was rejected for that reason; it is now the
+alternative style.
 
 **The p. 55 reading is partial application** (Will's item (ii): "syntactic sugar"?). φ!x seen as a
 function of (φ, x) and φ!x with φ fixed, seen as a function of x, are the same body as a
@@ -202,10 +229,12 @@ them"), which links this to Q4.
 
 ### 6. (b) Comprehension
 
-The decision is to **keep** comprehension, as the constructors `compr1` and `compr2`:
+The decision is to **keep** comprehension (Will, 2026-10-11, Q2: as its own module, marked for what it
+is for), as the constructors `compr1` and `compr2`, available in a system with `compr` (class
+`Comprehension S`, PM/Rules/Comprehension.lean, decision 13):
 
 ```
-compr1 (ψ : V a → QF V) (h : ∀ x, Lvl (ψ x) (fn1 a k).ord) :
+compr1 (_ : S.compr = true) (ψ : V a → QF V) (h : S.style.adm1 k ψ) :
   ⊢ (∃f : fn1 a k) : ψx . ≡ₓ . f x
 ```
 
@@ -215,8 +244,8 @@ there is a function φx̂". Applied to an apparent variable over functions of or
 order to be formed from formulas whose variables are of lower order: pp. 54–56, 169–171, and p. 172,
 "non-predicative functions always result from such as are predicative by means of generalization".
 
-**The side condition** is exactly `Lvl ψ m` with m the order of the type of f (Intro p. 56, read as in
-decision 5).
+**The side condition** is the style's (decisions 3 and 5): the order check (`Lvl`, p. 55, or `LvlArg`,
+p. 54) at the order of the type of f, and, in the matrix style at a predicative type, the matrix test.
 
 **Honest limits.**
 - PM never states comprehension as a proposition, and its proofs never need it, because ✱12·1 gives
@@ -396,14 +425,22 @@ on `QThm`, such as `qsound`, reaches all constructors through the recursor's typ
 
 | File | Lines | Contents |
 |---|---|---|
-| `PM/Quant.lean` | 341 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Lvl`; `QThm` with `compr1`, `compr2`, `red1`, `red2`; collapse model, `qsound`, `classicalAll`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, the old counter-models |
-| `PM/Star12.lean` | 74 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
+| `PM/Quant.lean` | 313 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Style`, `OrderCheck`, `Sys`; `QThm S` with gated `compr1`, `compr2`, `red1`, `red2`; `QThm.mono`; `QModel` (values, application, abstraction), `qsound` |
+| `PM/Rules/Reducibility.lean`, `PM/Rules/Comprehension.lean` | 24, 41 | the classes `Reducibility S`, `Comprehension S` with their PM warrants; `comprehension1`, `comprehension2` |
+| `PM/Systems.lean` | 33 | `Sys.full`, `Sys.reducibility`, `Sys.predicative`, `Sys.base` and their instances |
+| `PM/Pred/RealOwnOrder.lean`, `PM/Pred/RealAsArgument.lean` | 29, 69 | `Lvl` (p. 55), `LvlArg` (p. 54) with its decision procedure at `U` |
+| `PM/Pred/Matrix.lean`, `PM/Pred/LowestOrder.lean` | 40, 26 | `IsMatrix`, `Style.matrix` (p. 172, primary); `Style.lowestOrder` (p. 56) |
+| `PM/Pred/Styles.lean` | 205 | `PredReading`, `RealReading`, `Style.of` (four styles); `QThm.matrix_to_lowestOrder`; golden tests where the styles differ; `p171_…`, `realPhi_…`; `consistent_of_style`, `consistent_collapse_of_style` |
+| `PM/StylesEquiv.lean` | 116 | `qex_chain`, `restyle`, `admitsPredApp_of`, `styles_equiv`, `styles_equiv_full`, `styles_equiv_real` |
+| `PM/Pred/Curry.lean` | 154 | `fnOrder2`, `curry_order`, `phi_x_two_views`; `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` |
+| `PM/Models/Collapse.lean`, `PM/Models/Finite.lean` | 54, 152 | `Ty.den`, `QModel.collapse`, `classicalAll`, `QModel.classical`, `consistent_collapse`; shapes `Sh`, `finModel`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, three counter-models |
+| `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 221 | ✱13·01–✱13·03 (macros); all 24 numbered propositions ✱13·1–✱13·22 except ✱13·3 |
-| `PM/Star14.lean` | 140 | ✱14·01, ✱14·02 (macros); ✱14·1, ✱14·101, ✱14·11, ✱14·12, ✱14·121, ✱14·2, ✱14·201, ✱14·21; a scope counter-model |
+| `PM/Star14.lean` | 125 | ✱14·01, ✱14·02 (macros); ✱14·1, ✱14·101, ✱14·11, ✱14·12, ✱14·121, ✱14·2, ✱14·201, ✱14·21; a scope counter-model |
 | `PM/Star20.lean` | 109 | ✱20·01, ✱20·02 (macros), class identity; ✱20·1, ✱20·13, ✱20·14, ✱20·15, ✱20·3; typical-ambiguity checks |
-| `PM/Orders.lean` | 171 | decidable order checker; 32 order tests |
-| `PM/Trap.lean` | 61 | `trap_empty`, `trap_unit` |
-| `RedCheck.lean` | 55 | reducibility and comprehension dependencies |
+| `PM/Orders.lean` | 166 | decidable order checker; order tests |
+| `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
+| `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 72, 73, 43 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
 
 ✱13·3 (p. 180) is not formalized. It concerns significance, and its proof turns on ✱10·221
 (identifying the types of two variables), which, like ✱10·221, is built into the Lean typing.
@@ -438,7 +475,7 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
-| **S1** every PM theorem under both styles of "predicative" (Will, Q1) | **pass** | `StyleCheck.lean`: each of the 351 PM propositions instantiates in `Sys.full` of the matrix style and of the lowest-order style (351/351 each); 0 without a parameter `S`; per system: reducibility 350, predicative 322, base 321 in both styles (the 29 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency: `consistent_of_style`, `consistent_collapse_of_style` |
+| **S1** every PM theorem under every style (Will, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 351 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 351/351 each; 0 without a parameter `S`; per system, in every style: reducibility 350, predicative 322, base 321 (the 29 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
 | **S2** `styles_equiv` (Will, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
 | **S3** currying (Will, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
 | **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements. Not added as a style |
@@ -479,21 +516,24 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
     joined by Comp under ✱10·11·28). The elimination at the end is ✱10·23 plus Comm, 2 lines.
   - Everything later reaches ✱12·1 only through ✱13·101, at no further cost.
   - Each direct use in ✱20 costs 1–2 lines, mostly turning ψ ≡ₓ φ! into φ! ≡ₓ ψ (✱10·32 under ∃).
-- **Build:** clean `lake build`, 20 jobs, 16.6 s.
+- **Build:** clean `lake build`, 33 jobs, 12.5 s (wall clock, after `lake clean`).
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 587 names; 585 report no axioms. The other 2 are `classicalAll_spec` and
-`QModel.classical` (below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`,
-`qsound`, `consistent`, `consistent_all`, the five counter-models, the finite model, `lvl_iff_order`,
-`trap_empty` and `trap_unit` are axiom-free.
+`AxiomCheck.lean`: 614 names; 610 report no axioms. The other 4 belong to the classical collapse model
+(below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
+`consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
+`restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
+`second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
+theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1273 declarations under `PM` and all 30 private declarations of the PM modules
-(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 23 use an axiom:
+`AllAxioms.lean`: all 1407 declarations under `PM` and all 31 private declarations of the PM modules
+(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
 
 | Declarations | Axioms | Why |
 |---|---|---|
 | `classicalAll`, `classicalAll_spec`, `QModel.classical` | propext, Classical.choice, Quot.sound | the general collapse model, kept: classical quantifiers over arbitrary function spaces (`Classical.propDecidable`) |
+| `consistent_collapse`, `consistent_collapse_of_style` | propext, Classical.choice, Quot.sound | consistency evaluated in the classical collapse model (the axiom-free consistency proofs are `consistent`, `consistent_of_style`) |
 | `PM.sound`, `PM.not_thm_of_countermodel`, `PM.gutenberg_1_4_refuted` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
 | `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel` (15), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
@@ -510,8 +550,14 @@ search).
 2. **Keep comprehension?** DECIDED by Will (2026-10-11): keep it, "mark it for what it's for", as its
    own module imported where needed. Done: `PM/Rules/Comprehension.lean`, class `Comprehension S`
    (decisions 6 and 13).
-3. **Real variables count with their own order** (decision 5, p. 55). The alternative reading of p. 54
-   counts them as arguments, giving φ!x order 2. That would make even (∃g) : g!x ≡ₓ φ!x need ✱12·1.
+3. **Real variables count with their own order (p. 55) or as arguments (p. 54)?** DECIDED by Will
+   (2026-10-11 ~19:00): both, as styles, both must pass. Done: decision 5;
+   `PM/Pred/RealOwnOrder.lean` (default) and `PM/Pred/RealAsArgument.lean`, each combined with both
+   readings of "predicative" (four styles); every PM theorem checked under every combination
+   (`StyleCheck.lean`); consistency for each; golden tests where they differ; `styles_equiv` (and
+   `styles_equiv_real`) shows that with reducibility they derive the same theorems. Will's framing
+   ("syntactic sugar"?) is made precise by `curry_order` (decision 5): the two readings are the same
+   body seen as a closure and as a two-argument function.
 4. **Several-argument predicativity.** Proceeding on the recommended default (no separate type; Will has
    not objected, 2026-10-11), and SEARCHED as Will asked (item (iii), 2026-10-11 evening): is there a
    function of our types on which p. 56's second clause ("if there is one of its arguments such that,
@@ -533,8 +579,9 @@ search).
 ## 6. Not done
 
 - ✱13·3; ✱14 beyond the eight propositions listed; ✱20 beyond the five listed.
-- F4 (non-derivability of impredicative comprehension without ✱12·1): skipped. It needs a non-collapsed
-  model.
+- F4 (non-derivability of impredicative comprehension without ✱12·1), and so the strict weakness of the
+  matrix style and of the p. 54 reading without reducibility: skipped. It needs a model that sees orders;
+  both models here forget them.
 - No per-proposition ledger (`data/…_ledger.json`) for ✱12–✱20.
 - The scan images were not viewed (F3).
 - The n-ary function types and the 1925 route.

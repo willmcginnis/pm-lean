@@ -99,15 +99,16 @@ later as a separate file that proves ✱9's claim for prefixes of fixed length.
 - Caveat: because φ is any Lean function, `QF V` also contains "exotic" terms that correspond to no finite
   PM formula. `qsound` covers them, so nothing false becomes provable, but there is no adequacy theorem
   yet. See README, "Scope of the ✱9–✱10 semantics".
-- ✱10·11 is the rule `(∀ y, QThm (φ y)) → QThm (.all φ)`: "if φy is true whatever possible argument y
+- ✱10·11 is the rule `(∀ y, QThm S (φ y)) → QThm S (.all φ)`: "if φy is true whatever possible argument y
   may be". Not the implication φy ⊃ (x).φx, which PM calls "in general false" (p. 137).
 - Semantics: a domain, Boolean predicate letters, and for each type a ∀ given as a Boolean oracle with
   its specification; a function of any order denotes a Boolean function (docs/TYPES_DESIGN.md,
   decision 11). `qsound` proves every `QThm` true in every such structure. **[MEAS]** axiom-free.
 - Counter-models: φy ⊃ (x).φx and (∃x).φx ⊃ (x).φx fail in a two-element structure; (x).φx ⊃ (∃x).φx
-  fails in the empty structure. **[MEAS]** These structures quantify over function types classically,
-  so since function types were added the counter-models and `consistent` use `Classical.choice`,
-  `propext` and `Quot.sound` (they were axiom-free with individuals only).
+  fails in the empty structure. **[MEAS]** Since 2026-10-11 these are finite coded structures
+  (PM/Models/Finite.lean: truth tables, quantifiers by enumeration), so the counter-models and
+  `consistent` are axiom-free again, for every system (they used `Classical.choice`, `propext` and
+  `Quot.sound` between the arrival of function types and the finite model).
 - Consistency is stated at a structure's variables, not at an arbitrary `V`: at a family whose types are
   not full ranges, ✱10·11 is too strong (PM/Trap.lean).
 - `liftThm`: replacing the propositional letters of any ✱1–✱5 theorem by ✱10 formulas gives a ✱10

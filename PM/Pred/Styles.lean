@@ -1,4 +1,5 @@
 import PM.Pred.RealOwnOrder
+import PM.Pred.RealAsArgument
 import PM.Pred.LowestOrder
 import PM.Pred.Matrix
 import PM.Systems
@@ -12,8 +13,9 @@ import PM.Models.Collapse
 
   A style is a reading of "predicative" (`PredReading`: ✱12 p. 172 matrix, the primary style; or
   Introduction p. 56 lowest order, the alternative) combined with a reading of how a real function
-  variable counts in the order check (`RealReading`; p. 55, its own order). `Style.of P R` is the
-  style; `Sys.full (Style.of P R)` etc. are the systems.
+  variable counts in the order check (`RealReading`: p. 55, at its own order, the default; or p. 54, as
+  an argument; Will, 2026-10-11 ~19:00, open question Q3: both as styles). `Style.of P R` is the style;
+  `Sys.full (Style.of P R)` etc. are the systems. There are four styles.
 
   Every PM theorem here is stated for an arbitrary system, so it holds in every style; StyleCheck.lean
   instantiates each one under every style and system and reports the result. The styles change only
@@ -36,13 +38,16 @@ inductive PredReading where
 
 /-- The readings of how a real (free) function variable counts in the order check (decision 5). -/
 inductive RealReading where
-  /-- p. 55: at its own order (PM/Pred/RealOwnOrder.lean). -/
+  /-- p. 55: at its own order (PM/Pred/RealOwnOrder.lean). The default. -/
   | ownOrder
+  /-- p. 54: as an argument, raising the order (PM/Pred/RealAsArgument.lean). -/
+  | asArgument
   deriving DecidableEq
 
 /-- The order check of a reading. -/
 @[reducible] def RealReading.check : RealReading → OrderCheck
   | .ownOrder => Lvl
+  | .asArgument => LvlArg
 
 /-- The style with a reading of "predicative" and a reading of real function variables. -/
 @[reducible] def Style.of : PredReading → RealReading → Style
@@ -113,7 +118,55 @@ example : ¬ (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
     (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app1 φ x) :=
   fun h => absurd (h ()) (by decide)
 
-/-! ## Golden theorems: the same statement in the two styles
+/-! ## Golden tests: where the two readings of real function variables differ (p. 55, p. 54)
+
+  φ!x with φ a real (free) first-order function, as a function of x, at the type `pred1 ind`. -/
+
+/-- p. 55: φ!x with φ fixed is a predicative function of x: admitted (both readings of
+    "predicative": it is a matrix of order 1). -/
+example : (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
+    (fun x => .app1 (a := .ind) (k := 0) () x) :=
+  fun _ => ⟨.app1 (by decide), fun _ => .app1⟩
+
+/-- p. 54: φ counts as an argument, so φ!x is of order 2: refused at `pred1 ind`, in both readings of
+    "predicative". -/
+example : ¬ (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := .ind) 0
+    (fun x => .app1 (a := .ind) (k := 0) () x) :=
+  fun h => absurd (h ()) (by decide)
+example : ¬ (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 0
+    (fun x => .app1 (a := .ind) (k := 0) () x) :=
+  fun h => absurd (h ()).1 (by decide)
+
+/-- p. 54 at a type one order higher (`fn1 ind 1`, order 2): admitted. -/
+example : (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 1
+    (fun x => .app1 (a := .ind) (k := 0) () x) :=
+  fun _ => ⟨.app1 (by decide), fun h => nomatch h⟩
+
+/-- The function's own argument, applied, is admitted in both readings: (x) . φ!x as a function of φ
+    (p. 171 (1)) passes the p. 54 order check at order 2 (φ is the argument, not a parameter). -/
+example : (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := Ty.pred1 .ind) 0
+    (fun φ => .all fun x => .app1 φ x) :=
+  fun _ => .all (by decide) fun _ => .app1 (by decide)
+
+/-- The statement (∃g) : φ!x . ≡ₓ . g!x, g predicative, for a real first-order φ. -/
+abbrev realPhi {V : Ty → Type} (φ : V (Ty.pred1 .ind)) : QF V :=
+  ex (τ := Ty.pred1 .ind) fun g => fiff (fun x => .app1 φ x) fun x => .app1 g x
+
+/-- p. 55 reading, comprehension only (no ✱12·1): `realPhi` holds. P. 55 STYLES ONLY: in the p. 54
+    styles comprehension does not admit φ!x at `pred1 ind` (golden tests above); non-derivability there
+    is not proved (it needs a model that sees orders). -/
+theorem realPhi_ownOrder_predicative {V : Ty → Type} (P : PredReading) (φ : V (Ty.pred1 .ind)) :
+    QThm (Sys.predicative (Style.of P .ownOrder)) (realPhi φ) := by
+  cases P
+  · exact comprehension1 _ fun _ => ⟨.app1 (Nat.le_refl _), fun _ => .app1⟩
+  · exact comprehension1 _ fun _ => .app1 (Nat.le_refl _)
+
+/-- With reducibility, `realPhi` holds in every style (✱12·1). -/
+theorem realPhi_reducibility {V : Ty → Type} {S : Sys} [Reducibility S] (φ : V (Ty.pred1 .ind)) :
+    QThm S (realPhi φ) :=
+  q12_1 _
+
+/-! ## Golden theorems: the same statement in the two readings of "predicative"
 
   (∃f) : (x) . φ!x . ≡_φ . f!(φ!ẑ), f predicative (p. 171 (1)). -/
 

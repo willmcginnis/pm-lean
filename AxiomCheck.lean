@@ -389,9 +389,12 @@ import PM
 #print axioms PM.second_clause_iff_lowestOrder
 #print axioms PM.second_clause_matrix_iff
 #print axioms PM.anyLe_iff_le_maxL
+#print axioms PM.lvlArg_iff_orderArg
 #print axioms PM.matrix_adm1_le
 #print axioms PM.matrix_adm2_le
 #print axioms PM.QThm.matrix_to_lowestOrder
+#print axioms PM.realPhi_ownOrder_predicative
+#print axioms PM.realPhi_reducibility
 #print axioms PM.p171_lowestOrder_predicative
 #print axioms PM.p171_reducibility
 #print axioms PM.consistent_of_style
@@ -611,3 +614,4 @@ import PM
 #print axioms PM.admitsPredApp_of
 #print axioms PM.styles_equiv
 #print axioms PM.styles_equiv_full
+#print axioms PM.styles_equiv_real
