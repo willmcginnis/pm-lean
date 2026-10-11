@@ -393,8 +393,11 @@ import PM
 #print axioms PM.matrix_adm1_le
 #print axioms PM.matrix_adm2_le
 #print axioms PM.QThm.matrix_to_lowestOrder
-#print axioms PM.realPhi_ownOrder_predicative
-#print axioms PM.realPhi_reducibility
+#print axioms PM.p171_compr_lowestOrder
+#print axioms PM.p171_compr_matrix
+#print axioms PM.realPhi_compr_ownOrder
+#print axioms PM.realPhi_compr_asArgument
+#print axioms PM.realPhi_every_system
 #print axioms PM.p171_lowestOrder_predicative
 #print axioms PM.p171_reducibility
 #print axioms PM.consistent_of_style

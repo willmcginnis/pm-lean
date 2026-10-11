@@ -1,8 +1,12 @@
 -- Search for a two-argument function on which p. 56's second clause and the lowest-order rule disagree
 -- (Will, 2026-10-11 evening, item (iii)). Run with `lake env lean ClauseSearch.lean`.
 --
--- `PM.second_clause_iff_lowestOrder` (PM/Pred/Curry.lean) proves that there is none, for every
--- function of our types; this file is the concrete search that preceded the proof, kept as a check. It
+-- `PM.second_clause_iff_lowestOrder` (PM/Pred/Curry.lean) proves that there is none within this
+-- encoding (both partial applications evaluated at `()` in `U`, with the same body order O, so the
+-- equivalence is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1); this file is the concrete
+-- search that preceded the proof, kept as a check. It compares the same definitions (`fnOrder`,
+-- `fnOrder2`), so it checks the proof, not the encoding: it does not show that the encoding captures
+-- PM's "assignment of values", nor anything about other variable families. It
 -- enumerates bodies over the one-element family `U` up to depth 2, built from a letter, every
 -- application `app1`/`app2` at the function types below, ∼, ∨, and (x) over each type below; and every
 -- pair of argument types from the list. For each it compares the clause (fixing one argument gives a

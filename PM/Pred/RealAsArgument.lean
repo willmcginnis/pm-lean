@@ -8,8 +8,11 @@ import PM.Orders
   function of two variables, namely φ!ẑ and x" (p. 170), of order 2 as such (a second-order matrix,
   p. 171). Read that way, a real function variable occurring in a formula is one of its arguments, and
   "the function in which it occurs is of the n + 1th order" (p. 56) when the variable is of order n. So
-  φ!x with φ real of order 1 is of order 2, and (∃g) : g!x ≡ₓ φ!x is not predicative comprehension; it
-  needs ✱12·1.
+  φ!x with φ real of order 1 is of order 2, and comprehension at `pred1 ind` refuses it
+  (`realPhi_compr_asArgument`, PM/Pred/Styles.lean). The proposition (∃g) : g!x ≡ₓ φ!x is nevertheless
+  a theorem of every system, without comprehension or ✱12·1, since φ itself is a witness
+  (`realPhi_every_system`): the reading changes which direct comprehension applications are accepted,
+  not the derivability of that proposition.
 
   The other reading (p. 55: φ counts at its own order) is PM/Pred/RealOwnOrder.lean, the default. The
   only difference is the strict inequality for applied function variables. For an apparent variable it

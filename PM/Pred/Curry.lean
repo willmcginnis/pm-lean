@@ -17,12 +17,16 @@ import PM.Pred.Matrix
   arguments such that, when the other arguments have values assigned to them, we obtain a predicative
   function of the one undetermined argument." SEARCH for a case in our types where it disagrees with
   the lowest-order rule stated just before it ("if it is of the lowest order compatible with its having
-  the arguments it has"). Result: there is none. `second_clause_iff_lowestOrder` proves it for every
-  two-argument function of our types, and `anyLe_iff_le_maxL` for any number of arguments; the reason
-  is that an order is a maximum: the order of the function of argument i, the others fixed, is
-  max (oᵢ + 1) O, with O the order of the body, so "some i gives oᵢ + 1" is O ≤ oᵢ + 1 for some i, which
-  is O ≤ max oᵢ + 1, the lowest-order rule. ClauseSearch.lean also enumerates formulas and finds no
-  disagreement. So the clause is not added as a style.
+  the arguments it has"). Result: WITHIN THIS ENCODING there is none. `second_clause_iff_lowestOrder`
+  proves it for every two-argument body over `U`, and `anyLe_iff_le_maxL` states the same arithmetic
+  for any number of arguments. The encoding: "the other arguments have values assigned to them" is
+  read as evaluating both partial applications at `()` in the one-element family `U`, so both have the
+  same body order O, and the order of the function of argument i, the others fixed, is max (oᵢ + 1) O
+  (`fnOrder`). The equivalence then reduces to arithmetic: O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1, i.e.
+  the lowest-order rule. ClauseSearch.lean compares the same definitions on enumerated formulas and
+  finds no disagreement. This is a fact about this encoding; it does not independently show that the
+  encoding captures PM's "assignment of values", nor does it extend to arbitrary variable families. So
+  the clause is not added as a style, since within this encoding it would admit the same functions.
 
   Orders are computed at the one-element family `U`, as in PM/Orders.lean (exact for formulas written
   uniformly in the variable family).
@@ -76,9 +80,10 @@ example : fnOrder2 (Ty.pred1 .ind) .ind (fun φ x =>
 
 /-! ## p. 56's second clause -/
 
-/-- The clause for two arguments: fixing the second argument gives a predicative function of the first,
-    or fixing the first gives a predicative function of the second (fixed arguments counted at their
-    own order, p. 55). -/
+/-- The clause for two arguments, in this encoding: fixing the second argument gives a predicative
+    function of the first, or fixing the first gives a predicative function of the second (fixed
+    arguments counted at their own order, p. 55). "Assigning a value" is evaluating at `()` in `U`, so
+    both partial applications have the same body order. -/
 def SecondClause (a b : Ty) (ψ : U a → U b → QF U) : Prop :=
   fnOrder a (fun x => ψ x ()) = a.ord + 1 ∨ fnOrder b (ψ ()) = b.ord + 1
 
@@ -101,8 +106,11 @@ private theorem le_max_succ_iff {o x y : Nat} : o ≤ max x y + 1 ↔ o ≤ x + 
     | inl h => exact Nat.le_trans h (Nat.succ_le_succ (le_max_left' x y))
     | inr h => exact Nat.le_trans h (Nat.succ_le_succ (le_max_right' x y))
 
-/-- **No case exists.** For every two-argument function of our types, p. 56's second clause and the
-    lowest-order rule agree. -/
+/-- **No case exists within this encoding.** For every two-argument body over `U`, p. 56's second
+    clause as encoded by `SecondClause` and the lowest-order rule agree. With O the body order, this is
+    the arithmetic (O ≤ a.ord + 1 ∨ O ≤ b.ord + 1) ↔ O ≤ max a.ord b.ord + 1. It does not
+    independently show that `SecondClause` captures PM's "assignment of values", nor extend to
+    arbitrary variable families. -/
 theorem second_clause_iff_lowestOrder (a b : Ty) (ψ : U a → U b → QF U) :
     SecondClause a b ψ ↔ LowestOrder2 a b ψ := by
   show (max (a.ord + 1) (ψ () ()).order = a.ord + 1 ∨ max (b.ord + 1) (ψ () ()).order = b.ord + 1) ↔
@@ -127,9 +135,10 @@ theorem second_clause_matrix_iff (a b : Ty) (ψ : U a → U b → QF U) :
   ⟨fun ⟨m, h⟩ => ⟨m, (second_clause_iff_lowestOrder a b ψ).mp h⟩,
    fun ⟨m, h⟩ => ⟨m, (second_clause_iff_lowestOrder a b ψ).mpr h⟩⟩
 
-/-! Any number of arguments, as a statement about orders: with argument orders o₀, o₁, … and body
-    order O, "for some i, the function of argument i is of order oᵢ + 1" is "O ≤ oᵢ + 1 for some i"
-    (`max_eq_left_iff`), and this is the lowest-order rule O ≤ max oᵢ + 1. -/
+/-! Any number of arguments, as a statement about orders: with argument orders o₀, o₁, … and one body
+    order O shared by every partial application (as in the encoding above), "for some i, the function
+    of argument i is of order oᵢ + 1" is "O ≤ oᵢ + 1 for some i" (`max_eq_left_iff`), and this is the
+    lowest-order rule O ≤ max oᵢ + 1. A pure arithmetic fact; it carries the same encoding assumption. -/
 
 /-- O ≤ oᵢ + 1 for some argument order oᵢ in o₀, o₁, …. -/
 def anyLe (O : Nat) : Nat → List Nat → Prop

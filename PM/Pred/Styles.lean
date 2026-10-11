@@ -19,9 +19,12 @@ import PM.Models.Collapse
 
   Every PM theorem here is stated for an arbitrary system, so it holds in every style; StyleCheck.lean
   instantiates each one under every style and system and reports the result. The styles change only
-  what comprehension accepts at predicative types, so they differ only in systems with comprehension,
-  and (`styles_equiv`, PM/StylesEquiv.lean) not at all once reducibility is present. The golden tests at
-  the end of this file show exactly where they differ.
+  which direct applications of comprehension are accepted (its side condition, a syntactic fact), so
+  they can differ only in systems with comprehension, and (`styles_equiv`, PM/StylesEquiv.lean) they
+  derive the same theorems once reducibility is present. Without reducibility, no proposition is proved
+  here to be derivable in one style and not in another (that needs a model that sees orders, test F4).
+  The golden tests below show where the side condition differs; `realPhi_every_system` shows that a
+  refused application need not mean a non-derivable proposition.
 -/
 namespace PM
 open QF
@@ -78,18 +81,24 @@ theorem QThm.matrix_to_lowestOrder {V : Ty → Type} {c r : Bool} (R : RealReadi
 /-! ## Golden tests: where the two readings of "predicative" differ
 
   Each test is a formula ψ and a predicative type; "admits" is the comprehension side condition of the
-  style. Negative tests are at the one-element variable family `U`. -/
+  style, `S.style.adm1 k ψ` in `compr1`. It is a syntactic fact about ψ: whether the DIRECT
+  comprehension application is accepted. It is not a fact about derivability: a proposition refused
+  to comprehension may still be derivable by another route (`realPhi_every_system` below). Negative
+  tests need a value of the argument; unnamed ones are at the one-element variable family `U`. -/
 
 /-- p. 171 (1): (x) . φ!x as a function of φ!ẑ, at the type of predicative functions of first-order
-    functions. The lowest-order style admits it (order 2 = the lowest order for an argument of order 1). -/
-example : (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := Ty.pred1 .ind) 0
-    (fun φ => .all fun x => .app1 φ x) :=
-  fun _ => .all (by decide) fun _ => .app1 (by decide)
+    functions. The lowest-order styles admit it (order 2 = the lowest order for an argument of order 1),
+    in both readings of real variables (φ is the argument, not a parameter). -/
+theorem p171_compr_lowestOrder {V : Ty → Type} (R : RealReading) :
+    (Style.of .lowestOrder R).adm1 (V := V) (a := Ty.pred1 .ind) 0 (fun φ => .all fun x => .app1 φ x) := by
+  cases R
+  · exact fun _ => .all (by decide) fun _ => .app1 (by decide)
+  · exact fun _ => .all (by decide) fun _ => .app1 (by decide)
 
-/-- p. 171 (1), matrix style: refused, since (x) . φ!x has an apparent variable. -/
-example : ¬ (Style.of .matrix .ownOrder).adm1 (V := U) (a := Ty.pred1 .ind) 0
-    (fun φ => .all fun x => .app1 φ x) :=
-  fun h => nomatch (h ()).2 rfl
+/-- p. 171 (1), matrix styles: refused, since (x) . φ!x has an apparent variable. -/
+theorem p171_compr_matrix {V : Ty → Type} (R : RealReading) (φ : V (Ty.pred1 .ind)) :
+    ¬ (Style.of .matrix R).adm1 (V := V) (a := Ty.pred1 .ind) 0 (fun φ => .all fun x => .app1 φ x) :=
+  fun h => nomatch (h φ).2 rfl
 
 /-- p. 171 (1), at a non-predicative type (`fn1 (pred1 ind) 1`, order 3): both styles admit it; the
     matrix test applies only at predicative types. -/
@@ -122,20 +131,21 @@ example : ¬ (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
 
   φ!x with φ a real (free) first-order function, as a function of x, at the type `pred1 ind`. -/
 
-/-- p. 55: φ!x with φ fixed is a predicative function of x: admitted (both readings of
-    "predicative": it is a matrix of order 1). -/
-example : (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
-    (fun x => .app1 (a := .ind) (k := 0) () x) :=
-  fun _ => ⟨.app1 (by decide), fun _ => .app1⟩
+/-- p. 55: φ!x with φ fixed is a predicative function of x: admitted, in both readings of
+    "predicative" (it is a matrix of order 1). -/
+theorem realPhi_compr_ownOrder {V : Ty → Type} (P : PredReading) (φ : V (Ty.pred1 .ind)) :
+    (Style.of P .ownOrder).adm1 (a := .ind) 0 (fun x => .app1 φ x) := by
+  cases P
+  · exact fun _ => ⟨.app1 (Nat.le_refl _), fun _ => .app1⟩
+  · exact fun _ => .app1 (Nat.le_refl _)
 
 /-- p. 54: φ counts as an argument, so φ!x is of order 2: refused at `pred1 ind`, in both readings of
     "predicative". -/
-example : ¬ (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := .ind) 0
-    (fun x => .app1 (a := .ind) (k := 0) () x) :=
-  fun h => absurd (h ()) (by decide)
-example : ¬ (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 0
-    (fun x => .app1 (a := .ind) (k := 0) () x) :=
-  fun h => absurd (h ()).1 (by decide)
+theorem realPhi_compr_asArgument {V : Ty → Type} (P : PredReading) (φ : V (Ty.pred1 .ind))
+    (x : V .ind) : ¬ (Style.of P .asArgument).adm1 (a := .ind) 0 (fun x => .app1 φ x) := by
+  cases P
+  · intro h; cases (h x).1 with | app1 h => exact absurd h (by decide)
+  · intro h; cases h x with | app1 h => exact absurd h (by decide)
 
 /-- p. 54 at a type one order higher (`fn1 ind 1`, order 2): admitted. -/
 example : (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 1
@@ -152,21 +162,17 @@ example : (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := Ty.pred1 .ind)
 abbrev realPhi {V : Ty → Type} (φ : V (Ty.pred1 .ind)) : QF V :=
   ex (τ := Ty.pred1 .ind) fun g => fiff (fun x => .app1 φ x) fun x => .app1 g x
 
-/-- p. 55 reading, comprehension only (no ✱12·1): `realPhi` holds. P. 55 STYLES ONLY: in the p. 54
-    styles comprehension does not admit φ!x at `pred1 ind` (golden tests above); non-derivability there
-    is not proved (it needs a model that sees orders). -/
-theorem realPhi_ownOrder_predicative {V : Ty → Type} (P : PredReading) (φ : V (Ty.pred1 .ind)) :
-    QThm (Sys.predicative (Style.of P .ownOrder)) (realPhi φ) := by
-  cases P
-  · exact comprehension1 _ fun _ => ⟨.app1 (Nat.le_refl _), fun _ => .app1⟩
-  · exact comprehension1 _ fun _ => .app1 (Nat.le_refl _)
-
-/-- With reducibility, `realPhi` holds in every style (✱12·1). -/
-theorem realPhi_reducibility {V : Ty → Type} {S : Sys} [Reducibility S] (φ : V (Ty.pred1 .ind)) :
+/-- `realPhi` is a theorem of every system, so of every style, with neither comprehension nor ✱12·1:
+    φ is itself a witness (✱4·2 under ✱10·11 gives φ!x ≡ₓ φ!x, then ✱10·24). So the styles do not
+    differ in whether `realPhi` is derivable. They differ in whether the direct comprehension
+    application (`compr1` at φ!x) is accepted: in the p. 55 styles (`realPhi_compr_ownOrder`), not in
+    the p. 54 styles (`realPhi_compr_asArgument`). -/
+theorem realPhi_every_system {V : Ty → Type} (S : Sys) (φ : V (Ty.pred1 .ind)) :
     QThm S (realPhi φ) :=
-  q12_1 _
+  QThm.mp (q10_11 fun x => QL.t4_2 (.app1 φ x))
+    (q10_24 (fun g => fiff (fun x => .app1 φ x) (fun x => .app1 g x)) φ)
 
-/-! ## Golden theorems: the same statement in the two readings of "predicative"
+/-! ## Golden theorems: p. 171 (1) in the two readings of "predicative"
 
   (∃f) : (x) . φ!x . ≡_φ . f!(φ!ẑ), f predicative (p. 171 (1)). -/
 
@@ -174,13 +180,13 @@ theorem realPhi_reducibility {V : Ty → Type} {S : Sys} [Reducibility S] (φ : 
 abbrev p171 {V : Ty → Type} : QF V :=
   ex (τ := Ty.pred1 (Ty.pred1 .ind)) fun f => fiff (fun φ => .all fun x => .app1 φ x) fun φ => .app1 f φ
 
-/-- Lowest-order style, comprehension only (no ✱12·1): `p171` holds. LOWEST-ORDER STYLE ONLY: in the
-    matrix style comprehension does not admit (x) . φ!x at a predicative type (golden test above). That
-    `p171` is not derivable at all in the matrix-style predicative fragment is NOT proved: it needs a
-    model that sees orders (test F4). -/
+/-- Lowest-order style, comprehension only (no ✱12·1): `p171` by the direct comprehension application,
+    which the lowest-order styles accept (`p171_compr_lowestOrder`) and the matrix styles refuse
+    (`p171_compr_matrix`). Whether `p171` is derivable at all in the matrix-style predicative fragment,
+    by some other route, is NOT proved either way: it needs a model that sees orders (test F4). -/
 theorem p171_lowestOrder_predicative {V : Ty → Type} :
     QThm (V := V) (Sys.predicative (Style.of .lowestOrder .ownOrder)) p171 :=
-  comprehension1 _ fun _ => .all (by decide) fun _ => .app1 (by decide)
+  comprehension1 _ (p171_compr_lowestOrder .ownOrder)
 
 /-- With reducibility, `p171` holds in every style (✱12·1), with or without comprehension. -/
 theorem p171_reducibility {V : Ty → Type} {S : Sys} [Reducibility S] : QThm (V := V) S p171 :=

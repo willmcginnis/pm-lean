@@ -11,8 +11,8 @@ import PM.Quant
   variable or a predicative function of a first-order matrix".
 
   In this style comprehension at a predicative type (`fn1 a 0`, `fn2 a b 0`) accepts only matrices,
-  and only of the right order: the matrix test is CONJOINED with the order check (after an external review), not
-  put in its place. At non-predicative types (k > 0) it accepts what the order check accepts, as in the
+  and only of the right order: the matrix test is CONJOINED with the order check (after an external
+  review), not put in its place. At non-predicative types (k > 0) it accepts what the order check accepts, as in the
   lowest-order style (PM/Pred/LowestOrder.lean, the alternative). The order check `L` is the reading of
   how real function variables count (PM/Pred/RealOwnOrder.lean, p. 55; PM/Pred/RealAsArgument.lean,
   p. 54).

@@ -113,8 +113,10 @@ abbrev OrderCheck : Type 1 := {V : Ty → Type} → QF V → Nat → Prop
 /-- A proof system: which rules beyond ✱1–✱11 it has, and its style of predicativity. The rules are
     opt-in capabilities, each its own module with its PM warrant (PM/Rules/): `compr` is comprehension
     (class `Comprehension S`), `red` the axiom of reducibility ✱12·1, ✱12·11 (class `Reducibility S`).
-    A theorem that uses a rule takes its class in its signature, so Lean enforces and shows the
-    dependency; a theorem without such a class holds in every system. -/
+    Lean enforces that a rule is enabled: its constructors need a proof of `S.red = true` (resp.
+    `S.compr = true`). By convention a theorem that uses a rule gets that proof from the class in its
+    signature, which shows the dependency; RedCheck.lean checks the convention. A theorem that uses no
+    rule holds in every system. -/
 structure Sys where
   compr : Bool
   red : Bool

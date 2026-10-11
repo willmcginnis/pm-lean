@@ -1,8 +1,8 @@
 # PM 1910 ramified types with the axiom of reducibility: design and acceptance tests
 
-Will's decision (2026-10-11): the main road is the
-1910 ramified theory of types with the axiom of reducibility (✱12·1, ✱12·11), "if it actually is
-consistent and usable". The 1925 second edition is a later, separate pass.
+Will's decision (2026-10-11): the main road is the 1910 ramified theory of types with the axiom of
+reducibility (✱12·1, ✱12·11), "if it actually is consistent and usable". The 1925 second edition is
+a later, separate pass.
 
 Page numbers are those of the **1910 print** (Vol. I). They were read from the Distributed Proofreaders
 transcription (Gutenberg #78050, `pg78050-images.html`), whose page markers follow the scan images, with
@@ -108,8 +108,11 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
 - Golden tests (PM/Pred/Styles.lean): p. 171 (1) and p. 54 are admitted by the lowest-order style and
   refused by the matrix style at a predicative type; p. 171 (1) at a non-predicative type, and the
   matrix φ!x ⊃ ψ!x, are admitted by both; (φ) . φ!x as a predicative function of x is refused by both.
-  `p171_lowestOrder_predicative` (lowest-order style only, comprehension without ✱12·1) and
-  `p171_reducibility` (every style, by ✱12·1) are the same statement in the two styles.
+  These test the side condition of comprehension, a syntactic fact (`p171_compr_lowestOrder`,
+  `p171_compr_matrix`), not derivability. `p171_lowestOrder_predicative` derives p. 171 (1)'s
+  existential by the direct comprehension application, which only the lowest-order styles accept;
+  `p171_reducibility` derives it in every style by ✱12·1. Whether it is derivable at all in the
+  matrix-style predicative fragment, by another route, is not proved either way (test F4).
 - **With reducibility the styles derive exactly the same theorems: `styles_equiv`** (PM/StylesEquiv.lean;
   Will's item (i)). For either setting of comprehension `c` and any two styles,
   `QThm ⟨c, true, Style.of P R⟩ p ↔ QThm ⟨c, true, Style.of P' R'⟩ p`. The proof is an induction over
@@ -148,8 +151,8 @@ a paragraph earlier on the same page and says the same for orders in general). �
 function of those variables, i.e. to a matrix" (p. 174) agrees. The clause that follows, "A function of
 several arguments is predicative if there is one of its arguments such that, when the other arguments
 have values assigned to them, we obtain a predicative function of the one undetermined argument",
-agrees with that rule on every function of our types (Will's item (iii), searched): see Q4 (§5) and
-PM/Pred/Curry.lean.
+agrees with that rule within this encoding (both partial applications evaluated at `()` in `U`, with
+the same body order; Will's item (iii), searched): see Q4 (§5) and PM/Pred/Curry.lean.
 
 ### 4. Real and apparent function variables
 
@@ -189,8 +192,11 @@ module, and it combines with either reading of "predicative" (decision 3), givin
   argument is always of lower order than the function.
 - Golden tests (PM/Pred/Styles.lean): φ!x with φ real of order 1 is admitted at `pred1 ind` in the
   p. 55 styles and refused in the p. 54 styles; at `fn1 ind 1` both admit it; (x) . φ!x as a function
-  of φ passes both order checks. `realPhi_ownOrder_predicative` ((∃g) : φ!x ≡ₓ g!x by comprehension
-  alone, p. 55 styles only) and `realPhi_reducibility` (every style, by ✱12·1) are the same statement.
+  of φ passes both order checks. These test the side condition of comprehension
+  (`realPhi_compr_ownOrder`, `realPhi_compr_asArgument`), a syntactic fact. They say nothing about the
+  derivability of (∃g) : φ!x ≡ₓ g!x: that is a theorem of every system, in every style, without
+  comprehension or ✱12·1, since φ itself is a witness (`realPhi_every_system`). What differs between
+  the styles is whether the direct comprehension application is accepted.
 - `styles_equiv` covers all four styles: with reducibility they derive the same theorems;
   `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 351 PM
   propositions pass in `Sys.full` of each of the four styles.
@@ -206,15 +212,16 @@ and x together.
 
 A *real* function variable counts with its own order m, not m + 1. This follows p. 55: "if
 f!(φ!ẑ, x) is φ!x, the assignment of a value to φ gives us a predicative function of x". So
-(∃g) : g!x ≡ₓ φ!x, with φ real and of order 1, is ordinary predicative comprehension.
+comprehension at `pred1 ind` accepts φ!x, with φ real and of order 1. (The existential
+(∃g) : g!x ≡ₓ φ!x does not depend on that: φ itself is a witness, `realPhi_every_system`.)
 
 The order of the *function* x̂ ↦ ψx is `fnOrder a ψ = max (a.ord + 1) (order of ψx)` (PM/Orders.lean).
 It is decided at the one-element variable family `U` (`lvl_iff_order`, with a `Decidable` instance).
 
 The p. 54 reading (`LvlArg`) counts a real variable φ as an argument that raises the order of φ!x to 2.
-That is the order of φ!x as a function of φ *and* x (pp. 54, 170), and it refuses g := φ above to
-comprehension without ✱12·1. Before Will's decision it was rejected for that reason; it is now the
-alternative style.
+That is the order of φ!x as a function of φ *and* x (pp. 54, 170), and it refuses φ!x to
+comprehension at `pred1 ind` (the existential itself still holds, with φ as witness). Before Will's
+decision it was rejected for that reason; it is now the alternative style.
 
 **The p. 55 reading is partial application** (Will's item (ii): "syntactic sugar"?). φ!x seen as a
 function of (φ, x) and φ!x with φ fixed, seen as a function of x, are the same body as a
@@ -224,8 +231,8 @@ function is the larger of the first argument's lowest compatible order and the o
 application. `phi_x_two_views`: φ!x has order 2 as a function of (φ!ẑ, x) (pp. 54, 170) and is
 predicative as a function of x with φ fixed (p. 55). Golden tests add p. 55's other case: with a
 first-order function as apparent variable the partial application is of order 2. Partial application
-is also exactly what p. 56's second clause is about ("when the other arguments have values assigned to
-them"), which links this to Q4.
+is also how this encoding reads p. 56's second clause ("when the other arguments have values assigned
+to them"), which links this to Q4.
 
 ### 6. (b) Comprehension
 
@@ -395,25 +402,37 @@ header, and a class that supplies the proof:
 - `PM/Rules/Reducibility.lean`: `class Reducibility S` (✱12·1, ✱12·11, p. 174);
 - `PM/Rules/Comprehension.lean`: `class Comprehension S` (✱9·15, ✱10·122; our reading, decision 6).
 
-A theorem that uses a rule takes the class in its signature (`theorem q13_101 [Reducibility S] …`). For
-an arbitrary `S` there is no other way to get `S.red = true`, so Lean enforces the dependency, and the
-signature shows it. Reaching a rule shows that a proof uses it, not that the rule is logically necessary for the theorem
-(after an external review); the absence of a cycle in the constant graph only makes the reachability exact. A
-theorem without a class holds in every system, including later ones (the 1925
-pass will add an `Extensionality` capability). `QThm.mono` lifts a derivation to any system with more
-rules and a more permissive style. `PM/Systems.lean` names four systems: `Sys.full` (both rules),
+**What Lean enforces, and what is convention.** Lean enforces that a rule is enabled in the system: a
+proof that uses `red1` must supply a proof of `S.red = true`, and for an arbitrary `S` it has to get one
+from a hypothesis. It does not enforce the form of that hypothesis: a theorem taking
+`(h : S.red = true)` can call `QThm.red1 h φ` without `[Reducibility S]` (as an external review pointed out). That is
+not a way around the rule (the evidence is equivalent to the capability), but the dependency is then
+not shown by the class. That a theorem using a rule takes the class in its signature
+(`theorem q13_101 [Reducibility S] …`) is the repository's convention, and `RedCheck.lean` checks it
+(below), including that route. Reaching a rule shows that a proof uses it, not that the rule is
+logically necessary for the theorem (after an external review); the absence of a cycle in the constant
+graph only makes the reachability exact. A theorem that uses no rule holds in every system, including
+later ones (the 1925 pass will add an `Extensionality` capability). `QThm.mono` lifts a derivation to
+any system with more rules and a more permissive style. `PM/Systems.lean` names four systems: `Sys.full` (both rules),
 `Sys.reducibility` (PM's own route), `Sys.predicative` (comprehension only) and `Sys.base` (neither).
 
 Every ✱1–✱11 proof is unchanged; their statements gained the parameter `S`. The ✱12–✱20 theorems that
-use ✱12·1 gained `[Reducibility S]`, found by compiling (Lean refuses the proof without it); the list
+use ✱12·1 gained `[Reducibility S]`, found by compiling (Lean refuses the proof without some evidence
+of `S.red = true`, and the class was the evidence given); the list
 is the same 29 that the old after-the-fact scan found.
 
-`RedCheck.lean` is kept as an independent cross-check. It follows the constants used by each
-declaration, transitively, as `#print axioms` does, and reports which reach the class field
-`Reducibility.red` or `Comprehension.compr`, then compares that with whether the class occurs in the
-declaration's type. Result: 29 PM propositions use reducibility, 1 uses comprehension, and 0 disagree
-with their signatures. (The constructors themselves are not the test, because every proof by induction
-on `QThm`, such as `qsound`, reaches all constructors through the recursor's type.)
+`RedCheck.lean` checks the convention from the proof terms, in two ways. (1) It follows the constants
+used by each declaration, transitively, as `#print axioms` does, and reports which reach the class
+field `Reducibility.red` or `Comprehension.compr`. (2) It follows only proof terms (the values of
+constants) and reports which reach the constructors `QThm.red1`/`red2` or `QThm.compr1`/`compr2`; this
+catches evidence supplied other than by the class, directly or through any helper lemma. It does not
+look inside recursors, `casesOn`, `below`/`brecOn`, `noConfusion` or matchers, whose types name every
+constructor, so that a proof by induction on `QThm`, such as `qsound`, does not count as using every
+rule. A declaration uses a rule if either analysis finds it; that is compared with whether the class
+occurs in the declaration's type. Result: 29 PM propositions use reducibility, 1 uses comprehension
+(the two analyses agree on all 351), and 0 disagree with their signatures. The test
+`RedCheckTest.red_with_explicit_evidence` (in RedCheck.lean; from an external review) calls
+`QThm.red1` with explicit evidence and no class: RedCheck flags it, and fails if it does not.
 
 **Rejected:**
 - the earlier after-the-fact scan alone, with `QThm`'s type unchanged: the dependency was invisible in
@@ -425,14 +444,14 @@ on `QThm`, such as `qsound`, reaches all constructors through the recursor's typ
 
 | File | Lines | Contents |
 |---|---|---|
-| `PM/Quant.lean` | 313 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Style`, `OrderCheck`, `Sys`; `QThm S` with gated `compr1`, `compr2`, `red1`, `red2`; `QThm.mono`; `QModel` (values, application, abstraction), `qsound` |
-| `PM/Rules/Reducibility.lean`, `PM/Rules/Comprehension.lean` | 24, 41 | the classes `Reducibility S`, `Comprehension S` with their PM warrants; `comprehension1`, `comprehension2` |
+| `PM/Quant.lean` | 315 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Style`, `OrderCheck`, `Sys`; `QThm S` with gated `compr1`, `compr2`, `red1`, `red2`; `QThm.mono`; `QModel` (values, application, abstraction), `qsound` |
+| `PM/Rules/Reducibility.lean`, `PM/Rules/Comprehension.lean` | 25, 41 | the classes `Reducibility S`, `Comprehension S` with their PM warrants; `comprehension1`, `comprehension2` |
 | `PM/Systems.lean` | 33 | `Sys.full`, `Sys.reducibility`, `Sys.predicative`, `Sys.base` and their instances |
-| `PM/Pred/RealOwnOrder.lean`, `PM/Pred/RealAsArgument.lean` | 29, 69 | `Lvl` (p. 55), `LvlArg` (p. 54) with its decision procedure at `U` |
+| `PM/Pred/RealOwnOrder.lean`, `PM/Pred/RealAsArgument.lean` | 29, 72 | `Lvl` (p. 55), `LvlArg` (p. 54) with its decision procedure at `U` |
 | `PM/Pred/Matrix.lean`, `PM/Pred/LowestOrder.lean` | 40, 26 | `IsMatrix`, `Style.matrix` (p. 172, primary); `Style.lowestOrder` (p. 56) |
-| `PM/Pred/Styles.lean` | 205 | `PredReading`, `RealReading`, `Style.of` (four styles); `QThm.matrix_to_lowestOrder`; golden tests where the styles differ; `p171_…`, `realPhi_…`; `consistent_of_style`, `consistent_collapse_of_style` |
+| `PM/Pred/Styles.lean` | 211 | `PredReading`, `RealReading`, `Style.of` (four styles); `QThm.matrix_to_lowestOrder`; golden tests where the styles differ; `p171_…`, `realPhi_…`; `consistent_of_style`, `consistent_collapse_of_style` |
 | `PM/StylesEquiv.lean` | 116 | `qex_chain`, `restyle`, `admitsPredApp_of`, `styles_equiv`, `styles_equiv_full`, `styles_equiv_real` |
-| `PM/Pred/Curry.lean` | 154 | `fnOrder2`, `curry_order`, `phi_x_two_views`; `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` |
+| `PM/Pred/Curry.lean` | 163 | `fnOrder2`, `curry_order`, `phi_x_two_views`; `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` |
 | `PM/Models/Collapse.lean`, `PM/Models/Finite.lean` | 54, 152 | `Ty.den`, `QModel.collapse`, `classicalAll`, `QModel.classical`, `consistent_collapse`; shapes `Sh`, `finModel`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, three counter-models |
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 221 | ✱13·01–✱13·03 (macros); all 24 numbered propositions ✱13·1–✱13·22 except ✱13·3 |
@@ -440,7 +459,7 @@ on `QThm`, such as `qsound`, reaches all constructors through the recursor's typ
 | `PM/Star20.lean` | 109 | ✱20·01, ✱20·02 (macros), class identity; ✱20·1, ✱20·13, ✱20·14, ✱20·15, ✱20·3; typical-ambiguity checks |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
-| `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 72, 73, 43 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
+| `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
 
 ✱13·3 (p. 180) is not formalized. It concerns significance, and its proof turns on ✱10·221
 (identifying the types of two variables), which, like ✱10·221, is built into the Lean typing.
@@ -478,7 +497,7 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 | **S1** every PM theorem under every style (Will, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 351 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 351/351 each; 0 without a parameter `S`; per system, in every style: reducibility 350, predicative 322, base 321 (the 29 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
 | **S2** `styles_equiv` (Will, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
 | **S3** currying (Will, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
-| **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements. Not added as a style |
+| **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists within this encoding** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements, comparing the same definitions. Both partial applications are evaluated at `()` in `U` with the same body order, so the result is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1; it does not show that the encoding captures PM's "assignment of values", nor extend to arbitrary variable families. Not added as a style (none needed within this encoding) |
 
 ### U6: cost numbers
 
@@ -520,14 +539,14 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 614 names; 610 report no axioms. The other 4 belong to the classical collapse model
+`AxiomCheck.lean`: 617 names; 613 report no axioms. The other 4 belong to the classical collapse model
 (below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1407 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 1411 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
 
 | Declarations | Axioms | Why |
@@ -562,16 +581,22 @@ search).
    not objected, 2026-10-11), and SEARCHED as Will asked (item (iii), 2026-10-11 evening): is there a
    function of our types on which p. 56's second clause ("if there is one of its arguments such that,
    when the other arguments have values assigned to them, we obtain a predicative function of the one
-   undetermined argument") and the lowest-order rule stated just before it disagree? **None exists.**
-   `second_clause_iff_lowestOrder` proves it for every two-argument function (fixed arguments counted
-   at their own order, p. 55), `second_clause_matrix_iff` for the matrix reading, and
-   `anyLe_iff_le_maxL` for any number of arguments. The reason: the order of the function of argument
-   i, the others fixed, is max (oᵢ + 1) O with O the order of the body, so "some i gives oᵢ + 1" is
-   "O ≤ oᵢ + 1 for some i", which is O ≤ max oᵢ + 1, the lowest-order rule. The concrete search
-   (`ClauseSearch.lean`: 34,380 bodies of depth ≤ 2 over 9 types × 81 pairs of argument types,
-   2,784,780 cases) found 0 disagreements. So the clause is not added as a style. The earlier note that
-   the clause is "weaker" was wrong for these types. It could differ only in a hierarchy where the order
-   of a function is not determined by the maximum of its argument and body orders.
+   undetermined argument") and the lowest-order rule stated just before it disagree? **None exists
+   within this encoding.** The encoding reads "the other arguments have values assigned to them" as
+   evaluating both partial applications at `()` in the one-element family `U`, so both have the same
+   body order O, and the order of the function of argument i, the others fixed, is max (oᵢ + 1) O
+   (`fnOrder`). Under that reading, `second_clause_iff_lowestOrder` proves agreement for every
+   two-argument body (fixed arguments counted at their own order, p. 55), `second_clause_matrix_iff`
+   for the matrix reading, and `anyLe_iff_le_maxL` for any number of arguments; all three reduce to
+   the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1. The concrete search (`ClauseSearch.lean`:
+   34,380 bodies of depth ≤ 2 over 9 types × 81 pairs of argument types, 2,784,780 cases) compares the
+   same definitions and found 0 disagreements. This is a theorem about this encoding; it does
+   not independently show that the encoding captures PM's "assignment of values", nor extend to
+   arbitrary variable families. **No separate style is needed within this encoding**, so the clause is
+   not added as one. The earlier note that the clause is "weaker" does not hold in this encoding. A
+   different reading of "assignment of values" (one in which assigning a value can change the order
+   of the remaining function other than through max (oᵢ + 1) O) could make the clause differ; that
+   question stays open.
 5. **Axiom-free consistency.** DECIDED by Will (2026-10-11): yes, "its own little module". Done:
    PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
    classical collapse model is kept as the general one (decision 11).
