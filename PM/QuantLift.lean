@@ -11,568 +11,568 @@ namespace PM.QL
 open PM
 
 /-- ✱2·01 -/
-theorem t2_01 {V : Type} (p : QF V) : QThm ((QF.imp (QF.imp p (.neg p)) (.neg p))) :=
+theorem t2_01 {V : Ty → Type} (p : QF V) : QThm ((QF.imp (QF.imp p (.neg p)) (.neg p))) :=
   liftThm (_root_.PM.t2_01 (.var "p")) (subst4 p p p p)
 /-- ✱2·02 -/
-theorem t2_02 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.imp p q))) :=
+theorem t2_02 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.imp p q))) :=
   liftThm (_root_.PM.t2_02 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·03 -/
-theorem t2_03 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p (.neg q)) (QF.imp q (.neg p)))) :=
+theorem t2_03 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p (.neg q)) (QF.imp q (.neg p)))) :=
   liftThm (_root_.PM.t2_03 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·04 -/
-theorem t2_04 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp q (QF.imp p r)))) :=
+theorem t2_04 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp q (QF.imp p r)))) :=
   liftThm (_root_.PM.t2_04 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·05 -/
-theorem t2_05 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (QF.imp p q) (QF.imp p r)))) :=
+theorem t2_05 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (QF.imp p q) (QF.imp p r)))) :=
   liftThm (_root_.PM.t2_05 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·06 -/
-theorem t2_06 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp q r) (QF.imp p r)))) :=
+theorem t2_06 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp q r) (QF.imp p r)))) :=
   liftThm (_root_.PM.t2_06 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·07 -/
-theorem t2_07 {V : Type} (p : QF V) : QThm ((QF.imp p (.or p p))) :=
+theorem t2_07 {V : Ty → Type} (p : QF V) : QThm ((QF.imp p (.or p p))) :=
   liftThm (_root_.PM.t2_07 (.var "p")) (subst4 p p p p)
 /-- ✱2·08 -/
-theorem t2_08 {V : Type} (p : QF V) : QThm ((QF.imp p p)) :=
+theorem t2_08 {V : Ty → Type} (p : QF V) : QThm ((QF.imp p p)) :=
   liftThm (_root_.PM.t2_08 (.var "p")) (subst4 p p p p)
 /-- ✱2·1 -/
-theorem t2_1 {V : Type} (p : QF V) : QThm ((.or (.neg p) p)) :=
+theorem t2_1 {V : Ty → Type} (p : QF V) : QThm ((.or (.neg p) p)) :=
   liftThm (_root_.PM.t2_1 (.var "p")) (subst4 p p p p)
 /-- ✱2·11 -/
-theorem t2_11 {V : Type} (p : QF V) : QThm ((.or p (.neg p))) :=
+theorem t2_11 {V : Ty → Type} (p : QF V) : QThm ((.or p (.neg p))) :=
   liftThm (_root_.PM.t2_11 (.var "p")) (subst4 p p p p)
 /-- ✱2·12 -/
-theorem t2_12 {V : Type} (p : QF V) : QThm ((QF.imp p (.neg (.neg p)))) :=
+theorem t2_12 {V : Ty → Type} (p : QF V) : QThm ((QF.imp p (.neg (.neg p)))) :=
   liftThm (_root_.PM.t2_12 (.var "p")) (subst4 p p p p)
 /-- ✱2·13 -/
-theorem t2_13 {V : Type} (p : QF V) : QThm ((.or p (.neg (.neg (.neg p))))) :=
+theorem t2_13 {V : Ty → Type} (p : QF V) : QThm ((.or p (.neg (.neg (.neg p))))) :=
   liftThm (_root_.PM.t2_13 (.var "p")) (subst4 p p p p)
 /-- ✱2·14 -/
-theorem t2_14 {V : Type} (p : QF V) : QThm ((QF.imp (.neg (.neg p)) p)) :=
+theorem t2_14 {V : Ty → Type} (p : QF V) : QThm ((QF.imp (.neg (.neg p)) p)) :=
   liftThm (_root_.PM.t2_14 (.var "p")) (subst4 p p p p)
 /-- ✱2·15 -/
-theorem t2_15 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (QF.imp (.neg q) p))) :=
+theorem t2_15 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (QF.imp (.neg q) p))) :=
   liftThm (_root_.PM.t2_15 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·16 -/
-theorem t2_16 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.neg q) (.neg p)))) :=
+theorem t2_16 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.neg q) (.neg p)))) :=
   liftThm (_root_.PM.t2_16 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·17 -/
-theorem t2_17 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg q) (.neg p)) (QF.imp p q))) :=
+theorem t2_17 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg q) (.neg p)) (QF.imp p q))) :=
   liftThm (_root_.PM.t2_17 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·18 -/
-theorem t2_18 {V : Type} (p : QF V) : QThm ((QF.imp (QF.imp (.neg p) p) p)) :=
+theorem t2_18 {V : Ty → Type} (p : QF V) : QThm ((QF.imp (QF.imp (.neg p) p) p)) :=
   liftThm (_root_.PM.t2_18 (.var "p")) (subst4 p p p p)
 /-- ✱2·2 -/
-theorem t2_2 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (.or p q))) :=
+theorem t2_2 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (.or p q))) :=
   liftThm (_root_.PM.t2_2 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·21 -/
-theorem t2_21 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.imp p q))) :=
+theorem t2_21 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.imp p q))) :=
   liftThm (_root_.PM.t2_21 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·24 -/
-theorem t2_24 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp (.neg p) q))) :=
+theorem t2_24 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp (.neg p) q))) :=
   liftThm (_root_.PM.t2_24 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·25 -/
-theorem t2_25 {V : Type} (p : QF V) (q : QF V) : QThm ((.or p (QF.imp (.or p q) q))) :=
+theorem t2_25 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or p (QF.imp (.or p q) q))) :=
   liftThm (_root_.PM.t2_25 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·26 -/
-theorem t2_26 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (.neg p) (QF.imp (QF.imp p q) q))) :=
+theorem t2_26 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (.neg p) (QF.imp (QF.imp p q) q))) :=
   liftThm (_root_.PM.t2_26 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·27 -/
-theorem t2_27 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp (QF.imp p q) q))) :=
+theorem t2_27 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp (QF.imp p q) q))) :=
   liftThm (_root_.PM.t2_27 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·3 -/
-theorem t2_3 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (.or q r)) (.or p (.or r q)))) :=
+theorem t2_3 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (.or q r)) (.or p (.or r q)))) :=
   liftThm (_root_.PM.t2_3 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·31 -/
-theorem t2_31 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (.or q r)) (.or (.or p q) r))) :=
+theorem t2_31 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (.or q r)) (.or (.or p q) r))) :=
   liftThm (_root_.PM.t2_31 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·32 -/
-theorem t2_32 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or (.or p q) r) (.or p (.or q r)))) :=
+theorem t2_32 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or (.or p q) r) (.or p (.or q r)))) :=
   liftThm (_root_.PM.t2_32 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·36 -/
-theorem t2_36 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or p q) (.or r p)))) :=
+theorem t2_36 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or p q) (.or r p)))) :=
   liftThm (_root_.PM.t2_36 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·37 -/
-theorem t2_37 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or q p) (.or p r)))) :=
+theorem t2_37 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or q p) (.or p r)))) :=
   liftThm (_root_.PM.t2_37 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·38 -/
-theorem t2_38 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or q p) (.or r p)))) :=
+theorem t2_38 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (.or q p) (.or r p)))) :=
   liftThm (_root_.PM.t2_38 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·4 -/
-theorem t2_4 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p (.or p q)) (.or p q))) :=
+theorem t2_4 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p (.or p q)) (.or p q))) :=
   liftThm (_root_.PM.t2_4 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·41 -/
-theorem t2_41 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or q (.or p q)) (.or p q))) :=
+theorem t2_41 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or q (.or p q)) (.or p q))) :=
   liftThm (_root_.PM.t2_41 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·42 -/
-theorem t2_42 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or (.neg p) (QF.imp p q)) (QF.imp p q))) :=
+theorem t2_42 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or (.neg p) (QF.imp p q)) (QF.imp p q))) :=
   liftThm (_root_.PM.t2_42 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·43 -/
-theorem t2_43 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p (QF.imp p q)) (QF.imp p q))) :=
+theorem t2_43 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p (QF.imp p q)) (QF.imp p q))) :=
   liftThm (_root_.PM.t2_43 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·45 -/
-theorem t2_45 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.neg p))) :=
+theorem t2_45 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.neg p))) :=
   liftThm (_root_.PM.t2_45 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·46 -/
-theorem t2_46 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.neg q))) :=
+theorem t2_46 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.neg q))) :=
   liftThm (_root_.PM.t2_46 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·47 -/
-theorem t2_47 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or (.neg p) q))) :=
+theorem t2_47 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or (.neg p) q))) :=
   liftThm (_root_.PM.t2_47 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·48 -/
-theorem t2_48 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or p (.neg q)))) :=
+theorem t2_48 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or p (.neg q)))) :=
   liftThm (_root_.PM.t2_48 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·49 -/
-theorem t2_49 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or (.neg p) (.neg q)))) :=
+theorem t2_49 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or p q)) (.or (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t2_49 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·5 -/
-theorem t2_5 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp (.neg p) q))) :=
+theorem t2_5 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp (.neg p) q))) :=
   liftThm (_root_.PM.t2_5 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·51 -/
-theorem t2_51 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp p (.neg q)))) :=
+theorem t2_51 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp p (.neg q)))) :=
   liftThm (_root_.PM.t2_51 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·52 -/
-theorem t2_52 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp (.neg p) (.neg q)))) :=
+theorem t2_52 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t2_52 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·521 -/
-theorem t2_521 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp q p))) :=
+theorem t2_521 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.imp p q)) (QF.imp q p))) :=
   liftThm (_root_.PM.t2_521 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·53 -/
-theorem t2_53 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.neg p) q))) :=
+theorem t2_53 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.neg p) q))) :=
   liftThm (_root_.PM.t2_53 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·54 -/
-theorem t2_54 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (.or p q))) :=
+theorem t2_54 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (.or p q))) :=
   liftThm (_root_.PM.t2_54 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·55 -/
-theorem t2_55 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.imp (.or p q) q))) :=
+theorem t2_55 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.imp (.or p q) q))) :=
   liftThm (_root_.PM.t2_55 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·56 -/
-theorem t2_56 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg q) (QF.imp (.or p q) p))) :=
+theorem t2_56 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg q) (QF.imp (.or p q) p))) :=
   liftThm (_root_.PM.t2_56 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·6 -/
-theorem t2_6 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (QF.imp (QF.imp p q) q))) :=
+theorem t2_6 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.neg p) q) (QF.imp (QF.imp p q) q))) :=
   liftThm (_root_.PM.t2_6 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·61 -/
-theorem t2_61 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp (.neg p) q) q))) :=
+theorem t2_61 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp (.neg p) q) q))) :=
   liftThm (_root_.PM.t2_61 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·62 -/
-theorem t2_62 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (QF.imp p q) q))) :=
+theorem t2_62 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (QF.imp p q) q))) :=
   liftThm (_root_.PM.t2_62 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·621 -/
-theorem t2_621 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.or p q) q))) :=
+theorem t2_621 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.or p q) q))) :=
   liftThm (_root_.PM.t2_621 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·63 -/
-theorem t2_63 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or (.neg p) q) q))) :=
+theorem t2_63 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or (.neg p) q) q))) :=
   liftThm (_root_.PM.t2_63 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·64 -/
-theorem t2_64 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or p (.neg q)) p))) :=
+theorem t2_64 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or p (.neg q)) p))) :=
   liftThm (_root_.PM.t2_64 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·65 -/
-theorem t2_65 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp p (.neg q)) (.neg p)))) :=
+theorem t2_65 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.imp p (.neg q)) (.neg p)))) :=
   liftThm (_root_.PM.t2_65 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·67 -/
-theorem t2_67 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.or p q) q) (QF.imp p q))) :=
+theorem t2_67 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (.or p q) q) (QF.imp p q))) :=
   liftThm (_root_.PM.t2_67 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·68 -/
-theorem t2_68 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) q) (.or p q))) :=
+theorem t2_68 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) q) (.or p q))) :=
   liftThm (_root_.PM.t2_68 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·69 -/
-theorem t2_69 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) q) (QF.imp (QF.imp q p) p))) :=
+theorem t2_69 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) q) (QF.imp (QF.imp q p) p))) :=
   liftThm (_root_.PM.t2_69 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱2·73 -/
-theorem t2_73 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.or (.or p q) r) (.or q r)))) :=
+theorem t2_73 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (.or (.or p q) r) (.or q r)))) :=
   liftThm (_root_.PM.t2_73 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·74 -/
-theorem t2_74 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q p) (QF.imp (.or (.or p q) r) (.or p r)))) :=
+theorem t2_74 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q p) (QF.imp (.or (.or p q) r) (.or p r)))) :=
   liftThm (_root_.PM.t2_74 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·75 -/
-theorem t2_75 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or p (QF.imp q r)) (.or p r)))) :=
+theorem t2_75 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p q) (QF.imp (.or p (QF.imp q r)) (.or p r)))) :=
   liftThm (_root_.PM.t2_75 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·76 -/
-theorem t2_76 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (QF.imp q r)) (QF.imp (.or p q) (.or p r)))) :=
+theorem t2_76 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (.or p (QF.imp q r)) (QF.imp (.or p q) (.or p r)))) :=
   liftThm (_root_.PM.t2_76 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·77 -/
-theorem t2_77 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.imp p q) (QF.imp p r)))) :=
+theorem t2_77 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.imp p q) (QF.imp p r)))) :=
   liftThm (_root_.PM.t2_77 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·8 -/
-theorem t2_8 {V : Type} (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (.or q r) (QF.imp (.or (.neg r) s) (.or q s)))) :=
+theorem t2_8 {V : Ty → Type} (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (.or q r) (QF.imp (.or (.neg r) s) (.or q s)))) :=
   liftThm (_root_.PM.t2_8 (.var "q") (.var "r") (.var "s")) (subst4 q q r s)
 /-- ✱2·81 -/
-theorem t2_81 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.imp q (QF.imp r s)) (QF.imp (.or p q) (QF.imp (.or p r) (.or p s))))) :=
+theorem t2_81 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.imp q (QF.imp r s)) (QF.imp (.or p q) (QF.imp (.or p r) (.or p s))))) :=
   liftThm (_root_.PM.t2_81 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱2·82 -/
-theorem t2_82 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (.or (.or p q) r) (QF.imp (.or (.or p (.neg r)) s) (.or (.or p q) s)))) :=
+theorem t2_82 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (.or (.or p q) r) (QF.imp (.or (.or p (.neg r)) s) (.or (.or p q) s)))) :=
   liftThm (_root_.PM.t2_82 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱2·83 -/
-theorem t2_83 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.imp p (QF.imp r s)) (QF.imp p (QF.imp q s))))) :=
+theorem t2_83 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.imp p (QF.imp r s)) (QF.imp p (QF.imp q s))))) :=
   liftThm (_root_.PM.t2_83 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱2·85 -/
-theorem t2_85 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (.or p q) (.or p r)) (.or p (QF.imp q r)))) :=
+theorem t2_85 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (.or p q) (.or p r)) (.or p (QF.imp q r)))) :=
   liftThm (_root_.PM.t2_85 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱2·86 -/
-theorem t2_86 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.imp q r)))) :=
+theorem t2_86 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.imp q r)))) :=
   liftThm (_root_.PM.t2_86 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·1 -/
-theorem t3_1 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (.neg (.or (.neg p) (.neg q))))) :=
+theorem t3_1 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (.neg (.or (.neg p) (.neg q))))) :=
   liftThm (_root_.PM.t3_1 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·11 -/
-theorem t3_11 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or (.neg p) (.neg q))) (QF.and p q))) :=
+theorem t3_11 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (.or (.neg p) (.neg q))) (QF.and p q))) :=
   liftThm (_root_.PM.t3_11 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·12 -/
-theorem t3_12 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (.or (.neg p) (.neg q)) (QF.and p q))) :=
+theorem t3_12 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (.or (.neg p) (.neg q)) (QF.and p q))) :=
   liftThm (_root_.PM.t3_12 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·13 -/
-theorem t3_13 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.and p q)) (.or (.neg p) (.neg q)))) :=
+theorem t3_13 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg (QF.and p q)) (.or (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t3_13 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·14 -/
-theorem t3_14 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or (.neg p) (.neg q)) (.neg (QF.and p q)))) :=
+theorem t3_14 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.or (.neg p) (.neg q)) (.neg (QF.and p q)))) :=
   liftThm (_root_.PM.t3_14 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·2 -/
-theorem t3_2 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp q (QF.and p q)))) :=
+theorem t3_2 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.imp q (QF.and p q)))) :=
   liftThm (_root_.PM.t3_2 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·21 -/
-theorem t3_21 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.imp p (QF.and p q)))) :=
+theorem t3_21 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.imp p (QF.and p q)))) :=
   liftThm (_root_.PM.t3_21 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·22 -/
-theorem t3_22 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.and q p))) :=
+theorem t3_22 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.and q p))) :=
   liftThm (_root_.PM.t3_22 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·24 -/
-theorem t3_24 {V : Type} (p : QF V) : QThm ((.neg (QF.and p (.neg p)))) :=
+theorem t3_24 {V : Ty → Type} (p : QF V) : QThm ((.neg (QF.and p (.neg p)))) :=
   liftThm (_root_.PM.t3_24 (.var "p")) (subst4 p p p p)
 /-- ✱3·26 -/
-theorem t3_26 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) p)) :=
+theorem t3_26 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) p)) :=
   liftThm (_root_.PM.t3_26 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·27 -/
-theorem t3_27 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) q)) :=
+theorem t3_27 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) q)) :=
   liftThm (_root_.PM.t3_27 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·3 -/
-theorem t3_3 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.and p q) r) (QF.imp p (QF.imp q r)))) :=
+theorem t3_3 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.and p q) r) (QF.imp p (QF.imp q r)))) :=
   liftThm (_root_.PM.t3_3 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·31 -/
-theorem t3_31 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.and p q) r))) :=
+theorem t3_31 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p (QF.imp q r)) (QF.imp (QF.and p q) r))) :=
   liftThm (_root_.PM.t3_31 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·33 -/
-theorem t3_33 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp q r)) (QF.imp p r))) :=
+theorem t3_33 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp q r)) (QF.imp p r))) :=
   liftThm (_root_.PM.t3_33 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·34 -/
-theorem t3_34 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp q r) (QF.imp p q)) (QF.imp p r))) :=
+theorem t3_34 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp q r) (QF.imp p q)) (QF.imp p r))) :=
   liftThm (_root_.PM.t3_34 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·35 -/
-theorem t3_35 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p (QF.imp p q)) q)) :=
+theorem t3_35 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p (QF.imp p q)) q)) :=
   liftThm (_root_.PM.t3_35 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·37 -/
-theorem t3_37 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.and p q) r) (QF.imp (QF.and p (.neg r)) (.neg q)))) :=
+theorem t3_37 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp (QF.and p q) r) (QF.imp (QF.and p (.neg r)) (.neg q)))) :=
   liftThm (_root_.PM.t3_37 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·4 -/
-theorem t3_4 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.imp p q))) :=
+theorem t3_4 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.imp p q))) :=
   liftThm (_root_.PM.t3_4 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱3·41 -/
-theorem t3_41 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p r) (QF.imp (QF.and p q) r))) :=
+theorem t3_41 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p r) (QF.imp (QF.and p q) r))) :=
   liftThm (_root_.PM.t3_41 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·42 -/
-theorem t3_42 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (QF.and p q) r))) :=
+theorem t3_42 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q r) (QF.imp (QF.and p q) r))) :=
   liftThm (_root_.PM.t3_42 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·43 -/
-theorem t3_43 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.and q r)))) :=
+theorem t3_43 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.and q r)))) :=
   liftThm (_root_.PM.t3_43 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·44 -/
-theorem t3_44 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp q p) (QF.imp r p)) (QF.imp (.or q r) p))) :=
+theorem t3_44 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp q p) (QF.imp r p)) (QF.imp (.or q r) p))) :=
   liftThm (_root_.PM.t3_44 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·45 -/
-theorem t3_45 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.and p r) (QF.and q r)))) :=
+theorem t3_45 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.imp (QF.and p r) (QF.and q r)))) :=
   liftThm (_root_.PM.t3_45 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱3·47 -/
-theorem t3_47 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.imp p r) (QF.imp q s)) (QF.imp (QF.and p q) (QF.and r s)))) :=
+theorem t3_47 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.imp p r) (QF.imp q s)) (QF.imp (QF.and p q) (QF.and r s)))) :=
   liftThm (_root_.PM.t3_47 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱3·48 -/
-theorem t3_48 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.imp p r) (QF.imp q s)) (QF.imp (.or p q) (.or r s)))) :=
+theorem t3_48 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.imp p r) (QF.imp q s)) (QF.imp (.or p q) (.or r s)))) :=
   liftThm (_root_.PM.t3_48 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱4·1 -/
-theorem t4_1 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.imp (.neg q) (.neg p)))) :=
+theorem t4_1 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.imp (.neg q) (.neg p)))) :=
   liftThm (_root_.PM.t4_1 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·11 -/
-theorem t4_11 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (QF.iff (.neg p) (.neg q)))) :=
+theorem t4_11 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (QF.iff (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t4_11 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·12 -/
-theorem t4_12 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p (.neg q)) (QF.iff q (.neg p)))) :=
+theorem t4_12 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p (.neg q)) (QF.iff q (.neg p)))) :=
   liftThm (_root_.PM.t4_12 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·13 -/
-theorem t4_13 {V : Type} (p : QF V) : QThm ((QF.iff p (.neg (.neg p)))) :=
+theorem t4_13 {V : Ty → Type} (p : QF V) : QThm ((QF.iff p (.neg (.neg p)))) :=
   liftThm (_root_.PM.t4_13 (.var "p")) (subst4 p p p p)
 /-- ✱4·14 -/
-theorem t4_14 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) r) (QF.imp (QF.and p (.neg r)) (.neg q)))) :=
+theorem t4_14 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) r) (QF.imp (QF.and p (.neg r)) (.neg q)))) :=
   liftThm (_root_.PM.t4_14 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·15 -/
-theorem t4_15 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) (.neg r)) (QF.imp (QF.and q r) (.neg p)))) :=
+theorem t4_15 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) (.neg r)) (QF.imp (QF.and q r) (.neg p)))) :=
   liftThm (_root_.PM.t4_15 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·2 -/
-theorem t4_2 {V : Type} (p : QF V) : QThm ((QF.iff p p)) :=
+theorem t4_2 {V : Ty → Type} (p : QF V) : QThm ((QF.iff p p)) :=
   liftThm (_root_.PM.t4_2 (.var "p")) (subst4 p p p p)
 /-- ✱4·21 -/
-theorem t4_21 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (QF.iff q p))) :=
+theorem t4_21 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (QF.iff q p))) :=
   liftThm (_root_.PM.t4_21 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·22 -/
-theorem t4_22 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.iff p q) (QF.iff q r)) (QF.iff p r))) :=
+theorem t4_22 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.iff p q) (QF.iff q r)) (QF.iff p r))) :=
   liftThm (_root_.PM.t4_22 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·24 -/
-theorem t4_24 {V : Type} (p : QF V) : QThm ((QF.iff p (QF.and p p))) :=
+theorem t4_24 {V : Ty → Type} (p : QF V) : QThm ((QF.iff p (QF.and p p))) :=
   liftThm (_root_.PM.t4_24 (.var "p")) (subst4 p p p p)
 /-- ✱4·25 -/
-theorem t4_25 {V : Type} (p : QF V) : QThm ((QF.iff p (.or p p))) :=
+theorem t4_25 {V : Ty → Type} (p : QF V) : QThm ((QF.iff p (.or p p))) :=
   liftThm (_root_.PM.t4_25 (.var "p")) (subst4 p p p p)
 /-- ✱4·3 -/
-theorem t4_3 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p q) (QF.and q p))) :=
+theorem t4_3 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p q) (QF.and q p))) :=
   liftThm (_root_.PM.t4_3 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·31 -/
-theorem t4_31 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (.or q p))) :=
+theorem t4_31 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (.or q p))) :=
   liftThm (_root_.PM.t4_31 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·32 -/
-theorem t4_32 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.and p q) r) (QF.and p (QF.and q r)))) :=
+theorem t4_32 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.and p q) r) (QF.and p (QF.and q r)))) :=
   liftThm (_root_.PM.t4_32 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·33 -/
-theorem t4_33 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (.or p q) r) (.or p (.or q r)))) :=
+theorem t4_33 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (.or p q) r) (.or p (.or q r)))) :=
   liftThm (_root_.PM.t4_33 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·36 -/
-theorem t4_36 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.and p r) (QF.and q r)))) :=
+theorem t4_36 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.and p r) (QF.and q r)))) :=
   liftThm (_root_.PM.t4_36 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·37 -/
-theorem t4_37 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (.or p r) (.or q r)))) :=
+theorem t4_37 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (.or p r) (.or q r)))) :=
   liftThm (_root_.PM.t4_37 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·38 -/
-theorem t4_38 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.iff p r) (QF.iff q s)) (QF.iff (QF.and p q) (QF.and r s)))) :=
+theorem t4_38 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.iff p r) (QF.iff q s)) (QF.iff (QF.and p q) (QF.and r s)))) :=
   liftThm (_root_.PM.t4_38 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱4·39 -/
-theorem t4_39 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.iff p r) (QF.iff q s)) (QF.iff (.or p q) (.or r s)))) :=
+theorem t4_39 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.imp (QF.and (QF.iff p r) (QF.iff q s)) (QF.iff (.or p q) (.or r s)))) :=
   liftThm (_root_.PM.t4_39 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱4·4 -/
-theorem t4_4 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and p (.or q r)) (.or (QF.and p q) (QF.and p r)))) :=
+theorem t4_4 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and p (.or q r)) (.or (QF.and p q) (QF.and p r)))) :=
   liftThm (_root_.PM.t4_4 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·41 -/
-theorem t4_41 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or p (QF.and q r)) (QF.and (.or p q) (.or p r)))) :=
+theorem t4_41 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or p (QF.and q r)) (QF.and (.or p q) (.or p r)))) :=
   liftThm (_root_.PM.t4_41 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·42 -/
-theorem t4_42 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (.or (QF.and p q) (QF.and p (.neg q))))) :=
+theorem t4_42 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (.or (QF.and p q) (QF.and p (.neg q))))) :=
   liftThm (_root_.PM.t4_42 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·43 -/
-theorem t4_43 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (QF.and (.or p q) (.or p (.neg q))))) :=
+theorem t4_43 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (QF.and (.or p q) (.or p (.neg q))))) :=
   liftThm (_root_.PM.t4_43 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·44 -/
-theorem t4_44 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (.or p (QF.and p q)))) :=
+theorem t4_44 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (.or p (QF.and p q)))) :=
   liftThm (_root_.PM.t4_44 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·45 -/
-theorem t4_45 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (QF.and p (.or p q)))) :=
+theorem t4_45 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff p (QF.and p (.or p q)))) :=
   liftThm (_root_.PM.t4_45 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·5 -/
-theorem t4_5 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p q) (.neg (.or (.neg p) (.neg q))))) :=
+theorem t4_5 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p q) (.neg (.or (.neg p) (.neg q))))) :=
   liftThm (_root_.PM.t4_5 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·51 -/
-theorem t4_51 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and p q)) (.or (.neg p) (.neg q)))) :=
+theorem t4_51 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and p q)) (.or (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t4_51 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·52 -/
-theorem t4_52 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p (.neg q)) (.neg (.or (.neg p) q)))) :=
+theorem t4_52 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p (.neg q)) (.neg (.or (.neg p) q)))) :=
   liftThm (_root_.PM.t4_52 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·53 -/
-theorem t4_53 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and p (.neg q))) (.or (.neg p) q))) :=
+theorem t4_53 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and p (.neg q))) (.or (.neg p) q))) :=
   liftThm (_root_.PM.t4_53 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·54 -/
-theorem t4_54 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.neg p) q) (.neg (.or p (.neg q))))) :=
+theorem t4_54 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.neg p) q) (.neg (.or p (.neg q))))) :=
   liftThm (_root_.PM.t4_54 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·55 -/
-theorem t4_55 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and (.neg p) q)) (.or p (.neg q)))) :=
+theorem t4_55 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and (.neg p) q)) (.or p (.neg q)))) :=
   liftThm (_root_.PM.t4_55 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·56 -/
-theorem t4_56 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.neg p) (.neg q)) (.neg (.or p q)))) :=
+theorem t4_56 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.neg p) (.neg q)) (.neg (.or p q)))) :=
   liftThm (_root_.PM.t4_56 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·57 -/
-theorem t4_57 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and (.neg p) (.neg q))) (.or p q))) :=
+theorem t4_57 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.and (.neg p) (.neg q))) (.or p q))) :=
   liftThm (_root_.PM.t4_57 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·6 -/
-theorem t4_6 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (.or (.neg p) q))) :=
+theorem t4_6 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (.or (.neg p) q))) :=
   liftThm (_root_.PM.t4_6 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·61 -/
-theorem t4_61 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp p q)) (QF.and p (.neg q)))) :=
+theorem t4_61 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp p q)) (QF.and p (.neg q)))) :=
   liftThm (_root_.PM.t4_61 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·62 -/
-theorem t4_62 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p (.neg q)) (.or (.neg p) (.neg q)))) :=
+theorem t4_62 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p (.neg q)) (.or (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t4_62 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·63 -/
-theorem t4_63 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp p (.neg q))) (QF.and p q))) :=
+theorem t4_63 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp p (.neg q))) (QF.and p q))) :=
   liftThm (_root_.PM.t4_63 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·64 -/
-theorem t4_64 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp (.neg p) q) (.or p q))) :=
+theorem t4_64 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp (.neg p) q) (.or p q))) :=
   liftThm (_root_.PM.t4_64 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·65 -/
-theorem t4_65 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp (.neg p) q)) (QF.and (.neg p) (.neg q)))) :=
+theorem t4_65 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp (.neg p) q)) (QF.and (.neg p) (.neg q)))) :=
   liftThm (_root_.PM.t4_65 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·66 -/
-theorem t4_66 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp (.neg p) (.neg q)) (.or p (.neg q)))) :=
+theorem t4_66 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp (.neg p) (.neg q)) (.or p (.neg q)))) :=
   liftThm (_root_.PM.t4_66 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·67 -/
-theorem t4_67 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp (.neg p) (.neg q))) (QF.and (.neg p) q))) :=
+theorem t4_67 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.imp (.neg p) (.neg q))) (QF.and (.neg p) q))) :=
   liftThm (_root_.PM.t4_67 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·7 -/
-theorem t4_7 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.imp p (QF.and p q)))) :=
+theorem t4_7 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.imp p (QF.and p q)))) :=
   liftThm (_root_.PM.t4_7 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·71 -/
-theorem t4_71 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.iff p (QF.and p q)))) :=
+theorem t4_71 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.iff p (QF.and p q)))) :=
   liftThm (_root_.PM.t4_71 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·72 -/
-theorem t4_72 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.iff q (.or p q)))) :=
+theorem t4_72 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p q) (QF.iff q (.or p q)))) :=
   liftThm (_root_.PM.t4_72 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·73 -/
-theorem t4_73 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.iff p (QF.and p q)))) :=
+theorem t4_73 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp q (QF.iff p (QF.and p q)))) :=
   liftThm (_root_.PM.t4_73 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·74 -/
-theorem t4_74 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.iff q (.or p q)))) :=
+theorem t4_74 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (.neg p) (QF.iff q (.or p q)))) :=
   liftThm (_root_.PM.t4_74 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·76 -/
-theorem t4_76 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.and q r)))) :=
+theorem t4_76 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.and q r)))) :=
   liftThm (_root_.PM.t4_76 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·77 -/
-theorem t4_77 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.imp q p) (QF.imp r p)) (QF.imp (.or q r) p))) :=
+theorem t4_77 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and (QF.imp q p) (QF.imp r p)) (QF.imp (.or q r) p))) :=
   liftThm (_root_.PM.t4_77 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·78 -/
-theorem t4_78 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (QF.imp p q) (QF.imp p r)) (QF.imp p (.or q r)))) :=
+theorem t4_78 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (QF.imp p q) (QF.imp p r)) (QF.imp p (.or q r)))) :=
   liftThm (_root_.PM.t4_78 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·79 -/
-theorem t4_79 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (QF.imp q p) (QF.imp r p)) (QF.imp (QF.and q r) p))) :=
+theorem t4_79 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (.or (QF.imp q p) (QF.imp r p)) (QF.imp (QF.and q r) p))) :=
   liftThm (_root_.PM.t4_79 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·8 -/
-theorem t4_8 {V : Type} (p : QF V) : QThm ((QF.iff (QF.imp p (.neg p)) (.neg p))) :=
+theorem t4_8 {V : Ty → Type} (p : QF V) : QThm ((QF.iff (QF.imp p (.neg p)) (.neg p))) :=
   liftThm (_root_.PM.t4_8 (.var "p")) (subst4 p p p p)
 /-- ✱4·81 -/
-theorem t4_81 {V : Type} (p : QF V) : QThm ((QF.iff (QF.imp (.neg p) p) p)) :=
+theorem t4_81 {V : Ty → Type} (p : QF V) : QThm ((QF.iff (QF.imp (.neg p) p) p)) :=
   liftThm (_root_.PM.t4_81 (.var "p")) (subst4 p p p p)
 /-- ✱4·82 -/
-theorem t4_82 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp p (.neg q))) (.neg p))) :=
+theorem t4_82 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp p (.neg q))) (.neg p))) :=
   liftThm (_root_.PM.t4_82 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·83 -/
-theorem t4_83 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp (.neg p) q)) q)) :=
+theorem t4_83 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (QF.imp p q) (QF.imp (.neg p) q)) q)) :=
   liftThm (_root_.PM.t4_83 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱4·84 -/
-theorem t4_84 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.imp p r) (QF.imp q r)))) :=
+theorem t4_84 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.imp p r) (QF.imp q r)))) :=
   liftThm (_root_.PM.t4_84 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·85 -/
-theorem t4_85 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.imp r p) (QF.imp r q)))) :=
+theorem t4_85 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.imp r p) (QF.imp r q)))) :=
   liftThm (_root_.PM.t4_85 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·86 -/
-theorem t4_86 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.iff p r) (QF.iff q r)))) :=
+theorem t4_86 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.iff p q) (QF.iff (QF.iff p r) (QF.iff q r)))) :=
   liftThm (_root_.PM.t4_86 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱4·87 -/
-theorem t4_87 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.and (QF.and (QF.iff (QF.imp (QF.and p q) r) (QF.imp p (QF.imp q r))) (QF.iff (QF.imp p (QF.imp q r)) (QF.imp q (QF.imp p r)))) (QF.iff (QF.imp q (QF.imp p r)) (QF.imp (QF.and q p) r)))) :=
+theorem t4_87 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.and (QF.and (QF.iff (QF.imp (QF.and p q) r) (QF.imp p (QF.imp q r))) (QF.iff (QF.imp p (QF.imp q r)) (QF.imp q (QF.imp p r)))) (QF.iff (QF.imp q (QF.imp p r)) (QF.imp (QF.and q p) r)))) :=
   liftThm (_root_.PM.t4_87 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·1 -/
-theorem t5_1 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.iff p q))) :=
+theorem t5_1 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and p q) (QF.iff p q))) :=
   liftThm (_root_.PM.t5_1 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·11 -/
-theorem t5_11 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp (.neg p) q))) :=
+theorem t5_11 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp (.neg p) q))) :=
   liftThm (_root_.PM.t5_11 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·12 -/
-theorem t5_12 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp p (.neg q)))) :=
+theorem t5_12 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp p (.neg q)))) :=
   liftThm (_root_.PM.t5_12 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·13 -/
-theorem t5_13 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp q p))) :=
+theorem t5_13 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.imp p q) (QF.imp q p))) :=
   liftThm (_root_.PM.t5_13 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·14 -/
-theorem t5_14 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((.or (QF.imp p q) (QF.imp q r))) :=
+theorem t5_14 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((.or (QF.imp p q) (QF.imp q r))) :=
   liftThm (_root_.PM.t5_14 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·15 -/
-theorem t5_15 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff p q) (QF.iff p (.neg q)))) :=
+theorem t5_15 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff p q) (QF.iff p (.neg q)))) :=
   liftThm (_root_.PM.t5_15 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·16 -/
-theorem t5_16 {V : Type} (p : QF V) (q : QF V) : QThm ((.neg (QF.and (QF.iff p q) (QF.iff p (.neg q))))) :=
+theorem t5_16 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.neg (QF.and (QF.iff p q) (QF.iff p (.neg q))))) :=
   liftThm (_root_.PM.t5_16 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·17 -/
-theorem t5_17 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.or p q) (.neg (QF.and p q))) (QF.iff p (.neg q)))) :=
+theorem t5_17 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.or p q) (.neg (QF.and p q))) (QF.iff p (.neg q)))) :=
   liftThm (_root_.PM.t5_17 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·18 -/
-theorem t5_18 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (.neg (QF.iff p (.neg q))))) :=
+theorem t5_18 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (.neg (QF.iff p (.neg q))))) :=
   liftThm (_root_.PM.t5_18 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·19 -/
-theorem t5_19 {V : Type} (p : QF V) : QThm ((.neg (QF.iff p (.neg p)))) :=
+theorem t5_19 {V : Ty → Type} (p : QF V) : QThm ((.neg (QF.iff p (.neg p)))) :=
   liftThm (_root_.PM.t5_19 (.var "p")) (subst4 p p p p)
 /-- ✱5·21 -/
-theorem t5_21 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and (.neg p) (.neg q)) (QF.iff p q))) :=
+theorem t5_21 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp (QF.and (.neg p) (.neg q)) (QF.iff p q))) :=
   liftThm (_root_.PM.t5_21 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·22 -/
-theorem t5_22 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.iff p q)) (.or (QF.and p (.neg q)) (QF.and q (.neg p))))) :=
+theorem t5_22 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (QF.iff p q)) (.or (QF.and p (.neg q)) (QF.and q (.neg p))))) :=
   liftThm (_root_.PM.t5_22 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·23 -/
-theorem t5_23 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (.or (QF.and p q) (QF.and (.neg p) (.neg q))))) :=
+theorem t5_23 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.iff p q) (.or (QF.and p q) (QF.and (.neg p) (.neg q))))) :=
   liftThm (_root_.PM.t5_23 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·24 -/
-theorem t5_24 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (.or (QF.and p q) (QF.and (.neg p) (.neg q)))) (.or (QF.and p (.neg q)) (QF.and q (.neg p))))) :=
+theorem t5_24 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.neg (.or (QF.and p q) (QF.and (.neg p) (.neg q)))) (.or (QF.and p (.neg q)) (QF.and q (.neg p))))) :=
   liftThm (_root_.PM.t5_24 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·25 -/
-theorem t5_25 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (QF.imp (QF.imp p q) q))) :=
+theorem t5_25 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (QF.imp (QF.imp p q) q))) :=
   liftThm (_root_.PM.t5_25 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·3 -/
-theorem t5_3 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) r) (QF.imp (QF.and p q) (QF.and p r)))) :=
+theorem t5_3 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p q) r) (QF.imp (QF.and p q) (QF.and p r)))) :=
   liftThm (_root_.PM.t5_3 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·31 -/
-theorem t5_31 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and r (QF.imp p q)) (QF.imp p (QF.and q r)))) :=
+theorem t5_31 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and r (QF.imp p q)) (QF.imp p (QF.and q r)))) :=
   liftThm (_root_.PM.t5_31 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·32 -/
-theorem t5_32 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.iff q r)) (QF.iff (QF.and p q) (QF.and p r)))) :=
+theorem t5_32 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.iff q r)) (QF.iff (QF.and p q) (QF.and p r)))) :=
   liftThm (_root_.PM.t5_32 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·33 -/
-theorem t5_33 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and p (QF.imp q r)) (QF.and p (QF.imp (QF.and p q) r)))) :=
+theorem t5_33 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.and p (QF.imp q r)) (QF.and p (QF.imp (QF.and p q) r)))) :=
   liftThm (_root_.PM.t5_33 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·35 -/
-theorem t5_35 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.iff q r)))) :=
+theorem t5_35 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.iff q r)))) :=
   liftThm (_root_.PM.t5_35 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·36 -/
-theorem t5_36 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p (QF.iff p q)) (QF.and q (QF.iff p q)))) :=
+theorem t5_36 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and p (QF.iff p q)) (QF.and q (QF.iff p q)))) :=
   liftThm (_root_.PM.t5_36 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·4 -/
-theorem t5_4 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p (QF.imp p q)) (QF.imp p q))) :=
+theorem t5_4 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.imp p (QF.imp p q)) (QF.imp p q))) :=
   liftThm (_root_.PM.t5_4 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·41 -/
-theorem t5_41 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.imp q r)))) :=
+theorem t5_41 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.imp p q) (QF.imp p r)) (QF.imp p (QF.imp q r)))) :=
   liftThm (_root_.PM.t5_41 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·42 -/
-theorem t5_42 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.imp q r)) (QF.imp p (QF.imp q (QF.and p r))))) :=
+theorem t5_42 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.imp q r)) (QF.imp p (QF.imp q (QF.and p r))))) :=
   liftThm (_root_.PM.t5_42 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·44 -/
-theorem t5_44 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.iff (QF.imp p r) (QF.imp p (QF.and q r))))) :=
+theorem t5_44 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp p q) (QF.iff (QF.imp p r) (QF.imp p (QF.and q r))))) :=
   liftThm (_root_.PM.t5_44 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·5 -/
-theorem t5_5 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.iff (QF.imp p q) q))) :=
+theorem t5_5 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.iff (QF.imp p q) q))) :=
   liftThm (_root_.PM.t5_5 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·501 -/
-theorem t5_501 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.iff q (QF.iff p q)))) :=
+theorem t5_501 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.imp p (QF.iff q (QF.iff p q)))) :=
   liftThm (_root_.PM.t5_501 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·53 -/
-theorem t5_53 {V : Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.iff (QF.imp (.or (.or p q) r) s) (QF.and (QF.and (QF.imp p s) (QF.imp q s)) (QF.imp r s)))) :=
+theorem t5_53 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) (s : QF V) : QThm ((QF.iff (QF.imp (.or (.or p q) r) s) (QF.and (QF.and (QF.imp p s) (QF.imp q s)) (QF.imp r s)))) :=
   liftThm (_root_.PM.t5_53 (.var "p") (.var "q") (.var "r") (.var "s")) (subst4 p q r s)
 /-- ✱5·54 -/
-theorem t5_54 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff (QF.and p q) p) (QF.iff (QF.and p q) q))) :=
+theorem t5_54 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff (QF.and p q) p) (QF.iff (QF.and p q) q))) :=
   liftThm (_root_.PM.t5_54 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·55 -/
-theorem t5_55 {V : Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff (.or p q) p) (QF.iff (.or p q) q))) :=
+theorem t5_55 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((.or (QF.iff (.or p q) p) (QF.iff (.or p q) q))) :=
   liftThm (_root_.PM.t5_55 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·6 -/
-theorem t5_6 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p (.neg q)) r) (QF.imp p (.or q r)))) :=
+theorem t5_6 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp (QF.and p (.neg q)) r) (QF.imp p (.or q r)))) :=
   liftThm (_root_.PM.t5_6 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·61 -/
-theorem t5_61 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.or p q) (.neg q)) (QF.and p (.neg q)))) :=
+theorem t5_61 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (QF.and (.or p q) (.neg q)) (QF.and p (.neg q)))) :=
   liftThm (_root_.PM.t5_61 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·62 -/
-theorem t5_62 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or (QF.and p q) (.neg q)) (.or p (.neg q)))) :=
+theorem t5_62 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or (QF.and p q) (.neg q)) (.or p (.neg q)))) :=
   liftThm (_root_.PM.t5_62 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·63 -/
-theorem t5_63 {V : Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (.or p (QF.and (.neg p) q)))) :=
+theorem t5_63 {V : Ty → Type} (p : QF V) (q : QF V) : QThm ((QF.iff (.or p q) (.or p (QF.and (.neg p) q)))) :=
   liftThm (_root_.PM.t5_63 (.var "p") (.var "q")) (subst4 p q p p)
 /-- ✱5·7 -/
-theorem t5_7 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.iff (.or p r) (.or q r)) (.or r (QF.iff p q)))) :=
+theorem t5_7 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.iff (.or p r) (.or q r)) (.or r (QF.iff p q)))) :=
   liftThm (_root_.PM.t5_7 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·71 -/
-theorem t5_71 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q (.neg r)) (QF.iff (QF.and (.or p q) r) (QF.and p r)))) :=
+theorem t5_71 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.imp q (.neg r)) (QF.iff (QF.and (.or p q) r) (QF.and p r)))) :=
   liftThm (_root_.PM.t5_71 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·74 -/
-theorem t5_74 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.iff q r)) (QF.iff (QF.imp p q) (QF.imp p r)))) :=
+theorem t5_74 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.iff (QF.imp p (QF.iff q r)) (QF.iff (QF.imp p q) (QF.imp p r)))) :=
   liftThm (_root_.PM.t5_74 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 /-- ✱5·75 -/
-theorem t5_75 {V : Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp r (.neg q)) (QF.iff p (.or q r))) (QF.iff (QF.and p (.neg q)) r))) :=
+theorem t5_75 {V : Ty → Type} (p : QF V) (q : QF V) (r : QF V) : QThm ((QF.imp (QF.and (QF.imp r (.neg q)) (QF.iff p (.or q r))) (QF.iff (QF.and p (.neg q)) r))) :=
   liftThm (_root_.PM.t5_75 (.var "p") (.var "q") (.var "r")) (subst4 p q r p)
 
 end PM.QL

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate PM/QuantLift.lean: every ✱2–✱5 theorem of PM/Replay*.lean, restated for ✱10 formulas
-(QF V) and proved by `liftThm` (PM/Quant.lean). The statement text is copied from PM/Statements.lean,
+(QF V, over any variable family V : Ty → Type) and proved by `liftThm` (PM/Quant.lean). The statement text is copied from PM/Statements.lean,
 with F.imp/F.and/F.iff renamed to QF.imp/QF.and/QF.iff; Lean checks that it is the lifted formula."""
 import re, pathlib
 
@@ -26,7 +26,7 @@ for m in re.finditer(r"^/-- \*(\S+) -/\ndef s(\w+) ((?:\(\w+ : F\) )*): F := (.*
     get = lambda v: v if v in vs else vs[0]
     args = " ".join(f'(.var "{v}")' for v in vs)
     out.append(f"/-- ✱{pid.replace('.', '·')} -/")
-    out.append(f"theorem t{name} {{V : Type}} {' '.join(f'({v} : QF V)' for v in vs)} : QThm ({body}) :=")
+    out.append(f"theorem t{name} {{V : Ty → Type}} {' '.join(f'({v} : QF V)' for v in vs)} : QThm ({body}) :=")
     out.append(f"  liftThm (_root_.PM.t{name} {args}) (subst4 {get('p')} {get('q')} {get('r')} {get('s')})")
     n += 1
 out += ["", "end PM.QL", ""]

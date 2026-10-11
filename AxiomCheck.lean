@@ -192,6 +192,7 @@ import PM
 #print axioms PM.complete
 #print axioms PM.qsound
 #print axioms PM.not_qthm_of_countermodel
+#print axioms PM.consistent
 #print axioms PM.not_qthm_phiy_imp_all
 #print axioms PM.not_qthm_ex_imp_all
 #print axioms PM.not_qthm_all_imp_ex_empty
