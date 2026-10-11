@@ -1,6 +1,7 @@
 import PM.Star12
 import PM.Complete
 import PM.Orders
+import PM.Pred.Styles
 /-!
   Degenerate variable families: a documented negative example (docs/TYPES_DESIGN.md, decision 12 and
   test C3).
@@ -81,8 +82,12 @@ theorem trap_unit_compr [Comprehension S]
     (q10_1 (V := U) (fun x => iff (.neg (.atom "q" [x])) (.app1 (a := .ind) (k := 0) () x)) ())
   QThm.mp h2 (QThm.mp h1 (liftThm glue_thm fun s => if s = "a" then q else if s = "b" then A else p))
 
-/-- `trap_unit_compr` in the predicative fragment with the lowest-order style. -/
-theorem trap_unit_compr_lowest (p : QF U) : QThm (Sys.predicative (Style.lowestOrder Lvl)) p :=
-  trap_unit_compr (fun _ => .atom (by decide)) (fun _ => .neg (.atom (by decide))) p
+/-- `trap_unit_compr` in the predicative fragment, in every style. -/
+theorem trap_unit_compr_of (P : PredReading) (R : RealReading) (p : QF U) :
+    QThm (Sys.predicative (Style.of P R)) p := by
+  cases P <;> cases R
+  · exact trap_unit_compr (fun _ => ⟨.atom (by decide), fun _ => .atom⟩)
+      (fun _ => ⟨.neg (.atom (by decide)), fun _ => .neg .atom⟩) p
+  · exact trap_unit_compr (fun _ => .atom (by decide)) (fun _ => .neg (.atom (by decide))) p
 
 end PM

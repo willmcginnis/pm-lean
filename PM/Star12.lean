@@ -8,9 +8,12 @@ import PM.Rules.Comprehension
     ✱12·1   ⊢ : (∃f) : φx . ≡ₓ . f!x            Pp
     ✱12·11  ⊢ : (∃f) : φ(x, y) . ≡ₓ,ᵧ . f!(x, y)  Pp
   Its primitive idea, "'Matrix' or 'predicative function'" (p. 172), is the type `Ty.pred1 a`
-  (`Ty.pred2 a b`) of the apparent variable f, read as the lowest order compatible with the arguments
-  (Introduction p. 56). The rest of ✱12 is prose about types and orders: PM/Quant.lean (`Ty`, `Ty.ord`,
-  `Lvl`) and the order tests in PM/Orders.lean. docs/TYPES_DESIGN.md gives each reading and its page.
+  (`Ty.pred2 a b`) of the apparent variable f, the lowest order compatible with the arguments, in both
+  styles; which formulas comprehension turns into such a function is the style: matrix (p. 172, the
+  primary style) or lowest order (Introduction p. 56), PM/Pred/. ✱12·1 and ✱12·11 have no side
+  condition, so they are the same in every style. The rest of ✱12 is prose about types and orders:
+  PM/Quant.lean (`Ty`, `Ty.ord`), PM/Pred/ (`Lvl`, `IsMatrix`) and the order tests in PM/Orders.lean.
+  docs/TYPES_DESIGN.md gives each reading and its page.
 
   The primitive propositions are the constructors `QThm.red1` and `QThm.red2`; this file states them
   with PM's macros ≡ₓ (✱10·03, `fiff`) and ≡ₓ,ᵧ (✱11·06, `fiff2`), and proves two checks of the

@@ -384,7 +384,15 @@ import PM
 #print axioms PM.liftThm
 #print axioms PM.comprehension1
 #print axioms PM.comprehension2
+#print axioms PM.matrix_adm1_le
+#print axioms PM.matrix_adm2_le
+#print axioms PM.QThm.matrix_to_lowestOrder
+#print axioms PM.p171_lowestOrder_predicative
+#print axioms PM.p171_reducibility
+#print axioms PM.consistent_of_style
+#print axioms PM.consistent_collapse_of_style
 #print axioms PM.classicalAll_spec
+#print axioms PM.consistent_collapse
 #print axioms PM.QModel.collapse
 #print axioms PM.QModel.classical
 #print axioms PM.Sh.ap_lam
@@ -587,4 +595,4 @@ import PM
 #print axioms PM.trap_empty
 #print axioms PM.trap_unit
 #print axioms PM.trap_unit_compr
-#print axioms PM.trap_unit_compr_lowest
+#print axioms PM.trap_unit_compr_of

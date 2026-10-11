@@ -52,7 +52,7 @@ QF  := atom P xs | app1 f x | app2 f x y | neg p | or p q | all {τ} (φ : V τ 
     a first-order function of a second-order function;
   - Church's cumulative r-types.
 
-### 3. (a) "Predicative"
+### 3. (a) "Predicative": two styles (revised 2026-10-11, Will's decision on Q1)
 
 PM's text has two definitions.
 
@@ -61,27 +61,58 @@ PM's text has two definitions.
   that argument". p. 174 agrees in substance: "for higher types of arguments, predicative functions take
   the place that first-order functions take in respect of individuals".
 - **Matrix.** ✱12 p. 172: "A function is said to be *predicative* when it is a matrix", and "'Matrix'
-  or 'predicative function' is a primitive idea". p. 175, (3), is the same.
+  or 'predicative function' is a primitive idea". A matrix is "any function, of however many
+  variables, which does not involve any apparent variables" (p. 169). p. 171: "A second-order matrix of
+  one variable will be called a predicative second-order function of one variable".
 
-**Decision.** Predicative means lowest order, and it is a property of the type:
-`Ty.pred1 a := fn1 a 0` and `Ty.pred2 a b := fn2 a b 0`. PM's φ!x̂ is a variable of type `pred1 a`.
+**They come apart.** Take (x) . φ!x as a function of φ!ẑ (p. 171, (1)). It is of order 2, the lowest
+order possible for an argument of order 1, so it is predicative by p. 56. It is not a matrix, so it is
+not predicative by p. 172. Likewise (y) . ψ(x, y), a first-order function of x (p. 54): predicative by
+p. 56, not by p. 172. Holmes calls the matrix definition "completely destructive" (Notes p. 4).
 
-**Rejected: the matrix reading.**
-- "Matrix" is a property of an expression ("contains no apparent variables"), not a range of values.
-  So it cannot by itself be the type of an apparent variable φ!: a matrix condition can restrict which
-  formulas comprehension accepts, but it does not give a range of values. (As an external review noted, this is not
-  to say that the values of matrices cannot form a quantified range; the types `pred1 a` are such a
-  range.)
-- PM's own examples show the two readings come apart. Take (x) . φ!x as a function of φ!ẑ (p. 171,
-  (1)). It is of order 2, the lowest order possible for an argument of order 1, so it is predicative
-  by p. 56. It is not a matrix, so it is not predicative by p. 172.
-- PM/Orders.lean records this case as a golden test (`predicativeP56 … = true` beside `isMatrix … =
-  false`). Holmes calls the matrix definition "completely destructive" (Notes p. 4).
+**Decision (Will, 2026-10-11): both, as a deliberate, documented style choice.** Each reading is its own
+module, and the proof system takes the style as a parameter (`Sys.style`, the same mechanism as the
+rule capabilities of decision 13):
+- `PM/Pred/Matrix.lean`, `Style.matrix`: comprehension at a predicative type (`fn1 a 0`, `fn2 a b 0`)
+  accepts a formula only if it is a matrix (`IsMatrix`) AND passes the order check. The matrix test is
+  conjoined with the order check, not put in its place (after an external review): φ!x with φ of order 2 is a
+  matrix but not of order 1.
+- `PM/Pred/LowestOrder.lean`, `Style.lowestOrder`: comprehension at `fn1 a k` accepts every formula
+  that passes the order check at the order of `fn1 a k`.
+- At non-predicative types (k > 0) the two styles accept the same formulas.
+- `PM/Pred/Styles.lean` puts them side by side (`PredReading`, `Style.of`).
 
-**What the choice changes.** With reducibility, ✱12·1 gives a predicative equivalent of every
-function under either reading. That the two readings then derive the same theorems needs a translation
-argument, not just this remark (after an external review); it is not claimed here. The choice only decides which formulas
-predicative *comprehension* accepts without ✱12·1 (decision 6).
+**The matrix style is primary** (Will: "the more elegant one"), in the docs and the entry files
+(`Style.primary`); the lowest-order style is the alternative (`Style.alternative`). Reasons:
+- it is ✱12's own definition, where the formal system starts, and it is "a primitive idea" there
+  (p. 172), so the formal reading should use it; p. 56 is in the informal Introduction;
+- it is a syntactic test on the formula, with no arithmetic of orders beyond the order check that both
+  styles share;
+- PM's proofs never need comprehension, so the stricter style loses nothing that PM uses: every
+  function PM forms comes from ✱12·1.
+
+**What is the same in both.** The types: `Ty.pred1 a := fn1 a 0` and `Ty.pred2 a b := fn2 a b 0` are the
+predicative functions of either reading, the lowest order compatible with the arguments, and PM's
+φ!x̂ is a variable of type `pred1 a` in both. A matrix condition restricts which formulas
+comprehension turns into such a value; it is not a range of values itself. (As an external review noted, this is not
+to say that values of matrices cannot form a quantified range; the types `pred1 a` are such a range.)
+✱12·1 and ✱12·11 (decision 7) have no side condition, so they are the same in both.
+
+**What the choice changes.**
+- `matrix_adm1_le`, `QThm.matrix_to_lowestOrder`: the matrix style admits no more than the
+  lowest-order style, so every theorem of a system in the matrix style is a theorem of the same system
+  in the lowest-order style.
+- Golden tests (PM/Pred/Styles.lean): p. 171 (1) and p. 54 are admitted by the lowest-order style and
+  refused by the matrix style at a predicative type; p. 171 (1) at a non-predicative type, and the
+  matrix φ!x ⊃ ψ!x, are admitted by both; (φ) . φ!x as a predicative function of x is refused by both.
+  `p171_lowestOrder_predicative` (lowest-order style only, comprehension without ✱12·1) and
+  `p171_reducibility` (every style, by ✱12·1) are the same statement in the two styles.
+- Without reducibility, whether the matrix style is strictly weaker (`p171` not derivable at all in
+  the matrix-style predicative fragment) is not proved: it needs a model that sees orders (test F4).
+- "Both must pass": every PM theorem (✱1–✱20 so far) is stated for an arbitrary system, so for both
+  styles; `StyleCheck.lean` instantiates each of the 351 PM propositions under each style and named
+  system and reports the result (§3, test S1). Consistency is proved for both styles in both models
+  (`consistent_of_style`, `consistent_collapse_of_style`).
 
 **Arguments of a predicative function need not be predicative.** p. 174: "Let φx̂ be a function, of
 any order, of an argument x, which may itself be either an individual or a function of any order". So
@@ -91,15 +122,17 @@ all *variables* will be individuals or matrices. Our types allow that practice w
 **Rejected:** KLN's restriction of contexts to predicative types. In that system reducibility "cannot
 even" be stated (KLN 2002, Rem. 42).
 
-**The second clause of p. 56 is not used.** p. 56 gives the lowest-order rule for one argument, and,
-right before the clause, "If the highest order of variable occurring in a function, whether as
-argument or as apparent variable, is a function of the nth order, then the function in which it
-occurs is of the n + 1th order": the maximum argument order plus one, for any number of arguments.
-So `pred2` is directly supported by p. 56 itself (after an external review). The clause says: "A function of several arguments is predicative
-if there is one of its arguments such that, when the other arguments have values assigned to them, we
-obtain a predicative function of the one undetermined argument". `pred2 a b` takes instead the lowest
-order compatible with *both* arguments, as ✱12·11's "a predicative function of those variables, i.e.
-to a matrix" (p. 174) and p. 56's first sentence suggest.
+**Several arguments.** p. 56 states the lowest-order rule for several arguments explicitly, right
+before the disputed clause: "If a function has several arguments, and the highest order of function
+occurring among the arguments is the nth, we call the function predicative if it is of the n + 1th
+order, i.e. again, if it is of the lowest order compatible with its having the arguments it has." So
+`pred2 a b` (the maximum argument order plus one) is directly supported by p. 56 (after an external review;
+the sentence this note quoted before, "If the highest order of variable occurring in a function …", is
+a paragraph earlier on the same page and says the same for orders in general). ✱12·11's "a predicative
+function of those variables, i.e. to a matrix" (p. 174) agrees. The clause that follows, "A function of
+several arguments is predicative if there is one of its arguments such that, when the other arguments
+have values assigned to them, we obtain a predicative function of the one undetermined argument", is
+discussed under Q4 (§5).
 
 ### 4. Real and apparent function variables
 
@@ -380,6 +413,7 @@ itself. There is no per-proposition ledger for ✱12–✱20 yet.
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
+| **S1** every PM theorem under both styles of "predicative" (Will, Q1) | **pass** | `StyleCheck.lean`: each of the 351 PM propositions instantiates in `Sys.full` of the matrix style and of the lowest-order style (351/351 each); 0 without a parameter `S`; per system: reducibility 350, predicative 322, base 321 in both styles (the 29 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency: `consistent_of_style`, `consistent_collapse_of_style` |
 
 ### U6: cost numbers
 
@@ -440,11 +474,11 @@ search).
 
 ## 5. Open questions for Will
 
-1. **"Predicative": p. 56 or p. 172?** (decision 3) We take the lowest order (p. 56). With
-   reducibility, the theorems are the same either way. The choice only moves the line between what
-   needs ✱12·1 and what comprehension gives. Should comprehension at a predicative type instead accept
-   only matrices (p. 172: no apparent variables at all)? That would be a small change: a matrix
-   condition conjoined with `Lvl` in `compr1` when k = 0 (not replacing it; after an external review).
+1. **"Predicative": p. 56 or p. 172?** DECIDED by Will (2026-10-11): both, as a deliberate,
+   documented style choice, the matrix reading (p. 172) primary as the more elegant one. Done: decision
+   3; `PM/Pred/Matrix.lean` (matrix test conjoined with the order check, after an external review),
+   `PM/Pred/LowestOrder.lean`, `PM/Pred/Styles.lean`; every PM theorem checked under both
+   (`StyleCheck.lean`); consistency for both.
 2. **Keep comprehension?** DECIDED by Will (2026-10-11): keep it, "mark it for what it's for", as its
    own module imported where needed. Done: `PM/Rules/Comprehension.lean`, class `Comprehension S`
    (decisions 6 and 13).

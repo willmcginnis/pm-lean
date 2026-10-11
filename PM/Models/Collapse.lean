@@ -44,4 +44,11 @@ theorem classicalAll_spec {T : Type} (f : T → Bool) : classicalAll f = true �
 noncomputable def QModel.classical (D : Type) (R : String → List D → Bool) : QModel :=
   QModel.collapse D R (fun _ => classicalAll) (fun _ => classicalAll_spec)
 
+/-- Consistency in the collapse model (two individuals, classical quantifiers): the letter `p` is not a
+    theorem, in any system `S`. Uses the classical axioms of `QModel.classical`; the axiom-free proof is
+    `consistent` (PM/Models/Finite.lean). -/
+theorem consistent_collapse (S : Sys) :
+    ¬ QThm (V := (QModel.classical Bool fun _ xs => xs.headD false).den) S (.atom "p" []) :=
+  not_qthm_of_countermodel _ rfl
+
 end PM
