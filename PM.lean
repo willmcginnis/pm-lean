@@ -5,3 +5,6 @@ import PM.Replay
 import PM.Derived
 import PM.Replay2
 import PM.Complete
+import PM.Quant
+import PM.QuantLift
+import PM.Star10
