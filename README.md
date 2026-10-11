@@ -7,14 +7,14 @@ A deep embedding of the propositional part of Whitehead & Russell's *Principia M
 - `PM/Replay.lean`: 103 propositions replayed as explicit `Thm` terms built from PM's own cited propositions. 72 use only the propositions PM cites; 31 also need at least one proposition PM does not cite, and each addition is recorded in `data/replay_ledger.json`.
 - `PM/Derived.lean` and `PM/Replay2.lean`: derived rules (syllogism, ∧/≡ introduction and elimination, a deduction theorem) and the remaining 85 propositions.
 - `PM/Complete.lean`: a Kalmár-style completeness theorem, `complete : p.isTaut = true → Thm p`. No replay depends on it.
-- `PM/Star2.lean`: shows that Gutenberg #78050's transcription of ✱1·4 is not a theorem; the 1910 print has `q ∨ p`.
+- `PM/Star2.lean`: checks a one-letter difference between the Gutenberg #78050 transcription of ✱1·4 (`p ∨ p`) and the 1910 print (`q ∨ p`): the variant is not a theorem, which is how the slip was found.
 
 Status: all 188 ✱2–✱5 propositions are proved, all 51 numbered ✱11 assertions, ✱12·1 and ✱12·11 (primitive), 24 of the 25 numbered ✱13 propositions (all but ✱13·3), 8 propositions of ✱14 and 5 of ✱20. Every PM theorem (✱2–✱5, ✱9–✱20) and `complete` reports "does not depend on any axioms" under `#print axioms`. The project contains no `sorry`, no `native_decide` and no added axioms.
 
 An exhaustive check of all 1407 declarations under `PM` and the 31 private declarations of the PM modules (`AllAxioms.lean`) finds 25 that use Lean's standard axioms. None of them is a PM derivation, an axiom-free consistency theorem or a counter-model.
 
 - *Compiler-generated* (`propext` only): 15 `injEq` lemmas, and a `Repr` instance and its function.
-- *Propositional metatheorems* (`propext`, `Quot.sound`): `PM.sound`, `PM.not_thm_of_countermodel` and `PM.gutenberg_1_4_refuted`.
+- *Propositional metatheorems* (`propext`, `Quot.sound`): `PM.sound`, `PM.not_thm_of_countermodel` and `PM.star1_4_variant_not_a_theorem`.
 - *The general (classical) collapse model* (`propext`, `Classical.choice`, `Quot.sound`): `classicalAll`, its specification and `QModel.classical`, which give classical quantifiers over arbitrary function spaces, for any domain of individuals; and `consistent_collapse`, `consistent_collapse_of_style`, which evaluate in it. (The same consistency statements are proved without axioms in the finite model.)
 
 The ✱9–✱20 soundness theorem `PM.qsound` uses no axioms, and neither do `consistent`, `consistent_all` and the five counter-models: they are proved in a finite coded model (`PM/Models/Finite.lean`), in which function values are truth tables and every quantifier is computed by enumeration.

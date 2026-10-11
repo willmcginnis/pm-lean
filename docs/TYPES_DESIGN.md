@@ -534,7 +534,7 @@ theorems and the golden theorems are axiom-free.
 |---|---|---|
 | `classicalAll`, `classicalAll_spec`, `QModel.classical` | propext, Classical.choice, Quot.sound | the general collapse model, kept: classical quantifiers over arbitrary function spaces (`Classical.propDecidable`) |
 | `consistent_collapse`, `consistent_collapse_of_style` | propext, Classical.choice, Quot.sound | consistency evaluated in the classical collapse model (the axiom-free consistency proofs are `consistent`, `consistent_of_style`) |
-| `PM.sound`, `PM.not_thm_of_countermodel`, `PM.gutenberg_1_4_refuted` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
+| `PM.sound`, `PM.not_thm_of_countermodel`, `PM.star1_4_variant_not_a_theorem` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
 | `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel` (15), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
 No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` anywhere (checked by
