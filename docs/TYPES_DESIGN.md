@@ -472,8 +472,8 @@ occurs in the declaration's type. Result: 137 PM propositions use reducibility, 
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 270 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
 | `PM/Star14.lean` | 971 | ✱14·01–✱14·04 (macros); the 47 numbered propositions ✱14·1–✱14·34, ✱14·3 as a schema (`q14_3`, with `TruthFn`, `qtfnCongr`); a scope counter-model |
-| `PM/Star20.lean` | 958 | ✱20·01, ✱20·02, ✱20·03, ✱20·04–✱20·081 (macros), class identity, Greek letters, classes of classes (`Cls`, `clsCls`, `memCls`, `clsApp`; [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)); 53 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24, and of ✱20·3 for classes of classes (`qcls20_3`); typical-ambiguity checks |
-| `PM/Star21.lean` | 828 | ✱21·01, ✱21·02, ✱21·03, ✱21·07–✱21·083 (macros), identity of relations, relations of relations and classes of relations; 46 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705); `qrelCls20_3` |
+| `PM/Star20.lean` | 1083 | ✱20·01, ✱20·02, ✱20·03, ✱20·04–✱20·081 (macros), class identity, Greek letters, classes of classes (`Cls`, `clsCls`, `memCls`, `clsApp`; [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)); 53 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24, and of ✱20·3 for classes of classes (`qcls20_3`); the class expressions PM forms (`ClsExpr`) and their extensionality (`clsExpr_ext`, p. 200); typical-ambiguity checks |
+| `PM/Star21.lean` | 898 | ✱21·01, ✱21·02, ✱21·03, ✱21·07–✱21·083 (macros), identity of relations, relations of relations and classes of relations; 46 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705); `qrelCls20_3`; `RelExpr`, `relExpr_ext` (p. 213) |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
@@ -645,9 +645,13 @@ search).
    See [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md). The options were: (A) literal: φ of type
    `pred1 (pred1 a)`, ≡_α by `clsAll`, φ!α as ✱20·01 with context φ!χ!ẑ; (B) ✱20·01 itself at type
    `pred1 a` (typical ambiguity), simpler but not the printed definiens; (C) leave classes of classes
-   for a later pass. Still open within (A): `qcls20_3` takes the extensionality of the defining
-   expression (`ClsExt`, ✱20·11 for it) as a premise, which PM asserts in general on p. 200
-   ([PM_CLAIMS.md](PM_CLAIMS.md), D1); apparent classes of classes and their identity are not built.
+   for a later pass. Within (A), `qcls20_3` takes the extensionality of the defining expression
+   (`ClsExt`, ✱20·11 for it) as a premise, which PM asserts in general on p. 200. That premise is kept,
+   and is now discharged for every expression PM's notation forms: `ClsExpr` (from formulas by ∼, ∨, (x)
+   and ✱20·01 at the class) and `clsExpr_ext`, by induction with ✱20·11; `qclsExpr20_3` is ✱20·3 for
+   classes of classes with no premise (`RelExpr`, `relExpr_ext`, `qrelExpr20_3` for relations;
+   [PM_CLAIMS.md](PM_CLAIMS.md), D1). It remains a premise only for Lean functions PM's notation cannot
+   form. Apparent classes of classes and their identity are not built.
 7. **Which fidelity counts to show.** DECIDED by the maintainer (2026-10-12): (A), keep all three.
    The `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43,
    ✱2·02, ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under
@@ -706,7 +710,7 @@ search).
      compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 25.
 
    *Size.* About 300–500 Lean lines of infrastructure across about twelve files, plus about 40 for
-   ✱14·3 itself. That is less than ✱20 (958 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,
+   ✱14·3 itself. That is less than ✱20 (1083 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,
    `QThm`, `Sys`), so every file is rechecked and the design note and documentation change in several places.
    The payoff in Vol. I is one proposition, which PM itself "ha[s] not used … in subsequent proofs"
    (p. 194).

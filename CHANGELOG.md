@@ -5,6 +5,12 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **PM's claim of p. 200 checked** (docs/PM_CLAIMS.md, D1): "every proposition about a class expresses an
+  extensional property of the determining function of the class". `ClsExpr` (PM/Star20.lean) is the
+  expressions of a class that PM's notation forms, and `clsExpr_ext` proves each of them extensional, so the
+  analogue of ✱20·3 for classes of classes holds for them with no premise (`qclsExpr20_3`). The same for
+  relations, p. 213 (`RelExpr`, `relExpr_ext`, `qrelExpr20_3`). `qcls20_3` keeps its premise for an
+  arbitrary Lean function (docs/CLASSES_OF_CLASSES.md).
 - **Design principles and PM's claims** (`docs/PRINCIPLES.md`, `docs/PM_CLAIMS.md`): the standing principles
   collected on one page, with a new one (maintainer): PM's claims about its own system are checked in Lean,
   not adopted. 75 such claims from the Introduction and ✱1–✱21 are listed with their pages and status.
