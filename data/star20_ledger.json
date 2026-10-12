@@ -185,8 +185,6 @@
    "*13.16",
    "*4.36",
    "*10.281",
-   "*3.47",
-   "*2.08",
    "*10.321",
    "*10.11",
    "*10.23"
@@ -205,7 +203,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
+  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result put for the second factor (*4.36 with *4.3, qandCongrR) under (Ephi) by *10.11.281. PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
  },
  {
   "id": "*20.15",

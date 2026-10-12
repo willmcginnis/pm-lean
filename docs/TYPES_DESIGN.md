@@ -470,8 +470,8 @@ occurs in the declaration's type. Result: 132 PM propositions use reducibility, 
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 270 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
 | `PM/Star14.lean` | 904 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
-| `PM/Star20.lean` | 742 | ✱20·01, ✱20·02, ✱20·04–✱20·072 (macros), class identity, Greek letters; 51 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·4, ✱20·41, and ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24; typical-ambiguity checks |
-| `PM/Star21.lean` | 636 | ✱21·01, ✱21·02, ✱21·07–✱21·072 (macros), identity of relations; 44 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·4, ✱21·41, and ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705) |
+| `PM/Star20.lean` | 781 | ✱20·01, ✱20·02, ✱20·04–✱20·072 (macros), class identity, Greek letters; 51 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·4, ✱20·41, and ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24; typical-ambiguity checks |
+| `PM/Star21.lean` | 637 | ✱21·01, ✱21·02, ✱21·07–✱21·072 (macros), identity of relations; 44 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·4, ✱21·41, and ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705) |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
@@ -525,15 +525,15 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
   | File | Lines per proposition |
   |---|---|
   | ✱10 | 3.7 |
-  | ✱11 | 4.9 |
+  | ✱11 | 5.1 |
   | ✱13 | 5.2 (25 propositions) |
   | ✱14 | 9.7 (47; the helper lemmas of PM/Star14.lean not counted) |
-  | ✱20 | 4.4 (51; the helper lemmas not counted) |
+  | ✱20 | 5.1 (51; the helper lemmas not counted) |
   | ✱21 | 4.3 (44; the helper lemmas not counted) |
 
   A chain written as a `calc` block (PM/Chain.lean) states each line's formula, as PM does, so it takes
   more Lean lines than the nested term it replaced. ✱13·101 is 15 lines, against PM's 5 Dem. lines.
-  ✱20·13 is 15, ✱20·19 28 (and its step `qclsIndisc`, 22). ✱14·124 is 59, against PM's 6 numbered
+  ✱20·13 is 15, ✱20·19 33 (and its step `qclsIndisc`, 22). ✱14·124 is 59, against PM's 6 numbered
   Dem. lines; most of it is bookkeeping for its four variables.
 - **Direct citations of ✱12·1 / ✱12·11 in PM's ✱13–✱20** (1910 text; citations inside formulas and
   proofs, not prose): 10 of 145 numbered items (propositions and definitions).

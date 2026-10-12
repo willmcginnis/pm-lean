@@ -41,7 +41,8 @@ import PM.Star20
   - E!(ιR)(φR), which ✱21·56 uses, is the analogue of ✱14·02 (`QF.exists1Rel`), not printed in ✱21.
 
   Steps done silently are those of PM/Star11.lean's header and of PM/Star14.lean's (chaining ⊃ and ≡
-  lines under a hypothesis). A ✱10 proposition carried under (x) and (y) by its ✱10·11·27·271 pattern
+  lines under a hypothesis; the ledger lists the propositions that join them as `glue`). PM prints no
+  Dem. in ✱21, only bracketed hints, so there is no displayed chain to write as a `calc` block. A ✱10 proposition carried under (x) and (y) by its ✱10·11·27·271 pattern
   (PM pp. 161–162: "the analogous proposition in ✱10 is used twice") is counted as that proposition.
 
   Names: `q21_1` is ✱21·1, and so on. ψ, χ, φ are formulas with two holes (defining functions of
