@@ -40,7 +40,8 @@ theorem is required to pass under each.
 - "Predicative" has two definitions (p. 56 and p. 172), and a real function variable's order two readings
   (p. 55 and p. 54). They make four styles; every PM proposition is checked under all four
   (`StyleCheck.lean`), consistency is proved for each, and `styles_equiv` shows that with reducibility they
-  derive the same theorems ([TYPES_DESIGN.md](TYPES_DESIGN.md), decisions 3 and 5; §5, Q1 and Q3).
+  derive the same theorems ([TYPES_DESIGN.md](TYPES_DESIGN.md), decisions 3 and 5; §5, Q1 and Q3). The two
+  definitions do not pick out the same functions ([PM_CLAIMS.md](PM_CLAIMS.md), B4).
 - When the maintainer decides, the decision and its date go into the decisions log, and the options that
   were weighed stay recorded there.
 
@@ -69,3 +70,6 @@ Each such claim is listed in [PM_CLAIMS.md](PM_CLAIMS.md) with its page and stat
   (for example, PM's statement that every proposition about a class is extensional is an explicit premise,
   `ClsExt`, where a proof needs it in general).
 - A claim the formalization cannot yet reach is marked **not attempted**, not quietly adopted.
+- A claim shown to fail is marked **does not hold as stated**, with what holds instead (for example, PM's
+  two definitions of "predicative", p. 56 and p. 172, disagree on (y) . ψ(x, y), a first-order function of x;
+  with reducibility they still derive the same theorems).

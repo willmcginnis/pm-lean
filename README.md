@@ -24,7 +24,9 @@ The types are PM's 1910 ramified types, with functions of one and two arguments.
 The project's design principles are in [docs/PRINCIPLES.md](docs/PRINCIPLES.md). One of them:
 where PM asserts something about its own system (that two methods are equivalent, that proofs
 carry over "by merely repeating previous proofs"), the assertion is checked in Lean, not adopted;
-[docs/PM_CLAIMS.md](docs/PM_CLAIMS.md) lists these claims and their status. What comes next is in [docs/ROADMAP.md](docs/ROADMAP.md).
+[docs/PM_CLAIMS.md](docs/PM_CLAIMS.md) lists these claims and their status. One does not hold as stated: PM's
+two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
+axiom of reducibility they derive the same theorems (row B4). What comes next is in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Status at a glance (2026-10-12, commit `27b4f85`)
 
