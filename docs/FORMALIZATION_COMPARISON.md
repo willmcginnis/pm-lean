@@ -1,7 +1,7 @@
 # How far each formalization of PM got
 
 A dated survey of the formalizations of *Principia Mathematica*, this one included. It was measured on
-2026-10-11 (this project's row on 2026-10-12, at commit `e73ab2b`); the **Measured** column gives the date and,
+2026-10-11 (this project's row on 2026-10-12, at commit `27b4f85`); the **Measured** column gives the date and,
 where it was recorded, the commit of each row. It moved here on 2026-10-12 from the README of the companion
 [text audit](https://github.com/willmcginnis/principia-mathematica-text-audit), with its definitions,
 qualifications, dates and footnotes unchanged except for links. The claims about other projects have not been
@@ -50,7 +50,7 @@ we compiled the project; `static` means P comes from reading and searching the s
 | Project | Measured | Prim. | Emb. | Check | Fits within PM | ✱2–✱5 | ✱9 | ✱10 | ✱11–✱14 | ✱20–✱56 | ✱60–✱97 |
 |---|---|---|---|---|---|---|---|---|---|---|---|
 | **PM assertions (denominator)** | 2026-10-11 | | | | | **188** | **28** | **48** | **123** | **1366** | **1477** |
-| [ours](../README.md) (Lean 4) | 2026-10-12, `e73ab2b` | PM ✱1·1–✱1·6; ✱10 alt. method; ✱12·1/✱12·11 | deep | build | yes for its PM propositions (✱1–✱5, ✱9–✱21); has an extra comprehension rule that no numbered PM proposition uses⁶ | 188/188/177¹ | 6/4/ns | 48/46/ns | 123/123/123⁷ | 95/95/95⁷ | – |
+| [ours](../README.md) (Lean 4) | 2026-10-12, `27b4f85` | PM ✱1·1–✱1·6; ✱10 alt. method; ✱12·1/✱12·11 | deep | build | yes for its PM propositions (✱1–✱5, ✱9–✱21); has an extra comprehension rule that no numbered PM proposition uses⁶ | 188/188/177¹ | 6/4/ns | 48/46/ns | 123/123/123⁷ | 99/99/99⁷ | – |
 | [l-pommeret](https://github.com/l-pommeret/Principia-Mathematica) (Lean 4) | 2026-10-11, `3fb187a` | PM ✱1·1–✱1·6, ✱1·11; ramified system | deep (shallow from ✱70) | build⁴ | yes for ✱1–✱5; not verified for its ramified ranges; no for its shallow ones⁵ | 188/188/171 | 28/26/21 | 35/34/34 | 71/68/66 | 183/128/88 | 160/151/98 (6 deep) |
 | [Neo-Principia](https://github.com/MudroadWhite/Neo-Principia) (Rocq) | 2026-10-11, commit not recorded | host logic (classical Coq); ✱9+ Pps admitted | shallow | static | no | 186/186/ns² | 28/28‡/ns | 48/47‡/ns | 123/66‡/ns | 51/1‡/ns | – |
 | [PrincipiaMathematica_Agda](https://github.com/yangg1g/PrincipiaMathematica_Agda) (Agda) | 2026-10-11, commit not recorded | Sheffer stroke; PM ✱1·1–✱1·6 | deep | static | partly (its primitive connective is the Sheffer stroke) | 188/188/ns | 28/0/ns | – | – | – | – |
@@ -88,11 +88,11 @@ of primitive propositions. 59 PM numbers have deep proofs that take an extra hyp
 such as an assumption about carrying reducibility across scopes; those are counted as not proved, unless the
 same number has another, unconditional proof.
 
-⁶ Our row was measured on the Lean repository's main branch (commit `e73ab2b`, 2026-10-12), which we built. Every
+⁶ Our row was measured at commit `27b4f85` of this repository (2026-10-12), which we built. Every
 PM proposition counted in P is derived from PM's primitive propositions: ✱1·1–✱1·6, those of ✱10's alternative
 method, and ✱12·1 and ✱12·11. The system also has an opt-in comprehension rule (our reading of ✱9·15/✱10·122); no
 PM proposition counted in P uses it. `RedCheck.lean`, which follows each proof down to the rules, finds 1 of
-the 481 declarations it treats as PM propositions using it, the helper `q12_1_of_var` (not a numbered PM
+the 485 declarations it treats as PM propositions using it, the helper `q12_1_of_var` (not a numbered PM
 proposition). Besides the rule's own statements, 9 other declarations that are not PM propositions
 (metatheorems about the system, the trap and the styles of predicativity) also use it. Consistency is proved in a
 finite model with no Lean axioms, stated at the model's variables (see [SEMANTICS.md](SEMANTICS.md)). The formula type
@@ -107,11 +107,11 @@ of propositions is an open design question ([TYPES_DESIGN.md](TYPES_DESIGN.md) �
 here primitive rules. F comes from the per-proposition ledgers, counted as for ✱11 before: every ledgered proof
 follows PM's Dem. lines or hint. As in [FIDELITY.md](FIDELITY.md), `pm-lines` means it uses only the propositions PM cites (with
 the steps PM leaves tacit), `pm-lines+extra` that it also needs at least one PM does not cite: ✱11 34/17, ✱13 12/13,
-✱14 9/38⁸ (123 in all). ✱20–✱56: 51 of ✱20's 55 assertions and 44 of ✱21's 48, F = 95⁸: ✱20 18/31 and ✱21 13/29,
+✱14 9/38⁸ (123 in all). ✱20–✱56: 53 of ✱20's 55 assertions and 46 of ✱21's 48, F = 99⁸: ✱20 18/33 and ✱21 12/32,
 plus two numbered propositions in each that are proved as rules (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
 ✱20·631, ✱20·632, ✱21·631 and ✱21·632 concern significance and are built into the syntax, so they are not counted.
-Not done: ✱14·3 as printed; ✱20·4, ✱20·41, ✱21·4 and ✱21·41, with the definitions they need (✱20·03, ✱20·08, ✱20·081, ✱21·03,
-✱21·08–✱21·083), which wait on a design decision about classes of classes; ✱22 onward; a proof that comprehension
+✱20·4, ✱20·41, ✱21·4 and ✱21·41 use classes of classes (✱20·03, ✱20·08, ✱20·081, ✱21·03, ✱21·08–✱21·083), built
+as printed. Not done: ✱14·3 as printed; ✱22 onward; a proof that comprehension
 without ✱12·1 is weaker (so that the styles of predicativity differ without reducibility; its test F4); an adequacy
 theorem; and functions of three or more arguments.
 
@@ -121,7 +121,7 @@ carrying a step under (∃x)) count as tacit or as extra: strict (all glue extra
 `fidelity` field) and all glue tacit. The counts shown here are the ones as recorded, in which joining chain
 lines is tacit (PM p. 123: "The use of ✱4·22 will often be tacit") and the other glue is extra. We do not choose
 among the readings; all three are in the fidelity table of
-[FIDELITY.md](FIDELITY.md) (at commit `e73ab2b`, in the README's section on ✱12–✱20).
+[FIDELITY.md](FIDELITY.md) (section "The three counts").
 
 **l-pommeret is the furthest deep formalization in the table:** a deep ramified system whose rules include
 ✱12·1 and ✱12·11, with deep proofs into ✱11–✱56. We built it ourselves. Like ours, it records per proposition

@@ -319,9 +319,7 @@ def markdown(d):
                 if rest: s += f"; {lbl(rest[0])}–{lbl(rest[-1])} not started" if len(rest) > 1 else f"; {lbl(rest[0])} not started"
                 s += ")"
                 # the reasons are the ones PM/Star20.lean and PM/Star21.lean give; fail rather than print stale ones
-                why = {("*20.4", "*20.41", "*21.4", "*21.41"): "α ∈ Cls, R ∈ Rel: they wait on a design decision "
-                       "about classes of classes",
-                       ("*20.631", "*20.632", "*21.631", "*21.632"): "about significance, built into the syntax "
+                why = {("*20.631", "*20.632", "*21.631", "*21.632"): "about significance, built into the syntax "
                        "like ✱10·121 and ✱10·122, so not counted as proved"}
                 assert set(m["not_proved_started"]) == {i for k in why for i in k}, m["not_proved_started"]
                 s += ". Not counted: " + "; ".join(f"{', '.join(lbl(i) for i in k)} ({w})" for k, w in why.items())

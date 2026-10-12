@@ -152,27 +152,30 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
     description.
   - The file also proves that when the negation has the wider scope (the description the narrower),
     ∼{[(ιx)(φx)] . χ(ιx)(φx)} does not imply E!(ιx)(φx).
-- `PM/Star20.lean`: classes. ✱20·01, ✱20·02, ✱20·04–✱20·072 are macros.
+- `PM/Star20.lean`: classes. ✱20·01, ✱20·02, ✱20·03, ✱20·04–✱20·081 are macros.
   - Identity of classes is ✱13·01 at the type of predicative functions, so ✱13 is used there at a higher
     type (typical ambiguity as Lean parameters).
   - A class is written by its defining function: a real Greek letter by any formula with a hole (p. 203),
     an apparent one by φ!ẑ with φ bound (✱20·07, p. 198). Each occurrence of a class is eliminated where
     it stands, with ✱14's scope conventions (p. 197) and descriptions wider than classes (p. 204).
-  - 51 of the 55 numbered propositions ✱20·1–✱20·81 are proved, ✱20·62 and ✱20·633 as rules. ✱20·631 and
+  - 53 of the 55 numbered propositions ✱20·1–✱20·81 are proved, ✱20·62 and ✱20·633 as rules. ✱20·631 and
     ✱20·632 concern significance and are built into the syntax, like ✱10·121 and ✱10·122.
-  - ✱20·4 and ✱20·41 (α ∈ Cls) are not formalized: they need ✱20·03 and the classes of classes of
-    ✱20·08·081, which wait on a design decision ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q6).
+  - Classes of classes (✱20·03, ✱20·08, ✱20·081) are built as printed, one named lemma per layer of
+    elimination, and ✱20·4, ✱20·41 (α ∈ Cls) use the analogue of ✱20·3 for classes of classes
+    (`qcls20_3`, p. 206) ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)). `x ∈ α`, `α ∈ κ` are notation
+    scoped to `PM`.
   - Where PM instantiates an apparent class at a class ẑ(φz) that need not be predicative, citing ✱10·1 or
     ✱10·24 (✱20·25, ✱20·53, ✱20·54), the step is the class analogue p. 206 points to (✱20·17's argument:
     ✱12·1 and ✱20·11).
   - ✱20·59's Dem. eliminates the class before the description, against p. 204's convention; the statement
     follows the convention (docstring).
 - `PM/Star21.lean`: relations, as ✱20 for classes ("exactly analogous … merely substituting ✱12·11 for
-  ✱12·1, and propositions in ✱11 for propositions in ✱10", p. 212). ✱21·01, ✱21·02, ✱21·07–✱21·072 are
-  macros.
-  - 44 of the 48 numbered propositions ✱21·1–✱21·71 are proved, ✱21·62 and ✱21·633 as rules; ✱21·631,
+  ✱12·1, and propositions in ✱11 for propositions in ✱10", p. 212). ✱21·01, ✱21·02, ✱21·03,
+  ✱21·07–✱21·083 are macros.
+  - 46 of the 48 numbered propositions ✱21·1–✱21·71 are proved, ✱21·62 and ✱21·633 as rules; ✱21·631,
     ✱21·632 are built into the syntax.
-  - ✱21·4 and ✱21·41 (R ∈ Rel) wait on the same decision as ✱20·4·41.
+  - Relations of relations and classes of relations (✱21·08–✱21·083) are built as in ✱20, and ✱21·4,
+    ✱21·41 (R ∈ Rel) use the analogue of ✱20·3 for classes of relations (`qrelCls20_3`).
   - ✱21·57 cites ✱13·183, whose analogue for relations is not printed in ✱21; it is proved by ✱20·25's
     argument.
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
@@ -191,6 +194,10 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
 
 - Root check files: `AxiomCheck.lean`, `AllAxioms.lean`, `RedCheck.lean`, `StyleCheck.lean`,
   `ClauseSearch.lean` ([VERIFICATION.md](VERIFICATION.md)).
+- `Checks/`: `PinnedStatements.lean` (part of `lake build`: the exact statements of propositions whose
+  statement was once corrected) and `LedgerCheck.lean` (citations and ledger rows against proof terms).
+- `tests/`: the regression tests and `run_all.sh`, which runs every check
+  ([tests/README.md](../tests/README.md)).
 - `scripts/`: the statement parser and generators, and the progress counter
   ([scripts/README.md](../scripts/README.md)).
 - `data/`: the fidelity ledgers, the parsed Vol I text and the item lists

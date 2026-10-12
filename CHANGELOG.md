@@ -5,6 +5,16 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **Classes of classes** (maintainer's decision, docs/TYPES_DESIGN.md §5, Q6): ✱20·03, ✱20·08, ✱20·081
+  and ✱21·03, ✱21·08–✱21·083 as printed, and ✱20·4, ✱20·41, ✱21·4, ✱21·41 by the analogue of ✱20·3 for
+  classes of classes (p. 206). ✱20 is at 53 of 55, ✱21 at 46 of 48 (docs/CLASSES_OF_CLASSES.md).
+- **Regression tests** (`tests/`, `Checks/`): one test for each mistake a review has caught; the statements
+  once corrected are pinned in the build; `Checks/LedgerCheck.lean` checks citations and ledger rows
+  against proof terms; `tests/run_all.sh` runs every check.
+- **Ledgers list every proposition a proof uses.** ✱10·21, and the steps carried under an apparent
+  variable inside helper lemmas, are listed as under-exists glue; an equivalence read as an implication is
+  tacit outside a displayed chain and chain glue inside one (docs/FIDELITY.md). ✱20·11, ✱21·11 and ✱21·21
+  become `pm-lines+extra`.
 - **Repository reorganization.** The README was shortened. New pages: `docs/PROGRESS.md`, `docs/FIDELITY.md`,
   `docs/VERIFICATION.md`, `docs/ARCHITECTURE.md`, `docs/SEMANTICS.md`, and `docs/FORMALIZATION_COMPARISON.md`
   (moved from the text audit's README, still CC0). Also new: `data/README.md`, `scripts/README.md`,

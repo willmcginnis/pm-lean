@@ -53,7 +53,8 @@ What the soundness and consistency theorems show, and what they do not. These li
 
 - *Not as printed:* ✱14·3, proved as a schema: its propositions as apparent variables need a type of
   propositions ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q8; open: maintainer decision).
-- ✱20·03, ✱20·08, ✱20·081 and ✱20·4, ✱20·41 (classes of classes; [TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q6;
-  open: maintainer decision).
-- ✱21·03, ✱21·08–✱21·083 and ✱21·4, ✱21·41 (relations of relations, classes of relations).
+- Apparent classes of classes ((κ) . fκ) and identity of classes of classes, which later chapters need
+  ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)). Classes of classes themselves are built (✱20·03–✱20·081,
+  ✱21·03–✱21·083), with the extensionality of a class's defining expression as an explicit premise of the
+  analogue of ✱20·3, where PM asserts it in general (p. 200).
 - ✱22 onward; functions of three or more arguments; the 1925 second edition's system.

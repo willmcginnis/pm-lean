@@ -39,7 +39,8 @@ and the labels in [docs/FIDELITY.md](docs/FIDELITY.md). When you add or change a
 
 - list PM's citations the proof uses (`cited_used`) and does not use (`cited_unused`);
 - list every other proposition it needs in `extra_used`, with the reason in `reason`, unless it is chain
-  glue or a step in the row's `tacit` list;
+  glue or a step in the row's `tacit` list (an equivalence read as an implication outside a chain is
+  tacit; see docs/FIDELITY.md);
 - list structural steps in `glue` with their `glue_kind` (`chain`, `order`, `under-exists`);
 - set `fidelity`: `pm-lines` if `extra_used` is empty, otherwise `pm-lines+extra` (`unchanged` if there is
   no PM proof to follow);
@@ -54,6 +55,8 @@ lake env lean AllAxioms.lean     # still 25 declarations using an axiom, none of
 lake env lean RedCheck.lean      # 0 disagreements between signatures and proofs
 lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of all four styles
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines
+lake env lean Checks/LedgerCheck.lean  # every proposition a proof uses is listed in its ledger row
+tests/run_all.sh                 # all of the above, ClauseSearch and the regression tests
 ```
 
 If you add theorems, also run `python3 scripts/gen_axiomcheck.py`, so that `AxiomCheck.lean` covers them.

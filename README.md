@@ -21,7 +21,7 @@ proof needs that PM does not cite.
 
 The types are PM's 1910 ramified types, with functions of one and two arguments.
 
-## Status at a glance (2026-10-12, commit `e73ab2b`)
+## Status at a glance (2026-10-12, commit `27b4f85`)
 
 | Part of Vol I | Chapters | Numbered assertions proved |
 |---|---|---|
@@ -30,7 +30,7 @@ The types are PM's 1910 ramified types, with functions of one and two arguments.
 | Types and reducibility | ✱12 | no assertions: ✱12·1, ✱12·11 are rules |
 | Identity, descriptions | ✱13, ✱14 | 25 of 25; 47 of 47 (✱14·3 as a schema) |
 | Classes, relations | ✱20, ✱21 | 53 of 55; 46 of 48 |
-| **Vol I** | ✱1–✱97 | **456 of 3,230 (14.1%)** |
+| **Vol I** | ✱1–✱97 | **460 of 3,230 (14.2%)** |
 
 Vols II and III are not started.
 Per-chapter tables, milestones and the units counted: [docs/PROGRESS.md](docs/PROGRESS.md).
@@ -40,7 +40,8 @@ Not yet done:
 
 - ✱14·3 as printed: it needs a type of propositions, so it is proved as a schema,
   one theorem per instance;
-- ✱20·4, ✱20·41, ✱21·4, ✱21·41 (classes of classes; a design decision is open);
+- apparent classes of classes and their identity, needed from ✱40 on
+  ([docs/CLASSES_OF_CLASSES.md](docs/CLASSES_OF_CLASSES.md));
 - ✱22 onward; functions of three or more arguments; the 1925 second edition.
 
 ## What the proofs establish
@@ -70,12 +71,13 @@ Install the Lean toolchain named in `lean-toolchain` with
 [elan](https://github.com/leanprover/elan). There are no other dependencies.
 
 ```
-lake build                      # about 15 s from clean
-lake env lean AxiomCheck.lean   # 792 of 796 selected declarations use no axioms
+lake build                      # about 17 s from clean
+lake env lean AxiomCheck.lean   # 821 of 825 selected declarations use no axioms
 lake env lean AllAxioms.lean    # every declaration; lists the 25 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
 python3 data/fidelity_counts.py # fidelity counts from the ledgers
+tests/run_all.sh                # all checks, and the regression tests
 ```
 
 The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION.md).
@@ -89,7 +91,8 @@ The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION
 | `PM/Quant.lean`, `PM/Star10.lean`, `PM/Star11.lean` | ✱9–✱11 |
 | `PM/Star12.lean` … `PM/Star21.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱21, rules, styles of predicativity |
 | `PM/Models/` | the models: soundness, consistency, counter-models |
-| `*.lean` at the root | the checks |
+| `*.lean` at the root, `Checks/` | the checks |
+| `tests/` | regression tests and `run_all.sh` ([tests/README.md](tests/README.md)) |
 | `data/` | fidelity ledgers, the parsed Vol I text ([data/README.md](data/README.md)) |
 | `scripts/` | statement parser, generators, progress counter ([scripts/README.md](scripts/README.md)) |
 | `docs/` | documentation ([index](docs/README.md)) |

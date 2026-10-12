@@ -9,7 +9,8 @@
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the files, chapter by chapter |
 | [FORMALIZATION_COMPARISON.md](FORMALIZATION_COMPARISON.md) | a dated survey of the formalizations of PM (CC0) |
 | [STAR9_DESIGN.md](STAR9_DESIGN.md) | design note for ✱9–✱11: ✱10's alternative method |
+| [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md) | design note for classes of classes and classes of relations (✱20·03–✱20·081, ✱21·03–✱21·083) |
 | [TYPES_DESIGN.md](TYPES_DESIGN.md) | design note for ✱12 onward: ramified types, decisions with their pages, acceptance tests, decisions log and open questions |
 
 Elsewhere: [data/README.md](../data/README.md) (ledgers and parsed text), [scripts/README.md](../scripts/README.md)
-(regeneration), [CONTRIBUTING.md](../CONTRIBUTING.md), [CHANGELOG.md](../CHANGELOG.md).
+(regeneration), [tests/README.md](../tests/README.md) (regression tests), [CONTRIBUTING.md](../CONTRIBUTING.md), [CHANGELOG.md](../CHANGELOG.md).

@@ -128,8 +128,8 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   Skipped: neither the collapse model nor the finite model sees orders, and an order-aware model of the
   whole hierarchy (restricted ranges at every type, closed under comprehension) is not cheap. Only the
   syntactic half is proved: the matrix style admits less (`QThm.matrix_to_lowestOrder`, golden tests).
-- "Both must pass": every PM theorem (✱1–✱20 so far) is stated for an arbitrary system, so for both
-  styles; `StyleCheck.lean` instantiates each of the 481 PM propositions under each style and named
+- "Both must pass": every PM theorem (✱1–✱21 so far) is stated for an arbitrary system, so for both
+  styles; `StyleCheck.lean` instantiates each of the 485 PM propositions under each style and named
   system and reports the result (§3, test S1). Consistency is proved for both styles in both models
   (`consistent_of_style`, `consistent_collapse_of_style`).
 
@@ -198,7 +198,7 @@ module, and it combines with either reading of "predicative" (decision 3), givin
   comprehension or ✱12·1, since φ itself is a witness (`realPhi_every_system`). What differs between
   the styles is whether the direct comprehension application is accepted.
 - `styles_equiv` covers all four styles: with reducibility they derive the same theorems;
-  `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 481 PM
+  `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 485 PM
   propositions pass in `Sys.full` of each of the four styles.
 
 The p. 55 reading is the default because it is what p. 55 says outright about the case at issue, and
@@ -347,7 +347,9 @@ constructor. Their macros take the condition and the context:
   therefore stands for 'f{ẑ(φz)}'"). Descriptions of classes are `descCls` (✱20·072). This applies the
   decision above to Greek letters; it adds no term constructor. Capital letters for relations (✱21,
   p. 212) are treated the same way, with formulas of two holes (`rel`, `relAll`, `relEx`, `descRel`).
-  Classes of classes (✱20·08·081) and their ✱21 analogues are open (§5, Q6).
+  Classes of classes (✱20·08·081) and their ✱21 analogues are built as printed, with φ of type
+  `pred1 (pred1 a)` and each layer of elimination one named lemma (§5, Q6;
+  [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).
 
 **Rejected:** ι and ẑ as term constructors. That would make them complete symbols, contrary to PM.
 
@@ -443,8 +445,8 @@ catches evidence supplied other than by the class, directly or through any helpe
 look inside recursors, `casesOn`, `below`/`brecOn`, `noConfusion` or matchers, whose types name every
 constructor, so that a proof by induction on `QThm`, such as `qsound`, does not count as using every
 rule. A declaration uses a rule if either analysis finds it; that is compared with whether the class
-occurs in the declaration's type. Result: 133 PM propositions use reducibility, 1 uses comprehension
-(the two analyses agree on all 481), and 0 disagree with their signatures. The test
+occurs in the declaration's type. Result: 137 PM propositions use reducibility, 1 uses comprehension
+(the two analyses agree on all 485), and 0 disagree with their signatures. The test
 `RedCheckTest.red_with_explicit_evidence` (in RedCheck.lean; from an external review) calls
 `QThm.red1` with explicit evidence and no class: RedCheck flags it, and fails if it does not.
 
@@ -470,8 +472,8 @@ occurs in the declaration's type. Result: 133 PM propositions use reducibility, 
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 270 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
 | `PM/Star14.lean` | 971 | ✱14·01–✱14·04 (macros); the 47 numbered propositions ✱14·1–✱14·34, ✱14·3 as a schema (`q14_3`, with `TruthFn`, `qtfnCongr`); a scope counter-model |
-| `PM/Star20.lean` | 781 | ✱20·01, ✱20·02, ✱20·04–✱20·072 (macros), class identity, Greek letters; 51 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·4, ✱20·41, and ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24; typical-ambiguity checks |
-| `PM/Star21.lean` | 637 | ✱21·01, ✱21·02, ✱21·07–✱21·072 (macros), identity of relations; 44 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·4, ✱21·41, and ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705) |
+| `PM/Star20.lean` | 958 | ✱20·01, ✱20·02, ✱20·03, ✱20·04–✱20·081 (macros), class identity, Greek letters, classes of classes (`Cls`, `clsCls`, `memCls`, `clsApp`; [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)); 53 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24, and of ✱20·3 for classes of classes (`qcls20_3`); typical-ambiguity checks |
+| `PM/Star21.lean` | 828 | ✱21·01, ✱21·02, ✱21·03, ✱21·07–✱21·083 (macros), identity of relations, relations of relations and classes of relations; 46 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705); `qrelCls20_3` |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
@@ -507,14 +509,14 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **U2** ✱10 used at a function sort | **pass** | `q13_101` uses ✱10·1, ✱10·27, ✱10·23 at `pred1 a`; `q20_14` uses ✱10·23 at `pred1 a`; `q12_1_of_var` at `fn1 a k` and `pred1 a` |
 | **U3** ✱13·101, ✱13·12 along PM's lines, citing ✱12·1 | **pass** | `q13_101` (lines (1), (2) of p. 177; (1) is `q12_1`), `q13_12`; also ✱13·1–✱13·3 |
 | **U4** ✱14·21 with explicit scope | **pass** | `q14_21`, `q14_21_neg` ([(ιx)(φx)] . ∼χ(ιx)(φx) ⊃ E!), `not_qthm_neg_desc_imp_exists1` (∼{[(ιx)(φx)] . χ(ιx)(φx)} ⊃ E! is not a theorem); also ✱14·1–✱14·34 (✱14·3 as a schema) |
-| **U5** one ✱20 class theorem | **pass** | `q20_15` (ψx ≡ₓ χx . ≡ . ẑ(ψz) = ẑ(χz), p. 201), via `q20_13` (cites ✱12·1), `q20_14`; also `q20_3` (x ∈ ẑ(ψz) . ≡ . ψx, cites ✱12·1), and the rest of ✱20 but ✱20·4·41 |
+| **U5** one ✱20 class theorem | **pass** | `q20_15` (ψx ≡ₓ χx . ≡ . ẑ(ψz) = ẑ(χz), p. 201), via `q20_13` (cites ✱12·1), `q20_14`; also `q20_3` (x ∈ ẑ(ψz) . ≡ . ψx, cites ✱12·1), and the rest of ✱20 (✱20·4·41 since Q6) |
 | **U6** cost | **reported** | see below |
 | **F1** decidable order checker | **pass** | `QF.order`, `lvl_iff_order`, `instance : Decidable (Lvl p n)` at `U`; `fnOrder` |
 | **F2** golden order tests | **pass** | PM/Orders.lean: 6 type orders; 12 tests from Intro pp. 54–56; 12 from ✱12 pp. 170–171 (incl. the p. 56 / p. 172 divergence); 2 on comprehension (accepts (x) . φ!x as a function of φ; refuses (φ) . φ!x as a predicative function of x) |
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
-| **S1** every PM theorem under every style (Will, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 481 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 481/481 each; 0 without a parameter `S`; per system, in every style: reducibility 480, predicative 348, base 347 (the 133 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
+| **S1** every PM theorem under every style (Will, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 485 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 485/485 each; 0 without a parameter `S`; per system, in every style: reducibility 484, predicative 348, base 347 (the 137 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
 | **S2** `styles_equiv` (Will, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
 | **S3** currying (Will, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
 | **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists within this encoding** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements, comparing the same definitions. Both partial applications are evaluated at `()` in `U` with the same body order, so the result is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1; it does not show that the encoding captures PM's "assignment of values", nor extend to arbitrary variable families. Not added as a style (none needed within this encoding) |
@@ -530,8 +532,8 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
   | ✱11 | 5.1 |
   | ✱13 | 5.2 (25 propositions) |
   | ✱14 | 9.7 (48; the helper lemmas of PM/Star14.lean not counted) |
-  | ✱20 | 5.1 (51; the helper lemmas not counted) |
-  | ✱21 | 4.3 (44; the helper lemmas not counted) |
+  | ✱20 | 5.0 (53; the helper lemmas not counted) |
+  | ✱21 | 4.2 (46; the helper lemmas not counted) |
 
   A chain written as a `calc` block (PM/Chain.lean) states each line's formula, as PM does, so it takes
   more Lean lines than the nested term it replaced. ✱13·101 is 15 lines, against PM's 5 Dem. lines.
@@ -548,14 +550,14 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
     `q20_112`, `q20_12`, `q20_13`, `q20_151`, `q20_19`, `q20_3`, `q20_703`, `q21_112`, `q21_12`, `q21_13`,
     `q21_151`, `q21_3`), the ones PM's proofs cite it in among those formalized; `q20_701` and
     `q20_702` use ✱12·11 as their hint says. The class analogues of ✱10·1 and ✱10·24 (`qclsAllAt`,
-    `qclsExAt`, in ✱20·25, ✱20·53, ✱20·54) also use ✱12·1, and those for relations (`qrelAllAt`,
-    `qrelExAt`, in ✱21·53, ✱21·54) ✱12·11.
-  - **Transitive dependence (RedCheck):** 129 of the 168 formalized ✱13/✱14/✱20/✱21 propositions
+    `qclsExAt`, in ✱20·25, ✱20·4, ✱20·53, ✱20·54) also use ✱12·1, and those for relations (`qrelAllAt`,
+    `qrelExAt`, in ✱21·4, ✱21·53, ✱21·54) ✱12·11.
+  - **Transitive dependence (RedCheck):** 133 of the 172 formalized ✱13/✱14/✱20/✱21 propositions
     (counting the variant `q14_21_neg`) depend on ✱12·1 or ✱12·11:
     - ✱13: 20 of 25;
     - ✱14: 32 of 48;
-    - ✱20: 42 of 51 (✱20·112–✱20·59, ✱20·7–✱20·81);
-    - ✱21: 35 of 44 (✱21·112–✱21·58, ✱21·7–✱21·71).
+    - ✱20: 44 of 53 (✱20·112–✱20·59, ✱20·7–✱20·81);
+    - ✱21: 37 of 46 (✱21·112–✱21·58, ✱21·7–✱21·71).
   - **Not dependent:**
     - ✱13·1, ✱13·15, ✱13·17, ✱13·18, ✱13·19;
     - ✱14·1, ✱14·101, ✱14·11, ✱14·111, ✱14·112, ✱14·113, ✱14·121, ✱14·18, ✱14·201, ✱14·21 (and
@@ -569,18 +571,19 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
     joined by Comp under ✱10·11·28). The elimination at the end is ✱10·23 plus Comm, 2 lines.
   - The remaining ✱13 proofs reach ✱12·1 only through ✱13·101, at no further cost (✱14·17, ✱14·171 and ✱20 cite ✱12·1 directly).
   - Each direct use in ✱20 costs 1–2 lines, mostly turning ψ ≡ₓ φ! into φ! ≡ₓ ψ (✱10·32 under ∃).
-- **Build:** clean `lake build`, 35 jobs, 15.6 s (wall clock, after `lake clean`).
+- **Build:** clean `lake build`, 37 jobs (35 for `PM`, 2 for the pinned statements of `Checks/`), 17.2 s
+  (wall clock, after `lake clean`).
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 796 names; 792 report no axioms. The other 4 belong to the classical collapse model
+`AxiomCheck.lean`: 825 names; 821 report no axioms. The other 4 belong to the classical collapse model
 (below). Every PM theorem (✱2–✱5 and the ✱9–✱21 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1645 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 1693 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
 
 | Declarations | Axioms | Why |
@@ -635,26 +638,25 @@ search).
    PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
    classical collapse model is kept as the general one (decision 11).
 
-6. **Classes of classes (✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41).** OPEN: maintainer decision. ✱20·08 is
-   `f{α̂(ψα)} . = : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` and ✱20·081 `α ∈ ψ!α̂ . = . ψ!α` (p. 200); "Cls"
-   (✱20·03) is the class of classes α̂{(∃φ) . α = ẑ(φ!z)}, and ✱20·4, ✱20·41 are about α ∈ Cls. The
-   definiens binds φ, a predicative function whose argument is a class, ranges ≡_α over classes
-   (✱20·07), and applies φ! to a class (φ!α, eliminated by ✱20·01). Options:
-   (A) literal: φ of type `pred1 (pred1 a)`, ≡_α by `clsAll`, φ!α as ✱20·01 with context φ!χ!ẑ, so
-   ψα is a class expression `F` as elsewhere in ✱20; (B) ✱20·01 itself at type `pred1 a` (typical
-   ambiguity), so that α̂ ranges over predicative functions, not classes, which is simpler but not
-   the printed definiens; (C) leave classes of classes for a later pass (they "will occur constantly",
-   e.g. cardinal numbers, p. 199). Nothing else in ✱20 depends on the choice. The same
-   question covers ✱21·03 (Rel), ✱21·08–✱21·083 (relations of relations, classes of relations) and
-   ✱21·4, ✱21·41.
+6. **Classes of classes.** DECIDED by the maintainer (2026-10-12): (A), literal. Done: ✱20·03, ✱20·08,
+   ✱20·081 (`Cls`, `clsCls`, `memCls`, with φ!α as `clsApp`), ✱20·4, ✱20·41; ✱21·03, ✱21·08–✱21·083,
+   ✱21·4, ✱21·41. Each layer of elimination is one named lemma, statements use the scoped notation
+   `α ∈ κ`, and the ✱20·3 of ✱20·4's hint is its analogue for classes of classes (`qcls20_3`, p. 206).
+   See [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md). The options were: (A) literal: φ of type
+   `pred1 (pred1 a)`, ≡_α by `clsAll`, φ!α as ✱20·01 with context φ!χ!ẑ; (B) ✱20·01 itself at type
+   `pred1 a` (typical ambiguity), simpler but not the printed definiens; (C) leave classes of classes
+   for a later pass. Still open within (A): `qcls20_3` takes the extensionality of the defining
+   expression (`ClsExt`, ✱20·11 for it) as a premise, which PM asserts in general on p. 200;
+   apparent classes of classes and their identity are not built.
 7. **Which fidelity counts to show.** DECIDED by the maintainer (2026-10-12): (A), keep all three.
    The `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43,
    ✱2·02, ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under
    (∃x) (`order`, `under-exists`) as extra. That is a choice, so docs/FIDELITY.md shows three columns per
    chapter from `data/fidelity_counts.py`: strict (all glue extra), as recorded, and all glue tacit.
    The options were: (A) keep all three; (B) show one (which) and keep the others in the script; (C)
-   change what `fidelity` records. The columns differ at ✱11, ✱13, ✱14 (as recorded 34/17, 12/13, 9/38;
-   all glue tacit 39/12, 16/9, 12/35) and at ✱14·25, ✱20·11, ✱21·11 (strict).
+   change what `fidelity` records. When this was decided the columns differed at ✱11, ✱13, ✱14 (as
+   recorded 34/17, 12/13, 9/38; all glue tacit 39/12, 16/9, 12/35) and at ✱14·25, ✱20·11, ✱21·11
+   (strict); the current figures are in docs/FIDELITY.md.
 8. **A type of propositions, so that ✱14·3 could be stated as printed.** OPEN: maintainer decision.
    ✱14·3 is proved as a schema (§2; `q14_3`): PM's antecedent
    p ≡ q . ⊃_{p,q} . f(p) ≡ f(q) is a premise with p, q real, asserted for every p, q, and f is a Lean
@@ -704,7 +706,7 @@ search).
      compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 25.
 
    *Size.* About 300–500 Lean lines of infrastructure across about twelve files, plus about 40 for
-   ✱14·3 itself. That is less than ✱20 (781 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,
+   ✱14·3 itself. That is less than ✱20 (958 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,
    `QThm`, `Sys`), so every file is rechecked and the design note and documentation change in several places.
    The payoff in Vol. I is one proposition, which PM itself "ha[s] not used … in subsequent proofs"
    (p. 194).
@@ -718,8 +720,10 @@ search).
 
 ## 6. Not done
 
-- ✱14·3 as printed, with propositions as apparent variables (it is proved as a schema; §5, Q8); ✱20·03, ✱20·08, ✱20·081 and so ✱20·4, ✱20·41 (classes of
-  classes, §5 Q6); ✱21·03, ✱21·08–✱21·083 and so ✱21·4, ✱21·41; ✱22 onward.
+- ✱14·3 as printed, with propositions as apparent variables (it is proved as a schema; §5, Q8); ✱22
+  onward.
+- Apparent classes of classes ((κ) . fκ) and identity of classes of classes, needed from ✱40 and ✱60 on
+  ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).
 - F4 (non-derivability of impredicative comprehension without ✱12·1), and so the strict weakness of the
   matrix style and of the p. 54 reading without reducibility: skipped. It needs a model that sees orders;
   both models here forget them.
