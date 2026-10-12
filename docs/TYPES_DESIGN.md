@@ -572,7 +572,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 ## 4. Axioms
 
 `AxiomCheck.lean`: 794 names; 790 report no axioms. The other 4 belong to the classical collapse model
-(below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
+(below). Every PM theorem (✱2–✱5 and the ✱9–✱21 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
@@ -633,7 +633,8 @@ search).
    PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
    classical collapse model is kept as the general one (decision 11).
 
-6. **Classes of classes (✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41).** OPEN, for Will. ✱20·08 is
+6. **Classes of classes (✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41).** OPEN, for Will.
+   NEEDS WILL: classes of classes (✱20·08 etc.). ✱20·08 is
    `f{α̂(ψα)} . = : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` and ✱20·081 `α ∈ ψ!α̂ . = . ψ!α` (p. 200); "Cls"
    (✱20·03) is the class of classes α̂{(∃φ) . α = ẑ(φ!z)}, and ✱20·4, ✱20·41 are about α ∈ Cls. The
    definiens binds φ, a predicative function whose argument is a class, ranges ≡_α over classes
@@ -645,6 +646,14 @@ search).
    e.g. cardinal numbers, p. 199). Nothing else in ✱20 depends on the choice. The same
    question covers ✱21·03 (Rel), ✱21·08–✱21·083 (relations of relations, classes of relations) and
    ✱21·4, ✱21·41.
+7. **Which fidelity counts to show.** OPEN, for Will. NEEDS WILL: which count columns to show. The
+   `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱3·43, ✱2·02,
+   ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under (∃x)
+   (`order`, `under-exists`) as extra. That is a choice, so README.md (Fidelity) shows three columns per
+   chapter from `data/fidelity_counts.py`: strict (all glue extra), as recorded, and all glue tacit.
+   Options: (A) keep all three; (B) show one (which) and keep the others in the script; (C) change
+   what `fidelity` records. The columns differ at ✱11, ✱13, ✱14 (as recorded 34/17, 12/13, 9/37;
+   all glue tacit 39/12, 16/9, 12/34) and at ✱14·25, ✱20·11, ✱21·11 (strict).
 
 ## 6. Not done
 
