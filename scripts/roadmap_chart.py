@@ -20,7 +20,9 @@ Every SVG carries its own light and dark colours (prefers-color-scheme).
 Before writing, the script checks the data (ids, dependencies, cycles, "by
 choice" placements, evidence levels of prior work, a source for every
 measured entry, each source pinned to a full commit or a version, recorded
-moves), the dependencies that the prose of docs/ROADMAP.md states (see
+moves), the claims (every row of docs/PM_CLAIMS.md covered by exactly one
+task, and a task with claims done exactly when each of them is checked; see
+claims_errors), the dependencies that the prose of docs/ROADMAP.md states (see
 prose_deps_errors) and the
 drawing: every text box is estimated and must not overlap another, must stay
 inside its box and inside the image; each file is re-parsed as XML. Any
@@ -240,6 +242,49 @@ def read(path):
         return f.read()
 
 
+def claim_rows():
+    """{row id: status} for every row of docs/PM_CLAIMS.md, in the page's order."""
+    rows = {}
+    for line in read(os.path.join(ROOT, "docs", "PM_CLAIMS.md")).splitlines():
+        m = re.match(r"\| ([A-F]\d+) \|", line)
+        if m:
+            rows[m.group(1)] = [x.strip() for x in line.split("|")][4]
+    return rows
+
+
+# A claim is checked when its status is "checked", possibly qualified after a comma ("checked, as a schema"),
+# with no open part after a semicolon ("checked for ✱10's method; in progress for ✱9's" is not).
+CHECKED = re.compile(r"checked(?:, [^;]*)?")
+
+
+def claims_errors(leaves, rows):
+    """What is wrong with the tasks' `claims`, as a list of messages.
+
+    Every row of PM_CLAIMS.md belongs to exactly one task; a task with claims is done exactly when every
+    claim it covers is checked."""
+    errs, owner = [], {}
+    for lid, lf in leaves.items():
+        ids = lf.get("claims", [])
+        for c in ids:
+            if c not in rows:
+                errs.append(f"{lid}: claim {c} is not a row of PM_CLAIMS.md")
+            elif c in owner:
+                errs.append(f"claim {c} is covered by more than one task: {owner[c]}, {lid}")
+            else:
+                owner[c] = lid
+        if not ids:
+            continue
+        open_ = [c for c in ids if c in rows and not CHECKED.fullmatch(rows[c])]
+        if lf["status"] == "done" and open_:
+            errs.append(f"{lid}: done, but claims {', '.join(open_)} are not checked")
+        if lf["status"] != "done" and not open_:
+            errs.append(f"{lid}: every claim it covers is checked, but its status is {lf['status']!r}")
+    missing = [c for c in rows if c not in owner]
+    if missing:
+        errs.append(f"claims covered by no task: {', '.join(missing)}")
+    return errs
+
+
 def repo_facts():
     """The counts that notes may cite, read from the repository's own files."""
     prog = read(os.path.join(ROOT, "docs", "PROGRESS.md"))
@@ -258,10 +303,8 @@ def repo_facts():
             if total:
                 facts[f"progress:{vol}"] = f"{c[2]} of {total.group(1)}"
     claims = read(os.path.join(ROOT, "docs", "PM_CLAIMS.md"))
-    for line in claims.splitlines():
-        mm = re.match(r"\| ([A-F]\d+) \|", line)
-        if mm:
-            facts[f"claims:{mm.group(1)}"] = [x.strip() for x in line.split("|")][4]
+    for c, status in claim_rows().items():
+        facts[f"claims:{c}"] = status
     m = re.search(r"## Counts\n\n(.*?)\n\n", claims + "\n\n", re.S)
     facts["claims-counts"] = " ".join(re.sub(r"\s*\(`tests/[^)]*\)", "", m.group(1)).split()) if m else None
     rows = json.loads(read(os.path.join(ROOT, "data", "star9f_ledger.json")))
@@ -300,6 +343,9 @@ def load(path=DATA):
                 leaves[lf["id"]] = lf
                 owner[lf["id"]] = (gi, g, sg)
     validate(d, leaves)
+    errs = claims_errors(leaves, claim_rows())
+    if errs:
+        raise SystemExit("roadmap.json, claims of PM_CLAIMS.md:\n  " + "\n  ".join(errs))
     return d, leaves, owner
 
 
@@ -997,6 +1043,8 @@ def md_tables(d, leaves, owner):
                 status = lf["status"]
                 if lf.get("status_note"):
                     status = f"{status}. {lf['status_note']}"
+                if lf.get("claims"):
+                    status += ("" if status.endswith(".") else ".") + f" Claims of [PM_CLAIMS.md](PM_CLAIMS.md): {', '.join(lf['claims'])}."
                 out.append(f"| {lf['name']} | {status} | {lf['size']}: {lf['size_reason']} | "
                            f"{names(leaves, lf['hard_deps'])} | {names(leaves, lf['soft_deps'])} | {order} |")
             out += ["", "Prior work:", ""] + md_prior_work(sg, d.get("sources", {})) + [""]

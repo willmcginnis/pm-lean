@@ -26,7 +26,12 @@ What the searches so far found is listed under each subgroup below.
 that proofs carry over "by merely repeating previous proofs", that a construction "covers all the cases"),
 the assertion is treated as a theorem to check in Lean, not an assumption to adopt. Each claim is listed in
 [PM_CLAIMS.md](PM_CLAIMS.md) with its page and status, and is checked when its chapter is reached. A claim
-found not to hold as stated is a result, recorded as such.
+found not to hold as stated is a result, recorded as such. Every row of PM_CLAIMS.md belongs to exactly one
+task of this plan, most of them in the subgroup *PM's claims about its own system*, grouped by the page's
+sections and by the kind of work they ask for; a task with claims is done exactly when each of its claims
+is checked. Open: PM_CLAIMS.md covers only the pages read for it, the Introduction and ✱1–✱21, so the
+claims PM makes in ✱22–✱97 (for example ✱25's "Proofs will not be given, as they proceed precisely as
+in ✱24", p. 241) are not yet catalogued.
 
 **One source, many checkers.** PM is formalized once, here, in Lean, and that development is the single
 source. Other foundations do not get their own rewrite of PM: they receive the same derivations through an
@@ -48,7 +53,8 @@ The work is in four **groups** that run side by side:
 2. **Checking underneath**: the same derivations re-checked by independent Lean kernels, by Metamath and
    Rocq checkers, and in ZFC; and Lean's own kernel, verified for the fragment this project uses.
 3. **Comparing across**: the same statements compared with other readings of PM, with mainstream
-   mathematics (Mathlib), and with the printed text.
+   mathematics (Mathlib), and with the printed text; and exported to formalization platforms, whose
+   proofs come back to be checked here.
 4. **Results about PM**: adequacy, incompleteness, the finitist audit, WKL₀ and decision procedures.
 
 Each group is split into **subgroups**, and each subgroup into **tasks** the size of a chapter block or of
@@ -109,14 +115,15 @@ Formalize the text, volume by volume and chapter by chapter, and check PM's clai
 | A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142) | not started. With it, the agreement of the two methods (p. 144) rests only on a variable of every type. For the variables of a structure (`QModel.den`) an individual gives a value of every type (`den_nonempty`); for an arbitrary family of variables it does not, so there that assumption stays as stated. | L: A normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory, or a completeness theorem for the reading (for the working reading C, the completeness task). | nothing | ✱9·31 and p. 142, C complete | by dependency |
 | Every theorem checked under both foundations, ✱9's and ✱10's | not started | M: As StyleCheck does for the predicativity styles; done if the cost measured on a trial branch is reasonable. | Rep | ✱9 beside ✱10 | by dependency |
 | ✱20–✱24: classes and relations | in progress. ✱20 53 of 55 and ✱21 46 of 48 proved: done, the rest being ✱20·631·632 and ✱21·631·632, about significance, which are built into the syntax. ✱22–✱24 next. | M: 316 assertions; ✱20 and ✱21 are done, ✱22–✱24 are a calculus of classes and relations. | nothing | ✱9–✱14 | by dependency |
+| ✱25: the universal relation, the null relation, and the existence of relations | not started. No ✱25 proposition is stated yet. PM gives none of the proofs: "Proofs will not be given, as they proceed precisely as in ✱24" (p. 241), a remark of the kind PM_CLAIMS.md lists for ✱21 (D10), checked by writing each proof out. Later chapters cite ✱25, from ✱31, ✱33, ✱34 and ✱35 on. | S: 3 definitions and 70 assertions (pp. 241–243), the analogues for relations of ✱24's, with the same numbering; PM prints no proofs, so each is written out along ✱24's. | ✱20–✱24 | nothing | by dependency |
 | Apparent classes of classes and their identity, needed from ✱40 on | in progress. Decided (literal reading of ✱20·08) and built for the definitions and ✱20·4, ✱21·4; apparent classes of classes not yet (docs/CLASSES_OF_CLASSES.md). | M: A second layer of the class construction, built as printed (✱20·08), with its identity. | nothing | ✱20–✱24 | by dependency |
-| Extensionality of every class and relation expression, proved once (pp. 200, 213) | done. PM_CLAIMS D1: checked, for the expressions PM's notation forms (`clsExpr_ext`, `relExpr_ext`). For a Lean function that uses the class otherwise, which PM's notation cannot form, the premise remains. | M: A general theorem over the expressions PM's notation forms, replacing an explicit premise. | nothing | ✱20–✱24 | by dependency |
-| ✱30–✱38: the logic of relations | not started | M: Descriptive functions, converses, domains, relative products; mostly short proofs. | ✱20–✱24 | nothing | by dependency |
+| Extensionality of every class and relation expression, proved once (pp. 200, 213) | done. PM_CLAIMS D1: checked, for the expressions PM's notation forms (`clsExpr_ext`, `relExpr_ext`). For a Lean function that uses the class otherwise, which PM's notation cannot form, the premise remains. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): D1. | M: A general theorem over the expressions PM's notation forms, replacing an explicit premise. | nothing | ✱20–✱24 | by dependency |
+| ✱30–✱38: the logic of relations | not started | M: Descriptive functions, converses, domains, relative products; mostly short proofs. | ✱20–✱24, ✱25 | nothing | by dependency |
 | ✱40–✱56: products and sums of classes; unit classes and couples, to ✱54·43 | not started | L: Classes of classes throughout; ✱54·43 is the step before 1 + 1 = 2. | ✱30–✱38, classes of classes | nothing | by dependency |
 | ✱60–✱74: sub-classes, relative types; one-many and one-one relations | not started | L: Typical ambiguity and relative types become central here. | ✱40–✱56 | nothing | by dependency |
 | ✱80–✱88: selections, with the multiplicative axiom as hypothesis | not started | M: Selections and ✱88's multiplicative axiom, carried as an explicit hypothesis as PM states it. | ✱60–✱74 | nothing | by dependency |
 | ✱90–✱97: inductive relations | not started | L: The ancestral and induction in ramified types; the base for Vol II and Appendix B. | ✱60–✱74 | ✱80–✱88 | by dependency |
-| A model that sees orders: what reducibility adds (claim B11) | not started. The present models forget orders. | M: A new model in which the predicativity styles can differ without ✱12·1. | nothing | ✱9–✱14 | by dependency |
+| A model that sees orders: what reducibility adds (claim B11) | not started. The present models forget orders. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): B11. | M: A new model in which the predicativity styles can differ without ✱12·1. | nothing | ✱9–✱14 | by dependency |
 
 Prior work:
 
@@ -127,6 +134,7 @@ Prior work:
 - **Rep** (ideas). No search of its own yet; found while reading Landini (2000). Landini (2000), §5: completeness of ✱9 with his repair (reading L here), semantically, for predicate logic without identity, through a Russellian prenex normal form; adapting his proof is the first thing to try (*documented*: G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §5, pp. 64–75; read in full).
 - **both foundations** (not yet searched).
 - **✱20–✱24** (ideas, check against). A shallow embedding is known to have stalled here. Neo-Principia (Rocq, MIT): ✱20 with 78 admitted steps; its own audit names the scope of incomplete symbols and host equality hiding reducibility as the blockers: a failure report to learn from (*measured*: [Neo-Principia@752b04e pm/ch20.v](https://github.com/MudroadWhite/Neo-Principia/blob/752b04e18a9f1106b7088f6bdd05932a1876f8b5/pm/ch20.v), [Neo-Principia@752b04e docs/5_audit.md:17-21](https://github.com/MudroadWhite/Neo-Principia/blob/752b04e18a9f1106b7088f6bdd05932a1876f8b5/docs/5_audit.md#L17-L21)); l-pommeret/Principia-Mathematica: 183 statements and 128 proofs over ✱20–✱56 (our count, docs/FORMALIZATION_COMPARISON.md) (*measured*: [Principia-Mathematica@3fb187a Principia/FirstEdition](https://github.com/l-pommeret/Principia-Mathematica/blob/3fb187a763db7865a46ec9204d33f1f318490a29/Principia/FirstEdition)); Holmes: polymorphic typing for PM's classes (*documented*).
+- **✱25** (ideas, check against). Of ✱24's pointers, Neo-Principia stops at ✱20 and the l-pommeret count is for ✱20–✱56 as a whole, so ✱25's own file is cited here. l-pommeret/Principia-Mathematica: ✱25's three definitions, and theorems named for three of its assertions (✱25·104, ✱25·5, ✱25·58), with no sorry; its header records PM's remark that the unprinted proofs proceed as ✱24's (*measured*: [Principia-Mathematica@3fb187a Principia/Deduction/Star25Derived.lean:9-16](https://github.com/l-pommeret/Principia-Mathematica/blob/3fb187a763db7865a46ec9204d33f1f318490a29/Principia/Deduction/Star25Derived.lean#L9-L16), [Principia-Mathematica@3fb187a Principia/Deduction/Star25Derived.lean:244-392](https://github.com/l-pommeret/Principia-Mathematica/blob/3fb187a763db7865a46ec9204d33f1f318490a29/Principia/Deduction/Star25Derived.lean#L244-L392)).
 - **classes of classes** (not yet searched).
 - **extensionality** (not yet searched).
 - **✱30–✱38** (ideas). Landini, 'Note on Principia's ✱38 on operations' (*documented*); l-pommeret/Principia-Mathematica: proofs into this range (*from memory*).
@@ -135,6 +143,32 @@ Prior work:
 - **✱80–✱88** (ideas). PM-MATS citation graph: consulted for ordering only (*measured*: [PM-MATS@53c587c src/pmdata.json](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/src/pmdata.json), [PM-MATS@53c587c LICENSE](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/LICENSE)).
 - **✱90–✱97** (ideas). PM-MATS citation graph: consulted for ordering only (*measured*: [PM-MATS@53c587c src/pmdata.json](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/src/pmdata.json), [PM-MATS@53c587c LICENSE](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/LICENSE)).
 - **order-seeing model** (ideas). An extensional model proves consistency but cannot show that reducibility adds strength; that needs a model that sees orders. Reported research-level. Mares (2007): a semantics validating reducibility (*documented*); Fitch (1938), Lorenzen (1951): consistency of ramified PM without reducibility (*documented*); Kamareddine, Laan and Nederpelt: a modern reconstruction of PM's ramified types (*from memory*).
+
+#### PM's claims about its own system
+
+| Task | Status | Size | Needs | Helped by | Order |
+|---|---|---|---|---|---|
+| Claims checked with their chapters (✱1–✱21) | done. Each row's Lean column in PM_CLAIMS.md names the theorem, check or construction. A claim of another task that is checked later stays with that task. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): A1, A2, A6, A7, A10, A22, A23, A24, A25, A27, B2, B10, C2, C4, C5, C6, C7, C9, D2, D4, D5, D6, D7, D10, D11, D12, E4. | S: Each was checked as its chapter was built. | nothing | nothing | by dependency |
+| Claims about ✱9's method and its agreement with ✱10's (pp. 133–153) | in progress. Checked in ✱10's method; in ✱9's, under every reading, for elementary functions and one apparent variable per letter, and for the rest given Rep and a variable of every type (A29: partly checked). Claims of [PM_CLAIMS.md](PM_CLAIMS.md): A8, A9, A12, A13, A14, A15, A16, A17, A18, A28, A29. | M: Mostly settled by Rep and the ✱9 tasks; left of its own: ✱9's proofs of the ✱10 propositions PM proves both ways, ✱10·01 for every φ in ✱9's method, and whether the five propositions of p. 144 are independent. | Rep | ✱9 beside ✱10, ✱9·31 and p. 142, C complete | by dependency |
+| Non-derivability and other metatheorems of ✱1–✱11: independence, the witness property, any number of variables | in progress. Checked so far: that only ✱9·31's proof uses ✱9·11 (A11), and ✱11 for two variables (A26). ✱10·221 is built into the typing (A19: assumed). Claims of [PM_CLAIMS.md](PM_CLAIMS.md): A3, A4, A11, A19, A20, A26. | M: Independence by non-standard truth tables and models (✱1·5 against the natural associative law, an implicational base, ✱9·11); a witness property of the proof system; ✱11 for any finite number of variables; ✱10·221 in each particular case. | nothing | ✱9 beside ✱10, ✱9·31 and p. 142 | by dependency |
+| Claims about reducibility and orders (pp. 54–62, 171–177) | in progress. B4: does not hold as stated. B9: ✱13 reaches ✱12·1 only through ✱13·101 (RedCheck.lean). B12–B14 are not attempted. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): B4, B9, B12, B13, B14. | M: With the order-seeing model: whether the two definitions of "predicative" derive the same theorems without ✱12·1, and whether ✱13 can do without it; then the equivalent forms of reducibility of pp. 60–62, in the proof system. | order-seeing model | ✱9–✱14 | by dependency |
+| Claims about the hierarchy of types (Introduction, ✱12) | in progress. B1: partly checked. B3 and B15 are built into the formalization (assumed); B5 and B6 are not attempted. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): B1, B3, B5, B6, B15. | M: The paradoxes formalized and shown avoided; consistency beyond a model's variables; every function obtained from matrices; elementary functions and matrices; the hierarchy of propositions from that of functions, which needs a type of propositions (its cost is estimated in TYPES_DESIGN.md §5, Q8). | nothing | ✱9–✱14 | by dependency |
+| Claims about descriptions left open (✱14) | in progress. C8: partly checked. C3 is not attempted. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): C3, C8. | M: A counter-model for the converse of the scope propositions in general (C8); ✱14·3 with propositions as apparent variables, which needs a type of propositions, as B6 does (C3). | nothing | hierarchy claims | by dependency |
+| Claims about classes and relations: transfer, scope, classes of classes, and the calculus of ✱22–✱25 | in progress. D8: partly checked. D9: partly checked. D13 and D14 are not attempted; D14 is about ✱22–✱25. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): D8, D9, D13, D14. | M: A general transfer theorem for the analogues PM quotes (D8); classes of classes and higher (D9); the scope of class symbols, the analogue of ✱14·113 (D13); the calculus of classes and relations as the analogue of the propositional one (D14). | ✱20–✱24, ✱25, classes of classes | extensionality | by dependency |
+| Formulas PM says are not theorems: countervaluations and counter-models | in progress. E2: partly checked. E1, E3, E5 and E6 can be done now; E7 is about ✱22. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): E1, E2, E3, E5, E6, E7. | S: A countervaluation or a finite counter-model for each, as for the transcribed ✱1·4 and the converse of ✱11·26. | ✱20–✱24 | ✱9–✱14 | by dependency |
+| Claims about the whole work, checked as the volumes are built | in progress. Each is checked over ✱1–✱21 as far as its row in PM_CLAIMS.md says; F2: not attempted. Claims of [PM_CLAIMS.md](PM_CLAIMS.md): A5, A21, B7, B8, C1, D3, F1, F2, F3. | M: Kept up chapter by chapter: truth-functions and extensional functions are all PM needs (A5, C1, D3); no axioms of existence beyond those stated (A21); propositions as variables never needed (B7), nor reducibility beyond two variables (B8); PM's remarks on repeated proofs and on use (F1, F2); the Introduction's informal results (F3). | assumption census | nothing | by dependency |
+
+Prior work:
+
+- **claims checked** (not yet searched). The prior work of each chapter is under its task.
+- **✱9 claims** (not yet searched). The prior work of ✱9's method is under its tasks (✱9 beside ✱10, ✱9·31 and p. 142, Rep); the independence of the five propositions of p. 144 is not yet searched.
+- **metatheorems ✱1–✱11** (ideas, check against). If Bernays's result holds as recalled, ✱1·5 adds nothing beside the other four primitive propositions, which bears on how A3's "less deductive power" is to be read. Bernays (1926), 'Axiomatische Untersuchung des Aussagen-Kalkuls der Principia Mathematica': ✱1·5 derivable from PM's other propositional primitive propositions, and the remaining four independent (*from memory*); Herbrand's theorem and Gentzen's midsequent theorem: the standard routes to a witness property for existential theorems (*from memory*).
+- **reducibility claims** (not yet searched). The model's prior work is under the order-seeing model.
+- **hierarchy claims** (not yet searched).
+- **descriptions claims** (not yet searched).
+- **class claims** (not yet searched).
+- **non-theorems** (not yet searched).
+- **whole-work claims** (check against). PM-MATS's citation graph, for PM's remarks on use (F2) beyond the formalized range: its 'Proves' edges give ✱9·31 as the only use of ✱9·11, and ✱20·701–✱20·703 and then ✱21 as the uses of ✱12·11, as PM's remarks on pp. 136 and 214 say; counts and checks only, no copying (all rights reserved) (*measured*: [PM-MATS@53c587c src/pmdata.json](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/src/pmdata.json)).
 
 #### Vol II (1912)
 
@@ -262,7 +296,7 @@ Prior work:
 
 ### 3. Comparing across
 
-The same statements compared with other readings of PM, with mainstream mathematics, and with the printed text.
+The same statements compared with other readings of PM, with mainstream mathematics, and with the printed text; and exported to formalization platforms, whose proofs come back to be checked here.
 
 ![Group 3, Comparing across: its subgroups and tasks](roadmap/group-across.svg)
 
@@ -305,6 +339,16 @@ Prior work:
 - **Vol I–II text** (ideas, check against). No tool found that certifies formula transcriptions against scans. Gerrata (MIT): transcription against scans, the same architecture (*measured*: [Gerrata@045eebc README.md:5-17](https://github.com/Impression-Editions/Gerrata/blob/045eebc7e3328d2a7321d1f525fd95e82e5adf61/README.md#L5-L17), [Gerrata@045eebc pyproject.toml:10](https://github.com/Impression-Editions/Gerrata/blob/045eebc7e3328d2a7321d1f525fd95e82e5adf61/pyproject.toml#L10)); PM-MATS: counts only (all rights reserved) (*measured*: [PM-MATS@53c587c src/pmdata.json](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/src/pmdata.json), [PM-MATS@53c587c LICENSE](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/LICENSE)); Project Gutenberg eBooks #78050 (Vol I) and #78255 (Vol II) (*from memory*).
 - **Vol III text** (ideas). Distributed Proofreaders' LaTeX workflow (*documented*).
 - **dots check** (nothing found). The text audit sets PM's dots aside; this check is what the formalization adds.
+
+#### Formalization platforms
+
+| Task | Status | Size | Needs | Helped by | Order |
+|---|---|---|---|---|---|
+| Export to formalization platforms, with a private pilot on Prove2Me (✱1–✱5) | in progress. The repository at e3f64c3 builds unchanged in Prove2Me's default environment, Lean v4.33.1, with only the toolchain line edited (measured, below). No exporter is in the repository yet. Making a private submission public cannot be undone, so that step is the maintainer's. The task sits with the comparisons rather than under checking: a platform is another place where proofs are found, not a checker of this repository, and what it returns is checked here. | S: This repository stays the source of truth: an exporter generates a platform's files (definitions, statements, solutions) from it, and a proof found on a platform is pulled back and re-checked here before it counts. The first pilot is a private mission for ✱1–✱5 on Prove2Me; later chapters reuse the exporter. | ✱1–✱5 | nothing | by dependency |
+
+Prior work:
+
+- **platform export** (reuse). Prove2Me is where the pilot runs, not prior work on PM; the entries record what the export has to fit. Proofs contributed publicly there are Apache-2.0, so they can be imported once re-checked here. Prove2Me (prove2.me; Columbia): a platform on which definitions, statements and solutions in Lean are verified and organized into missions (*documented*: arXiv:2608.28433; https://prove2.me, read 2026-10-12); Prove2Me's environments: Lean v4.33.1 (the default), v4.30.0 and v4.29.0-rc3, each pinned to a Mathlib commit (*documented*: Prove2Me's API, https://prove2.me/api/v1/environments, read 2026-10-12); Prove2Me's terms: public contributions are licensed Apache-2.0, and the contributor keeps the copyright (*documented*: https://prove2.me/terms, effective 2026-09-24, read 2026-10-12); Prove2Me's private missions and submissions: making a private theorem or mission public cannot be undone (*measured*: [prove2me_workspace@7898980 SKILL.md:23](https://github.com/prove2me/prove2me_workspace/blob/78989800ba0b3149ee34205257025bd0f617e8ef/SKILL.md#L23), [prove2me_workspace@7898980 references/contribute.md:198](https://github.com/prove2me/prove2me_workspace/blob/78989800ba0b3149ee34205257025bd0f617e8ef/references/contribute.md#L198), [prove2me_workspace@7898980 references/mission_captain.md:383](https://github.com/prove2me/prove2me_workspace/blob/78989800ba0b3149ee34205257025bd0f617e8ef/references/mission_captain.md#L383)); the repository at e3f64c3, built with only the toolchain line edited to Lean v4.33.1: it builds unchanged (49 build steps, no errors) (*measured*: [principia-mathematica-lean@e3f64c3 lean-toolchain](https://github.com/willmcginnis/principia-mathematica-lean/blob/e3f64c3e8973793bb6ec060a92ac8d2deee51aa4/lean-toolchain)).
 
 ### 4. Results about PM
 
@@ -396,9 +440,9 @@ Prior work:
 Every task under way, and every task whose gates are all done and that is not held back by choice: <!-- deps: none -->
 
 <!-- generated:now:start -->
-- **PM itself.** Under way: ✱9–✱14; ✱9 beside ✱10; ✱9·31 and p. 142; ✱20–✱24; classes of classes. Can start: Rep; order-seeing model; Vol II list; edition differences.
+- **PM itself.** Under way: ✱9–✱14; ✱9 beside ✱10; ✱9·31 and p. 142; ✱20–✱24; classes of classes; ✱9 claims; metatheorems ✱1–✱11; reducibility claims; hierarchy claims; descriptions claims; class claims; non-theorems; whole-work claims. Can start: Rep; order-seeing model; Vol II list; edition differences.
 - **Checking underneath.** Can start: kernels in CI; our Metamath verifier; kernel census; Lean4Lean run; Lean proves Con(ZFC); ZFC + inaccessibles proves Con(Lean).
-- **Comparing across.** Under way: other formalizations; Vol I–II text; Vol III text; dots check. Can start: set.mm comparison.
+- **Comparing across.** Under way: other formalizations; Vol I–II text; Vol III text; dots check; platform export. Can start: set.mm comparison.
 - **Results about PM.** Under way: assumption tags. Can start: adequacy ✱1–✱5; C complete.
 <!-- generated:now:end -->
 
@@ -429,11 +473,16 @@ is not a hard dependency of B), or `deps: none` (the sentence's words name no de
 <!-- deps: none --> `scripts/roadmap_chart.py` and `tests/test_roadmap.py` check each comment against the
 data, and check that gate wording carries only gates and soft wording only helps. <!-- deps: none -->
 
-- **The volumes, chapter by chapter.** ✱20–✱24 → ✱30–✱38 → ✱40–✱56 (which also needs apparent classes of
-  classes) → ✱60–✱74 → ✱80–✱88 and ✱90–✱97 → Vol II's Parts III–V → Vol III, which also needs its
-  proofread transcription.
-  <!-- deps: gates v1-20-24 > v1-30-38; v1-30-38 > v1-40-56; v1-coc > v1-40-56; v1-40-56 > v1-60-74; v1-60-74 > v1-80-88 v1-90-97; v1-80-88 > v2-100-126; v1-90-97 > v2-100-126 v2-150-186 v2-200-234; v2-150-186 > v3-250-276; v2-200-234 > v3-250-276 v3-300-375; tx-3 > v3-250-276 v3-300-375 -->
+- **The volumes, chapter by chapter.** ✱20–✱24 → ✱25 → ✱30–✱38 → ✱40–✱56 (which also needs apparent
+  classes of classes) → ✱60–✱74 → ✱80–✱88 and ✱90–✱97 → Vol II's Parts III–V → Vol III, which also needs
+  its proofread transcription.
+  <!-- deps: gates v1-20-24 > v1-25 v1-30-38; v1-25 > v1-30-38; v1-30-38 > v1-40-56; v1-coc > v1-40-56; v1-40-56 > v1-60-74; v1-60-74 > v1-80-88 v1-90-97; v1-80-88 > v2-100-126; v1-90-97 > v2-100-126 v2-150-186 v2-200-234; v2-150-186 > v3-250-276; v2-200-234 > v3-250-276 v3-300-375; tx-3 > v3-250-276 v3-300-375 -->
   Dependencies are on the chapters actually cited, not on whole volumes.
+- **PM's claims.** The claims about ✱9's method need Rep; those about reducibility and orders need the
+  model that sees orders; those about classes and relations need ✱22–✱25 and apparent classes of classes,
+  and one formula PM says is not a theorem is about ✱22. <!-- deps: gates v1-rep > cl-9; v1-ord > cl-red; v1-20-24 > cl-D cl-E; v1-25 > cl-D; v1-coc > cl-D -->
+  The claims about the whole work wait for the complete assumption census, and with it every volume.
+  <!-- deps: gates fa-3 > cl-all; v3-250-276 v3-300-375 > cl-all -->
 - **✱9's own method.** Checking every theorem under both foundations needs the normal-form proof of Rep.
   <!-- deps: gates v1-rep > v1-both --> Rep is helped by the remaining one-variable cases (✱9·31's task)
   and by the completeness of the working reading C, which is one route to it.
@@ -736,6 +785,7 @@ since; an entry says what was true at the commit given.
 | [nomeata/lean-mini-kernel](https://github.com/nomeata/lean-mini-kernel) | [`7ea4f55f5a9f27e096ac8a6a0cf4ecb42e8b7759`](https://github.com/nomeata/lean-mini-kernel/tree/7ea4f55f5a9f27e096ac8a6a0cf4ecb42e8b7759) | 2026-08-11 |
 | [p-pavel/lean-hoas](https://github.com/p-pavel/lean-hoas) | [`c550018b5a18c00a1c9c50798f5ffdd0ba18a553`](https://github.com/p-pavel/lean-hoas/tree/c550018b5a18c00a1c9c50798f5ffdd0ba18a553) | 2026-09-26 |
 | [phadej/nbexp](https://github.com/phadej/nbexp) | [`6c073dda6c9c5c0e498c72dbb05f55d5498420e1`](https://github.com/phadej/nbexp/tree/6c073dda6c9c5c0e498c72dbb05f55d5498420e1) | 2025-02-14 |
+| [prove2me/prove2me_workspace](https://github.com/prove2me/prove2me_workspace) | [`78989800ba0b3149ee34205257025bd0f617e8ef`](https://github.com/prove2me/prove2me_workspace/tree/78989800ba0b3149ee34205257025bd0f617e8ef) | 2026-10-10 |
 | [Randall-Holmes/Randall-Holmes.github.io](https://github.com/Randall-Holmes/Randall-Holmes.github.io) | [`925857da70ac7491cd5565574813fe0cccfc3599`](https://github.com/Randall-Holmes/Randall-Holmes.github.io/tree/925857da70ac7491cd5565574813fe0cccfc3599) | 2026-10-08 |
 | [rocq-archive/presburger](https://github.com/rocq-archive/presburger) | [`2b2636f989a93c6f374401f797319c3bad4596e9`](https://github.com/rocq-archive/presburger/tree/2b2636f989a93c6f374401f797319c3bad4596e9) | 2018-10-22 |
 | [rocq-community/goedel](https://github.com/rocq-community/goedel) | [`8e02b2035e6441b9d0bb1ec1062089866fc17e0d`](https://github.com/rocq-community/goedel/tree/8e02b2035e6441b9d0bb1ec1062089866fc17e0d) | 2022-10-20 |
@@ -744,11 +794,12 @@ since; an entry says what was true at the commit given.
 | [stormj-UH/spivak-lean](https://github.com/stormj-UH/spivak-lean) | [`c24e9fcb7e96873ea9d4769c453be1b3ca48d211`](https://github.com/stormj-UH/spivak-lean/tree/c24e9fcb7e96873ea9d4769c453be1b3ca48d211) | 2026-09-26 |
 | [uds-psl/coq-library-undecidability](https://github.com/uds-psl/coq-library-undecidability) | [`c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c`](https://github.com/uds-psl/coq-library-undecidability/tree/c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c) | 2026-06-24 |
 | [VTrelat/ZFLean](https://github.com/VTrelat/ZFLean) | [`ae928234e7ed6b26241344ef4ba6d7cf98c0ed91`](https://github.com/VTrelat/ZFLean/tree/ae928234e7ed6b26241344ef4ba6d7cf98c0ed91) | 2026-09-02 |
+| [willmcginnis/principia-mathematica-lean](https://github.com/willmcginnis/principia-mathematica-lean) | [`e3f64c3e8973793bb6ec060a92ac8d2deee51aa4`](https://github.com/willmcginnis/principia-mathematica-lean/tree/e3f64c3e8973793bb6ec060a92ac8d2deee51aa4) | 2026-10-12 |
 | [yangg1g/PrincipiaMathematica_Agda](https://github.com/yangg1g/PrincipiaMathematica_Agda) | [`023478b36c67fd0cd66e8015c06645b1161ead56`](https://github.com/yangg1g/PrincipiaMathematica_Agda/tree/023478b36c67fd0cd66e8015c06645b1161ead56) | 2026-04-09 |
 <!-- generated:sources:end -->
 
 <!-- generated:evidence:start -->
-Of the 138 prior-work entries above: 77 *measured*, 47 *documented*, 3 *unverified*, 11 *from memory*.
+Of the 147 prior-work entries above: 81 *measured*, 50 *documented*, 3 *unverified*, 13 *from memory*.
 <!-- generated:evidence:end -->
 
 ## Maintaining this page
@@ -766,8 +817,9 @@ committed chart or generated region differs from what the data gives. The chart 
 chart in which two labels overlap or a label leaves its box, and checks that every dependency names an
 existing task, that there is no cycle, that every task placed *by choice* really is later than its
 dependencies require, that every prior-work entry has an evidence level, that every *measured* entry names
-its source and every source is pinned to a full commit (or a version), and that every move records where
-the task was and why. <!-- deps: none --> It also checks the dependencies the prose states: every sentence
+its source and every source is pinned to a full commit (or a version), that every move records where
+the task was and why, and that every row of PM_CLAIMS.md is covered by exactly one task, done exactly when
+each of its claims is checked. <!-- deps: none --> It also checks the dependencies the prose states: every sentence
 here that uses a gate word (needs, gates, waits for, requires, depends on, ...) or a soft word (helps,
 benefits) carries a `deps:` comment, each pair it names is checked against the data, gate wording may
 carry only gates and soft wording only helps, and `tests/test_roadmap.py` checks that the check fails when

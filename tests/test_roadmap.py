@@ -19,7 +19,13 @@ pair must be a hard dependency in the data, each `helps` pair a soft one, each `
 gate wording may carry only gates clauses, soft wording only helps clauses. The mutation tests below change
 the page's own wording and annotations and check that the check fails, so that prose cannot say "gated by"
 where the graph has "helped by", or the reverse, or name an edge the graph does not have.
+
+Every row of docs/PM_CLAIMS.md belongs to exactly one task, through the task's `claims`, and a task with
+claims is done exactly when every claim it covers is checked (`roadmap_chart.claims_errors`). The tests
+below check that the data meets both rules, and that a claim left out, given to two tasks, unknown, open in
+a done task, or checked throughout a task that is not done, makes the check fail.
 """
+import copy
 import os
 import re
 import sys
@@ -110,6 +116,49 @@ class Roadmap(unittest.TestCase):
                          "names an unknown task")
         self.assertFails(mutated("helps adq-2 > e2-8a; not", "helps v1-9eq > e2-8a; not"),
                          "says v1-9eq helps e2-8a, but v1-9eq is not a soft dependency of e2-8a")
+
+    # PM's claims: every row of docs/PM_CLAIMS.md belongs to exactly one task.
+
+    def claims_fail(self, leaves, fragment):
+        errs = roadmap_chart.claims_errors(leaves, roadmap_chart.claim_rows())
+        self.assertTrue(any(fragment in e for e in errs), f"expected an error with {fragment!r}, got {errs}")
+
+    def test_every_claim_is_covered_by_exactly_one_task(self):
+        rows = roadmap_chart.claim_rows()
+        self.assertGreater(len(rows), 70, "too few rows; is the parser reading PM_CLAIMS.md?")
+        owners = {c: [lid for lid, lf in self.leaves.items() if c in lf.get("claims", [])] for c in rows}
+        self.assertEqual({c: o for c, o in owners.items() if len(o) != 1}, {})
+        self.assertEqual(roadmap_chart.claims_errors(self.leaves, rows), [])
+        for lid, lf in self.leaves.items():
+            if lf.get("claims"):
+                checked = all(roadmap_chart.CHECKED.fullmatch(rows[c]) for c in lf["claims"])
+                self.assertEqual(lf["status"] == "done", checked, lid)
+
+    def test_a_claim_covered_by_no_task_fails(self):
+        leaves = copy.deepcopy(self.leaves)
+        leaves["cl-E"]["claims"].remove("E3")
+        self.claims_fail(leaves, "claims covered by no task: E3")
+
+    def test_a_claim_covered_by_two_tasks_fails(self):
+        leaves = copy.deepcopy(self.leaves)
+        leaves["v1-ord"]["claims"].append("B4")
+        self.claims_fail(leaves, "claim B4 is covered by more than one task")
+
+    def test_an_unknown_claim_fails(self):
+        leaves = copy.deepcopy(self.leaves)
+        leaves["cl-E"]["claims"].append("E99")
+        self.claims_fail(leaves, "claim E99 is not a row of PM_CLAIMS.md")
+
+    def test_a_done_task_with_an_open_claim_fails(self):
+        leaves = copy.deepcopy(self.leaves)
+        leaves["cl-E"]["claims"].remove("E3")
+        leaves["cl-done"]["claims"].append("E3")
+        self.claims_fail(leaves, "cl-done: done, but claims E3 are not checked")
+
+    def test_a_task_whose_claims_are_all_checked_must_be_done(self):
+        leaves = copy.deepcopy(self.leaves)
+        leaves["v1-ext"]["status"] = "in progress"
+        self.claims_fail(leaves, "v1-ext: every claim it covers is checked")
 
     def test_a_dependency_sentence_without_an_annotation_fails(self):
         self.assertFails(mutated("<!-- deps: gates v1-rep > v1-both -->", ""), "has no deps annotation")

@@ -9,7 +9,8 @@
     "prior_work": "The first step of every task is a search for prior work, with several independent search tools whose findings are compared. Each entry has an evidence level: 'measured' (its source was inspected at a pinned commit, given in 'source' as repository, commit and file, with lines where useful; the repositories and their commits are listed once in 'sources'; nothing was built unless said), 'documented' (a paper or README says so; 'cite' gives the place where one is recorded), 'unverified' (reported, not checked), or 'from memory' (listed before the search reached this task). 'effect' says what the search found it good for: reuse (licensed code or data to import or depend on), ideas (read it, write our own), check against (an independent result to compare with), nothing found, or not yet searched. 'Not found' means not found by the searches so far, not that nothing exists. Code is never copied from unlicensed sources.",
     "sizes": "S: days to a few weeks; M: weeks to a few months; L: several months or more.",
     "overview_alt": "Roadmap overview: four groups of work (PM itself; checking underneath; comparing across; results about PM) and five milestones (Vol I checked, Vol II checked, Vol III checked, first edition audited, Lean's kernel fragment verified)",
-    "readme_intro": "The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view)."
+    "readme_intro": "The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view).",
+    "claims": "claims: the rows of docs/PM_CLAIMS.md a task checks, by row id. Every row belongs to exactly one task; a task with claims is done exactly when every claim it covers is checked (status 'checked', possibly qualified after a comma, with no open part after a semicolon). scripts/roadmap_chart.py refuses data that breaks either rule."
   },
   "milestones": [
     {
@@ -24,6 +25,7 @@
         "v1-931",
         "v1-rep",
         "v1-20-24",
+        "v1-25",
         "v1-coc",
         "v1-ext",
         "v1-30-38",
@@ -31,7 +33,15 @@
         "v1-60-74",
         "v1-80-88",
         "v1-90-97",
-        "v1-ord"
+        "v1-ord",
+        "cl-done",
+        "cl-9",
+        "cl-meta",
+        "cl-red",
+        "cl-hier",
+        "cl-C",
+        "cl-D",
+        "cl-E"
       ]
     },
     {
@@ -70,7 +80,8 @@
         "tx-3",
         "fa-3",
         "x-setmm",
-        "x-other"
+        "x-other",
+        "cl-all"
       ]
     },
     {
@@ -342,6 +353,18 @@
       "name": "Internet Archive item principia-mathematica_l2o7Ic0GMLeSLqcPnq",
       "url": "https://archive.org/details/principia-mathematica_l2o7Ic0GMLeSLqcPnq",
       "version": "file Principia_Mathematica_vol1.pdf: Vol. I of the second edition (text of 1925), a 1963 impression"
+    },
+    "pm-lean": {
+      "name": "willmcginnis/principia-mathematica-lean",
+      "url": "https://github.com/willmcginnis/principia-mathematica-lean",
+      "commit": "e3f64c3e8973793bb6ec060a92ac8d2deee51aa4",
+      "date": "2026-10-12"
+    },
+    "prove2me-ws": {
+      "name": "prove2me/prove2me_workspace",
+      "url": "https://github.com/prove2me/prove2me_workspace",
+      "commit": "78989800ba0b3149ee34205257025bd0f617e8ef",
+      "date": "2026-10-10"
     }
   },
   "groups": [
@@ -655,6 +678,45 @@
               }
             },
             {
+              "id": "v1-25",
+              "name": "✱25: the universal relation, the null relation, and the existence of relations",
+              "short": "✱25",
+              "size": "S",
+              "size_reason": "3 definitions and 70 assertions (pp. 241–243), the analogues for relations of ✱24's, with the same numbering; PM prints no proofs, so each is written out along ✱24's.",
+              "status": "not started",
+              "status_note": "No ✱25 proposition is stated yet. PM gives none of the proofs: \"Proofs will not be given, as they proceed precisely as in ✱24\" (p. 241), a remark of the kind PM_CLAIMS.md lists for ✱21 (D10), checked by writing each proof out. Later chapters cite ✱25, from ✱31, ✱33, ✱34 and ✱35 on.",
+              "hard_deps": [
+                "v1-20-24"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "Of ✱24's pointers, Neo-Principia stops at ✱20 and the l-pommeret count is for ✱20–✱56 as a whole, so ✱25's own file is cited here.",
+                "known": [
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: ✱25's three definitions, and theorems named for three of its assertions (✱25·104, ✱25·5, ✱25·58), with no sorry; its header records PM's remark that the unprinted proofs proceed as ✱24's",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/Deduction/Star25Derived.lean",
+                        "lines": "9-16"
+                      },
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/Deduction/Star25Derived.lean",
+                        "lines": "244-392"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
               "id": "v1-coc",
               "name": "Apparent classes of classes and their identity, needed from ✱40 on",
               "short": "classes of classes",
@@ -692,7 +754,10 @@
                   "not yet searched"
                 ],
                 "known": []
-              }
+              },
+              "claims": [
+                "D1"
+              ]
             },
             {
               "id": "v1-30-38",
@@ -702,7 +767,8 @@
               "size_reason": "Descriptive functions, converses, domains, relative products; mostly short proofs.",
               "status": "not started",
               "hard_deps": [
-                "v1-20-24"
+                "v1-20-24",
+                "v1-25"
               ],
               "soft_deps": [],
               "order": "by dependency",
@@ -910,7 +976,325 @@
                     "evidence": "from memory"
                   }
                 ]
-              }
+              },
+              "claims": [
+                "B11"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "claims",
+          "name": "PM's claims about its own system",
+          "leaves": [
+            {
+              "id": "cl-done",
+              "name": "Claims checked with their chapters (✱1–✱21)",
+              "short": "claims checked",
+              "size": "S",
+              "size_reason": "Each was checked as its chapter was built.",
+              "status": "done",
+              "status_note": "Each row's Lean column in PM_CLAIMS.md names the theorem, check or construction. A claim of another task that is checked later stays with that task.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "note": "The prior work of each chapter is under its task.",
+                "known": []
+              },
+              "claims": [
+                "A1",
+                "A2",
+                "A6",
+                "A7",
+                "A10",
+                "A22",
+                "A23",
+                "A24",
+                "A25",
+                "A27",
+                "B2",
+                "B10",
+                "C2",
+                "C4",
+                "C5",
+                "C6",
+                "C7",
+                "C9",
+                "D2",
+                "D4",
+                "D5",
+                "D6",
+                "D7",
+                "D10",
+                "D11",
+                "D12",
+                "E4"
+              ]
+            },
+            {
+              "id": "cl-9",
+              "name": "Claims about ✱9's method and its agreement with ✱10's (pp. 133–153)",
+              "short": "✱9 claims",
+              "size": "M",
+              "size_reason": "Mostly settled by Rep and the ✱9 tasks; left of its own: ✱9's proofs of the ✱10 propositions PM proves both ways, ✱10·01 for every φ in ✱9's method, and whether the five propositions of p. 144 are independent.",
+              "status": "in progress",
+              "status_note": "Checked in ✱10's method; in ✱9's, under every reading, for elementary functions and one apparent variable per letter, and for the rest given Rep and a variable of every type (A29: {claims:A29}).",
+              "hard_deps": [
+                "v1-rep"
+              ],
+              "soft_deps": [
+                "v1-9eq",
+                "v1-931",
+                "adq-9c"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "note": "The prior work of ✱9's method is under its tasks (✱9 beside ✱10, ✱9·31 and p. 142, Rep); the independence of the five propositions of p. 144 is not yet searched.",
+                "known": []
+              },
+              "claims": [
+                "A8",
+                "A9",
+                "A12",
+                "A13",
+                "A14",
+                "A15",
+                "A16",
+                "A17",
+                "A18",
+                "A28",
+                "A29"
+              ]
+            },
+            {
+              "id": "cl-meta",
+              "name": "Non-derivability and other metatheorems of ✱1–✱11: independence, the witness property, any number of variables",
+              "short": "metatheorems ✱1–✱11",
+              "size": "M",
+              "size_reason": "Independence by non-standard truth tables and models (✱1·5 against the natural associative law, an implicational base, ✱9·11); a witness property of the proof system; ✱11 for any finite number of variables; ✱10·221 in each particular case.",
+              "status": "in progress",
+              "status_note": "Checked so far: that only ✱9·31's proof uses ✱9·11 (A11), and ✱11 for two variables (A26). ✱10·221 is built into the typing (A19: {claims:A19}).",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9eq",
+                "v1-931"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "If Bernays's result holds as recalled, ✱1·5 adds nothing beside the other four primitive propositions, which bears on how A3's \"less deductive power\" is to be read.",
+                "known": [
+                  {
+                    "work": "Bernays (1926), 'Axiomatische Untersuchung des Aussagen-Kalkuls der Principia Mathematica': ✱1·5 derivable from PM's other propositional primitive propositions, and the remaining four independent",
+                    "evidence": "from memory"
+                  },
+                  {
+                    "work": "Herbrand's theorem and Gentzen's midsequent theorem: the standard routes to a witness property for existential theorems",
+                    "evidence": "from memory"
+                  }
+                ]
+              },
+              "claims": [
+                "A3",
+                "A4",
+                "A11",
+                "A19",
+                "A20",
+                "A26"
+              ]
+            },
+            {
+              "id": "cl-red",
+              "name": "Claims about reducibility and orders (pp. 54–62, 171–177)",
+              "short": "reducibility claims",
+              "size": "M",
+              "size_reason": "With the order-seeing model: whether the two definitions of \"predicative\" derive the same theorems without ✱12·1, and whether ✱13 can do without it; then the equivalent forms of reducibility of pp. 60–62, in the proof system.",
+              "status": "in progress",
+              "status_note": "B4: {claims:B4}. B9: ✱13 reaches ✱12·1 only through ✱13·101 (RedCheck.lean). B12–B14 are not attempted.",
+              "hard_deps": [
+                "v1-ord"
+              ],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "note": "The model's prior work is under the order-seeing model.",
+                "known": []
+              },
+              "claims": [
+                "B4",
+                "B9",
+                "B12",
+                "B13",
+                "B14"
+              ]
+            },
+            {
+              "id": "cl-hier",
+              "name": "Claims about the hierarchy of types (Introduction, ✱12)",
+              "short": "hierarchy claims",
+              "size": "M",
+              "size_reason": "The paradoxes formalized and shown avoided; consistency beyond a model's variables; every function obtained from matrices; elementary functions and matrices; the hierarchy of propositions from that of functions, which needs a type of propositions (its cost is estimated in TYPES_DESIGN.md §5, Q8).",
+              "status": "in progress",
+              "status_note": "B1: {claims:B1}. B3 and B15 are built into the formalization (assumed); B5 and B6 are not attempted.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              },
+              "claims": [
+                "B1",
+                "B3",
+                "B5",
+                "B6",
+                "B15"
+              ]
+            },
+            {
+              "id": "cl-C",
+              "name": "Claims about descriptions left open (✱14)",
+              "short": "descriptions claims",
+              "size": "M",
+              "size_reason": "A counter-model for the converse of the scope propositions in general (C8); ✱14·3 with propositions as apparent variables, which needs a type of propositions, as B6 does (C3).",
+              "status": "in progress",
+              "status_note": "C8: {claims:C8}. C3 is not attempted.",
+              "hard_deps": [],
+              "soft_deps": [
+                "cl-hier"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              },
+              "claims": [
+                "C3",
+                "C8"
+              ]
+            },
+            {
+              "id": "cl-D",
+              "name": "Claims about classes and relations: transfer, scope, classes of classes, and the calculus of ✱22–✱25",
+              "short": "class claims",
+              "size": "M",
+              "size_reason": "A general transfer theorem for the analogues PM quotes (D8); classes of classes and higher (D9); the scope of class symbols, the analogue of ✱14·113 (D13); the calculus of classes and relations as the analogue of the propositional one (D14).",
+              "status": "in progress",
+              "status_note": "D8: {claims:D8}. D9: {claims:D9}. D13 and D14 are not attempted; D14 is about ✱22–✱25.",
+              "hard_deps": [
+                "v1-20-24",
+                "v1-25",
+                "v1-coc"
+              ],
+              "soft_deps": [
+                "v1-ext"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              },
+              "claims": [
+                "D8",
+                "D9",
+                "D13",
+                "D14"
+              ]
+            },
+            {
+              "id": "cl-E",
+              "name": "Formulas PM says are not theorems: countervaluations and counter-models",
+              "short": "non-theorems",
+              "size": "S",
+              "size_reason": "A countervaluation or a finite counter-model for each, as for the transcribed ✱1·4 and the converse of ✱11·26.",
+              "status": "in progress",
+              "status_note": "E2: {claims:E2}. E1, E3, E5 and E6 can be done now; E7 is about ✱22.",
+              "hard_deps": [
+                "v1-20-24"
+              ],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              },
+              "claims": [
+                "E1",
+                "E2",
+                "E3",
+                "E5",
+                "E6",
+                "E7"
+              ]
+            },
+            {
+              "id": "cl-all",
+              "name": "Claims about the whole work, checked as the volumes are built",
+              "short": "whole-work claims",
+              "size": "M",
+              "size_reason": "Kept up chapter by chapter: truth-functions and extensional functions are all PM needs (A5, C1, D3); no axioms of existence beyond those stated (A21); propositions as variables never needed (B7), nor reducibility beyond two variables (B8); PM's remarks on repeated proofs and on use (F1, F2); the Introduction's informal results (F3).",
+              "status": "in progress",
+              "status_note": "Each is checked over ✱1–✱21 as far as its row in PM_CLAIMS.md says; F2: {claims:F2}.",
+              "hard_deps": [
+                "fa-3"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "PM-MATS's citation graph, for PM's remarks on use (F2) beyond the formalized range: its 'Proves' edges give ✱9·31 as the only use of ✱9·11, and ✱20·701–✱20·703 and then ✱21 as the uses of ✱12·11, as PM's remarks on pp. 136 and 214 say; counts and checks only, no copying (all rights reserved)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "claims": [
+                "A5",
+                "A21",
+                "B7",
+                "B8",
+                "C1",
+                "D3",
+                "F1",
+                "F2",
+                "F3"
+              ]
             }
           ]
         },
@@ -2110,7 +2494,7 @@
     {
       "id": "across",
       "name": "Comparing across",
-      "description": "The same statements compared with other readings of PM, with mainstream mathematics, and with the printed text.",
+      "description": "The same statements compared with other readings of PM, with mainstream mathematics, and with the printed text; and exported to formalization platforms, whose proofs come back to be checked here.",
       "subgroups": [
         {
           "id": "readings",
@@ -2459,9 +2843,83 @@
               }
             }
           ]
+        },
+        {
+          "id": "platforms",
+          "name": "Formalization platforms",
+          "leaves": [
+            {
+              "id": "x-export",
+              "name": "Export to formalization platforms, with a private pilot on Prove2Me (✱1–✱5)",
+              "short": "platform export",
+              "size": "S",
+              "size_reason": "This repository stays the source of truth: an exporter generates a platform's files (definitions, statements, solutions) from it, and a proof found on a platform is pulled back and re-checked here before it counts. The first pilot is a private mission for ✱1–✱5 on Prove2Me; later chapters reuse the exporter.",
+              "status": "in progress",
+              "status_note": "The repository at e3f64c3 builds unchanged in Prove2Me's default environment, Lean v4.33.1, with only the toolchain line edited (measured, below). No exporter is in the repository yet. Making a private submission public cannot be undone, so that step is the maintainer's. The task sits with the comparisons rather than under checking: a platform is another place where proofs are found, not a checker of this repository, and what it returns is checked here.",
+              "hard_deps": [
+                "v1-1-5"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "note": "Prove2Me is where the pilot runs, not prior work on PM; the entries record what the export has to fit. Proofs contributed publicly there are Apache-2.0, so they can be imported once re-checked here.",
+                "known": [
+                  {
+                    "work": "Prove2Me (prove2.me; Columbia): a platform on which definitions, statements and solutions in Lean are verified and organized into missions",
+                    "evidence": "documented",
+                    "cite": "arXiv:2608.28433; https://prove2.me, read 2026-10-12"
+                  },
+                  {
+                    "work": "Prove2Me's environments: Lean v4.33.1 (the default), v4.30.0 and v4.29.0-rc3, each pinned to a Mathlib commit",
+                    "evidence": "documented",
+                    "cite": "Prove2Me's API, https://prove2.me/api/v1/environments, read 2026-10-12"
+                  },
+                  {
+                    "work": "Prove2Me's terms: public contributions are licensed Apache-2.0, and the contributor keeps the copyright",
+                    "evidence": "documented",
+                    "cite": "https://prove2.me/terms, effective 2026-09-24, read 2026-10-12"
+                  },
+                  {
+                    "work": "Prove2Me's private missions and submissions: making a private theorem or mission public cannot be undone",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "prove2me-ws",
+                        "path": "SKILL.md",
+                        "lines": "23"
+                      },
+                      {
+                        "in": "prove2me-ws",
+                        "path": "references/contribute.md",
+                        "lines": "198"
+                      },
+                      {
+                        "in": "prove2me-ws",
+                        "path": "references/mission_captain.md",
+                        "lines": "383"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "The repository at e3f64c3, built with only the toolchain line edited to Lean v4.33.1: it builds unchanged (49 build steps, no errors)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pm-lean",
+                        "path": "lean-toolchain"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
         }
       ],
-      "tagline": "other readings of PM, Mathlib, the printed text"
+      "tagline": "other readings of PM, Mathlib, the printed text, formalization platforms"
     },
     {
       "id": "about",

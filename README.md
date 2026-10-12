@@ -108,7 +108,7 @@ The limits matter as much
 The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view).
 
 <details>
-<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (2 done, 5 in progress, 20 not started)</summary>
+<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (3 done, 13 in progress, 21 not started)</summary>
 
 ![Group 1, PM itself: its subgroups and tasks](docs/roadmap/group-pm.svg)
 
@@ -120,6 +120,7 @@ The work is split into four groups that run side by side. Each group is split in
   - A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142): *not started*
   - Every theorem checked under both foundations, ✱9's and ✱10's: *not started*
   - ✱20–✱24: classes and relations: *in progress*
+  - ✱25: the universal relation, the null relation, and the existence of relations: *not started*
   - Apparent classes of classes and their identity, needed from ✱40 on: *in progress*
   - Extensionality of every class and relation expression, proved once (pp. 200, 213): *done*
   - ✱30–✱38: the logic of relations: *not started*
@@ -128,6 +129,16 @@ The work is split into four groups that run side by side. Each group is split in
   - ✱80–✱88: selections, with the multiplicative axiom as hypothesis: *not started*
   - ✱90–✱97: inductive relations: *not started*
   - A model that sees orders: what reducibility adds (claim B11): *not started*
+- **PM's claims about its own system**
+  - Claims checked with their chapters (✱1–✱21): *done*
+  - Claims about ✱9's method and its agreement with ✱10's (pp. 133–153): *in progress*
+  - Non-derivability and other metatheorems of ✱1–✱11: independence, the witness property, any number of variables: *in progress*
+  - Claims about reducibility and orders (pp. 54–62, 171–177): *in progress*
+  - Claims about the hierarchy of types (Introduction, ✱12): *in progress*
+  - Claims about descriptions left open (✱14): *in progress*
+  - Claims about classes and relations: transfer, scope, classes of classes, and the calculus of ✱22–✱25: *in progress*
+  - Formulas PM says are not theorems: countervaluations and counter-models: *in progress*
+  - Claims about the whole work, checked as the volumes are built: *in progress*
 - **Vol II (1912)**
   - Per-item list of Vol II, and its claims listed by reading: *not started*
   - ✱100–✱126 (Part III): cardinal arithmetic, to ✱110·643 (1 + 1 = 2) and inductive cardinals: *not started*
@@ -175,7 +186,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text (4 in progress, 4 not started)</summary>
+<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text, formalization platforms (5 in progress, 4 not started)</summary>
 
 ![Group 3, Comparing across: its subgroups and tasks](docs/roadmap/group-across.svg)
 
@@ -190,6 +201,8 @@ The work is split into four groups that run side by side. Each group is split in
   - Vol I and Vol II transcriptions checked against scans; errata reported: *in progress*
   - Vol III transcription proofread and checked against scans: *in progress*
   - ✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable: *in progress*
+- **Formalization platforms**
+  - Export to formalization platforms, with a private pilot on Prove2Me (✱1–✱5): *in progress*
 
 </details>
 

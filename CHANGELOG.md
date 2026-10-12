@@ -5,6 +5,22 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **Roadmap: ✱25, and every claim of PM_CLAIMS.md in a task.** A task for ✱25 (the universal and null
+  relations and the existence of relations, pp. 241–243: 3 definitions, 70 assertions, whose proofs PM
+  omits as proceeding "precisely as in ✱24"), after ✱20–✱24 and before ✱30–✱38, which cites it. A
+  subgroup *PM's claims about its own system* groups the 77 rows of `docs/PM_CLAIMS.md` by the page's
+  sections and the kind of work left: the 27 rows checked with their chapters (done), ✱9's method,
+  metatheorems of ✱1–✱11, reducibility and orders, the hierarchy of types, descriptions, classes and
+  relations, formulas PM says are not theorems, and claims about the whole work; B11 stays with the
+  order-seeing model and D1 with extensionality. `scripts/roadmap_chart.py` refuses data in which a row is
+  covered by no task or by two, or a task with claims is done while one is open (or not done when all are
+  checked); `tests/test_roadmap.py` checks both, with mutations. A subgroup *Formalization platforms*
+  under *Comparing across* holds a task for exporting to formalization platforms, in progress: the
+  repository stays the source of truth, an exporter generates the platform's definitions, statements and
+  solutions from it, and proofs found there are pulled back and re-checked here; the first pilot is a
+  private mission for ✱1–✱5 on Prove2Me, whose default environment (Lean v4.33.1) builds the repository
+  at e3f64c3 with only the toolchain line edited. docs/ROADMAP.md records as open that PM_CLAIMS.md
+  covers the Introduction and ✱1–✱21 only, so the claims of ✱22–✱97 are not yet catalogued.
 - **✱9 under four readings; the working reading C is the definitions as printed with Russell's ✱8·13
   carried over to ✱9** (`PM/Found9/`; docs/REPAIRS.md R1–R5, docs/STAR9_READINGS.md,
   docs/STAR9_FOUNDATION.md §4, §10). ✱9's system is now parametrized by a reading `R`: its definitions
