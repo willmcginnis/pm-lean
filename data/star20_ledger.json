@@ -871,6 +871,82 @@
   ]
  },
  {
+  "id": "*20.4",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*20.03"
+  ],
+  "extra_used": [
+   "*12.1",
+   "*10.32",
+   "*10.1",
+   "*2.06",
+   "*10.11",
+   "*10.23",
+   "*20.11",
+   "*10.21",
+   "*10.281",
+   "*4.86",
+   "*3.26",
+   "*5.32",
+   "*4.2",
+   "*10.24",
+   "*3.31",
+   "*4.3",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "alpha real (an expression z(psi z)); *20.3 is its analogue for classes of classes (p. 206: analogues are quoted by the numbers of the original propositions), proved by *20.3's Dem. with *20.08, *20.081 for *20.01, *20.02 and *20.7 for *12.1 (qcls20_3); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3's *10.43 is used at alpha, whose defining function need not be predicative: the class analogue of *10.1 (p. 206, *20.17; qclsAllAt: *12.1 turned by *10.32, *10.1, *2.06, *10.11, *10.23), the two members carried by *20.11 and joined by *4.86 (the ⊃ half by *3.26), then *10.43's own step *5.32. This needs the defining expression of Cls, (Ephi) . alpha = z(phi!z), to be extensional: *20.11 under (Ephi) by *10.11.21 and *10.281 (clsExt_Cls). *20.7 is stated for a generic f{alpha}; for this expression it is joined with the expression's generic form (p. 199; qclsGen: *4.2, *10.11, *10.24, and *3.26 with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 is used with p second (*4.3); '[*12.1]' (here *20.7) drops the asserted factor by *3.27 and *3.2.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*20.41",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.4",
+   "*20.151"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
   "id": "*20.42",
   "page": 204,
   "category": "assertion",

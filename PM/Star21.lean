@@ -1,10 +1,9 @@
 import PM.Star20
 /-!
   ✱21: general theory of relations (1910 print, pp. 211–216; summary pp. 211–213, definitions p. 213,
-  numbered propositions pp. 213–216). The print has 48 numbered propositions, ✱21·1 to ✱21·71. 44 are
+  numbered propositions pp. 213–216). The print has 48 numbered propositions, ✱21·1 to ✱21·71. 46 are
   proved here. ✱21·631 and ✱21·632 concern significance and are built into the syntax, as ✱20·631,
-  ✱20·632 (and ✱10·121, ✱10·122) are. ✱21·4 and ✱21·41 are not formalized; they are about "Rel"
-  (see "Not formalized" below).
+  ✱20·632 (and ✱10·121, ✱10·122) are.
 
   "The proofs of the propositions of this number are usually omitted, since they are exactly analogous
   to those of ✱20, merely substituting ✱12·11 for ✱12·1, and propositions in ✱11 for propositions in
@@ -21,6 +20,11 @@ import PM.Star20
     ✱21·07  (R) . fR . = . (φ) . f{x̂ŷφ!(x, y)}                               Df   (`QF.relAll`)
     ✱21·071 (∃R) . fR . = . (∃φ) . f{x̂ŷφ!(x, y)}                             Df   (`QF.relEx`)
     ✱21·072 [(ιR)(φR)] . f(ιR)(φR) . = : (∃S) : φR . ≡_R . R = S : fS        Df   (`QF.descRel`)
+    ✱21·03  Rel = R̂{(∃φ) . R = x̂ŷφ!(x, y)}                                   Df   (`QF.Rel`)
+    ✱21·08  f{R̂Ŝψ(R, S)} . = : (∃φ) : ψ(R, S) . ≡_{R,S} . φ!(R, S) : f{φ!(R̂, Ŝ)}   Df   (`QF.relRel Ψ f`)
+    ✱21·081 P{φ!(R̂, Ŝ)}Q . = . φ!(P, Q)                                      Df   (`QF.relAppRel P φ Q`)
+    ✱21·082 f{R̂(ψR)} . = : (∃φ) : ψR . ≡_R . φ!R : f(φ!R̂)                   Df   (`QF.relCls Ψ f`)
+    ✱21·083 R ∈ φ!R̂ . = . φ!R                                                Df   (`QF.memRelCls R φ`)
   The order convention of pp. 211–212 (the argument mentioned first goes to the letter first in the
   alphabet) is the order of the Lean arguments: `ψ x y`, `φ!(x, y)` is `.app2 φ x y`. Identity of
   relations is ✱13·01 at the type of predicative functions of two arguments, the relation written first
@@ -33,9 +37,14 @@ import PM.Star20
   function need not be predicative (✱21·53, ✱21·54 and the steps of ✱21·55–✱21·58), the step is the
   analogue for relations of ✱20·17's argument: ✱12·11 and ✱21·11 (`qrelAllAt`, `qrelExAt`).
 
+  Relations of relations (✱21·08, ✱21·081) and classes of relations (✱21·082, ✱21·083) are built as
+  printed, as classes of classes are in ✱20 (docs/CLASSES_OF_CLASSES.md): φ is a predicative function
+  whose arguments are relations, ≡_R ranges over relations (✱21·07), and φ!R, φ!(R, S) are eliminated
+  by ✱21·01 with context φ!χ!(x̂, ŷ) (`QF.relClsApp`, `QF.relRelApp`; of two relations the one written
+  first has the larger scope). `R ∈ κ` (scoped to `PM`) is `relClsMem R κ`. ✱21·4 and ✱21·41 are proved
+  after ✱21·7, whose analogue of ✱12·1 their ✱20·3 (the analogue for classes of relations) needs.
+
   Not formalized:
-  - ✱21·03 (Rel), ✱21·08–✱21·083 (relations of relations and classes of relations), and so ✱21·4 and
-    ✱21·41, which state R ∈ Rel; this waits on the same decision as ✱20·08 (classes of classes).
   - ✱21·631, ✱21·632 (significance, built into the syntax). ✱21·62 and ✱21·633 are proved as rules.
   - The converse-order form f{ŷx̂ψ(x, y)} of ✱21·01 (p. 213), which is not numbered and not used.
   - E!(ιR)(φR), which ✱21·56 uses, is the analogue of ✱14·02 (`QF.exists1Rel`), not printed in ✱21.
@@ -47,7 +56,7 @@ import PM.Star20
 
   Names: `q21_1` is ✱21·1, and so on. ψ, χ, φ are formulas with two holes (defining functions of
   relations); f, g are contexts of a predicative function of two arguments; F, G, Φ are expressions
-  containing a relation.
+  containing a relation; Ψ is the defining expression of a class of relations or a relation of relations.
 -/
 namespace PM
 open QF
@@ -80,7 +89,47 @@ variable {V : Ty → Type} {S : Sys}
 /-- `E!(ιR)(φR) . = : (∃S) : φR . ≡_R . R = S`, the analogue of ✱14·02 that ✱21·56 uses. -/
 @[reducible] def exists1Rel {a b : Ty} (Φ : (V a → V b → QF V) → QF V) : QF V :=
   relEx fun T => relAll fun R => iff (Φ R) (relEq R T)
+/-- ✱21·03 `Rel = R̂{(∃φ) . R = x̂ŷφ!(x, y)}` Df: the defining expression of the class of relations, with R the
+    smallest scope ("similar remarks apply to it as to the definition of 'Cls'", p. 212). -/
+@[reducible] def Rel {a b : Ty} : (V a → V b → QF V) → QF V :=
+  fun R => ex (τ := Ty.pred2 a b) fun φ => relEq R (pf2 φ)
+/-- φ!R, a predicative function φ of relations applied to the relation R = x̂ŷψ(x, y): ✱21·01 with context
+    φ!χ!(x̂, ŷ), the relation having the smallest scope. -/
+@[reducible] def relClsApp {a b : Ty} (φ : V (Ty.pred1 (Ty.pred2 a b))) (R : V a → V b → QF V) : QF V :=
+  rel R fun χ => .app1 φ χ
+/-- ✱21·082 `f{R̂(ψR)} . = : (∃φ) : ψR . ≡_R . φ!R : f(φ!R̂)` Df: classes of relations. -/
+@[reducible] def relCls {a b : Ty} (Ψ : (V a → V b → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred2 a b)) → QF V) :
+    QF V :=
+  ex (τ := Ty.pred1 (Ty.pred2 a b)) fun φ => QF.and (relAll fun R => iff (Ψ R) (relClsApp φ R)) (f φ)
+/-- ✱21·083 `R ∈ φ!R̂ . = . φ!R` Df -/
+@[reducible] def memRelCls {a b : Ty} (R : V a → V b → QF V) (φ : V (Ty.pred1 (Ty.pred2 a b))) : QF V :=
+  relClsApp φ R
+/-- `R ∈ R̂(ΨR)`: ✱21·083 with ✱21·082 applied to the class of relations, with the smallest scope. -/
+@[reducible] def relClsMem {a b : Ty} (R : V a → V b → QF V) (Ψ : (V a → V b → QF V) → QF V) : QF V :=
+  relCls Ψ fun φ => memRelCls R φ
+/-- φ!(R, S), a predicative function φ of two relations applied to R = x̂ŷψ(x, y) and S = x̂ŷχ(x, y): ✱21·01
+    for R and then for S (R, written first, has the larger scope), with context φ!(χ!(x̂, ŷ), θ!(x̂, ŷ)). -/
+@[reducible] def relRelApp {a b c d : Ty} (φ : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)))
+    (R : V a → V b → QF V) (T : V c → V d → QF V) : QF V :=
+  rel R fun χ => rel T fun θ => .app2 φ χ θ
+/-- ✱21·08 `f{R̂Ŝψ(R, S)} . = : (∃φ) : ψ(R, S) . ≡_{R,S} . φ!(R, S) : f{φ!(R̂, Ŝ)}` Df: relations of relations.
+    ≡_{R,S} is (R, S) : ψ(R, S) . ≡ . φ!(R, S), the relations apparent (✱21·07). -/
+@[reducible] def relRel {a b c d : Ty} (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V)
+    (f : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) → QF V) : QF V :=
+  ex (τ := Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) fun φ =>
+    QF.and (relAll fun R => relAll fun T => iff (Ψ R T) (relRelApp φ R T)) (f φ)
+/-- ✱21·081 `P{φ!(R̂, Ŝ)}Q . = . φ!(P, Q)` Df -/
+@[reducible] def relAppRel {a b c d : Ty} (P : V a → V b → QF V) (φ : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)))
+    (Q : V c → V d → QF V) : QF V :=
+  relRelApp φ P Q
+/-- `P{R̂Ŝψ(R, S)}Q`: ✱21·081 with ✱21·08 applied to the relation of relations, with the smallest scope. -/
+@[reducible] def relRelHolds {a b c d : Ty} (P : V a → V b → QF V) (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V)
+    (Q : V c → V d → QF V) : QF V :=
+  relRel Ψ fun φ => relAppRel P φ Q
 end QF
+
+/-- `R ∈ κ`, κ a class of relations: `relClsMem R κ` (scoped to `PM`, like `x ∈ α` and `α ∈ κ` of ✱20). -/
+scoped infix:50 " ∈ " => QF.relClsMem
 
 variable {V : Ty → Type} {S : Sys} {a b : Ty}
 
@@ -633,5 +682,147 @@ theorem q21_71 [Reducibility S] (ψ χ : V a → V b → QF V) :
     QThm S (iff (relEq ψ χ) (.all (τ := Ty.pred1 (Ty.pred2 a b)) fun g =>
       imp (rel ψ fun φ => .app1 g φ) (rel χ fun φ => .app1 g φ))) :=
   q21_19 ψ χ                                                                      -- ✱21·19
+
+/-! ## Classes of relations and relations of relations: ✱21·03, ✱21·08–✱21·083; ✱21·4, ✱21·41
+
+  As for classes of classes (PM/Star20.lean, `qcls20_3`), with ✱21·01, ✱21·11, ✱21·7, ✱12·11 and
+  `qrelAllAt` for ✱20·01, ✱20·11, ✱20·7, ✱12·1 and `qclsAllAt`. ✱21·4's hint "✱20·3 . (✱21·03)" cites
+  ✱20·3 for the class of relations Rel: `qrelCls20_3`. -/
+
+/-- `Ψ` is extensional: `⊢ :. ψ(x, y) . ≡_{x,y} . χ(x, y) : ⊃ : Ψ{x̂ŷψ(x, y)} . ≡ . Ψ{x̂ŷχ(x, y)}` for all ψ, χ,
+    i.e. ✱21·11 for the expression ΨR. -/
+def RelExt (S : Sys) (Ψ : (V a → V b → QF V) → QF V) : Prop :=
+  ∀ ψ χ : V a → V b → QF V, QThm S (imp (fiff2 ψ χ) (iff (Ψ ψ) (Ψ χ)))
+
+/-- A generic expression f{R} (`rel R f`) is extensional: ✱21·11. -/
+theorem relExt_rel (f : V (Ty.pred2 a b) → QF V) : RelExt S fun R => rel R f :=
+  fun ψ χ => q21_11 ψ χ f
+
+/-- (∃v) . Ψ(v, R) is extensional when each Ψ(v, R) is: ✱10·11·21 and ✱10·281. -/
+theorem relExt_ex {τ : Ty} (Ψ : V τ → (V a → V b → QF V) → QF V) (h : ∀ v, RelExt S (Ψ v)) :
+    RelExt S fun R => ex fun v => Ψ v R :=
+  fun ψ χ => qsyl (q10_11_21 fun v => h v ψ χ) (q10_281 _ _)
+
+/-- The defining expression of Rel, (∃φ) . R = x̂ŷφ!(x, y), is extensional (`relExt_ex`, `relExt_rel`). -/
+theorem relExt_Rel : RelExt S (Rel (V := V) (a := a) (b := b)) :=
+  relExt_ex (fun φ R => relEq R (pf2 φ)) fun _ => relExt_rel _
+
+/-- ✱21·1 for classes of relations: `⊢ :. f{R̂(ψR)} . ≡ : (∃φ) : ψR . ≡_R . φ!R : f(φ!R̂)` [✱4·2 . (✱21·082)]. -/
+theorem qrelCls1 (Ψ : (V a → V b → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred2 a b)) → QF V) :
+    QThm S (iff (relCls Ψ f) (ex (τ := Ty.pred1 (Ty.pred2 a b)) fun φ =>
+      QF.and (relAll fun R => iff (Ψ R) (relClsApp φ R)) (f φ))) :=
+  QL.t4_2 _
+
+/-- `⊢ : R ∈ φ!R̂ . ≡ . φ!R` [✱4·2 . (✱21·083)] -/
+theorem qmemRelCls (R : V a → V b → QF V) (φ : V (Ty.pred1 (Ty.pred2 a b))) :
+    QThm S (iff (memRelCls R φ) (relClsApp φ R)) :=
+  QL.t4_2 _
+
+/-- `⊢ :. R ∈ R̂(ψR) . ≡ : (∃φ) : ψT . ≡_T . φ!T : φ!R` [✱4·2 . (✱21·082) . (✱21·083)]. -/
+theorem qrelClsMem (Ψ : (V a → V b → QF V) → QF V) (R : V a → V b → QF V) :
+    QThm S (iff (R ∈ Ψ) (ex (τ := Ty.pred1 (Ty.pred2 a b)) fun φ =>
+      QF.and (relAll fun T => iff (Ψ T) (relClsApp φ T)) (relClsApp φ R))) :=
+  QL.t4_2 _
+
+/-- `⊢ :. φ!{x̂ŷψ(x, y)} . ≡ : (∃χ) : χ!(x, y) . ≡_{x,y} . ψ(x, y) : φ!χ!(x̂, ŷ)` [✱21·1]: ✱21·01 with context
+    φ!χ!(x̂, ŷ). -/
+theorem qrelClsApp (φ : V (Ty.pred1 (Ty.pred2 a b))) (ψ : V a → V b → QF V) :
+    QThm S (iff (relClsApp φ ψ) (ex (τ := Ty.pred2 a b) fun χ => QF.and (fiff2 (pf2 χ) ψ) (.app1 φ χ))) :=
+  q21_1 ψ _
+
+/-- ✱21·1 for relations of relations: `⊢ :. f{R̂Ŝψ(R, S)} . ≡ : (∃φ) : ψ(R, S) . ≡_{R,S} . φ!(R, S) :
+    f{φ!(R̂, Ŝ)}` [✱4·2 . (✱21·08)]. -/
+theorem qrelRel1 {c d : Ty} (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V)
+    (f : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) → QF V) :
+    QThm S (iff (relRel Ψ f) (ex (τ := Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) fun φ =>
+      QF.and (relAll fun R => relAll fun T => iff (Ψ R T) (relRelApp φ R T)) (f φ))) :=
+  QL.t4_2 _
+
+/-- `⊢ : P{φ!(R̂, Ŝ)}Q . ≡ . φ!(P, Q)` [✱4·2 . (✱21·081)] -/
+theorem qrelAppRel {c d : Ty} (P : V a → V b → QF V) (φ : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)))
+    (Q : V c → V d → QF V) : QThm S (iff (relAppRel P φ Q) (relRelApp φ P Q)) :=
+  QL.t4_2 _
+
+/-- `⊢ :. φ!(x̂ŷψ(x, y), x̂ŷω(x, y)) . ≡ : (∃χ) : χ!(x, y) . ≡_{x,y} . ψ(x, y) : (∃θ) : θ!(x, y) . ≡_{x,y} .
+    ω(x, y) : φ!(χ!(x̂, ŷ), θ!(x̂, ŷ))` [✱21·1]: ✱21·01 for each relation, the first with the larger scope. -/
+theorem qrelRelApp {c d : Ty} (φ : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d))) (ψ : V a → V b → QF V)
+    (ω : V c → V d → QF V) :
+    QThm S (iff (relRelApp φ ψ ω) (ex (τ := Ty.pred2 a b) fun χ => QF.and (fiff2 (pf2 χ) ψ)
+      (ex (τ := Ty.pred2 c d) fun θ => QF.and (fiff2 (pf2 θ) ω) (.app2 φ χ θ)))) :=
+  q21_1 ψ _
+
+/-- `qclsGen` for relations: an extensional expression of a predicative relation x̂ŷθ!(x, y) is
+    f{x̂ŷθ!(x, y)} for the context f(χ!(x̂, ŷ)) that is the expression of x̂ŷχ!(x, y). ⊃: θ!(x, y) ≡_{x,y}
+    θ!(x, y) (✱4·2, ✱11·11), joined (✱3·2), and ✱10·24 at θ. ⊂: `hΨ` (✱3·26) with Imp (✱3·31), under (∃χ)
+    by ✱10·11, ✱10·23. -/
+theorem qrelGen (Ψ : (V a → V b → QF V) → QF V) (hΨ : RelExt S Ψ) (θ : V (Ty.pred2 a b)) :
+    QThm S (iff (Ψ (pf2 θ)) (rel (pf2 θ) fun χ => Ψ (pf2 χ))) :=
+  have h1 : QThm S (imp (Ψ (pf2 θ)) (rel (pf2 θ) fun χ => Ψ (pf2 χ))) :=
+    qsyl (QThm.mp (q11_11 fun x y => QL.t4_2 (.app2 θ x y)) (QL.t3_2 _ _))
+      (q10_24 (fun χ => QF.and (fiff2 (pf2 χ) (pf2 θ)) (Ψ (pf2 χ))) θ)
+  have h2 : QThm S (imp (rel (pf2 θ) fun χ => Ψ (pf2 χ)) (Ψ (pf2 θ))) :=
+    QThm.mp (q10_11 fun χ => QThm.mp (qsyl (hΨ (pf2 χ) (pf2 θ)) (QL.t3_26 _ _)) (QL.t3_31 _ _ _))
+      (qiffMp (q10_23 _ _))
+  qiffI h1 h2
+
+/-- ✱21·7, the analogue of ✱12·1 for relations, for an extensional expression ΨR: `⊢ : (∃g) : ΨR . ≡_R . g!R`.
+    ✱21·7 for the context f(χ!(x̂, ŷ)) = Ψ{x̂ŷχ!(x, y)}, and `qrelGen` for the first member, under (R) and
+    (∃g) (✱10·11·27·28). -/
+theorem qrelRed [Reducibility S] (Ψ : (V a → V b → QF V) → QF V) (hΨ : RelExt S Ψ) :
+    QThm S (ex (τ := Ty.pred1 (Ty.pred2 a b)) fun g => relAll fun R => iff (Ψ R) (relClsApp g R)) :=
+  QThm.mp (q21_7 fun χ => Ψ (pf2 χ)) (q10_11_28 fun _ => q10_11_27 fun θ =>
+    qsyl (QThm.mp (qrelGen Ψ hΨ θ) (QL.t3_2 _ _)) (QL.t4_22 _ _ _))                -- ✱21·7
+
+/-- ✱10·43 for relations, at a relation x̂ŷψ(x, y) whose defining function need not be predicative, as
+    `qcls10_43`: `qrelAllAt` for ✱10·1, the members carried by `hΨ`, `hΦ`, joined by ✱4·86 (✱3·26); ✱5·32. -/
+theorem qrel10_43 [Reducibility S] (Ψ Φ : (V a → V b → QF V) → QF V) (hΨ : RelExt S Ψ) (hΦ : RelExt S Φ)
+    (ψ : V a → V b → QF V) :
+    QThm S (iff (QF.and (relAll fun T => iff (Ψ T) (Φ T)) (Ψ ψ))
+      (QF.and (relAll fun T => iff (Ψ T) (Φ T)) (Φ ψ))) :=
+  QThm.mp (qrelAllAt (fun T => iff (Ψ T) (Φ T)) ψ fun θ =>
+      qsyl (qimpIffIffCongr (hΨ (pf2 θ) ψ) (hΦ (pf2 θ) ψ)) (QL.t3_26 _ _))         -- ✱10·1
+    (qiffMp (QL.t5_32 _ (Ψ ψ) (Φ ψ)))                                             -- ✱5·32
+
+/-- ✱20·3 for classes of relations: `⊢ : R ∈ R̂(ΨR) . ≡ . ΨR`, R real (an expression x̂ŷψ(x, y)) and ΨR
+    extensional. `qcls20_3`'s lines: ✱21·082, ✱21·083 (`qrelClsMem`); ✱10·43 at R (`qrel10_43`) under (∃φ);
+    ✱10·35 with p second (✱4·3); ✱21·7 (`qrelRed`) for ✱12·1 (✱3·27, ✱3·2). -/
+theorem qrelCls20_3 [Reducibility S] (Ψ : (V a → V b → QF V) → QF V) (hΨ : RelExt S Ψ)
+    (ψ : V a → V b → QF V) : QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
+  let P : V (Ty.pred1 (Ty.pred2 a b)) → QF V := fun φ => relAll fun T => iff (Ψ T) (relClsApp φ T)
+  calc (ψ ∈ Ψ)
+      ≡ ex (fun φ => QF.and (P φ) (relClsApp φ ψ)) := qrelClsMem Ψ ψ               -- (✱21·082) . (✱21·083)
+    _ ≡ ex (fun φ => QF.and (P φ) (Ψ ψ)) :=
+        q10_11_281 fun φ => qiffSymm (qrel10_43 Ψ (relClsApp φ) hΨ (relExt_rel _) ψ)  -- [✱10·43]
+    _ ≡ QF.and (ex P) (Ψ ψ) := qex_and_perm P (Ψ ψ)                                -- [✱10·35]
+    _ ≡ Ψ ψ := qand_true_left (qrelRed Ψ hΨ)                                      -- [✱12·1]
+
+/-- ✱21·4 `⊢ : R ∈ Rel . ≡ . (∃φ) . R = x̂ŷφ!(x, y)` [✱20·3 . (✱21·03)], R real (an expression x̂ŷψ(x, y)).
+    ✱20·3 is its analogue for classes of relations (`qrelCls20_3`), at the defining expression of Rel,
+    extensional by ✱21·11 under (∃φ) (`relExt_Rel`). -/
+theorem q21_4 [Reducibility S] (ψ : V a → V b → QF V) :
+    QThm S (iff (ψ ∈ Rel) (ex (τ := Ty.pred2 a b) fun φ => relEq ψ (pf2 φ))) :=
+  qrelCls20_3 Rel relExt_Rel ψ                                                    -- ✱20·3 . (✱21·03)
+
+/-- ✱21·41 `⊢ . x̂ŷφ(x, y) ∈ Rel` [✱21·4·151] -/
+theorem q21_41 [Reducibility S] (φ : V a → V b → QF V) : QThm S (φ ∈ Rel) :=
+  QThm.mp (q21_151 φ) (qiffMpr (q21_4 φ))                                         -- ✱21·4·151
+
+/-! A check of the layers for relations of relations (docs/CLASSES_OF_CLASSES.md); not a PM proposition.
+  P{R̂Ŝψ(R, S)}Q, unfolded one layer per line: ✱21·08, ✱21·081, ✱21·01 (twice, P first). -/
+example {c d : Ty} (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V) (P : V a → V b → QF V)
+    (Q : V c → V d → QF V) :
+    QThm S (iff (relRelHolds P Ψ Q) (ex (τ := Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) fun φ =>
+      QF.and (relAll fun R => relAll fun T => iff (Ψ R T) (relRelApp φ R T))
+        (ex (τ := Ty.pred2 a b) fun χ => QF.and (fiff2 (pf2 χ) P)
+          (ex (τ := Ty.pred2 c d) fun θ => QF.and (fiff2 (pf2 θ) Q) (.app2 φ χ θ))))) :=
+  let H : V (Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) → QF V := fun φ =>
+    relAll fun R => relAll fun T => iff (Ψ R T) (relRelApp φ R T)
+  calc relRelHolds P Ψ Q
+      ≡ ex (fun φ => QF.and (H φ) (relAppRel P φ Q)) := qrelRel1 Ψ _                -- (✱21·08)
+    _ ≡ ex (fun φ => QF.and (H φ) (relRelApp φ P Q)) :=
+        q10_11_281 fun φ => qandCongrR _ (qrelAppRel P φ Q)                      -- (✱21·081)
+    _ ≡ ex (fun φ => QF.and (H φ) (ex fun χ => QF.and (fiff2 (pf2 χ) P)
+          (ex fun θ => QF.and (fiff2 (pf2 θ) Q) (.app2 φ χ θ)))) :=
+        q10_11_281 fun φ => qandCongrR _ (qrelRelApp φ P Q)                      -- (✱21·01)
 
 end PM
