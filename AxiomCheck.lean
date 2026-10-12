@@ -646,6 +646,8 @@ import PM
 #print axioms PM.q14_271
 #print axioms PM.q14_272
 #print axioms PM.q14_28
+#print axioms PM.qtfnCongr
+#print axioms PM.q14_3
 #print axioms PM.q14_31
 #print axioms PM.q14_32
 #print axioms PM.q14_33
