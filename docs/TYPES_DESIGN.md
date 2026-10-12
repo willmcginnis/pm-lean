@@ -458,7 +458,7 @@ occurs in the declaration's type. Result: 59 PM propositions use reducibility, 1
 | `PM/Models/Collapse.lean`, `PM/Models/Finite.lean` | 54, 152 | `Ty.den`, `QModel.collapse`, `classicalAll`, `QModel.classical`, `consistent_collapse`; shapes `Sh`, `finModel`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, three counter-models |
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
 | `PM/Star13.lean` | 249 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
-| `PM/Star14.lean` | 834 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
+| `PM/Star14.lean` | 839 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
 | `PM/Star20.lean` | 109 | ✱20·01, ✱20·02 (macros), class identity; ✱20·1, ✱20·13, ✱20·14, ✱20·15, ✱20·3; typical-ambiguity checks |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
@@ -542,7 +542,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 - **What reducibility costs in practice.**
   - In ✱13 it is paid once, inside ✱13·101: line (1) is 3 Lean lines (✱12·1, then ✱10·1 at x and y
     joined by Comp under ✱10·11·28). The elimination at the end is ✱10·23 plus Comm, 2 lines.
-  - Everything later reaches ✱12·1 only through ✱13·101, at no further cost.
+  - The remaining ✱13 proofs reach ✱12·1 only through ✱13·101, at no further cost (✱14·17, ✱14·171 and ✱20 cite ✱12·1 directly).
   - Each direct use in ✱20 costs 1–2 lines, mostly turning ψ ≡ₓ φ! into φ! ≡ₓ ψ (✱10·32 under ∃).
 - **Build:** clean `lake build`, 33 jobs, 13.6 s (wall clock, after `lake clean`).
 
