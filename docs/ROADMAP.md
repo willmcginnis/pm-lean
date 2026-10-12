@@ -4,8 +4,8 @@ What this project plans to do next, roughly in order. Status words: **in progres
 
 ## Checking PM's own claims
 
-- **Next.** A normal-form proof of `Rep`: ✱1·2–✱1·6 for every proposition of ✱9's method (PM, p. 142: "by mere repetition of the proofs"). ✱9's foundation is built (`PM/Found9/`, docs/STAR9_FOUNDATION.md), and `star9_iff_star10` makes the agreement of the two methods (p. 144) conditional on `Rep`; a proof would make it unconditional (given an individual). It needs a normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory.
-- **Next.** The three cases of ✱1·6, for one apparent variable per letter, that the methods of ✱9·3–✱9·52 do not reach (p = (x) . φx, q = (∃y) . ψy; docs/PM_CLAIMS.md, A28): a derivation in ✱9's method, or a proof that there is none.
+- **Next.** A normal-form proof of `Rep`: ✱1·2–✱1·6 for every proposition of ✱9's method (PM, p. 142: "by mere repetition of the proofs"). ✱9's foundation is built (`PM/Found9/`, docs/STAR9_FOUNDATION.md), and `star9_iff_star10` makes the agreement of the two methods (p. 144) conditional on `Rep` and on a variable of every type; a proof would leave only the second. For the variables of a structure (`QModel.den`) an individual gives a value of every type (`den_nonempty`, PM/Found9/Equiv.lean); for an arbitrary family of variables it does not, so there the assumption stays as stated. It needs a normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory.
+- **Next.** ✱9·31 under the definitions as printed, and the 20 cases of ✱1·2–✱1·6, for one apparent variable per letter, that the methods of ✱9·3–✱9·52 do not reach (docs/STAR9_FOUNDATION.md §5, §7; docs/PM_CLAIMS.md, A10, A28): a derivation in ✱9's method, or a proof that there is none.
 - **Next.** Work through docs/PM_CLAIMS.md: every claim checked, or marked with why not.
 - **Later.** Every theorem checked under both foundations (✱9's and ✱10's), as StyleCheck does for the predicativity styles, if the cost measured on a trial branch is reasonable.
 

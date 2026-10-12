@@ -110,8 +110,10 @@ for example:
 - ✱2·54 to turn `∼p ⊃ q` into `p ∨ q`, and ✱3·47 to replace one factor of a product.
 
 **✱9–✱10.** The proofs follow PM's lines, and each docstring names the steps PM leaves tacit. There is no
-per-proposition ledger for ✱9–✱10, so they count 0 in the "followed PM's lines" column of
-[PROGRESS.md](PROGRESS.md).
+per-proposition ledger for ✱9–✱10 by ✱10's method, the method these counts and
+[PROGRESS.md](PROGRESS.md) cover, so they count 0 in its "followed PM's lines" column. ✱9 by its own
+method (`PM/Found9`) has a ledger, `data/star9f_ledger.json`, which these counts do not read
+([STAR9_FOUNDATION.md](STAR9_FOUNDATION.md)).
 
 **✱11** (51 assertions; `star11_ledger.json`). All 51 follow PM's Dem. lines or bracketed hint: 34
 `pm-lines`, 17 `pm-lines+extra`. Typical reasons for an extra:
