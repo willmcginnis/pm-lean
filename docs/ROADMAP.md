@@ -1,7 +1,7 @@
 # Roadmap
 
 What this project plans to do, how the pieces depend on each other, which tasks wait for others and why,
-and what is already known about each from prior work. PM's claims about its own system, and their status,
+and what is already known about each from prior work. <!-- deps: none --> PM's claims about its own system, and their status,
 are in [PM_CLAIMS.md](PM_CLAIMS.md); decisions already taken are in [TYPES_DESIGN.md](TYPES_DESIGN.md);
 measured progress is in [PROGRESS.md](PROGRESS.md). This page was last revised on 2026-10-12, with the
 statuses of commit `efbb89d`; the counts in it are read from PROGRESS.md and PM_CLAIMS.md when it is
@@ -37,7 +37,7 @@ accept a wrongly translated statement, so the translation itself is also checked
 **The order is a plan, not a contract.** Work moves when it fits better elsewhere or costs little, and the
 reason is recorded. Small tasks that are independent of the rest are done early. A task placed later than
 its dependencies require says so (*by choice*, with the reason), and a task that has moved says where it
-was and why ([Tasks that moved](#tasks-that-moved)).
+was and why ([Tasks that moved](#tasks-that-moved)). <!-- deps: none -->
 
 ## How the plan is organized
 
@@ -57,19 +57,19 @@ one stage of a larger piece of work. For each task the plan gives:
 - its **status**: done, in progress or not started, read from the repository;
 - its **size**: S (days to a few weeks), M (weeks to a few months) or L (several months or more), with the
   reason;
-- what it **needs**: the tasks whose results it cannot do without. These are the **gates**: arrows between
-  particular tasks, not walls between phases;
+- what it **needs**: the tasks whose results it cannot do without. <!-- deps: none --> These are the **gates**: arrows between
+  particular tasks, not walls between phases; <!-- deps: none -->
 - what it is **helped by**: tasks that make it easier (shared tools, comparisons, experience) but are not
-  required;
+  required; <!-- deps: none -->
 - its **order**: *by dependency* if it is placed as early as what it needs allows, or *by choice* if it is
-  placed later than that, with the reason;
+  placed later than that, with the reason; <!-- deps: none -->
 - the **prior work** found for it, with what the search found it good for (*reuse*: licensed code or data
   to import or depend on; *ideas*: read it, write our own; *check against*: an independent result to
   compare with; *nothing found*; *not yet searched*) and an evidence level for each entry: *measured* (its
   source was inspected at a pinned commit, and the entry links the repository, the commit and the file,
   with lines where useful; nothing was built unless said), *documented* (a paper or README says so; where
   the place has been recorded, it is cited), *unverified* (reported, not checked), or *from memory* (listed
-  before the search reached this task). "Not found" means not found by the searches so far, not that nothing
+  before the search reached this task). <!-- deps: none --> "Not found" means not found by the searches so far, not that nothing
   exists. Every repository inspected, with the commit read, is listed under
   [Where the prior work was read](#where-the-prior-work-was-read).
 
@@ -120,7 +120,7 @@ Formalize the text, volume by volume and chapter by chapter, and check PM's clai
 
 Prior work:
 
-- **✱1–✱5** (check against). Done many times elsewhere; only this project and l-pommeret/Principia-Mathematica use PM's own ✱1 rules (docs/FORMALIZATION_COMPARISON.md). Metamath set.mm: 231 theorems pm1.* to pm5.* (281 pm* theorems in all), CC0 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 LICENSE](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/LICENSE)); Metamath pmproofs.txt, ✱2–✱5 by condensed detachment, CC0 (*documented*); principia-rewrite (Coq, shallow: PM's propositions as Coq propositions over classical Coq, GPL-3.0): a comparison only (*measured*: [principia-rewrite@3f3bfc0 PL.v:1-4](https://github.com/LogicalAtomist/principia-rewrite/blob/3f3bfc09b43df42b34b03b2efb6ecdd764d1ea10/PL.v#L1-L4), [principia-rewrite@3f3bfc0 LICENSE](https://github.com/LogicalAtomist/principia-rewrite/blob/3f3bfc09b43df42b34b03b2efb6ecdd764d1ea10/LICENSE)).
+- **✱1–✱5** (check against). Done many times elsewhere; only this project and l-pommeret/Principia-Mathematica use PM's own ✱1 rules (docs/FORMALIZATION_COMPARISON.md). Metamath set.mm: 230 theorems labelled `pm1.`–`pm5.` and 280 with a PM number in all (labels matching `pm[0-9]+\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 LICENSE](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/LICENSE)); Metamath pmproofs.txt, ✱2–✱5 by condensed detachment, CC0 (*documented*); principia-rewrite (Coq, shallow: PM's propositions as Coq propositions over classical Coq, GPL-3.0): a comparison only (*measured*: [principia-rewrite@3f3bfc0 PL.v:1-4](https://github.com/LogicalAtomist/principia-rewrite/blob/3f3bfc09b43df42b34b03b2efb6ecdd764d1ea10/PL.v#L1-L4), [principia-rewrite@3f3bfc0 LICENSE](https://github.com/LogicalAtomist/principia-rewrite/blob/3f3bfc09b43df42b34b03b2efb6ecdd764d1ea10/LICENSE)).
 - **✱9–✱14** (check against, ideas). l-pommeret/Principia-Mathematica (Lean 4): a deep ramified layer, ✱9 26 of 28 and ✱10 34 of 35 by our count (docs/FORMALIZATION_COMPARISON.md, built by us); no LICENSE file, so ideas only (*measured*: [Principia-Mathematica@3fb187a Principia/FirstEdition](https://github.com/l-pommeret/Principia-Mathematica/blob/3fb187a763db7865a46ec9204d33f1f318490a29/Principia/FirstEdition)); Metamath set.mm: 48 PM-numbered ✱10–✱14 theorems (✱10 13, ✱11 15, ✱13 11, ✱14 9), CC0 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm)); Neo-Principia (Rocq, MIT): shallow, ✱9's definitions over Coq's `Prop → Prop` (*measured*: [Neo-Principia@752b04e pm/ch9.v:14-37](https://github.com/MudroadWhite/Neo-Principia/blob/752b04e18a9f1106b7088f6bdd05932a1876f8b5/pm/ch9.v#L14-L37)); Wang (1960): the predicate part of ✱10–✱14 is a decidable fragment (*documented*).
 - **✱9 beside ✱10** (ideas, check against). Faithful ✱9 is reported hard. Landini (2000): §4 locates the flaw in ✱9·31's demonstration, which applies ✱9·03 to a p that contains quantifiers, and repairs ✱9 with two definitions (✱9·yy, ✱9·zz) and a rule, Switch; §5 proves the repaired system semantically complete for predicate logic without identity (*documented*: G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §4 (pp. 63–64) and §5 (pp. 64–75); read in full); Urquhart (2016), on ✱9 and ✱10 (*documented*); Holmes's SML code (2002–04): a partial proof checker for ramified type theory, `theoldbook()` loading PM's ✱1 and ✱9/✱10 axioms, under a notice permitting free copying and use (*measured*: [Randall-Holmes.github.io@925857d RTT/rtt.sml:3](https://github.com/Randall-Holmes/Randall-Holmes.github.io/blob/925857da70ac7491cd5565574813fe0cccfc3599/RTT/rtt.sml#L3), [Randall-Holmes.github.io@925857d RTT/rtt.sml:4731](https://github.com/Randall-Holmes/Randall-Holmes.github.io/blob/925857da70ac7491cd5565574813fe0cccfc3599/RTT/rtt.sml#L4731)).
 - **✱9·31 as printed** (ideas, check against). Landini (2000), §4: the flaw located in ✱9·31's demonstration (the moves from his lines 2 to 3 and 4 to 5 apply ✱9·03, stated for a quantifier-free p), and the repair: ✱9·yy, (x)Ax ∨ (y)By for (x)(y)(Ax ∨ By); ✱9·zz, (∃x)Ax ∨ (∃y)By for (∃x)(∃y)(Ax ∨ By); and Switch, from B[(x)(∃y)Axy] infer B[(∃y)(x)Axy] when a connective in A separates every free x from every free y (*documented*: G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §4, pp. 63–64; read in full); PM's own Introduction defines the disjunction of two universal propositions: "(x).φx .∨. (y).ψy" as meaning "(x, y). φx ∨ ψy", which is Landini's ✱9·yy; ✱9 never states it (*documented*: Whitehead and Russell, Principia Mathematica Vol. I (1910), Introduction, Chapter II: p. 49 of the 1910 printing as paginated in Project Gutenberg eBook #78050 (not yet checked against a scan); Landini, who uses the second edition's pages, cites it as p. 47); Russell's own rule in the second edition, ✱8·13: "If all occurrences of x are separated from all occurrences of y by a certain stroke, we can change the order of x and y in the prefix … and vice versa. Pp" (a primitive proposition, both directions, on the prefix) (*measured*: [Internet Archive item principia-mathematica_l2o7Ic0GMLeSLqcPnq, Principia_Mathematica_vol1.pdf, Appendix A, p. 636 (PDF page 680)](https://archive.org/details/principia-mathematica_l2o7Ic0GMLeSLqcPnq)).
@@ -228,7 +228,7 @@ Prior work:
 
 Prior work:
 
-- **set.mm replay ✱1–✱5** (reuse, check against). Metamath set.mm: 281 pm* theorems, CC0 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 LICENSE](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/LICENSE)); Carneiro's embedding of hol.mm in set.mm, as the template (*documented*).
+- **set.mm replay ✱1–✱5** (reuse, check against). Metamath set.mm: 280 theorems labelled with a PM number (labels matching `pm[0-9]+\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 LICENSE](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/LICENSE)); Carneiro's embedding of hol.mm in set.mm, as the template (*documented*).
 - **ZFC model of PM's types** (ideas). With reducibility, an extensional model: moderate; with infinity: hard. Mares (2007); Fitch (1938); Lorenzen (1951) (*documented*); Isabelle AFP Q0_Metatheory and HOL_in_HOL_Deep: semantics, soundness and consistency for simple types (*documented*); Flypitch: a deep-embedded theory with a model, in Lean (*measured*: [flypitch@d72904c src/summary.lean:77](https://github.com/flypitch/flypitch/blob/d72904c17fbb874f01ffe168667ba12663a7b853/src/summary.lean#L77)).
 - **transfer through the model** (not yet searched).
 
@@ -275,7 +275,7 @@ The same statements compared with other readings of PM, with mainstream mathemat
 
 Prior work:
 
-- **set.mm comparison** (check against). 281 pm* theorems in set.mm and 198 in iset.mm (CC0), reaching ✱10–✱14 and ✱54, not only ✱1–✱5 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 iset.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/iset.mm)).
+- **set.mm comparison** (check against). 280 theorems labelled with a PM number in set.mm and 201 in iset.mm (labels matching `pm[0-9]+\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0, reaching ✱10–✱14 (48 in set.mm) and ✱54, not only ✱1–✱5 (*measured*: [set.mm@405ce88 set.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/set.mm), [set.mm@405ce88 iset.mm](https://github.com/metamath/set.mm/blob/405ce8897374f337393b19d25a128fdc52210fec/iset.mm)).
 - **other formalizations** (check against). docs/FORMALIZATION_COMPARISON.md is itself the survey. l-pommeret/Principia-Mathematica: HEAD is still the commit docs/FORMALIZATION_COMPARISON.md measured (*measured*: [Principia-Mathematica@3fb187a README.md](https://github.com/l-pommeret/Principia-Mathematica/blob/3fb187a763db7865a46ec9204d33f1f318490a29/README.md)); the Agda PM development's ✱9 imports a module, PMClasses, that is not in the repository, so it cannot build as published (*measured*: [PrincipiaMathematica_Agda@023478b Star9.agda:10](https://github.com/yangg1g/PrincipiaMathematica_Agda/blob/023478b36c67fd0cd66e8015c06645b1161ead56/Star9.agda#L10)); Lacrimae-Angeli: ✱1 only (135 lines of Rocq), no LICENSE file (*measured*: [Lacrimae-Angeli@bc9c0d5 pm/ch1.v](https://github.com/MudroadWhite/Lacrimae-Angeli/blob/bc9c0d5ead127b6fcc229ecfd5e41374a041c7b3/pm/ch1.v), [Lacrimae-Angeli@bc9c0d5 README.md:19](https://github.com/MudroadWhite/Lacrimae-Angeli/blob/bc9c0d5ead127b6fcc229ecfd5e41374a041c7b3/README.md#L19)).
 
 #### Mainstream mathematics (Mathlib), in a separate package
@@ -391,7 +391,7 @@ Prior work:
 
 ### Now, in parallel
 
-Every task under way, and every task whose gates are all done and that is not held back by choice:
+Every task under way, and every task whose gates are all done and that is not held back by choice: <!-- deps: none -->
 
 <!-- generated:now:start -->
 - **PM itself.** Under way: ✱9–✱14; ✱9 beside ✱10; ✱9·31 as printed; ✱20–✱24; classes of classes. Can start: Rep; order-seeing model; Vol II list; edition differences.
@@ -408,7 +408,7 @@ first-order core, with derivations as data, and proves the easy direction: every
 gives a theorem of the present embedding. The present derivations cannot be numbered or exported as they
 are, because `QThm.gen` takes one premise for every variable, so a `QThm` proof is infinitely branching.
 pm.mm beyond ✱5, the Rocq re-check, the model of PM's types in ZFC and the incompleteness work are all built
-on the core. <!-- gates: adq-2 > mm-2 rocq sm-2 g-fo g1 g2 -->
+on the core. <!-- deps: gates adq-2 > mm-2 rocq sm-2 g-fo g1 g2 -->
 
 With one maintainer, the limit is not how many tasks could start but how many decisions and reviews one
 person can make. So one principal task on PM's text and one bounded support task are in review at a time;
@@ -419,49 +419,55 @@ project already does for the readings of "predicative".
 
 ### Waits for a dependency
 
-These are the main gates; the dependency view below shows every one. Each item ends with an HTML comment
-of the form `gates: A > B C`, naming the gates it states as task ids (B and C need A, directly or through
-other tasks); so does any other sentence on this page that states a gate, and `tests/test_roadmap.py`
-checks every such comment against the data.
+These are the main gates; the dependency view below shows every one. <!-- deps: none --> Every sentence
+on this page that says one task needs, gates or waits for another, or is helped by it, ends with an HTML
+comment naming those dependencies as task ids: `deps: gates A > B C` (B and C need A, directly or through
+other tasks), `deps: helps A > B` (A is among B's soft dependencies, not a hard one), `deps: not A > B` (A
+is not a hard dependency of B), or `deps: none` (the sentence's words name no dependency between tasks).
+<!-- deps: none --> `scripts/roadmap_chart.py` and `tests/test_roadmap.py` check each comment against the
+data, and check that gate wording carries only gates and soft wording only helps. <!-- deps: none -->
 
 - **The volumes, chapter by chapter.** ✱20–✱24 → ✱30–✱38 → ✱40–✱56 (which also needs apparent classes of
   classes) → ✱60–✱74 → ✱80–✱88 and ✱90–✱97 → Vol II's Parts III–V → Vol III, which also needs its
-  proofread transcription. Dependencies are on the chapters actually cited, not on whole volumes.
-  <!-- gates: v1-20-24 > v1-30-38; v1-30-38 > v1-40-56; v1-coc > v1-40-56; v1-40-56 > v1-60-74; v1-60-74 > v1-80-88 v1-90-97; v1-80-88 > v2-100-126; v1-90-97 > v2-100-126 v2-150-186 v2-200-234; v2-150-186 > v3-250-276; v2-200-234 > v3-250-276 v3-300-375; tx-3 > v3-250-276 v3-300-375 -->
+  proofread transcription.
+  <!-- deps: gates v1-20-24 > v1-30-38; v1-30-38 > v1-40-56; v1-coc > v1-40-56; v1-40-56 > v1-60-74; v1-60-74 > v1-80-88 v1-90-97; v1-80-88 > v2-100-126; v1-90-97 > v2-100-126 v2-150-186 v2-200-234; v2-150-186 > v3-250-276; v2-200-234 > v3-250-276 v3-300-375; tx-3 > v3-250-276 v3-300-375 -->
+  Dependencies are on the chapters actually cited, not on whole volumes.
 - **✱9's own method.** Checking every theorem under both foundations needs the normal-form proof of Rep.
-  <!-- gates: v1-rep > v1-both -->
-- **The finite core.** pm.mm for ✱1–✱5 needs the first stage of adequacy. The second stage (the finite
-  first-order core) gates pm.mm beyond ✱5, the Rocq re-check, the model of PM's types in ZFC, the
-  first-order presentation of PM and with it both incompleteness theorems, and the monadic decision
-  procedure; pm.mm from ✱20 on needs the third stage. The core helps ✱8's comparison with ✱9 but does not
-  gate it (see the 1925 edition below).
-  <!-- gates: adq-1 > mm-1 adq-2; adq-2 > mm-2 mm-3 rocq sm-2 g-fo g1 g2 d-monadic; adq-3 > mm-3 -->
+  <!-- deps: gates v1-rep > v1-both -->
+- **The finite core.** pm.mm for ✱1–✱5 needs the first stage of adequacy, and so does the second stage.
+  <!-- deps: gates adq-1 > mm-1 adq-2 --> The second stage (the finite first-order core) gates pm.mm beyond
+  ✱5, the Rocq re-check, the model of PM's types in ZFC, the first-order presentation of PM and with it both
+  incompleteness theorems, and the monadic decision procedure; pm.mm from ✱20 on needs the third stage.
+  <!-- deps: gates adq-2 > mm-2 mm-3 rocq sm-2 g-fo g1 g2 d-monadic; adq-3 > mm-3 --> The core helps ✱8's
+  comparison with ✱9 but does not gate it (see the 1925 edition below).
+  <!-- deps: helps adq-2 > e2-8a; not adq-2 > e2-8a -->
 - **The exports.** The set.mm replay needs pm.mm for ✱1–✱5; transferring every derivation through the ZFC
   model needs both the model and the quantified export.
-  <!-- gates: mm-1 > sm-1; sm-2 > sm-3; mm-2 > sm-3 -->
+  <!-- deps: gates mm-1 > sm-1; sm-2 > sm-3; mm-2 > sm-3 -->
 - **Incompleteness.** The first theorem needs the first-order presentation, the numbering, and arithmetic
   interpreted inside the chosen PM theory: Robinson's Q, and IΣ₁ for the Gödel–Rosser theorem of the library
   the plan reuses, which needs Vol II's cardinal arithmetic (✱100–✱126) and the induction of ✱90–✱97 on
-  which it rests. Nothing in Vol III feeds it. The second theorem needs the first, and induction inside the
-  theory (✱90–✱97).
-  <!-- gates: g-fo > g-num g1; g-num > g1; g-arith > g1; v2-100-126 > g-arith; v1-90-97 > g-arith g2; g1 > g2 -->
-- **Decision procedures that produce PM derivations.** Monadic: the finite core. Presburger: PM's addition
-  (✱100–✱126). Tarski: PM's real numbers (✱300–✱375). Studying the algorithms needs none of these.
-  <!-- gates: adq-2 > d-monadic; v2-100-126 > d-presburger; v3-300-375 > d-tarski -->
+  which it rests. <!-- deps: gates g-fo > g-num g1; g-num > g1; g-arith > g1; v2-100-126 > g-arith; v1-90-97 > g-arith -->
+  Nothing in Vol III feeds it. <!-- deps: not v3-250-276 v3-300-375 > g1 --> The second theorem needs the
+  first, and induction inside the theory (✱90–✱97). <!-- deps: gates g1 > g2; v1-90-97 > g2 -->
+- **Decision procedures that produce PM derivations.** The monadic procedure needs the finite core;
+  Presburger needs PM's addition (✱100–✱126); Tarski needs PM's real numbers (✱300–✱375).
+  <!-- deps: gates adq-2 > d-monadic; v2-100-126 > d-presburger; v3-300-375 > d-tarski --> Studying the
+  algorithms needs none of these. <!-- deps: none -->
 - **The 1925 edition.** ✱8 and Appendix A need ✱9 beside ✱10, and are helped by the finite core; Appendix
   B needs Vol I's induction (✱90–✱97); Appendix C needs the truth-function results of ✱9–✱14.
-  <!-- gates: v1-9eq > e2-8a; v1-90-97 > e2-b; v1-9-14 > e2-c -->
-- **Lean's kernel.** The census, then the re-check by a verified checker (an existing one first), then the
-  correctness proof, or the audit of an existing one.
-  <!-- gates: lk-census > lk-restricted lk-proof; lk-restricted > lk-proof -->
-- **Comparisons with Mathlib**, from ✱100 on, after the chapters they compare; the **complete assumption
-  census**, after all three volumes; the **PRA readings**, after a formal PRA.
-  <!-- gates: v2-100-126 > x-ml-1; v2-150-186 > x-ml-2; v3-250-276 > x-ml-3; v3-300-375 > x-ml-3 fa-3; v2-200-234 > fa-3; w-1 > fa-2 -->
+  <!-- deps: gates v1-9eq > e2-8a; v1-90-97 > e2-b; v1-9-14 > e2-c; helps adq-2 > e2-8a -->
+- **Lean's kernel.** The re-check by a verified checker (an existing one first) needs the census; the
+  correctness proof, or the audit of an existing one, needs both.
+  <!-- deps: gates lk-census > lk-restricted lk-proof; lk-restricted > lk-proof -->
+- **Comparisons with Mathlib**, from ✱100 on, need the chapters they compare; the **complete assumption
+  census** needs all three volumes; the **PRA readings** need a formal PRA.
+  <!-- deps: gates v2-100-126 > x-ml-1; v2-150-186 > x-ml-2; v3-250-276 > x-ml-3; v3-300-375 > x-ml-3 fa-3; v2-200-234 > fa-3; w-1 > fa-2 -->
 ### Waits by choice
 
 The maintainer's order of priorities: the three volumes first, with PM's claims checked in each; then
 incompleteness, with the finitist audit alongside; then WKL₀ and the decision procedures. Where that places
-a task later than its dependencies require, the task is marked *by choice*:
+a task later than its dependencies require, the task is marked *by choice*: <!-- deps: none -->
 
 <!-- generated:choice:start -->
 | Task | Placed after | Why |
@@ -498,14 +504,14 @@ The order is a plan, not a contract. When a task moves, it keeps a note of where
 Some findings would bring foundational work forward before more dependent proofs pile up: adequacy
 failing for some part of the embedding, or its converse direction turning out to need more than a
 restricted form of `QThm`; ✱9's questions (Rep, ✱9·31) staying open; a claim of PM turning out false;
-class or relation interfaces that do not fit the later volumes; churn in the checkers or the toolchain. A
+class or relation interfaces that do not fit the later volumes; churn in the checkers or the toolchain. <!-- deps: none --> A
 claim that fails is a valid result of the audit, not a reason to stop.
 
 ## Dependency view
 
 Every task in its group's column, at the level of its longest chain of hard dependencies (level 0 needs
-nothing else). A solid arrow points from a task to one that needs it; a dashed arrow, to one placed after
-it by choice. The image is large; open it on its own to read it at full size.
+nothing else). <!-- deps: none --> A solid arrow points from a task to one that needs it; a dashed arrow, to one placed after
+it by choice. <!-- deps: none --> The image is large; open it on its own to read it at full size.
 
 ![Dependency view: every task, the hard dependencies between them, and the placements by choice](roadmap/deps.svg)
 
@@ -530,13 +536,14 @@ commit [`611d57c`](https://github.com/FormalizedFormalLogic/Foundation/blob/611d
 `incomplete_GR` proves that T is incomplete for an arithmetic theory T (a theory in the language of ordered
 rings) with a Δ₁ axiomatization, IΣ₁ ⪯ T and T consistent, and `incomplete_GR_of_RE` the same for an r.e.
 axiomatization. Its abstract form, `rosser_first_incompleteness`, needs a base theory with diagonalization
-in T's own language. So the route must supply three things: an arithmetic theory of T_H (the arithmetic
+in T's own language. <!-- deps: none --> So the route must supply three things: an arithmetic theory of T_H (the arithmetic
 sentences whose translations T_H proves), whose incompleteness then carries back to T_H; that this theory is
 r.e., from the numbering; and that it contains IΣ₁, which needs T_H to prove the translation of every
-axiom of IΣ₁, including induction for Σ₁ formulas, and not only Q. The plan's default is to interpret
-IΣ₁, from PM's induction for inductive cardinals, so that the theorem applies as stated; the alternative,
-a Gödel–Rosser proof from Q written here, is extra work the library does not provide. Consistency stays a
-hypothesis either way. <!-- gates: g-arith > g1; g-num > g1; v1-90-97 > g-arith -->
+axiom of IΣ₁, including induction for Σ₁ formulas, and not only Q. <!-- deps: gates g-arith g-num > g1 -->
+The plan's default is to interpret IΣ₁, which needs PM's induction (✱90–✱97) and its inductive cardinals
+(✱100–✱126), so that the theorem applies as stated; the alternative, a Gödel–Rosser proof from Q written
+here, is extra work the library does not provide. <!-- deps: gates v1-90-97 v2-100-126 > g-arith -->
+Consistency stays a hypothesis either way.
 
 What does not suffice: interpreting PM's formulas in Lean's natural numbers from outside, or adding Peano's
 axioms to PM, shows nothing about PM without them; the interpretation's obligations must be proved inside
@@ -556,7 +563,7 @@ provability predicate satisfies the Hilbert–Bernays–Löb derivability condit
 contains, or suitably interprets, enough arithmetic; IΣ₁ suffices), then T does not prove its own
 consistency statement Con(T). For PM, the derivability conditions must be proved for T_H's provability
 predicate under its interpretation of arithmetic, which needs induction inside T_H; that is why it is a
-separate, later task. A consistency proof has to be given in another theory, whose own consistency is then
+separate, later task. <!-- deps: gates v1-90-97 g1 > g2 --> A consistency proof has to be given in another theory, whose own consistency is then
 assumed; those links are documented, not finished. Checking, by contrast, can be repeated side by side by
 independent tools, which is where this project spends its effort.
 
@@ -591,7 +598,7 @@ toolchain, and state exactly what each proves: in which system, from which hypot
 theory, and how many universe levels.
 
 A model of Lean's type theory is a model of a calculus; it does not verify the program that checks proofs.
-That is the separate work on Lean's kernel, which in turn does not need a ZFC model.
+That is the separate work on Lean's kernel, which in turn does not need a ZFC model. <!-- deps: not lz-2 > lk-census lk-restricted lk-proof -->
 
 **Lean's kernel.** The plan is to re-check the whole build in CI with external checkers of Lean's kernel
 (see the Lean Kernel Arena), one per code family: separately written ones such as nanoda (Rust) or Tenet
@@ -603,7 +610,8 @@ four stages: (a) a census of the kernel features this project exercises; (b) Lea
 (c) a re-check by a checker restricted to that fragment, starting with existing verified checkers and
 writing our own only if they do not serve; (d) a formal proof that the checker used is correct against a
 specification of the fragment, or, for an existing checker, an audit of its proof and of what it does not
-cover. Stages (c) and (d) follow the census directly. <!-- gates: lk-census > lk-restricted lk-proof -->
+cover. Stage (c) needs only the census, and stage (d) needs stage (c).
+<!-- deps: gates lk-census > lk-restricted lk-proof; lk-restricted > lk-proof -->
 
 Two things can be re-checked, and they differ. The PM theorems (✱2–✱5 and ✱9–✱21, ✱9 by its own method, and
 the completeness theorem for ✱1–✱5) use none of Lean's axioms. The whole build does: 33 declarations use
@@ -611,7 +619,7 @@ the completeness theorem for ✱1–✱5) use none of Lean's axioms. The whole b
 a `Repr` instance, propositional metatheorems such as `PM.sound`, and the classical collapse model
 ([VERIFICATION.md](VERIFICATION.md), "Lean's axioms"). So a restricted export of the PM derivations,
 with the declarations they depend on, needs a checker only for an axiom-free fragment, while the whole build
-needs one that accepts the three standard axioms, as con-leche does. The census is taken for both, stage (c)
+needs one that accepts the three standard axioms, as con-leche does. <!-- deps: none --> The census is taken for both, stage (c)
 re-checks the restricted export first and then the whole build, and the result says which of the two each
 checker accepted. Mathlib is not used, and is not part of either.
 
@@ -621,7 +629,7 @@ WKL₀ proves, PRA proves. The result is for Π⁰₂ sentences, not for all sen
 
 **The finitist audit.** A tag that records which rules a proof uses shows that this proof uses them; it
 shows neither that the assumption is necessary nor that the result is provable in PRA. A PRA claim needs
-an arithmetic reading of the statement and a PRA proof or a certified reduction.
+an arithmetic reading of the statement and a PRA proof or a certified reduction. <!-- deps: none -->
 
 **Reducibility, infinity and choice.** PM prints the axioms of reducibility, ✱12·1 and ✱12·11, as
 primitive propositions. The axiom of infinity (✱120·03) and the multiplicative axiom (✱88) are not
@@ -634,7 +642,7 @@ discusses there what is then lost. Appendix B argues for induction without reduc
 step that fails and prove a narrower replacement, not to promise a reconstruction of the whole.
 
 **Decision procedures.** Each produces ordinary PM derivations that the kernel checks, which requires PM
-derivations of the fragment's axioms and inference steps. The monadic fragment is defined as a restricted
+derivations of the fragment's axioms and inference steps. <!-- deps: none --> The monadic fragment is defined as a restricted
 first-order fragment: variables range over one type of individuals, predicate letters are one-place
 predicates of that type, and there is no quantification over functions; "one-place functions" alone would
 not delimit it, since PM's language is higher-order. Presburger arithmetic is the first-order theory of
@@ -645,7 +653,7 @@ tautology into a derivation.
 
 **Mathlib.** The bridges to Mathlib are semantic agreements (PM's notions, read in a model, agree with
 Mathlib's), not results about PM's proof system, and they are labelled so. They live in a separate package
-that depends on Mathlib; the core depends on nothing.
+that depends on Mathlib; the core depends on nothing. <!-- deps: none -->
 
 ## What is established
 
@@ -755,6 +763,9 @@ chart in which two labels overlap or a label leaves its box, and checks that eve
 existing task, that there is no cycle, that every task placed *by choice* really is later than its
 dependencies require, that every prior-work entry has an evidence level, that every *measured* entry names
 its source and every source is pinned to a full commit (or a version), and that every move records where
-the task was and why. The test also checks every gate that the prose states in a `gates:` comment against
-the dependencies in the data. Text between `<!-- generated:… -->` markers is overwritten; edit the rest by
-hand.
+the task was and why. <!-- deps: none --> It also checks the dependencies the prose states: every sentence
+here that uses a gate word (needs, gates, waits for, requires, depends on, ...) or a soft word (helps,
+benefits) carries a `deps:` comment, each pair it names is checked against the data, gate wording may
+carry only gates and soft wording only helps, and `tests/test_roadmap.py` checks that the check fails when
+"helped by" becomes "gated by", or the reverse. <!-- deps: none --> Text between `<!-- generated:… -->`
+markers is overwritten; edit the rest by hand.

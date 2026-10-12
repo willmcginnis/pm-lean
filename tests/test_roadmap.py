@@ -11,10 +11,14 @@ if docs/roadmap/ holds a chart the data does not give; and scripts/check_svg.py 
 on its own terms (well-formed XML, a dark-mode block, no scripts or external references, no text outside the
 image, no two texts overlapping, with width estimates independent of the drawing code's).
 
-The prose of docs/ROADMAP.md states gates in words ("the finite core gates pm.mm beyond ✱5"). Each such
-sentence carries a comment `<!-- gates: A > B C; … -->`; here every pair it names must be a gate in the
-data (A among the hard dependencies of B, directly or through other tasks), and every item of the "Waits
-for a dependency" list must carry one, so that prose cannot name a gate the graph does not have.
+Dependencies are also stated in words in docs/ROADMAP.md ("the second stage gates pm.mm beyond ✱5", "are
+helped by the finite core"). `roadmap_chart.prose_deps_errors` reads every sentence of the page's hand-written
+prose: each one that uses a gate word (needs, gates, waits for, requires, ...) or a soft word (helps,
+benefits) must end with a `<!-- deps: ... -->` comment naming its dependencies as task ids; each `gates`
+pair must be a hard dependency in the data, each `helps` pair a soft one, each `not` pair no hard one; and
+gate wording may carry only gates clauses, soft wording only helps clauses. The mutation tests below change
+the page's own wording and annotations and check that the check fails, so that prose cannot say "gated by"
+where the graph has "helped by", or the reverse, or name an edge the graph does not have.
 """
 import os
 import re
@@ -28,21 +32,28 @@ sys.path.insert(0, str(ROOT / "scripts"))
 import roadmap_chart  # noqa: E402
 
 CHARTS = ROOT / "docs" / "roadmap"
-GATES = re.compile(r"<!-- gates: (.*?) -->")
+PAGE = ROOT / "docs" / "ROADMAP.md"
 
 
-def stated_gates(text):
-    """The (needed, needing) pairs named by the gates comments of a text."""
-    pairs = []
-    for body in GATES.findall(text):
-        for clause in body.split(";"):
-            before, _, after = clause.partition(">")
-            for a in before.split():
-                pairs += [(a, b) for b in after.split()]
-    return pairs
+def mutated(old, new):
+    """docs/ROADMAP.md with its one occurrence of `old` replaced by `new`."""
+    text = PAGE.read_text(encoding="utf-8")
+    assert text.count(old) == 1, f"expected one occurrence of {old!r}"
+    return text.replace(old, new)
 
 
 class Roadmap(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        _, cls.leaves, _ = roadmap_chart.load()
+
+    def errors(self, text):
+        return roadmap_chart.prose_deps_errors(text, self.leaves)
+
+    def assertFails(self, text, fragment):
+        errs = self.errors(text)
+        self.assertTrue(any(fragment in e for e in errs), f"expected an error with {fragment!r}, got {errs}")
+
     def test_generated_files_are_up_to_date(self):
         code, out = run([sys.executable, "scripts/roadmap_chart.py", "--check"], timeout=300)
         self.assertEqual(code, 0, out)
@@ -57,31 +68,52 @@ class Roadmap(unittest.TestCase):
         for p in CHARTS.glob("*.svg"):
             self.assertIn("@media (prefers-color-scheme: dark)", p.read_text(encoding="utf-8"), p.name)
 
-    def test_gates_named_in_prose_are_gates_in_the_data(self):
-        _, leaves, _ = roadmap_chart.load()
-        text = (ROOT / "docs" / "ROADMAP.md").read_text(encoding="utf-8")
-        pairs = stated_gates(text)
-        self.assertTrue(pairs, "no gates comments in docs/ROADMAP.md")
-        for a, b in pairs:
-            self.assertIn(a, leaves, f"gates comment names an unknown task {a}")
-            self.assertIn(b, leaves, f"gates comment names an unknown task {b}")
-            self.assertIn(a, roadmap_chart.ancestors(leaves, b),
-                          f"the prose says {a} gates {b}, but {a} is not a hard dependency of {b} in the data")
+    def test_dependencies_stated_in_the_prose_match_the_data(self):
+        text = PAGE.read_text(encoding="utf-8")
+        self.assertEqual(self.errors(text), [])
+        notes = [n for _, n in roadmap_chart.prose_sentences(text) if n is not None]
+        self.assertGreater(sum("gates" in n for n in notes), 10, "too few gates annotations; is the parser reading the page?")
+        self.assertTrue(any("helps" in n for n in notes), "no helps annotation on the page")
 
     def test_every_dependency_item_states_its_gates(self):
-        text = (ROOT / "docs" / "ROADMAP.md").read_text(encoding="utf-8")
+        text = PAGE.read_text(encoding="utf-8")
         section = text.split("### Waits for a dependency", 1)[1].split("\n### ", 1)[0]
         items = re.split(r"\n(?=- \*\*)", section)[1:]
         self.assertTrue(items, "no items under 'Waits for a dependency'")
         for item in items:
-            self.assertRegex(item, GATES, f"item without a gates comment: {item[:60]!r}")
+            self.assertRegex(item, r"<!-- deps: gates ", f"item without a gates annotation: {item[:60]!r}")
 
-    def test_the_check_catches_a_gate_the_data_does_not_have(self):
+    # Mutations of the page: each must make the check fail.
+
+    def test_helped_by_changed_to_gated_by_fails(self):
+        self.assertFails(mutated("are helped by the finite core", "are gated by the finite core"),
+                         "a helps clause, but no soft word")
+
+    def test_helped_by_changed_to_gated_by_with_its_annotation_fails(self):
         # The finding that started this test: the core (adq-2) was said to gate ✱8 and Appendix A (e2-8a),
         # where the data makes it a soft dependency only.
-        _, leaves, _ = roadmap_chart.load()
-        (a, b), = stated_gates("<!-- gates: adq-2 > e2-8a -->")
-        self.assertNotIn(a, roadmap_chart.ancestors(leaves, b))
+        text = mutated("are helped by the finite core", "are gated by the finite core")
+        text = text.replace("v1-9-14 > e2-c; helps adq-2 > e2-8a", "v1-9-14 > e2-c; adq-2 > e2-8a")
+        self.assertFails(text, "says adq-2 gates e2-8a, but adq-2 is not a hard dependency of e2-8a")
+
+    def test_gates_changed_to_helps_fails(self):
+        self.assertFails(mutated("first-order core) gates pm.mm", "first-order core) helps pm.mm"),
+                         "but the annotation has no helps clause")
+
+    def test_does_not_gate_changed_to_gates_fails(self):
+        self.assertFails(mutated("but does not gate it", "but gates it"), "but the annotation has no gates clause")
+
+    def test_an_annotation_naming_an_edge_the_data_does_not_have_fails(self):
+        self.assertFails(mutated("gates v1-rep > v1-both", "gates v1-both > v1-rep"),
+                         "says v1-both gates v1-rep, but v1-both is not a hard dependency of v1-rep")
+        self.assertFails(mutated("gates v1-rep > v1-both", "gates v1-rep > v1-nonesuch"),
+                         "names an unknown task")
+        self.assertFails(mutated("helps adq-2 > e2-8a; not", "helps v1-9eq > e2-8a; not"),
+                         "says v1-9eq helps e2-8a, but v1-9eq is not a soft dependency of e2-8a")
+
+    def test_a_dependency_sentence_without_an_annotation_fails(self):
+        self.assertFails(mutated("<!-- deps: gates v1-rep > v1-both -->", ""), "has no deps annotation")
+        self.assertFails("A needs B, and C is helped by D.\n", "has no deps annotation")
 
 
 if __name__ == "__main__":

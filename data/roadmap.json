@@ -372,7 +372,7 @@
                 "note": "Done many times elsewhere; only this project and l-pommeret/Principia-Mathematica use PM's own ✱1 rules (docs/FORMALIZATION_COMPARISON.md).",
                 "known": [
                   {
-                    "work": "Metamath set.mm: 231 theorems pm1.* to pm5.* (281 pm* theorems in all), CC0",
+                    "work": "Metamath set.mm: 230 theorems labelled `pm1.`–`pm5.` and 280 with a PM number in all (labels matching `pm[0-9]+\\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0",
                     "evidence": "measured",
                     "source": [
                       {
@@ -1689,7 +1689,7 @@
                 ],
                 "known": [
                   {
-                    "work": "Metamath set.mm: 281 pm* theorems, CC0",
+                    "work": "Metamath set.mm: 280 theorems labelled with a PM number (labels matching `pm[0-9]+\\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0",
                     "evidence": "measured",
                     "source": [
                       {
@@ -2134,7 +2134,7 @@
                 ],
                 "known": [
                   {
-                    "work": "281 pm* theorems in set.mm and 198 in iset.mm (CC0), reaching ✱10–✱14 and ✱54, not only ✱1–✱5",
+                    "work": "280 theorems labelled with a PM number in set.mm and 201 in iset.mm (labels matching `pm[0-9]+\\.`, `$p` statements only, comments excluded, counted by scripts/count_setmm.py), CC0, reaching ✱10–✱14 (48 in set.mm) and ✱54, not only ✱1–✱5",
                     "evidence": "measured",
                     "source": [
                       {

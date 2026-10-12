@@ -20,7 +20,8 @@ Every SVG carries its own light and dark colours (prefers-color-scheme).
 Before writing, the script checks the data (ids, dependencies, cycles, "by
 choice" placements, evidence levels of prior work, a source for every
 measured entry, each source pinned to a full commit or a version, recorded
-moves) and the
+moves), the dependencies that the prose of docs/ROADMAP.md states (see
+prose_deps_errors) and the
 drawing: every text box is estimated and must not overlap another, must stay
 inside its box and inside the image; each file is re-parsed as XML. Any
 failure stops the script with a message.
@@ -387,6 +388,108 @@ def ancestors(leaves, lid):
             seen.add(n)
             todo.extend(leaves[n]["hard_deps"])
     return seen
+
+
+# The dependency words of the hand-written prose of docs/ROADMAP.md, and the annotation each sentence
+# that uses them must carry, `<!-- deps: gates A > B C; helps D > E; not F > G -->` or `<!-- deps: none -->`.
+GATE_WORDS = re.compile(r"\b(?:gat(?:e|es|ed|ing)|waits? for|waiting for|blocked by|blocks|requires?|required|"
+                        r"needs?|needed|depends? on|prerequisites?|built on|feeds?)\b|→", re.I)
+SOFT_WORDS = re.compile(r"\b(?:help(?:s|ed|ing)?|benefits?(?: from)?|benefited)\b", re.I)
+NEGATION = re.compile(r"\b(?:not|no|none|nothing|neither|nor|never|without)\b", re.I)
+DEPS = re.compile(r"<!-- deps: (.*?) -->")
+
+
+def prose_sentences(text):
+    """(sentence, annotation or None) for every sentence of the hand-written prose of a page.
+
+    Generated regions, code blocks and headings are skipped; an annotation belongs to the sentence it
+    directly follows."""
+    text = re.sub(r"<!-- generated:([a-z]+):start -->.*?<!-- generated:\1:end -->", "\n\n", text, flags=re.S)
+    text = re.sub(r"^```.*?^```", "\n\n", text, flags=re.S | re.M)
+    blocks, cur = [], []
+    for line in text.split("\n"):
+        if not line.strip() or line.startswith("#") or re.match(r"\s*(?:[-*]|\d+\.) |\|", line):
+            blocks.append(" ".join(cur))
+            cur = []
+            if line.strip() and not line.startswith("#"):
+                cur = [line.strip()]
+        else:
+            cur.append(line.strip())
+    blocks.append(" ".join(cur))
+    out = []
+    for block in blocks:
+        parts = DEPS.split(block)            # text, annotation, text, annotation, ..., text
+        for i in range(0, len(parts), 2):
+            note = parts[i + 1] if i + 1 < len(parts) else None
+            sents = [s for s in re.split(r"(?<=[.!?])\s+(?=[^a-z])", parts[i].strip()) if s]
+            if not sents and note is not None:
+                sents = [""]
+            for j, s in enumerate(sents):
+                out.append((s, note if j == len(sents) - 1 else None))
+    return out
+
+
+def prose_deps_errors(text, leaves):
+    """What is wrong with the dependency statements of a page's prose, as a list of messages.
+
+    Every sentence that uses a gate word (needs, gates, waits for, requires, ...) or a soft word (helps,
+    benefits) carries an annotation. A `gates A > B` clause says A is a hard dependency of B, directly or
+    through other tasks; `helps A > B`, that A is among B's soft dependencies and not a hard one; `not A > B`,
+    that A is not a hard dependency of B; `none`, that the sentence's words name no dependency between tasks.
+    A clause without a kind has the kind of the clause before it (`gates A > B; C > D`).
+    Gate wording needs a gates clause (or, negated, a not clause), soft wording a helps clause, and a clause
+    needs the wording of its kind, so that a sentence cannot say "gated by" where the graph has "helped by",
+    or the reverse, without failing."""
+    errs = []
+    for sent, note in prose_sentences(text):
+        words = re.sub(r"`[^`]*`|\]\([^)]*\)", "", sent)
+        gate, soft, neg = GATE_WORDS.search(words), SOFT_WORDS.search(words), NEGATION.search(words)
+        where = repr(sent[:70] + ("…" if len(sent) > 70 else ""))
+        if note is None:
+            if gate or soft:
+                errs.append(f"{where}: uses {(gate or soft).group(0)!r} but has no deps annotation")
+            continue
+        kinds, pairs, kind = set(), [], None
+        for clause in note.split(";"):
+            clause = clause.strip()
+            if clause == "none":
+                kinds.add("none")
+                continue
+            first, _, rest = clause.partition(" ")
+            if first in ("gates", "helps", "not"):     # otherwise the clause has the kind of the one before
+                kind, clause = first, rest
+            before, sep, after = clause.partition(">")
+            if kind is None or not sep or not before.split() or not after.split():
+                errs.append(f"{where}: cannot read the annotation clause {clause!r}")
+                continue
+            kinds.add(kind)
+            pairs += [(kind, a, b) for a in before.split() for b in after.split()]
+        if "none" in kinds and (len(kinds) > 1 or pairs):
+            errs.append(f"{where}: 'none' with other clauses")
+        if gate and not neg and not kinds & {"gates", "none"}:
+            errs.append(f"{where}: says {gate.group(0)!r}, but the annotation has no gates clause")
+        if gate and neg and not kinds & {"gates", "not", "none"}:
+            errs.append(f"{where}: says {gate.group(0)!r}, but the annotation has no gates or not clause")
+        if soft and not kinds & {"helps", "none"}:
+            errs.append(f"{where}: says {soft.group(0)!r}, but the annotation has no helps clause")
+        if "gates" in kinds and not gate:
+            errs.append(f"{where}: a gates clause, but no gate word (needs, gates, waits for, ...)")
+        if "helps" in kinds and not soft:
+            errs.append(f"{where}: a helps clause, but no soft word (helps, helped by, benefits)")
+        if "not" in kinds and not (gate and neg):
+            errs.append(f"{where}: a not clause, but no negated gate word")
+        for kind, a, b in pairs:
+            if a not in leaves or b not in leaves:
+                errs.append(f"{where}: {kind} {a} > {b} names an unknown task")
+                continue
+            hard = a in ancestors(leaves, b)
+            if kind == "gates" and not hard:
+                errs.append(f"{where}: says {a} gates {b}, but {a} is not a hard dependency of {b} in the data")
+            if kind == "helps" and (hard or a not in leaves[b]["soft_deps"]):
+                errs.append(f"{where}: says {a} helps {b}, but {a} is not a soft dependency of {b} in the data")
+            if kind == "not" and hard:
+                errs.append(f"{where}: says {a} does not gate {b}, but it is a hard dependency in the data")
+    return errs
 
 
 def levels(leaves):
@@ -993,6 +1096,9 @@ def main():
         return
     if args not in ([], ["--check"]):
         raise SystemExit(__doc__)
+    errs = prose_deps_errors(read(ROADMAP), leaves)
+    if errs:
+        raise SystemExit("docs/ROADMAP.md, dependencies stated in the prose:\n  " + "\n  ".join(errs))
     files = outputs(d, leaves, owner)
     if args == ["--check"]:
         stale = [p for p, s in files.items() if not os.path.exists(p) or read(p) != s]

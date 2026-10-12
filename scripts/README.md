@@ -11,8 +11,9 @@ path. Building the Lean project needs none of them: their outputs are committed.
 | `gen_quant_lift.py` | `PM/Statements.lean`, `PM/Replay.lean`, `PM/Replay2.lean` | `PM/QuantLift.lean` |
 | `gen_axiomcheck.py` | the PM source files | `AxiomCheck.lean` |
 | `progress.py` | the PM files and ledgers at a git commit; `data/vol1_items.json`, `data/vol2_labels.json` | the tables of `docs/PROGRESS.md` (with `--update`) |
-| `roadmap_chart.py` | `data/roadmap.json`; the counts its notes cite, from `docs/PROGRESS.md`, `docs/PM_CLAIMS.md`, `data/star9f_ledger.json` | `docs/roadmap/*.svg` and the generated regions of `README.md` and `docs/ROADMAP.md` (`--check` writes nothing and fails if any differs) |
+| `roadmap_chart.py` | `data/roadmap.json`; the counts its notes cite, from `docs/PROGRESS.md`, `docs/PM_CLAIMS.md`, `data/star9f_ledger.json`; the `deps:` annotations of `docs/ROADMAP.md` | `docs/roadmap/*.svg` and the generated regions of `README.md` and `docs/ROADMAP.md` (`--check` writes nothing and fails if any differs; both fail if a dependency the prose states disagrees with the data) |
 | `check_svg.py FILE.svg ...` | SVG charts | nothing: checks each is well-formed, has a dark-mode block, and has no overlapping text |
+| `count_setmm.py CLONE [COMMIT]` | `set.mm` and `iset.mm` from a git clone of metamath/set.mm, at the commit pinned in `data/roadmap.json` (or COMMIT) | nothing: prints the counts of PM-numbered theorems the roadmap cites (labels matching `pm[0-9]+\.`, `$p` statements only, comments excluded) |
 
 ## Getting the source texts
 
