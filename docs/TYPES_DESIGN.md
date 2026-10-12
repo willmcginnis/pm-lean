@@ -473,7 +473,8 @@ in PM/Star11.lean's header are named in each docstring. The commonest are:
   used between them.
 
 ✱20·13's line (2) uses the first line of ✱13·195's proof (✱3·2, ✱13·15, ✱10·24) instead of ✱13·195
-itself. There is no per-proposition ledger for ✱12–✱20 yet.
+itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledger.json`,
+`star14_ledger.json` and `star20_ledger.json` (the format of `data/star11_ledger.json`).
 
 ## 3. Acceptance tests
 
@@ -607,6 +608,5 @@ search).
 - F4 (non-derivability of impredicative comprehension without ✱12·1), and so the strict weakness of the
   matrix style and of the p. 54 reading without reducibility: skipped. It needs a model that sees orders;
   both models here forget them.
-- No per-proposition ledger (`data/…_ledger.json`) for ✱12–✱20.
 - The scan images were not viewed (F3).
 - The n-ary function types and the 1925 route.

@@ -1,0 +1,155 @@
+[
+ {
+  "id": "*20.1",
+  "page": 200,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*20.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the context f is explicit (QF.cls psi f)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.13",
+  "page": 201,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.1",
+   "*12.1",
+   "*10.321",
+   "*10.11",
+   "*10.28"
+  ],
+  "extra_used": [
+   "*10.32",
+   "*3.27",
+   "*3.2",
+   "*13.15",
+   "*2.04",
+   "*10.24",
+   "*3.43",
+   "*3.3",
+   "*10.21"
+  ],
+  "cited_unused": [
+   "*13.195"
+  ],
+  "note": "cites *12.1; takes [Reducibility S]; (1) is the definitional unfolding (*20.1 twice)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm."
+ },
+ {
+  "id": "*20.14",
+  "page": 201,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.1",
+   "*13.195"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*13.16",
+   "*4.36",
+   "*3.47",
+   "*2.08",
+   "*10.321",
+   "*10.11",
+   "*10.23"
+  ],
+  "cited_unused": [
+   "*10.322"
+  ],
+  "note": "",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
+ },
+ {
+  "id": "*20.15",
+  "page": 201,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.13",
+   "*20.14"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.3",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.1",
+   "*20.02",
+   "*10.43",
+   "*10.35",
+   "*12.1"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*10.32",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "cites *12.1; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
+ }
+]

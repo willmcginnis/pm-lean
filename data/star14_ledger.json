@@ -1,0 +1,224 @@
+[
+ {
+  "id": "*14.1",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*14.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the scope is explicit (QF.desc phi psi)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.101",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "with the scope explicit in the Lean term, this is *14.1 again (PM's convention, p. 182, gives the unmarked psi(ix)(phi x) the scope psi)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.11",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*14.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.12",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.11",
+   "*4.38",
+   "*10.1",
+   "*11.11",
+   "*11.3",
+   "*13.172",
+   "*10.11",
+   "*10.23"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*3.26",
+   "*2.05"
+  ],
+  "cited_unused": [],
+  "note": "",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (2), *10.1 is used at x and at y and the two joined by Comp (*3.43); the == of *4.38 is used left to right (*3.26) and chained with *13.172 by *2.05."
+ },
+ {
+  "id": "*14.121",
+  "page": 185,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.15",
+   "*3.35"
+  ],
+  "extra_used": [
+   "*10.14",
+   "*3.27",
+   "*2.04",
+   "*3.45",
+   "*3.47",
+   "*2.08",
+   "*3.26"
+  ],
+  "cited_unused": [
+   "*10.1"
+  ],
+  "note": "Ass = *3.35",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, *3.26 turns phi b == b = c into phi b ⊃ b = c on the second factor (*3.47 with Id, *2.08)."
+ },
+ {
+  "id": "*14.2",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.101",
+   "*13.195",
+   "*4.2"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "Id read as *4.2",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*13.195 needs the factors b = a . F b; *14.101 gives F b : b = a, commuted under (Eb) by *4.3 (with *10.11.281). 'Id' (x = a . ==_x . x = a) is *4.2 generalized by *10.11."
+ },
+ {
+  "id": "*14.201",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.11",
+   "*10.1",
+   "*13.15"
+  ],
+  "extra_used": [
+   "*3.27",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "*10.1 and [*13.15] act under (Eb) (*10.11.28)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "'[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04)."
+ },
+ {
+  "id": "*14.21",
+  "page": 190,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*10.5",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "the description in psi has the scope psi; the variant q14_21_neg (scope wider than the negation) is an instance",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191)."
+ }
+]

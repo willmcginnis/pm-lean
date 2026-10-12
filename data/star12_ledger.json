@@ -1,0 +1,44 @@
+[
+ {
+  "id": "*12.1",
+  "page": 174,
+  "category": "primitive",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "primitive proposition (Pp), so no Dem. to follow; the constructor QThm.red1, stated with PM's macros (q12_1); takes [Reducibility S]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*12.11",
+  "page": 174,
+  "category": "primitive",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "primitive proposition (Pp), so no Dem. to follow; the constructor QThm.red2, stated with PM's macros (q12_11); takes [Reducibility S]",
+  "fidelity": "unchanged",
+  "pm_text": "none",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ }
+]
