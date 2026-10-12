@@ -651,5 +651,39 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
   "reason": ""
+ },
+ {
+  "id": "*13.3",
+  "page": 180,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.11",
+   "*2.02",
+   "*13.101",
+   "*2.04",
+   "*10.13",
+   "*3.26",
+   "*3.27",
+   "*5.35"
+  ],
+  "extra_used": [
+   "*13.16"
+  ],
+  "cited_unused": [
+   "*10.221"
+  ],
+  "note": "takes [Reducibility S] (through *13.101); Simp read as *2.02 in (2), (4) and as *3.26, *3.27 in (8); Comm = *2.04",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Line (5) needs *13.101 in the form a = x . ⊃ . psi a ⊃ psi x; PM writes x = a, turned by *13.16. *10.221 (identifying the a's and the x's of the lines joined in (6) and (7)) has no proof step: x and a are variables of one Lean type, so *10.13 (q10_13) joins the lines."
  }
 ]

@@ -584,6 +584,7 @@ import PM
 #print axioms PM.q13_196
 #print axioms PM.q13_21
 #print axioms PM.q13_22
+#print axioms PM.q13_3
 #print axioms PM.q14_1
 #print axioms PM.q14_101
 #print axioms PM.q14_11

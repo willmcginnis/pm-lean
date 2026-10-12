@@ -19,8 +19,9 @@ import PM.Star12
   reducibility"); everything that rests on ✱13·101 (✱13·11, ✱13·12, ✱13·13, …) uses it through it.
   RedCheck.lean lists them. ✱13·15 and ✱13·17 do not use it.
 
-  Not formalized: ✱13·3 (p. 180), a proposition about significance whose proof turns on ✱10·221
-  (identifying the types of two real variables); like ✱10·221 it is built into the Lean typing.
+  ✱13·3 (p. 180) is about significance, and its proof turns on ✱10·221 (identifying the types of two
+  real variables). Like ✱10·221 itself, that identification is built into the Lean typing: x and a are
+  variables of one type, so the joins by ✱10·13 typecheck. The proof otherwise follows PM's lines.
 
   Names: `q13_101` is ✱13·101. ψ, φ are formulas with a hole (`V a → QF V`), i.e. PM's real function
   variables of any order.
@@ -218,5 +219,31 @@ theorem q13_22 [Reducibility S] (φ : V a → V b → QF V) (x : V a) (y : V b) 
   qiffTrans (q11_55 (fun z => ident z x) fun z w => QF.and (ident w y) (φ z w))  -- ✱11·55
     (qiffTrans (q13_195 (fun z => ex fun w => QF.and (ident w y) (φ z w)) x)   -- [✱13·195]
       (q13_195 (φ x) y))                                                        -- [✱13·195]
+
+/-- ✱13·3 `⊢ :: φa ∨ ∼φa . ⊃ :. φx ∨ ∼φx . ≡ : x = a . ∨ . x ≠ a` (p. 180): if φa is significant, φx is
+    significant when, and only when, x is identical with a or not. PM's two uses of ✱10·221 (in (6) and
+    (7)) identify the a's and x's of the lines joined; here x and a have one type `τ`, so ✱10·13
+    (`q10_13`) joins them directly. Simp is ✱2·02 in (2) and (4), and ✱3·26, ✱3·27 in (8), which drops
+    (5) from the product (7). Line (5) needs ✱13·101 in the form `a = x . ⊃ . ψa ⊃ ψx`; PM writes x = a,
+    which is turned by ✱13·16. Through ✱13·101 the proof uses ✱12·1; the statement itself is a
+    propositional consequence of ✱2·11, but that is not PM's route and is not taken. -/
+theorem q13_3 [Reducibility S] {τ : Ty} (φ : V τ → QF V) (a x : V τ) :
+    QThm S (imp (.or (φ a) (.neg (φ a)))
+      (iff (.or (φ x) (.neg (φ x))) (.or (ident x a) (nident x a)))) :=
+  let P : QF V := .or (φ a) (.neg (φ a))
+  let Q : QF V := .or (φ x) (.neg (φ x))
+  let R : QF V := .or (ident x a) (nident x a)
+  have h1 : QThm S Q := QL.t2_11 (φ x)                                          -- ✱2·11 (1)
+  have h2 : QThm S (imp P Q) := QThm.mp h1 (QL.t2_02 P Q)                       -- (1).Simp (2)
+  have h3 : QThm S R := QL.t2_11 (ident x a)                                    -- ✱2·11 (3)
+  have h4 : QThm S (imp P R) := QThm.mp h3 (QL.t2_02 P R)                       -- (3).Simp (4)
+  have h5 : QThm S (imp P (imp (ident x a) Q)) :=
+    QThm.mp (qsyl (qiffMp (q13_16 x a)) (q13_101 (fun z => .or (φ z) (.neg (φ z))) a x))
+      (QL.t2_04 _ _ _)                                                          -- ✱13·101 . Comm (5)
+  have h6 := q10_13 h4 h5                                                       -- (4).(5).✱10·13·221 (6)
+  have h7 := q10_13 h2 h6                                                       -- (2).(6).✱10·13·221 (7)
+  have h8 : QThm S (QF.and (imp P Q) (imp P R)) :=
+    qandI (QThm.mp h7 (QL.t3_26 _ _)) (QThm.mp (QThm.mp h7 (QL.t3_27 _ _)) (QL.t3_26 _ _))  -- (7).Simp (8)
+  QThm.mp h8 (QL.t5_35 P Q R)                                                   -- (8).✱5·35
 
 end PM
