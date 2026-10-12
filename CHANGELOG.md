@@ -5,6 +5,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **Design principles and PM's claims** (`docs/PRINCIPLES.md`, `docs/PM_CLAIMS.md`): the standing principles
+  collected on one page, with a new one (maintainer): PM's claims about its own system are checked in Lean,
+  not adopted. 75 such claims from the Introduction and ✱1–✱21 are listed with their pages and status.
+- **LICENSE-CC0**: the CC0 1.0 legal code, for `docs/FORMALIZATION_COMPARISON.md`.
 - **Classes of classes** (maintainer's decision, docs/TYPES_DESIGN.md §5, Q6): ✱20·03, ✱20·08, ✱20·081
   and ✱21·03, ✱21·08–✱21·083 as printed, and ✱20·4, ✱20·41, ✱21·4, ✱21·41 by the analogue of ✱20·3 for
   classes of classes (p. 206). ✱20 is at 53 of 55, ✱21 at 46 of 48 (docs/CLASSES_OF_CLASSES.md).

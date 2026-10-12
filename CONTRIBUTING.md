@@ -6,6 +6,10 @@ Distributed Proofreaders transcriptions) belong in the companion
 [text audit](https://github.com/willmcginnis/principia-mathematica-text-audit) instead. Please do not paste
 the unpublished Distributed Proofreaders text of Vol III into issues.
 
+The project's design principles are in [docs/PRINCIPLES.md](docs/PRINCIPLES.md). If a proposition you
+formalize comes with a claim of PM's about its own system ("by merely repeating previous proofs", "can be
+proved in each particular case"), add it to [docs/PM_CLAIMS.md](docs/PM_CLAIMS.md) with its status.
+
 ## The rules a proof must keep
 
 - No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern`.

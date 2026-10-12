@@ -646,8 +646,8 @@ search).
    `pred1 (pred1 a)`, ≡_α by `clsAll`, φ!α as ✱20·01 with context φ!χ!ẑ; (B) ✱20·01 itself at type
    `pred1 a` (typical ambiguity), simpler but not the printed definiens; (C) leave classes of classes
    for a later pass. Still open within (A): `qcls20_3` takes the extensionality of the defining
-   expression (`ClsExt`, ✱20·11 for it) as a premise, which PM asserts in general on p. 200;
-   apparent classes of classes and their identity are not built.
+   expression (`ClsExt`, ✱20·11 for it) as a premise, which PM asserts in general on p. 200
+   ([PM_CLAIMS.md](PM_CLAIMS.md), D1); apparent classes of classes and their identity are not built.
 7. **Which fidelity counts to show.** DECIDED by the maintainer (2026-10-12): (A), keep all three.
    The `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43,
    ✱2·02, ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under
