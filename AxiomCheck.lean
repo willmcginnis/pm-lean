@@ -491,6 +491,12 @@ import PM
 #print axioms PM.q10_55
 #print axioms PM.q10_56
 #print axioms PM.q10_57
+#print axioms PM.qimpIffTrans
+#print axioms PM.qimpIffTransR
+#print axioms PM.qimpIffTransL
+#print axioms PM.qimpImpTrans
+#print axioms PM.qimpImpTransR
+#print axioms PM.qimpIffSymm
 #print axioms PM.q10_11_28
 #print axioms PM.q10_11_281
 #print axioms PM.qex_transp
@@ -585,12 +591,6 @@ import PM
 #print axioms PM.q13_21
 #print axioms PM.q13_22
 #print axioms PM.q13_3
-#print axioms PM.qimpIffTrans
-#print axioms PM.qimpIffTransR
-#print axioms PM.qimpIffTransL
-#print axioms PM.qimpImpTrans
-#print axioms PM.qimpImpTransR
-#print axioms PM.qimpIffSymm
 #print axioms PM.qandCongrRImp
 #print axioms PM.qandCongrR
 #print axioms PM.qandCongrL

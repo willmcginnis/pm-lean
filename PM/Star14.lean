@@ -34,10 +34,11 @@ import PM.Star13
   apparent variables, which we have not done elsewhere" (p. 194).
 
   Steps done silently are those of PM/Star11.lean's header, and also chaining ⊃ and ≡ lines under a
-  hypothesis, as PM writes "Hp . ⊃ : A . ≡ . B . [✱x] ≡ . C" (`qimpIffTrans`, `qimpIffTransR`,
-  `qimpIffTransL`, `qimpImpTrans`, `qimpImpTransR`, `qimpIffSymm` below; in Lean they need Comp, ✱3·33, ✱2·02 or ✱4·21
-  besides Syll and ✱4·22, the way PM/Star11.lean's `qimpCongr` does in ✱11·71). Any other proposition a
-  proof needs is named in its docstring and listed as `extra_used` in the ledger.
+  hypothesis, as PM writes "Hp . ⊃ : A . ≡ . B . [✱x] ≡ . C". Such a chain is a `calc` block, one line
+  per PM line (PM/Chain.lean: `A ≡[Hp] B`, and `A ≡ B` for an asserted line); the step that joins two
+  lines under a hypothesis needs Comp (✱3·43), ✱2·02 or ✱2·83 besides Syll and ✱4·22, and the ledger
+  lists these per proposition as `glue`, apart from the fidelity. Any other proposition a proof needs
+  is named in its docstring and listed as `extra_used` in the ledger.
 
   Names: `q14_1` is ✱14·1, and so on. φ, ψ, χ are formulas with a hole (PM's real function variables of
   any order); a, b, c are real variables of the description's type `α`.
@@ -65,37 +66,14 @@ end QF
 
 variable {V : Ty → Type} {S : Sys} {α β : Ty}
 
-/-! ## Steps PM leaves tacit: chaining lines under a hypothesis -/
-
-/-- Chaining two ≡ lines under one hypothesis (Comp ✱3·43, ✱4·22). -/
-theorem qimpIffTrans {H A B C : QF V} (h1 : QThm S (imp H (iff A B))) (h2 : QThm S (imp H (iff B C))) :
-    QThm S (imp H (iff A C)) :=
-  qsyl (qcomp h1 h2) (QL.t4_22 A B C)
-/-- Chaining a ≡ line under a hypothesis with an asserted ≡ (✱2·02, ✱3·43, ✱4·22). -/
-theorem qimpIffTransR {H A B C : QF V} (h1 : QThm S (imp H (iff A B))) (h2 : QThm S (iff B C)) :
-    QThm S (imp H (iff A C)) :=
-  qimpIffTrans h1 (QThm.mp h2 (QL.t2_02 H _))
-/-- An asserted ≡ followed by a ≡ line under a hypothesis (✱2·02, ✱3·43, ✱4·22). -/
-theorem qimpIffTransL {H A B C : QF V} (h1 : QThm S (iff A B)) (h2 : QThm S (imp H (iff B C))) :
-    QThm S (imp H (iff A C)) :=
-  qimpIffTrans (QThm.mp h1 (QL.t2_02 H _)) h2
-/-- Chaining two ⊃ lines under one hypothesis (Comp ✱3·43, Syll ✱3·33). -/
-theorem qimpImpTrans {H A B C : QF V} (h1 : QThm S (imp H (imp A B))) (h2 : QThm S (imp H (imp B C))) :
-    QThm S (imp H (imp A C)) :=
-  qsyl (qcomp h1 h2) (QL.t3_33 A B C)
-/-- Chaining a ⊃ line under a hypothesis with an asserted ⊃ (Syll ✱2·05). -/
-theorem qimpImpTransR {H A B C : QF V} (h1 : QThm S (imp H (imp A B))) (h2 : QThm S (imp B C)) :
-    QThm S (imp H (imp A C)) :=
-  qsyl h1 (QThm.mp h2 (QL.t2_05 A B C))
-/-- Reading the ≡ of a line under a hypothesis from right to left (✱4·21). -/
-theorem qimpIffSymm {H A B : QF V} (h : QThm S (imp H (iff A B))) : QThm S (imp H (iff B A)) :=
-  qsyl h (qiffMp (QL.t4_21 A B))
-
 /-! ## Further steps, each listed in the ledger where used -/
 
 /-- ✱4·36 for the second factor: `p ≡ q . ⊃ : r . p . ≡ . r . q` (✱4·36 with ✱4·3). -/
 theorem qandCongrRImp (p q r : QF V) : QThm S (imp (iff p q) (iff (QF.and r p) (QF.and r q))) :=
-  qimpIffTransL (QL.t4_3 r p) (qimpIffTransR (QL.t4_36 p q r) (QL.t4_3 q r))
+  calc QF.and r p
+      ≡ QF.and p r := QL.t4_3 r p                                               -- ✱4·3
+    _ ≡[iff p q] QF.and q r := QL.t4_36 p q r                                    -- ✱4·36
+    _ ≡ QF.and r q := QL.t4_3 q r                                               -- ✱4·3
 /-- From `⊢ . p ≡ q`, `⊢ : r . p . ≡ . r . q` (✱4·36 with ✱4·3). -/
 theorem qandCongrR {p q : QF V} (r : QF V) (h : QThm S (iff p q)) : QThm S (iff (QF.and r p) (QF.and r q)) :=
   QThm.mp h (qandCongrRImp p q r)
@@ -107,10 +85,16 @@ theorem qandPerm (p q r : QF V) : QThm S (iff (QF.and p (QF.and q r)) (QF.and q 
   qiffTrans (qiffSymm (QL.t4_32 p q r)) (qiffTrans (qandCongrL r (QL.t4_3 p q)) (QL.t4_32 q p r))
 /-- ✱4·86 for the second member: `q ≡ r . ⊃ : p ≡ q . ≡ . p ≡ r` (✱4·86 with ✱4·21). -/
 theorem qiffCongrRImp (p q r : QF V) : QThm S (imp (iff q r) (iff (iff p q) (iff p r))) :=
-  qimpIffTransL (QL.t4_21 p q) (qimpIffTransR (QL.t4_86 q r p) (QL.t4_21 r p))
+  calc iff p q
+      ≡ iff q p := QL.t4_21 p q                                                 -- ✱4·21
+    _ ≡[iff q r] iff r p := QL.t4_86 q r p                                       -- ✱4·86
+    _ ≡ iff p r := QL.t4_21 r p                                                 -- ✱4·21
 /-- ✱4·37 for the second disjunct: `q ≡ r . ⊃ : p ∨ q . ≡ . p ∨ r` (✱4·37 with ✱4·31). -/
 theorem qorCongrRImp (p q r : QF V) : QThm S (imp (iff q r) (iff (.or p q) (.or p r))) :=
-  qimpIffTransL (QL.t4_31 p q) (qimpIffTransR (QL.t4_37 q r p) (QL.t4_31 r p))
+  calc QF.or p q
+      ≡ QF.or q p := QL.t4_31 p q                                               -- ✱4·31
+    _ ≡[iff q r] QF.or r p := QL.t4_37 q r p                                     -- ✱4·37
+    _ ≡ QF.or p r := QL.t4_31 r p                                               -- ✱4·31
 /-- From `⊢ . q`, `p ≡ q . ⊃ . p` (✱3·27, Comm ✱2·04): an equivalence with an asserted side. -/
 theorem qiffElimOf {p q : QF V} (hq : QThm S q) : QThm S (imp (iff p q) p) :=
   QThm.mp hq (QThm.mp (QL.t3_27 _ _) (QL.t2_04 _ _ _))
@@ -127,7 +111,10 @@ theorem qdescCongr (φ ψ χ : V α → QF V) : QThm S (imp (fiff φ ψ) (iff (d
   have h2 : ∀ b : V α, QThm S (imp (fiff φ ψ) (iff (QF.and (fiff φ fun x => ident x b) (χ b))
       (QF.and (fiff ψ fun x => ident x b) (χ b)))) := fun b =>
     qsyl (h1 b) (QL.t4_36 _ _ (χ b))                                           -- [Fact]
-  qsyl (q10_11_21 h2) (q10_281 _ _)                                            -- [✱10·11·21] [✱10·281]
+  calc fiff φ ψ
+      ⊃ .all (fun b => iff (QF.and (fiff φ fun x => ident x b) (χ b))
+          (QF.and (fiff ψ fun x => ident x b) (χ b))) := q10_11_21 h2          -- [✱10·11·21]
+    _ ⊃ iff (desc φ χ) (desc ψ χ) := q10_281 _ _                               -- [✱10·281]
 
 /-- A scope replaced by a formally equivalent one: `χx ≡ₓ θx . ⊃ : [(ιx)(φx)] . χ(ιx)(φx) . ≡ .
     [(ιx)(φx)] . θ(ιx)(φx)` (✱10·1, ✱4·36 on the second factor (with ✱4·3), ✱10·11·21, ✱10·281). -/
@@ -142,7 +129,9 @@ theorem qdescScope (φ χ θ : V α → QF V) : QThm S (imp (fiff χ θ) (iff (d
     argument (`qdescCongr`), then ✱13·192. -/
 theorem qdescAt [Reducibility S] (φ ψ : V α → QF V) (b : V α) :
     QThm S (imp (fiff φ fun x => ident x b) (iff (desc φ ψ) (ψ b))) :=
-  qimpIffTransR (qdescCongr φ (fun x => ident x b) ψ) (q13_192 ψ b)
+  calc desc φ ψ
+      ≡[fiff φ fun x => ident x b] desc (fun x => ident x b) ψ := qdescCongr φ _ ψ  -- ✱14·1
+    _ ≡ ψ b := q13_192 ψ b                                                       -- [✱13·192]
 
 /-- `a = (ιx)(φx) . ≡ : φx . ≡ₓ . x = a`: line (1) of ✱14·145 (✱14·1 [✱13·195]). ✱13·195 needs
     `b = a . F b`; ✱14·1 gives `F b : a = b`, so the factors are commuted (✱4·3) and a = b turned by
@@ -150,8 +139,10 @@ theorem qdescAt [Reducibility S] (φ ψ : V α → QF V) (b : V α) :
 theorem qidentDesc [Reducibility S] (φ : V α → QF V) (a : V α) :
     QThm S (iff (desc φ fun z => ident a z) (fiff φ fun x => ident x a)) :=
   let F : V α → QF V := fun b => fiff φ fun x => ident x b
-  qiffTrans (q10_11_281 fun b => qiffTrans (QL.t4_3 (F b) (ident a b)) (qandCongrL (F b) (q13_16 a b)))
-    (q13_195 F a)                                                               -- ✱14·1 [✱13·195]
+  calc desc φ (fun z => ident a z)
+      ≡ ex fun b => QF.and (ident b a) (F b) :=
+        q10_11_281 fun b => qiffTrans (QL.t4_3 (F b) (ident a b)) (qandCongrL (F b) (q13_16 a b))  -- ✱14·1
+    _ ≡ fiff φ fun x => ident x a := q13_195 F a                                -- [✱13·195]
 
 /-! ## ✱14·1–✱14·124 -/
 
@@ -180,12 +171,14 @@ theorem q14_111 (φ : V α → QF V) (ψ : V β → QF V) (f : V α → V β →
       (QF.and (fiff ψ fun x => ident x c) (f b c)))) :=
   let Fφ : V α → QF V := fun b => fiff φ fun x => ident x b
   let Fψ : V β → QF V := fun c => fiff ψ fun x => ident x c
-  have h1 := qiffSymm (q11_55 Fψ fun c b => QF.and (Fφ b) (f b c))              -- [✱11·55]
-  have h2 := q11_23 fun c b => QF.and (Fψ c) (QF.and (Fφ b) (f b c))           -- ✱11·23
-  have h3 := QThm.mp (q11_11 fun b c => qandPerm (Fψ c) (Fφ b) (f b c))
-    (q11_341 (fun b c => QF.and (Fψ c) (QF.and (Fφ b) (f b c)))
-      (fun b c => QF.and (Fφ b) (QF.and (Fψ c) (f b c))))                       -- ✱4·32·3 . ✱11·11·341
-  qiffTrans h1 (qiffTrans h2 h3)
+  calc desc2r φ ψ f
+      ≡ ex fun c => QF.and (Fψ c) (ex fun b => QF.and (Fφ b) (f b c)) := QL.t4_2 _
+                                                                  -- ✱4·2 . (✱14·04·03) [✱14·1] [✱14·1]
+    _ ≡ ex2 fun c b => QF.and (Fψ c) (QF.and (Fφ b) (f b c)) :=
+        qiffSymm (q11_55 Fψ fun c b => QF.and (Fφ b) (f b c))                   -- [✱11·55]
+    _ ≡ ex2 fun b c => QF.and (Fψ c) (QF.and (Fφ b) (f b c)) := q11_23 _        -- ✱11·23
+    _ ≡ ex2 fun b c => QF.and (Fφ b) (QF.and (Fψ c) (f b c)) :=
+        QThm.mp (q11_11 fun b c => qandPerm (Fψ c) (Fφ b) (f b c)) (q11_341 _ _)  -- ✱4·32·3 . ✱11·11·341
 
 /-- ✱14·112 `⊢ :. f{(ιx)(φx), (ιx)(ψx)} . ≡ : (∃b, c) : φx . ≡ₓ . x = b : ψx . ≡ₓ . x = c : f(b, c)`
     [Proof as in ✱14·111]. The unmarked f{(ιx)(φx), (ιx)(ψx)} gives the first description the larger
@@ -213,7 +206,9 @@ theorem q14_12 [Reducibility S] (φ : V α → QF V) :
       (imp (QF.and (φ x) (φ y)) (ident x y))) := fun b x y =>
     have e := qsyl (qcomp (q10_1 (fun x => iff (φ x) (ident x b)) x)
       (q10_1 (fun x => iff (φ x) (ident x b)) y)) (QL.t4_38 _ _ _ _)           -- ✱4·38 . ✱10·1
-    qsyl (qsyl e (QL.t3_26 _ _)) (QThm.mp (q13_172 b x y) (QL.t2_05 _ _ _))    -- [✱13·172] (2)
+    calc QF.and (φ x) (φ y)
+        ⊃[fiff φ fun x => ident x b] QF.and (ident x b) (ident y b) := qsyl e (QL.t3_26 _ _)  -- ✱4·38 . ✱10·1
+      _ ⊃ ident x y := q13_172 b x y                                            -- [✱13·172] (2)
   have h2' : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (fimp2 (fun x y => QF.and (φ x) (φ y)) fun x y => ident x y)) := fun b =>
     qiffMpr (q11_3 _ _) |> QThm.mp (q11_11 (h2 b))                              -- ✱11·11·3
@@ -240,13 +235,17 @@ theorem q14_122 [Reducibility S] (φ : V α → QF V) (b : V α) :
       (iff (fiff φ fun x => ident x b) (QF.and (fimp φ fun x => ident x b) (φ b)))
       (iff (QF.and (fimp φ fun x => ident x b) (φ b)) (QF.and (fimp φ fun x => ident x b) (ex φ)))) :=
   let H : QF V := fimp φ fun x => ident x b
-  have h1 := qiffTrans (q10_22 (fun x => imp (φ x) (ident x b)) (fun x => imp (ident x b) (φ x)))  -- ✱10·22
-    (qandCongrR H (q13_191 φ b))                                                -- [✱13·191] (1)
+  have h1 : QThm S (iff (fiff φ fun x => ident x b) (QF.and H (φ b))) :=
+    calc fiff φ (fun x => ident x b)
+        ≡ QF.and H (fimp (fun x => ident x b) φ) := q10_22 _ _                  -- ✱10·22
+      _ ≡ QF.and H (φ b) := qandCongrR H (q13_191 φ b)                          -- [✱13·191] (1)
   have h2 : QThm S (imp H (iff (ex φ) (φ b))) :=
-    qimpIffTransR
-      (qsyl (q10_11_27 fun x => qiffMp (QL.t4_71 (φ x) (ident x b)))            -- ✱4·71 [✱10·11·27]
-        (q10_281 φ fun x => QF.and (φ x) (ident x b)))                          -- [✱10·281]
-      (qiffTrans (q10_11_281 fun x => QL.t4_3 (φ x) (ident x b)) (q13_195 φ b)) -- [✱13·195] (2)
+    calc ex φ
+        ≡[H] ex (fun x => QF.and (φ x) (ident x b)) :=
+          qsyl (q10_11_27 fun x => qiffMp (QL.t4_71 (φ x) (ident x b)))          -- ✱4·71 [✱10·11·27]
+            (q10_281 φ fun x => QF.and (φ x) (ident x b))                        -- [✱10·281]
+      _ ≡ ex (fun x => QF.and (ident x b) (φ x)) := q10_11_281 fun x => QL.t4_3 (φ x) (ident x b)  -- (✱4·3)
+      _ ≡ φ b := q13_195 φ b                                                    -- [✱13·195] (2)
   have h3 := QThm.mp h2 (qiffMp (QL.t5_32 H (ex φ) (φ b)))                      -- (2).✱5·32 (3)
   qandI h1 (qiffSymm h3)                                                        -- (1).(3)
 
@@ -262,17 +261,22 @@ theorem q14_123 [Reducibility S] (φ : V α → V β → QF V) (x : V α) (y : V
         (QF.and (fimp2 φ fun z w => QF.and (ident z x) (ident w y)) (ex2 φ)))) :=
   let E : V α → V β → QF V := fun z w => QF.and (ident z x) (ident w y)
   let H : QF V := fimp2 φ E
-  have h1 := qiffTrans (qiffSymm (q11_31 (fun z w => imp (φ z w) (E z w)) (fun z w => imp (E z w) (φ z w))))  -- ✱11·31
-    (qandCongrR H (q13_21 φ x y))                                               -- [✱13·21] (1)
+  have h1 : QThm S (iff (fiff2 φ E) (QF.and H (φ x y))) :=
+    calc fiff2 φ E
+        ≡ QF.and H (fimp2 E φ) := qiffSymm (q11_31 _ _)                         -- ✱11·31
+      _ ≡ QF.and H (φ x y) := qandCongrR H (q13_21 φ x y)                       -- [✱13·21] (1)
   have r : ∀ z w, QThm S (iff (QF.and (φ z w) (E z w))
       (QF.and (ident z x) (QF.and (ident w y) (φ z w)))) := fun z w =>
     qiffTrans (QL.t4_3 (φ z w) (E z w)) (QL.t4_32 (ident z x) (ident w y) (φ z w))
   have h2 : QThm S (imp H (iff (ex2 φ) (φ x y))) :=
-    qimpIffTransR
-      (qsyl (QThm.mp (q11_11 fun z w => qiffMp (QL.t4_71 (φ z w) (E z w)))
-          (q11_32 (fun z w => imp (φ z w) (E z w)) (fun z w => iff (φ z w) (QF.and (φ z w) (E z w)))))  -- ✱4·71 [✱11·11·32]
-        (q11_341 φ fun z w => QF.and (φ z w) (E z w)))                          -- [✱11·341]
-      (qiffTrans (QThm.mp (q11_11 r) (q11_341 _ _)) (q13_22 φ x y))             -- [✱13·22] (2)
+    calc ex2 φ
+        ≡[H] ex2 (fun z w => QF.and (φ z w) (E z w)) :=
+          qsyl (QThm.mp (q11_11 fun z w => qiffMp (QL.t4_71 (φ z w) (E z w)))
+              (q11_32 (fun z w => imp (φ z w) (E z w)) (fun z w => iff (φ z w) (QF.and (φ z w) (E z w)))))  -- ✱4·71 [✱11·11·32]
+            (q11_341 φ fun z w => QF.and (φ z w) (E z w))                       -- [✱11·341]
+      _ ≡ ex2 (fun z w => QF.and (ident z x) (QF.and (ident w y) (φ z w))) :=
+          QThm.mp (q11_11 r) (q11_341 _ _)                                      -- (✱4·3, ✱4·32)
+      _ ≡ φ x y := q13_22 φ x y                                                 -- [✱13·22] (2)
   have h3 := QThm.mp h2 (qiffMp (QL.t5_32 H (ex2 φ) (φ x y)))                   -- (2).✱5·32 (3)
   qandI h1 (qiffSymm h3)                                                        -- (1).(3)
 
@@ -316,7 +320,9 @@ theorem q14_124 [Reducibility S] (φ : V α → V β → QF V) :
     have m2 : QThm S (imp (QF.and (E x y z w) (E x y u v)) (ident w v)) :=
       qsyl (qcomp (qsyl (QL.t3_26 _ _) (QL.t3_27 _ _)) (qsyl (QL.t3_27 _ _) (QL.t3_27 _ _)))
         (q13_172 y w v)
-    qimpImpTransR a3 (qcomp m1 m2)                                              -- [✱13·172] (2)
+    calc QF.and (φ z w) (φ u v)
+        ⊃[F x y] QF.and (E x y z w) (E x y u v) := a3                           -- ✱11·1 . ✱3·47
+      _ ⊃ QF.and (ident z u) (ident w v) := qcomp m1 m2                         -- [✱13·172] (2)
   have h4 : QThm S (imp (ex2 F) U) :=
     qiffMpr (q11_3 (ex2 F) fun z w => all2 (K z w)) |> QThm.mp (q11_11 fun z w =>
       qiffMpr (q11_3 (ex2 F) (K z w)) |> QThm.mp (q11_11 fun u v =>
@@ -336,7 +342,10 @@ theorem q14_124 [Reducibility S] (φ : V α → V β → QF V) :
         (q11_32 A fun z w => imp (φ z w) (E x y z w))
     have e3 : QThm S (imp (QF.and (φ x y) (all2 A)) (QF.and (G x y) (ex2 φ))) :=
       qcomp (QThm.mp e2 (QL.t3_31 _ _ _)) (qsyl (QL.t3_26 _ _) (q11_36 φ x y))
-    qsyl (qandR u1) (qsyl e3 (qiffMpr (c1 x y)))                               -- [✱14·123] (5)
+    calc QF.and (φ x y) U
+        ⊃ QF.and (φ x y) (all2 A) := qandR u1                                   -- ✱11·1
+      _ ⊃ QF.and (G x y) (ex2 φ) := e3                                          -- [✱5·33]
+      _ ⊃ F x y := qiffMpr (c1 x y)                                             -- [✱14·123] (5)
   have h6 : QThm S (imp (QF.and (ex2 φ) U) (ex2 F)) :=
     qsyl (qiffMp (qiffTrans (QL.t4_3 (ex2 φ) U) (qiffSymm (q11_45 φ U))))       -- [✱11·45]
       (QThm.mp (q11_11 fun x y => qsyl (QL.t3_22 U (φ x y)) (h5 x y))
@@ -360,17 +369,19 @@ theorem q14_131 [Reducibility S] (φ ψ : V α → QF V) :
     QThm S (iff (desc2 φ ψ fun b c => ident b c) (desc2 ψ φ fun c b => ident c b)) :=
   let Fφ : V α → QF V := fun b => fiff φ fun x => ident x b
   let Fψ : V α → QF V := fun c => fiff ψ fun x => ident x c
-  have h1 : QThm S (iff (desc2 φ ψ fun b c => ident b c)
-      (ex fun b => QF.and (ex fun c => QF.and (ident b c) (Fψ c)) (Fφ b))) :=
-    q10_11_281 fun b => qiffTrans (QL.t4_3 (Fφ b) _)
-      (qandCongrL (Fφ b) (q10_11_281 fun c => QL.t4_3 (Fψ c) (ident b c)))     -- ✱14·1 . ✱14·1
-  have h2 := q11_6 (fun b c => ident b c) Fψ Fφ                                 -- [✱11·6]
-  have h3 : QThm S (iff (ex fun c => QF.and (ex fun b => QF.and (ident b c) (Fφ b)) (Fψ c))
-      (ex fun c => QF.and (Fψ c) (desc φ fun b => ident c b))) :=
-    q10_11_281 fun c => qiffTrans (QL.t4_3 _ (Fψ c))
-      (qandCongrR (Fψ c) (qiffTrans (q10_11_281 fun b => QL.t4_3 (ident b c) (Fφ b))  -- [✱14·1]
-        (qiffSymm (q14_13 φ c))))                                               -- [✱14·13]
-  qiffTrans h1 (qiffTrans h2 h3)                                                -- [✱14·1]
+  calc desc2 φ ψ (fun b c => ident b c)
+      ≡ ex fun b => QF.and (Fφ b) (ex fun c => QF.and (Fψ c) (ident b c)) := q14_1 φ _  -- ✱14·1 [✱14·1]
+    _ ≡ ex fun b => QF.and (ex fun c => QF.and (ident b c) (Fψ c)) (Fφ b) :=
+        q10_11_281 fun b => qiffTrans (QL.t4_3 (Fφ b) _)
+          (qandCongrL (Fφ b) (q10_11_281 fun c => QL.t4_3 (Fψ c) (ident b c)))  -- (✱4·3)
+    _ ≡ ex fun c => QF.and (ex fun b => QF.and (ident b c) (Fφ b)) (Fψ c) :=
+        q11_6 (fun b c => ident b c) Fψ Fφ                                      -- [✱11·6]
+    _ ≡ ex fun c => QF.and (Fψ c) (desc φ fun b => ident b c) :=
+        q10_11_281 fun c => qiffTrans (QL.t4_3 _ (Fψ c))
+          (qandCongrR (Fψ c) (q10_11_281 fun b => QL.t4_3 (ident b c) (Fφ b)))  -- [✱14·1]
+    _ ≡ ex fun c => QF.and (Fψ c) (desc φ fun b => ident c b) :=
+        q10_11_281 fun c => qandCongrR (Fψ c) (qiffSymm (q14_13 φ c))           -- [✱14·13]
+    _ ≡ desc2 ψ φ (fun c b => ident c b) := qiffSymm (q14_1 ψ _)                 -- [✱14·1]
 
 /-- ✱14·14 `⊢ : a = b . b = (ιx)(φx) . ⊃ . a = (ιx)(φx)` [✱13·13]. ✱13·13 with ψẑ the formula
     ẑ = (ιx)(φx), b for x and a for y needs `b = (ιx)(φx) . b = a`: a = b is turned by ✱13·16 (on the
@@ -389,17 +400,19 @@ theorem q14_142 [Reducibility S] (φ ψ : V α → QF V) (a : V α) :
       (desc ψ fun z => ident a z)) :=
   let Fφ : V α → QF V := fun b => fiff φ fun x => ident x b
   let R : V α → QF V := fun c => desc ψ fun z => ident c z
-  have h1 := qandCongrL (desc2 φ ψ fun b c => ident b c) (qidentDesc φ a)       -- ✱14·1 [✱13·195]
-  have h2 := qiffSymm (q10_35 (fun c => QF.and (Fφ c) (R c)) (Fφ a))           -- [✱10·35]
   have h3 : ∀ c, QThm S (imp (QF.and (Fφ a) (QF.and (Fφ c) (R c)))
       (QF.and (Fφ a) (QF.and (ident a c) (R c)))) := fun c =>
     qcomp (QL.t3_26 _ _)
       (qcomp (qsyl (qcomp (QL.t3_26 _ _) (qsyl (QL.t3_27 _ _) (QL.t3_26 _ _))) (q14_121 φ a c))
         (qsyl (QL.t3_27 _ _) (QL.t3_27 _ _)))                                   -- [✱14·121]
   have h4 : ∀ c, QThm S (imp (QF.and (Fφ a) (QF.and (ident a c) (R c))) (QF.and (ident c a) (R c))) :=
-    fun c => qsyl (QL.t3_27 _ _) (QThm.mp (qiffMp (q13_16 a c)) (QL.t3_45 _ _ _))  -- [✱3·27]
-  qsyl (qiffMp (qiffTrans h1 h2))
-    (qsyl (q10_11_28 h3) (qsyl (q10_11_28 h4) (qiffMp (q13_195 R a))))          -- [✱13·195]
+    fun c => qsyl (QL.t3_27 _ _) (QThm.mp (qiffMp (q13_16 a c)) (QL.t3_45 _ _ _))
+  calc QF.and (desc φ fun z => ident a z) (desc2 φ ψ fun b c => ident b c)
+      ≡ QF.and (Fφ a) (ex fun c => QF.and (Fφ c) (R c)) := qandCongrL _ (qidentDesc φ a)  -- ✱14·1 [✱13·195]
+    _ ≡ ex fun c => QF.and (Fφ a) (QF.and (Fφ c) (R c)) := qiffSymm (q10_35 _ _)  -- [✱10·35]
+    _ ⊃ ex fun c => QF.and (Fφ a) (QF.and (ident a c) (R c)) := q10_11_28 h3      -- [✱14·121]
+    _ ⊃ ex fun c => QF.and (ident c a) (R c) := q10_11_28 h4                     -- [✱3·27 . ✱13·195]: ✱3·27
+    _ ⊃ desc ψ fun z => ident a z := qiffMp (q13_195 R a)                        --   and ✱13·195
 
 /-- `(ιx)(θx) = (ιx)(θ'x) . ⊃ : (∃a) : θx . ≡ₓ . x = a : θ'x . ≡ₓ . x = a`: the first two lines of
     ✱14·144's Dem. (✱14·111, read as ✱14·112, then ✱13·195, which here is ✱10·35 and `qidentDesc`). -/
@@ -421,16 +434,20 @@ theorem q14_144 [Reducibility S] (φ ψ χ : V α → QF V) :
   let Fφ : V α → QF V := fun b => fiff φ fun x => ident x b
   let Fψ : V α → QF V := fun b => fiff ψ fun x => ident x b
   let Fχ : V α → QF V := fun b => fiff χ fun x => ident x b
-  have h1 := QThm.mp (qandI (qdescEqCommon φ ψ) (qdescEqCommon ψ χ)) (QL.t3_47 _ _ _ _)  -- ✱14·111 [✱13·195]
-  have h2 := qiffMpr (q11_54 (fun a => QF.and (Fφ a) (Fψ a)) fun c => QF.and (Fψ c) (Fχ c))  -- [✱11·54]
   have h3 : ∀ a c, QThm S (imp (QF.and (QF.and (Fφ a) (Fψ a)) (QF.and (Fψ c) (Fχ c)))
       (QF.and (Fφ a) (QF.and (Fχ c) (ident a c)))) := fun a c =>
     qcomp (qsyl (QL.t3_26 _ _) (QL.t3_26 _ _))
       (qcomp (qsyl (QL.t3_27 _ _) (QL.t3_27 _ _))
         (qsyl (qcomp (qsyl (QL.t3_26 _ _) (QL.t3_27 _ _)) (qsyl (QL.t3_27 _ _) (QL.t3_26 _ _)))
-          (q14_121 ψ a c)))                                                     -- [✱14·121]
-  have h4 := QThm.mp (q11_11 h3) (q11_34 _ _)                                   -- [✱11·11·34]
-  qsyl h1 (qsyl h2 (qsyl h4 (qiffMpr (q14_112 φ χ fun b c => ident b c))))      -- [✱14·111]
+          (q14_121 ψ a c)))
+  calc QF.and (desc2 φ ψ fun b c => ident b c) (desc2 ψ χ fun b c => ident b c)
+      ⊃ QF.and (ex fun a => QF.and (Fφ a) (Fψ a)) (ex fun c => QF.and (Fψ c) (Fχ c)) :=
+        QThm.mp (qandI (qdescEqCommon φ ψ) (qdescEqCommon ψ χ)) (QL.t3_47 _ _ _ _)  -- ✱14·111 [✱13·195]
+    _ ⊃ ex2 fun a c => QF.and (QF.and (Fφ a) (Fψ a)) (QF.and (Fψ c) (Fχ c)) :=
+        qiffMpr (q11_54 _ _)                                                    -- [✱11·54]
+    _ ⊃ ex2 fun a c => QF.and (Fφ a) (QF.and (Fχ c) (ident a c)) :=
+        QThm.mp (q11_11 h3) (q11_34 _ _)                                        -- [✱14·121 . ✱11·42]
+    _ ⊃ desc2 φ χ fun b c => ident b c := qiffMpr (q14_112 φ χ fun b c => ident b c)  -- [✱14·111]
 
 /-- ✱14·145 `⊢ : a = (ιx)(φx) . a = (ιx)(ψx) . ⊃ . (ιx)(φx) = (ιx)(ψx)`. Line (1) is `qidentDesc`
     (✱14·1, ✱13·195, with ✱13·16 and ✱4·3), used on the first factor of Hp by ✱4·36. The last line
@@ -441,10 +458,12 @@ theorem q14_145 [Reducibility S] (φ ψ : V α → QF V) (a : V α) :
       (desc2 φ ψ fun b c => ident b c)) :=
   let Fφ : V α → QF V := fun b => fiff φ fun x => ident x b
   let Fψ : V α → QF V := fun b => fiff ψ fun x => ident x b
-  have h1 := qandCongrL (desc ψ fun z => ident a z) (qidentDesc φ a)           -- (1) . ✱14·1
-  have h2 := qiffSymm (q10_35 (fun b => QF.and (Fψ b) (ident a b)) (Fφ a))     -- [✱10·35]
-  have h3 := q10_24 (fun a' => ex fun b => QF.and (Fφ a') (QF.and (Fψ b) (ident a' b))) a  -- ✱10·24
-  qsyl (qiffMp (qiffTrans h1 h2)) (qsyl h3 (qiffMpr (q14_112 φ ψ fun b c => ident b c)))  -- [✱14·111]
+  calc QF.and (desc φ fun z => ident a z) (desc ψ fun z => ident a z)
+      ≡ QF.and (Fφ a) (ex fun b => QF.and (Fψ b) (ident a b)) := qandCongrL _ (qidentDesc φ a)  -- (1) . ✱14·1
+    _ ≡ ex fun b => QF.and (Fφ a) (QF.and (Fψ b) (ident a b)) := qiffSymm (q10_35 _ _)  -- [✱10·35]
+    _ ⊃ ex2 fun a' b => QF.and (Fφ a') (QF.and (Fψ b) (ident a' b)) :=
+        q10_24 (fun a' => ex fun b => QF.and (Fφ a') (QF.and (Fψ b) (ident a' b))) a  -- [✱14·111]: ✱10·24
+    _ ⊃ desc2 φ ψ fun b c => ident b c := qiffMpr (q14_112 φ ψ fun b c => ident b c)  --   and ✱14·112
 
 /-- ✱14·15 `⊢ :. (ιx)(φx) = b . ⊃ : ψ{(ιx)(φx)} . ≡ . ψb`. In (1), ✱13·195 needs `c = b . F c`, so the
     factors are commuted (✱4·3) under (∃c) by ✱10·11·281. (2) is `qdescAt`: ✱14·1, ✱13·192, and the
@@ -452,8 +471,15 @@ theorem q14_145 [Reducibility S] (φ ψ : V α → QF V) (a : V α) :
 theorem q14_15 [Reducibility S] (φ ψ : V α → QF V) (b : V α) :
     QThm S (imp (desc φ fun z => ident z b) (iff (desc φ ψ) (ψ b))) :=
   let F : V α → QF V := fun c => fiff φ fun x => ident x c
-  have h1 := qiffMp (qiffTrans (q10_11_281 fun c => QL.t4_3 (F c) (ident c b)) (q13_195 F b))  -- ✱14·1 [✱13·195] (1)
-  qsyl h1 (qdescAt φ ψ b)                                                       -- (1).✱14·1 [✱13·192]
+  have h1 : QThm S (imp (desc φ fun z => ident z b) (F b)) :=
+    calc desc φ (fun z => ident z b)
+        ⊃ ex fun c => QF.and (ident c b) (F c) :=
+          qiffMp (q10_11_281 fun c => QL.t4_3 (F c) (ident c b))                -- ✱14·1
+      _ ⊃ F b := qiffMp (q13_195 F b)                                           -- [✱13·195] (1)
+  calc desc φ ψ
+      ≡[desc φ fun z => ident z b] desc (fun x => ident x b) ψ :=
+        qsyl h1 (qdescCongr φ (fun x => ident x b) ψ)                           -- (1) . ✱14·1
+    _ ≡ ψ b := q13_192 ψ b                                                      -- [✱13·192]
 
 /-- ✱14·16 `⊢ :. (ιx)(φx) = (ιx)(ψx) . ⊃ : χ{(ιx)(φx)} . ≡ . χ{(ιx)(ψx)}`. (2) is `qdescAt` as in ✱14·15;
     in (4), (2) and (3) are joined on the product by ✱3·47; the last line's "✱10·1·23" is done by
@@ -482,16 +508,16 @@ theorem q14_17 [Reducibility S] (φ : V α → QF V) (b : V α) :
   have h1 : QThm S (imp A P) := q10_11_21 fun ψ => q14_15 φ (fun z => .app1 ψ z) b  -- ✱14·15 . ✱10·11·21 (1)
   have h2 : ∀ χ : V (Ty.pred1 α),
       QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) P) A) := fun χ =>
-    have k1 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) P)
-        (iff A (desc φ fun z => .app1 χ z))) :=
-      qsyl (QL.t3_26 _ _) (qdescScope φ (fun z => ident z b) fun z => .app1 χ z)
-    have k2 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) P)
-        (iff (desc φ fun z => .app1 χ z) (.app1 χ b))) :=
-      qsyl (QL.t3_27 _ _) (q10_1 (fun ψ => iff (desc φ fun z => .app1 ψ z) (.app1 ψ b)) χ)  -- ✱10·1
-    have k3 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) P)
-        (iff (.app1 χ b) (ident b b))) :=
-      qimpIffSymm (qsyl (QL.t3_26 _ _) (q10_1 (fun x => iff (ident x b) (.app1 χ x)) b))  -- ✱10·1
-    qsyl (qimpIffTrans (qimpIffTrans k1 k2) k3) (qiffElimOf (q13_15 b))         -- ✱4·22 [✱13·15] (2)
+    let Hp : QF V := QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) P
+    have k : QThm S (imp Hp (iff A (ident b b))) :=
+      calc A
+          ≡[Hp] desc φ (fun z => .app1 χ z) :=
+            qsyl (QL.t3_26 _ _) (qdescScope φ (fun z => ident z b) fun z => .app1 χ z)  -- (`qdescScope`)
+        _ ≡[Hp] .app1 χ b :=
+            qsyl (QL.t3_27 _ _) (q10_1 (fun ψ => iff (desc φ fun z => .app1 ψ z) (.app1 ψ b)) χ)  -- ✱10·1
+        _ ≡[Hp] ident b b :=
+            qimpIffSymm (qsyl (QL.t3_26 _ _) (q10_1 (fun x => iff (ident x b) (.app1 χ x)) b))  -- ✱10·1 . ✱4·22
+    qsyl k (qiffElimOf (q13_15 b))                                              -- [✱13·15] (2)
   have h3 : QThm S (imp (ex (τ := Ty.pred1 α) fun χ => fiff (fun x => ident x b) fun x => .app1 χ x)
       (imp P A)) :=
     QThm.mp (q10_11 fun χ => QThm.mp (h2 χ) (QL.t3_3 _ _ _)) (qiffMp (q10_23 _ _))  -- (2).Exp.✱10·11·23 (3)
@@ -512,16 +538,16 @@ theorem q14_171 [Reducibility S] (φ : V α → QF V) (b : V α) :
       (qfiffMpr (τ := Ty.pred1 α) (fun ψ => desc φ fun z => .app1 ψ z) fun ψ => .app1 ψ b)  -- ✱14·17 (1)
   have h2 : ∀ χ : V (Ty.pred1 α),
       QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) Q) A) := fun χ =>
-    have k1 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) Q)
-        (imp (.app1 χ b) (desc φ fun z => .app1 χ z))) :=
-      qsyl (QL.t3_27 _ _) (q10_1 (fun ψ => imp (.app1 ψ b) (desc φ fun z => .app1 ψ z)) χ)  -- ✱10·1
-    have k2 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) Q)
-        (imp (ident b b) (.app1 χ b))) :=
-      qsyl (QL.t3_26 _ _) (qsyl (q10_1 (fun x => iff (ident x b) (.app1 χ x)) b) (QL.t3_26 _ _))
-    have k3 : QThm S (imp (QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) Q)
-        (imp (desc φ fun z => .app1 χ z) A)) :=
-      qsyl (QL.t3_26 _ _) (qsyl (qdescScope φ (fun z => ident z b) fun z => .app1 χ z) (QL.t3_27 _ _))
-    qsyl (qimpImpTrans (qimpImpTrans k2 k1) k3) (QThm.mp (q13_15 b) (QL.t2_27 _ _))  -- ✱12·1 [✱13·15] (2)
+    let Hp : QF V := QF.and (fiff (fun x => ident x b) fun x => .app1 χ x) Q
+    have k : QThm S (imp Hp (imp (ident b b) A)) :=
+      calc ident b b
+          ⊃[Hp] .app1 χ b :=
+            qsyl (QL.t3_26 _ _) (qsyl (q10_1 (fun x => iff (ident x b) (.app1 χ x)) b) (QL.t3_26 _ _))  -- ✱12·1
+        _ ⊃[Hp] desc φ (fun z => .app1 χ z) :=
+            qsyl (QL.t3_27 _ _) (q10_1 (fun ψ => imp (.app1 ψ b) (desc φ fun z => .app1 ψ z)) χ)  -- ✱10·1
+        _ ⊃[Hp] A :=
+            qsyl (QL.t3_26 _ _) (qsyl (qdescScope φ (fun z => ident z b) fun z => .app1 χ z) (QL.t3_27 _ _))  -- (`qdescScope`)
+    qsyl k (QThm.mp (q13_15 b) (QL.t2_27 _ _))                                  -- [✱13·15] (2)
   have h3 : QThm S (imp (ex (τ := Ty.pred1 α) fun χ => fiff (fun x => ident x b) fun x => .app1 χ x)
       (imp Q A)) :=
     QThm.mp (q10_11 fun χ => QThm.mp (h2 χ) (QL.t3_3 _ _ _)) (qiffMp (q10_23 _ _))
@@ -545,15 +571,19 @@ theorem q14_18 (φ ψ : V α → QF V) : QThm S (imp (exists1 φ) (imp (.all ψ)
 theorem q14_2 [Reducibility S] (c : V α) : QThm S (desc (fun x => ident x c) fun z => ident z c) :=
   let F : V α → QF V := fun b => fiff (fun x => ident x c) fun x => ident x b
   have h1 : QThm S (iff (desc (fun x => ident x c) fun z => ident z c) (F c)) :=
-    qiffTrans (q14_101 _ _)                                                      -- ✱14·101
-      (qiffTrans (q10_11_281 fun b => QL.t4_3 (F b) (ident b c)) (q13_195 F c))  -- [✱13·195] (1)
+    calc desc (fun x => ident x c) (fun z => ident z c)
+        ≡ ex fun b => QF.and (F b) (ident b c) := q14_101 _ _                   -- ✱14·101
+      _ ≡ ex fun b => QF.and (ident b c) (F b) := q10_11_281 fun b => QL.t4_3 (F b) (ident b c)  -- (✱4·3)
+      _ ≡ F c := q13_195 F c                                                    -- [✱13·195] (1)
   QThm.mp (q10_11 fun x => QL.t4_2 (ident x c)) (qiffMpr h1)                    -- (1).Id
 
 /-- ✱14·201 `⊢ : E!(ιx)(φx) . ⊃ . (∃x) . φx`. ✱10·1 and "[✱13·15]" act under (∃b) (✱10·11·28). -/
 theorem q14_201 (φ : V α → QF V) : QThm S (imp (exists1 φ) (ex φ)) :=
-  qsyl (qiffMp (q14_11 φ))                                                       -- ✱14·11
-    (q10_11_28 fun b => qsyl (q10_1 (fun x => iff (φ x) (ident x b)) b)          -- [✱10·1]
-      (qiff_refl_elim φ b))                                                      -- [✱13·15]
+  calc exists1 φ
+      ⊃ ex (fun b => fiff φ fun x => ident x b) := qiffMp (q14_11 φ)              -- ✱14·11
+    _ ⊃ ex (fun b => iff (φ b) (ident b b)) :=
+        q10_11_28 fun b => q10_1 (fun x => iff (φ x) (ident x b)) b             -- [✱10·1]
+    _ ⊃ ex φ := q10_11_28 fun b => qiff_refl_elim φ b                           -- [✱13·15]
 
 /-- ✱14·202 `⊢ :. φx . ≡ₓ . x = b : ≡ : (ιx)(φx) = b : ≡ : φx . ≡ₓ . b = x : ≡ : b = (ιx)(φx)`. The chain
     A ≡ B ≡ C ≡ D is stated as `A ≡ B . B ≡ C . C ≡ D`. First half (A ≡ B): ✱14·1 [✱13·195], with the
@@ -566,7 +596,9 @@ theorem q14_202 [Reducibility S] (φ : V α → QF V) (b : V α) :
         (iff (fiff φ fun x => ident b x) (desc φ fun z => ident b z)))) :=
   let F : V α → QF V := fun c => fiff φ fun x => ident x c
   have h1 : QThm S (iff (desc φ fun z => ident z b) (F b)) :=
-    qiffTrans (q10_11_281 fun c => QL.t4_3 (F c) (ident c b)) (q13_195 F b)     -- ✱14·1 [✱13·195]
+    calc desc φ (fun z => ident z b)
+        ≡ ex fun c => QF.and (ident c b) (F c) := q10_11_281 fun c => QL.t4_3 (F c) (ident c b)  -- ✱14·1
+      _ ≡ F b := q13_195 F b                                                    -- [✱13·195]
   have h2 : QThm S (iff (desc φ fun z => ident b z) (F b)) := qidentDesc φ b
   have h3 : QThm S (iff (F b) (fiff φ fun x => ident b x)) :=
     q10_11_271 fun x => QThm.mp (q13_16 x b) (qiffCongrRImp (φ x) _ _)          -- ✱13·16
@@ -605,12 +637,14 @@ theorem q14_203 [Reducibility S] (φ : V α → QF V) :
     have e2 : QThm S (imp (φ b) (imp (.all fun x => imp (QF.and (φ x) (φ b)) (ident x b))
         (fimp φ fun x => ident x b))) :=
       qsyl (q10_11_21 e) (q10_27 _ _)
-    have m1 : QThm S (imp (QF.and (φ b) (.all fun x => imp (QF.and (φ x) (φ b)) (ident x b)))
-        (QF.and (fimp (fun x => ident x b) φ) (fimp φ fun x => ident x b))) :=
-      qsyl (qcomp (QL.t3_26 _ _) (QThm.mp e2 (QL.t3_31 _ _ _)))
-        (QThm.mp (qiffMpr (q13_191 φ b)) (QL.t3_45 _ _ _))                      -- [✱13·191]
-    qsyl (qandR u) (qsyl m1 (qsyl (QL.t3_22 _ _)
-      (qiffMpr (q10_22 (fun x => imp (φ x) (ident x b)) fun x => imp (ident x b) (φ x)))))  -- [✱10·22] (2)
+    calc QF.and (φ b) U
+        ⊃ QF.and (φ b) (.all fun x => imp (QF.and (φ x) (φ b)) (ident x b)) := qandR u  -- ✱10·1
+      _ ⊃ QF.and (φ b) (fimp φ fun x => ident x b) :=
+          qcomp (QL.t3_26 _ _) (QThm.mp e2 (QL.t3_31 _ _ _))                    -- [✱5·33]
+      _ ⊃ QF.and (fimp (fun x => ident x b) φ) (fimp φ fun x => ident x b) :=
+          QThm.mp (qiffMpr (q13_191 φ b)) (QL.t3_45 _ _ _)                      -- [✱13·191]
+      _ ⊃ QF.and (fimp φ fun x => ident x b) (fimp (fun x => ident x b) φ) := QL.t3_22 _ _  -- (✱3·22)
+      _ ⊃ F b := qiffMpr (q10_22 _ _)                                           -- [✱10·22] (2)
   have h3 := qsyl (qiffMpr (qex_and_perm φ U)) (q10_11_28 h2)                   -- (2).✱10·1·28 [✱10·35] [✱14·11] (3)
   qiffI h1 h3                                                                    -- (1).(3)
 
@@ -630,8 +664,10 @@ theorem q14_205 [Reducibility S] (φ ψ : V α → QF V) :
 /-- ✱14·21 `⊢ : ψ(ιx)(φx) . ⊃ . E!(ιx)(φx)`, the description in ψ having the scope ψ. ✱10·5 gives the
     product of the two existentials; its first factor is taken by ✱3·26 (tacit). -/
 theorem q14_21 (φ ψ : V α → QF V) : QThm S (imp (desc φ ψ) (exists1 φ)) :=
-  qsyl (qiffMp (q14_1 φ ψ))                                                      -- ✱14·1
-    (qsyl (q10_5 _ ψ) (QL.t3_26 _ _))                                            -- [✱10·5] [✱14·11]
+  calc desc φ ψ
+      ⊃ ex (fun b => QF.and (fiff φ fun x => ident x b) (ψ b)) := qiffMp (q14_1 φ ψ)  -- ✱14·1
+    _ ⊃ QF.and (exists1 φ) (ex ψ) := q10_5 _ ψ                                  -- [✱10·5]
+    _ ⊃ exists1 φ := QL.t3_26 _ _                                               -- [✱14·11]
 
 /-- ✱14·21 for `∼χ(ιx)(φx)` with the description's scope wider than the negation (a primary
     occurrence), i.e. [(ιx)(φx)] . ∼χ(ιx)(φx): it also implies E!(ιx)(φx). When the negation has the wider
@@ -662,7 +698,11 @@ theorem q14_23 [Reducibility S] (φ ψ : V α → QF V) :
     whole formal equivalence. -/
 theorem q14_24 (φ : V α → QF V) :
     QThm S (iff (exists1 φ) (desc φ fun b => fiff φ fun y => ident y b)) :=
-  q10_11_281 fun _ => QL.t4_24 _                                                 -- ✱14·1 [✱4·24 . ✱10·281] [✱14·11]
+  qiffSymm <|
+  calc desc φ (fun b => fiff φ fun y => ident y b)
+      ≡ ex (fun b => QF.and (fiff φ fun y => ident y b) (fiff φ fun y => ident y b)) := q14_1 _ _  -- ✱14·1
+    _ ≡ ex (fun b => fiff φ fun y => ident y b) := q10_11_281 fun _ => qiffSymm (QL.t4_24 _)  -- [✱4·24 . ✱10·281]
+    _ ≡ exists1 φ := qiffSymm (q14_11 φ)                                        -- [✱14·11]
 
 /-- ✱14·241 `⊢ :. E!(ιx)(φx) . ⊃ : φy . ≡_y . y = (ιx)(φx)`, the description having the smallest scope
     y = (ιx)(φx). Tacit steps: ✱14·203's second factor is taken by ✱3·27 and instantiated at y and x by
@@ -678,13 +718,15 @@ theorem q14_241 [Reducibility S] (φ : V α → QF V) :
     have a1 : QThm S (imp (exists1 φ) (imp (φ y) (fimp φ fun x => ident y x))) :=
       qsyl hU (qsyl (q10_11_21 fun x => qsyl (qsyl (q10_1 _ y) (q10_1 _ x)) (QL.t3_3 _ _ _))  -- [Exp] [✱10·11·21]
         (qiffMp (q10_21 (φ y) fun x => imp (φ x) (ident y x))))
-    have a2 := qsyl a1 (qiffMp (QL.t4_71 _ _))                                   -- [✱4·71]
     have r : QThm S (iff (fimp (fun x => ident y x) φ) (φ y)) :=
       qiffTrans (q10_11_271 fun x => QThm.mp (q13_16 y x) (QL.t4_84 _ _ (φ x))) (q13_191 φ y)
-    have a3 := qimpIffTransR a2 (qandCongrL _ (qiffSymm r))                      -- [✱13·191]
-    have a4 := qimpIffTransR a3 (qiffTrans (QL.t4_3 _ _)
-      (qiffSymm (q10_22 (fun x => imp (φ x) (ident y x)) fun x => imp (ident y x) (φ x))))  -- [✱10·22]
-    qimpIffTransR a4 (QThm.mp (QThm.mp (q14_202 φ y) (QL.t3_27 _ _)) (QL.t3_27 _ _))  -- [✱14·202]
+    calc φ y
+        ≡[exists1 φ] QF.and (φ y) (fimp φ fun x => ident y x) := qsyl a1 (qiffMp (QL.t4_71 _ _))  -- [✱4·71]
+      _ ≡ QF.and (fimp (fun x => ident y x) φ) (fimp φ fun x => ident y x) :=
+          qandCongrL _ (qiffSymm r)                                             -- [✱13·191]
+      _ ≡ fiff φ (fun x => ident y x) := qiffTrans (QL.t4_3 _ _) (qiffSymm (q10_22 _ _))  -- [✱10·22]
+      _ ≡ desc φ (fun z => ident y z) :=
+          QThm.mp (QThm.mp (q14_202 φ y) (QL.t3_27 _ _)) (QL.t3_27 _ _)         -- [✱14·202]
 
 /-- ✱14·242 `⊢ :. φx . ≡ₓ . x = b : ⊃ : ψb . ≡ . ψ(ιx)(φx)` [✱14·202·15]. The first link of ✱14·202 is
     taken by ✱3·26. -/
@@ -696,10 +738,12 @@ theorem q14_242 [Reducibility S] (φ ψ : V α → QF V) (b : V α) :
 theorem q14_25 [Reducibility S] (φ ψ : V α → QF V) :
     QThm S (imp (exists1 φ) (iff (fimp φ ψ) (desc φ ψ))) :=
   have h1 : ∀ b, QThm S (imp (fiff φ fun x => ident x b) (iff (fimp φ ψ) (desc φ ψ))) := fun b =>
-    qimpIffTrans
-      (qimpIffTransR (qsyl (q10_11_27 fun x => QL.t4_84 (φ x) (ident x b) (ψ x))
-          (q10_271 _ _)) (q13_191 ψ b))                                         -- ✱4·84 . ✱10·27·271 [✱13·191]
-      (q14_242 φ ψ b)                                                           -- [✱14·242] (1)
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc fimp φ ψ
+        ≡[Hp] fimp (fun x => ident x b) ψ :=
+          qsyl (q10_11_27 fun x => QL.t4_84 (φ x) (ident x b) (ψ x)) (q10_271 _ _)  -- ✱4·84 . ✱10·27·271
+      _ ≡ ψ b := q13_191 ψ b                                                    -- [✱13·191]
+      _ ≡[Hp] desc φ ψ := q14_242 φ ψ b                                         -- [✱14·242] (1)
   QThm.mp (q10_11 h1) (qiffMp (q10_23 _ _))                                     -- (1).✱10·11·23 (2) . (2).✱14·11
 
 /-- ✱14·26 `⊢ :. E!(ιx)(φx) . ⊃ : (∃x) . φx . ψx . ≡ . ψ{(ιx)(φx)} . ≡ . φx ⊃ₓ ψx`. The chain is stated as
@@ -709,9 +753,12 @@ theorem q14_26 [Reducibility S] (φ ψ : V α → QF V) :
       (iff (desc φ ψ) (fimp φ ψ)))) :=
   have h2 : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (ex fun x => QF.and (φ x) (ψ x)) (desc φ ψ))) := fun b =>
-    qimpIffTrans
-      (qimpIffTransR (qsyl (q10_311 φ (fun x => ident x b) ψ) (q10_281 _ _)) (q13_195 ψ b))  -- ✱10·311 [✱10·281] [✱13·195]
-      (q14_242 φ ψ b)                                                           -- [✱14·242] (2)
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc ex (fun x => QF.and (φ x) (ψ x))
+        ≡[Hp] ex (fun x => QF.and (ident x b) (ψ x)) :=
+          qsyl (q10_311 φ (fun x => ident x b) ψ) (q10_281 _ _)                 -- ✱10·311 [✱10·281]
+      _ ≡ ψ b := q13_195 ψ b                                                    -- [✱13·195]
+      _ ≡[Hp] desc φ ψ := q14_242 φ ψ b                                         -- [✱14·242] (2)
   have h3 := QThm.mp (q10_11 h2) (qiffMp (q10_23 _ _))                          -- (2).✱10·11·23 (3)
   qcomp h3 (qimpIffSymm (q14_25 φ ψ))                                           -- (1).(3).✱14·25
 
@@ -723,17 +770,24 @@ theorem q14_27 [Reducibility S] (φ ψ : V α → QF V) :
       (iff (fiff φ ψ) (desc2 φ ψ fun b c => ident b c))) := fun b =>
     have l1 : ∀ x, QThm S (imp (iff (φ x) (ident x b))
         (iff (iff (φ x) (ψ x)) (iff (ψ x) (ident x b)))) := fun x =>
-      qimpIffTransR (QL.t4_86 (φ x) (ident x b) (ψ x)) (QL.t4_21 _ _)           -- ✱4·86·21 (1)
-    qimpIffTrans
-      (qimpIffTransR (qsyl (q10_11_27 l1) (q10_271 _ _)) (qfiffDescEq ψ b))     -- (1).✱10·11·27 [✱10·271] [✱14·202]
-      (q14_242 φ (fun c => desc ψ fun d => ident c d) b)                        -- [✱14·242] (2)
+      calc iff (φ x) (ψ x)
+          ≡[iff (φ x) (ident x b)] iff (ident x b) (ψ x) := QL.t4_86 _ _ _       -- ✱4·86
+        _ ≡ iff (ψ x) (ident x b) := QL.t4_21 _ _                               -- ✱4·21 (1)
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc fiff φ ψ
+        ≡[Hp] fiff ψ (fun x => ident x b) := qsyl (q10_11_27 l1) (q10_271 _ _)  -- (1).✱10·11·27 [✱10·271]
+      _ ≡ desc ψ (fun c => ident b c) := qfiffDescEq ψ b                        -- [✱14·202]
+      _ ≡[Hp] desc2 φ ψ (fun b c => ident b c) :=
+          q14_242 φ (fun c => desc ψ fun d => ident c d) b                      -- [✱14·242] (2)
   QThm.mp (q10_11 h2) (qiffMp (q10_23 _ _))                                     -- (2).✱10·11·23.✱14·11
 
 /-- ✱14·271 `⊢ :. φx ≡ₓ ψx . ⊃ : E!(ιx)(φx) . ≡ . E!(ιx)(ψx)` -/
 theorem q14_271 (φ ψ : V α → QF V) : QThm S (imp (fiff φ ψ) (iff (exists1 φ) (exists1 ψ))) :=
-  qsyl (q10_11_21 fun b => qsyl (q10_11_27 fun x => QL.t4_86 (φ x) (ψ x) (ident x b))  -- ✱4·86 [✱10·11·27]
-      (q10_271 (fun x => iff (φ x) (ident x b)) fun x => iff (ψ x) (ident x b)))  -- [✱10·271] [✱10·11·21]
-    (q10_281 _ _)                                                               -- [✱10·281]
+  calc fiff φ ψ
+      ⊃ .all (fun b => iff (fiff φ fun x => ident x b) (fiff ψ fun x => ident x b)) :=
+        q10_11_21 fun b => qsyl (q10_11_27 fun x => QL.t4_86 (φ x) (ψ x) (ident x b))  -- ✱4·86 [✱10·11·27]
+          (q10_271 (fun x => iff (φ x) (ident x b)) fun x => iff (ψ x) (ident x b))  -- [✱10·271] [✱10·11·21]
+    _ ⊃ iff (exists1 φ) (exists1 ψ) := q10_281 _ _                              -- [✱10·281]
 
 /-- ✱14·272 `⊢ :. φx ≡ₓ ψx . ⊃ : χ(ιx)(φx) . ≡ . χ(ιx)(ψx)`: `qdescCongr`. PM's second line cites
     "✱10·11·414"; the step it takes, from (x) : φx ≡ x = b . ≡ . ψx ≡ x = b to φx ≡ₓ x = b . ≡ . ψx ≡ₓ x = b,
@@ -756,8 +810,10 @@ theorem q14_31 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     QThm S (imp (exists1 φ) (iff (desc φ fun z => .or p (χ z)) (.or p (desc φ χ)))) :=
   have h3 : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => .or p (χ z)) (.or p (desc φ χ)))) := fun b =>
-    qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => .or p (χ z)) b))             -- ✱14·242 (1)
-      (qsyl (q14_242 φ χ b) (qorCongrRImp p _ _))                               -- ✱14·242 [✱4·37] (2) . (1).(2) (3)
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc desc φ (fun z => .or p (χ z))
+        ≡[Hp] .or p (χ b) := qimpIffSymm (q14_242 φ (fun z => .or p (χ z)) b)  -- ✱14·242 (1)
+      _ ≡[Hp] .or p (desc φ χ) := qsyl (q14_242 φ χ b) (qorCongrRImp p _ _)    -- ✱14·242 [✱4·37] (2) . (1).(2) (3)
   QThm.mp (q10_11 h3) (qiffMp (q10_23 _ _))                                     -- (3).✱10·23.✱14·11
 
 /-- ✱14·32 `⊢ :. E!(ιx)(φx) . ≡ : [(ιx)(φx)] . ∼χ(ιx)(φx) . ≡ . ∼{[(ιx)(φx)] . χ(ιx)(φx)}`
@@ -770,8 +826,10 @@ theorem q14_32 [Reducibility S] (φ χ : V α → QF V) :
     QThm S (iff (exists1 φ) (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) :=
   have h : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) := fun b =>
-    qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => .neg (χ z)) b))              -- ✱14·242
-      (qsyl (q14_242 φ χ b) (qiffMp (QL.t4_11 _ _)))                             -- ✱14·242 . ✱4·11
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc desc φ (fun z => .neg (χ z))
+        ≡[Hp] .neg (χ b) := qimpIffSymm (q14_242 φ (fun z => .neg (χ z)) b)    -- ✱14·242
+      _ ≡[Hp] .neg (desc φ χ) := qsyl (q14_242 φ χ b) (qiffMp (QL.t4_11 _ _))  -- ✱14·242 . ✱4·11
   have h1 := QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                            -- ✱10·23 . ✱14·11 (1)
   have h2 := QThm.mp (qandI (q14_21 φ χ) (q14_21_neg φ χ)) (QL.t3_44 _ _ _)     -- ✱14·21 . ✱3·44 (2)
   qiffI h1 (qsyl (QL.t3_27 _ _) (qsyl (QL.t2_54 _ _) h2))                        -- ✱3·27 . ✱2·54 . (2) . (1)
@@ -782,8 +840,10 @@ theorem q14_33 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     QThm S (imp (exists1 φ) (iff (desc φ fun z => imp p (χ z)) (imp p (desc φ χ)))) :=
   have h : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => imp p (χ z)) (imp p (desc φ χ)))) := fun b =>
-    qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => imp p (χ z)) b))             -- ✱14·242
-      (qsyl (q14_242 φ χ b) (QL.t4_85 _ _ p))                                    -- ✱14·242 . ✱4·85
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc desc φ (fun z => imp p (χ z))
+        ≡[Hp] imp p (χ b) := qimpIffSymm (q14_242 φ (fun z => imp p (χ z)) b)  -- ✱14·242
+      _ ≡[Hp] imp p (desc φ χ) := qsyl (q14_242 φ χ b) (QL.t4_85 _ _ p)        -- ✱14·242 . ✱4·85
   QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                                       -- ✱10·23 . ✱14·11
 
 /-- ✱14·331 `⊢ :: E!(ιx)(φx) . ⊃ :. [(ιx)(φx)] . χ(ιx)(φx) ⊃ p . ≡ : [(ιx)(φx)] . χ(ιx)(φx) . ⊃ . p`
@@ -792,8 +852,10 @@ theorem q14_331 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     QThm S (imp (exists1 φ) (iff (desc φ fun z => imp (χ z) p) (imp (desc φ χ) p))) :=
   have h : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => imp (χ z) p) (imp (desc φ χ) p))) := fun b =>
-    qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => imp (χ z) p) b))             -- ✱14·242
-      (qsyl (q14_242 φ χ b) (QL.t4_84 _ _ p))                                    -- ✱4·84
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc desc φ (fun z => imp (χ z) p)
+        ≡[Hp] imp (χ b) p := qimpIffSymm (q14_242 φ (fun z => imp (χ z) p) b)  -- ✱14·242
+      _ ≡[Hp] imp (desc φ χ) p := qsyl (q14_242 φ χ b) (QL.t4_84 _ _ p)        -- ✱4·84 . ✱14·242
   QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                                       -- ✱10·23 . ✱14·11
 
 /-- ✱14·332 `⊢ :: E!(ιx)(φx) . ⊃ :. [(ιx)(φx)] . p ≡ χ(ιx)(φx) . ≡ : p . ≡ . [(ιx)(φx)] . χ(ιx)(φx)`
@@ -803,8 +865,10 @@ theorem q14_332 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     QThm S (imp (exists1 φ) (iff (desc φ fun z => iff p (χ z)) (iff p (desc φ χ)))) :=
   have h : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => iff p (χ z)) (iff p (desc φ χ)))) := fun b =>
-    qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => iff p (χ z)) b))             -- ✱14·242
-      (qsyl (q14_242 φ χ b) (qiffCongrRImp p _ _))                               -- ✱4·86
+    let Hp : QF V := fiff φ fun x => ident x b
+    calc desc φ (fun z => iff p (χ z))
+        ≡[Hp] iff p (χ b) := qimpIffSymm (q14_242 φ (fun z => iff p (χ z)) b)  -- ✱14·242
+      _ ≡[Hp] iff p (desc φ χ) := qsyl (q14_242 φ χ b) (qiffCongrRImp p _ _)   -- ✱4·86 . ✱14·242
   QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                                       -- ✱10·23 . ✱14·11
 
 /-- ✱14·34 `⊢ :. p : [(ιx)(φx)] . χ(ιx)(φx) : ≡ : [(ιx)(φx)] : p . χ(ιx)(φx)`, without E!(ιx)(φx). PM's
@@ -812,8 +876,9 @@ theorem q14_332 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     ✱4·32, ✱4·3 (with ✱4·36), under (∃b) by ✱10·11·281. -/
 theorem q14_34 (φ χ : V α → QF V) (p : QF V) :
     QThm S (iff (QF.and p (desc φ χ)) (desc φ fun z => QF.and p (χ z))) :=
-  qiffTrans (qiffSymm (q10_35 (fun b => QF.and (fiff φ fun x => ident x b) (χ b)) p))  -- ✱14·1 [✱10·35]
-    (q10_11_281 fun _ => qandPerm p _ _)                                         -- [✱14·1]
+  calc QF.and p (desc φ χ)
+      ≡ ex (fun b => QF.and p (QF.and (fiff φ fun x => ident x b) (χ b))) := qiffSymm (q10_35 _ p)  -- ✱14·1 [✱10·35]
+    _ ≡ desc φ (fun z => QF.and p (χ z)) := q10_11_281 fun _ => qandPerm p _ _  -- [✱14·1]
 
 /-! ## A counter-model for the negation with the wider scope -/
 

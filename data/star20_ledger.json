@@ -21,7 +21,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.13",
@@ -60,7 +62,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm."
+  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm.",
+  "glue": [
+   "*2.04",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.14",
@@ -96,7 +106,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
+  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.15",
@@ -120,7 +138,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.3",
@@ -152,6 +172,14 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
+  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2.",
+  "glue": [
+   "*10.281",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "order"
+  ]
  }
 ]

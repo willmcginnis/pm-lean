@@ -21,7 +21,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.101",
@@ -44,7 +46,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.11",
@@ -68,7 +72,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.111",
@@ -101,9 +107,25 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*11.55 gives (Ec, b) . psi x ==_x x = c . phi x ==_x x = b . f(b, c); PM's last line (whose transcription has 'x = c' twice) has (Eb, c) and the factors in the order of the statement: the variables are interchanged by *11.23 and the factors permuted by *4.32, *4.3 (with *4.36), under (b, c) by *11.11.341."
+  "reason": "*11.55 gives (Ec, b) . psi x ==_x x = c . phi x ==_x x = b . f(b, c); PM's last line (whose transcription has 'x = c' twice) has (Eb, c) and the factors in the order of the statement: the variables are interchanged by *11.23 and the factors permuted by *4.32, *4.3 (with *4.36), under (b, c) by *11.11.341.",
+  "glue": [
+   "*11.23",
+   "*4.32",
+   "*4.3",
+   "*4.36",
+   "*11.11",
+   "*11.341"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.112",
@@ -128,9 +150,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.113",
@@ -153,9 +177,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.12",
@@ -189,7 +215,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (2), *10.1 is used at x and at y and the two joined by Comp (*3.43); the == of *4.38 is used left to right (*3.26) and chained with *13.172 by *2.05."
+  "reason": "In (2), *10.1 is used at x and at y and the two joined by Comp (*3.43); the == of *4.38 is used left to right (*3.26) and chained with *13.172 by *2.05.",
+  "glue": [
+   "*2.05"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*14.121",
@@ -223,7 +255,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, *3.26 turns phi b == b = c into phi b ⊃ b = c on the second factor (*3.47 with Id, *2.08)."
+  "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, *3.26 turns phi b == b = c into phi b ⊃ b = c on the second factor (*3.47 with Id, *2.08).",
+  "glue": [
+   "*2.04"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*14.122",
@@ -255,9 +293,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), *13.191 replaces the second factor (*4.36 with *4.3); in (2), *13.195 needs x = b . phi x, so the factors are commuted (*4.3) under (Ex) by *10.11.281."
+  "reason": "In (1), *13.191 replaces the second factor (*4.36 with *4.3); in (2), *13.195 needs x = b . phi x, so the factors are commuted (*4.3) under (Ex) by *10.11.281.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*14.123",
@@ -290,9 +338,21 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), *13.21 replaces the second factor (*4.36 with *4.3); in (2), *13.22 needs z = x . (w = y . phi(z, w)), so the factors of phi(z, w) . (z = x . w = y) are rearranged (*4.3, *4.32) under (z, w) by *11.11.341."
+  "reason": "In (1), *13.21 replaces the second factor (*4.36 with *4.3); in (2), *13.22 needs z = x . (w = y . phi(z, w)), so the factors of phi(z, w) . (z = x . w = y) are rearranged (*4.3, *4.32) under (z, w) by *11.11.341.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*4.32"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "order"
+  ]
  },
  {
   "id": "*14.124",
@@ -335,9 +395,21 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "(1) takes *14.123's chain end to end (*3.26, *3.27) and removes (Ex, y) by *11.11.35 (cited in (3)). In (2), the ⊃ halves of the two *11.1 instances are taken by *3.26 and joined by Comp (*3.43) before *3.47, and the factors for the two uses of *13.172 are picked out by *3.26, *3.27 and joined by Comp. (4) uses *11.11.3 twice. In (5), *11.1 is carried under (z, w) by *11.11.3 and applied to the second factor (*3.47 with Id, *2.08); *5.33 needs phi(x, y) . phi(z, w) where Hp has phi(z, w) . phi(x, y) (*3.22, *2.06), is exported by *3.27 and Exp (*3.3), carried under (z, w) by *11.11.3 and *11.32 and imported by *3.31, phi(x, y) being kept by *3.26 and Comp; (Ez, w) . phi(z, w) is got from phi(x, y) by *11.36. (6) needs U . phi(x, y) for *11.45 (*4.3, *3.22). The last line joins (1) and (4) by Comp."
+  "reason": "(1) takes *14.123's chain end to end (*3.26, *3.27) and removes (Ex, y) by *11.11.35 (cited in (3)). In (2), the ⊃ halves of the two *11.1 instances are taken by *3.26 and joined by Comp (*3.43) before *3.47, and the factors for the two uses of *13.172 are picked out by *3.26, *3.27 and joined by Comp. (4) uses *11.11.3 twice. In (5), *11.1 is carried under (z, w) by *11.11.3 and applied to the second factor (*3.47 with Id, *2.08); *5.33 needs phi(x, y) . phi(z, w) where Hp has phi(z, w) . phi(x, y) (*3.22, *2.06), is exported by *3.27 and Exp (*3.3), carried under (z, w) by *11.11.3 and *11.32 and imported by *3.31, phi(x, y) being kept by *3.26 and Comp; (Ez, w) . phi(z, w) is got from phi(x, y) by *11.36. (6) needs U . phi(x, y) for *11.45 (*4.3, *3.22). The last line joins (1) and (4) by Comp.",
+  "glue": [
+   "*2.05",
+   "*3.22",
+   "*2.06",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "order",
+   "order",
+   "order"
+  ]
  },
  {
   "id": "*14.13",
@@ -365,9 +437,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.36 acts on the first factor; a = b is the second, so the factors are commuted (*4.3) (qandCongrR)."
+  "reason": "*4.36 acts on the first factor; a = b is the second, so the factors are commuted (*4.3) (qandCongrR).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*14.131",
@@ -395,9 +477,21 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*11.6 needs (Eb) : (Ec) . b = c . psi x ==_x x = c : phi x ==_x x = b, so the factors of the *14.1 lines are commuted (*4.3, with *4.36) under (Eb), (Ec) by *10.11.281, before *11.6 and back after it; *14.13 replaces the second factor (*4.36 with *4.3)."
+  "reason": "*11.6 needs (Eb) : (Ec) . b = c . psi x ==_x x = c : phi x ==_x x = b, so the factors of the *14.1 lines are commuted (*4.3, with *4.36) under (Eb), (Ec) by *10.11.281, before *11.6 and back after it; *14.13 replaces the second factor (*4.36 with *4.3).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.14",
@@ -424,9 +518,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*13.13 with psi z := z = (ix)(phi x), b for x and a for y needs b = (ix)(phi x) . b = a: a = b is turned by *13.16 on the second factor (*3.47 with Id, *2.08) and the factors commuted by *3.22."
+  "reason": "*13.13 with psi z := z = (ix)(phi x), b for x and a for y needs b = (ix)(phi x) . b = a: a = b is turned by *13.16 on the second factor (*3.47 with Id, *2.08) and the factors commuted by *3.22.",
+  "glue": [
+   "*3.22"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*14.142",
@@ -461,9 +561,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'[*13.195]' in the second line takes (Eb) : phi x ==_x x = b : a = b to phi x ==_x x = a, which needs b = a . F b: the factors are commuted (*4.3) and a = b turned by *13.16 (with *4.36) under (Eb) by *10.11.281 (qidentDesc), and the result used on the first factor of Hp (*4.36). '[*14.121]' picks out the two formal equivalences by *3.26, *3.27 and joins them by Comp (*3.43); it and the last line act under (Ec) by *10.11.28. In the last line *13.195 needs c = a, got from a = c by *13.16 with Fact (*3.45)."
+  "reason": "'[*13.195]' in the second line takes (Eb) : phi x ==_x x = b : a = b to phi x ==_x x = a, which needs b = a . F b: the factors are commuted (*4.3) and a = b turned by *13.16 (with *4.36) under (Eb) by *10.11.281 (qidentDesc), and the result used on the first factor of Hp (*4.36). '[*14.121]' picks out the two formal equivalences by *3.26, *3.27 and joins them by Comp (*3.43); it and the last line act under (Ec) by *10.11.28. In the last line *13.195 needs c = a, got from a = c by *13.16 with Fact (*3.45).",
+  "glue": [
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.144",
@@ -503,9 +613,23 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "PM cites *14.111 for (Ea, b) : phi x ==_x x = a : psi x ==_x x = b : a = b; with PM's convention (p. 182) the unmarked (ix)(phi x) = (ix)(psi x) is *14.112's form (equivalent by *14.113), so *14.112 is used, in the first and the last line. The two factors of Hp are treated by *3.47; '[*13.195]' is *10.35 with qidentDesc (*13.195, *13.16, *4.3, *4.36, *10.11.281). '[*14.121 . *11.42]' picks out the factors (*3.26, *3.27, Comp *3.43) and is carried under (Ea, c) by *11.11.34; *11.42 distributes (Ea, c) over a product, which this step does not need."
+  "reason": "PM cites *14.111 for (Ea, b) : phi x ==_x x = a : psi x ==_x x = b : a = b; with PM's convention (p. 182) the unmarked (ix)(phi x) = (ix)(psi x) is *14.112's form (equivalent by *14.113), so *14.112 is used, in the first and the last line. The two factors of Hp are treated by *3.47; '[*13.195]' is *10.35 with qidentDesc (*13.195, *13.16, *4.3, *4.36, *10.11.281). '[*14.121 . *11.42]' picks out the factors (*3.26, *3.27, Comp *3.43) and is carried under (Ea, c) by *11.11.34; *11.42 distributes (Ea, c) over a product, which this step does not need.",
+  "glue": [
+   "*2.02",
+   "*4.3",
+   "*10.281",
+   "*11.11",
+   "*11.34"
+  ],
+  "glue_kind": [
+   "chain",
+   "order",
+   "under-exists",
+   "under-exists",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.145",
@@ -538,9 +662,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "Line (1) is qidentDesc (*13.195 needs b = a . F b: *4.3, *13.16 with *4.36, under (Eb) by *10.11.281), used on the first factor of Hp by *4.36. The last line takes (Eb) : phi x ==_x x = a : psi x ==_x x = b : a = b to (Ea, b) . ... by *10.24 and, as in *14.144, PM's *14.111 is *14.112 for the unmarked descriptions."
+  "reason": "Line (1) is qidentDesc (*13.195 needs b = a . F b: *4.3, *13.16 with *4.36, under (Eb) by *10.11.281), used on the first factor of Hp by *4.36. The last line takes (Eb) : phi x ==_x x = a : psi x ==_x x = b : a = b to (Ea, b) . ... by *10.24 and, as in *14.144, PM's *14.111 is *14.112 for the unmarked descriptions.",
+  "glue": [
+   "*3.26",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.15",
@@ -572,9 +706,21 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. Between *14.1 and *13.192 in (2), PM leaves tacit the step from phi x ==_x x = b to psi{(ix)(phi x)} == (Ec) : x = b ==_x x = c : psi c; it is the argument of *14.272's Dem. (*4.86 under (x) by *10.11.27 and *10.271, *4.36, *10.11.21, *10.281; qdescCongr)."
+  "reason": "In (1), *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. Between *14.1 and *13.192 in (2), PM leaves tacit the step from phi x ==_x x = b to psi{(ix)(phi x)} == (Ec) : x = b ==_x x = c : psi c; it is the argument of *14.272's Dem. (*4.86 under (x) by *10.11.27 and *10.271, *4.36, *10.11.21, *10.281; qdescCongr).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.16",
@@ -611,9 +757,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "(2) is line (2) of *14.15 (qdescAt), with the same tacit step (*14.272's argument: *4.86, *10.27, *10.271, *4.36, *10.21, *10.281). In (4), (2) and (3) are joined on the product by *3.47 (and *4.22). The last line's '*10.1.23' is done by *10.11 and *10.23; *10.1 is not needed (probably *10.11.23 is meant)."
+  "reason": "(2) is line (2) of *14.15 (qdescAt), with the same tacit step (*14.272's argument: *4.86, *10.27, *10.271, *4.36, *10.21, *10.281). In (4), (2) and (3) are joined on the product by *3.47 (and *4.22). The last line's '*10.1.23' is done by *10.11 and *10.23; *10.1 is not needed (probably *10.11.23 is meant).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.17",
@@ -650,9 +806,23 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*12.1 gives x = b ==_x chi!x; lines (2)-(3) are written with that orientation (PM writes chi!x ==_x x = b), so *10.1 at b gives b = b == chi!b, read from right to left. (2) picks the factors of its hypothesis by *3.26, *3.27; the step from chi!(ix)(phi x) to (ix)(phi x) = b, which PM leaves tacit, is qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' is *3.27 with Comm (*2.04)."
+  "reason": "*12.1 gives x = b ==_x chi!x; lines (2)-(3) are written with that orientation (PM writes chi!x ==_x x = b), so *10.1 at b gives b = b == chi!b, read from right to left. (2) picks the factors of its hypothesis by *3.26, *3.27; the step from chi!(ix)(phi x) to (ix)(phi x) = b, which PM leaves tacit, is qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' is *3.27 with Comm (*2.04).",
+  "glue": [
+   "*3.43",
+   "*2.02",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "under-exists",
+   "order"
+  ]
  },
  {
   "id": "*14.171",
@@ -689,9 +859,23 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), the converse halves of *14.17's ==_psi are taken by *10.22 and *3.27 (qfiffMpr). In (2), *12.1 gives chi with x = b ==_x chi!x; the hypothesis is picked apart by *3.26, *3.27; chi!(ix)(phi x) is turned into (ix)(phi x) = b by qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' detaches b = b by *2.27; chi is removed by Exp (*3.3), *10.11 and *10.23."
+  "reason": "In (1), the converse halves of *14.17's ==_psi are taken by *10.22 and *3.27 (qfiffMpr). In (2), *12.1 gives chi with x = b ==_x chi!x; the hypothesis is picked apart by *3.26, *3.27; chi!(ix)(phi x) is turned into (ix)(phi x) = b by qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' detaches b = b by *2.27; chi is removed by Exp (*3.3), *10.11 and *10.23.",
+  "glue": [
+   "*2.83",
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.18",
@@ -726,9 +910,17 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3)."
+  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3).",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.2",
@@ -757,7 +949,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs the factors b = a . F b; *14.101 gives F b : b = a, commuted under (Eb) by *4.3 with *10.11.281. 'Id' (x = a . ==_x . x = a) is *4.2 generalized by *10.11."
+  "reason": "*13.195 needs the factors b = a . F b; *14.101 gives F b : b = a, commuted under (Eb) by *4.3 with *10.11.281. 'Id' (x = a . ==_x . x = a) is *4.2 generalized by *10.11.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.201",
@@ -786,7 +986,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 and '[*13.15]' act under (Eb), by *10.11.28; '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04)."
+  "reason": "*10.1 and '[*13.15]' act under (Eb), by *10.11.28; '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04).",
+  "glue": [
+   "*10.28",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "order"
+  ]
  },
  {
   "id": "*14.202",
@@ -817,9 +1025,23 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "First half (A == B): *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. 'The second half is proved in the same way': D == A by qidentDesc (*13.195 with *13.16, *4.3, *4.36). The links through C need A == C, which PM does not print: *13.16 under (x) (*4.86 with *4.21, *10.11.271)."
+  "reason": "First half (A == B): *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. 'The second half is proved in the same way': D == A by qidentDesc (*13.195 with *13.16, *4.3, *4.36). The links through C need A == C, which PM does not print: *13.16 under (x) (*4.86 with *4.21, *10.11.271).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*10.281",
+   "*4.21"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "under-exists",
+   "order"
+  ]
  },
  {
   "id": "*14.203",
@@ -865,9 +1087,21 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm)."
+  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm).",
+  "glue": [
+   "*3.22",
+   "*2.06",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*14.204",
@@ -894,9 +1128,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The first link of *14.202's chain is taken by *3.26."
+  "reason": "The first link of *14.202's chain is taken by *3.26.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.205",
@@ -924,9 +1160,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*14.202 is used end to end (its links taken by *3.26, *3.27; qfiffDescEq), on the first factor (*4.36), under (Eb) by *10.11.281."
+  "reason": "*14.202 is used end to end (its links taken by *3.26, *3.27; qfiffDescEq), on the first factor (*4.36), under (Eb) by *10.11.281.",
+  "glue": [
+   "*10.281"
+  ],
+  "glue_kind": [
+   "under-exists"
+  ]
  },
  {
   "id": "*14.21",
@@ -953,7 +1195,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191)."
+  "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.22",
@@ -983,9 +1227,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), the first link of *14.122's chain is taken by *3.26 and its second factor phi b by *3.27."
+  "reason": "In (1), the first link of *14.122's chain is taken by *3.26 and its second factor phi b by *3.27.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.23",
@@ -1015,9 +1261,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "PM notes (p. 191) that '*10.5, not only *3.26, is required', the scope being the whole product. The step from (Eb) : phi x . psi x ==_x x = b : phi b . psi b to (Eb) : ... : phi b is *3.26 on the second factor (*3.47 with Id, *2.08) carried under (Eb) by *10.11.28; *10.5 (distributing (Eb) over a product) does not give it."
+  "reason": "PM notes (p. 191) that '*10.5, not only *3.26, is required', the scope being the whole product. The step from (Eb) : phi x . psi x ==_x x = b : phi b . psi b to (Eb) : ... : phi b is *3.26 on the second factor (*3.47 with Id, *2.08) carried under (Eb) by *10.11.28; *10.5 (distributing (Eb) over a product) does not give it.",
+  "glue": [
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists"
+  ]
  },
  {
   "id": "*14.24",
@@ -1042,9 +1294,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.241",
@@ -1081,9 +1335,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*14.203's second factor is taken by *3.27 and instantiated at y and x by *10.1 (twice). '[*13.191]' needs y = x . ⊃_x . phi x where *13.191 gives x = y . ⊃_x . phi x: turned by *13.16 (with *4.84, *10.11.271), and acts on the first factor (*4.36). '[*10.22]' needs the factors in the other order (*4.3). '[*14.202]' is its third link (*3.27 twice). PM's last line is for one y under Hp; it is generalized by *10.11.21."
+  "reason": "*14.203's second factor is taken by *3.27 and instantiated at y and x by *10.1 (twice). '[*13.191]' needs y = x . ⊃_x . phi x where *13.191 gives x = y . ⊃_x . phi x: turned by *13.16 (with *4.84, *10.11.271), and acts on the first factor (*4.36). '[*10.22]' needs the factors in the other order (*4.3). '[*14.202]' is its third link (*3.27 twice). PM's last line is for one y under Hp; it is generalized by *10.11.21.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*14.242",
@@ -1108,9 +1372,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The first link of *14.202's chain is taken by *3.26."
+  "reason": "The first link of *14.202's chain is taken by *3.26.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.25",
@@ -1139,9 +1405,17 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [
+   "*3.43",
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*14.26",
@@ -1172,9 +1446,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The last line joins (3) with *14.25 (read from right to left) by Comp (*3.43)."
+  "reason": "The last line joins (3) with *14.25 (read from right to left) by Comp (*3.43).",
+  "glue": [
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*14.27",
@@ -1207,9 +1487,17 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'[*14.202]' is used end to end (its links taken by *3.26, *3.27; qfiffDescEq)."
+  "reason": "'[*14.202]' is used end to end (its links taken by *3.26, *3.27; qfiffDescEq).",
+  "glue": [
+   "*3.43",
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*14.271",
@@ -1236,9 +1524,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.272",
@@ -1271,9 +1561,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The second line's '[*10.11.414]' takes (x) : phi x == x = b . == . psi x == x = b to phi x ==_x x = b . == . psi x ==_x x = b, which is *10.11.27 with *10.271 (as in *14.271's Dem.), not *10.414 (a formal equivalence ==_x, not an equivalence of the two (x)'s). 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃)."
+  "reason": "The second line's '[*10.11.414]' takes (x) : phi x == x = b . == . psi x == x = b to phi x ==_x x = b . == . psi x ==_x x = b, which is *10.11.27 with *10.271 (as in *14.271's Dem.), not *10.414 (a formal equivalence ==_x, not an equivalence of the two (x)'s). 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.28",
@@ -1300,9 +1592,11 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*14.31",
@@ -1330,9 +1624,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.37 has the varied disjunct first; here it is second (*4.31). *10.23 needs (b) first (*10.11)."
+  "reason": "*4.37 has the varied disjunct first; here it is second (*4.31). *10.23 needs (b) first (*10.11).",
+  "glue": [
+   "*3.43",
+   "*2.02",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*14.32",
@@ -1363,9 +1667,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): from the right-hand side, *3.27 takes ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x)."
+  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): from the right-hand side, *3.27 takes ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x).",
+  "glue": [
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*14.33",
@@ -1392,9 +1702,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11)."
+  "reason": "*10.23 needs (b) first (*10.11).",
+  "glue": [
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*14.331",
@@ -1421,9 +1737,15 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11)."
+  "reason": "*10.23 needs (b) first (*10.11).",
+  "glue": [
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*14.332",
@@ -1451,9 +1773,19 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.86 has the varied member first; here it is second (*4.21, qiffCongrRImp). *10.23 needs (b) first (*10.11)."
+  "reason": "*4.86 has the varied member first; here it is second (*4.21, qiffCongrRImp). *10.23 needs (b) first (*10.11).",
+  "glue": [
+   "*3.43",
+   "*2.02",
+   "*4.21"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*14.34",
@@ -1481,8 +1813,20 @@
    "*4.22",
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
-   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "PM's middle line (Eb) : p : phi x ==_x x = b : chi b is rearranged to the scope p . chi b of the last line by *4.32, *4.3 (with *4.36), under (Eb) by *10.11.281."
+  "reason": "PM's middle line (Eb) : p : phi x ==_x x = b : chi b is rearranged to the scope p . chi b of the last line by *4.32, *4.3 (with *4.36), under (Eb) by *10.11.281.",
+  "glue": [
+   "*4.32",
+   "*4.3",
+   "*4.36",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  }
 ]

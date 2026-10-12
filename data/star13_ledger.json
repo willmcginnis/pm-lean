@@ -22,7 +22,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.101",
@@ -57,7 +59,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken by *3.27; Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2)."
+  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken by *3.27; Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2).",
+  "glue": [
+   "*10.28",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "order"
+  ]
  },
  {
   "id": "*13.11",
@@ -90,7 +100,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) takes the ⊃ half of *10.22's product by Simp (*3.26, in qfiffMp). *1.7 (that ~p is elementary when p is) has no proof step: negation is a constructor of the syntax."
+  "reason": "Line (1) takes the ⊃ half of *10.22's product by Simp (*3.26, in qfiffMp). *1.7 (that ~p is elementary when p is) has no proof step: negation is a constructor of the syntax.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.12",
@@ -115,7 +127,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.13",
@@ -140,7 +154,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.14",
@@ -164,7 +180,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.15",
@@ -189,7 +207,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.16",
@@ -213,7 +233,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.17",
@@ -237,7 +259,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.171",
@@ -263,7 +287,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.16 is applied to the first factor of the hypothesis by Fact (*3.45)."
+  "reason": "*13.16 is applied to the first factor of the hypothesis by Fact (*3.45).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.172",
@@ -290,7 +316,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.16 is applied to the second factor of the hypothesis: *3.47 with Id (*2.08) (qandR)."
+  "reason": "*13.16 is applied to the second factor of the hypothesis: *3.47 with Id (*2.08) (qandR).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.18",
@@ -314,7 +342,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.181",
@@ -338,7 +368,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.182",
@@ -366,7 +398,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "After Exp, Comm (*2.04) puts x = y first in each half."
+  "reason": "After Exp, Comm (*2.04) puts x = y first in each half.",
+  "glue": [
+   "*2.04"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*13.183",
@@ -396,7 +434,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (2), *10.1 gives x = x . == . x = y; its ⊃ half is taken by *3.26 and x = x (*13.15) detached by *2.27."
+  "reason": "In (2), *10.1 gives x = x . == . x = y; its ⊃ half is taken by *3.26 and x = x (*13.15) detached by *2.27.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.19",
@@ -420,7 +460,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.191",
@@ -451,7 +493,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (1), x = x (*13.15) is detached by *2.27; in (2), the half phi x ⊃ phi y of *13.12 is taken by *3.27."
+  "reason": "In (1), x = x (*13.15) is detached by *2.27; in (2), the half phi x ⊃ phi y of *13.12 is taken by *3.27.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.192",
@@ -486,7 +530,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1) generalizes *4.2 by *10.11 (cited with *10.23 in (3)). In (2), *10.1 is carried onto the product with psi c by Fact (*3.45); *5.501 with *13.15 gives b = c, but *13.13 needs psi c . c = b: b = c is turned by *13.16 (under Fact) and the factors commuted by *3.22."
+  "reason": "(1) generalizes *4.2 by *10.11 (cited with *10.23 in (3)). In (2), *10.1 is carried onto the product with psi c by Fact (*3.45); *5.501 with *13.15 gives b = c, but *13.13 needs psi c . c = b: b = c is turned by *13.16 (under Fact) and the factors commuted by *3.22.",
+  "glue": [
+   "*3.22"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*13.193",
@@ -517,7 +567,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'Fact' in (4) acts on the second factor (x = y); *3.45 acts on the first, so it is done by *3.47 with Id (*2.08) (qandR)."
+  "reason": "'Fact' in (4) acts on the second factor (x = y); *3.45 acts on the first, so it is done by *3.47 with Id (*2.08) (qandR).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.194",
@@ -546,7 +598,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*4.71 gives phi x . x = y : phi y; it is rearranged to phi x . phi y : x = y by *4.32 and *4.3 (with *4.38 and *4.2)."
+  "reason": "*4.71 gives phi x . x = y : phi y; it is rearranged to phi x . phi y : x = y by *4.32 and *4.3 (with *4.38 and *4.2).",
+  "glue": [
+   "*4.32",
+   "*4.3",
+   "*4.38",
+   "*4.2"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "order"
+  ]
  },
  {
   "id": "*13.195",
@@ -576,7 +640,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (2), *13.13 has the factors in the other order (psi x . x = y); they are commuted by *3.22."
+  "reason": "In (2), *13.13 has the factors in the other order (psi x . x = y); they are commuted by *3.22.",
+  "glue": [
+   "*3.22"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*13.196",
@@ -604,7 +674,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.51 has the factors phi y . y = x; they are commuted under (Ey) by *4.3 with *10.11.281."
+  "reason": "*10.51 has the factors phi y . y = x; they are commuted under (Ey) by *4.3 with *10.11.281.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*13.21",
@@ -628,7 +706,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.22",
@@ -652,7 +732,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*13.3",
@@ -686,6 +768,8 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (5) needs *13.101 in the form a = x . ⊃ . psi a ⊃ psi x; PM writes x = a, turned by *13.16. *10.221 (identifying the a's and the x's of the lines joined in (6) and (7)) has no proof step: x and a are variables of one Lean type, so *10.13 (q10_13) joins the lines."
+  "reason": "Line (5) needs *13.101 in the form a = x . ⊃ . psi a ⊃ psi x; PM writes x = a, turned by *13.16. *10.221 (identifying the a's and the x's of the lines joined in (6) and (7)) has no proof step: x and a are variables of one Lean type, so *10.13 (q10_13) joins the lines.",
+  "glue": [],
+  "glue_kind": []
  }
 ]

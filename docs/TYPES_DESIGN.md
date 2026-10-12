@@ -457,8 +457,8 @@ occurs in the declaration's type. Result: 59 PM propositions use reducibility, 1
 | `PM/Pred/Curry.lean` | 163 | `fnOrder2`, `curry_order`, `phi_x_two_views`; `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` |
 | `PM/Models/Collapse.lean`, `PM/Models/Finite.lean` | 54, 152 | `Ty.den`, `QModel.collapse`, `classicalAll`, `QModel.classical`, `consistent_collapse`; shapes `Sh`, `finModel`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, three counter-models |
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
-| `PM/Star13.lean` | 249 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
-| `PM/Star14.lean` | 839 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
+| `PM/Star13.lean` | 270 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
+| `PM/Star14.lean` | 904 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
 | `PM/Star20.lean` | 109 | ✱20·01, ✱20·02 (macros), class identity; ✱20·1, ✱20·13, ✱20·14, ✱20·15, ✱20·3; typical-ambiguity checks |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
@@ -489,7 +489,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **C2** consistency at a model's own V | **pass** | `consistent S` (at `twoModel.den`, the finite coded model), `consistent_all S` (∀ V), for every system `S`. No axioms (decision 11) |
 | **C3** degenerate V documented or removed | **pass (documented, not removed)** | `trap_empty`, `trap_unit` in PM/Trap.lean; header of `consistent` and README |
 | **C4** old counter-models still refute | **pass** | `not_qthm_phiy_imp_all` (φy ⊃ (x).φx), `not_qthm_ex_imp_all` ((∃x).φx ⊃ (x).φx), `not_qthm_all_imp_ex_empty` ((x).φx ⊃ (∃x).φx, empty D); also `not_qthm_converse_11_26` and the new `not_qthm_neg_desc_imp_exists1` |
-| **U1** ✱2–✱5, ✱9–✱11 unchanged | **pass** | PM/QuantLift.lean, PM/Star10.lean, PM/Star11.lean: no line changed; all compile against the new `QF`/`QThm` |
+| **U1** ✱2–✱5, ✱9–✱11 unchanged | **pass** | PM/QuantLift.lean, PM/Star10.lean, PM/Star11.lean: no line changed by the types work (✱11·71's chains were later written as `calc` blocks, PM/Chain.lean); all compile against the new `QF`/`QThm` |
 | **U2** ✱10 used at a function sort | **pass** | `q13_101` uses ✱10·1, ✱10·27, ✱10·23 at `pred1 a`; `q20_14` uses ✱10·23 at `pred1 a`; `q12_1_of_var` at `fn1 a k` and `pred1 a` |
 | **U3** ✱13·101, ✱13·12 along PM's lines, citing ✱12·1 | **pass** | `q13_101` (lines (1), (2) of p. 177; (1) is `q12_1`), `q13_12`; also ✱13·1–✱13·3 |
 | **U4** ✱14·21 with explicit scope | **pass** | `q14_21`, `q14_21_neg` ([(ιx)(φx)] . ∼χ(ιx)(φx) ⊃ E!), `not_qthm_neg_desc_imp_exists1` (∼{[(ιx)(φx)] . χ(ιx)(φx)} ⊃ E! is not a theorem); also ✱14·1–✱14·34 except ✱14·3 |
@@ -514,12 +514,14 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
   |---|---|
   | ✱10 | 3.7 |
   | ✱11 | 4.9 |
-  | ✱13 | 4.3 (25 propositions) |
-  | ✱14 | 8.1 (47; the helper lemmas of PM/Star14.lean not counted) |
+  | ✱13 | 5.2 (25 propositions) |
+  | ✱14 | 9.7 (47; the helper lemmas of PM/Star14.lean not counted) |
   | ✱20 | 6.4 (5) |
 
-  ✱13·101 is 13 lines, against PM's 5 Dem. lines. ✱20·13 is 15. ✱14·124 is 54, against PM's 6 numbered
-  Dem. lines; most of it is bookkeeping for its four variables.
+  A chain written as a `calc` block (PM/Chain.lean) states each line's formula, as PM does, so it takes
+  more Lean lines than the nested term it replaced. ✱13·101 is 15 lines, against PM's 5 Dem. lines.
+  ✱20·13 is 15. ✱14·124 is 59, against PM's 6 numbered Dem. lines; most of it is bookkeeping for its
+  four variables.
 - **Direct citations of ✱12·1 / ✱12·11 in PM's ✱13–✱20** (1910 text; citations inside formulas and
   proofs, not prose): 10 of 145 numbered items (propositions and definitions).
   - ✱13: 1 of 28 (✱13·101);
@@ -544,7 +546,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
     joined by Comp under ✱10·11·28). The elimination at the end is ✱10·23 plus Comm, 2 lines.
   - The remaining ✱13 proofs reach ✱12·1 only through ✱13·101, at no further cost (✱14·17, ✱14·171 and ✱20 cite ✱12·1 directly).
   - Each direct use in ✱20 costs 1–2 lines, mostly turning ψ ≡ₓ φ! into φ! ≡ₓ ψ (✱10·32 under ∃).
-- **Build:** clean `lake build`, 33 jobs, 13.6 s (wall clock, after `lake clean`).
+- **Build:** clean `lake build`, 34 jobs, 13.5 s (wall clock, after `lake clean`).
 
 ## 4. Axioms
 
@@ -555,7 +557,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1471 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 1488 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
 
 | Declarations | Axioms | Why |

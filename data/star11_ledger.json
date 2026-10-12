@@ -21,7 +21,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM takes *11.07 as a primitive proposition (p. 159; p. 158). In the alternative method as formalized it is derivable: *11.1 gives phi(x, y) for real x, y, and *10.11 turns them into apparent variables in either order."
+  "reason": "PM takes *11.07 as a primitive proposition (p. 159; p. 158). In the alternative method as formalized it is derivable: *11.1 gives phi(x, y) for real x, y, and *10.11 turns them into apparent variables in either order.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.1",
@@ -44,7 +46,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.11",
@@ -67,7 +71,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.12",
@@ -92,7 +98,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.13",
@@ -115,7 +123,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.14",
@@ -138,7 +148,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.2",
@@ -164,7 +176,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.21",
@@ -188,7 +202,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.22",
@@ -215,7 +231,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line 2 replaces (x) : ~(Ey) . phi(x, y) by (x) : (y) . ~phi(x, y) inside a negation; the negation of the *10.271 equivalence needs *4.11."
+  "reason": "Line 2 replaces (x) : ~(Ey) . phi(x, y) by (x) : (y) . ~phi(x, y) inside a negation; the negation of the *10.271 equivalence needs *4.11.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.23",
@@ -240,7 +258,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.24",
@@ -264,7 +284,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.25",
@@ -288,7 +310,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.26",
@@ -314,7 +338,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.27",
@@ -339,7 +365,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.3",
@@ -363,7 +391,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.31",
@@ -387,7 +417,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.311",
@@ -410,7 +442,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.32",
@@ -433,7 +467,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.33",
@@ -456,7 +492,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.34",
@@ -480,7 +518,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.341",
@@ -507,7 +547,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Carrying the inner *10.281 under (x) needs *10.27 (an implication under (x)); the cited *10.271 is not used. Compare *11.34's hint [*10.27.28]."
+  "reason": "Carrying the inner *10.281 under (x) needs *10.27 (an implication under (x)); the cited *10.271 is not used. Compare *11.34's hint [*10.27.28].",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.35",
@@ -531,7 +573,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.36",
@@ -557,7 +601,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1).Transp gives phi(z, w) . ⊃ . ~(x, y) . ~phi(x, y); with *11.03 read literally, (Ex, y) . phi(x, y) is ~(x) . ~~(y) . ~phi(x, y), so *11.22 is needed to reach it."
+  "reason": "(1).Transp gives phi(z, w) . ⊃ . ~(x, y) . ~phi(x, y); with *11.03 read literally, (Ex, y) . phi(x, y) is ~(x) . ~~(y) . ~phi(x, y), so *11.22 is needed to reach it.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.37",
@@ -583,7 +629,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.371",
@@ -612,7 +660,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Done as *11.37 with *4.22 for Syll. Passing from (x, y) : A . ⊃ . B to (x, y) . A . ⊃ . (x, y) . B is *11.32; the cited *11.33 does not give it."
+  "reason": "Done as *11.37 with *4.22 for Syll. Passing from (x, y) : A . ⊃ . B to (x, y) . A . ⊃ . (x, y) . B is *11.32; the cited *11.33 does not give it.",
+  "glue": [
+   "*4.22"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*11.38",
@@ -637,7 +691,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.39",
@@ -664,7 +720,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The two factors of the hypothesis are first combined into one (x, y) by *11.31 (as in line (1) of *11.37); the hint omits it."
+  "reason": "The two factors of the hypothesis are first combined into one (x, y) by *11.31 (as in line (1) of *11.37); the hint omits it.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.391",
@@ -690,7 +748,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.4",
@@ -716,7 +776,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.401",
@@ -744,7 +806,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Id gives chi ≡ chi (*4.2), generalized by *11.11; dropping that asserted factor from the hypothesis of *11.4 uses Exp (*3.3) and Comm (*2.04)."
+  "reason": "Id gives chi ≡ chi (*4.2), generalized by *11.11; dropping that asserted factor from the hypothesis of *11.4 uses Exp (*3.3) and Comm (*2.04).",
+  "glue": [
+   "*2.04"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*11.41",
@@ -768,7 +836,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.42",
@@ -791,7 +861,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.421",
@@ -824,7 +896,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM reads ~(Ex, y) . ~phi(x, y) as (x, y) . phi(x, y) tacitly; with *11.03 read literally this needs *11.25 and double negation (*4.13 under *11.11.33), and *4.51/*4.39 to pass through the negated product; *4.56 is negated by *4.11."
+  "reason": "PM reads ~(Ex, y) . ~phi(x, y) as (x, y) . phi(x, y) tacitly; with *11.03 read literally this needs *11.25 and double negation (*4.13 under *11.11.33), and *4.51/*4.39 to pass through the negated product; *4.56 is negated by *4.11.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.43",
@@ -848,7 +922,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.44",
@@ -874,7 +950,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.2 has p as the first disjunct, *11.44 as the second: both uses permuted by *4.31."
+  "reason": "*10.2 has p as the first disjunct, *11.44 as the second: both uses permuted by *4.31.",
+  "glue": [
+   "*4.31"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*11.45",
@@ -898,7 +980,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.46",
@@ -922,7 +1006,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.47",
@@ -948,7 +1034,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.33 has p as the second factor, *11.47 as the first: both uses commuted by *4.3."
+  "reason": "*10.33 has p as the second factor, *11.47 as the first: both uses commuted by *4.3.",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*11.5",
@@ -973,7 +1065,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.51",
@@ -1001,7 +1095,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.52",
@@ -1029,7 +1125,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.521",
@@ -1059,7 +1157,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The substitution ~psi/psi gives phi . ⊃ . ~~psi; PM drops the double negation tacitly."
+  "reason": "The substitution ~psi/psi gives phi . ⊃ . ~~psi; PM drops the double negation tacitly.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.53",
@@ -1084,7 +1184,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.54",
@@ -1111,7 +1213,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The last line needs *10.35 with p as the second factor: commuted by *4.3."
+  "reason": "The last line needs *10.35 with p as the second factor: commuted by *4.3.",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*11.55",
@@ -1136,7 +1244,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.56",
@@ -1163,7 +1273,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The second *10.33 line has p as the first factor: commuted by *4.3."
+  "reason": "The second *10.33 line has p as the first factor: commuted by *4.3.",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*11.57",
@@ -1187,7 +1303,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.58",
@@ -1211,7 +1329,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.59",
@@ -1242,7 +1362,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) generalizes *3.47 by *11.11 before *11.32; the hint omits it."
+  "reason": "Line (1) generalizes *3.47 by *11.11 before *11.32; the hint omits it.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.6",
@@ -1277,7 +1399,21 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.35 is needed with p as the second factor (*4.3). 'Perm' in line 4 rearranges a product, phi . psi . chi ≡ phi . chi . psi, which is not *1.4 (a disjunction); done by *4.32, *4.38 (with *4.2, *4.3), generalized by *11.11."
+  "reason": "*10.35 is needed with p as the second factor (*4.3). 'Perm' in line 4 rearranges a product, phi . psi . chi ≡ phi . chi . psi, which is not *1.4 (a disjunction); done by *4.32, *4.38 (with *4.2, *4.3), generalized by *11.11.",
+  "glue": [
+   "*4.3",
+   "*4.32",
+   "*4.38",
+   "*4.2",
+   "*11.11"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*11.61",
@@ -1303,7 +1439,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.62",
@@ -1332,7 +1470,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*4.87 is a product of three equivalences; its first factor is taken by *3.26 (twice)."
+  "reason": "*4.87 is a product of three equivalences; its first factor is taken by *3.26 (twice).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.63",
@@ -1358,7 +1498,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.7",
@@ -1386,7 +1528,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Replacing the second disjunct by *11.23 uses *4.39 with *4.2."
+  "reason": "Replacing the second disjunct by *11.23 uses *4.39 with *4.2.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*11.71",
@@ -1425,6 +1569,18 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(4) needs Exp (*3.3) before Comm; 'Similarly' (6) takes (w) : (z) from Hp by *11.2, uses *10.35 with p second (*4.3) and *3.27 for *3.26; in (7) the *3.47 factors are commuted by *3.22 before Comp; (2).(7) adds Hp to (2) by *2.02."
+  "reason": "(4) needs Exp (*3.3) before Comm; 'Similarly' (6) takes (w) : (z) from Hp by *11.2, uses *10.35 with p second (*4.3) and *3.27 for *3.26; in (7) the *3.47 factors are commuted by *3.22 before Comp; (2).(7) adds Hp to (2) by *2.02.",
+  "glue": [
+   "*11.2",
+   "*4.3",
+   "*3.22",
+   "*2.02"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "chain"
+  ]
  }
 ]

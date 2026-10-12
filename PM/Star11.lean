@@ -1,4 +1,5 @@
 import PM.Star10
+import PM.Chain
 import PM.Models.Finite
 /-!
   ✱11: theory of two apparent variables (1910 print, pp. 157–167; summary pp. 157–158, numbered
@@ -14,7 +15,8 @@ import PM.Models.Finite
   variables may have different types (`x : V σ`, `y : V τ`), which ✱12 onward uses for function types.
 
   Steps done silently, as in PM/Star10.lean and PM/Replay2.lean (the ones PM leaves tacit everywhere):
-  - joining two lines by ✱3·2 (or ✱4·01 for "≡"), and chaining "⊃" or "≡" lines (Syll, ✱4·22);
+  - joining two lines by ✱3·2 (or ✱4·01 for "≡"), and chaining "⊃" or "≡" lines (Syll, ✱4·22; a
+    displayed chain is a `calc` block, PM/Chain.lean);
   - reading an equivalence from right to left (✱4·21);
   - reading a definition (✱1·01, ✱3·01, ✱4·01, ✱10·01–✱10·03, ✱11·01–✱11·06), which is definitional;
   - ✱10·11 before ✱10·27, ✱10·271, ✱10·28, ✱10·281, and the use of one of these to carry a ✱10
@@ -574,9 +576,13 @@ theorem q11_71 (φ ψ : V σ → QF V) (χ θ : V τ → QF V) :
     QThm.mp (q11_11 h1) (qiffMpr (q11_3 (QF.and A B)
       (fun z w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w)))))             -- (1).✱11·11·3 (2)
   have h3 : ∀ z, QThm S (imp K (imp (QF.and (φ z) (ex χ)) (QF.and (ψ z) (ex θ)))) := fun z =>
-    qsyl (qsyl (q10_1 (fun z => .all fun w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) z)  -- ✱10·1
-        (q10_28 (fun w => QF.and (φ z) (χ w)) (fun w => QF.and (ψ z) (θ w))))   -- [✱10·28]
-      (qimpCongr (qiffMpr (q10_35 χ (φ z))) (qiffMp (q10_35 θ (ψ z))))         -- [✱10·35] (3)
+    calc K
+        ⊃ .all (fun w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) :=
+          q10_1 (fun z => .all fun w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) z  -- ✱10·1
+      _ ⊃ imp (ex fun w => QF.and (φ z) (χ w)) (ex fun w => QF.and (ψ z) (θ w)) :=
+          q10_28 (fun w => QF.and (φ z) (χ w)) (fun w => QF.and (ψ z) (θ w))    -- [✱10·28]
+      _ ⊃ imp (QF.and (φ z) (ex χ)) (QF.and (ψ z) (ex θ)) :=
+          qimpCongr (qiffMpr (q10_35 χ (φ z))) (qiffMp (q10_35 θ (ψ z)))        -- [✱10·35] (3)
   have h4 : ∀ z, QThm S (imp (ex χ) (imp K (imp (φ z) (ψ z)))) := fun z =>
     QThm.mp (qsyl (qsyl (qsyl (h3 z) (QThm.mp (QL.t3_26 (ψ z) (ex θ)) (QL.t2_05 _ _ _)))
         (QL.t3_3 (φ z) (ex χ) (ψ z))) (QL.t2_04 (φ z) (ex χ) (ψ z)))
@@ -584,10 +590,15 @@ theorem q11_71 (φ ψ : V σ → QF V) (χ θ : V τ → QF V) :
   have h5 : QThm S (imp (ex χ) (imp K A)) :=
     qsyl (q10_11_21 h4) (qiffMp (q10_21 K fun z => imp (φ z) (ψ z)))            -- (4).✱10·11·21 (5)
   have h3' : ∀ w, QThm S (imp K (imp (QF.and (ex φ) (χ w)) (QF.and (ex ψ) (θ w)))) := fun w =>
-    qsyl (qsyl (qsyl (qiffMp (q11_2 fun z w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))))
-          (q10_1 (fun w => .all fun z => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) w))
-        (q10_28 (fun z => QF.and (φ z) (χ w)) (fun z => QF.and (ψ z) (θ w))))
-      (qimpCongr (qiffMpr (qex_and_perm φ (χ w))) (qiffMp (qex_and_perm ψ (θ w))))
+    calc K
+        ⊃ all2 (fun w z => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) :=
+          qiffMp (q11_2 fun z w => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w)))  -- Similarly: (✱11·2)
+      _ ⊃ .all (fun z => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) :=
+          q10_1 (fun w => .all fun z => imp (QF.and (φ z) (χ w)) (QF.and (ψ z) (θ w))) w  -- ✱10·1
+      _ ⊃ imp (ex fun z => QF.and (φ z) (χ w)) (ex fun z => QF.and (ψ z) (θ w)) :=
+          q10_28 (fun z => QF.and (φ z) (χ w)) (fun z => QF.and (ψ z) (θ w))    -- [✱10·28]
+      _ ⊃ imp (QF.and (ex φ) (χ w)) (QF.and (ex ψ) (θ w)) :=
+          qimpCongr (qiffMpr (qex_and_perm φ (χ w))) (qiffMp (qex_and_perm ψ (θ w)))  -- [✱10·35]
   have h6' : ∀ w, QThm S (imp (ex φ) (imp K (imp (χ w) (θ w)))) := fun w =>
     QThm.mp (qsyl (qsyl (h3' w) (QThm.mp (QL.t3_27 (ex ψ) (θ w)) (QL.t2_05 _ _ _)))
         (QL.t3_3 (ex φ) (χ w) (θ w)))
