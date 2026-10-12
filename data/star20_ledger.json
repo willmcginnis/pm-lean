@@ -21,7 +21,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.11",
@@ -47,7 +49,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*20.111",
@@ -79,7 +89,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's first line has f(psi!z) == g(psi!z) from Hp, which is *10.1 at psi. 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), here on the second factor, so with *4.3 (qandCongrRImp)."
+  "reason": "PM's first line has f(psi!z) == g(psi!z) from Hp, which is *10.1 at psi. 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), here on the second factor, so with *4.3 (qandCongrRImp).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.112",
@@ -103,7 +123,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.12",
@@ -130,7 +152,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*12.1 gives psi x ==_x phi!x; the first factor, in *20.01's orientation phi!x ==_x psi x, is got by *10.32 and joined with *20.11 by Comp (*3.43), under (Ephi)."
+  "reason": "*12.1 gives psi x ==_x phi!x; the first factor, in *20.01's orientation phi!x ==_x psi x, is got by *10.32 and joined with *20.11 by Comp (*3.43), under (Ephi).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.13",
@@ -169,7 +193,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm."
+  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm.",
+  "glue": [
+   "*2.04",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.14",
@@ -203,7 +235,21 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result put for the second factor (*4.36 with *4.3, qandCongrR) under (Ephi) by *10.11.281. PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
+  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result put for the second factor (*4.36 with *4.3, qandCongrR) under (Ephi) by *10.11.281. PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*3.26",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.15",
@@ -227,7 +273,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.151",
@@ -253,7 +301,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.16",
@@ -278,7 +328,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The second factor of *20.12 is taken by *3.27 under (Ephi)."
+  "reason": "The second factor of *20.12 is taken by *3.27 under (Ephi).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.17",
@@ -307,7 +359,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "For each phi, *10.1 and the converse half of *20.16's equivalence (*3.27) are chained by *2.06; the (Ephi) of *20.16 is removed by *10.11 and *10.23."
+  "reason": "For each phi, *10.1 and the converse half of *20.16's equivalence (*3.27) are chained by *2.06; the (Ephi) of *20.16 is removed by *10.11 and *10.23.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.18",
@@ -331,7 +385,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.19",
@@ -380,7 +436,21 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (1), *20.18's == is used from left to right (*3.26). In (2), *20.15 and *20.18 are used for each factor of Hp, picked by *3.26 and *3.27, joined by *4.84, *4.85, and the converse half taken (*3.27). (2) is kept in the exported form Hp ⊃ : f!z(psi z) ⊃ f!z(chi z) . ⊃ . f!z(phi!z) ⊃ f!z(theta!z), so in (3) *10.33 (which needs a real variable here) is not used: *10.11.21 and *10.27 carry (2) under (f). '[*20.112 . *10.1]': *20.112 for the context phi!x ==_x chi!x gives g; *10.1 at g, and at phi and theta (joined by *4.84, *4.85, the converse half by *3.27, chained by *2.06), gives the implication for the context, and (Eg) is removed by *10.11, *10.23. PM reads the context of z(theta!z) as phi!x ==_x theta!x; from its *20.01 form (Echi) : chi!x ==_x theta!x : phi!x ==_x chi!x it follows by *10.301 (factors commuted, *3.22) under (Echi) (*10.11, *10.23), and the form at phi holds by *4.2 (under *10.11), *10.13 and *10.24, detached by *2.27 ('[*4.2]'). '[*10.301.32 . Hp]' uses *10.301 twice, with Exp (*3.3) and Comm (*2.04). (4), (5): the two existentials of *12.1 (turned by *10.32) are used one after the other, with Exp, Comm, *10.11 and *10.23, not combined by *10.35."
+  "reason": "In (1), *20.18's == is used from left to right (*3.26). In (2), *20.15 and *20.18 are used for each factor of Hp, picked by *3.26 and *3.27, joined by *4.84, *4.85, and the converse half taken (*3.27). (2) is kept in the exported form Hp ⊃ : f!z(psi z) ⊃ f!z(chi z) . ⊃ . f!z(phi!z) ⊃ f!z(theta!z), so in (3) *10.33 (which needs a real variable here) is not used: *10.11.21 and *10.27 carry (2) under (f). '[*20.112 . *10.1]': *20.112 for the context phi!x ==_x chi!x gives g; *10.1 at g, and at phi and theta (joined by *4.84, *4.85, the converse half by *3.27, chained by *2.06), gives the implication for the context, and (Eg) is removed by *10.11, *10.23. PM reads the context of z(theta!z) as phi!x ==_x theta!x; from its *20.01 form (Echi) : chi!x ==_x theta!x : phi!x ==_x chi!x it follows by *10.301 (factors commuted, *3.22) under (Echi) (*10.11, *10.23), and the form at phi holds by *4.2 (under *10.11), *10.13 and *10.24, detached by *2.27 ('[*4.2]'). '[*10.301.32 . Hp]' uses *10.301 twice, with Exp (*3.3) and Comm (*2.04). (4), (5): the two existentials of *12.1 (turned by *10.32) are used one after the other, with Exp, Comm, *10.11 and *10.23, not combined by *10.35.",
+  "glue": [
+   "*3.43",
+   "*2.83",
+   "*2.05",
+   "*3.22",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain",
+   "order",
+   "order"
+  ]
  },
  {
   "id": "*20.191",
@@ -409,7 +479,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.18 is generalized over f by *10.11.21; *10.22 is used with Simp (*3.26, qfiffMp)."
+  "reason": "*20.18 is generalized over f by *10.11.21; *10.22 is used with Simp (*3.26, qfiffMp).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.2",
@@ -434,7 +506,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.21",
@@ -458,7 +532,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.22",
@@ -484,7 +560,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.15 is used on both factors of the hypothesis, joined by *3.47."
+  "reason": "*20.15 is used on both factors of the hypothesis, joined by *3.47.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.23",
@@ -510,7 +588,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.21 acts on the first factor (Fact, *3.45)."
+  "reason": "*20.21 acts on the first factor (Fact, *3.45).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.24",
@@ -537,7 +617,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.21 acts on the second factor (*3.47 with Id, *2.08: qandR)."
+  "reason": "*20.21 acts on the second factor (*3.47 with Id, *2.08: qandR).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.25",
@@ -578,7 +660,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1)'s *10.1 instantiates the apparent alpha at z(phi z), whose defining function need not be predicative: the class analogue (p. 206: '(alpha) . f alpha . ⊃ . f{z(psi z)} ... This is *20.17'). *12.1 gives a predicative theta with theta!x ==_x phi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to z(phi z) by *20.11 and joined by *4.86 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches z(phi z) = z(phi z) by *3.26 and *2.27. In (3), *20.24 has the factors in the other order (*3.22). (2) and (3) are joined by Comp (*3.43)."
+  "reason": "Line (1)'s *10.1 instantiates the apparent alpha at z(phi z), whose defining function need not be predicative: the class analogue (p. 206: '(alpha) . f alpha . ⊃ . f{z(psi z)} ... This is *20.17'). *12.1 gives a predicative theta with theta!x ==_x phi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to z(phi z) by *20.11 and joined by *4.86 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches z(phi z) = z(phi z) by *3.26 and *2.27. In (3), *20.24 has the factors in the other order (*3.22). (2) and (3) are joined by Comp (*3.43).",
+  "glue": [
+   "*2.02",
+   "*3.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.3",
@@ -610,7 +700,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
+  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.31",
@@ -636,7 +734,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3 replaces both members under (x) by *4.86 (with *4.21 for the second member), *10.11.271."
+  "reason": "*20.3 replaces both members under (x) by *4.86 (with *4.21 for the second member), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*20.32",
@@ -662,7 +768,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3 is generalized over x by *10.11 before *20.15."
+  "reason": "*20.3 is generalized over x by *10.11 before *20.15.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.33",
@@ -688,7 +796,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (1).*20.3 the second member is replaced under (x) by *4.86 (with *4.21, qiffCongrRImp), *10.11.271."
+  "reason": "In (1).*20.3 the second member is replaced under (x) by *4.86 (with *4.21, qiffCongrRImp), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*20.34",
@@ -717,7 +833,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3 replaces both sides of the implication under (phi) by *4.84 and *4.85, *10.11.271."
+  "reason": "*20.3 replaces both sides of the implication under (phi) by *4.84 and *4.85, *10.11.271.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.35",
@@ -743,7 +861,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3 replaces both members under (phi) by *4.86 (with *4.21 for the second member), *10.11.271."
+  "reason": "*20.3 replaces both members under (phi) by *4.86 (with *4.21 for the second member), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*20.42",
@@ -768,7 +894,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.43",
@@ -791,7 +919,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.5",
@@ -818,7 +948,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3 acts on the second factor of *14.1's product: *4.36 with *4.3 (qandCongrR), under (Ec) by *10.11.281."
+  "reason": "*20.3 acts on the second factor of *14.1's product: *4.36 with *4.3 (qandCongrR), under (Ec) by *10.11.281.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.51",
@@ -846,7 +986,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.5 and *20.3 at alpha = z(psi!z) are joined by *4.86 (with *4.21 for the second member) and carried under (psi) by *10.11.271."
+  "reason": "*20.5 and *20.3 at alpha = z(psi!z) are joined by *4.86 (with *4.21 for the second member) and carried under (psi) by *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*20.52",
@@ -872,7 +1020,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.53",
@@ -911,7 +1061,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1)'s *10.1 instantiates the apparent beta at alpha, whose defining function need not be predicative: the class analogue (p. 206, *20.17). *12.1 gives a predicative theta with theta!x ==_x psi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to alpha by *20.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches alpha = alpha by *2.27. In (2), *20.18's == is used from left to right (*3.26)."
+  "reason": "Line (1)'s *10.1 instantiates the apparent beta at alpha, whose defining function need not be predicative: the class analogue (p. 206, *20.17). *12.1 gives a predicative theta with theta!x ==_x psi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to alpha by *20.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches alpha = alpha by *2.27. In (2), *20.18's == is used from left to right (*3.26).",
+  "glue": [
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*20.54",
@@ -950,7 +1106,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1): *20.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23. (2): PM's *10.24 is used at alpha, whose defining function need not be predicative: the class analogue (qclsExAt). *12.1 gives a predicative phi with phi!x ==_x psi x (turned by *10.32); z(phi!z) = alpha follows by *20.13, and phi beta is carried from alpha to z(phi!z) by *20.18 (the converse half, *3.27); the two are joined by Comp (*3.43, with *2.02 and *2.06), *10.24 is used at phi (with *2.05), and (Ephi) is removed by *10.11, *10.23. The Lean proof is qcls54 with *20.18."
+  "reason": "(1): *20.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23. (2): PM's *10.24 is used at alpha, whose defining function need not be predicative: the class analogue (qclsExAt). *12.1 gives a predicative phi with phi!x ==_x psi x (turned by *10.32); z(phi!z) = alpha follows by *20.13, and phi beta is carried from alpha to z(phi!z) by *20.18 (the converse half, *3.27); the two are joined by Comp (*3.43, with *2.02 and *2.06), *10.24 is used at phi (with *2.05), and (Ephi) is removed by *10.11, *10.23. The Lean proof is qcls54 with *20.18.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.55",
@@ -1003,7 +1161,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.33 is generalized over alpha by *10.11 (*20.62) and read from right to left. '[*20.54]' is applied to phi beta = (x in alpha ==_x phi x . ==_alpha . alpha = beta), in which beta occurs under (alpha): *20.54's argument is used (qcls54, with the extras listed for *20.54), with the analogue of *20.18 for this phi beta got from *20.22 and *20.24 (Exp, Comm, factors commuted by *3.22, joined by Comp *3.43) under (alpha) by *4.86 (with *4.21), *10.11.21 and *10.271 (qclsEqR, qdescClsEq). PM's line (Ebeta) : ... : z(phi z) = beta comes from *20.54's beta = z(phi z) . ... by *20.21 and *4.3 (with *4.36) under (Ebeta), *10.11.281."
+  "reason": "*20.33 is generalized over alpha by *10.11 (*20.62) and read from right to left. '[*20.54]' is applied to phi beta = (x in alpha ==_x phi x . ==_alpha . alpha = beta), in which beta occurs under (alpha): *20.54's argument is used (qcls54, with the extras listed for *20.54), with the analogue of *20.18 for this phi beta got from *20.22 and *20.24 (Exp, Comm, factors commuted by *3.22, joined by Comp *3.43) under (alpha) by *4.86 (with *4.21), *10.11.21 and *10.271 (qclsEqR, qdescClsEq). PM's line (Ebeta) : ... : z(phi z) = beta comes from *20.54's beta = z(phi z) . ... by *20.21 and *4.3 (with *4.36) under (Ebeta), *10.11.281.",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.56",
@@ -1030,7 +1200,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*14.21 for descriptions of classes (qdescClsE) is proved as *14.21 is, by *10.5 and *3.26. E!(i alpha)(phi alpha) is the analogue of *14.02 (exists1Cls), which *20 does not print."
+  "reason": "*14.21 for descriptions of classes (qdescClsE) is proved as *14.21 is, by *10.5 and *3.26. E!(i alpha)(phi alpha) is the analogue of *14.02 (exists1Cls), which *20 does not print.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.57",
@@ -1086,7 +1258,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1) is the step of *20.55 (qdescClsEq: *20.54's argument for f alpha ==_alpha alpha = beta, with the extras listed there, *20.21 and *4.3). (1).(2): f alpha is replaced by alpha = z(phi z) under (alpha) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (Ebeta) by *10.11.21 and *10.281. '[*13.183]' is its class analogue *20.25, and beta = z(phi z) is turned by *20.21 for *20.54 (with *4.36)."
+  "reason": "(1) is the step of *20.55 (qdescClsEq: *20.54's argument for f alpha ==_alpha alpha = beta, with the extras listed there, *20.21 and *4.3). (1).(2): f alpha is replaced by alpha = z(phi z) under (alpha) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (Ebeta) by *10.11.21 and *10.281. '[*13.183]' is its class analogue *20.25, and beta = z(phi z) is turned by *20.21 for *20.54 (with *4.36).",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.58",
@@ -1139,7 +1323,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'[*20.54] [*14.1]' is the step of *20.55 (qdescClsEq: *20.54's argument for alpha = z(phi z) . ==_alpha . alpha = beta, with the extras listed for *20.54 and *20.55, *20.21 and *4.3)."
+  "reason": "'[*20.54] [*14.1]' is the step of *20.55 (qdescClsEq: *20.54's argument for alpha = z(phi z) . ==_alpha . alpha = beta, with the extras listed for *20.54 and *20.55, *20.21 and *4.3).",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.59",
@@ -1169,7 +1365,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's Dem. eliminates z(phi z) first (*20.1), against p. 204's convention, and then cites *14.13 for the description and the predicative function psi!z put for the class; its last line, read back by *20.1, would give (i alpha)(f alpha) = z(phi z) with the class eliminated first, against the convention that the first-written symbol has the larger scope. With the description eliminated first on both sides, the step is *14.13's own argument: *20.21 (for *13.16) on the second factor (*4.36 with *4.3) under (Ebeta) by *10.11.281."
+  "reason": "PM's Dem. eliminates z(phi z) first (*20.1), against p. 204's convention, and then cites *14.13 for the description and the predicative function psi!z put for the class; its last line, read back by *20.1, would give (i alpha)(f alpha) = z(phi z) with the class eliminated first, against the convention that the first-written symbol has the larger scope. With the description eliminated first on both sides, the step is *14.13's own argument: *20.21 (for *13.16) on the second factor (*4.36 with *4.3) under (Ebeta) by *10.11.281.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*20.6",
@@ -1195,7 +1403,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.61",
@@ -1219,7 +1429,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.62",
@@ -1243,7 +1455,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.63",
@@ -1268,7 +1482,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.633",
@@ -1291,7 +1507,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.64",
@@ -1316,7 +1534,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.7",
@@ -1339,7 +1559,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.701",
@@ -1369,7 +1591,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.111 is for one argument; its lines are repeated for two (qcls111_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), and *11.11.3 for the generalization over (phi, x)."
+  "reason": "*20.111 is for one argument; its lines are repeated for two (qcls111_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), and *11.11.3 for the generalization over (phi, x).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.702",
@@ -1399,7 +1631,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As in *20.701, with the class second (qcls111_2r): *11.1 at (x, psi), *4.36 with *4.3, *10.11.21, *10.281 and *11.11.3."
+  "reason": "As in *20.701, with the class second (qcls111_2r): *11.1 at (x, psi), *4.36 with *4.3, *10.11.21, *10.281 and *11.11.3.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.703",
@@ -1435,7 +1677,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice (qandCongrRImp). '[*20.1 . *10.35]' uses *10.35 under (Echi) (*10.11.281). In (3), (2) is an implication and is carried under (Eg) by *10.11.28; PM prints '*10.11.281'."
+  "reason": "(1): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice (qandCongrRImp). '[*20.1 . *10.35]' uses *10.35 under (Echi) (*10.11.281). In (3), (2) is an implication and is carried under (Eg) by *10.11.28; PM prints '*10.11.281'.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*20.71",
@@ -1458,7 +1710,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.8",
@@ -1484,7 +1738,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*20.81",
@@ -1515,6 +1771,8 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Hp's factors are picked by *3.26 and *3.27 for the two uses of *20.8. *10.121 and *10.13 identify the a's of (1) and (2) (pp. 209-210): here they are one variable of one Lean type, so the lines are joined by Comp directly."
+  "reason": "Hp's factors are picked by *3.26 and *3.27 for the two uses of *20.8. *10.121 and *10.13 identify the a's of (1) and (2) (pp. 209-210): here they are one variable of one Lean type, so the lines are joined by Comp directly.",
+  "glue": [],
+  "glue_kind": []
  }
 ]

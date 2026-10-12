@@ -21,7 +21,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.11",
@@ -47,7 +49,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*21.111",
@@ -79,7 +89,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As in *20.111: f(psi!(x, y)) == g(psi!(x, y)) is *10.1 at psi, and 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), on the second factor, so with *4.3 (qandCongrRImp)."
+  "reason": "As in *20.111: f(psi!(x, y)) == g(psi!(x, y)) is *10.1 at psi, and 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), on the second factor, so with *4.3 (qandCongrRImp).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.112",
@@ -103,7 +123,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.12",
@@ -130,7 +152,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.12: *12.11 gives psi(x, y) ==_{x,y} phi!(x, y); the first factor, in *21.01's orientation, is got by *10.32 under (x), and joined with *21.11 by Comp (*3.43), under (Ephi)."
+  "reason": "As *20.12: *12.11 gives psi(x, y) ==_{x,y} phi!(x, y); the first factor, in *21.01's orientation, is got by *10.32 under (x), and joined with *21.11 by Comp (*3.43), under (Ephi).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.13",
@@ -170,7 +194,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.13's Dem. with *12.11: psi ==_{x,y} phi! is turned by *10.32 under (x); with Hp, *10.321 for two variables (its proof with *11.371 for *10.301: qfiff2_321, Fact *3.45) gives phi! ==_{x,y} chi; the step taken by *13.195 is its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04); the hypotheses are joined by Comp and Exp (*3.43, *3.3, with *3.27) and carried under (Ephi) by *10.11.21 and *10.28."
+  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.13's Dem. with *12.11: psi ==_{x,y} phi! is turned by *10.32 under (x); with Hp, *10.321 for two variables (its proof with *11.371 for *10.301: qfiff2_321, Fact *3.45) gives phi! ==_{x,y} chi; the step taken by *13.195 is its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04); the hypotheses are joined by Comp and Exp (*3.43, *3.3, with *3.27) and carried under (Ephi) by *10.11.21 and *10.28.",
+  "glue": [
+   "*2.04",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*21.14",
@@ -208,7 +240,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.14's Dem. (*20.1, *13.195, *10.322): *13.195 needs theta = phi . F theta where *21.01 gives F theta : phi = theta, so the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi ==_{x,y} phi!; with *21.01's it is *10.321, for two variables (qfiff2_321: *10.32 under (x), Fact *3.45, *11.371). (Ephi) is removed by *10.11 and *10.23."
+  "reason": "*20.14's Dem. (*20.1, *13.195, *10.322): *13.195 needs theta = phi . F theta where *21.01 gives F theta : phi = theta, so the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi ==_{x,y} phi!; with *21.01's it is *10.321, for two variables (qfiff2_321: *10.32 under (x), Fact *3.45, *11.371). (Ephi) is removed by *10.11 and *10.23.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*21.15",
@@ -232,7 +272,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.151",
@@ -256,7 +298,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.16",
@@ -281,7 +325,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "The second factor of *21.12 is taken by *3.27 under (Ephi)."
+  "reason": "The second factor of *21.12 is taken by *3.27 under (Ephi).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.17",
@@ -310,7 +356,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.17: for each phi, *10.1 and the converse half of *21.16's equivalence (*3.27) are chained by *2.06; (Ephi) is removed by *10.11 and *10.23."
+  "reason": "As *20.17: for each phi, *10.1 and the converse half of *21.16's equivalence (*3.27) are chained by *2.06; (Ephi) is removed by *10.11 and *10.23.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.18",
@@ -334,7 +382,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.19",
@@ -386,7 +436,21 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.19's Dem. with *21 for *20 and *12.11 for *12.1 (see that row): (1) *21.18 under (f) (*3.26); (2) *21.15 and *21.18 for each factor of Hp (*3.26, *3.27), joined by *4.84, *4.85, the converse half by *3.27; carried under (f) by *10.11.21 and *10.27; the step [*21.112 . *10.1] is qrelIndisc (*10.1 at g, phi, theta; *2.06; *10.11, *10.23; the class-form of the context at phi by *4.2 under *11.11, *10.13, *10.24, detached by *2.27; *11.371 with *3.22 under (Echi)). *10.301 for two variables is *11.371, used twice with *10.32 under (x), Exp (*3.3) and Comm (*2.04); *21.15 gives the identity. The two existentials of *12.11 are used one after the other (*10.11, *10.23), not combined by *10.35."
+  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.19's Dem. with *21 for *20 and *12.11 for *12.1 (see that row): (1) *21.18 under (f) (*3.26); (2) *21.15 and *21.18 for each factor of Hp (*3.26, *3.27), joined by *4.84, *4.85, the converse half by *3.27; carried under (f) by *10.11.21 and *10.27; the step [*21.112 . *10.1] is qrelIndisc (*10.1 at g, phi, theta; *2.06; *10.11, *10.23; the class-form of the context at phi by *4.2 under *11.11, *10.13, *10.24, detached by *2.27; *11.371 with *3.22 under (Echi)). *10.301 for two variables is *11.371, used twice with *10.32 under (x), Exp (*3.3) and Comm (*2.04); *21.15 gives the identity. The two existentials of *12.11 are used one after the other (*10.11, *10.23), not combined by *10.35.",
+  "glue": [
+   "*3.43",
+   "*2.83",
+   "*2.05",
+   "*3.22",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain",
+   "order",
+   "order"
+  ]
  },
  {
   "id": "*21.191",
@@ -415,7 +479,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.191: *21.18 is generalized over f by *10.11.21; *10.22 with Simp (*3.26, qfiffMp) gives the implication for *21.19."
+  "reason": "As *20.191: *21.18 is generalized over f by *10.11.21; *10.22 with Simp (*3.26, qfiffMp) gives the implication for *21.19.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.2",
@@ -441,7 +507,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*4.2 is generalized over (x, y) by *11.11."
+  "reason": "*4.2 is generalized over (x, y) by *11.11.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.21",
@@ -465,7 +533,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.22",
@@ -493,7 +563,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.301 for two variables is *11.371 ('propositions in *11 for propositions in *10', p. 212). *21.15 is used on both factors, joined by *3.47."
+  "reason": "*10.301 for two variables is *11.371 ('propositions in *11 for propositions in *10', p. 212). *21.15 is used on both factors, joined by *3.47.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.23",
@@ -519,7 +591,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.21 acts on the first factor (Fact, *3.45)."
+  "reason": "*21.21 acts on the first factor (Fact, *3.45).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.24",
@@ -546,7 +620,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.21 acts on the second factor (*3.47 with Id, *2.08: qandR)."
+  "reason": "*21.21 acts on the second factor (*3.47 with Id, *2.08: qandR).",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.3",
@@ -581,7 +657,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.43 for two variables is its proof with *11.1 for *10.1 (*5.32; qfiff2_43), under (Ephi). *10.35 is used with p second (*4.3, qex_and_perm). *12.11, turned by *10.32 under (x), drops the asserted factor (*3.27, *3.2)."
+  "reason": "*10.43 for two variables is its proof with *11.1 for *10.1 (*5.32; qfiff2_43), under (Ephi). *10.35 is used with p second (*4.3, qex_and_perm). *12.11, turned by *10.32 under (x), drops the asserted factor (*3.27, *3.2).",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
  },
  {
   "id": "*21.31",
@@ -607,7 +689,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.3 replaces both members under (x, y) by *4.86 (with *4.21 for the second member), *10.11.271."
+  "reason": "*21.3 replaces both members under (x, y) by *4.86 (with *4.21 for the second member), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*21.32",
@@ -633,7 +723,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.3 is generalized over (x, y) by *11.11 before *21.15."
+  "reason": "*21.3 is generalized over (x, y) by *11.11 before *21.15.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.33",
@@ -659,7 +751,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.3 replaces the second member under (x, y) by *4.86 (with *4.21, qiffCongrRImp), *10.11.271."
+  "reason": "*21.3 replaces the second member under (x, y) by *4.86 (with *4.21, qiffCongrRImp), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*21.42",
@@ -685,7 +785,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.3 is generalized over (x, y) by *11.11 before *21.15."
+  "reason": "*21.3 is generalized over (x, y) by *11.11 before *21.15.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.43",
@@ -711,7 +813,15 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.3 replaces both members under (x, y) by *4.86 (with *4.21 for the second member), *10.11.271."
+  "reason": "*21.3 replaces both members under (x, y) by *4.86 (with *4.21 for the second member), *10.11.271.",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
  },
  {
   "id": "*21.53",
@@ -750,7 +860,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 at R, whose defining function need not be predicative, is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} psi(x, y) (turned by *10.32 under (x)), *10.1 is used at theta, both occurrences of the relation are carried by *21.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) removed by *10.11, *10.23. *21.2 is detached by *2.27, and *21.18's == is used from left to right (*3.26)."
+  "reason": "*10.1 at R, whose defining function need not be predicative, is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} psi(x, y) (turned by *10.32 under (x)), *10.1 is used at theta, both occurrences of the relation are carried by *21.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) removed by *10.11, *10.23. *21.2 is detached by *2.27, and *21.18's == is used from left to right (*3.26).",
+  "glue": [
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
  },
  {
   "id": "*21.54",
@@ -789,7 +905,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.54 (qrel54 with *21.18): *21.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23; *21.2 with *3.2; *10.24 at R, whose defining function need not be predicative, is the analogue qrelExAt: *12.11 (turned by *10.32 under (x)), the identity by *21.13, phi S carried by *21.18 (*3.27), joined by Comp (*3.43, with *2.02, *2.06), *10.24 with *2.05, *10.11, *10.23."
+  "reason": "As *20.54 (qrel54 with *21.18): *21.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23; *21.2 with *3.2; *10.24 at R, whose defining function need not be predicative, is the analogue qrelExAt: *12.11 (turned by *10.32 under (x)), the identity by *21.13, phi S carried by *21.18 (*3.27), joined by Comp (*3.43, with *2.02, *2.06), *10.24 with *2.05, *10.11, *10.23.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.55",
@@ -842,7 +960,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.55: *21.33 is generalized over R by *10.11 and read from right to left. *21.54 is applied to phi S = (xRy ==_{x,y} phi(x, y) . ==_R . R = S), in which S occurs under (R): *21.54's argument (qrel54, with the extras listed for *21.54), its analogue of *21.18 got from *21.22 and *21.24 (Exp, Comm, *3.22, Comp *3.43) under (R) by *4.86, *10.11.21 and *10.271 (qrelEqR, qdescRelEq); the factors are commuted (*4.3) and x y phi(x, y) = S turned by *21.21 (*4.36) under (ES), *10.11.281."
+  "reason": "As *20.55: *21.33 is generalized over R by *10.11 and read from right to left. *21.54 is applied to phi S = (xRy ==_{x,y} phi(x, y) . ==_R . R = S), in which S occurs under (R): *21.54's argument (qrel54, with the extras listed for *21.54), its analogue of *21.18 got from *21.22 and *21.24 (Exp, Comm, *3.22, Comp *3.43) under (R) by *4.86, *10.11.21 and *10.271 (qrelEqR, qdescRelEq); the factors are commuted (*4.3) and x y phi(x, y) = S turned by *21.21 (*4.36) under (ES), *10.11.281.",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*21.56",
@@ -869,7 +999,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*14.21 for descriptions of relations (qdescRelE) is proved as *14.21 is, by *10.5 and *3.26. E!(iR)(phi R) is the analogue of *14.02 (exists1Rel), which *21 does not print."
+  "reason": "*14.21 for descriptions of relations (qdescRelE) is proved as *14.21 is, by *10.5 and *3.26. E!(iR)(phi R) is the analogue of *14.02 (exists1Rel), which *21 does not print.",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.57",
@@ -927,7 +1059,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.57: (1) is qdescRelEq (*21.54's argument, see *21.55); f R is replaced by R = x y phi(x, y) under (R) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (ES) by *10.11.21 and *10.281. *13.183's analogue for relations, R = phi ==_R R = psi . == . phi = psi, is not printed in *21; it is proved by *20.25's argument (qrel183: qrelAllAt with *21.11, *4.86, *3.26, *21.2, *2.27, qrelEqR), and S = x y phi(x, y) is turned by *21.21 for *21.54 (*4.36)."
+  "reason": "As *20.57: (1) is qdescRelEq (*21.54's argument, see *21.55); f R is replaced by R = x y phi(x, y) under (R) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (ES) by *10.11.21 and *10.281. *13.183's analogue for relations, R = phi ==_R R = psi . == . phi = psi, is not printed in *21; it is proved by *20.25's argument (qrel183: qrelAllAt with *21.11, *4.86, *3.26, *21.2, *2.27, qrelEqR), and S = x y phi(x, y) is turned by *21.21 for *21.54 (*4.36).",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*21.58",
@@ -980,7 +1124,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'*21.54 . *14.1' is the step of *21.55 (qdescRelEq: *21.54's argument for R = x y phi(x, y) . ==_R . R = S, with the extras listed for *21.54 and *21.55)."
+  "reason": "'*21.54 . *14.1' is the step of *21.55 (qdescRelEq: *21.54's argument for R = x y phi(x, y) . ==_R . R = S, with the extras listed for *21.54 and *21.55).",
+  "glue": [
+   "*2.04",
+   "*3.22",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "order",
+   "order",
+   "under-exists"
+  ]
  },
  {
   "id": "*21.6",
@@ -1006,7 +1162,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.61",
@@ -1030,7 +1188,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.62",
@@ -1054,7 +1214,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.63",
@@ -1079,7 +1241,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.633",
@@ -1102,7 +1266,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.64",
@@ -1127,7 +1293,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.7",
@@ -1150,7 +1318,9 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  },
  {
   "id": "*21.701",
@@ -1180,7 +1350,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.701: *21.111's lines repeated for two arguments (qelim1_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), *11.11.3 for the generalization over (R, x)."
+  "reason": "As *20.701: *21.111's lines repeated for two arguments (qelim1_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), *11.11.3 for the generalization over (R, x).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.702",
@@ -1210,7 +1390,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.701, with *12.11 applied to f(x, R) as a function of (R, x)."
+  "reason": "As *21.701, with *12.11 applied to f(x, R) as a function of (R, x).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.703",
@@ -1246,7 +1436,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.703's lines (qelim2): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice. (2) is an implication, carried under (Eg) by *10.11.28."
+  "reason": "*20.703's lines (qelim2): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice. (2) is an implication, carried under (Eg) by *10.11.28.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.704",
@@ -1283,7 +1483,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.703, with *21.01 for R and *20.01 for alpha (qelim2)."
+  "reason": "As *21.703, with *21.01 for R and *20.01 for alpha (qelim2).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.705",
@@ -1320,7 +1530,17 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.703, with *20.01 for alpha and *21.01 for R (qelim2)."
+  "reason": "As *21.703, with *20.01 for alpha and *21.01 for R (qelim2).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
  },
  {
   "id": "*21.71",
@@ -1343,6 +1563,8 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": ""
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
  }
 ]
