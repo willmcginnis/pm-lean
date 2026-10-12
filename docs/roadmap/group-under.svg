@@ -1,0 +1,194 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1593" viewBox="0 0 900 1593" role="img" aria-labelledby="title desc">
+<title id="title">Group 2: Checking underneath</title>
+<desc id="desc">The subgroups and tasks of the group Checking underneath, with status, size, hard dependencies and placements by choice.</desc>
+<style>
+text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif}
+.bg{fill:#fcfcfb}
+.card{fill:#ffffff;stroke:#d6d5cf;stroke-width:1}
+.band{fill:#f3f3f0}
+.rule{stroke:#d6d5cf;stroke-width:1}
+.t1{fill:#0b0b0b}
+.t2{fill:#52514e}
+.t3{fill:#62615c}
+.st{fill:#52514e;stroke:#52514e}
+.sto{fill:none;stroke:#52514e;stroke-width:1.5}
+.edge{fill:none;stroke:#55544f;stroke-width:1.3}
+.choice{fill:none;stroke:#8a5a00;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#55544f}
+.ahc{fill:#8a5a00}
+.ms{fill:#0b0b0b}
+.g0{fill:#2a78d6}
+.gs0{stroke:#2a78d6;stroke-width:2;fill:none}
+.g1{fill:#eb6834}
+.gs1{stroke:#eb6834;stroke-width:2;fill:none}
+.g2{fill:#1baf7a}
+.gs2{stroke:#1baf7a;stroke-width:2;fill:none}
+.g3{fill:#eda100}
+.gs3{stroke:#eda100;stroke-width:2;fill:none}
+@media (prefers-color-scheme: dark) {
+.bg{fill:#1a1a19}
+.card{fill:#232322;stroke:#45443f;stroke-width:1}
+.band{fill:#2b2b29}
+.rule{stroke:#45443f;stroke-width:1}
+.t1{fill:#ffffff}
+.t2{fill:#c3c2b7}
+.t3{fill:#b0afa5}
+.st{fill:#c3c2b7;stroke:#c3c2b7}
+.sto{fill:none;stroke:#c3c2b7;stroke-width:1.5}
+.edge{fill:none;stroke:#b8b7ad;stroke-width:1.3}
+.choice{fill:none;stroke:#e3b04b;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#b8b7ad}
+.ahc{fill:#e3b04b}
+.ms{fill:#ffffff}
+.g0{fill:#3987e5}
+.gs0{stroke:#3987e5;stroke-width:2;fill:none}
+.g1{fill:#d95926}
+.gs1{stroke:#d95926;stroke-width:2;fill:none}
+.g2{fill:#199e70}
+.gs2{stroke:#199e70;stroke-width:2;fill:none}
+.g3{fill:#c98500}
+.gs3{stroke:#c98500;stroke-width:2;fill:none}
+}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahc"/></marker></defs>
+<rect x="0" y="0" width="900" height="1593" class="bg"/>
+<rect x="16.0" y="195.8" width="868.0" height="172.4" rx="8" class="band"/>
+<rect x="16.0" y="195.8" width="5.0" height="172.4" rx="2" class="g1"/>
+<rect x="30.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="16.0" y="384.1" width="868.0" height="385.0" rx="8" class="band"/>
+<rect x="16.0" y="384.1" width="5.0" height="385.0" rx="2" class="g1"/>
+<rect x="30.0" y="424.1" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="314.0" y="424.1" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="598.0" y="424.1" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="30.0" y="586.5" width="272.0" height="166.7" rx="6" class="card"/>
+<rect x="16.0" y="785.2" width="868.0" height="190.0" rx="8" class="band"/>
+<rect x="16.0" y="785.2" width="5.0" height="190.0" rx="2" class="g1"/>
+<rect x="30.0" y="825.2" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="314.0" y="825.2" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="598.0" y="825.2" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="16.0" y="991.2" width="868.0" height="353.8" rx="8" class="band"/>
+<rect x="16.0" y="991.2" width="5.0" height="353.8" rx="2" class="g1"/>
+<rect x="30.0" y="1031.2" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="314.0" y="1031.2" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="598.0" y="1031.2" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="30.0" y="1194.9" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="16.0" y="1361.0" width="868.0" height="207.7" rx="8" class="band"/>
+<rect x="16.0" y="1361.0" width="5.0" height="207.7" rx="2" class="g1"/>
+<rect x="30.0" y="1401.0" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="314.0" y="1401.0" width="272.0" height="151.7" rx="6" class="card"/>
+<text x="24.0" y="30.0" font-size="12.5" class="t3">Group 2 of 4</text>
+<text x="40.0" y="60.0" font-size="22" font-weight="700" class="t1">Checking underneath</text>
+<rect x="24.0" y="42.0" width="6.0" height="24.0" rx="2" class="g1"/>
+<text x="24.0" y="86.0" font-size="13.5" class="t2">One source, many checkers: the same derivations re-checked by independent kernels, by Metamath and</text>
+<text x="24.0" y="103.8" font-size="13.5" class="t2">Rocq checkers, and in ZFC; and Lean's own kernel verified for the fragment the project uses.</text>
+<circle cx="29.0" cy="124.6" r="5" class="st"/>
+<text x="38.0" y="129.1" font-size="12" class="t2">done</text>
+<circle cx="90.8" cy="124.6" r="5" class="sto"/>
+<path d="M90.8,119.6 A5,5 0 0 0 90.8,129.6 Z" class="st"/>
+<text x="99.8" y="129.1" font-size="12" class="t2">in progress</text>
+<circle cx="204.6" cy="124.6" r="5" class="sto"/>
+<text x="213.6" y="129.1" font-size="12" class="t2">not started</text>
+<text x="313.4" y="129.1" font-size="12" class="t2">S, M, L: weeks, months, longer</text>
+<text x="24.0" y="155.1" font-size="12" class="t3">needs: the tasks whose results this one requires (its gates). Later by choice: placed after other work by the</text>
+<text x="24.0" y="170.9" font-size="12" class="t3">maintainer's priorities, not because it must wait.</text>
+<text x="30.0" y="218.8" font-size="15" font-weight="700" class="t1">Independent Lean kernels</text>
+<text x="42.0" y="258.8" font-size="13" font-weight="700" class="t1">Independent Lean kernels</text>
+<text x="42.0" y="276.5" font-size="13" font-weight="700" class="t1">re-check the build in CI,</text>
+<text x="42.0" y="294.1" font-size="13" font-weight="700" class="t1">one checker per code family</text>
+<circle cx="47.0" cy="310.8" r="5" class="sto"/>
+<text x="58.0" y="314.8" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="332.8" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="30.0" y="407.1" font-size="15" font-weight="700" class="t1">Metamath and Rocq</text>
+<text x="42.0" y="447.1" font-size="13" font-weight="700" class="t1">pm.mm for ✱1–✱5, from the</text>
+<text x="42.0" y="464.8" font-size="13" font-weight="700" class="t1">finite propositional core,</text>
+<text x="42.0" y="482.5" font-size="13" font-weight="700" class="t1">checked by several Metamath</text>
+<text x="42.0" y="500.2" font-size="13" font-weight="700" class="t1">verifiers</text>
+<circle cx="47.0" cy="516.9" r="5" class="sto"/>
+<text x="58.0" y="520.9" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="538.9" font-size="12" class="t2">needs: adequacy ✱1–✱5</text>
+<text x="326.0" y="447.1" font-size="13" font-weight="700" class="t1">pm.mm for ✱9–✱14, from</text>
+<text x="326.0" y="464.8" font-size="13" font-weight="700" class="t1">the finite first-order core:</text>
+<text x="326.0" y="482.5" font-size="13" font-weight="700" class="t1">binding, substitution,</text>
+<text x="326.0" y="500.2" font-size="13" font-weight="700" class="t1">distinct-variable conditions</text>
+<circle cx="331.0" cy="516.9" r="5" class="sto"/>
+<text x="342.0" y="520.9" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="538.9" font-size="12" class="t2">needs: pm.mm ✱1–✱5, finite</text>
+<text x="326.0" y="555.2" font-size="12" class="t2">core</text>
+<text x="610.0" y="447.1" font-size="13" font-weight="700" class="t1">pm.mm from ✱20 on, chapter</text>
+<text x="610.0" y="464.8" font-size="13" font-weight="700" class="t1">by chapter</text>
+<circle cx="615.0" cy="481.5" r="5" class="sto"/>
+<text x="626.0" y="485.5" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="503.5" font-size="12" class="t2">needs: pm.mm ✱9–✱14, adequacy</text>
+<text x="610.0" y="519.8" font-size="12" class="t2">from ✱20</text>
+<text x="42.0" y="609.5" font-size="13" font-weight="700" class="t1">Rocq re-check: our own</text>
+<text x="42.0" y="627.2" font-size="13" font-weight="700" class="t1">small checker for our</text>
+<text x="42.0" y="644.9" font-size="13" font-weight="700" class="t1">certificate format, proved</text>
+<text x="42.0" y="662.5" font-size="13" font-weight="700" class="t1">sound in Rocq</text>
+<circle cx="47.0" cy="679.2" r="5" class="sto"/>
+<text x="58.0" y="683.2" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="701.2" font-size="12" class="t2">needs: finite core</text>
+<text x="42.0" y="717.5" font-size="12" class="t2">later by choice: after pm.mm</text>
+<text x="42.0" y="733.9" font-size="12" class="t2">✱9–✱14</text>
+<text x="30.0" y="808.2" font-size="15" font-weight="700" class="t1">set.mm and ZFC</text>
+<text x="42.0" y="848.2" font-size="13" font-weight="700" class="t1">set.mm: replay ✱1–✱5</text>
+<text x="42.0" y="865.9" font-size="13" font-weight="700" class="t1">inside ZFC</text>
+<circle cx="47.0" cy="882.5" r="5" class="sto"/>
+<text x="58.0" y="886.5" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="904.5" font-size="12" class="t2">needs: pm.mm ✱1–✱5</text>
+<text x="326.0" y="848.2" font-size="13" font-weight="700" class="t1">A model of PM's types in</text>
+<text x="326.0" y="865.9" font-size="13" font-weight="700" class="t1">ZFC: each primitive</text>
+<text x="326.0" y="883.5" font-size="13" font-weight="700" class="t1">proposition and rule proved</text>
+<text x="326.0" y="901.2" font-size="13" font-weight="700" class="t1">true once</text>
+<circle cx="331.0" cy="917.9" r="5" class="sto"/>
+<text x="342.0" y="921.9" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="939.9" font-size="12" class="t2">needs: finite core</text>
+<text x="610.0" y="848.2" font-size="13" font-weight="700" class="t1">Every exported derivation</text>
+<text x="610.0" y="865.9" font-size="13" font-weight="700" class="t1">transferred through the</text>
+<text x="610.0" y="883.5" font-size="13" font-weight="700" class="t1">model</text>
+<circle cx="615.0" cy="900.2" r="5" class="sto"/>
+<text x="626.0" y="904.2" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="922.2" font-size="12" class="t2">needs: ZFC model of PM's types,</text>
+<text x="610.0" y="938.5" font-size="12" class="t2">pm.mm ✱9–✱14</text>
+<text x="30.0" y="1014.2" font-size="15" font-weight="700" class="t1">Lean's own kernel</text>
+<text x="42.0" y="1054.2" font-size="13" font-weight="700" class="t1">(a) Census of the kernel</text>
+<text x="42.0" y="1071.9" font-size="13" font-weight="700" class="t1">features the project</text>
+<text x="42.0" y="1089.6" font-size="13" font-weight="700" class="t1">exercises</text>
+<circle cx="47.0" cy="1106.3" r="5" class="sto"/>
+<text x="58.0" y="1110.3" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="1128.3" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="1054.2" font-size="13" font-weight="700" class="t1">(b) Lean in Lean: Lean4Lean</text>
+<text x="326.0" y="1071.9" font-size="13" font-weight="700" class="t1">re-checks the build</text>
+<circle cx="331.0" cy="1088.6" r="5" class="sto"/>
+<text x="342.0" y="1092.6" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="1110.6" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="610.0" y="1054.2" font-size="13" font-weight="700" class="t1">(c) A restricted checker</text>
+<text x="610.0" y="1071.9" font-size="13" font-weight="700" class="t1">for that fragment: first</text>
+<text x="610.0" y="1089.6" font-size="13" font-weight="700" class="t1">existing verified checkers</text>
+<text x="610.0" y="1107.3" font-size="13" font-weight="700" class="t1">(con-leche), then our own</text>
+<text x="610.0" y="1124.9" font-size="13" font-weight="700" class="t1">only if needed</text>
+<circle cx="615.0" cy="1141.6" r="5" class="sto"/>
+<text x="626.0" y="1145.6" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="1163.6" font-size="12" class="t2">needs: kernel census</text>
+<text x="42.0" y="1217.9" font-size="13" font-weight="700" class="t1">(d) A formal proof that the</text>
+<text x="42.0" y="1235.6" font-size="13" font-weight="700" class="t1">checker used is correct</text>
+<text x="42.0" y="1253.3" font-size="13" font-weight="700" class="t1">against a specification of</text>
+<text x="42.0" y="1271.0" font-size="13" font-weight="700" class="t1">the fragment</text>
+<circle cx="47.0" cy="1287.7" r="5" class="sto"/>
+<text x="58.0" y="1291.7" font-size="12" class="t2">not started · size L</text>
+<text x="42.0" y="1309.7" font-size="12" class="t2">needs: restricted checker</text>
+<text x="30.0" y="1384.0" font-size="15" font-weight="700" class="t1">Lean and ZFC: relative consistency</text>
+<text x="42.0" y="1424.0" font-size="13" font-weight="700" class="t1">Lean proves Con(ZFC):</text>
+<text x="42.0" y="1441.7" font-size="13" font-weight="700" class="t1">existing mechanizations</text>
+<text x="42.0" y="1459.3" font-size="13" font-weight="700" class="t1">cited and re-checked</text>
+<circle cx="47.0" cy="1476.0" r="5" class="sto"/>
+<text x="58.0" y="1480.0" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="1498.0" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="1424.0" font-size="13" font-weight="700" class="t1">ZFC with inaccessibles</text>
+<text x="326.0" y="1441.7" font-size="13" font-weight="700" class="t1">proves Con(Lean's type</text>
+<text x="326.0" y="1459.3" font-size="13" font-weight="700" class="t1">theory): existing</text>
+<text x="326.0" y="1477.0" font-size="13" font-weight="700" class="t1">mechanizations cited and</text>
+<text x="326.0" y="1494.7" font-size="13" font-weight="700" class="t1">re-checked</text>
+<circle cx="331.0" cy="1511.4" r="5" class="sto"/>
+<text x="342.0" y="1515.4" font-size="12" class="t2">not started · size S</text>
+<text x="326.0" y="1533.4" font-size="12" class="t2">needs: nothing; can start now</text>
+</svg>

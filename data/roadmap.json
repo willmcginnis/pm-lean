@@ -1,0 +1,2209 @@
+{
+  "meta": {
+    "title": "Roadmap: Principia Mathematica in Lean 4",
+    "as_of": "2026-10-12",
+    "status_source": "Statuses are read from the repository at commit efbb89d: docs/PROGRESS.md (whose tables name the commit they measure), docs/PM_CLAIMS.md, docs/STAR9_FOUNDATION.md and data/star9f_ledger.json; counts in the notes are cited with {...} and filled in from those files by scripts/roadmap_chart.py. 'in progress' means some of the task's work is in the repository or under way in the companion text audit.",
+    "structure": "Four groups, each split into subgroups, each split into leaves (tasks). A leaf is a chapter-sized or stage-sized task.",
+    "deps": "hard_deps: leaves whose results this leaf's deliverable needs; these edges are the gates. soft_deps: leaves that help (shared infrastructure, comparisons, experience) but are not needed. Dependencies are on particular leaves, not on whole volumes or phases.",
+    "order": "'by dependency': the task is placed as early as its hard dependencies allow. 'by choice': it is placed later than they require, after the tasks in placed_after, by the maintainer's order of priorities; order_reason says why. The order is a plan, not a contract: a task that moved records where it was and why in 'moved'.",
+    "prior_work": "The first step of every task is a search for prior work, with several independent search tools whose findings are compared. Each entry has an evidence level: 'measured' (its source was read at a pinned commit; nothing was built unless said), 'documented' (a paper or README says so), 'unverified' (reported, not checked), or 'from memory' (listed before the search reached this task). 'effect' says what the search found it good for: reuse (licensed code or data to import or depend on), ideas (read it, write our own), check against (an independent result to compare with), nothing found, or not yet searched. 'Not found' means not found by the searches so far, not that nothing exists. Code is never copied from unlicensed sources.",
+    "sizes": "S: days to a few weeks; M: weeks to a few months; L: several months or more.",
+    "overview_alt": "Roadmap overview: four groups of work (PM itself; checking underneath; comparing across; results about PM) and five milestones (Vol I checked, Vol II checked, Vol III checked, first edition audited, Lean's kernel fragment verified)",
+    "readme_intro": "The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view)."
+  },
+  "milestones": [
+    {
+      "id": "ms-vol1",
+      "name": "Vol I checked",
+      "short": "✱1–✱97 derived or listed; Vol I's claims checked or marked",
+      "true_when": "Every numbered assertion of ✱1–✱97 is derived from PM's primitive propositions, or listed with the reason it is not; every Vol I claim in PM_CLAIMS.md is checked or marked with why not.",
+      "reached_by": [
+        "v1-1-5",
+        "v1-9-14",
+        "v1-9eq",
+        "v1-931",
+        "v1-rep",
+        "v1-20-24",
+        "v1-coc",
+        "v1-ext",
+        "v1-30-38",
+        "v1-40-56",
+        "v1-60-74",
+        "v1-80-88",
+        "v1-90-97",
+        "v1-ord"
+      ]
+    },
+    {
+      "id": "ms-vol2",
+      "name": "Vol II checked",
+      "short": "✱100–✱234 the same",
+      "true_when": "The same for ✱100–✱234: every assertion derived or listed with the reason; every Vol II claim checked or marked.",
+      "reached_by": [
+        "v2-list",
+        "v2-100-126",
+        "v2-150-186",
+        "v2-200-234"
+      ]
+    },
+    {
+      "id": "ms-vol3",
+      "name": "Vol III checked",
+      "short": "✱250–✱375 the same, from the proofread text",
+      "true_when": "The same for Vol III (✱250–✱375), read from its proofread transcription.",
+      "reached_by": [
+        "v3-list",
+        "v3-250-276",
+        "v3-300-375"
+      ]
+    },
+    {
+      "id": "ms-ed1",
+      "name": "First edition audited",
+      "short": "volumes, text, assumption census and comparisons complete",
+      "true_when": "Vols I–III checked; the transcriptions of all three volumes checked against scans of the print; the census of which results use reducibility, infinity or the multiplicative axiom complete; the statement comparisons with set.mm and with other formalizations of PM complete.",
+      "reached_by": [
+        "v3-250-276",
+        "v3-300-375",
+        "v3-list",
+        "tx-12",
+        "tx-3",
+        "fa-3",
+        "x-setmm",
+        "x-other"
+      ]
+    },
+    {
+      "id": "ms-kernel",
+      "name": "Lean's kernel fragment verified",
+      "short": "the kernel fragment the project uses, re-checked by a checker proved correct",
+      "true_when": "The kernel features this project exercises are listed; a checker with a machine-checked correctness theorem for that fragment (an existing one, or our own restricted checker) re-checks the build; and what that theorem covers, and what it does not, is stated.",
+      "reached_by": [
+        "lk-census",
+        "lk-restricted",
+        "lk-proof"
+      ]
+    }
+  ],
+  "groups": [
+    {
+      "id": "pm",
+      "name": "PM itself",
+      "description": "Formalize the text, volume by volume and chapter by chapter, and check PM's claims about its own system as each chapter is reached.",
+      "subgroups": [
+        {
+          "id": "vol1",
+          "name": "Vol I (1910)",
+          "leaves": [
+            {
+              "id": "v1-1-5",
+              "name": "✱1–✱5: the theory of deduction",
+              "short": "✱1–✱5",
+              "size": "M",
+              "size_reason": "188 assertions with ledgers and a completeness theorem; finished.",
+              "status": "done",
+              "status_note": "{progress:✱1–✱5} assertions proved from ✱1·1–✱1·6; complete for two-valued truth tables (PM_CLAIMS A1: {claims:A1}).",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "note": "Done many times elsewhere; only this project and l-pommeret/Principia-Mathematica use PM's own ✱1 rules (docs/FORMALIZATION_COMPARISON.md).",
+                "known": [
+                  {
+                    "work": "Metamath set.mm: about 220 theorems pm1.* to pm5.*, CC0",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Metamath pmproofs.txt, ✱2–✱5 by condensed detachment, CC0",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "principia-rewrite (Coq, shallow, GPL-3.0): a comparison only",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-9-14",
+              "name": "✱9–✱14: apparent variables, types, identity, descriptions",
+              "short": "✱9–✱14",
+              "size": "M",
+              "size_reason": "199 assertions, {progress:✱9–✱14} proved by ✱10's method; what is left is ✱9's own method.",
+              "status": "in progress",
+              "status_note": "By ✱10's method: ✱10 {progress:✱10}, ✱11 {progress:✱11}, ✱13 {progress:✱13}, ✱14 {progress:✱14}, ✱9 {progress:✱9}. ✱14·3 is proved as a schema; a type of propositions is revisited if Vols II–III or the 1925 pass need propositions as variables (TYPES_DESIGN.md, Q8). ✱9 by its own method is the next three tasks.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9eq"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against",
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "l-pommeret/Principia-Mathematica (Lean 4): a deep ramified layer, ✱9 26 of 28 and ✱10 34 of 35 by our count; no license, so ideas only",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Metamath set.mm: about 50 PM-numbered ✱10–✱14 theorems, CC0",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Neo-Principia (Rocq): shallow",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Wang (1960): the predicate part of ✱10–✱14 is a decidable fragment",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-9eq",
+              "name": "✱9's method beside ✱10's, shown to derive the same results (p. 144)",
+              "short": "✱9 beside ✱10",
+              "size": "M",
+              "size_reason": "A second set of primitive propositions, ✱9's development and an equivalence theorem.",
+              "status": "in progress",
+              "status_note": "Built (PM/Found9, docs/STAR9_FOUNDATION.md): {star9f} numbered ✱9 propositions proved by ✱9's own method, along PM's lines; ✱9·31 is open. `star9_iff_star10` makes the agreement conditional on Rep (✱1·2–✱1·6 for every ✱9 proposition) and on a variable of every type (PM_CLAIMS A29: {claims:A29}).",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "Faithful ✱9 is reported hard.",
+                "known": [
+                  {
+                    "work": "Landini (2000), 'Quantification theory in ✱9 of Principia Mathematica': reported to find a flaw in ✱9 as printed, repaired by a minor change",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Urquhart (2016), on ✱9 and ✱10",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Holmes's SML code (2002–04): a partial proof checker for ramified type theory loaded with PM's ✱1 and ✱9/✱10 axioms, under a permissive notice",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-931",
+              "name": "✱9·31 and the one-variable cases of p. 142: derived by ✱9's method, or shown underivable",
+              "short": "✱9·31 as printed",
+              "size": "M",
+              "size_reason": "One proposition and 20 cases of ✱1·2–✱1·6 for one apparent variable per letter; a proof of underivability would need a model of ✱9's method.",
+              "status": "in progress",
+              "status_note": "✱9·31's lines (1)–(3) are proved; line (4), cited as definitional, is not a definitional rewrite under the definitions as printed, and no other step is cited. 50 of the 70 cases are proved (PM_CLAIMS A10, A28: {claims:A28}). Separate work considers ✱9 as printed beside a repaired ✱9 (docs/STAR9_FOUNDATION.md §8, §10); a repair is kept as a marked repair and does not replace the printed reading.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9eq"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Landini (2000), as above; a later presentation of ✱9 by Landini is reported to add a rule exchanging quantifiers",
+                    "evidence": "unverified"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-rep",
+              "name": "A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142)",
+              "short": "Rep",
+              "size": "L",
+              "size_reason": "A normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory.",
+              "status": "not started",
+              "status_note": "With it, the agreement of the two methods (p. 144) rests only on a variable of every type. For the variables of a structure (`QModel.den`) an individual gives a value of every type (`den_nonempty`); for an arbitrary family of variables it does not, so there that assumption stays as stated.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-931"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v1-both",
+              "name": "Every theorem checked under both foundations, ✱9's and ✱10's",
+              "short": "both foundations",
+              "size": "M",
+              "size_reason": "As StyleCheck does for the predicativity styles; done if the cost measured on a trial branch is reasonable.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-rep"
+              ],
+              "soft_deps": [
+                "v1-9eq"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v1-20-24",
+              "name": "✱20–✱24: classes and relations",
+              "short": "✱20–✱24",
+              "size": "M",
+              "size_reason": "316 assertions; ✱20 and ✱21 are done, ✱22–✱24 are a calculus of classes and relations.",
+              "status": "in progress",
+              "status_note": "✱20 {progress:✱20} and ✱21 {progress:✱21} proved: done, the rest being ✱20·631·632 and ✱21·631·632, about significance, which are built into the syntax. ✱22–✱24 next.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "A shallow embedding is known to have stalled here.",
+                "known": [
+                  {
+                    "work": "Neo-Principia (Rocq): ✱20 with 78 admitted steps; its own audit names the scope of incomplete symbols and host equality hiding reducibility as the blockers (MIT): a failure report to learn from",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: 183 statements and 128 proofs over ✱20–✱56 (our count)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Holmes: polymorphic typing for PM's classes",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-coc",
+              "name": "Apparent classes of classes and their identity, needed from ✱40 on",
+              "short": "classes of classes",
+              "size": "M",
+              "size_reason": "A second layer of the class construction, built as printed (✱20·08), with its identity.",
+              "status": "in progress",
+              "status_note": "Decided (literal reading of ✱20·08) and built for the definitions and ✱20·4, ✱21·4; apparent classes of classes not yet (docs/CLASSES_OF_CLASSES.md).",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-20-24"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v1-ext",
+              "name": "Extensionality of every class and relation expression, proved once (pp. 200, 213)",
+              "short": "extensionality",
+              "size": "M",
+              "size_reason": "A general theorem over the expressions PM's notation forms, replacing an explicit premise.",
+              "status": "done",
+              "status_note": "PM_CLAIMS D1: {claims:D1} (`clsExpr_ext`, `relExpr_ext`). For a Lean function that uses the class otherwise, which PM's notation cannot form, the premise remains.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-20-24"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v1-30-38",
+              "name": "✱30–✱38: the logic of relations",
+              "short": "✱30–✱38",
+              "size": "M",
+              "size_reason": "Descriptive functions, converses, domains, relative products; mostly short proofs.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-20-24"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Landini, 'Note on Principia's ✱38 on operations'",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: proofs into this range",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-40-56",
+              "name": "✱40–✱56: products and sums of classes; unit classes and couples, to ✱54·43",
+              "short": "✱40–✱56",
+              "size": "L",
+              "size_reason": "Classes of classes throughout; ✱54·43 is the step before 1 + 1 = 2.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-30-38",
+                "v1-coc"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "Metamath set.mm: pm54.43, with its own note on the translation",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: proofs into ✱56",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-60-74",
+              "name": "✱60–✱74: sub-classes, relative types; one-many and one-one relations",
+              "short": "✱60–✱74",
+              "size": "L",
+              "size_reason": "Typical ambiguity and relative types become central here.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-40-56"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: deep to about ✱70, then shallow",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "PM-MATS dependency graph of both editions: all rights reserved, so consulted for ordering only",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-80-88",
+              "name": "✱80–✱88: selections, with the multiplicative axiom as hypothesis",
+              "short": "✱80–✱88",
+              "size": "M",
+              "size_reason": "Selections and ✱88's multiplicative axiom, carried as an explicit hypothesis as PM states it.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-60-74"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "PM-MATS dependency graph: consulted for ordering only",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-90-97",
+              "name": "✱90–✱97: inductive relations",
+              "short": "✱90–✱97",
+              "size": "L",
+              "size_reason": "The ancestral and induction in ramified types; the base for Vol II and Appendix B.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-60-74"
+              ],
+              "soft_deps": [
+                "v1-80-88"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "PM-MATS dependency graph: consulted for ordering only",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v1-ord",
+              "name": "A model that sees orders: what reducibility adds (claim B11)",
+              "short": "order-seeing model",
+              "size": "M",
+              "size_reason": "A new model in which the predicativity styles can differ without ✱12·1.",
+              "status": "not started",
+              "status_note": "The present models forget orders.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "An extensional model proves consistency but cannot show that reducibility adds strength; that needs a model that sees orders. Reported research-level.",
+                "known": [
+                  {
+                    "work": "Mares (2007): a semantics validating reducibility",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Fitch (1938), Lorenzen (1951): consistency of ramified PM without reducibility",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Kamareddine, Laan and Nederpelt: a modern reconstruction of PM's ramified types",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "vol2",
+          "name": "Vol II (1912)",
+          "leaves": [
+            {
+              "id": "v2-list",
+              "name": "Per-item list of Vol II, and its claims listed by reading",
+              "short": "Vol II list",
+              "size": "S",
+              "size_reason": "Reading and parsing; no proofs.",
+              "status": "not started",
+              "status_note": "Only an upper bound on Vol II's labels exists (data/vol2_labels.json).",
+              "hard_deps": [],
+              "soft_deps": [
+                "tx-12"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "PM-MATS citation graph: counts only, no copying (all rights reserved)",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v2-100-126",
+              "name": "✱100–✱126 (Part III): cardinal arithmetic, to ✱110·643 (1 + 1 = 2) and inductive cardinals",
+              "short": "✱100–✱126",
+              "size": "L",
+              "size_reason": "PM's cardinal numbers, their arithmetic, finite and infinite; Infinity (✱120·03) as hypothesis.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-80-88",
+                "v1-90-97"
+              ],
+              "soft_deps": [
+                "v2-list"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "No deep formalization found.",
+                "known": [
+                  {
+                    "work": "Burgess and Hazen (1998): elementary arithmetic inside ramified PM with infinity, without reducibility",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: ✱110 shallowly, through Lean's sets",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Metamath set.mm theorem pm110.643",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v2-150-186",
+              "name": "✱150–✱186 (Part IV): relation-arithmetic",
+              "short": "✱150–✱186",
+              "size": "L",
+              "size_reason": "Ordinal similarity and relation-numbers, with their arithmetic.",
+              "status": "not started",
+              "status_note": "Which Part III propositions it cites is to be measured from the citation graph.",
+              "hard_deps": [
+                "v1-90-97"
+              ],
+              "soft_deps": [
+                "v2-100-126"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v2-200-234",
+              "name": "✱200–✱234 (Part V, first half): series",
+              "short": "✱200–✱234",
+              "size": "L",
+              "size_reason": "Series, sections, limits; the base for Vol III.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-90-97"
+              ],
+              "soft_deps": [
+                "v2-150-186"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": []
+              }
+            }
+          ]
+        },
+        {
+          "id": "vol3",
+          "name": "Vol III (1913)",
+          "leaves": [
+            {
+              "id": "v3-list",
+              "name": "Per-item list of Vol III, and its claims listed by reading",
+              "short": "Vol III list",
+              "size": "S",
+              "size_reason": "Reading and parsing; no proofs.",
+              "status": "not started",
+              "hard_deps": [
+                "tx-3"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "v3-250-276",
+              "name": "✱250–✱276 (Part V, continued): well-ordered series, ordinals, compact and continuous series",
+              "short": "✱250–✱276",
+              "size": "L",
+              "size_reason": "Well-ordering, transfinite ordinals and the order theory PM's reals use.",
+              "status": "not started",
+              "hard_deps": [
+                "v2-150-186",
+                "v2-200-234",
+                "tx-3"
+              ],
+              "soft_deps": [
+                "v3-list"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": [
+                  {
+                    "work": "l-pommeret/Principia-Mathematica: shallow declarations; ✱260 as a list of strings",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "v3-300-375",
+              "name": "✱300–✱375 (Part VI): quantity: ratios, real numbers, measurement, cyclic families",
+              "short": "✱300–✱375",
+              "size": "L",
+              "size_reason": "PM's own theory of quantity, little studied and not formalized as far as known.",
+              "status": "not started",
+              "hard_deps": [
+                "v2-200-234",
+                "tx-3"
+              ],
+              "soft_deps": [
+                "v3-250-276",
+                "v3-list"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": [
+                  {
+                    "work": "Gandon, Russell's Unknown Logicism (2012), on PM's Part VI",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "ed2",
+          "name": "1925 second edition",
+          "leaves": [
+            {
+              "id": "e2-diff",
+              "name": "Record the edition differences, and the new Introduction's claims",
+              "short": "edition differences",
+              "size": "S",
+              "size_reason": "A list from reading, no proofs.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Linsky, The Evolution of Principia Mathematica (2011)",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "PM-MATS covers both editions",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "e2-8a",
+              "name": "✱8 and Appendix A, in place of ✱9",
+              "short": "✱8 and Appendix A",
+              "size": "M",
+              "size_reason": "A second quantification theory, compared with ✱9 and ✱10.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-9eq"
+              ],
+              "soft_deps": [
+                "adq-2",
+                "e2-diff"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "No mechanization found. ✱8 and Appendix A are treated together; a treatment with the stroke alone misses the change to quantification.",
+                "known": [
+                  {
+                    "work": "Hazen and Davoren (2000), 'Russell's 1925 logic': both editions reconstructed",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "A paper on ✱8 and the empty domain (History and Philosophy of Logic)",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "e2-b",
+              "name": "Appendix B (✱89, induction without reducibility): locate the failing step and prove a narrower replacement",
+              "short": "Appendix B",
+              "size": "M",
+              "size_reason": "The argument is a known dead end as stated: the step that fails (reported around ✱89·16) is located, and a narrower replacement is proved, or a countermodel to the step is given.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-90-97"
+              ],
+              "soft_deps": [
+                "e2-diff"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Gödel (1944), 'Russell's mathematical logic': the objection to ✱89",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Myhill (1974): no collapse at any finite order",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Hazen (2004): the reconstruction does not validate induction",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Landini (1996): defends a reconstruction",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "e2-c",
+              "name": "Appendix C: truth-functions and extensionality",
+              "short": "Appendix C",
+              "size": "M",
+              "size_reason": "Builds on the truth-function results of ✱14 and the extensionality work.",
+              "status": "not started",
+              "hard_deps": [
+                "v1-9-14"
+              ],
+              "soft_deps": [
+                "v1-ext",
+                "e2-diff"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Nothing mechanized found.",
+                "known": [
+                  {
+                    "work": "Hazen, on the 1925 Introduction and Appendix C; Russell concedes losses there",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "e2-full",
+              "name": "Full second-edition pass",
+              "short": "second-edition pass",
+              "size": "L",
+              "size_reason": "The revised calculus carried through the volumes, as a second pass.",
+              "status": "not started",
+              "hard_deps": [
+                "e2-diff",
+                "e2-8a",
+                "e2-b",
+                "e2-c"
+              ],
+              "soft_deps": [],
+              "order": "by choice",
+              "placed_after": [
+                "v3-250-276",
+                "v3-300-375"
+              ],
+              "order_reason": "After Vol III, as a second pass over a finished first edition.",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": []
+              }
+            }
+          ]
+        }
+      ],
+      "tagline": "Vol I, Vol II, Vol III, the 1925 second edition"
+    },
+    {
+      "id": "under",
+      "name": "Checking underneath",
+      "description": "One source, many checkers: the same derivations re-checked by independent kernels, by Metamath and Rocq checkers, and in ZFC; and Lean's own kernel verified for the fragment the project uses.",
+      "subgroups": [
+        {
+          "id": "kernels",
+          "name": "Independent Lean kernels",
+          "leaves": [
+            {
+              "id": "k-ci",
+              "name": "Independent Lean kernels re-check the build in CI, one checker per code family",
+              "short": "kernels in CI",
+              "size": "S",
+              "size_reason": "Existing checkers on the pinned toolchain: the official kernel, one checker of the nanoda family, con-leche (with a machine-checked theorem about what it accepts), and Tenet or eink0rn (separately written).",
+              "status": "not started",
+              "status_note": "CI today builds and runs the project's own checks only.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "note": "lean4lean and other checkers that follow the C++ kernel add little independence.",
+                "known": [
+                  {
+                    "work": "Lean Kernel Arena: 26 checkers in about 7 lineages, a negative-test corpus, run on this project's toolchain",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "nanoda (Rust, Apache-2.0)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Tenet (C#, MIT/Apache-2.0)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "con-leche (Lean, Apache-2.0): accepts only the three standard axioms",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "A kernel bug caught by nanoda in July 2026, and a nanoda bug fixed a week earlier: pin current versions",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mm",
+          "name": "Metamath and Rocq",
+          "leaves": [
+            {
+              "id": "mm-1",
+              "name": "pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers",
+              "short": "pm.mm ✱1–✱5",
+              "size": "S",
+              "size_reason": "Propositional formulas need no binding; the core's certificates are written out as Metamath; small verifiers of a few hundred lines each.",
+              "status": "not started",
+              "hard_deps": [
+                "adq-1"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Metamath nf.mm, which opens by taking PM's ✱1·2–✱5·75 as its base; hol.mm, iset.mm (all CC0): database conventions to reuse",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "AML-Formalization: a proof-of-concept exporter from a deep embedding in Coq to Metamath (LGPL-2.1)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "metamath.exe, metamath-knife, mmverify.py, checkmm",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mm-2",
+              "name": "pm.mm for ✱9–✱14, from the finite first-order core: binding, substitution, distinct-variable conditions",
+              "short": "pm.mm ✱9–✱14",
+              "size": "M",
+              "size_reason": "Quantifiers and types need distinct-variable conditions and type checking in Metamath.",
+              "status": "not started",
+              "status_note": "A Metamath proof is finite and a `QThm` proof is not (`QThm.gen` has one premise for every variable), so pm.mm is built from the core, not exported from `QThm`.",
+              "hard_deps": [
+                "mm-1",
+                "adq-2"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Carneiro, conversion of HOL Light proofs into Metamath (2016)",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "hol.mm: types as terms (CC0)",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "mm-3",
+              "name": "pm.mm from ✱20 on, chapter by chapter",
+              "short": "pm.mm from ✱20",
+              "size": "M",
+              "size_reason": "Defined notation for classes and relations; then incremental per chapter.",
+              "status": "not started",
+              "hard_deps": [
+                "mm-2",
+                "adq-3"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "rocq",
+              "name": "Rocq re-check: our own small checker for our certificate format, proved sound in Rocq",
+              "short": "Rocq re-check",
+              "size": "M",
+              "size_reason": "No ready tool of the strength wanted: moderate for ✱1–✱5, hard for ✱9–✱14 (side conditions, orders). The result states that proofs, not only statements, were checked.",
+              "status": "not started",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [],
+              "order": "by choice",
+              "placed_after": [
+                "mm-2"
+              ],
+              "order_reason": "The maintainer's order: after pm.mm, so the certificate format is settled on one consumer before a second is added.",
+              "moved": {
+                "from": "Needed pm.mm for ✱1–✱5 and re-checked exported derivation trees.",
+                "why": "It now checks the finite core's certificates, so it waits for adequacy stage 2. Existing routes from Lean into Rocq weaken the check (definitional UIP, universe checks switched off), and no verified Metamath checker in Rocq was found, so the checker is our own."
+              },
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "rocq-lean-import (LGPL-2.1, alpha): runs Rocq with definitional UIP and without universe checks for some inductives; an optional extra, reported as such",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Metamatix, a Metamath checker in Rocq: its soundness file is empty",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "LRAT (two certified checkers for one format) and SMTCoq: the pattern to follow",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "coq-hol-light ships its theorems as Rocq axioms: why the result must say proofs were checked",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "MetaRocq, for trusting Rocq itself",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "zfc",
+          "name": "set.mm and ZFC",
+          "leaves": [
+            {
+              "id": "sm-1",
+              "name": "set.mm: replay ✱1–✱5 inside ZFC",
+              "short": "set.mm replay ✱1–✱5",
+              "size": "S",
+              "size_reason": "set.mm already proves PM's propositional primitives; a link file.",
+              "status": "not started",
+              "hard_deps": [
+                "mm-1"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse",
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "Metamath set.mm: 281 pm* labels, CC0",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Carneiro's embedding of hol.mm in set.mm, as the template",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sm-2",
+              "name": "A model of PM's types in ZFC: each primitive proposition and rule proved true once",
+              "short": "ZFC model of PM's types",
+              "size": "L",
+              "size_reason": "A model of ramified types with reducibility, and a soundness induction.",
+              "status": "not started",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [
+                "v1-ord"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "With reducibility, an extensional model: moderate; with infinity: hard.",
+                "known": [
+                  {
+                    "work": "Mares (2007); Fitch (1938); Lorenzen (1951)",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Isabelle AFP Q0_Metatheory and HOL_in_HOL_Deep: semantics, soundness and consistency for simple types",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Flypitch: a deep-embedded theory with a model, in Lean",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "sm-3",
+              "name": "Every exported derivation transferred through the model",
+              "short": "transfer through the model",
+              "size": "M",
+              "size_reason": "Automatic once the model and the quantified export exist.",
+              "status": "not started",
+              "hard_deps": [
+                "sm-2",
+                "mm-2"
+              ],
+              "soft_deps": [
+                "mm-3"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            }
+          ]
+        },
+        {
+          "id": "leank",
+          "name": "Lean's own kernel",
+          "leaves": [
+            {
+              "id": "lk-census",
+              "name": "(a) Census of the kernel features the project exercises",
+              "short": "kernel census",
+              "size": "S",
+              "size_reason": "An instrumented re-check of the build, extending the axiom reports. The questions that decide stage (c): does the development, with what it imports, use nested inductives, or Nat and String literals (the orders of types use Nat, atoms use String)?",
+              "status": "not started",
+              "status_note": "The axiom reports already show that no PM derivation uses propext, Quot.sound or Classical.choice.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Lean Kernel Arena descriptors: which features each checker declines",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-l4l",
+              "name": "(b) Lean in Lean: Lean4Lean re-checks the build",
+              "short": "Lean4Lean run",
+              "size": "M",
+              "size_reason": "Others' implementation; our part is running it on this project and reading its scope.",
+              "status": "not started",
+              "status_note": "Lean4Lean itself is others' work, in progress. Its README says it follows the C++ kernel closely and is not really an independent implementation.",
+              "hard_deps": [],
+              "soft_deps": [
+                "k-ci"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "note": "Used as a checker; not described as verification.",
+                "known": [
+                  {
+                    "work": "Lean4Lean (Apache-2.0): checks Mathlib; its metatheory is partial (inductive types not yet specified)",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-restricted",
+              "name": "(c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed",
+              "short": "restricted checker",
+              "size": "M",
+              "size_reason": "First re-check the build with con-leche, and with metalean's slow checker if our literals are acceptable to it. Our own restricted checker (for example over a literal-free re-encoding) only if they do not serve.",
+              "status": "not started",
+              "hard_deps": [
+                "lk-census"
+              ],
+              "soft_deps": [
+                "lk-l4l"
+              ],
+              "order": "by dependency",
+              "moved": {
+                "from": "Last, by choice: after Π⁰₂-conservativity and Tarski.",
+                "why": "The maintainer's decision: a side task right after the census. Existing verified checkers make its first step small."
+              },
+              "prior_work": {
+                "effect": [
+                  "reuse",
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "con-leche (Apache-2.0): a full checker with a machine-checked theorem that every environment it accepts has a set model",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "metalean (Apache-2.0): a verified checker for an idealised Lean type theory; its slow checker declines Nat and String literals and nested inductives, so it probably declines this development as it is",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "mini-kernel, canonical-min: small, unverified",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-proof",
+              "name": "(d) A formal proof that the checker used is correct against a specification of the fragment",
+              "short": "checker correctness proof",
+              "size": "L",
+              "size_reason": "For an existing checker: read and audit its specification and theorem, and say what it does not cover (neither con-leche's nor metalean's covers the executable driver). For our own: a refinement proof, research-scale.",
+              "status": "not started",
+              "hard_deps": [
+                "lk-restricted"
+              ],
+              "soft_deps": [
+                "lk-l4l"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse",
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "metalean: soundness against its own typing specification; consistency relative to ZFC with ω inaccessibles, its only axiom",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "con-leche: `model_exists`",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "MetaCoq's verified checker for Coq",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "leanzfc",
+          "name": "Lean and ZFC: relative consistency",
+          "leaves": [
+            {
+              "id": "lz-1",
+              "name": "Lean proves Con(ZFC): existing mechanizations cited and re-checked",
+              "short": "Lean proves Con(ZFC)",
+              "size": "S",
+              "size_reason": "Existing proofs are re-built on a pinned toolchain; the task states what each proves, for which encoding of ZFC.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "moved": {
+                "from": "Build our own, after Gödel I, by choice.",
+                "why": "Mechanizations exist, so citing and re-checking them is small; small, independent work goes early."
+              },
+              "prior_work": {
+                "effect": [
+                  "check against",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Flypitch (Lean 3, Apache-2.0): `ZFC_is_consistent` for its encoded ZFC; a Lean 4 port exists",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Mathlib's ZFSet",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lz-2",
+              "name": "ZFC with inaccessibles proves Con(Lean's type theory): existing mechanizations cited and re-checked",
+              "short": "ZFC + inaccessibles proves Con(Lean)",
+              "size": "S",
+              "size_reason": "Existing proofs are re-built on a pinned toolchain; the task states, for each, in which system it is proved, from which hypotheses, and for which type theory.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [
+                "lz-1",
+                "lk-l4l"
+              ],
+              "order": "by dependency",
+              "moved": {
+                "from": "Build our own, after Gödel I, by choice.",
+                "why": "Two mechanizations for actual checkers exist, so citing and re-checking them is small; small, independent work goes early."
+              },
+              "prior_work": {
+                "effect": [
+                  "check against",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Carneiro, The Type Theory of Lean (2019): a paper proof for Lean 3 from ZFC with n inaccessibles; its repository has no license",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "con-leche: `model_exists`, every environment it accepts has a set model",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "metalean: `consistency`, relative to ZFC with ω inaccessibles, for an idealised type theory",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "lean4lean-model: its main theorem is still `sorry`",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Werner, 'Sets in types, types in sets' (1997), for Coq",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "tagline": "independent kernels, Metamath and Rocq, ZFC, Lean's own kernel"
+    },
+    {
+      "id": "across",
+      "name": "Comparing across",
+      "description": "The same statements compared with other readings of PM, with mainstream mathematics, and with the printed text.",
+      "subgroups": [
+        {
+          "id": "readings",
+          "name": "Other readings of PM",
+          "leaves": [
+            {
+              "id": "x-setmm",
+              "name": "Compare with set.mm's own PM theorems, chapter by chapter",
+              "short": "set.mm comparison",
+              "size": "S",
+              "size_reason": "Statement-level matching by PM number; a few hundred theorems.",
+              "status": "not started",
+              "status_note": "set.mm is listed in the formalization comparison but not measured.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-20-24"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "281 pm* labels in set.mm and 198 in iset.mm (CC0), reaching ✱10–✱14 and ✱54, not only ✱1–✱5",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "x-other",
+              "name": "Compare other formalizations of PM, number by number",
+              "short": "other formalizations",
+              "size": "S",
+              "size_reason": "Statement-level comparison on the survey's common scale.",
+              "status": "in progress",
+              "status_note": "docs/FORMALIZATION_COMPARISON.md measures several projects; one of them (Neo-Principia) has changed since, so its row is to be measured again.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "check against"
+                ],
+                "note": "docs/FORMALIZATION_COMPARISON.md is itself the survey.",
+                "known": [
+                  {
+                    "work": "l-pommeret/Principia-Mathematica unchanged since it was measured",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "The Agda PM development's ✱9 does not build as published (a missing module)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Lacrimae-Angeli: ✱1 only, no license",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mathlib",
+          "name": "Mainstream mathematics (Mathlib), in a separate package",
+          "leaves": [
+            {
+              "id": "x-ml-1",
+              "name": "Cardinal arithmetic (✱100–✱126) agrees with Mathlib's Nat and Cardinal",
+              "short": "Mathlib: cardinals",
+              "size": "M",
+              "size_reason": "The first bridge, with the package: theorems about the collapse model's denotations; typical ambiguity as a family of bridges that commute with type raising.",
+              "status": "not started",
+              "status_note": "A semantic agreement, not a conservativity result about the proof system, and labelled so.",
+              "hard_deps": [
+                "v2-100-126"
+              ],
+              "soft_deps": [
+                "sm-2"
+              ],
+              "order": "by dependency",
+              "moved": {
+                "from": "The first bridge was classes, relations and ✱54·43, after ✱40–✱56.",
+                "why": "Bridges start at ✱100, where PM's cardinals start, and go through the collapse model, which already reads function types as Lean function spaces; reading classes there becomes part of this bridge. They live in a separate package that depends on Mathlib, because the core depends on nothing."
+              },
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "reuse"
+                ],
+                "note": "No bridge from any historical or type-theoretic system to Mathlib found.",
+                "known": [
+                  {
+                    "work": "Mathlib: `Cardinal.eq`, `mk_sum`, `mk_prod`, `lift_mk_eq`",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "ZFLean (Apache-2.0): isomorphisms of products, powersets and function spaces",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "x-ml-2",
+              "name": "Relation-numbers (✱150–✱186) agree with Mathlib's order types, and with Ordinal for well-orders",
+              "short": "Mathlib: relation-numbers",
+              "size": "M",
+              "size_reason": "PM's relation-numbers cover relations that are not well-orders; Mathlib's Ordinal covers well-orders only.",
+              "status": "not started",
+              "hard_deps": [
+                "v2-150-186",
+                "x-ml-1"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Mathlib: `RelIso`, `Ordinal.type_eq` (well-orders only)",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "x-ml-3",
+              "name": "Series, ordinals and real numbers (Vol III) agree with Mathlib",
+              "short": "Mathlib: series and reals",
+              "size": "M",
+              "size_reason": "Order types, ordinals and PM's reals mapped to Mathlib's; the last step is easy once a complete ordered field is in hand.",
+              "status": "not started",
+              "hard_deps": [
+                "v3-250-276",
+                "v3-300-375",
+                "x-ml-1"
+              ],
+              "soft_deps": [
+                "x-ml-2"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Mathlib: `inducedOrderRingIso`",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Spivak Lean (Apache-2.0): Dedekind cuts made a field, then `isoFun_eq_inducedOrderRingIso`",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "text",
+          "name": "The printed text",
+          "leaves": [
+            {
+              "id": "tx-12",
+              "name": "Vol I and Vol II transcriptions checked against scans; errata reported",
+              "short": "Vol I–II text",
+              "size": "M",
+              "size_reason": "Errata are prepared; each needs a check against the scan.",
+              "status": "in progress",
+              "status_note": "Companion text audit; errata prepared, awaiting the scan check and reporting.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "No tool found that certifies formula transcriptions against scans.",
+                "known": [
+                  {
+                    "work": "Gerrata (MIT): transcription against scans, the same architecture",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "PM-MATS: counts only (all rights reserved)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Project Gutenberg eBooks #78050 (Vol I) and #78255 (Vol II)",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "tx-3",
+              "name": "Vol III transcription proofread and checked against scans",
+              "short": "Vol III text",
+              "size": "M",
+              "size_reason": "Volunteer proofreading under way; then the same scan checks.",
+              "status": "in progress",
+              "status_note": "At Distributed Proofreaders (companion text audit).",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Distributed Proofreaders' LaTeX workflow",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "tx-dots",
+              "name": "✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable",
+              "short": "dots check",
+              "size": "S",
+              "size_reason": "The dot parser and the completeness theorem exist; the task runs them on the raw transcription as a standing check and reports each failure to the text audit.",
+              "status": "in progress",
+              "status_note": "PM/Statements.lean was generated from the transcription by a dot parser (scripts/gen_lean.py), and ✱1·4 and ✱4·42 were found this way; not yet a standing check. It catches underivable transcriptions only: a derivable formula can still be mistranscribed.",
+              "hard_deps": [],
+              "soft_deps": [
+                "tx-12"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "note": "The text audit sets PM's dots aside; this check is what the formalization adds.",
+                "known": []
+              }
+            }
+          ]
+        }
+      ],
+      "tagline": "other readings of PM, Mathlib, the printed text"
+    },
+    {
+      "id": "about",
+      "name": "Results about PM",
+      "description": "Metatheorems about the formalized system: adequacy, incompleteness, the finitist audit, WKL₀ and decision procedures.",
+      "subgroups": [
+        {
+          "id": "adequacy",
+          "name": "Finite syntax and adequacy",
+          "leaves": [
+            {
+              "id": "adq-1",
+              "name": "Adequacy, stage 1: ✱1–✱5, a finite certificate format and both translations",
+              "short": "adequacy ✱1–✱5",
+              "size": "S",
+              "size_reason": "Propositional formulas are already finite; the work is the certificate format and both translations.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "note": "Propositional formulas have no binders; none needed.",
+                "known": []
+              }
+            },
+            {
+              "id": "adq-2",
+              "name": "Adequacy, stage 2: a finite first-order core for ✱9–✱14, with derivations as data, and the easy direction (every core derivation gives a QThm theorem)",
+              "short": "finite core",
+              "size": "M",
+              "size_reason": "Finite syntax with named or de Bruijn variables, types and orders; finite derivations; a translation into QF and soundness at every V.",
+              "status": "not started",
+              "status_note": "Today `QF` binds with Lean functions and `QThm.gen` takes one premise for every variable, so a `QThm` proof is not a finite object (docs/SEMANTICS.md). The core is the source for pm.mm beyond ✱5, the Rocq re-check and incompleteness.",
+              "hard_deps": [
+                "adq-1"
+              ],
+              "soft_deps": [
+                "v1-9eq"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Two independent searches recommend this architecture: a finite core as the source of truth, related to the present encoding by a proved translation.",
+                "known": [
+                  {
+                    "work": "FormalizedFormalLogic/Foundation (Apache-2.0): locally nameless first-order formulas",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "HOL_in_HOL_Deep (BSD): a locally nameless deep embedding",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "lean-hoas: in Lean, a parametric encoding does not exclude exotic terms; no license, ideas only",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Grenrus (2025, Agda): a well-formedness predicate and a proved round trip between de Bruijn and parametric terms; no license",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Hybrid (Isabelle): an encoding over de Bruijn terms with an admissibility predicate and adequacy results",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Nothing for ramified types, or for derivations with an infinitary generalization rule",
+                    "evidence": "unverified"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "adq-2c",
+              "name": "Adequacy, stage 2, the converse: from QThm back to the finite core",
+              "short": "converse",
+              "size": "L",
+              "size_reason": "Exotic intermediate formulas, the infinitary generalization rule and order side conditions; no precedent found. Possibly research-level.",
+              "status": "not started",
+              "status_note": "Three ways, to be chosen before incompleteness starts: (a) a restricted QThm whose formulas are all well-formed; (b) the theorems needed re-derived in the core; (c) full conservativity.",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Chlipala's well-formedness predicate for parametric syntax",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "adq-3",
+              "name": "Adequacy, stage 3: classes and beyond",
+              "short": "adequacy from ✱20",
+              "size": "M",
+              "size_reason": "Defined notation, classes of classes, and whatever the later volumes add (for example functions of three or more arguments), on stage 2's core.",
+              "status": "not started",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [
+                "v1-coc",
+                "v1-20-24"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "nothing found"
+                ],
+                "known": []
+              }
+            }
+          ]
+        },
+        {
+          "id": "incompleteness",
+          "name": "Incompleteness",
+          "leaves": [
+            {
+              "id": "g-fo",
+              "name": "PM as a many-sorted first-order theory (the finite core), in a separate package that reuses the Foundation library",
+              "short": "first-order PM",
+              "size": "M",
+              "size_reason": "The core presented as a first-order theory in Foundation's sense; Foundation brings Mathlib and classical axioms, so it stays out of the core package.",
+              "status": "not started",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "note": "Foundation's theorems are stated for first-order theories, hence the first-order presentation.",
+                "known": [
+                  {
+                    "work": "Foundation (Lean 4, Apache-2.0): the first theorem for Δ₁, Σ₁-sound theories containing R₀; Gödel–Rosser for any encodable first-order theory; the second theorem for consistent Δ₁ theories containing IΣ₁, with the derivability conditions proved; no `sorry` in its incompleteness part (not built)",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "g-num",
+              "name": "Numbering of the core's formulas and derivations; 'is a derivation of' representable",
+              "short": "numbering",
+              "size": "M",
+              "size_reason": "Standard arithmetization, taken from Foundation where its encoding fits.",
+              "status": "not started",
+              "hard_deps": [
+                "g-fo"
+              ],
+              "soft_deps": [
+                "adq-3"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Foundation, as above",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Paulson, Gödel's theorems in Isabelle/HOL (hereditarily finite sets)",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "g-arith",
+              "name": "Robinson's Q interpreted inside the chosen PM theory, with Infinity as hypothesis",
+              "short": "Q interpreted",
+              "size": "L",
+              "size_reason": "Every axiom of Q proved inside the theory, with typical ambiguity resolved to one type.",
+              "status": "not started",
+              "status_note": "PM's cardinal route (✱100–✱126) is the default; a shorter internal interpretation may exist.",
+              "hard_deps": [
+                "v2-100-126"
+              ],
+              "soft_deps": [
+                "g-num"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Without the axiom of infinity PM has a finite model, so this route needs infinity.",
+                "known": [
+                  {
+                    "work": "Burgess and Hazen (1998): arithmetic in ramified PM",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "g1",
+              "name": "Gödel's first theorem for PM, in the Gödel–Rosser form",
+              "short": "Gödel I",
+              "size": "L",
+              "size_reason": "The diagonal argument is reused; the work is representability inside PM's own arithmetic for the first-order presentation.",
+              "status": "not started",
+              "hard_deps": [
+                "g-fo",
+                "g-num",
+                "g-arith"
+              ],
+              "soft_deps": [
+                "adq-2c",
+                "adq-3"
+              ],
+              "order": "by choice",
+              "placed_after": [
+                "v3-250-276",
+                "v3-300-375"
+              ],
+              "order_reason": "The maintainer's priority: the theorem after Vol III. Not a dependency: nothing in Vol III feeds it.",
+              "prior_work": {
+                "effect": [
+                  "reuse",
+                  "ideas"
+                ],
+                "note": "Nothing for any type theory or for PM.",
+                "known": [
+                  {
+                    "work": "Foundation, as above",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "O'Connor (Coq, MIT): essential incompleteness of arithmetic",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Popescu and Traytel: abstract, syntax-independent formalization in Isabelle",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "g2",
+              "name": "Gödel's second theorem for PM: derivability conditions, then Con unprovable",
+              "short": "Gödel II",
+              "size": "L",
+              "size_reason": "The derivability conditions for PM's provability predicate need induction inside the theory.",
+              "status": "not started",
+              "hard_deps": [
+                "g1",
+                "v1-90-97"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Because a too-weak specification of the provability predicate is reported to have given a spurious second theorem, the predicate's adequacy is stated here as an explicit theorem.",
+                "known": [
+                  {
+                    "work": "Foundation: the second theorem over IΣ₁, with the derivability conditions proved",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Paulson; Popescu and Traytel",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "O'Connor's Coq development assumes two of the derivability conditions",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "A reported case where a too-weak specification of the provability predicate gave a spurious second theorem",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "finitist",
+          "name": "Finitist audit",
+          "leaves": [
+            {
+              "id": "fa-1",
+              "name": "Assumption provenance: which results use reducibility, infinity, the multiplicative axiom",
+              "short": "assumption tags",
+              "size": "S",
+              "size_reason": "Extends RedCheck and AllAxioms, which exist; kept up per chapter.",
+              "status": "in progress",
+              "status_note": "Reducibility tags exist for ✱1–✱21 of ✱10's method (RedCheck.lean); ✱9's own method is not yet among them; infinity and choice are added as the volumes reach them.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "set.mm's per-theorem axiom usage lists",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "fa-2",
+              "name": "PRA readings: which results have an arithmetic reading provable in PRA",
+              "short": "PRA readings",
+              "size": "L",
+              "size_reason": "A formal PRA, a translation of PM statements, and a PRA proof or certified reduction for each.",
+              "status": "not started",
+              "hard_deps": [
+                "fa-1",
+                "w-1"
+              ],
+              "soft_deps": [
+                "w-2",
+                "x-ml-2",
+                "g-num"
+              ],
+              "order": "by choice",
+              "placed_after": [
+                "v3-250-276",
+                "v3-300-375"
+              ],
+              "order_reason": "The maintainer's order: alongside incompleteness. Not a dependency on it.",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Tags of rule use do not certify provability in PRA.",
+                "known": [
+                  {
+                    "work": "No PRA object theory in Lean found; Foundation has IΣ₀ and IΣ₁",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Tait, 'Finitism' (1981)",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "fa-3",
+              "name": "Complete census of assumptions, all three volumes",
+              "short": "assumption census",
+              "size": "S",
+              "size_reason": "Collected from the per-chapter tags.",
+              "status": "not started",
+              "hard_deps": [
+                "fa-1",
+                "v2-100-126",
+                "v2-150-186",
+                "v2-200-234",
+                "v3-250-276",
+                "v3-300-375"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            }
+          ]
+        },
+        {
+          "id": "wkl",
+          "name": "WKL₀",
+          "leaves": [
+            {
+              "id": "w-1",
+              "name": "PRA, RCA₀ and WKL₀ as formal systems",
+              "short": "PRA, RCA₀, WKL₀",
+              "size": "M",
+              "size_reason": "Their own syntax and proof systems, separate from PM's.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by choice",
+              "placed_after": [
+                "g1"
+              ],
+              "order_reason": "The maintainer's order: after incompleteness. Nothing in PM's volumes is needed.",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "reverse-mathlib (Lean 4, Apache-2.0): ω-model facts and one syntactic result, kept apart",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Simpson, Subsystems of Second Order Arithmetic",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "w-2",
+              "name": "WKL₀ is Π⁰₂-conservative over PRA",
+              "short": "Π⁰₂-conservativity",
+              "size": "L",
+              "size_reason": "A substantial proof (Friedman; Sieg; Simpson), not formalized as far as known.",
+              "status": "not started",
+              "hard_deps": [
+                "w-1"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "A first formal proof would be new.",
+                "known": [
+                  {
+                    "work": "Not mechanized anywhere found",
+                    "evidence": "unverified"
+                  },
+                  {
+                    "work": "Sieg (1985), the syntactic route; Simpson (1988)",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Simpson credits the result to Friedman's 1977 communication to Harrington",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "decision",
+          "name": "Decision procedures",
+          "leaves": [
+            {
+              "id": "d-monadic",
+              "name": "Monadic first-order fragment",
+              "short": "monadic",
+              "size": "M",
+              "size_reason": "Known algorithm; the work is producing PM derivations for the restricted fragment.",
+              "status": "not started",
+              "status_note": "Prior work searched (below); the build comes with the other decision procedures. The fragment: one type of individuals, one-place predicate variables of that type, quantifiers over individuals only.",
+              "hard_deps": [
+                "adq-2"
+              ],
+              "soft_deps": [
+                "v1-9-14"
+              ],
+              "order": "by choice",
+              "placed_after": [
+                "w-1"
+              ],
+              "order_reason": "The maintainer's order: built with the other decision procedures, after WKL₀ is started.",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "What is new here: validity over arbitrary domains, PM's convention on the empty domain, and producing PM derivations.",
+                "known": [
+                  {
+                    "work": "Coq library of undecidability proofs (MPL-2.0): decides finite satisfiability for monadic signatures",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Orlandelli and Tesi (2024): a syntactic decision procedure; models of size at most 2^k",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Löwenheim (1915); Behmann (1922)",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "d-presburger",
+              "name": "Presburger arithmetic (addition only)",
+              "short": "Presburger",
+              "size": "M",
+              "size_reason": "Proof-producing procedures exist elsewhere; the target is PM's interpreted addition.",
+              "status": "not started",
+              "hard_deps": [
+                "v2-100-126"
+              ],
+              "soft_deps": [
+                "g-arith"
+              ],
+              "order": "by choice",
+              "placed_after": [
+                "w-1"
+              ],
+              "order_reason": "Same reason as the monadic procedure.",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "Nipkow, linear quantifier elimination (Isabelle, BSD)",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Théry (Coq, LGPL-2.1)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Lean's `omega` is not a decision procedure, so not relied on for metatheory",
+                    "evidence": "measured"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "d-tarski",
+              "name": "Tarski: real closed fields",
+              "short": "Tarski",
+              "size": "L",
+              "size_reason": "Real quantifier elimination is hard to make proof-producing.",
+              "status": "not started",
+              "hard_deps": [
+                "v3-300-375"
+              ],
+              "soft_deps": [],
+              "order": "by choice",
+              "placed_after": [
+                "w-1"
+              ],
+              "order_reason": "Same reason as the monadic procedure.",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "Cohen and Mahboubi (Coq, CeCILL-B)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Rocq CAD, `cylindrical_decomposition` (LGPL-3.0)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "Sturm–Tarski theorems in Lean (Apache-2.0; no quantifier elimination)",
+                    "evidence": "measured"
+                  },
+                  {
+                    "work": "McLaughlin and Harrison (HOL Light, proof-producing)",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "tagline": "adequacy, incompleteness, the finitist audit, WKL₀, decision procedures"
+    }
+  ],
+  "established": [
+    "✱1–✱5: {progress:✱1–✱5} numbered assertions derived from ✱1·1–✱1·6, and ✱1–✱5 complete for two-valued truth tables.",
+    "Vol I: {progress:Vol I} numbered assertions proved (✱1–✱5 from ✱1·1–✱1·6; from ✱9 on, from the primitive propositions of ✱10's method and ✱12·1, ✱12·11), as counted in docs/PROGRESS.md at commit {progress-commit}. Vols II and III are not started.",
+    "✱9 by its own method (PM/Found9): {star9f} numbered ✱9 propositions proved; ✱9·31 is open under the definitions as printed. Every ✱9 theorem is a ✱10 theorem given a variable of every type; the converse is proved given Rep and a variable of every type.",
+    "Every class and relation expression that PM's notation forms is extensional (pp. 200, 213).",
+    "No PM derivation depends on any Lean axiom; consistency is shown in a finite model, at the model's variables.",
+    "PM's claims, with their status, are in PM_CLAIMS.md. {claims-counts}",
+    "Known limits: no adequacy theorem yet (the formula type has terms that match no finite PM formula, and a `QThm` proof is not a finite object); the models forget orders."
+  ]
+}

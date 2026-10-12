@@ -1,0 +1,278 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1862" viewBox="0 0 900 1862" role="img" aria-labelledby="title desc">
+<title id="title">Group 1: PM itself</title>
+<desc id="desc">The subgroups and tasks of the group PM itself, with status, size, hard dependencies and placements by choice.</desc>
+<style>
+text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif}
+.bg{fill:#fcfcfb}
+.card{fill:#ffffff;stroke:#d6d5cf;stroke-width:1}
+.band{fill:#f3f3f0}
+.rule{stroke:#d6d5cf;stroke-width:1}
+.t1{fill:#0b0b0b}
+.t2{fill:#52514e}
+.t3{fill:#62615c}
+.st{fill:#52514e;stroke:#52514e}
+.sto{fill:none;stroke:#52514e;stroke-width:1.5}
+.edge{fill:none;stroke:#55544f;stroke-width:1.3}
+.choice{fill:none;stroke:#8a5a00;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#55544f}
+.ahc{fill:#8a5a00}
+.ms{fill:#0b0b0b}
+.g0{fill:#2a78d6}
+.gs0{stroke:#2a78d6;stroke-width:2;fill:none}
+.g1{fill:#eb6834}
+.gs1{stroke:#eb6834;stroke-width:2;fill:none}
+.g2{fill:#1baf7a}
+.gs2{stroke:#1baf7a;stroke-width:2;fill:none}
+.g3{fill:#eda100}
+.gs3{stroke:#eda100;stroke-width:2;fill:none}
+@media (prefers-color-scheme: dark) {
+.bg{fill:#1a1a19}
+.card{fill:#232322;stroke:#45443f;stroke-width:1}
+.band{fill:#2b2b29}
+.rule{stroke:#45443f;stroke-width:1}
+.t1{fill:#ffffff}
+.t2{fill:#c3c2b7}
+.t3{fill:#b0afa5}
+.st{fill:#c3c2b7;stroke:#c3c2b7}
+.sto{fill:none;stroke:#c3c2b7;stroke-width:1.5}
+.edge{fill:none;stroke:#b8b7ad;stroke-width:1.3}
+.choice{fill:none;stroke:#e3b04b;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#b8b7ad}
+.ahc{fill:#e3b04b}
+.ms{fill:#ffffff}
+.g0{fill:#3987e5}
+.gs0{stroke:#3987e5;stroke-width:2;fill:none}
+.g1{fill:#d95926}
+.gs1{stroke:#d95926;stroke-width:2;fill:none}
+.g2{fill:#199e70}
+.gs2{stroke:#199e70;stroke-width:2;fill:none}
+.g3{fill:#c98500}
+.gs3{stroke:#c98500;stroke-width:2;fill:none}
+}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahc"/></marker></defs>
+<rect x="0" y="0" width="900" height="1862" class="bg"/>
+<rect x="16.0" y="195.8" width="868.0" height="721.2" rx="8" class="band"/>
+<rect x="16.0" y="195.8" width="5.0" height="721.2" rx="2" class="g0"/>
+<rect x="30.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="314.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="598.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="30.0" y="364.1" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="314.0" y="364.1" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="598.0" y="364.1" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="30.0" y="510.2" width="272.0" height="117.7" rx="6" class="card"/>
+<rect x="314.0" y="510.2" width="272.0" height="117.7" rx="6" class="card"/>
+<rect x="598.0" y="510.2" width="272.0" height="117.7" rx="6" class="card"/>
+<rect x="30.0" y="639.9" width="272.0" height="132.7" rx="6" class="card"/>
+<rect x="314.0" y="639.9" width="272.0" height="132.7" rx="6" class="card"/>
+<rect x="598.0" y="639.9" width="272.0" height="132.7" rx="6" class="card"/>
+<rect x="30.0" y="784.6" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="314.0" y="784.6" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="598.0" y="784.6" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="16.0" y="932.9" width="868.0" height="300.7" rx="8" class="band"/>
+<rect x="16.0" y="932.9" width="5.0" height="300.7" rx="2" class="g0"/>
+<rect x="30.0" y="972.9" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="314.0" y="972.9" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="598.0" y="972.9" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="30.0" y="1119.0" width="272.0" height="98.7" rx="6" class="card"/>
+<rect x="16.0" y="1249.7" width="868.0" height="206.4" rx="8" class="band"/>
+<rect x="16.0" y="1249.7" width="5.0" height="206.4" rx="2" class="g0"/>
+<rect x="30.0" y="1289.7" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="314.0" y="1289.7" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="598.0" y="1289.7" width="272.0" height="150.4" rx="6" class="card"/>
+<rect x="16.0" y="1472.0" width="868.0" height="366.0" rx="8" class="band"/>
+<rect x="16.0" y="1472.0" width="5.0" height="366.0" rx="2" class="g0"/>
+<rect x="30.0" y="1512.0" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="314.0" y="1512.0" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="598.0" y="1512.0" width="272.0" height="151.7" rx="6" class="card"/>
+<rect x="30.0" y="1675.7" width="272.0" height="146.3" rx="6" class="card"/>
+<rect x="314.0" y="1675.7" width="272.0" height="146.3" rx="6" class="card"/>
+<text x="24.0" y="30.0" font-size="12.5" class="t3">Group 1 of 4</text>
+<text x="40.0" y="60.0" font-size="22" font-weight="700" class="t1">PM itself</text>
+<rect x="24.0" y="42.0" width="6.0" height="24.0" rx="2" class="g0"/>
+<text x="24.0" y="86.0" font-size="13.5" class="t2">Formalize the text, volume by volume and chapter by chapter, and check PM's claims about its own</text>
+<text x="24.0" y="103.8" font-size="13.5" class="t2">system as each chapter is reached.</text>
+<circle cx="29.0" cy="124.6" r="5" class="st"/>
+<text x="38.0" y="129.1" font-size="12" class="t2">done</text>
+<circle cx="90.8" cy="124.6" r="5" class="sto"/>
+<path d="M90.8,119.6 A5,5 0 0 0 90.8,129.6 Z" class="st"/>
+<text x="99.8" y="129.1" font-size="12" class="t2">in progress</text>
+<circle cx="204.6" cy="124.6" r="5" class="sto"/>
+<text x="213.6" y="129.1" font-size="12" class="t2">not started</text>
+<text x="313.4" y="129.1" font-size="12" class="t2">S, M, L: weeks, months, longer</text>
+<text x="24.0" y="155.1" font-size="12" class="t3">needs: the tasks whose results this one requires (its gates). Later by choice: placed after other work by the</text>
+<text x="24.0" y="170.9" font-size="12" class="t3">maintainer's priorities, not because it must wait.</text>
+<text x="30.0" y="218.8" font-size="15" font-weight="700" class="t1">Vol I (1910)</text>
+<text x="42.0" y="258.8" font-size="13" font-weight="700" class="t1">✱1–✱5: the theory of</text>
+<text x="42.0" y="276.5" font-size="13" font-weight="700" class="t1">deduction</text>
+<circle cx="47.0" cy="293.1" r="5" class="st"/>
+<text x="58.0" y="297.1" font-size="12" class="t2">done · size M</text>
+<text x="326.0" y="258.8" font-size="13" font-weight="700" class="t1">✱9–✱14: apparent</text>
+<text x="326.0" y="276.5" font-size="13" font-weight="700" class="t1">variables, types, identity,</text>
+<text x="326.0" y="294.1" font-size="13" font-weight="700" class="t1">descriptions</text>
+<circle cx="331.0" cy="310.8" r="5" class="sto"/>
+<path d="M331.0,305.8 A5,5 0 0 0 331.0,315.8 Z" class="st"/>
+<text x="342.0" y="314.8" font-size="12" class="t2">in progress · size M</text>
+<text x="326.0" y="332.8" font-size="12" class="t2">needs: nothing</text>
+<text x="610.0" y="258.8" font-size="13" font-weight="700" class="t1">✱9's method beside ✱10's,</text>
+<text x="610.0" y="276.5" font-size="13" font-weight="700" class="t1">shown to derive the same</text>
+<text x="610.0" y="294.1" font-size="13" font-weight="700" class="t1">results (p. 144)</text>
+<circle cx="615.0" cy="310.8" r="5" class="sto"/>
+<path d="M615.0,305.8 A5,5 0 0 0 615.0,315.8 Z" class="st"/>
+<text x="626.0" y="314.8" font-size="12" class="t2">in progress · size M</text>
+<text x="610.0" y="332.8" font-size="12" class="t2">needs: nothing</text>
+<text x="42.0" y="387.1" font-size="13" font-weight="700" class="t1">✱9·31 and the one-variable</text>
+<text x="42.0" y="404.8" font-size="13" font-weight="700" class="t1">cases of p. 142: derived by</text>
+<text x="42.0" y="422.5" font-size="13" font-weight="700" class="t1">✱9's method, or shown</text>
+<text x="42.0" y="440.2" font-size="13" font-weight="700" class="t1">underivable</text>
+<circle cx="47.0" cy="456.9" r="5" class="sto"/>
+<path d="M47.0,451.9 A5,5 0 0 0 47.0,461.9 Z" class="st"/>
+<text x="58.0" y="460.9" font-size="12" class="t2">in progress · size M</text>
+<text x="42.0" y="478.9" font-size="12" class="t2">needs: nothing</text>
+<text x="326.0" y="387.1" font-size="13" font-weight="700" class="t1">A normal-form proof of Rep:</text>
+<text x="326.0" y="404.8" font-size="13" font-weight="700" class="t1">✱1·2–✱1·6 for every</text>
+<text x="326.0" y="422.5" font-size="13" font-weight="700" class="t1">proposition of ✱9's method</text>
+<text x="326.0" y="440.2" font-size="13" font-weight="700" class="t1">(p. 142)</text>
+<circle cx="331.0" cy="456.9" r="5" class="sto"/>
+<text x="342.0" y="460.9" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="478.9" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="610.0" y="387.1" font-size="13" font-weight="700" class="t1">Every theorem checked under</text>
+<text x="610.0" y="404.8" font-size="13" font-weight="700" class="t1">both foundations, ✱9's and</text>
+<text x="610.0" y="422.5" font-size="13" font-weight="700" class="t1">✱10's</text>
+<circle cx="615.0" cy="439.2" r="5" class="sto"/>
+<text x="626.0" y="443.2" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="461.2" font-size="12" class="t2">needs: Rep</text>
+<text x="42.0" y="533.2" font-size="13" font-weight="700" class="t1">✱20–✱24: classes and</text>
+<text x="42.0" y="550.9" font-size="13" font-weight="700" class="t1">relations</text>
+<circle cx="47.0" cy="567.5" r="5" class="sto"/>
+<path d="M47.0,562.5 A5,5 0 0 0 47.0,572.5 Z" class="st"/>
+<text x="58.0" y="571.5" font-size="12" class="t2">in progress · size M</text>
+<text x="42.0" y="589.5" font-size="12" class="t2">needs: nothing</text>
+<text x="326.0" y="533.2" font-size="13" font-weight="700" class="t1">Apparent classes of classes</text>
+<text x="326.0" y="550.9" font-size="13" font-weight="700" class="t1">and their identity, needed</text>
+<text x="326.0" y="568.5" font-size="13" font-weight="700" class="t1">from ✱40 on</text>
+<circle cx="331.0" cy="585.2" r="5" class="sto"/>
+<path d="M331.0,580.2 A5,5 0 0 0 331.0,590.2 Z" class="st"/>
+<text x="342.0" y="589.2" font-size="12" class="t2">in progress · size M</text>
+<text x="326.0" y="607.2" font-size="12" class="t2">needs: nothing</text>
+<text x="610.0" y="533.2" font-size="13" font-weight="700" class="t1">Extensionality of every</text>
+<text x="610.0" y="550.9" font-size="13" font-weight="700" class="t1">class and relation</text>
+<text x="610.0" y="568.5" font-size="13" font-weight="700" class="t1">expression, proved once (pp.</text>
+<text x="610.0" y="586.2" font-size="13" font-weight="700" class="t1">200, 213)</text>
+<circle cx="615.0" cy="602.9" r="5" class="st"/>
+<text x="626.0" y="606.9" font-size="12" class="t2">done · size M</text>
+<text x="42.0" y="662.9" font-size="13" font-weight="700" class="t1">✱30–✱38: the logic of</text>
+<text x="42.0" y="680.6" font-size="13" font-weight="700" class="t1">relations</text>
+<circle cx="47.0" cy="697.3" r="5" class="sto"/>
+<text x="58.0" y="701.3" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="719.3" font-size="12" class="t2">needs: ✱20–✱24</text>
+<text x="326.0" y="662.9" font-size="13" font-weight="700" class="t1">✱40–✱56: products and sums</text>
+<text x="326.0" y="680.6" font-size="13" font-weight="700" class="t1">of classes; unit classes and</text>
+<text x="326.0" y="698.3" font-size="13" font-weight="700" class="t1">couples, to ✱54·43</text>
+<circle cx="331.0" cy="714.9" r="5" class="sto"/>
+<text x="342.0" y="718.9" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="736.9" font-size="12" class="t2">needs: ✱30–✱38, classes of</text>
+<text x="326.0" y="753.3" font-size="12" class="t2">classes</text>
+<text x="610.0" y="662.9" font-size="13" font-weight="700" class="t1">✱60–✱74: sub-classes,</text>
+<text x="610.0" y="680.6" font-size="13" font-weight="700" class="t1">relative types; one-many</text>
+<text x="610.0" y="698.3" font-size="13" font-weight="700" class="t1">and one-one relations</text>
+<circle cx="615.0" cy="714.9" r="5" class="sto"/>
+<text x="626.0" y="718.9" font-size="12" class="t2">not started · size L</text>
+<text x="610.0" y="736.9" font-size="12" class="t2">needs: ✱40–✱56</text>
+<text x="42.0" y="807.6" font-size="13" font-weight="700" class="t1">✱80–✱88: selections, with</text>
+<text x="42.0" y="825.3" font-size="13" font-weight="700" class="t1">the multiplicative axiom as</text>
+<text x="42.0" y="842.9" font-size="13" font-weight="700" class="t1">hypothesis</text>
+<circle cx="47.0" cy="859.6" r="5" class="sto"/>
+<text x="58.0" y="863.6" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="881.6" font-size="12" class="t2">needs: ✱60–✱74</text>
+<text x="326.0" y="807.6" font-size="13" font-weight="700" class="t1">✱90–✱97: inductive</text>
+<text x="326.0" y="825.3" font-size="13" font-weight="700" class="t1">relations</text>
+<circle cx="331.0" cy="841.9" r="5" class="sto"/>
+<text x="342.0" y="845.9" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="863.9" font-size="12" class="t2">needs: ✱60–✱74</text>
+<text x="610.0" y="807.6" font-size="13" font-weight="700" class="t1">A model that sees orders:</text>
+<text x="610.0" y="825.3" font-size="13" font-weight="700" class="t1">what reducibility adds</text>
+<text x="610.0" y="842.9" font-size="13" font-weight="700" class="t1">(claim B11)</text>
+<circle cx="615.0" cy="859.6" r="5" class="sto"/>
+<text x="626.0" y="863.6" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="881.6" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="30.0" y="955.9" font-size="15" font-weight="700" class="t1">Vol II (1912)</text>
+<text x="42.0" y="995.9" font-size="13" font-weight="700" class="t1">Per-item list of Vol II,</text>
+<text x="42.0" y="1013.6" font-size="13" font-weight="700" class="t1">and its claims listed by</text>
+<text x="42.0" y="1031.3" font-size="13" font-weight="700" class="t1">reading</text>
+<circle cx="47.0" cy="1048.0" r="5" class="sto"/>
+<text x="58.0" y="1052.0" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="1070.0" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="995.9" font-size="13" font-weight="700" class="t1">✱100–✱126 (Part III):</text>
+<text x="326.0" y="1013.6" font-size="13" font-weight="700" class="t1">cardinal arithmetic, to</text>
+<text x="326.0" y="1031.3" font-size="13" font-weight="700" class="t1">✱110·643 (1 + 1 = 2) and</text>
+<text x="326.0" y="1049.0" font-size="13" font-weight="700" class="t1">inductive cardinals</text>
+<circle cx="331.0" cy="1065.7" r="5" class="sto"/>
+<text x="342.0" y="1069.7" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="1087.7" font-size="12" class="t2">needs: ✱80–✱88, ✱90–✱97</text>
+<text x="610.0" y="995.9" font-size="13" font-weight="700" class="t1">✱150–✱186 (Part IV):</text>
+<text x="610.0" y="1013.6" font-size="13" font-weight="700" class="t1">relation-arithmetic</text>
+<circle cx="615.0" cy="1030.3" r="5" class="sto"/>
+<text x="626.0" y="1034.3" font-size="12" class="t2">not started · size L</text>
+<text x="610.0" y="1052.3" font-size="12" class="t2">needs: ✱90–✱97</text>
+<text x="42.0" y="1142.0" font-size="13" font-weight="700" class="t1">✱200–✱234 (Part V, first</text>
+<text x="42.0" y="1159.7" font-size="13" font-weight="700" class="t1">half): series</text>
+<circle cx="47.0" cy="1176.3" r="5" class="sto"/>
+<text x="58.0" y="1180.3" font-size="12" class="t2">not started · size L</text>
+<text x="42.0" y="1198.3" font-size="12" class="t2">needs: ✱90–✱97</text>
+<text x="30.0" y="1272.7" font-size="15" font-weight="700" class="t1">Vol III (1913)</text>
+<text x="42.0" y="1312.7" font-size="13" font-weight="700" class="t1">Per-item list of Vol III,</text>
+<text x="42.0" y="1330.3" font-size="13" font-weight="700" class="t1">and its claims listed by</text>
+<text x="42.0" y="1348.0" font-size="13" font-weight="700" class="t1">reading</text>
+<circle cx="47.0" cy="1364.7" r="5" class="sto"/>
+<text x="58.0" y="1368.7" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="1386.7" font-size="12" class="t2">needs: Vol III text</text>
+<text x="326.0" y="1312.7" font-size="13" font-weight="700" class="t1">✱250–✱276 (Part V,</text>
+<text x="326.0" y="1330.3" font-size="13" font-weight="700" class="t1">continued): well-ordered</text>
+<text x="326.0" y="1348.0" font-size="13" font-weight="700" class="t1">series, ordinals, compact</text>
+<text x="326.0" y="1365.7" font-size="13" font-weight="700" class="t1">and continuous series</text>
+<circle cx="331.0" cy="1382.4" r="5" class="sto"/>
+<text x="342.0" y="1386.4" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="1404.4" font-size="12" class="t2">needs: ✱150–✱186, ✱200–✱234,</text>
+<text x="326.0" y="1420.7" font-size="12" class="t2">Vol III text</text>
+<text x="610.0" y="1312.7" font-size="13" font-weight="700" class="t1">✱300–✱375 (Part VI):</text>
+<text x="610.0" y="1330.3" font-size="13" font-weight="700" class="t1">quantity: ratios, real</text>
+<text x="610.0" y="1348.0" font-size="13" font-weight="700" class="t1">numbers, measurement,</text>
+<text x="610.0" y="1365.7" font-size="13" font-weight="700" class="t1">cyclic families</text>
+<circle cx="615.0" cy="1382.4" r="5" class="sto"/>
+<text x="626.0" y="1386.4" font-size="12" class="t2">not started · size L</text>
+<text x="610.0" y="1404.4" font-size="12" class="t2">needs: ✱200–✱234, Vol III text</text>
+<text x="30.0" y="1495.0" font-size="15" font-weight="700" class="t1">1925 second edition</text>
+<text x="42.0" y="1535.0" font-size="13" font-weight="700" class="t1">Record the edition</text>
+<text x="42.0" y="1552.7" font-size="13" font-weight="700" class="t1">differences, and the new</text>
+<text x="42.0" y="1570.4" font-size="13" font-weight="700" class="t1">Introduction's claims</text>
+<circle cx="47.0" cy="1587.1" r="5" class="sto"/>
+<text x="58.0" y="1591.1" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="1609.1" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="1535.0" font-size="13" font-weight="700" class="t1">✱8 and Appendix A, in place</text>
+<text x="326.0" y="1552.7" font-size="13" font-weight="700" class="t1">of ✱9</text>
+<circle cx="331.0" cy="1569.4" r="5" class="sto"/>
+<text x="342.0" y="1573.4" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="1591.4" font-size="12" class="t2">needs: ✱9 beside ✱10</text>
+<text x="610.0" y="1535.0" font-size="13" font-weight="700" class="t1">Appendix B (✱89, induction</text>
+<text x="610.0" y="1552.7" font-size="13" font-weight="700" class="t1">without reducibility):</text>
+<text x="610.0" y="1570.4" font-size="13" font-weight="700" class="t1">locate the failing step and</text>
+<text x="610.0" y="1588.1" font-size="13" font-weight="700" class="t1">prove a narrower</text>
+<text x="610.0" y="1605.7" font-size="13" font-weight="700" class="t1">replacement</text>
+<circle cx="615.0" cy="1622.4" r="5" class="sto"/>
+<text x="626.0" y="1626.4" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="1644.4" font-size="12" class="t2">needs: ✱90–✱97</text>
+<text x="42.0" y="1698.7" font-size="13" font-weight="700" class="t1">Appendix C: truth-functions</text>
+<text x="42.0" y="1716.4" font-size="13" font-weight="700" class="t1">and extensionality</text>
+<circle cx="47.0" cy="1733.1" r="5" class="sto"/>
+<text x="58.0" y="1737.1" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="1755.1" font-size="12" class="t2">needs: ✱9–✱14</text>
+<text x="326.0" y="1698.7" font-size="13" font-weight="700" class="t1">Full second-edition pass</text>
+<circle cx="331.0" cy="1715.4" r="5" class="sto"/>
+<text x="342.0" y="1719.4" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="1737.4" font-size="12" class="t2">needs: edition differences, ✱8</text>
+<text x="326.0" y="1753.7" font-size="12" class="t2">and Appendix A, Appendix B,</text>
+<text x="326.0" y="1770.1" font-size="12" class="t2">Appendix C</text>
+<text x="326.0" y="1786.4" font-size="12" class="t2">later by choice: after</text>
+<text x="326.0" y="1802.7" font-size="12" class="t2">✱250–✱276, ✱300–✱375</text>
+</svg>

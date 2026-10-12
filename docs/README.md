@@ -3,7 +3,7 @@
 | Page | What it covers |
 |---|---|
 | [PRINCIPLES.md](PRINCIPLES.md) | the project's standing design principles |
-| [ROADMAP.md](ROADMAP.md) | what comes next: checking PM's claims, coverage, independent checking, cross-checking between foundations |
+| [ROADMAP.md](ROADMAP.md) | the plan: four groups of tasks, each with its status, size, dependencies, the prior work found for it and the reason for its place in the order; the statements about incompleteness and consistency, with their hypotheses; scope. Its tables and the charts in [roadmap/](roadmap/) are generated from [data/roadmap.json](../data/roadmap.json) |
 | [PM_CLAIMS.md](PM_CLAIMS.md) | PM's claims about its own system (Introduction, ✱1–✱21), each with its page and its status: checked in Lean, partly checked, assumed, in progress, not attempted, or shown not to hold as stated |
 | [PROGRESS.md](PROGRESS.md) | coverage by volume, range and chapter; milestones; the units counted (generated tables) |
 | [FIDELITY.md](FIDELITY.md) | how closely the proofs follow PM: labels, glue, the three counts, findings in the text |

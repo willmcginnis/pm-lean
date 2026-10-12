@@ -1,0 +1,145 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="838" viewBox="0 0 900 838" role="img" aria-labelledby="title desc">
+<title id="title">Group 3: Comparing across</title>
+<desc id="desc">The subgroups and tasks of the group Comparing across, with status, size, hard dependencies and placements by choice.</desc>
+<style>
+text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif}
+.bg{fill:#fcfcfb}
+.card{fill:#ffffff;stroke:#d6d5cf;stroke-width:1}
+.band{fill:#f3f3f0}
+.rule{stroke:#d6d5cf;stroke-width:1}
+.t1{fill:#0b0b0b}
+.t2{fill:#52514e}
+.t3{fill:#62615c}
+.st{fill:#52514e;stroke:#52514e}
+.sto{fill:none;stroke:#52514e;stroke-width:1.5}
+.edge{fill:none;stroke:#55544f;stroke-width:1.3}
+.choice{fill:none;stroke:#8a5a00;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#55544f}
+.ahc{fill:#8a5a00}
+.ms{fill:#0b0b0b}
+.g0{fill:#2a78d6}
+.gs0{stroke:#2a78d6;stroke-width:2;fill:none}
+.g1{fill:#eb6834}
+.gs1{stroke:#eb6834;stroke-width:2;fill:none}
+.g2{fill:#1baf7a}
+.gs2{stroke:#1baf7a;stroke-width:2;fill:none}
+.g3{fill:#eda100}
+.gs3{stroke:#eda100;stroke-width:2;fill:none}
+@media (prefers-color-scheme: dark) {
+.bg{fill:#1a1a19}
+.card{fill:#232322;stroke:#45443f;stroke-width:1}
+.band{fill:#2b2b29}
+.rule{stroke:#45443f;stroke-width:1}
+.t1{fill:#ffffff}
+.t2{fill:#c3c2b7}
+.t3{fill:#b0afa5}
+.st{fill:#c3c2b7;stroke:#c3c2b7}
+.sto{fill:none;stroke:#c3c2b7;stroke-width:1.5}
+.edge{fill:none;stroke:#b8b7ad;stroke-width:1.3}
+.choice{fill:none;stroke:#e3b04b;stroke-width:1.5;stroke-dasharray:5 3}
+.ah{fill:#b8b7ad}
+.ahc{fill:#e3b04b}
+.ms{fill:#ffffff}
+.g0{fill:#3987e5}
+.gs0{stroke:#3987e5;stroke-width:2;fill:none}
+.g1{fill:#d95926}
+.gs1{stroke:#d95926;stroke-width:2;fill:none}
+.g2{fill:#199e70}
+.gs2{stroke:#199e70;stroke-width:2;fill:none}
+.g3{fill:#c98500}
+.gs3{stroke:#c98500;stroke-width:2;fill:none}
+}
+</style>
+<defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahc"/></marker></defs>
+<rect x="0" y="0" width="900" height="838" class="bg"/>
+<rect x="16.0" y="195.8" width="868.0" height="172.4" rx="8" class="band"/>
+<rect x="16.0" y="195.8" width="5.0" height="172.4" rx="2" class="g2"/>
+<rect x="30.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="314.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="16.0" y="384.1" width="868.0" height="224.0" rx="8" class="band"/>
+<rect x="16.0" y="384.1" width="5.0" height="224.0" rx="2" class="g2"/>
+<rect x="30.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
+<rect x="314.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
+<rect x="598.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
+<rect x="16.0" y="624.2" width="868.0" height="190.0" rx="8" class="band"/>
+<rect x="16.0" y="624.2" width="5.0" height="190.0" rx="2" class="g2"/>
+<rect x="30.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="314.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
+<rect x="598.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
+<text x="24.0" y="30.0" font-size="12.5" class="t3">Group 3 of 4</text>
+<text x="40.0" y="60.0" font-size="22" font-weight="700" class="t1">Comparing across</text>
+<rect x="24.0" y="42.0" width="6.0" height="24.0" rx="2" class="g2"/>
+<text x="24.0" y="86.0" font-size="13.5" class="t2">The same statements compared with other readings of PM, with mainstream mathematics, and with the</text>
+<text x="24.0" y="103.8" font-size="13.5" class="t2">printed text.</text>
+<circle cx="29.0" cy="124.6" r="5" class="st"/>
+<text x="38.0" y="129.1" font-size="12" class="t2">done</text>
+<circle cx="90.8" cy="124.6" r="5" class="sto"/>
+<path d="M90.8,119.6 A5,5 0 0 0 90.8,129.6 Z" class="st"/>
+<text x="99.8" y="129.1" font-size="12" class="t2">in progress</text>
+<circle cx="204.6" cy="124.6" r="5" class="sto"/>
+<text x="213.6" y="129.1" font-size="12" class="t2">not started</text>
+<text x="313.4" y="129.1" font-size="12" class="t2">S, M, L: weeks, months, longer</text>
+<text x="24.0" y="155.1" font-size="12" class="t3">needs: the tasks whose results this one requires (its gates). Later by choice: placed after other work by the</text>
+<text x="24.0" y="170.9" font-size="12" class="t3">maintainer's priorities, not because it must wait.</text>
+<text x="30.0" y="218.8" font-size="15" font-weight="700" class="t1">Other readings of PM</text>
+<text x="42.0" y="258.8" font-size="13" font-weight="700" class="t1">Compare with set.mm's own</text>
+<text x="42.0" y="276.5" font-size="13" font-weight="700" class="t1">PM theorems, chapter by</text>
+<text x="42.0" y="294.1" font-size="13" font-weight="700" class="t1">chapter</text>
+<circle cx="47.0" cy="310.8" r="5" class="sto"/>
+<text x="58.0" y="314.8" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="332.8" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="258.8" font-size="13" font-weight="700" class="t1">Compare other</text>
+<text x="326.0" y="276.5" font-size="13" font-weight="700" class="t1">formalizations of PM,</text>
+<text x="326.0" y="294.1" font-size="13" font-weight="700" class="t1">number by number</text>
+<circle cx="331.0" cy="310.8" r="5" class="sto"/>
+<path d="M331.0,305.8 A5,5 0 0 0 331.0,315.8 Z" class="st"/>
+<text x="342.0" y="314.8" font-size="12" class="t2">in progress · size S</text>
+<text x="326.0" y="332.8" font-size="12" class="t2">needs: nothing</text>
+<text x="30.0" y="407.1" font-size="15" font-weight="700" class="t1">Mainstream mathematics (Mathlib), in a separate package</text>
+<text x="42.0" y="447.1" font-size="13" font-weight="700" class="t1">Cardinal arithmetic</text>
+<text x="42.0" y="464.8" font-size="13" font-weight="700" class="t1">(✱100–✱126) agrees with</text>
+<text x="42.0" y="482.5" font-size="13" font-weight="700" class="t1">Mathlib's Nat and Cardinal</text>
+<circle cx="47.0" cy="499.2" r="5" class="sto"/>
+<text x="58.0" y="503.2" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="521.2" font-size="12" class="t2">needs: ✱100–✱126</text>
+<text x="326.0" y="447.1" font-size="13" font-weight="700" class="t1">Relation-numbers</text>
+<text x="326.0" y="464.8" font-size="13" font-weight="700" class="t1">(✱150–✱186) agree with</text>
+<text x="326.0" y="482.5" font-size="13" font-weight="700" class="t1">Mathlib's order types, and</text>
+<text x="326.0" y="500.2" font-size="13" font-weight="700" class="t1">with Ordinal for</text>
+<text x="326.0" y="517.9" font-size="13" font-weight="700" class="t1">well-orders</text>
+<circle cx="331.0" cy="534.5" r="5" class="sto"/>
+<text x="342.0" y="538.5" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="556.5" font-size="12" class="t2">needs: ✱150–✱186, Mathlib:</text>
+<text x="326.0" y="572.9" font-size="12" class="t2">cardinals</text>
+<text x="610.0" y="447.1" font-size="13" font-weight="700" class="t1">Series, ordinals and real</text>
+<text x="610.0" y="464.8" font-size="13" font-weight="700" class="t1">numbers (Vol III) agree</text>
+<text x="610.0" y="482.5" font-size="13" font-weight="700" class="t1">with Mathlib</text>
+<circle cx="615.0" cy="499.2" r="5" class="sto"/>
+<text x="626.0" y="503.2" font-size="12" class="t2">not started · size M</text>
+<text x="610.0" y="521.2" font-size="12" class="t2">needs: ✱250–✱276, ✱300–✱375,</text>
+<text x="610.0" y="537.5" font-size="12" class="t2">Mathlib: cardinals</text>
+<text x="30.0" y="647.2" font-size="15" font-weight="700" class="t1">The printed text</text>
+<text x="42.0" y="687.2" font-size="13" font-weight="700" class="t1">Vol I and Vol II</text>
+<text x="42.0" y="704.9" font-size="13" font-weight="700" class="t1">transcriptions checked</text>
+<text x="42.0" y="722.5" font-size="13" font-weight="700" class="t1">against scans; errata</text>
+<text x="42.0" y="740.2" font-size="13" font-weight="700" class="t1">reported</text>
+<circle cx="47.0" cy="756.9" r="5" class="sto"/>
+<path d="M47.0,751.9 A5,5 0 0 0 47.0,761.9 Z" class="st"/>
+<text x="58.0" y="760.9" font-size="12" class="t2">in progress · size M</text>
+<text x="42.0" y="778.9" font-size="12" class="t2">needs: nothing</text>
+<text x="326.0" y="687.2" font-size="13" font-weight="700" class="t1">Vol III transcription</text>
+<text x="326.0" y="704.9" font-size="13" font-weight="700" class="t1">proofread and checked</text>
+<text x="326.0" y="722.5" font-size="13" font-weight="700" class="t1">against scans</text>
+<circle cx="331.0" cy="739.2" r="5" class="sto"/>
+<path d="M331.0,734.2 A5,5 0 0 0 331.0,744.2 Z" class="st"/>
+<text x="342.0" y="743.2" font-size="12" class="t2">in progress · size M</text>
+<text x="326.0" y="761.2" font-size="12" class="t2">needs: nothing</text>
+<text x="610.0" y="687.2" font-size="13" font-weight="700" class="t1">✱1–✱5 as transcribed:</text>
+<text x="610.0" y="704.9" font-size="13" font-weight="700" class="t1">every formula parses with</text>
+<text x="610.0" y="722.5" font-size="13" font-weight="700" class="t1">the printed dots and is</text>
+<text x="610.0" y="740.2" font-size="13" font-weight="700" class="t1">derivable</text>
+<circle cx="615.0" cy="756.9" r="5" class="sto"/>
+<path d="M615.0,751.9 A5,5 0 0 0 615.0,761.9 Z" class="st"/>
+<text x="626.0" y="760.9" font-size="12" class="t2">in progress · size S</text>
+<text x="610.0" y="778.9" font-size="12" class="t2">needs: nothing</text>
+</svg>

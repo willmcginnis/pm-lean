@@ -5,6 +5,22 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **The roadmap as nested groups, generated from data.** `data/roadmap.json` holds the plan: four groups (PM
+  itself; checking underneath; comparing across; results about PM), their subgroups, and 66 tasks, each with
+  status, size, dependencies, order (by dependency, or by choice with the reason) and the prior work found for
+  it, with an evidence level for each entry. `scripts/roadmap_chart.py` draws the charts in `docs/roadmap/`
+  and writes the roadmap section of the README and the tables of `docs/ROADMAP.md`, filling in counts from
+  `docs/PROGRESS.md`, `docs/PM_CLAIMS.md` and the ✱9 ledger; `tests/test_roadmap.py` keeps them in step.
+  Changes to the plan: the finite first-order core (adequacy, stage 2) is the gate for pm.mm beyond ✱5, the
+  Rocq re-check and incompleteness, because a `QThm` proof is infinitely branching; incompleteness goes
+  through a first-order presentation of PM, reusing an existing library in a separate package; the Rocq
+  re-check is our own small checker over our own certificates; a verified checker for Lean's kernel fragment
+  follows the census directly, starting with existing ones; the Lean–ZFC links are cited and re-checked, not
+  rebuilt; Appendix B's goal is to locate the failing step and prove a narrower replacement; Mathlib bridges
+  start at ✱100, in a separate package. New tasks: ✱9·31 and the one-variable cases of p. 142, a normal-form
+  proof of `Rep`, every theorem under both foundations, the converse of adequacy, and a check that the
+  transcribed ✱1–✱5 formulas parse with the printed dots and are derivable. Tasks that moved say why.
+  `docs/PRINCIPLES.md`: principles 6 (search prior work first) and 7 (the order is a plan, not a contract).
 - **Corrections after a second external review.** PM_CLAIMS A12 is partly checked (27 checked, 22
   partly checked): ✱10·12 is proved in ✱9's method for an elementary p (`f10_12`), and for every p only
   given `Rep` and a variable of every type (`Rep.distrib`); A14 names both hypotheses of `qthm_toF9`.

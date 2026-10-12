@@ -73,3 +73,32 @@ Each such claim is listed in [PM_CLAIMS.md](PM_CLAIMS.md) with its page and stat
 - A claim shown to fail is marked **does not hold as stated**, with what holds instead (for example, PM's
   two definitions of "predicative", p. 56 and p. 172, disagree on (y) . ψ(x, y), a first-order function of x;
   with reducibility they still derive the same theorems).
+
+## 6. Search prior work first
+
+Added 2026-10-12 (maintainer).
+
+Before any task is started, and as the first step of every task, prior work is searched in depth: existing
+formalizations (Lean, Rocq/Coq, Isabelle, HOL, Metamath, Mizar, Agda), papers, theses, talks and
+repositories. Several independent search tools are used and their findings compared. An earlier search
+found a formalization of PM that had gone much further than expected.
+
+- The purposes: to save work, to get ideas, to learn early whether a task is easy, hard or a dead end, and
+  to have independent work to check ours against.
+- Findings are recorded per task, in [ROADMAP.md](ROADMAP.md): what exists, how far it got, its license,
+  whether it can be reused, and how well each finding is established (measured from the source, documented
+  in a paper or README, or unverified). "Not found" means not found by the searches so far.
+- Code is never copied from unlicensed repositories; ideas only.
+- The searches are cheap and independent of each other, so they run ahead of the work they inform.
+
+## 7. The order is a plan, not a contract
+
+Added 2026-10-12 (maintainer).
+
+Work moves when it fits better elsewhere or costs little, and the reason is recorded.
+
+- A task that is small, or independent of the rest, is done early rather than in its place in the plan.
+- A task placed later than its dependencies require is marked *by choice*, with the reason, so that a
+  choice is not mistaken for a dependency.
+- When a task moves, [ROADMAP.md](ROADMAP.md) records where it was and why
+  ([data/roadmap.json](../data/roadmap.json), field `moved`).

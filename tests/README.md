@@ -20,6 +20,7 @@ request. Each test was checked to fail when its mistake is put back.
 | The docs kept the count of axiom users at 25 after eight `injEq` lemmas were added | `test_axiom_users.py`: the count each doc gives (and the number of `injEq` lemmas) equals `expected_axiom_users.txt` |
 | A merge left PM_CLAIMS.md's totals inconsistent with its rows | `test_pm_claims_counts.py`: each clause of the Counts paragraph equals a recount of the rows with its status, and every row is counted once |
 | ✱9's own ledger could list fewer propositions than its proofs use | `Checks/LedgerCheck.lean`, check 3: as check 2, for `data/star9f_ledger.json` |
+| (the roadmap's charts and lists must not drift from its data, or from the counts they cite) | `test_roadmap.py`: `scripts/roadmap_chart.py --check` regenerates the charts and the generated text of README.md and docs/ROADMAP.md and finds no difference; `scripts/check_svg.py` passes on every chart |
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built.

@@ -37,7 +37,7 @@ where PM asserts something about its own system (that two methods are equivalent
 carry over "by merely repeating previous proofs"), the assertion is checked in Lean, not adopted;
 [docs/PM_CLAIMS.md](docs/PM_CLAIMS.md) lists these claims and their status. One does not hold as stated: PM's
 two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
-axiom of reducibility they derive the same theorems (row B4). What comes next is in [docs/ROADMAP.md](docs/ROADMAP.md).
+axiom of reducibility they derive the same theorems (row B4). What comes next is in the [roadmap](#roadmap) below and in [docs/ROADMAP.md](docs/ROADMAP.md).
 
 ## Status at a glance (2026-10-12, commit `27b4f85`)
 
@@ -84,6 +84,129 @@ The limits matter as much
   variable families every formula is derivable (`PM/Trap.lean`).
 - **The models forget orders.** The order discipline is checked only
   syntactically, so it is not proved that comprehension without ✱12·1 is weaker.
+
+## Roadmap
+
+<!-- generated:roadmap:start -->
+![Roadmap overview: four groups of work (PM itself; checking underneath; comparing across; results about PM) and five milestones (Vol I checked, Vol II checked, Vol III checked, first edition audited, Lean's kernel fragment verified)](docs/roadmap/overview.svg)
+
+The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view).
+
+<details>
+<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (2 done, 5 in progress, 20 not started)</summary>
+
+![Group 1, PM itself: its subgroups and tasks](docs/roadmap/group-pm.svg)
+
+- **Vol I (1910)**
+  - ✱1–✱5: the theory of deduction: *done*
+  - ✱9–✱14: apparent variables, types, identity, descriptions: *in progress*
+  - ✱9's method beside ✱10's, shown to derive the same results (p. 144): *in progress*
+  - ✱9·31 and the one-variable cases of p. 142: derived by ✱9's method, or shown underivable: *in progress*
+  - A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142): *not started*
+  - Every theorem checked under both foundations, ✱9's and ✱10's: *not started*
+  - ✱20–✱24: classes and relations: *in progress*
+  - Apparent classes of classes and their identity, needed from ✱40 on: *in progress*
+  - Extensionality of every class and relation expression, proved once (pp. 200, 213): *done*
+  - ✱30–✱38: the logic of relations: *not started*
+  - ✱40–✱56: products and sums of classes; unit classes and couples, to ✱54·43: *not started*
+  - ✱60–✱74: sub-classes, relative types; one-many and one-one relations: *not started*
+  - ✱80–✱88: selections, with the multiplicative axiom as hypothesis: *not started*
+  - ✱90–✱97: inductive relations: *not started*
+  - A model that sees orders: what reducibility adds (claim B11): *not started*
+- **Vol II (1912)**
+  - Per-item list of Vol II, and its claims listed by reading: *not started*
+  - ✱100–✱126 (Part III): cardinal arithmetic, to ✱110·643 (1 + 1 = 2) and inductive cardinals: *not started*
+  - ✱150–✱186 (Part IV): relation-arithmetic: *not started*
+  - ✱200–✱234 (Part V, first half): series: *not started*
+- **Vol III (1913)**
+  - Per-item list of Vol III, and its claims listed by reading: *not started*
+  - ✱250–✱276 (Part V, continued): well-ordered series, ordinals, compact and continuous series: *not started*
+  - ✱300–✱375 (Part VI): quantity: ratios, real numbers, measurement, cyclic families: *not started*
+- **1925 second edition**
+  - Record the edition differences, and the new Introduction's claims: *not started*
+  - ✱8 and Appendix A, in place of ✱9: *not started*
+  - Appendix B (✱89, induction without reducibility): locate the failing step and prove a narrower replacement: *not started*
+  - Appendix C: truth-functions and extensionality: *not started*
+  - Full second-edition pass: *not started, later by choice*
+
+</details>
+
+<details>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (14 not started)</summary>
+
+![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
+
+- **Independent Lean kernels**
+  - Independent Lean kernels re-check the build in CI, one checker per code family: *not started*
+- **Metamath and Rocq**
+  - pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers: *not started*
+  - pm.mm for ✱9–✱14, from the finite first-order core: binding, substitution, distinct-variable conditions: *not started*
+  - pm.mm from ✱20 on, chapter by chapter: *not started*
+  - Rocq re-check: our own small checker for our certificate format, proved sound in Rocq: *not started, later by choice*
+- **set.mm and ZFC**
+  - set.mm: replay ✱1–✱5 inside ZFC: *not started*
+  - A model of PM's types in ZFC: each primitive proposition and rule proved true once: *not started*
+  - Every exported derivation transferred through the model: *not started*
+- **Lean's own kernel**
+  - (a) Census of the kernel features the project exercises: *not started*
+  - (b) Lean in Lean: Lean4Lean re-checks the build: *not started*
+  - (c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed: *not started*
+  - (d) A formal proof that the checker used is correct against a specification of the fragment: *not started*
+- **Lean and ZFC: relative consistency**
+  - Lean proves Con(ZFC): existing mechanizations cited and re-checked: *not started*
+  - ZFC with inaccessibles proves Con(Lean's type theory): existing mechanizations cited and re-checked: *not started*
+
+</details>
+
+<details>
+<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text (4 in progress, 4 not started)</summary>
+
+![Group 3, Comparing across: its subgroups and tasks](docs/roadmap/group-across.svg)
+
+- **Other readings of PM**
+  - Compare with set.mm's own PM theorems, chapter by chapter: *not started*
+  - Compare other formalizations of PM, number by number: *in progress*
+- **Mainstream mathematics (Mathlib), in a separate package**
+  - Cardinal arithmetic (✱100–✱126) agrees with Mathlib's Nat and Cardinal: *not started*
+  - Relation-numbers (✱150–✱186) agree with Mathlib's order types, and with Ordinal for well-orders: *not started*
+  - Series, ordinals and real numbers (Vol III) agree with Mathlib: *not started*
+- **The printed text**
+  - Vol I and Vol II transcriptions checked against scans; errata reported: *in progress*
+  - Vol III transcription proofread and checked against scans: *in progress*
+  - ✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable: *in progress*
+
+</details>
+
+<details>
+<summary><b>4. Results about PM</b>: adequacy, incompleteness, the finitist audit, WKL₀, decision procedures (1 in progress, 16 not started)</summary>
+
+![Group 4, Results about PM: its subgroups and tasks](docs/roadmap/group-about.svg)
+
+- **Finite syntax and adequacy**
+  - Adequacy, stage 1: ✱1–✱5, a finite certificate format and both translations: *not started*
+  - Adequacy, stage 2: a finite first-order core for ✱9–✱14, with derivations as data, and the easy direction (every core derivation gives a QThm theorem): *not started*
+  - Adequacy, stage 2, the converse: from QThm back to the finite core: *not started*
+  - Adequacy, stage 3: classes and beyond: *not started*
+- **Incompleteness**
+  - PM as a many-sorted first-order theory (the finite core), in a separate package that reuses the Foundation library: *not started*
+  - Numbering of the core's formulas and derivations; 'is a derivation of' representable: *not started*
+  - Robinson's Q interpreted inside the chosen PM theory, with Infinity as hypothesis: *not started*
+  - Gödel's first theorem for PM, in the Gödel–Rosser form: *not started, later by choice*
+  - Gödel's second theorem for PM: derivability conditions, then Con unprovable: *not started*
+- **Finitist audit**
+  - Assumption provenance: which results use reducibility, infinity, the multiplicative axiom: *in progress*
+  - PRA readings: which results have an arithmetic reading provable in PRA: *not started, later by choice*
+  - Complete census of assumptions, all three volumes: *not started*
+- **WKL₀**
+  - PRA, RCA₀ and WKL₀ as formal systems: *not started, later by choice*
+  - WKL₀ is Π⁰₂-conservative over PRA: *not started*
+- **Decision procedures**
+  - Monadic first-order fragment: *not started, later by choice*
+  - Presburger arithmetic (addition only): *not started, later by choice*
+  - Tarski: real closed fields: *not started, later by choice*
+
+</details>
+<!-- generated:roadmap:end -->
 
 ## Build and check
 
