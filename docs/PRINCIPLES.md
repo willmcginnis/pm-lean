@@ -67,8 +67,8 @@ merely repeating previous proofs", that one hierarchy "can be derived" from anot
 Each such claim is listed in [PM_CLAIMS.md](PM_CLAIMS.md) with its page and status.
 
 - A claim that is built into the formalization rather than proved is marked **assumed**, with the reason
-  (for example, PM's statement that every proposition about a class is extensional is an explicit premise,
-  `ClsExt`, where a proof needs it in general).
+  (for example, PM's extension of the axiom of reducibility to functions of functions is built in: ✱12·1
+  is a rule at every type).
 - A claim the formalization cannot yet reach is marked **not attempted**, not quietly adopted.
 - A claim shown to fail is marked **does not hold as stated**, with what holds instead (for example, PM's
   two definitions of "predicative", p. 56 and p. 172, disagree on (y) . ψ(x, y), a first-order function of x;

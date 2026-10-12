@@ -5,7 +5,6 @@ What this project plans to do next, roughly in order. Status words: **in progres
 ## Checking PM's own claims
 
 - **In progress.** ✱9's foundation built alongside ✱10's, with a theorem that both derive the same results (PM, p. 144: the two methods are alternatives).
-- **Next.** Extensionality of every class expression, proved once (PM, p. 200: "every proposition about a class expresses an extensional property"). Today it is an explicit premise.
 - **Next.** Work through docs/PM_CLAIMS.md: every claim checked, or marked with why not.
 - **Later.** Every theorem checked under both foundations (✱9's and ✱10's), as StyleCheck does for the predicativity styles, if the cost measured on a trial branch is reasonable.
 

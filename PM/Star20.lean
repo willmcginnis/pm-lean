@@ -59,7 +59,9 @@ import PM.Star14
   (`qclsCls1`, `qmemCls`, `qclsClsMem`, `qclsApp`), and statements use the notation `x ∈ α` and
   `α ∈ κ` (scoped to `PM`). ✱20·4 and ✱20·41 are proved after ✱20·7, whose analogue of ✱12·1
   their ✱20·3 needs: the ✱20·3 of ✱20·4's hint is its analogue for classes of classes (p. 206: the
-  analogues "will, therefore, be quoted by the numbers of the original propositions").
+  analogues "will, therefore, be quoted by the numbers of the original propositions"). The
+  extensionality of the defining expression, a premise of that analogue (`ClsExt`), is proved for every
+  expression of a class that PM's notation forms (`ClsExpr`, `clsExpr_ext`; p. 200).
 
   Not formalized:
   - ✱20·631, ✱20·632 (significance, built into the syntax as ✱10·121, ✱10·122 are). ✱20·62 and
@@ -815,7 +817,7 @@ theorem q20_81 [Reducibility S] {τ : Ty} (φ ψ : V τ → QF V) (a : V τ) :
   needs the defining expression Ψα of the class of classes to be extensional (`ClsExt`): "every
   proposition about a class expresses an extensional property of the determining function of the
   class" (p. 200), which ✱20·11 proves for each context; `clsExt_cls` and `clsExt_ex` give it for the
-  expressions used here. -/
+  expressions used here, and `clsExpr_ext` (after ✱20·41) for every expression PM's notation forms. -/
 
 /-- `Ψ` is extensional: `⊢ :. ψx . ≡ₓ . χx : ⊃ : Ψ{ẑ(ψz)} . ≡ . Ψ{ẑ(χz)}` for all ψ, χ, i.e. ✱20·11 for the
     expression Ψα. -/
@@ -834,6 +836,12 @@ theorem clsExt_ex {τ : Ty} (Ψ : V τ → (V a → QF V) → QF V) (h : ∀ v, 
 /-- The defining expression of Cls, (∃φ) . α = ẑ(φ!z), is extensional (`clsExt_ex`, `clsExt_cls`). -/
 theorem clsExt_Cls : ClsExt S (Cls (V := V) (a := a)) :=
   clsExt_ex (fun φ α => clsEq α (pf φ)) fun _ => clsExt_cls _
+
+/-- The bare application ψx, a function of ψ rather than of the class ẑ(ψz), is extensional too: ✱10·1.
+    PM's notation does not form it as a proposition about the class (`ClsExpr` leaves it out), but
+    leaving it out hides no counterexample to p. 200. -/
+theorem clsExt_app (x : V a) : ClsExt S fun α => α x :=
+  fun ψ χ => q10_1 (fun y => iff (ψ y) (χ y)) x
 
 /-- ✱20·1 for classes of classes: `⊢ :. f{α̂(ψα)} . ≡ : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` [✱4·2 . (✱20·08)]. -/
 theorem qclsCls1 (Ψ : (V a → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred1 a)) → QF V) :
@@ -916,6 +924,129 @@ theorem q20_4 [Reducibility S] (ψ : V a → QF V) :
 /-- ✱20·41 `⊢ . ẑ(ψz) ∈ Cls` [✱20·4·151]. "We need further ⊢ . (∃α) . ẑ(ψz) = α. This is ✱20·41" (p. 206). -/
 theorem q20_41 [Reducibility S] (ψ : V a → QF V) : QThm S (ψ ∈ Cls) :=
   QThm.mp (q20_151 ψ) (qiffMpr (q20_4 ψ))                                         -- ✱20·4·151
+
+/-! ## Every expression of a class that PM's notation forms is extensional (p. 200)
+
+  After ✱20·11: "This proves that every proposition about a class expresses an extensional property of
+  the determining function of the class" (p. 200). ✱20·11 proves it for one context f{ẑ(ψz)}; the claim
+  is that it then holds for every proposition about a class, because each occurrence of a class is
+  eliminated by ✱20·01. A Lean function `Ψ : (V a → QF V) → QF V` need not be built that way, so
+  `qcls20_3` takes `ClsExt S Ψ` as a premise. `ClsExpr` names the expressions that are built that way,
+  and `clsExpr_ext` proves `ClsExt` for all of them, as `TruthFn` and `qtfnCongr` do for the
+  truth-functions of ✱14·3 (PM/Star14.lean).
+
+  `ClsExpr Ψ`: Ψα is generated from formulas not containing α by ∼, ∨ and (x) (x of any type, so also
+  apparent classes and relations), and by ✱20·01 at α itself, f{α} with a context f that may contain α
+  again. Each of PM's notations for a proposition about α is a definition that unfolds into these, so
+  it is a `ClsExpr` (the lemmas in `ClsExpr` below): ⊃, ., ≡, (∃x), ≡ₓ; x ∈ α, α = β, α = α, φ!α; a class
+  ẑ(ψz), a description (ιx)(φx) or a class of classes α̂(Ψα) whose defining function contains α (so
+  also β ∈ α̂(Ψα) and α ∈ κ); (β) . fβ and (∃β) . fβ; and the ✱21 notations for relations, which unfold
+  the same way (✱21·01 is a formula built by ∼, ∨, (x)). Not included: a Lean function that uses its
+  argument in any other way, e.g. one that inspects the formula ψx (by `match`), compares ψ with a
+  given function, or uses ψx outside an elimination by ✱20·01. PM's notation has no means to form
+  these: a class "has no meaning in isolation", and ψx is not a proposition about the class ẑ(ψz). -/
+
+/-- The expressions Ψα of a class α that PM's notation forms: from formulas not containing α by ∼, ∨, (x),
+    and by ✱20·01 at α (f{α}, the context f possibly containing α again). -/
+inductive ClsExpr {V : Ty → Type} {a : Ty} : ((V a → QF V) → QF V) → Prop
+  | const (r : QF V) : ClsExpr fun _ => r
+  | neg {F : (V a → QF V) → QF V} : ClsExpr F → ClsExpr fun α => .neg (F α)
+  | or {F G : (V a → QF V) → QF V} : ClsExpr F → ClsExpr G → ClsExpr fun α => .or (F α) (G α)
+  | all {τ : Ty} {F : V τ → (V a → QF V) → QF V} : (∀ x, ClsExpr (F x)) →
+      ClsExpr fun α => .all fun x => F x α
+  | cls {F : V (Ty.pred1 a) → (V a → QF V) → QF V} : (∀ φ, ClsExpr (F φ)) →
+      ClsExpr fun α => cls α fun φ => F φ α
+
+/-- Every `ClsExpr` is extensional: `⊢ :. ψx . ≡ₓ . χx : ⊃ : Ψ{ẑ(ψz)} . ≡ . Ψ{ẑ(χz)}`, the claim of p. 200 for
+    the expressions PM forms. By induction on Ψ: ✱4·2 and Simp (✱2·02); ✱4·11; Comp and ✱4·39;
+    ✱10·11·21 and ✱10·271 (as `qtfnCongr`); and for f{α}, ✱20·11 for the context f(φ!ẑ) at ẑ(ψz), then
+    the context carried from ẑ(ψz) to ẑ(χz) under (∃φ) (✱4·36 on the second factor, ✱10·11·21, ✱10·281),
+    joined under Hp (✱3·43, ✱4·22). -/
+theorem clsExpr_ext {Ψ : (V a → QF V) → QF V} (hΨ : ClsExpr Ψ) : ClsExt S Ψ := by
+  intro ψ χ
+  induction hΨ with
+  | const r => exact QThm.mp (QL.t4_2 r) (QL.t2_02 _ _)                          -- ✱4·2 . Simp
+  | neg _ ih => exact qsyl ih (qiffMp (QL.t4_11 _ _))                            -- ✱4·11
+  | or _ _ ih1 ih2 => exact qsyl (qcomp ih1 ih2) (QL.t4_39 _ _ _ _)              -- Comp . ✱4·39
+  | all _ ih => exact qsyl (q10_11_21 ih) (q10_271 _ _)                          -- ✱10·11·21 . ✱10·271
+  | @cls F _ ih =>
+    exact qimpIffTrans (q20_11 ψ χ fun φ => F φ ψ)                               -- ✱20·11
+      (qsyl (q10_11_21 fun φ => qsyl (ih φ) (qandCongrRImp _ _ _)) (q10_281 _ _))  -- ✱4·36 . ✱10·11·21·281
+
+namespace ClsExpr
+variable {b : Ty}
+/-- p . q (✱3·01). -/
+theorem and {F G : (V a → QF V) → QF V} (hF : ClsExpr F) (hG : ClsExpr G) :
+    ClsExpr fun α => QF.and (F α) (G α) := .neg (.or (.neg hF) (.neg hG))
+/-- p ⊃ q (✱1·01). -/
+theorem imp {F G : (V a → QF V) → QF V} (hF : ClsExpr F) (hG : ClsExpr G) :
+    ClsExpr fun α => QF.imp (F α) (G α) := .or (.neg hF) hG
+/-- p ≡ q (✱4·01). -/
+theorem iff {F G : (V a → QF V) → QF V} (hF : ClsExpr F) (hG : ClsExpr G) :
+    ClsExpr fun α => QF.iff (F α) (G α) := and (imp hF hG) (imp hG hF)
+/-- (∃x) . F(x, α) (✱10·01). -/
+theorem ex {τ : Ty} {F : V τ → (V a → QF V) → QF V} (h : ∀ x, ClsExpr (F x)) :
+    ClsExpr fun α => QF.ex fun x => F x α := .neg (.all fun x => .neg (h x))
+/-- F(x, α) . ≡ₓ . G(x, α) (✱10·03). -/
+theorem fiff {τ : Ty} {F G : V τ → (V a → QF V) → QF V} (hF : ∀ x, ClsExpr (F x)) (hG : ∀ x, ClsExpr (G x)) :
+    ClsExpr fun α => QF.fiff (fun x => F x α) fun x => G x α := .all fun x => iff (hF x) (hG x)
+/-- A class ẑ(G(z, α)) whose defining function contains α, in a context that may contain α (✱20·01). -/
+theorem clsOf {G : V b → (V a → QF V) → QF V} {F : V (Ty.pred1 b) → (V a → QF V) → QF V}
+    (hG : ∀ z, ClsExpr (G z)) (hF : ∀ φ, ClsExpr (F φ)) :
+    ClsExpr fun α => QF.cls (fun z => G z α) fun φ => F φ α :=
+  ex fun _ => and (fiff (fun _ => .const _) hG) (hF _)
+/-- A description (ιx)(G(x, α)) in a scope H that may contain α (✱14·01). -/
+theorem desc {G H : V b → (V a → QF V) → QF V} (hG : ∀ x, ClsExpr (G x)) (hH : ∀ x, ClsExpr (H x)) :
+    ClsExpr fun α => QF.desc (fun x => G x α) fun x => H x α :=
+  ex fun _ => and (fiff hG fun _ => .const _) (hH _)
+/-- (β) . F(β, α) (✱20·07), the apparent class β. -/
+theorem clsAll {F : (V b → QF V) → (V a → QF V) → QF V} (h : ∀ θ, ClsExpr (F (pf θ))) :
+    ClsExpr fun α => QF.clsAll fun β => F β α := .all h
+/-- (∃β) . F(β, α) (✱20·071). -/
+theorem clsEx {F : (V b → QF V) → (V a → QF V) → QF V} (h : ∀ θ, ClsExpr (F (pf θ))) :
+    ClsExpr fun α => QF.clsEx fun β => F β α := ex h
+/-- A class of classes β̂Ψ(β, α) whose defining expression contains α, in a context that may contain α
+    (✱20·08). -/
+theorem clsCls {Ψ : (V b → QF V) → (V a → QF V) → QF V} {F : V (Ty.pred1 (Ty.pred1 b)) → (V a → QF V) → QF V}
+    (hΨ : ∀ θ, ClsExpr (Ψ (pf θ))) (hF : ∀ φ, ClsExpr (F φ)) :
+    ClsExpr fun α => QF.clsCls (fun β => Ψ β α) fun φ => F φ α :=
+  ex fun _ => and (clsAll fun θ => iff (hΨ θ) (.const _)) (hF _)
+/-- x ∈ α (✱20·02 with ✱20·01). -/
+theorem clsMem (x : V a) : ClsExpr fun α => x ∈ α := .cls fun _ => .const _
+/-- φ!α (✱20·01 with context φ!χ!ẑ). -/
+theorem clsApp (φ : V (Ty.pred1 (Ty.pred1 a))) : ClsExpr fun α => QF.clsApp φ α := .cls fun _ => .const _
+/-- α ∈ κ, κ a class of classes (✱20·081 with ✱20·08). -/
+theorem clsClsMem (κ : (V a → QF V) → QF V) : ClsExpr fun α => α ∈ κ :=
+  ex fun φ => and (.const _) (clsApp φ)
+/-- The defining expression of Cls, (∃φ) . α = ẑ(φ!z) (✱20·03, with ✱13·01 and ✱20·01). -/
+theorem Cls : ClsExpr (QF.Cls (V := V) (a := a)) := ex fun _ => .cls fun _ => .const _
+end ClsExpr
+
+/-- ✱20·7 for every class expression Ψα that PM forms, without the premise: `⊢ : (∃g) : Ψα . ≡_α . g!α`
+    (`qclsRed`, `clsExpr_ext`). -/
+theorem qclsExprRed [Reducibility S] {Ψ : (V a → QF V) → QF V} (hΨ : ClsExpr Ψ) :
+    QThm S (ex (τ := Ty.pred1 (Ty.pred1 a)) fun g => clsAll fun α => iff (Ψ α) (clsApp g α)) :=
+  qclsRed Ψ (clsExpr_ext hΨ)
+
+/-- ✱20·3 for classes of classes, for every class expression Ψα that PM forms, without the premise:
+    `⊢ : α ∈ α̂(Ψα) . ≡ . Ψα`, α real (`qcls20_3`, `clsExpr_ext`). -/
+theorem qclsExpr20_3 [Reducibility S] {Ψ : (V a → QF V) → QF V} (hΨ : ClsExpr Ψ) (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
+  qcls20_3 Ψ (clsExpr_ext hΨ) ψ
+
+/-! ✱20·4 again, from `qclsExpr20_3` and `ClsExpr.Cls`, with no premise about Cls; and an expression in which
+  the class occurs several times, in the defining function of another class, under an apparent class and
+  in a class of classes: α ∈ α̂{(∃β) . α = β . x ∈ ẑ(z ∈ α ∨ p)} ∨ α ∈ κ. Neither is a PM proposition. -/
+example [Reducibility S] (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ Cls) (ex (τ := Ty.pred1 a) fun φ => clsEq ψ (pf φ))) :=
+  qclsExpr20_3 ClsExpr.Cls ψ
+
+example [Reducibility S] (x : V a) (p : QF V) (κ : (V a → QF V) → QF V) (ψ : V a → QF V) :
+    let Ψ : (V a → QF V) → QF V := fun α =>
+      .or (clsEx fun β => QF.and (clsEq α β) (x ∈ fun z => .or (z ∈ α) p)) (α ∈ κ)
+    QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
+  qclsExpr20_3 (.or (ClsExpr.clsEx fun _ => .and (.cls fun _ => .const _)
+    (ClsExpr.clsOf (fun z => .or (ClsExpr.clsMem z) (.const _)) fun _ => .const _)) (ClsExpr.clsClsMem _)) ψ
 
 /-! Two checks of the notation and the layers (docs/CLASSES_OF_CLASSES.md); neither is a PM proposition.
 

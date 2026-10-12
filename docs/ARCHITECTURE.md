@@ -163,7 +163,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   - Classes of classes (✱20·03, ✱20·08, ✱20·081) are built as printed, one named lemma per layer of
     elimination, and ✱20·4, ✱20·41 (α ∈ Cls) use the analogue of ✱20·3 for classes of classes
     (`qcls20_3`, p. 206) ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)). `x ∈ α`, `α ∈ κ` are notation
-    scoped to `PM`.
+    scoped to `PM`. The extensionality of a class expression, which `qcls20_3` takes as a premise, is
+    proved for every expression PM's notation forms (`ClsExpr`, `clsExpr_ext`; p. 200).
   - Where PM instantiates an apparent class at a class ẑ(φz) that need not be predicative, citing ✱10·1 or
     ✱10·24 (✱20·25, ✱20·53, ✱20·54), the step is the class analogue p. 206 points to (✱20·17's argument:
     ✱12·1 and ✱20·11).

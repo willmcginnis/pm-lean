@@ -19,13 +19,34 @@ files += sorted(str(p.relative_to(root)) for p in (root / "PM/Models").glob("*.l
 files += ["PM/Star10.lean", "PM/Chain.lean", "PM/Star11.lean", "PM/Star12.lean", "PM/Star13.lean", "PM/Star14.lean",
           "PM/Star20.lean", "PM/Star21.lean", "PM/Orders.lean", "PM/Trap.lean"]
 files += sorted(str(p.relative_to(root)) for p in root.glob("PM/Styles*.lean"))
+
+
+def declared(text):
+    """(full name, is theorem) of each public theorem and def of a file, with the enclosing namespaces
+    (`namespace X` ... `end X`) prefixed, so `theorem and` inside `namespace ClsExpr` is `PM.ClsExpr.and`."""
+    ns = []  # the open namespaces and sections, innermost last; a section is None
+    for line in text.splitlines():
+        if m := re.match(r"namespace ([\w.]+)\s*$", line):
+            ns.append(m.group(1))
+        elif m := re.match(r"section\b", line):
+            ns.append(None)
+        elif m := re.match(r"end\b\s*([\w.]*)\s*$", line):
+            if ns:
+                ns.pop()
+        elif (m := re.match(THM, line)) and not line.startswith("private "):
+            yield ".".join([n for n in ns if n] + [m.group(1)]), True
+        elif m := re.match(DEF, line):
+            yield ".".join([n for n in ns if n] + [m.group(1)]), False
+
+
 for f in files:
     p = root / f
     if not p.exists():
         continue
-    text = p.read_text()
-    names += [f"PM.{n}" for n in re.findall(THM, text, re.M) if not text.count(f"private theorem {n}")]
-    names += [f"PM.{n}" for n in re.findall(DEF, text, re.M) if "Model" in n or "model" in n.lower()]
+    for name, thm in declared(p.read_text()):
+        local = name.removeprefix("PM.")
+        if thm or "Model" in local or "model" in local.lower():
+            names.append(name if name.startswith("PM.") else f"PM.{name}")
 seen = set(); uniq = []
 for n in names:
     if n not in seen:

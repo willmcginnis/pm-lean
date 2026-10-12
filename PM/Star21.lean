@@ -707,6 +707,11 @@ theorem relExt_ex {τ : Ty} (Ψ : V τ → (V a → V b → QF V) → QF V) (h :
 theorem relExt_Rel : RelExt S (Rel (V := V) (a := a) (b := b)) :=
   relExt_ex (fun φ R => relEq R (pf2 φ)) fun _ => relExt_rel _
 
+/-- The bare application ψ(x, y), a function of ψ rather than of the relation x̂ŷψ(x, y), is
+    extensional too: ✱11·1. `RelExpr` leaves it out, as `ClsExpr` leaves out ψx (`clsExt_app`). -/
+theorem relExt_app (x : V a) (y : V b) : RelExt S fun R => R x y :=
+  fun ψ χ => q11_1 (fun u v => iff (ψ u v) (χ u v)) x y
+
 /-- ✱21·1 for classes of relations: `⊢ :. f{R̂(ψR)} . ≡ : (∃φ) : ψR . ≡_R . φ!R : f(φ!R̂)` [✱4·2 . (✱21·082)]. -/
 theorem qrelCls1 (Ψ : (V a → V b → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred2 a b)) → QF V) :
     QThm S (iff (relCls Ψ f) (ex (τ := Ty.pred1 (Ty.pred2 a b)) fun φ =>
@@ -806,6 +811,76 @@ theorem q21_4 [Reducibility S] (ψ : V a → V b → QF V) :
 /-- ✱21·41 `⊢ . x̂ŷφ(x, y) ∈ Rel` [✱21·4·151] -/
 theorem q21_41 [Reducibility S] (φ : V a → V b → QF V) : QThm S (φ ∈ Rel) :=
   QThm.mp (q21_151 φ) (qiffMpr (q21_4 φ))                                         -- ✱21·4·151
+
+/-! ## Every expression of a relation that PM's notation forms is extensional (p. 213)
+
+  After ✱21·11: "This proposition proves that every proposition about a relation expresses an extensional
+  property of the determining function" (p. 213). As `ClsExpr` and `clsExpr_ext` (PM/Star20.lean), with
+  ✱21·01 and ✱21·11 for ✱20·01 and ✱20·11. -/
+
+/-- The expressions ΨR of a relation R that PM's notation forms: from formulas not containing R by ∼, ∨, (x),
+    and by ✱21·01 at R (f{R}, the context f possibly containing R again). As for `ClsExpr`, each of PM's
+    notations (R = S, xRy, φ!R, R ∈ κ, a class, relation or description whose defining function contains
+    R, apparent classes and relations) unfolds into these. -/
+inductive RelExpr {V : Ty → Type} {a b : Ty} : ((V a → V b → QF V) → QF V) → Prop
+  | const (r : QF V) : RelExpr fun _ => r
+  | neg {F : (V a → V b → QF V) → QF V} : RelExpr F → RelExpr fun R => .neg (F R)
+  | or {F G : (V a → V b → QF V) → QF V} : RelExpr F → RelExpr G → RelExpr fun R => .or (F R) (G R)
+  | all {τ : Ty} {F : V τ → (V a → V b → QF V) → QF V} : (∀ x, RelExpr (F x)) →
+      RelExpr fun R => .all fun x => F x R
+  | rel {F : V (Ty.pred2 a b) → (V a → V b → QF V) → QF V} : (∀ φ, RelExpr (F φ)) →
+      RelExpr fun R => rel R fun φ => F φ R
+
+/-- Every `RelExpr` is extensional: `⊢ :. ψ(x, y) . ≡_{x,y} . χ(x, y) : ⊃ : Ψ{x̂ŷψ(x, y)} . ≡ . Ψ{x̂ŷχ(x, y)}`,
+    the claim of p. 213 for the expressions PM forms. As `clsExpr_ext`, with ✱21·11 for ✱20·11. -/
+theorem relExpr_ext {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExpr Ψ) : RelExt S Ψ := by
+  intro ψ χ
+  induction hΨ with
+  | const r => exact QThm.mp (QL.t4_2 r) (QL.t2_02 _ _)                          -- ✱4·2 . Simp
+  | neg _ ih => exact qsyl ih (qiffMp (QL.t4_11 _ _))                            -- ✱4·11
+  | or _ _ ih1 ih2 => exact qsyl (qcomp ih1 ih2) (QL.t4_39 _ _ _ _)              -- Comp . ✱4·39
+  | all _ ih => exact qsyl (q10_11_21 ih) (q10_271 _ _)                          -- ✱10·11·21 . ✱10·271
+  | @rel F _ ih =>
+    exact qimpIffTrans (q21_11 ψ χ fun φ => F φ ψ)                               -- ✱21·11
+      (qsyl (q10_11_21 fun φ => qsyl (ih φ) (qandCongrRImp _ _ _)) (q10_281 _ _))  -- ✱4·36 . ✱10·11·21·281
+
+namespace RelExpr
+/-- p . q (✱3·01). -/
+theorem and {F G : (V a → V b → QF V) → QF V} (hF : RelExpr F) (hG : RelExpr G) :
+    RelExpr fun R => QF.and (F R) (G R) := .neg (.or (.neg hF) (.neg hG))
+/-- p ≡ q (✱4·01). -/
+theorem iff {F G : (V a → V b → QF V) → QF V} (hF : RelExpr F) (hG : RelExpr G) :
+    RelExpr fun R => QF.iff (F R) (G R) := and (.or (.neg hF) hG) (.or (.neg hG) hF)
+/-- (∃x) . F(x, R) (✱10·01). -/
+theorem ex {τ : Ty} {F : V τ → (V a → V b → QF V) → QF V} (h : ∀ x, RelExpr (F x)) :
+    RelExpr fun R => QF.ex fun x => F x R := .neg (.all fun x => .neg (h x))
+/-- xRy (✱21·02 with ✱21·01). -/
+theorem relHolds (x : V a) (y : V b) : RelExpr fun R => QF.relHolds x R y := .rel fun _ => .const _
+/-- φ!R (✱21·01 with context φ!χ!(x̂, ŷ)). -/
+theorem relClsApp (φ : V (Ty.pred1 (Ty.pred2 a b))) : RelExpr fun R => QF.relClsApp φ R := .rel fun _ => .const _
+/-- R ∈ κ, κ a class of relations (✱21·083 with ✱21·082). -/
+theorem relClsMem (κ : (V a → V b → QF V) → QF V) : RelExpr fun R => R ∈ κ :=
+  ex fun φ => and (.const _) (relClsApp φ)
+/-- The defining expression of Rel, (∃φ) . R = x̂ŷφ!(x, y) (✱21·03). -/
+theorem Rel : RelExpr (QF.Rel (V := V) (a := a) (b := b)) := ex fun _ => .rel fun _ => .const _
+end RelExpr
+
+/-- ✱21·7 for every relation expression ΨR that PM forms, without the premise: `⊢ : (∃g) : ΨR . ≡_R . g!R`
+    (`qrelRed`, `relExpr_ext`). -/
+theorem qrelExprRed [Reducibility S] {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExpr Ψ) :
+    QThm S (ex (τ := Ty.pred1 (Ty.pred2 a b)) fun g => relAll fun R => iff (Ψ R) (relClsApp g R)) :=
+  qrelRed Ψ (relExpr_ext hΨ)
+
+/-- ✱20·3 for classes of relations, for every relation expression ΨR that PM forms, without the premise:
+    `⊢ : R ∈ R̂(ΨR) . ≡ . ΨR`, R real (`qrelCls20_3`, `relExpr_ext`). -/
+theorem qrelExpr20_3 [Reducibility S] {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExpr Ψ)
+    (ψ : V a → V b → QF V) : QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
+  qrelCls20_3 Ψ (relExpr_ext hΨ) ψ
+
+/-! ✱21·4 again, from `qrelExpr20_3` and `RelExpr.Rel`, with no premise about Rel; not a PM proposition. -/
+example [Reducibility S] (ψ : V a → V b → QF V) :
+    QThm S (iff (ψ ∈ Rel) (ex (τ := Ty.pred2 a b) fun φ => relEq ψ (pf2 φ))) :=
+  qrelExpr20_3 RelExpr.Rel ψ
 
 /-! A check of the layers for relations of relations (docs/CLASSES_OF_CLASSES.md); not a PM proposition.
   P{R̂Ŝψ(R, S)}Q, unfolded one layer per line: ✱21·08, ✱21·081, ✱21·01 (twice, P first). -/

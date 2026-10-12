@@ -147,6 +147,45 @@ premise, `ClsExt S Ψ` (✱20·11 for Ψ), proved for each expression used:
 
 For relations: `RelExt`, `relExt_rel` (✱21·11), `relExt_ex`, `relExt_Rel`.
 
+**PM's claim, checked for the expressions PM forms.** Beside the premise, `ClsExpr Ψ` (PM/Star20.lean) says
+that Ψα is built the way PM's notation builds a proposition about a class: from formulas not containing α
+by ∼, ∨ and (x) (x of any type, so apparent classes and relations too), and by ✱20·01 at α itself, f{α},
+whose context f may contain α again. `clsExpr_ext` proves `ClsExt S Ψ` for every `ClsExpr Ψ`, by
+induction, with ✱20·11 at each elimination of α (as `qtfnCongr` does for the truth-functions of ✱14·3).
+So the premise of `qcls20_3` is discharged once for all such Ψ: `qclsExpr20_3` is ✱20·3 for classes of
+classes and `qclsExprRed` ✱20·7, both with no premise, and ✱20·4 follows from `ClsExpr.Cls` alone.
+`q20_4` and `q21_4` themselves stay on the premise version (`qcls20_3` with `clsExt_Cls`, `qrelCls20_3`
+with `relExt_Rel`), which is the shorter dependency; the premise-free route proves the same statements,
+as two checks in PM/Star20.lean and PM/Star21.lean show (`qclsExpr20_3 ClsExpr.Cls ψ` and
+`qrelExpr20_3 RelExpr.Rel ψ`, each with ✱20·4's or ✱21·4's statement).
+
+- *Included.* Every defined notation of ✱10–✱21 is a reducible definition that unfolds into ∼, ∨, (x) and
+  ✱20·01, so an expression written with them is a `ClsExpr` when α occurs only as a class. Lemmas in
+  `ClsExpr` give the cases by name: ⊃, ., ≡, (∃x), ≡ₓ; x ∈ α, φ!α, α ∈ κ and Cls's (∃φ) . α = ẑ(φ!z);
+  a class ẑ(ψz) (`clsOf`), a description (ιx)(φx) (`desc`) or a class of classes (`clsCls`) whose
+  defining function contains α; (β) . fβ and (∃β) . fβ. Identities α = β, β = α and α = α are ✱20·01 at
+  each class (the constructor `cls` at α, `clsOf` at β). A check states an expression with α in several places
+  (under an apparent class, inside another class's defining function, in α ∈ κ) and gets its ✱20·3.
+- *Not included.* A Lean function that uses the defining function otherwise: one that inspects the formula
+  ψx (`match`), compares ψ with a given function, or uses ψx outside an elimination by ✱20·01. PM's
+  notation cannot form these (a class "has no meaning in isolation", and ψx is a proposition about ψ,
+  not about the class). For an arbitrary Lean function `qcls20_3` keeps its premise.
+- *The bare ψx.* `fun α => α x`, the defining function applied directly, is not a constructor of
+  `ClsExpr`, because PM's notation cannot form it as a proposition about the class. A class enters a
+  proposition either as a variable α, which ✱20·07 and ✱20·071 make range over classes, and which PM
+  writes only in x ∈ α, α = β, φ!α and the like, all eliminated by ✱20·01 (there is no notation "αx");
+  or as a class ẑ(ψz), an incomplete symbol whose only meaning is the one ✱20·01 gives it in a context
+  f{ẑ(ψz)}. In the second case ψx can be written beside it, but it is then an occurrence of ψ, not of
+  ẑ(ψz): replacing the class by a coextensive one does not touch it. Leaving it out hides no
+  counterexample: `clsExt_app` proves it extensional anyway, by ✱10·1 (`relExt_app`, by ✱11·1, for
+  ψ(x, y) and relations).
+- *No counterexample.* The induction goes through for every constructor, so no expression PM forms fails
+  the claim.
+
+For relations: `RelExpr`, `relExpr_ext` (✱21·11), `qrelExpr20_3`, `qrelExprRed`, `RelExpr.Rel`
+(PM/Star21.lean; p. 213, after ✱21·11: "every proposition about a relation expresses an extensional
+property of the determining function").
+
 The analogue of ✱12·1 is ✱20·7, (∃g) : fα ≡_α g!α, stated for a generic fα. For an extensional Ψ,
 `qclsGen` writes Ψ{ẑ(θ!z)} as f{ẑ(θ!z)} for the context f(χ!ẑ) = Ψ{ẑ(χ!z)} (p. 199: fα "is, in
 reality, a function of φẑ, namely the extensional function associated with f(ψ!ẑ) by means of
@@ -159,7 +198,8 @@ relations), which the analogue takes inside `qcls20_3`, as under-exists glue
 ## Reuse
 
 Later numbers write their classes of classes as defining expressions and use `α ∈ κ`, `qcls20_3`
-(their "✱20·3") and an extensionality proof from `clsExt_cls` and `clsExt_ex`:
+(their "✱20·3") and an extensionality proof from `clsExt_cls` and `clsExt_ex`, or `qclsExpr20_3` with a
+`ClsExpr` proof:
 
 - ✱40·01, ✱40·02: p'κ = x̂(α ∈ κ . ⊃_α . x ∈ α) and s'κ = x̂{(∃α) . α ∈ κ . x ∈ α} are classes of
   individuals whose defining functions contain `α ∈ κ`, κ real; ✱40·1 and ✱40·11 are ✱20·3 itself.
@@ -183,7 +223,10 @@ Not built yet, and needed by those numbers:
 ## Size
 
 - PM/Star20.lean: 5 macros; `ClsExt` and 11 lemmas (its three instances, the four elimination steps,
-  `qclsGen`, `qclsRed`, `qcls10_43`, `qcls20_3`); ✱20·4, ✱20·41; two checks.
+  `qclsGen`, `qclsRed`, `qcls10_43`, `qcls20_3`); ✱20·4, ✱20·41; two checks. For PM's claim of p. 200: `ClsExpr` (5
+  constructors), `clsExpr_ext`, 14 lemmas in `ClsExpr`, `qclsExprRed`, `qclsExpr20_3`, `clsExt_app`; two
+  checks.
 - PM/Star21.lean: 9 macros; `RelExt` and 14 lemmas (the same, and the three steps of ✱21·08, ✱21·081);
-  ✱21·4, ✱21·41; one check.
+  ✱21·4, ✱21·41; one check. For p. 213: `RelExpr` (5 constructors), `relExpr_ext`, 7 lemmas in
+  `RelExpr`, `qrelExprRed`, `qrelExpr20_3`, `relExt_app`; one check.
 - ✱20·4 and ✱21·4 are one line each; ✱20·41 and ✱21·41 one line each. `qcls20_3` is a four-line `calc`.
