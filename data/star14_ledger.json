@@ -710,6 +710,7 @@
    "*3.47",
    "*2.08",
    "*4.3",
+   "*10.281",
    "*3.3"
   ],
   "cited_unused": [
@@ -727,7 +728,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
   ],
-  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor (*4.3). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3)."
+  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3)."
  },
  {
   "id": "*14.2",
@@ -850,7 +851,8 @@
    "*3.31",
    "*3.26",
    "*3.45",
-   "*4.3"
+   "*4.3",
+   "*10.281"
   ],
   "cited_unused": [],
   "note": "takes [Reducibility S]",
@@ -865,7 +867,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
   ],
-  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second (*4.3)."
+  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm)."
  },
  {
   "id": "*14.204",
@@ -1344,10 +1346,14 @@
    "*14.11"
   ],
   "extra_used": [
-   "*10.11"
+   "*10.11",
+   "*3.27",
+   "*2.54",
+   "*14.21",
+   "*3.44"
   ],
   "cited_unused": [],
-  "note": "takes [Reducibility S]; stated with ⊃ after E!(ix)(phi x): the transcription prints ==, the hint gives the implication (as for *14.31, *14.33), and *30.13 cites *14.32 as an implication; the scan was not consulted",
+  "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -1359,7 +1365,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11)."
+  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): from the right-hand side, *3.27 takes ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x)."
  },
  {
   "id": "*14.33",

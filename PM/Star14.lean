@@ -529,7 +529,8 @@ theorem q14_171 [Reducibility S] (φ : V α → QF V) (b : V α) :
 
 /-- ✱14·18 `⊢ :. E!(ιx)(φx) . ⊃ : (x) . ψx . ⊃ . ψ(ιx)(φx)`. "Fact" acts on the second factor ((x) . ψx);
     ✱3·45 acts on the first, so it is ✱3·47 with Id (✱2·08) (`qandR`); ✱10·35 is used with p as the
-    second factor (✱4·3, `qex_and_perm`); the last line's E! : (x) . ψx : ⊃ is exported by Exp (✱3·3). -/
+    second factor (✱4·3 under (∃x) by ✱10·11·281, `qex_and_perm`); the last line's E! : (x) . ψx : ⊃ is
+    exported by Exp (✱3·3). -/
 theorem q14_18 (φ ψ : V α → QF V) : QThm S (imp (exists1 φ) (imp (.all ψ) (desc φ ψ))) :=
   let F : V α → QF V := fun b => fiff φ fun x => ident x b
   have h1 : ∀ b, QThm S (imp (QF.and (F b) (.all ψ)) (QF.and (F b) (ψ b))) := fun b =>
@@ -586,7 +587,7 @@ theorem qfiffDescEq [Reducibility S] (φ : V α → QF V) (b : V α) :
     ✱2·06), Exp (✱3·3) and ✱3·27, carried under (x) by ✱10·11·21·27 and joined back by ✱3·31, ✱3·26
     and Comp; "[✱13·191]" acts on the first factor (Fact, ✱3·45); "[✱10·22]" needs the factors in the
     other order (✱3·22). In (3), PM's "✱10·1·28" is ✱10·11·28, and ✱10·35 is used with p second
-    (✱4·3, `qex_and_perm`). -/
+    (✱4·3 under (∃x) by ✱10·11·281, `qex_and_perm`). -/
 theorem q14_203 [Reducibility S] (φ : V α → QF V) :
     QThm S (iff (exists1 φ)
       (QF.and (ex φ) (fimp2 (fun x y => QF.and (φ x) (φ y)) fun x y => ident x y))) :=
@@ -759,17 +760,21 @@ theorem q14_31 [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
       (qsyl (q14_242 φ χ b) (qorCongrRImp p _ _))                               -- ✱14·242 [✱4·37] (2) . (1).(2) (3)
   QThm.mp (q10_11 h3) (qiffMp (q10_23 _ _))                                     -- (3).✱10·23.✱14·11
 
-/-- ✱14·32 `⊢ :. E!(ιx)(φx) . ⊃ : [(ιx)(φx)] . ∼χ(ιx)(φx) . ≡ . ∼{[(ιx)(φx)] . χ(ιx)(φx)}`
-    [✱14·242 . ✱4·11 . ✱10·23 . ✱14·11]. The transcription prints "≡" after E!(ιx)(φx); the hint gives
-    the implication, as for ✱14·31 and ✱14·33, and ✱30·13 cites ✱14·32 as an implication, so it is
-    stated with "⊃" (the scan was not consulted). ✱10·23 needs (b) first (✱10·11). -/
+/-- ✱14·32 `⊢ :. E!(ιx)(φx) . ≡ : [(ιx)(φx)] . ∼χ(ιx)(φx) . ≡ . ∼{[(ιx)(φx)] . χ(ιx)(φx)}`
+    [✱14·242 . ✱4·11 . ✱10·23 . ✱14·11]. The hint proves the implication from E!(ιx)(φx) (✱10·23 needs
+    (b) first, ✱10·11). The converse is not in the hint; as pp. 194–195 explain, when (ιx)(φx) does not
+    exist both [(ιx)(φx)] . ∼χ(ιx)(φx) and [(ιx)(φx)] . χ(ιx)(φx) are false (✱14·21), so they are not
+    each other's negation: from the right-hand side, ∼{…} ⊃ [(ιx)(φx)] . ∼χ(ιx)(φx) (✱3·27) gives the
+    disjunction of the two (✱2·54), and either implies E!(ιx)(φx) by ✱14·21 (joined by ✱3·44). -/
 theorem q14_32 [Reducibility S] (φ χ : V α → QF V) :
-    QThm S (imp (exists1 φ) (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) :=
+    QThm S (iff (exists1 φ) (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) :=
   have h : ∀ b, QThm S (imp (fiff φ fun x => ident x b)
       (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) := fun b =>
     qimpIffTrans (qimpIffSymm (q14_242 φ (fun z => .neg (χ z)) b))              -- ✱14·242
       (qsyl (q14_242 φ χ b) (qiffMp (QL.t4_11 _ _)))                             -- ✱14·242 . ✱4·11
-  QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                                       -- ✱10·23 . ✱14·11
+  have h1 := QThm.mp (q10_11 h) (qiffMp (q10_23 _ _))                            -- ✱10·23 . ✱14·11 (1)
+  have h2 := QThm.mp (qandI (q14_21 φ χ) (q14_21_neg φ χ)) (QL.t3_44 _ _ _)     -- ✱14·21 . ✱3·44 (2)
+  qiffI h1 (qsyl (QL.t3_27 _ _) (qsyl (QL.t2_54 _ _) h2))                        -- ✱3·27 . ✱2·54 . (2) . (1)
 
 /-- ✱14·33 `⊢ :: E!(ιx)(φx) . ⊃ :. [(ιx)(φx)] . p ⊃ χ(ιx)(φx) . ≡ : p . ⊃ . [(ιx)(φx)] . χ(ιx)(φx)`
     [✱14·242 . ✱4·85 . ✱10·23 . ✱14·11]. ✱10·23 needs (b) first (✱10·11). -/
