@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate AxiomCheck.lean: `#print axioms` for every ✱2–✱5 theorem, `complete`, and every theorem of
-the ✱9–✱20 files (✱12–✱20 partial), the rule and style modules, the models, the order checker and the
+the ✱9–✱21 files, the rule and style modules, the models, the order checker and the
 degenerate-family examples. Run `lake env lean AxiomCheck.lean`; every line should say "does not depend on
 any axioms", except the declarations listed in README.md (Status)."""
 import re, pathlib
@@ -17,7 +17,7 @@ files = ["PM/Quant.lean", "PM/Rules/Comprehension.lean", "PM/Rules/Reducibility.
 files += sorted(str(p.relative_to(root)) for p in (root / "PM/Pred").glob("*.lean"))
 files += sorted(str(p.relative_to(root)) for p in (root / "PM/Models").glob("*.lean"))
 files += ["PM/Star10.lean", "PM/Chain.lean", "PM/Star11.lean", "PM/Star12.lean", "PM/Star13.lean", "PM/Star14.lean",
-          "PM/Star20.lean", "PM/Orders.lean", "PM/Trap.lean"]
+          "PM/Star20.lean", "PM/Star21.lean", "PM/Orders.lean", "PM/Trap.lean"]
 files += sorted(str(p.relative_to(root)) for p in root.glob("PM/Styles*.lean"))
 for f in files:
     p = root / f
