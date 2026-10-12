@@ -370,7 +370,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "For elementary p and every function phi it is distribEl (PM/Found9/Base.lean). For a p with apparent variables the two sides are different propositions; Rep.distrib (PM/Found9/FromStar10.lean) proves it given Rep and a variable of every type.",
+  "reason": "For elementary p and every function phi it is distribEl (PM/Found9/Base.lean). For a p with apparent variables the two sides can be the same proposition (p = (Eu).chi u, phi elementary: both are (x):(Eu).chi u v phi x, pinned in Checks/PinnedStatements.lean) or differ (p = (Eu).chi u, phi x = (w).psi(x,w): distrib_sides_ne). Rep.distrib (PM/Found9/FromStar10.lean) proves it for every p given Rep and a variable of every type; an instance whose two sides are the same proposition needs neither.",
   "glue": [],
   "glue_kind": []
  },
@@ -422,7 +422,7 @@
    "*9.05",
    "*9.06"
   ],
-  "note": "not proved. f9_31_3 proves PM's Dem. lines (1)-(3). Line (4), cited as [(3).(*9.03.02)], reads *9.03 with p = (Ez).phi z; by *9.07, which applies also when phi is not elementary, (4) is a different proposition, (x):(Ez):(y) where (3) is (x):(y):(Ez) (f9_31_step). Whether *9's primitive propositions prove *9.31 as the definitions print it is open; given Rep it is an instance of *1.2",
+  "note": "not proved. f9_31_3 proves PM's Dem. lines (1)-(3). Line (4), cited as [(3).(*9.03.02)], reads *9.03 with p = (Ez).phi z; by *9.07, which applies also when phi is not elementary, (4) is a different proposition, (x):(Ez):(y) where (3) is (x):(y):(Ez) (f9_31_step). So the cited step fails as a definitional rewrite, and no step exchanging quantifiers is cited. This does not show *9.31 false or underivable: whether *9's primitive propositions prove *9.31 as the definitions print it is open; given Rep it is an instance of *1.2",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -1057,7 +1057,7 @@
    "*9.13"
   ],
   "cited_unused": [],
-  "note": "for an elementary p and every phi; for every p, given Rep and a variable of every type: Rep.distrib (PM/Found9/FromStar10.lean)",
+  "note": "for an elementary p and every phi; for every p, given Rep and a variable of every type: Rep.distrib (PM/Found9/FromStar10.lean). Those are assumptions of the proof for every p: an instance whose two sides are the same proposition, as for p = (Eu).chi u with phi elementary, is Id",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [

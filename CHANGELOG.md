@@ -5,14 +5,23 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **Corrections after a second external review.** PM_CLAIMS A12 is partly checked (27 checked, 22
+  partly checked): ✱10·12 is proved in ✱9's method for an elementary p (`f10_12`), and for every p only
+  given `Rep` and a variable of every type (`Rep.distrib`); A14 names both hypotheses of `qthm_toF9`.
+  For a p with apparent variables the two sides of ✱10·12 can be the same proposition (p = (∃u) . χu,
+  φ elementary: pinned by `rfl` in `Checks/PinnedStatements.lean`) or differ (`distrib_sides_ne`); the
+  docs had said they always differ. The ✱9·31 finding is stated as what it shows: the cited
+  definitional step fails, not that ✱9·31 is false or underivable.
 - **✱9·07–✱9·08 as printed** (after an external review; `PM/Found9/Syntax.lean`): ✱9's disjunction
   `PF.or` now applies ✱9·03–✱9·08 to the outermost quantifier of each side, as printed, with ✱9·07·08
   "also when φ and ψ are not both elementary" (pp. 135–136). It had taken every leading universal
   quantifier of the left side out first, so that, for φx = (z) . R(x, z), "(x) . φx . ∨ . (∃y) . ψy" was
   (x) : (z) : (∃y) instead of (x) : (∃y) : (z) (pinned in `Checks/PinnedStatements.lean`). Changed
-  results, which correct the entry below: PM's proof of ✱9·31 does not follow the printed definitions
-  (its line (4) reads ✱9·03 where ✱9·07 applies; `f9_31_step`), so ✱9·31 is open (lines (1)–(3) are
-  proved) and PM_CLAIMS A10 is partly checked (28 checked, 21 partly checked); p. 142 for one apparent
+  results, which correct the entry below: in PM's proof of ✱9·31 the step from line (3) to line (4),
+  cited as "[(3).(✱9·03·02)]", is not a definitional rewrite under the printed definitions (it reads
+  ✱9·03 where ✱9·07 applies; `f9_31_step`), and no step exchanging quantifiers is cited. So ✱9·31 is
+  open: lines (1)–(3) are proved, and whether ✱9's method derives it is not settled (28 numbered ✱9
+  propositions, 27 proved). PM_CLAIMS A10 is partly checked; p. 142 for one apparent
   variable per letter: 50 of 70 cases (was 67), the 20 open ones listed in docs/STAR9_FOUNDATION.md §7;
   ✱10·12 is proved in ✱9 for an elementary p, and for every p given `Rep` and a variable of every type
   (`Rep.distrib`), so `qthm_toF9` now takes `hV` as `star9_iff_star10` already did. ✱9·21 and ✱9·22

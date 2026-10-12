@@ -103,9 +103,10 @@ theorem f9_24 (φ : V τ → EF V) : Thm9 S (imp (Ex φ) (Ex φ)) :=
   Thm9.mp (Thm9.gen fun x => eId (φ x)) (f9_22 φ φ)
 
 /-- ✱9·25 `⊢ :. (x) . p ∨ φx . ⊃ : p . ∨ . (x) . φx` [✱9·23 . (✱9·04)]. By ✱9·04 the two sides are
-    the same proposition: ✱10·12 "is a mere example of "q ⊃ q"" (p. 146). For every function φ it is
-    `distribEl` (PM/Found9/Base.lean); for a p with apparent variables, `Rep.distrib`
-    (PM/Found9/FromStar10.lean). -/
+    the same proposition: ✱10·12 "is a mere example of "q ⊃ q"" (p. 146). For an elementary p and every
+    function φ it is `distribEl` (PM/Found9/Base.lean). For a p with apparent variables the two sides
+    can be the same proposition or differ (`distrib_sides_ne`); for every p it is `Rep.distrib`, given
+    `Rep` and a variable of every type (PM/Found9/FromStar10.lean). -/
 theorem f9_25 (p : EF V) (φ : V τ → EF V) :
     Thm9 S (imp (.all fun x => .el (.or p (φ x))) (PF.or (.el p) (Al φ))) :=
   f9_23 fun x => .or p (φ x)
@@ -134,8 +135,10 @@ theorem f9_3 (φ : V τ → EF V) : Thm9 S (imp (PF.or (Al φ) (Al φ)) (Al φ))
     `(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz` by ✱9·03, with p = (∃z) . φz, as
     (x) : (y) : (∃z) . ∼(φx ∨ φy) ∨ φz, which is line (3). The definitions as printed do not give
     that: the left side begins with (x) and the right with (∃z), so ✱9·07 applies, "also when φ and ψ
-    are not both elementary", and line (4) is (x) : (∃z) : (y) . ∼(φx ∨ φy) ∨ φz (`f9_31_step`). So
-    ✱9·31 itself is not proved here (docs/STAR9_FOUNDATION.md); with ✱1·2 for every proposition
+    are not both elementary", and line (4) is (x) : (∃z) : (y) . ∼(φx ∨ φy) ∨ φz (`f9_31_step`). So the
+    step, cited as definitions alone, is not a definitional rewrite, and PM cites no step that
+    exchanges quantifiers. That does not show ✱9·31 false or underivable: whether ✱9's method derives
+    it is open, and it is not proved here (docs/STAR9_FOUNDATION.md). With ✱1·2 for every proposition
     (`Rep`) it is an instance of ✱1·2. -/
 theorem f9_31_3 (φ : V τ → EF V) :
     Thm9 S (.all fun x => imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) :=
@@ -148,7 +151,8 @@ theorem f9_31_3 (φ : V τ → EF V) :
 /-- PM's step from line (3) to line (4) of ✱9·31 is not an application of the definitions as
     printed: given a variable of every type, the two propositions differ in the order of their
     quantifiers, (x) : (y) : (∃z) and (x) : (∃z) : (y). In the earlier reading `PF.orL`, which applies
-    ✱9·03 for every p, they are the same proposition (`f9_31_step_orL`). -/
+    ✱9·03 for every p, they are the same proposition (`f9_31_step_orL`). This is about the cited step
+    only, not about whether ✱9·31 can be derived. -/
 theorem f9_31_step (d : ∀ τ, V τ) (φ : V τ → EF V) :
     (PF.all fun x => imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) ≠
       imp (PF.or (Ex φ) (Ex φ)) (Ex φ) := by
@@ -374,8 +378,9 @@ theorem f9_521 (φ : V τ → EF V) (q r : EF V) :
 
   "✱10·1 is ✱9·2, ✱10·11 is ✱9·13, ✱10·12 is ✱9·25" (p. 144). Here they are stated for every function
   φ, with or without apparent variables, as the alternative method takes them; ✱10·12 for an
-  elementary p (for every p it needs ✱1·2–✱1·6 for every proposition: `Rep.distrib`,
-  PM/Found9/FromStar10.lean). ✱10·121 and ✱10·122 are ✱9·14 and ✱9·15, built into the syntax. -/
+  elementary p (for every p it is proved given ✱1·2–✱1·6 for every proposition and a variable of every
+  type: `Rep.distrib`, PM/Found9/FromStar10.lean). ✱10·121 and ✱10·122 are ✱9·14 and ✱9·15, built
+  into the syntax. -/
 
 /-- ✱10·1 `⊢ : (x) . φx . ⊃ . φy` [✱9·2], for every function φ. -/
 theorem f10_1 (φ : V τ → PF V) (y : V τ) : Thm9 S (imp (.all φ) (φ y)) := inst φ y

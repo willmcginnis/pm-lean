@@ -21,9 +21,10 @@ The repository is built on ✱10's. Beside it, `PM/Found9/` builds ✱9's own me
 `star9_iff_star10` states that the two agree. Every ✱9 theorem is a ✱10 theorem, given a
 variable of every type. The converse holds given ✱1·2–✱1·6 for every ✱9 proposition, which
 is PM's claim on p. 142 and is not proved: for one apparent variable per letter, 50 of 70 cases
-are proved by the method of PM's ✱9·3–✱9·52. ✱9's definitions are applied as printed; PM's own
-proof of ✱9·31 does not follow them, and ✱9·31 is left open. In a structure with no individuals, ✱9's method asserts an instance of ✱9·1
-that is false there; ✱10's is sound in every structure. Details: [docs/STAR9_FOUNDATION.md](docs/STAR9_FOUNDATION.md).
+are proved by the method of PM's ✱9·3–✱9·52. ✱9's definitions are applied as printed; under them
+one step of PM's proof of ✱9·31, which cites only definitions, is not a definitional rewrite, and
+whether ✱9's method derives ✱9·31 is open (28 numbered ✱9 propositions, 27 proved). In a
+structure with no individuals, ✱9's method asserts an instance of ✱9·1 that is false there; ✱10's is sound in every structure. Details: [docs/STAR9_FOUNDATION.md](docs/STAR9_FOUNDATION.md).
 
 The proofs follow PM's own: one Lean line per line of PM's *Dem.*, or one step per
 proposition of its bracketed hint. A ledger records, for each proposition, anything a

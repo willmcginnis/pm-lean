@@ -49,8 +49,10 @@ import PM.Quant
   ✱9·3 read "(x) : φx . ∨ . (y) . φy" as "(x) . φx . ∨ . (y) . φy" [(✱9·03)], and those of ✱9·31 read
   "(∃x) : (∃y) . φx ∨ φy" as "(∃x) . φx . ∨ . (∃y) . φy" [(✱9·05·06)] (p. 140). That is, ✱9·03 and
   ✱9·05 are repeated with p = (y) . ψy, p = (∃y) . ψy. Every other case is fixed by the printed text.
-  Where the text disagrees with itself. PM's proof of ✱9·31 also reads ✱9·03 with p = (∃z) . φz,
-  where ✱9·07 applies; `PF.or` follows ✱9·07 (PM/Found9/Star9.lean, `f9_31_3`, `f9_31_step`).
+  Where a step cited as definitional is not one. PM's proof of ✱9·31 passes from line (3) to line (4)
+  by "[(3).(✱9·03·02)]", reading ✱9·03 with p = (∃z) . φz, where ✱9·07 applies; `PF.or` follows ✱9·07,
+  so under it that step is not a definitional rewrite (PM/Found9/Star9.lean, `f9_31_3`,
+  `f9_31_step`). Whether ✱9's method derives ✱9·31 otherwise is open.
 
   The orders that different readings give are equivalent in every structure with at least one
   individual (the quantified variables are distinct and each occurs on one side only), but in ✱9 they

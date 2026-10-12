@@ -26,8 +26,9 @@ import PM.Found9.Star9
   In each, the definitions put an existential quantifier before the universal quantifier whose
   variable it needs. For ✱1·3 with p = (x) . φx, q = (y) . ψy: "p ∨ q" is (x) : (y) . φx ∨ ψy (✱9·03,
   ✱9·04), and "q . ⊃ . p ∨ q" is (x) : (∃y′) : (y) . ∼ψy′ ∨ φx ∨ ψy (✱9·08, ✱9·04): y′ is chosen before
-  y. The case `x` of ✱1·2 is ✱9·31, whose own proof does not survive the definitions as printed
-  (PM/Found9/Star9.lean, `f9_31_step`). Whether ✱9's primitive propositions prove the 20 by a longer
+  y. The case `x` of ✱1·2 is ✱9·31, whose proof cites, as definitional, a step that is not a
+  definitional rewrite under the definitions as printed (PM/Found9/Star9.lean, `f9_31_step`); whether
+  ✱9's method derives ✱9·31 is open. Whether ✱9's primitive propositions prove the 20 by a longer
   route (modus ponens with propositions that contain apparent variables) is not settled here.
   Under the earlier reading of the definitions (`PF.orL`, which applies ✱9·03 and ✱9·05 for every p)
   the same search proves 66 of them, and ✱9·31's Dem. the 67th; the three left were ✱1·6 `axa`,

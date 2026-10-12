@@ -45,7 +45,7 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   it ([STAR9_FOUNDATION.md](STAR9_FOUNDATION.md)). Elementary formulas `EF` and ✱9 propositions `PF`, with
   ∼ and ∨ of quantified propositions computed by ✱9·01–✱9·08 (`Syntax.lean`); ✱9's primitive propositions
   as the inductive `Thm9 S`, for every `Sys` (`System.lean`); ✱9·2–✱9·52 along PM's lines (✱9·31 open:
-  PM's proof of it departs from the definitions as printed) and ✱10·01, ✱10·1, ✱10·11, ✱10·12 in ✱9
+  one step of PM's proof, cited as definitions, is not a definitional rewrite under them as printed) and ✱10·01, ✱10·1, ✱10·11, ✱10·12 in ✱9
   (`Base.lean`, `Star9.lean`); p. 142 for one apparent variable per letter, 50 of 70 cases
   (`Simul.lean`); the agreement with ✱10's method, `star9_iff_star10`, with ✱9's soundness and its
   failure without an individual (`ToStar10.lean`, `FromStar10.lean`, `Equiv.lean`). The agreement

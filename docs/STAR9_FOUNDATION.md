@@ -65,16 +65,18 @@ Names: `PM.F9.f9_21` is ✱9·21 by ✱9's method; `PM.q9_21` (PM/Star10.lean) i
   "(x) : φx . ∨ . (y) . φy" as "(x) . φx . ∨ . (y) . φy" (✱9·03), and the last line of ✱9·31 reads
   "(∃x) : (∃y) . φx ∨ φy" as "(∃x) . φx . ∨ . (∃y) . φy" (✱9·05·06) **[DOC] p. 140**. Every other case is
   fixed by the printed text.
-- **Where the text disagrees with itself.** In the proof of ✱9·31, PM goes from line (3),
+- **Where a step cited as definitional is not one.** In the proof of ✱9·31, PM goes from line (3),
   "(x) : (∃y) . φx ∨ φy . ⊃ . (∃z) . φz", to line (4), "(∃x) : (∃y) . φx ∨ φy : ⊃ . (∃z) . φz", by
-  "[(3).(✱9·03·02)]" **[DOC] p. 140**. That reads "(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz" by ✱9·03 with
-  p = (∃z) . φz, which gives (x) : (y) : (∃z), line (3). But the left side begins with (x) and the right
-  with (∃z), and ✱9·07 applies "also when φ and ψ are not both elementary": it gives
-  (x) : (∃z) : (y). So PM's printed definitions and its printed proof give this expression two
-  different prenex forms; it has the shape of the review's example, read the other way. **[MEAS]**
-  `f9_31_step` proves the two propositions different (given a variable of every type), and
-  `f9_31_step_orL` shows that under `PF.orL` they are the same. No single definition of ∨ satisfies
-  both ✱9·07's note and ✱9·31's step. `PF.or` follows the definitions. Consequences: §5 (✱9·31), §7.
+  "[(3).(✱9·03·02)]" **[DOC] p. 140**: by definitions alone, with no step that exchanges quantifiers.
+  That reads "(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz" by ✱9·03 with p = (∃z) . φz, which gives
+  (x) : (y) : (∃z), line (3). But the left side begins with (x) and the right with (∃z), and ✱9·07
+  applies "also when φ and ψ are not both elementary": it gives (x) : (∃z) : (y). It has the shape of
+  the review's example, read the other way. **[MEAS]** `f9_31_step` proves the two propositions
+  different (given a variable of every type), and `f9_31_step_orL` shows that under `PF.orL` they are
+  the same. So the cited step fails as a definitional rewrite in ✱9's ordered syntax, and no single
+  definition of ∨ satisfies both ✱9·07's note and this step. That is all it shows: the two orders are
+  equivalent in every structure with an individual (below), and whether ✱9's method derives ✱9·31 by
+  some other route is open (§5). `PF.or` follows the definitions. Consequences: §5 (✱9·31), §7.
 - The orders that different readings give are equivalent in every structure with at least one
   individual (the quantified variables are distinct and each occurs on one side only). In ✱9 they are
   different propositions, and ✱9's primitive propositions have no rule that moves a quantifier.
@@ -96,18 +98,23 @@ Names: `PM.F9.f9_21` is ✱9·21 by ✱9's method; `PM.q9_21` (PM/Star10.lean) i
 
 ## 5. ✱9's own development (PM/Found9/Star9.lean, data/star9f_ledger.json)
 
-- ✱9·2–✱9·521 are 28 propositions. 27 are proved along PM's Dem. lines, with φ, ψ elementary as in ✱9.
-  Each line that PM justifies by definitions ("[(4).(✱9·06)]") is stated in its printed form. Lean
-  accepts it as the same proposition as the line before, because ✱9·01–✱9·08 are computed.
+- ✱9·2–✱9·521 are 28 numbered ✱9 propositions, 27 proved, along PM's Dem. lines, with φ, ψ
+  elementary as in ✱9. Each line that PM justifies by definitions ("[(4).(✱9·06)]") is stated in its
+  printed form. Lean accepts it as the same proposition as the line before, because ✱9·01–✱9·08 are
+  computed.
   **[MEAS]** Every one of these definitional steps checks under `PF.or`, except one: line (4) of ✱9·31.
 - **✱9·31 is not proved.** Its lines (1)–(3) are (`f9_31_3`, the one use of ✱9·11); line (4) is not
-  the same proposition as line (3) under the printed definitions (§3). As the definitions print it,
+  the same proposition as line (3) under the printed definitions, so the step PM cites as
+  definitional, "[(3).(✱9·03·02)]", fails, and PM cites no other (§3). As the definitions print it,
   ✱9·31 is (x) : (∃z) : (y) . ∼(φx ∨ φy) ∨ φz. A proof by ✱9·13 and ✱9·1 must choose z before y and needs
   both z = x and z = y, so it needs this (∃z) : (y) proposition twice; ✱9·11 combines two instances of a
   function at real variables only. **[EST]** We have not found a derivation from ✱9's primitive
-  propositions, nor shown that there is none. Given `Rep` it is an instance of ✱1·2.
-- Ledger: 32 assertions (with ✱10·01, ✱10·1, ✱10·11, ✱10·12), 31 proved, 20 of them on PM's lines with
-  nothing extra; ✱9·31's row has method `open`. **[MEAS]**
+  propositions, nor shown that there is none: whether ✱9's method derives ✱9·31 is open. Read in a
+  structure with an individual, the proposition is true (for each x take z with φz if there is one,
+  any z otherwise), and given `Rep` it is an instance of ✱1·2.
+- Ledger: 28 numbered ✱9 propositions, 27 proved; with the four ✱10 assertions (✱10·01, ✱10·1,
+  ✱10·11, ✱10·12), 31 of 32 proved, 20 of them on PM's lines with nothing extra; ✱9·31's row has
+  method `open`. **[MEAS]**
 - Text notes:
   - ✱9·5, ✱9·51, ✱9·52 cite ✱1·6 for line (1), but the line is ✱2·38 (✱1·6 with the disjunctions in the
     other order). **[MEAS]** ✱2·38 holds for elementary propositions, so the step is sound.
@@ -120,13 +127,18 @@ Names: `PM.F9.f9_21` is ✱9·21 by ✱9's method; `PM.q9_21` (PM/Star10.lean) i
   - ✱9·33 ("Proof as above") cannot copy ✱9·32: the (∃x) analogue of its line (2) is not ✱9·25. The
     reconstruction uses ✱9·1 at a real variable, so the Lean statement takes one. **[MEAS]**
   - ✱10·12 "is a mere example of "q ⊃ q"" by the definitions in ✱9 **[DOC] p. 146**: true for elementary
-    p (`f9_25` is Id). For a p with apparent variables the two sides are different propositions.
-    **[MEAS]**
+    p (`f9_25` is Id). For a p with apparent variables the two sides can be the same proposition or
+    differ. For p = (∃u) . χu and φ elementary both are (x) : (∃u) . χu ∨ φx (✱9·08, ✱9·06; pinned by
+    `rfl` in Checks/PinnedStatements.lean), so that instance is Id as well. For p = (∃u) . χu and
+    φx = (w) . ψ(x, w) they are (x) : (w) : (∃u) and (x) : (∃u) : (w) over the same matrix
+    (`distrib_sides_ne`, PM/Found9/Base.lean). **[MEAS]**
 - ✱10's primitive propositions as ✱9 theorems:
   - ✱10·1 (`f10_1`) for every function φ;
   - ✱10·11 is ✱9·13;
   - ✱10·12 (`f10_12`) for an elementary p and every function φ. For every p it is `Rep.distrib`
-    (PM/Found9/FromStar10.lean), from `Rep` and a variable of every type. ✱9·13 and ✱9·1 alone do not
+    (PM/Found9/FromStar10.lean), from `Rep` and a variable of every type. Those are assumptions of the
+    proof for every p, not of each instance: an instance whose two sides are the same proposition, as
+    for p = (∃u) . χu above, is Id and needs neither. ✱9·13 and ✱9·1 alone do not
     reach it the way they did under the earlier reading: with p = (u) . χu and φ elementary it is
     (x) : (u) . χu ∨ φx . ⊃ : (u) : (x) . χu ∨ φx, and ✱9·08 asks for the x of the antecedent before
     the consequent's x has been introduced. Whether ✱9's primitive propositions prove it for every p
@@ -161,7 +173,7 @@ formula q, `QThm S q ↔ Thm9 S q.toF9`. It assumes that every type has a variab
 - **`Rep` under the printed definitions.** `Rep` is stated with `PF.or`, so making `PF.or` follow
   ✱9·07·08 changed the proposition it states. It became harder to reach: **[MEAS]** the direct method
   of §7 proves 50 of the 70 one-variable combinations, against 67 under the earlier reading; ✱9·31 is
-  not derived; ✱10·12 for a p with apparent variables now needs `Rep` (§5). **[EST]** It is no less
+  not derived; the proof of ✱10·12 for every p now uses `Rep` (§5). **[EST]** It is no less
   plausible: its instances are valid in every structure with an individual, and the two readings
   differ only in the order of independent quantifiers.
 - **Individuals.** `hV` cannot be dropped (`thm9_unsound_empty`). In a structure with no individuals,
@@ -208,9 +220,10 @@ formula q, `QThm S q ↔ Thm9 S q.toF9`. It assumes that every type has a variab
    not, PM's claim on p. 142 fails for ✱9's method as printed, already for one apparent variable per
    letter. *As it stands:* an open finding ([PM_CLAIMS.md](PM_CLAIMS.md), A10, A28, partly checked),
    not a failure of PM's claim, since no proof that they are underivable is given.
-3. PM's definitions and its proof of ✱9·31 disagree (§3). *As it stands:* `PF.or` follows the
-   definitions as printed, and ✱9·31 is left open. Following ✱9·31 instead (`PF.orL`) contradicts
-   ✱9·07's note. A rule that exchanges independent quantifiers, if added to ✱9, would make the two
+3. One step of PM's proof of ✱9·31, cited as definitional, is not a definitional rewrite under the
+   definitions as printed (§3). *As it stands:* `PF.or` follows the definitions as printed, and ✱9·31
+   is left open, neither derived nor shown underivable (question 2). Making the step definitional
+   (`PF.orL`) contradicts ✱9·07's note. A rule that exchanges independent quantifiers, if added to ✱9, would make the two
    readings interderivable (§10).
 4. Two quantifiers of the same kind (§3) are ordered by a reading, the one PM's proofs of ✱9·3 and ✱9·31
    use. Another reading would give a different `PF.or` and possibly different answers to 1 and 2.
@@ -221,7 +234,7 @@ formula q, `QThm S q ↔ Thm9 S q.toF9`. It assumes that every type has a variab
 
 ## 9. Measurements
 
-- Files: PM/Found9/*.lean (1271 lines with PM/Found9.lean), data/star9f_ledger.json; PM.lean imports
+- Files: PM/Found9/*.lean (1296 lines with PM/Found9.lean), data/star9f_ledger.json; PM.lean imports
   PM/Found9.lean. No file of ✱10's foundation was changed for it. **[MEAS]**
 - Each PM/Found9 file checks in under 3 s (PM/Found9/Simul.lean, the slowest, 2.4 s). **[MEAS]**
 - `AllAxioms.lean`: 33 declarations use an axiom, against 25 before. The 8 new ones are Lean's
@@ -247,14 +260,15 @@ formula q, `QThm S q ↔ Thm9 S q.toF9`. It assumes that every type has a variab
   *Not checked here.*
 - What this formalization shows **[DOC]**, **[MEAS]**: (a) the definitions are silent on two
   quantifiers of the same kind (§3); (b) the definitions, with the note that ✱9·07·08 apply to
-  functions that are not elementary, and the proof of ✱9·31 give
-  "(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz" two different prenex forms (§3, `f9_31_step`); (c) under the
+  functions that are not elementary, give "(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz" a prenex form
+  other than the one the proof of ✱9·31 takes it to have by definition, so that step is not a
+  definitional rewrite (§3, `f9_31_step`); (c) under the
   definitions as printed, ✱9·31 is not derived here, and the direct method proves 50 of the 70 cases
   of §7.
 - **[EST]** A rule exchanging independent quantifiers would make the choice in (a) immaterial and
   repair (b): ✱9·31 would follow from PM's line (3). That fits the review's description of Landini's
   later system. Whether it is the flaw and repair of the 2000 paper, and whether the paper also
   concerns (c), cannot be settled without the paper. So this formalization neither meets nor
-  sidesteps a flaw that it can identify as Landini's. It shows one place where PM's printed
-  definitions and its printed proof disagree, and records how much of p. 142 survives the definitions
+  sidesteps a flaw that it can identify as Landini's. It shows one step of PM's printed proof that is
+  not the definitional rewrite it cites, without showing ✱9·31 false or underivable, and records how much of p. 142 survives the definitions
   as printed.

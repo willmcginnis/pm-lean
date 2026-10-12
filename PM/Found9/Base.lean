@@ -18,8 +18,9 @@ import PM.Replay2
     (y) : (∃x) . φx ⊃ ψy and (∃x) . φx . ⊃ . (∃x) . ψx is (x) : (∃y) . φx ⊃ ψy, so ✱9·13 and ✱9·1
     prove them from φx ⊃ ψx.
   - ✱9·25 (= ✱10·12) for an elementary p: "a mere example of q ⊃ q" (p. 146), the two sides being the
-    same proposition by ✱9·04. For a p with apparent variables the two sides are different
-    propositions; PM/Found9/FromStar10.lean proves it from ✱1·2–✱1·6 for every proposition (`Rep`).
+    same proposition by ✱9·04. For a p with apparent variables the two sides can be the same
+    proposition or differ (`distrib_sides_ne`); PM/Found9/FromStar10.lean proves it for every p from
+    ✱1·2–✱1·6 for every proposition (`Rep`) and a variable of every type.
 -/
 namespace PM.F9
 open PF
@@ -137,5 +138,17 @@ theorem exImp {τ : Ty} {φ ψ : V τ → PF V} (h : ∀ x, Thm9 S (imp (φ x) (
 theorem distribEl (a : EF V) {τ : Ty} (φ : V τ → PF V) :
     Thm9 S (imp (.all fun x => PF.or (.el a) (φ x)) (PF.or (.el a) (.all φ))) :=
   idt _
+
+/-- For a p with apparent variables the two sides of ✱9·25 can be the same proposition (for
+    p = (∃u) . χu and φ elementary both are (x) : (∃u) . χu ∨ φx, by ✱9·08 and ✱9·06; pinned in
+    Checks/PinnedStatements.lean), and they can differ: for p = (∃u) . χu and φx = (w) . ψ(x, w), with
+    χ, ψ elementary, the antecedent is (x) : (w) : (∃u) . χu ∨ ψ(x, w) and the consequent
+    (x) : (∃u) : (w) . χu ∨ ψ(x, w) (✱9·08), given a variable of every type. -/
+theorem distrib_sides_ne (d : ∀ τ, V τ) {σ τ ρ : Ty} (χ : V σ → EF V) (ψ : V τ → V ρ → EF V) :
+    (PF.all fun x => PF.or (.ex fun u => .el (χ u)) (.all fun w => .el (ψ x w))) ≠
+      PF.or (.ex fun u => .el (χ u)) (.all fun x => .all fun w => .el (ψ x w)) := by
+  intro h
+  have h' : [true, true, false] = [true, false, true] := congrArg (PF.kinds d) h
+  exact absurd h' (by decide)
 
 end PM.F9

@@ -17,13 +17,15 @@ import PM.Found9.Star9
   - ✱1·1 is ✱9·12; ✱1·2–✱1·6 are `Rep`;
   - ✱10·1 is ✱9·2, proved for every function without `Rep` (PM/Found9/Base.lean); ✱10·11 is ✱9·13;
   - ✱10·12 is ✱9·25. For an elementary p its two sides are the same proposition (✱9·04); for a p with
-    apparent variables they are not, and the order that ✱9·03–✱9·08 give the quantifiers does not
-    let ✱9·1 and ✱9·13 prove it directly: with p = (u) . χu and φ elementary it is
+    apparent variables they can be (p = (∃u) . χu, φ elementary) or not (`distrib_sides_ne`), and the
+    order that ✱9·03–✱9·08 give the quantifiers does not always let ✱9·1 and ✱9·13 prove it
+    directly: with p = (u) . χu and φ elementary it is
     (x) : (u) . χu ∨ φx . ⊃ : (u) : (x) . χu ∨ φx, in which ✱9·08 asks for the x of the antecedent
     before the x of the consequent has been introduced. `Rep.distrib` proves it from `Rep`, by
     ✱2·31, ✱2·32, ✱1·4 and ✱9·07; the step that ✱9·07 makes from p ∨ (∃w) . ρw to (∃w) . p ∨ ρw
-    needs a value of w (`hV`). Whether ✱9's primitive propositions prove ✱9·25 for every p without
-    `Rep` is not settled here.
+    needs a value of w (`hV`). `Rep` and `hV` are assumptions of this proof for every p, not of each
+    instance: one whose two sides are the same proposition is Id (`idt`). Whether ✱9's primitive
+    propositions prove ✱9·25 for every p without `Rep` is not settled here.
   - comprehension and ✱12·1, ✱12·11 are the same rules: ✱10's (∃f) is ∼(f) . ∼, which ✱9·01 turns into
     (∃f) . ∼∼, and `Rep` gives ✱2·12 under (∃f) (by ✱9·22 as a rule, `exImp`).
 -/

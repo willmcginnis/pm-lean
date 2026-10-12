@@ -99,6 +99,7 @@ import PM
 #print axioms PM.F9.allImp
 #print axioms PM.F9.exImp
 #print axioms PM.F9.distribEl
+#print axioms PM.F9.distrib_sides_ne
 #print axioms PM.F9.star9_iff_star10
 #print axioms PM.F9.den_nonempty
 #print axioms PM.F9.thm9_sound

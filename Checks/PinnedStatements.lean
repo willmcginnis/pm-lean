@@ -103,6 +103,19 @@ example {V : Ty → Type} :
       = .all fun x => .all fun z => .ex fun y => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
   rfl
 
+/-- ✱9·25 (= ✱10·12) for p = (∃u) . χu, not elementary, and φ elementary: by ✱9·08 and ✱9·06 its two
+    sides are the same proposition, (x) : (∃u) . χu ∨ φx, so this instance is Id, with neither `Rep`
+    nor a variable of every type. An external review found it against a claim that apparent
+    variables in p always make the two sides different propositions. -/
+example {V : Ty → Type} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+    (F9.PF.all fun x => F9.PF.or (.ex fun u => .el (χ u)) (.el (φ x))) =
+      F9.PF.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)) :=
+  rfl
+example {V : Ty → Type} {S : Sys} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+    F9.Thm9 S (F9.PF.imp (.all fun x => F9.PF.or (.ex fun u => .el (χ u)) (.el (φ x)))
+      (F9.PF.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)))) :=
+  F9.idt _
+
 /-- The agreement of ✱9's method with ✱10's has two hypotheses, a variable of every type and ✱1·2–✱1·6
     for every ✱9 proposition (`Rep`); an external review asked that both be stated wherever it is
     cited. -/
