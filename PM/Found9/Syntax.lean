@@ -29,6 +29,8 @@ import PM.Quant
   - otherwise a universal quantifier at the front of the right side (✱9·04, ✱9·08);
   - otherwise an existential quantifier at the front of the left side (✱9·05), then of the right
     (✱9·06).
+  So of two quantifiers of the same kind the left one comes first, as in the last lines of PM's ✱9·3
+  ("(x) : φx . ∨ . (y) . φy" read as "(x) . φx . ∨ . (y) . φy" by ✱9·03) and ✱9·31 (by ✱9·05·06), p. 140.
   Two readings of PM's repetition would give different orders: with p = (y) . ψy, ✱9·06 read for this p
   gives "p . ∨ . (∃x) . φx : = . (∃x) : (y) . ψy ∨ φx", while ✱9·07 gives "(y) : (∃x) . ψy ∨ φx". PM's
   note on ✱9·07·08 settles this case for ✱9·07, and `PF.or` follows it: a universal quantifier at the

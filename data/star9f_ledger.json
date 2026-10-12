@@ -1,0 +1,1070 @@
+[
+ {
+  "id": "*9.1",
+  "page": 136,
+  "category": "primitive",
+  "method": "primitive",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; Thm9.ex1, stated for every function phi",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "PM applies *9.1 to a function that contains an apparent variable (proof of *9.21, line (3)); the definitions are 'repeated for successive types' (p. 136).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.11",
+  "page": 136,
+  "category": "primitive",
+  "method": "primitive",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; Thm9.ex2, stated for every function phi",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.12",
+  "page": 137,
+  "category": "primitive",
+  "method": "primitive",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; Thm9.mp",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.13",
+  "page": 138,
+  "category": "primitive",
+  "method": "primitive",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; Thm9.gen",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.14",
+  "page": 138,
+  "category": "primitive",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; built into the syntax",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Every phi : V tau -> PF V is a function and phi a, a : V tau, is a proposition.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.15",
+  "page": 138,
+  "category": "primitive",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Pp; built into the syntax",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.131",
+  "page": 138,
+  "category": "type",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "being of the same type: Lean's typing of V tau; not stated",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.6",
+  "page": 142,
+  "category": "type",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "being of the same type: Lean's typing of V tau; not stated",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.61",
+  "page": 142,
+  "category": "type",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "being of the same type: Lean's typing of V tau; not stated",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.62",
+  "page": 142,
+  "category": "type",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "being of the same type: Lean's typing of V tau; not stated",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.63",
+  "page": 142,
+  "category": "type",
+  "method": "not stated",
+  "cited_used": [],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "being of the same type: Lean's typing of V tau; not stated",
+  "fidelity": "pm-lines",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.2",
+  "page": 138,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.1",
+   "*9.1",
+   "*1.11",
+   "*9.05",
+   "*9.01",
+   "*1.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "For elementary phi, as in *9. For every function phi it is inst (PM/Found9/Base.lean).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.21",
+  "page": 139,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*9.1",
+   "*9.13",
+   "*9.06",
+   "*1.01",
+   "*9.08"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.22",
+  "page": 139,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*9.1",
+   "*9.13",
+   "*9.06",
+   "*1.01",
+   "*9.08",
+   "*9.07",
+   "*9.01",
+   "*9.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.23",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*9.13",
+   "*9.21"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Id = *2.08",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.24",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*9.13",
+   "*9.22"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Id = *2.08",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.25",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.23",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "by *9.04 the two sides are the same proposition (p. 146)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "For every p and phi (with or without apparent variables) it is distrib (PM/Found9/Base.lean): for p beginning with (y), the definitions put (y) first and the two sides differ.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.3",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.2",
+   "*9.1",
+   "*9.13",
+   "*9.05",
+   "*9.01",
+   "*9.04",
+   "*9.21",
+   "*9.03"
+  ],
+  "extra_used": [
+   "*9.2"
+  ],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp), after *9.2 for that function (allE), both proved in PM/Found9/Base.lean.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.31",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.11",
+   "*9.13",
+   "*9.03",
+   "*9.02",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.32",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*9.13",
+   "*9.25",
+   "*9.03"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition; *9.25 is Id here",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.33",
+  "page": 140,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [
+   "*9.1"
+  ],
+  "cited_unused": [],
+  "note": "Proof as above",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "The analogue of *9.32's line (2) for (Ex) is not *9.25; the proof uses *9.1 at a real variable x, so the Lean statement takes one.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.34",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*9.13",
+   "*9.21",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.35",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*9.13",
+   "*9.22",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Proof as above, with *9.22, *9.06 for *9.21, *9.04",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.36",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*9.13",
+   "*9.21",
+   "*9.03",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.361",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*9.13",
+   "*9.21",
+   "*9.03",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Similar proof",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.37",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*9.13",
+   "*9.22",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Similar proof, with *9.22",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.371",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.4",
+   "*9.13",
+   "*9.22",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Similar proof, with *9.22",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.4",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.21",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.401",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.22",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "As above, with *9.22, *9.06",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.41",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.21",
+   "*9.03",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "As above",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.411",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.22",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "As above, with *9.22",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.42",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.21",
+   "*9.03",
+   "*9.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "As above",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.421",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.5",
+   "*9.22",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "As above, with *9.22",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.5",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.1",
+   "*9.06",
+   "*9.13",
+   "*9.04",
+   "*9.08",
+   "*9.01"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.501",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.1",
+   "*9.06",
+   "*9.13",
+   "*9.04",
+   "*9.03",
+   "*9.02"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "As above, the two quantifiers' roles exchanged",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.51",
+  "page": 141,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.13",
+   "*9.21",
+   "*9.03",
+   "*9.04"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.511",
+  "page": 142,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.13",
+   "*9.22",
+   "*9.05",
+   "*9.06"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "As above, with *9.22",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.52",
+  "page": 142,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.13",
+   "*9.22",
+   "*9.05",
+   "*9.01",
+   "*9.03"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*9.521",
+  "page": 142,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.13",
+   "*9.21",
+   "*9.06",
+   "*9.02",
+   "*9.05"
+  ],
+  "extra_used": [
+   "*2.38"
+  ],
+  "cited_unused": [
+   "*1.6"
+  ],
+  "note": "As above, with *9.21",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*10.01",
+  "page": 145,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.01"
+  ],
+  "extra_used": [
+   "*2.12",
+   "*2.14",
+   "*3.2",
+   "*9.1",
+   "*9.13"
+  ],
+  "cited_unused": [],
+  "note": "'In either case we have' (p. 145); for elementary phi",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "none",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "By *9.01, ~(x).~phi x is (Ex).~~phi x. PM gives no proof. Lean's: *2.12 and *2.14 joined by *3.2 in the matrix, then *9.1 and *9.13 for the four apparent variables of the prenex form.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*10.1",
+  "page": 145,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.2"
+  ],
+  "extra_used": [
+   "*2.08",
+   "*9.1",
+   "*9.13"
+  ],
+  "cited_unused": [],
+  "note": "for every function phi",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "*9.2 is proved in *9 for elementary phi (f9_2). The alternative method needs it for every function: Lean's proof (ai) goes by the prefix of the function, with *9.13 for each (x), *9.1 for each (Ex) (applied to a function that may contain apparent variables), and Id for the elementary matrix.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*10.11",
+  "page": 145,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.13"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Thm9.gen",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*10.12",
+  "page": 146,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*9.25"
+  ],
+  "extra_used": [
+   "*2.08",
+   "*9.1",
+   "*9.13"
+  ],
+  "cited_unused": [],
+  "note": "for every p and phi",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "definitions",
+   "*1.11",
+   "*9.13 before *9.21 or *9.22"
+  ],
+  "reason": "For elementary p it is 'a mere example of q ⊃ q' (p. 146; f9_25). For p beginning with (y) the definitions put (y) first, and Lean's proof (distrib) uses ai as for *10.1.",
+  "glue": [],
+  "glue_kind": []
+ }
+]
