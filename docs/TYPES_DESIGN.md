@@ -11,7 +11,7 @@ the formulas taken from its LaTeX source. The scan images themselves were not co
 Code: `PM/Quant.lean` (types, syntax, styles and systems, rules, structures, soundness), `PM/Rules/`
 (the opt-in rules), `PM/Pred/` (the styles of predicativity, currying and p. 56's second clause),
 `PM/Systems.lean`, `PM/StylesEquiv.lean`, `PM/Models/` (the collapse model and the finite coded model),
-`PM/Star12.lean`, `PM/Star13.lean`, `PM/Star14.lean` (partial), `PM/Star20.lean` (partial),
+`PM/Star12.lean`, `PM/Star13.lean`, `PM/Star14.lean`, `PM/Star20.lean` (partial),
 `PM/Orders.lean` (order checker and golden tests), `PM/Trap.lean` (degenerate variable families),
 `PM/Vol1.lean` (entry file); checks `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean`,
 `AxiomCheck.lean`, `AllAxioms.lean`.
@@ -321,18 +321,20 @@ of variables (✱13·3's note, p. 180).
 
 ### 9. Definitions and incomplete symbols
 
-✱13·01–✱13·03, ✱14·01–✱14·02 and ✱20·01–✱20·02 are `@[reducible]` macros, like ✱1·01 and ✱10·01. So
+✱13·01–✱13·03, ✱14·01–✱14·04 and ✱20·01–✱20·02 are `@[reducible]` macros, like ✱1·01 and ✱10·01. So
 "⊢ ✱13·1 [✱4·2 . (✱13·01)]" is literally ✱4·2.
 
 **Descriptions and classes are incomplete symbols** (pp. 66–67, 181, 196–197), so they have no term
 constructor. Their macros take the condition and the context:
-- `desc φ ψ` is [(ιx)(φx)] . ψ(ιx)(φx) (✱14·01, p. 184);
+- `desc φ ψ` is [(ιx)(φx)] . ψ(ιx)(φx) (✱14·01, p. 184); `desc2 φ ψ f` and `desc2r φ ψ f` are the two
+  orders of elimination of two descriptions (✱14·03, ✱14·04);
 - `cls ψ f` is f{ẑ(ψz)} (✱20·01, pp. 197, 199).
 
 **The scope is the placement of the context, so it is always explicit.**
 - `desc φ (fun z => ∼χ z)` and `∼(desc φ χ)` are the two scopes of ∼χ(ιx)(φx).
-- PM's convention that an unmarked description has the smallest scope (p. 182) is not mechanized:
-  the author picks the scope when writing the term.
+- PM's conventions that an unmarked description has the smallest scope, and that of two descriptions
+  the one written first has the larger (p. 182), are not mechanized: the author picks the scope when
+  writing the term, and the ✱14 statements pick it as PM does.
 - Identity of classes eliminates the first class first: "ẑ(ψz) is to have a larger scope than ẑ(χz)
   because it occurs first" (p. 201, `clsEq`).
 
@@ -455,15 +457,17 @@ occurs in the declaration's type. Result: 59 PM propositions use reducibility, 1
 | `PM/Pred/Curry.lean` | 163 | `fnOrder2`, `curry_order`, `phi_x_two_views`; `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` |
 | `PM/Models/Collapse.lean`, `PM/Models/Finite.lean` | 54, 152 | `Ty.den`, `QModel.collapse`, `classicalAll`, `QModel.classical`, `consistent_collapse`; shapes `Sh`, `finModel`, `twoModel`, `emptyModel`, `consistent`, `consistent_all`, three counter-models |
 | `PM/Star12.lean` | 80 | ✱12·1, ✱12·11 with PM's macros; variable-shape corollaries; `q12_1_of_var` |
-| `PM/Star13.lean` | 221 | ✱13·01–✱13·03 (macros); all 24 numbered propositions ✱13·1–✱13·22 except ✱13·3 |
-| `PM/Star14.lean` | 125 | ✱14·01, ✱14·02 (macros); ✱14·1, ✱14·101, ✱14·11, ✱14·12, ✱14·121, ✱14·2, ✱14·201, ✱14·21; a scope counter-model |
+| `PM/Star13.lean` | 249 | ✱13·01–✱13·03 (macros); all 25 numbered propositions ✱13·1–✱13·3 |
+| `PM/Star14.lean` | 834 | ✱14·01–✱14·04 (macros); 46 of the 47 numbered propositions ✱14·1–✱14·34 (all but ✱14·3); a scope counter-model |
 | `PM/Star20.lean` | 109 | ✱20·01, ✱20·02 (macros), class identity; ✱20·1, ✱20·13, ✱20·14, ✱20·15, ✱20·3; typical-ambiguity checks |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
 
-✱13·3 (p. 180) is not formalized. It concerns significance, and its proof turns on ✱10·221
-(identifying the types of two variables), which, like ✱10·221, is built into the Lean typing.
+✱13·3 (p. 180) concerns significance, and its proof turns on ✱10·221 (identifying the types of two
+variables), which is built into the Lean typing: x and a have one type, so ✱10·13 joins the lines.
+✱14·3 (p. 194) is not formalized: it takes propositions as apparent variables, and there is no type of
+propositions (decision 1).
 
 Proofs follow PM's Dem. lines or bracketed hints, as in ✱11. Steps PM leaves tacit beyond those listed
 in PM/Star11.lean's header are named in each docstring. The commonest are:
@@ -487,8 +491,8 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **C4** old counter-models still refute | **pass** | `not_qthm_phiy_imp_all` (φy ⊃ (x).φx), `not_qthm_ex_imp_all` ((∃x).φx ⊃ (x).φx), `not_qthm_all_imp_ex_empty` ((x).φx ⊃ (∃x).φx, empty D); also `not_qthm_converse_11_26` and the new `not_qthm_neg_desc_imp_exists1` |
 | **U1** ✱2–✱5, ✱9–✱11 unchanged | **pass** | PM/QuantLift.lean, PM/Star10.lean, PM/Star11.lean: no line changed; all compile against the new `QF`/`QThm` |
 | **U2** ✱10 used at a function sort | **pass** | `q13_101` uses ✱10·1, ✱10·27, ✱10·23 at `pred1 a`; `q20_14` uses ✱10·23 at `pred1 a`; `q12_1_of_var` at `fn1 a k` and `pred1 a` |
-| **U3** ✱13·101, ✱13·12 along PM's lines, citing ✱12·1 | **pass** | `q13_101` (lines (1), (2) of p. 177; (1) is `q12_1`), `q13_12`; also ✱13·1–✱13·22 except ✱13·3 |
-| **U4** ✱14·21 with explicit scope | **pass** | `q14_21`, `q14_21_neg` ([(ιx)(φx)] . ∼χ(ιx)(φx) ⊃ E!), `not_qthm_neg_desc_imp_exists1` (∼{[(ιx)(φx)] . χ(ιx)(φx)} ⊃ E! is not a theorem) |
+| **U3** ✱13·101, ✱13·12 along PM's lines, citing ✱12·1 | **pass** | `q13_101` (lines (1), (2) of p. 177; (1) is `q12_1`), `q13_12`; also ✱13·1–✱13·3 |
+| **U4** ✱14·21 with explicit scope | **pass** | `q14_21`, `q14_21_neg` ([(ιx)(φx)] . ∼χ(ιx)(φx) ⊃ E!), `not_qthm_neg_desc_imp_exists1` (∼{[(ιx)(φx)] . χ(ιx)(φx)} ⊃ E! is not a theorem); also ✱14·1–✱14·34 except ✱14·3 |
 | **U5** one ✱20 class theorem | **pass** | `q20_15` (ψx ≡ₓ χx . ≡ . ẑ(ψz) = ẑ(χz), p. 201), via `q20_13` (cites ✱12·1), `q20_14`; also `q20_3` (x ∈ ẑ(ψz) . ≡ . ψx, cites ✱12·1) |
 | **U6** cost | **reported** | see below |
 | **F1** decidable order checker | **pass** | `QF.order`, `lvl_iff_order`, `instance : Decidable (Lvl p n)` at `U`; `fnOrder` |
@@ -510,11 +514,12 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
   |---|---|
   | ✱10 | 3.7 |
   | ✱11 | 4.9 |
-  | ✱13 | 3.8 (24 propositions) |
-  | ✱14 | 3.4 (9) |
+  | ✱13 | 4.3 (25 propositions) |
+  | ✱14 | 8.1 (47; the helper lemmas of PM/Star14.lean not counted) |
   | ✱20 | 6.4 (5) |
 
-  ✱13·101 is 13 lines, against PM's 5 Dem. lines. ✱20·13 is 15.
+  ✱13·101 is 13 lines, against PM's 5 Dem. lines. ✱20·13 is 15. ✱14·124 is 54, against PM's 6 numbered
+  Dem. lines; most of it is bookkeeping for its four variables.
 - **Direct citations of ✱12·1 / ✱12·11 in PM's ✱13–✱20** (1910 text; citations inside formulas and
   proofs, not prose): 10 of 145 numbered items (propositions and definitions).
   - ✱13: 1 of 28 (✱13·101);
@@ -539,18 +544,18 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
     joined by Comp under ✱10·11·28). The elimination at the end is ✱10·23 plus Comm, 2 lines.
   - Everything later reaches ✱12·1 only through ✱13·101, at no further cost.
   - Each direct use in ✱20 costs 1–2 lines, mostly turning ψ ≡ₓ φ! into φ! ≡ₓ ψ (✱10·32 under ∃).
-- **Build:** clean `lake build`, 33 jobs, 12.5 s (wall clock, after `lake clean`).
+- **Build:** clean `lake build`, 33 jobs, 13.6 s (wall clock, after `lake clean`).
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 617 names; 613 report no axioms. The other 4 belong to the classical collapse model
+`AxiomCheck.lean`: 675 names; 671 report no axioms. The other 4 belong to the classical collapse model
 (below). Every PM theorem (✱2–✱5 and the ✱9–✱20 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1411 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 1471 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
 
 | Declarations | Axioms | Why |
@@ -607,7 +612,7 @@ search).
 
 ## 6. Not done
 
-- ✱13·3; ✱14 beyond the eight propositions listed; ✱20 beyond the five listed.
+- ✱14·3 (propositions as apparent variables); ✱20 beyond the five listed.
 - F4 (non-derivability of impredicative comprehension without ✱12·1), and so the strict weakness of the
   matrix style and of the p. 54 reading without reducibility: skipped. It needs a model that sees orders;
   both models here forget them.
