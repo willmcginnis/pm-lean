@@ -132,13 +132,14 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (14 not started)</summary>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (15 not started)</summary>
 
 ![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
 
 - **Independent Lean kernels**
   - Independent Lean kernels re-check the build in CI, one checker per code family: *not started*
 - **Metamath and Rocq**
+  - A small, readable independent checker written for this project (a Metamath verifier in a few hundred lines), chosen for clarity over speed: *not started*
   - pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers: *not started*
   - pm.mm for ✱9–✱14, from the finite first-order core: binding, substitution, distinct-variable conditions: *not started*
   - pm.mm from ✱20 on, chapter by chapter: *not started*
@@ -190,7 +191,7 @@ The work is split into four groups that run side by side. Each group is split in
 - **Incompleteness**
   - PM as a many-sorted first-order theory (the finite core), in a separate package that reuses the Foundation library: *not started*
   - Numbering of the core's formulas and derivations; 'is a derivation of' representable: *not started*
-  - Robinson's Q interpreted inside the chosen PM theory, with Infinity as hypothesis: *not started*
+  - Arithmetic interpreted inside the chosen PM theory, with Infinity as hypothesis: Robinson's Q, and IΣ₁ for the library's Gödel–Rosser theorem: *not started*
   - Gödel's first theorem for PM, in the Gödel–Rosser form: *not started, later by choice*
   - Gödel's second theorem for PM: derivability conditions, then Con unprovable: *not started*
 - **Finitist audit**

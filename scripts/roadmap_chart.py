@@ -18,7 +18,9 @@ Charts:
 
 Every SVG carries its own light and dark colours (prefers-color-scheme).
 Before writing, the script checks the data (ids, dependencies, cycles, "by
-choice" placements, evidence levels of prior work, recorded moves) and the
+choice" placements, evidence levels of prior work, a source for every
+measured entry, each source pinned to a full commit or a version, recorded
+moves) and the
 drawing: every text box is estimated and must not overlap another, must stay
 inside its box and inside the image; each file is re-parsed as XML. Any
 failure stops the script with a message.
@@ -47,8 +49,8 @@ ROADMAP = os.path.join(ROOT, "docs", "ROADMAP.md")
 
 # Evidence levels of a prior-work entry, and what a search found it is good for.
 EVIDENCE = {
-    "measured": "measured",          # its source was read at a pinned commit (not built unless said)
-    "documented": "documented",      # a paper or README says so
+    "measured": "measured",          # its source was inspected at a pinned commit, given in "source" (not built unless said)
+    "documented": "documented",      # a paper or README says so ("cite" gives where, when recorded)
     "unverified": "unverified",      # reported, not checked
     "from memory": "from memory",    # listed before the search reached this task
 }
@@ -329,11 +331,22 @@ def validate(d, leaves):
         if not pw.get("effect"):
             errs.append(f"{lid}: prior work has no effect")
         for kn in pw.get("known", []):
+            what = f"{lid}: prior work {kn.get('work', '')[:40]!r}"
             if kn.get("evidence") not in EVIDENCE:
-                errs.append(f"{lid}: prior work {kn.get('work', '')[:40]!r} has no evidence level")
+                errs.append(f"{what} has no evidence level")
+            if kn.get("evidence") == "measured" and not kn.get("source"):
+                errs.append(f"{what} is measured but names no source (repository, commit, file)")
+            for ref in kn.get("source", []):
+                if ref.get("in") not in d.get("sources", {}) or not ref.get("path"):
+                    errs.append(f"{what}: a source needs 'in' (a key of 'sources') and 'path'")
         mv = lf.get("moved")
         if mv is not None and not (mv.get("from") and mv.get("why")):
             errs.append(f"{lid}: a move needs 'from' and 'why'")
+    for key, r in d.get("sources", {}).items():
+        if not r.get("url", "").startswith("https://") or not r.get("name"):
+            errs.append(f"source {key}: needs 'name' and an https 'url'")
+        if not (re.fullmatch(r"[0-9a-f]{40}", r.get("commit", "")) and r.get("date")) and not r.get("version"):
+            errs.append(f"source {key}: needs a full 40-hex 'commit' with its 'date', or a 'version'")
     for m in d["milestones"]:
         for r in m["reached_by"]:
             if r not in leaves:
@@ -808,7 +821,27 @@ def md_lists(d, leaves, owner):
     return "\n".join(out)
 
 
-def md_prior_work(sg):
+def source_link(ref, sources):
+    """A Markdown link to a file at the pinned commit (or to an item at its version), with its lines."""
+    r = sources[ref["in"]]
+    where = ref["path"] + (f":{ref['lines']}" if ref.get("lines") else "") + (f", {ref['at']}" if ref.get("at") else "")
+    if "commit" in r:
+        lines = ref.get("lines", "")
+        anchor = "#L" + "-L".join(lines.split("-")) if lines else ""
+        return f"[{r['name'].split('/')[-1]}@{r['commit'][:7]} {where}]({r['url']}/blob/{r['commit']}/{ref['path']}{anchor})"
+    return f"[{r['name']}, {where}]({r['url']})"
+
+
+def evidence(k, sources):
+    s = f"*{EVIDENCE[k['evidence']]}*"
+    if k.get("source"):
+        s += ": " + ", ".join(source_link(ref, sources) for ref in k["source"])
+    if k.get("cite"):
+        s += f": {k['cite']}"
+    return s
+
+
+def md_prior_work(sg, sources):
     out = []
     for lf in sg["leaves"]:
         pw = lf["prior_work"]
@@ -820,9 +853,29 @@ def md_prior_work(sg):
             # inside the sentence, an entry that opens with a common word starts in lower case
             works = [w if i == 0 or w.split(" ")[0] not in GENERIC else w[0].lower() + w[1:]
                      for i, w in enumerate(works)]
-            s += " " + "; ".join(f"{w} (*{EVIDENCE[k['evidence']]}*)" for w, k in zip(works, pw["known"])) + "."
+            s += " " + "; ".join(f"{w} ({evidence(k, sources)})" for w, k in zip(works, pw["known"])) + "."
         out.append(s)
     return out
+
+
+def md_sources(d):
+    """The repositories and other items whose source was inspected, at the commit or version read."""
+    rows = ["| Source | Commit or version | Commit date |", "|---|---|---|"]
+    for r in sorted(d["sources"].values(), key=lambda r: r["name"].lower()):
+        if "commit" in r:
+            rows.append(f"| [{r['name']}]({r['url']}) | [`{r['commit']}`]({r['url']}/tree/{r['commit']}) | {r['date']} |")
+        else:
+            rows.append(f"| [{r['name']}]({r['url']}) | {r['version']} | |")
+    return "\n".join(rows)
+
+
+def md_evidence(leaves):
+    c = {e: 0 for e in EVIDENCE}
+    for lf in leaves.values():
+        for k in lf["prior_work"].get("known", []):
+            c[k["evidence"]] += 1
+    parts = ", ".join(f"{n} *{EVIDENCE[e]}*" for e, n in c.items())
+    return f"Of the {sum(c.values())} prior-work entries above: {parts}."
 
 
 def md_tables(d, leaves, owner):
@@ -843,7 +896,7 @@ def md_tables(d, leaves, owner):
                     status = f"{status}. {lf['status_note']}"
                 out.append(f"| {lf['name']} | {status} | {lf['size']}: {lf['size_reason']} | "
                            f"{names(leaves, lf['hard_deps'])} | {names(leaves, lf['soft_deps'])} | {order} |")
-            out += ["", "Prior work:", ""] + md_prior_work(sg) + [""]
+            out += ["", "Prior work:", ""] + md_prior_work(sg, d.get("sources", {})) + [""]
     return "\n".join(out).rstrip("\n")
 
 
@@ -925,7 +978,8 @@ def outputs(d, leaves, owner):
     for name, body in (("milestones", md_milestones(d)),
                        ("plan", md_tables(d, leaves, owner)), ("now", md_now(d, leaves)),
                        ("choice", md_choice(d, leaves)), ("moves", md_moves(d, leaves)),
-                       ("established", md_established(d))):
+                       ("established", md_established(d)), ("sources", md_sources(d)),
+                       ("evidence", md_evidence(leaves))):
         s = splice(s, name, body, ROADMAP)
     files[ROADMAP] = s
     return files

@@ -8,7 +8,7 @@
 | `replay_ledger.json` | ✱2–✱5, first ledger: all 188 propositions | by hand, with the proofs |
 | `replay2_ledger.json` | ✱2–✱5, second ledger: the 85 proofs of `PM/Replay2.lean` | by hand, with the proofs |
 | `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
-| `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order and prior work ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
+| `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order and prior work, and the repositories whose source the prior work was read in, each at a full commit ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
 | `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
 | `fidelity_counts.py` | the three fidelity counts per chapter, and consistency checks on the ledgers | — |
 

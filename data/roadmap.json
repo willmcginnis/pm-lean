@@ -6,7 +6,7 @@
     "structure": "Four groups, each split into subgroups, each split into leaves (tasks). A leaf is a chapter-sized or stage-sized task.",
     "deps": "hard_deps: leaves whose results this leaf's deliverable needs; these edges are the gates. soft_deps: leaves that help (shared infrastructure, comparisons, experience) but are not needed. Dependencies are on particular leaves, not on whole volumes or phases.",
     "order": "'by dependency': the task is placed as early as its hard dependencies allow. 'by choice': it is placed later than they require, after the tasks in placed_after, by the maintainer's order of priorities; order_reason says why. The order is a plan, not a contract: a task that moved records where it was and why in 'moved'.",
-    "prior_work": "The first step of every task is a search for prior work, with several independent search tools whose findings are compared. Each entry has an evidence level: 'measured' (its source was read at a pinned commit; nothing was built unless said), 'documented' (a paper or README says so), 'unverified' (reported, not checked), or 'from memory' (listed before the search reached this task). 'effect' says what the search found it good for: reuse (licensed code or data to import or depend on), ideas (read it, write our own), check against (an independent result to compare with), nothing found, or not yet searched. 'Not found' means not found by the searches so far, not that nothing exists. Code is never copied from unlicensed sources.",
+    "prior_work": "The first step of every task is a search for prior work, with several independent search tools whose findings are compared. Each entry has an evidence level: 'measured' (its source was inspected at a pinned commit, given in 'source' as repository, commit and file, with lines where useful; the repositories and their commits are listed once in 'sources'; nothing was built unless said), 'documented' (a paper or README says so; 'cite' gives the place where one is recorded), 'unverified' (reported, not checked), or 'from memory' (listed before the search reached this task). 'effect' says what the search found it good for: reuse (licensed code or data to import or depend on), ideas (read it, write our own), check against (an independent result to compare with), nothing found, or not yet searched. 'Not found' means not found by the searches so far, not that nothing exists. Code is never copied from unlicensed sources.",
     "sizes": "S: days to a few weeks; M: weeks to a few months; L: several months or more.",
     "overview_alt": "Roadmap overview: four groups of work (PM itself; checking underneath; comparing across; results about PM) and five milestones (Vol I checked, Vol II checked, Vol III checked, first edition audited, Lean's kernel fragment verified)",
     "readme_intro": "The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view)."
@@ -77,7 +77,7 @@
       "id": "ms-kernel",
       "name": "Lean's kernel fragment verified",
       "short": "the kernel fragment the project uses, re-checked by a checker proved correct",
-      "true_when": "The kernel features this project exercises are listed; a checker with a machine-checked correctness theorem for that fragment (an existing one, or our own restricted checker) re-checks the build; and what that theorem covers, and what it does not, is stated.",
+      "true_when": "The kernel features this project exercises are listed; a checker with a machine-checked correctness theorem for that fragment (an existing one, or our own restricted checker) re-checks the PM derivations and, if it accepts the three standard axioms, the whole build; and what that theorem covers, and what it does not, is stated.",
       "reached_by": [
         "lk-census",
         "lk-restricted",
@@ -85,6 +85,265 @@
       ]
     }
   ],
+  "sources": {
+    "setmm": {
+      "name": "metamath/set.mm",
+      "url": "https://github.com/metamath/set.mm",
+      "commit": "405ce8897374f337393b19d25a128fdc52210fec",
+      "date": "2026-10-11"
+    },
+    "principia-rewrite": {
+      "name": "LogicalAtomist/principia-rewrite",
+      "url": "https://github.com/LogicalAtomist/principia-rewrite",
+      "commit": "3f3bfc09b43df42b34b03b2efb6ecdd764d1ea10",
+      "date": "2025-01-30"
+    },
+    "pommeret": {
+      "name": "l-pommeret/Principia-Mathematica",
+      "url": "https://github.com/l-pommeret/Principia-Mathematica",
+      "commit": "3fb187a763db7865a46ec9204d33f1f318490a29",
+      "date": "2026-08-24"
+    },
+    "neo": {
+      "name": "MudroadWhite/Neo-Principia",
+      "url": "https://github.com/MudroadWhite/Neo-Principia",
+      "commit": "752b04e18a9f1106b7088f6bdd05932a1876f8b5",
+      "date": "2026-10-12"
+    },
+    "lacrimae": {
+      "name": "MudroadWhite/Lacrimae-Angeli",
+      "url": "https://github.com/MudroadWhite/Lacrimae-Angeli",
+      "commit": "bc9c0d5ead127b6fcc229ecfd5e41374a041c7b3",
+      "date": "2026-09-20"
+    },
+    "agda-pm": {
+      "name": "yangg1g/PrincipiaMathematica_Agda",
+      "url": "https://github.com/yangg1g/PrincipiaMathematica_Agda",
+      "commit": "023478b36c67fd0cd66e8015c06645b1161ead56",
+      "date": "2026-04-09"
+    },
+    "pmmats": {
+      "name": "LogicalAtomist/PM-MATS",
+      "url": "https://github.com/LogicalAtomist/PM-MATS",
+      "commit": "53c587ce95c5c66d2489f10b8b5b2dce10e522a4",
+      "date": "2026-04-10"
+    },
+    "holmes": {
+      "name": "Randall-Holmes/Randall-Holmes.github.io",
+      "url": "https://github.com/Randall-Holmes/Randall-Holmes.github.io",
+      "commit": "925857da70ac7491cd5565574813fe0cccfc3599",
+      "date": "2026-10-08"
+    },
+    "foundation": {
+      "name": "FormalizedFormalLogic/Foundation",
+      "url": "https://github.com/FormalizedFormalLogic/Foundation",
+      "commit": "611d57ccebaaac64d77e8a6128a6e1413c40a6e3",
+      "date": "2026-10-10"
+    },
+    "agda-godel-tree": {
+      "name": "coquand/agda-godel-tree",
+      "url": "https://github.com/coquand/agda-godel-tree",
+      "commit": "5475628ea4b648f956dce4baee7d0273ba257730",
+      "date": "2026-07-12"
+    },
+    "hydra": {
+      "name": "rocq-community/hydra-battles",
+      "url": "https://github.com/rocq-community/hydra-battles",
+      "commit": "ed8e6048018a61b4fe6d7d6f96daf0d63da2eba8",
+      "date": "2025-01-22"
+    },
+    "goedel": {
+      "name": "rocq-community/goedel",
+      "url": "https://github.com/rocq-community/goedel",
+      "commit": "8e02b2035e6441b9d0bb1ec1062089866fc17e0d",
+      "date": "2022-10-20"
+    },
+    "undec": {
+      "name": "uds-psl/coq-library-undecidability",
+      "url": "https://github.com/uds-psl/coq-library-undecidability",
+      "commit": "c7257b736763d7b2bc3bd25ac47d5fb7ce749c9c",
+      "date": "2026-06-24"
+    },
+    "revmathlib": {
+      "name": "cameronfreer/reverse-mathlib",
+      "url": "https://github.com/cameronfreer/reverse-mathlib",
+      "commit": "e299be8e05881c797571041c66af8e6b46ace507",
+      "date": "2026-09-12"
+    },
+    "presburger": {
+      "name": "rocq-archive/presburger",
+      "url": "https://github.com/rocq-archive/presburger",
+      "commit": "2b2636f989a93c6f374401f797319c3bad4596e9",
+      "date": "2018-10-22"
+    },
+    "real-closed": {
+      "name": "math-comp/real-closed",
+      "url": "https://github.com/math-comp/real-closed",
+      "commit": "05e77d874e7432b8908bade7a60e45cd59670a13",
+      "date": "2026-07-23"
+    },
+    "cad": {
+      "name": "math-comp/cad",
+      "url": "https://github.com/math-comp/cad",
+      "commit": "52e6b88b8801b79d2a906332b7c42960dcf27b8f",
+      "date": "2025-08-25"
+    },
+    "rcf-lean": {
+      "name": "artie2000/real_closed_field",
+      "url": "https://github.com/artie2000/real_closed_field",
+      "commit": "b34b84f0bbf8cb4942961490ba3d6f90d74cb4af",
+      "date": "2026-10-10"
+    },
+    "lean4": {
+      "name": "leanprover/lean4",
+      "url": "https://github.com/leanprover/lean4",
+      "commit": "157bd5b80cfc0c5e8b8fa4936a044fc5acb42e08",
+      "date": "2026-10-12"
+    },
+    "lean4lean": {
+      "name": "digama0/lean4lean",
+      "url": "https://github.com/digama0/lean4lean",
+      "commit": "67f63b0c818920dfaed2ad07ccff187a6a8fe1e3",
+      "date": "2026-10-10"
+    },
+    "nanoda": {
+      "name": "ammkrn/nanoda_lib",
+      "url": "https://github.com/ammkrn/nanoda_lib",
+      "commit": "0f88b5f382f0f3f08aed4af0dd6c0e48c3fd7a44",
+      "date": "2026-10-11"
+    },
+    "tenet": {
+      "name": "keithadler/tenet",
+      "url": "https://github.com/keithadler/tenet",
+      "commit": "2cb6438b9844b683d4a20a3817148fb2355ec584",
+      "date": "2026-10-11"
+    },
+    "con-leche": {
+      "name": "leanprover/con-leche",
+      "url": "https://github.com/leanprover/con-leche",
+      "commit": "3b37939f0d9d37bfd86299dc92d9a97fbacba29e",
+      "date": "2026-10-10"
+    },
+    "arena": {
+      "name": "leanprover/lean-kernel-arena",
+      "url": "https://github.com/leanprover/lean-kernel-arena",
+      "commit": "10429df702e854564cd8df46646a07929fddaa3f",
+      "date": "2026-10-12"
+    },
+    "l4l-model": {
+      "name": "digama0/lean4lean-model",
+      "url": "https://github.com/digama0/lean4lean-model",
+      "commit": "27fb3b656c0d536469f6817cf277904dee8eb5ca",
+      "date": "2026-09-23"
+    },
+    "metalean": {
+      "name": "intgrah/metalean",
+      "url": "https://github.com/intgrah/metalean",
+      "commit": "2172d5a20f65229e262c915ca1fbaec70c9124d4",
+      "date": "2026-10-04"
+    },
+    "metarocq": {
+      "name": "MetaRocq/metarocq",
+      "url": "https://github.com/MetaRocq/metarocq",
+      "commit": "c8cd46054518193103c3bb33aa6e15c7f489e72c",
+      "date": "2026-08-10"
+    },
+    "flypitch": {
+      "name": "flypitch/flypitch",
+      "url": "https://github.com/flypitch/flypitch",
+      "commit": "d72904c17fbb874f01ffe168667ba12663a7b853",
+      "date": "2024-08-26"
+    },
+    "flypitch4": {
+      "name": "ianklatzco/flypitch",
+      "url": "https://github.com/ianklatzco/flypitch",
+      "commit": "ad649f89e9f3107b7e2ea97a58b2eafdfc80b815",
+      "date": "2026-07-09"
+    },
+    "aml": {
+      "name": "harp-project/AML-Formalization",
+      "url": "https://github.com/harp-project/AML-Formalization",
+      "commit": "99d0fee29e29aa68a8de84bc1538a81af248eea0",
+      "date": "2026-02-27"
+    },
+    "canonical-min": {
+      "name": "FrederickPu/Canonical-min",
+      "url": "https://github.com/FrederickPu/Canonical-min",
+      "commit": "f893c756591b3a9aa086feb3f2754e6af12df747",
+      "date": "2026-03-02"
+    },
+    "mini-kernel": {
+      "name": "nomeata/lean-mini-kernel",
+      "url": "https://github.com/nomeata/lean-mini-kernel",
+      "commit": "7ea4f55f5a9f27e096ac8a6a0cf4ecb42e8b7759",
+      "date": "2026-08-11"
+    },
+    "rocq-lean-import": {
+      "name": "rocq-community/rocq-lean-import",
+      "url": "https://github.com/rocq-community/rocq-lean-import",
+      "commit": "2d28bbe80e7361bf3ac54f5ef099207fc61ce837",
+      "date": "2026-10-01"
+    },
+    "metamatix": {
+      "name": "acorrenson/metamatix",
+      "url": "https://github.com/acorrenson/metamatix",
+      "commit": "e18d03bb7f609e936972862854be009d49c32b94",
+      "date": "2023-04-17"
+    },
+    "coq-hol-light": {
+      "name": "Deducteam/coq-hol-light",
+      "url": "https://github.com/Deducteam/coq-hol-light",
+      "commit": "253961a55312e51e0ab4177121ca10cb533638ae",
+      "date": "2026-04-01"
+    },
+    "lean-hoas": {
+      "name": "p-pavel/lean-hoas",
+      "url": "https://github.com/p-pavel/lean-hoas",
+      "commit": "c550018b5a18c00a1c9c50798f5ffdd0ba18a553",
+      "date": "2026-09-26"
+    },
+    "nbexp": {
+      "name": "phadej/nbexp",
+      "url": "https://github.com/phadej/nbexp",
+      "commit": "6c073dda6c9c5c0e498c72dbb05f55d5498420e1",
+      "date": "2025-02-14"
+    },
+    "zflean": {
+      "name": "VTrelat/ZFLean",
+      "url": "https://github.com/VTrelat/ZFLean",
+      "commit": "ae928234e7ed6b26241344ef4ba6d7cf98c0ed91",
+      "date": "2026-09-02"
+    },
+    "spivak": {
+      "name": "stormj-UH/spivak-lean",
+      "url": "https://github.com/stormj-UH/spivak-lean",
+      "commit": "c24e9fcb7e96873ea9d4769c453be1b3ca48d211",
+      "date": "2026-09-26"
+    },
+    "mathlib4": {
+      "name": "leanprover-community/mathlib4",
+      "url": "https://github.com/leanprover-community/mathlib4",
+      "commit": "9454a4c25a2b923eb55dba3098f2d6ae0484d09b",
+      "date": "2026-10-12"
+    },
+    "gerrata": {
+      "name": "Impression-Editions/Gerrata",
+      "url": "https://github.com/Impression-Editions/Gerrata",
+      "commit": "045eebc7e3328d2a7321d1f525fd95e82e5adf61",
+      "date": "2026-07-29"
+    },
+    "mm-lean4": {
+      "name": "digama0/mm-lean4",
+      "url": "https://github.com/digama0/mm-lean4",
+      "commit": "58123caf246f4d7afc903d8a749512449bef75c1",
+      "date": "2025-12-11"
+    },
+    "pm2-vol1": {
+      "name": "Internet Archive item principia-mathematica_l2o7Ic0GMLeSLqcPnq",
+      "url": "https://archive.org/details/principia-mathematica_l2o7Ic0GMLeSLqcPnq",
+      "version": "file Principia_Mathematica_vol1.pdf: Vol. I of the second edition (text of 1925), a 1963 impression"
+    }
+  },
   "groups": [
     {
       "id": "pm",
@@ -113,16 +372,37 @@
                 "note": "Done many times elsewhere; only this project and l-pommeret/Principia-Mathematica use PM's own ✱1 rules (docs/FORMALIZATION_COMPARISON.md).",
                 "known": [
                   {
-                    "work": "Metamath set.mm: about 220 theorems pm1.* to pm5.*, CC0",
-                    "evidence": "measured"
+                    "work": "Metamath set.mm: 231 theorems pm1.* to pm5.* (281 pm* theorems in all), CC0",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm"
+                      },
+                      {
+                        "in": "setmm",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "Metamath pmproofs.txt, ✱2–✱5 by condensed detachment, CC0",
                     "evidence": "documented"
                   },
                   {
-                    "work": "principia-rewrite (Coq, shallow, GPL-3.0): a comparison only",
-                    "evidence": "measured"
+                    "work": "principia-rewrite (Coq, shallow: PM's propositions as Coq propositions over classical Coq, GPL-3.0): a comparison only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "principia-rewrite",
+                        "path": "PL.v",
+                        "lines": "1-4"
+                      },
+                      {
+                        "in": "principia-rewrite",
+                        "path": "LICENSE"
+                      }
+                    ]
                   }
                 ]
               }
@@ -147,16 +427,35 @@
                 ],
                 "known": [
                   {
-                    "work": "l-pommeret/Principia-Mathematica (Lean 4): a deep ramified layer, ✱9 26 of 28 and ✱10 34 of 35 by our count; no license, so ideas only",
-                    "evidence": "measured"
+                    "work": "l-pommeret/Principia-Mathematica (Lean 4): a deep ramified layer, ✱9 26 of 28 and ✱10 34 of 35 by our count (docs/FORMALIZATION_COMPARISON.md, built by us); no LICENSE file, so ideas only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/FirstEdition"
+                      }
+                    ]
                   },
                   {
-                    "work": "Metamath set.mm: about 50 PM-numbered ✱10–✱14 theorems, CC0",
-                    "evidence": "measured"
+                    "work": "Metamath set.mm: 48 PM-numbered ✱10–✱14 theorems (✱10 13, ✱11 15, ✱13 11, ✱14 9), CC0",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm"
+                      }
+                    ]
                   },
                   {
-                    "work": "Neo-Principia (Rocq): shallow",
-                    "evidence": "measured"
+                    "work": "Neo-Principia (Rocq, MIT): shallow, ✱9's definitions over Coq's `Prop → Prop`",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "neo",
+                        "path": "pm/ch9.v",
+                        "lines": "14-37"
+                      }
+                    ]
                   },
                   {
                     "work": "Wang (1960): the predicate part of ✱10–✱14 is a decidable fragment",
@@ -184,16 +483,29 @@
                 "note": "Faithful ✱9 is reported hard.",
                 "known": [
                   {
-                    "work": "Landini (2000), 'Quantification theory in ✱9 of Principia Mathematica': reported to find a flaw in ✱9 as printed, repaired by a minor change",
-                    "evidence": "documented"
+                    "work": "Landini (2000): §4 locates the flaw in ✱9·31's demonstration, which applies ✱9·03 to a p that contains quantifiers, and repairs ✱9 with two definitions (✱9·yy, ✱9·zz) and a rule, Switch; §5 proves the repaired system semantically complete for predicate logic without identity",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §4 (pp. 63–64) and §5 (pp. 64–75); read in full"
                   },
                   {
                     "work": "Urquhart (2016), on ✱9 and ✱10",
                     "evidence": "documented"
                   },
                   {
-                    "work": "Holmes's SML code (2002–04): a partial proof checker for ramified type theory loaded with PM's ✱1 and ✱9/✱10 axioms, under a permissive notice",
-                    "evidence": "measured"
+                    "work": "Holmes's SML code (2002–04): a partial proof checker for ramified type theory, `theoldbook()` loading PM's ✱1 and ✱9/✱10 axioms, under a notice permitting free copying and use",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "holmes",
+                        "path": "RTT/rtt.sml",
+                        "lines": "3"
+                      },
+                      {
+                        "in": "holmes",
+                        "path": "RTT/rtt.sml",
+                        "lines": "4731"
+                      }
+                    ]
                   }
                 ]
               }
@@ -205,7 +517,7 @@
               "size": "M",
               "size_reason": "One proposition and 20 cases of ✱1·2–✱1·6 for one apparent variable per letter; a proof of underivability would need a model of ✱9's method.",
               "status": "in progress",
-              "status_note": "✱9·31's lines (1)–(3) are proved; line (4), cited as definitional, is not a definitional rewrite under the definitions as printed, and no other step is cited. 50 of the 70 cases are proved (PM_CLAIMS A10, A28: {claims:A28}). Separate work considers ✱9 as printed beside a repaired ✱9 (docs/STAR9_FOUNDATION.md §8, §10); a repair is kept as a marked repair and does not replace the printed reading.",
+              "status_note": "✱9·31's lines (1)–(3) are proved; line (4), cited as definitional, is not a definitional rewrite under the definitions as printed, and no other step is cited. 50 of the 70 cases are proved (PM_CLAIMS A10, A28: {claims:A28}). The plan: the maintainer has ruled that the working reading of ✱9 is the definitions as printed with Landini's repair (✱9·yy, ✱9·zz and the rule Switch), each added as a marked repair, with the reading by convention kept only as a cross-check labelled as such. That work is on a separate branch; the counts here are those of this branch's base and are regenerated when it lands. Whether ✱9·31 follows from the definitions as printed alone stays an open question in its own right.",
               "hard_deps": [],
               "soft_deps": [
                 "v1-9eq"
@@ -213,12 +525,30 @@
               "order": "by dependency",
               "prior_work": {
                 "effect": [
-                  "ideas"
+                  "ideas",
+                  "check against"
                 ],
                 "known": [
                   {
-                    "work": "Landini (2000), as above; a later presentation of ✱9 by Landini is reported to add a rule exchanging quantifiers",
-                    "evidence": "unverified"
+                    "work": "Landini (2000), §4: the flaw located in ✱9·31's demonstration (the moves from his lines 2 to 3 and 4 to 5 apply ✱9·03, stated for a quantifier-free p), and the repair: ✱9·yy, (x)Ax ∨ (y)By for (x)(y)(Ax ∨ By); ✱9·zz, (∃x)Ax ∨ (∃y)By for (∃x)(∃y)(Ax ∨ By); and Switch, from B[(x)(∃y)Axy] infer B[(∃y)(x)Axy] when a connective in A separates every free x from every free y",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §4, pp. 63–64; read in full"
+                  },
+                  {
+                    "work": "PM's own Introduction defines the disjunction of two universal propositions: \"(x).φx .∨. (y).ψy\" as meaning \"(x, y). φx ∨ ψy\", which is Landini's ✱9·yy; ✱9 never states it",
+                    "evidence": "documented",
+                    "cite": "Whitehead and Russell, Principia Mathematica Vol. I (1910), Introduction, Chapter II: p. 49 of the 1910 printing as paginated in Project Gutenberg eBook #78050 (not yet checked against a scan); Landini, who uses the second edition's pages, cites it as p. 47"
+                  },
+                  {
+                    "work": "Russell's own rule in the second edition, ✱8·13: \"If all occurrences of x are separated from all occurrences of y by a certain stroke, we can change the order of x and y in the prefix … and vice versa. Pp\" (a primitive proposition, both directions, on the prefix)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pm2-vol1",
+                        "path": "Principia_Mathematica_vol1.pdf",
+                        "at": "Appendix A, p. 636 (PDF page 680)"
+                      }
+                    ]
                   }
                 ]
               }
@@ -238,9 +568,16 @@
               "order": "by dependency",
               "prior_work": {
                 "effect": [
-                  "not yet searched"
+                  "ideas"
                 ],
-                "known": []
+                "note": "No search of its own yet; found while reading Landini (2000).",
+                "known": [
+                  {
+                    "work": "Landini (2000), §5: completeness of ✱9 with his repair, through a Russellian prenex normal form",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §5, pp. 64–75; read in full"
+                  }
+                ]
               }
             },
             {
@@ -285,12 +622,29 @@
                 "note": "A shallow embedding is known to have stalled here.",
                 "known": [
                   {
-                    "work": "Neo-Principia (Rocq): ✱20 with 78 admitted steps; its own audit names the scope of incomplete symbols and host equality hiding reducibility as the blockers (MIT): a failure report to learn from",
-                    "evidence": "measured"
+                    "work": "Neo-Principia (Rocq, MIT): ✱20 with 78 admitted steps; its own audit names the scope of incomplete symbols and host equality hiding reducibility as the blockers: a failure report to learn from",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "neo",
+                        "path": "pm/ch20.v"
+                      },
+                      {
+                        "in": "neo",
+                        "path": "docs/5_audit.md",
+                        "lines": "17-21"
+                      }
+                    ]
                   },
                   {
-                    "work": "l-pommeret/Principia-Mathematica: 183 statements and 128 proofs over ✱20–✱56 (our count)",
-                    "evidence": "measured"
+                    "work": "l-pommeret/Principia-Mathematica: 183 statements and 128 proofs over ✱20–✱56 (our count, docs/FORMALIZATION_COMPARISON.md)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/FirstEdition"
+                      }
+                    ]
                   },
                   {
                     "work": "Holmes: polymorphic typing for PM's classes",
@@ -387,11 +741,24 @@
                 "known": [
                   {
                     "work": "Metamath set.mm: pm54.43, with its own note on the translation",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm",
+                        "lines": "110227-110244"
+                      }
+                    ]
                   },
                   {
-                    "work": "l-pommeret/Principia-Mathematica: proofs into ✱56",
-                    "evidence": "measured"
+                    "work": "l-pommeret/Principia-Mathematica: proofs into ✱56 (our count, docs/FORMALIZATION_COMPARISON.md)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/FirstEdition"
+                      }
+                    ]
                   }
                 ]
               }
@@ -414,12 +781,28 @@
                 ],
                 "known": [
                   {
-                    "work": "l-pommeret/Principia-Mathematica: deep to about ✱70, then shallow",
-                    "evidence": "measured"
+                    "work": "l-pommeret/Principia-Mathematica: deep to about ✱70, then shallow (docs/FORMALIZATION_COMPARISON.md)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "Principia/FirstEdition"
+                      }
+                    ]
                   },
                   {
-                    "work": "PM-MATS dependency graph of both editions: all rights reserved, so consulted for ordering only",
-                    "evidence": "measured"
+                    "work": "PM-MATS citation graph: 9,944 numbered propositions and 35,380 citations; all rights reserved, so consulted for ordering only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      },
+                      {
+                        "in": "pmmats",
+                        "path": "LICENSE"
+                      }
+                    ]
                   }
                 ]
               }
@@ -442,8 +825,18 @@
                 ],
                 "known": [
                   {
-                    "work": "PM-MATS dependency graph: consulted for ordering only",
-                    "evidence": "measured"
+                    "work": "PM-MATS citation graph: consulted for ordering only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      },
+                      {
+                        "in": "pmmats",
+                        "path": "LICENSE"
+                      }
+                    ]
                   }
                 ]
               }
@@ -468,8 +861,18 @@
                 ],
                 "known": [
                   {
-                    "work": "PM-MATS dependency graph: consulted for ordering only",
-                    "evidence": "measured"
+                    "work": "PM-MATS citation graph: consulted for ordering only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      },
+                      {
+                        "in": "pmmats",
+                        "path": "LICENSE"
+                      }
+                    ]
                   }
                 ]
               }
@@ -534,7 +937,17 @@
                 "known": [
                   {
                     "work": "PM-MATS citation graph: counts only, no copying (all rights reserved)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      },
+                      {
+                        "in": "pmmats",
+                        "path": "LICENSE"
+                      }
+                    ]
                   }
                 ]
               }
@@ -569,8 +982,15 @@
                     "evidence": "documented"
                   },
                   {
-                    "work": "Metamath set.mm theorem pm110.643",
-                    "evidence": "from memory"
+                    "work": "Metamath set.mm: ✱110·643 (1 + 1 = 2 for cardinals) as `dju1p1e2`, derived from pm54.43",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm",
+                        "lines": "113180-113190"
+                      }
+                    ]
                   }
                 ]
               }
@@ -725,8 +1145,14 @@
                     "evidence": "documented"
                   },
                   {
-                    "work": "PM-MATS covers both editions",
-                    "evidence": "documented"
+                    "work": "PM-MATS's citation graph includes the 1925 edition's ✱8 (56 numbers) and ✱89 (43)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      }
+                    ]
                   }
                 ]
               }
@@ -752,6 +1178,22 @@
                 ],
                 "note": "No mechanization found. ✱8 and Appendix A are treated together; a treatment with the stroke alone misses the change to quantification.",
                 "known": [
+                  {
+                    "work": "Russell's ✱8·13: the order of x and y in a prefix may be changed, in both directions, when a stroke separates their occurrences (a primitive proposition)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pm2-vol1",
+                        "path": "Principia_Mathematica_vol1.pdf",
+                        "at": "Appendix A, p. 636 (PDF page 680)"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "Landini (2000), §6: ✱8's single set of definitions and its rule ✱8·13 avoid ✱9's flaw",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §6, pp. 75–76; read in full"
+                  },
                   {
                     "work": "Hazen and Davoren (2000), 'Russell's 1925 logic': both editions reconstructed",
                     "evidence": "documented"
@@ -888,20 +1330,77 @@
                 "note": "lean4lean and other checkers that follow the C++ kernel add little independence.",
                 "known": [
                   {
-                    "work": "Lean Kernel Arena: 26 checkers in about 7 lineages, a negative-test corpus, run on this project's toolchain",
-                    "evidence": "measured"
+                    "work": "Lean Kernel Arena: 26 checker descriptors, of which one (parse-only) only parses, so 25 checkers that type-check, 24 besides the official kernel, in about 7 code lineages by our reading of their READMEs; 25 tests that a checker must reject; its official checker on v4.34.1, this project's toolchain",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "arena",
+                        "path": "checkers"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/official.yaml",
+                        "lines": "1"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/parse-only.yaml",
+                        "lines": "1-13"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "tests"
+                      }
+                    ]
                   },
                   {
-                    "work": "nanoda (Rust, Apache-2.0)",
-                    "evidence": "measured"
+                    "work": "nanoda (Rust, Apache-2.0): an allow-list of permitted axioms",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "nanoda",
+                        "path": "README.md",
+                        "lines": "29-33"
+                      },
+                      {
+                        "in": "nanoda",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
-                    "work": "Tenet (C#, MIT/Apache-2.0)",
-                    "evidence": "measured"
+                    "work": "Tenet (C#, MIT or Apache-2.0): shares no code with Lean; by its own account the algorithm is not independent",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "tenet",
+                        "path": "README.md",
+                        "lines": "24-26"
+                      },
+                      {
+                        "in": "tenet",
+                        "path": "LICENSE-MIT"
+                      },
+                      {
+                        "in": "tenet",
+                        "path": "LICENSE-APACHE"
+                      }
+                    ]
                   },
                   {
-                    "work": "con-leche (Lean, Apache-2.0): accepts only the three standard axioms",
-                    "evidence": "measured"
+                    "work": "con-leche (Lean, Apache-2.0): accepts only the three standard axioms (it ignores `sorryAx` declarations unless used)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "README.md",
+                        "lines": "26-30"
+                      },
+                      {
+                        "in": "con-leche",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "A kernel bug caught by nanoda in July 2026, and a nanoda bug fixed a week earlier: pin current versions",
@@ -917,6 +1416,55 @@
           "name": "Metamath and Rocq",
           "leaves": [
             {
+              "id": "mm-verify",
+              "name": "A small, readable independent checker written for this project (a Metamath verifier in a few hundred lines), chosen for clarity over speed",
+              "short": "our Metamath verifier",
+              "size": "S",
+              "size_reason": "A few hundred lines against the Metamath specification, tested on set.mm and on the test files of existing verifiers; then one of the verifiers that check pm.mm.",
+              "status": "not started",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "moved": {
+                "from": "In the roadmap before the nested plan, a later item: \"A small, readable independent checker written for this project (a Metamath verifier in a few hundred lines), chosen for clarity over speed.\" The first nested plan left it out.",
+                "why": "Restored as its own task. It needs nothing else and is small and independent, so it can start now; pm.mm for ✱1–✱5 is its first input from this project, and there it is one of the several verifiers."
+              },
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "known": [
+                  {
+                    "work": "mm-lean4: a Lean 4 Metamath verifier that checks set.mm; no LICENSE file, so ideas only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "mm-lean4",
+                        "path": "README.md",
+                        "lines": "1-3"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "Metamatix (Rocq, CC0): an unfinished Metamath checker, with no soundness theorem",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metamatix",
+                        "path": "theories/soundness.v",
+                        "lines": "1-3"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "metamath.exe, metamath-knife, mmverify.py, checkmm: verifiers to compare against",
+                    "evidence": "from memory"
+                  }
+                ]
+              }
+            },
+            {
               "id": "mm-1",
               "name": "pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers",
               "short": "pm.mm ✱1–✱5",
@@ -926,7 +1474,9 @@
               "hard_deps": [
                 "adq-1"
               ],
-              "soft_deps": [],
+              "soft_deps": [
+                "mm-verify"
+              ],
               "order": "by dependency",
               "prior_work": {
                 "effect": [
@@ -935,12 +1485,34 @@
                 ],
                 "known": [
                   {
-                    "work": "Metamath nf.mm, which opens by taking PM's ✱1·2–✱5·75 as its base; hol.mm, iset.mm (all CC0): database conventions to reuse",
-                    "evidence": "measured"
+                    "work": "Metamath nf.mm states that all 194 of PM's ✱1·2–✱5·75 are axioms or proved in it; hol.mm, iset.mm (all CC0): database conventions to reuse",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "nf.mm",
+                        "lines": "437-438"
+                      },
+                      {
+                        "in": "setmm",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "AML-Formalization: a proof-of-concept exporter from a deep embedding in Coq to Metamath (LGPL-2.1)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "aml",
+                        "path": "README.md",
+                        "lines": "108"
+                      },
+                      {
+                        "in": "aml",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "metamath.exe, metamath-knife, mmverify.py, checkmm",
@@ -973,8 +1545,15 @@
                     "evidence": "documented"
                   },
                   {
-                    "work": "hol.mm: types as terms (CC0)",
-                    "evidence": "measured"
+                    "work": "hol.mm: HOL's types as a Metamath typecode, with typing judgments (CC0)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "hol.mm",
+                        "lines": "34-38"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1026,11 +1605,35 @@
                 "known": [
                   {
                     "work": "rocq-lean-import (LGPL-2.1, alpha): runs Rocq with definitional UIP and without universe checks for some inductives; an optional extra, reported as such",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "rocq-lean-import",
+                        "path": "README.md",
+                        "lines": "7"
+                      },
+                      {
+                        "in": "rocq-lean-import",
+                        "path": "README.md",
+                        "lines": "262"
+                      },
+                      {
+                        "in": "rocq-lean-import",
+                        "path": "src/Lean.v",
+                        "lines": "11"
+                      }
+                    ]
                   },
                   {
-                    "work": "Metamatix, a Metamath checker in Rocq: its soundness file is empty",
-                    "evidence": "measured"
+                    "work": "Metamatix, a Metamath checker in Rocq (CC0, last commit 2023): its soundness file is a three-line empty section, so it states no soundness theorem",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metamatix",
+                        "path": "theories/soundness.v",
+                        "lines": "1-3"
+                      }
+                    ]
                   },
                   {
                     "work": "LRAT (two certified checkers for one format) and SMTCoq: the pattern to follow",
@@ -1038,11 +1641,25 @@
                   },
                   {
                     "work": "coq-hol-light ships its theorems as Rocq axioms: why the result must say proofs were checked",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "coq-hol-light",
+                        "path": "README.md",
+                        "lines": "14"
+                      }
+                    ]
                   },
                   {
-                    "work": "MetaRocq, for trusting Rocq itself",
-                    "evidence": "measured"
+                    "work": "MetaRocq, for trusting Rocq itself; its verified checker relies on a postulate of strong normalization",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metarocq",
+                        "path": "README.md",
+                        "lines": "131-132"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1072,8 +1689,18 @@
                 ],
                 "known": [
                   {
-                    "work": "Metamath set.mm: 281 pm* labels, CC0",
-                    "evidence": "measured"
+                    "work": "Metamath set.mm: 281 pm* theorems, CC0",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm"
+                      },
+                      {
+                        "in": "setmm",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "Carneiro's embedding of hol.mm in set.mm, as the template",
@@ -1112,7 +1739,14 @@
                   },
                   {
                     "work": "Flypitch: a deep-embedded theory with a model, in Lean",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "flypitch",
+                        "path": "src/summary.lean",
+                        "lines": "77"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1150,9 +1784,9 @@
               "name": "(a) Census of the kernel features the project exercises",
               "short": "kernel census",
               "size": "S",
-              "size_reason": "An instrumented re-check of the build, extending the axiom reports. The questions that decide stage (c): does the development, with what it imports, use nested inductives, or Nat and String literals (the orders of types use Nat, atoms use String)?",
+              "size_reason": "An instrumented re-check of the build, extending the axiom reports, taken twice: for a restricted export of the PM derivations and for the whole build. The questions that decide stage (c): does the development, with what it imports, use nested inductives, or Nat and String literals (the orders of types use Nat, atoms use String)?",
               "status": "not started",
-              "status_note": "The axiom reports already show that no PM derivation uses propext, Quot.sound or Classical.choice.",
+              "status_note": "The axiom reports already show that no PM derivation uses propext, Quot.sound or Classical.choice; the repository's metatheorems and models do (33 declarations, docs/VERIFICATION.md), so the whole build needs a checker that accepts the three standard axioms.",
               "hard_deps": [],
               "soft_deps": [],
               "order": "by dependency",
@@ -1163,7 +1797,23 @@
                 "known": [
                   {
                     "work": "Lean Kernel Arena descriptors: which features each checker declines",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "arena",
+                        "path": "checkers"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/metalean-slow.yaml",
+                        "lines": "3-6"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/mini.yaml",
+                        "lines": "12-15"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1188,8 +1838,20 @@
                 "note": "Used as a checker; not described as verification.",
                 "known": [
                   {
-                    "work": "Lean4Lean (Apache-2.0): checks Mathlib; its metatheory is partial (inductive types not yet specified)",
-                    "evidence": "measured"
+                    "work": "Lean4Lean (Apache-2.0): derived from the C++ kernel; its metatheory is partial (27 `sorry` in its Theory and Verify parts; inductive types not yet specified)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "lean4lean",
+                        "path": "README.md",
+                        "lines": "3-7"
+                      },
+                      {
+                        "in": "lean4lean",
+                        "path": "Lean4Lean/Theory/Inductive.lean",
+                        "lines": "5-7"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1199,7 +1861,7 @@
               "name": "(c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed",
               "short": "restricted checker",
               "size": "M",
-              "size_reason": "First re-check the build with con-leche, and with metalean's slow checker if our literals are acceptable to it. Our own restricted checker (for example over a literal-free re-encoding) only if they do not serve.",
+              "size_reason": "First re-check the restricted export of the PM derivations, then the whole build, with con-leche, and with metalean's slow checker if our literals are acceptable to it. Our own restricted checker (for example over a literal-free re-encoding) only if they do not serve.",
               "status": "not started",
               "hard_deps": [
                 "lk-census"
@@ -1220,15 +1882,51 @@
                 "known": [
                   {
                     "work": "con-leche (Apache-2.0): a full checker with a machine-checked theorem that every environment it accepts has a set model",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "96"
+                      },
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "110"
+                      }
+                    ]
                   },
                   {
-                    "work": "metalean (Apache-2.0): a verified checker for an idealised Lean type theory; its slow checker declines Nat and String literals and nested inductives, so it probably declines this development as it is",
-                    "evidence": "measured"
+                    "work": "metalean (Apache-2.0): a verified checker for an idealised Lean type theory; its slow checker declines Nat and String literals, and nested inductives, which it does not support, are filtered out before it runs, so it probably declines this development as it is",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metalean",
+                        "path": "README.md",
+                        "lines": "5-7"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/metalean-slow.yaml",
+                        "lines": "3-6"
+                      }
+                    ]
                   },
                   {
-                    "work": "mini-kernel, canonical-min: small, unverified",
-                    "evidence": "measured"
+                    "work": "mini-kernel, canonical-min: small kernels without a correctness proof, both incomplete by design",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "mini-kernel",
+                        "path": "README.md",
+                        "lines": "17"
+                      },
+                      {
+                        "in": "arena",
+                        "path": "checkers/canonical-min.yaml",
+                        "lines": "7-8"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1255,11 +1953,30 @@
                 "known": [
                   {
                     "work": "metalean: soundness against its own typing specification; consistency relative to ZFC with ω inaccessibles, its only axiom",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metalean",
+                        "path": "Metalean/SetSemantics/Consistency/Main.lean",
+                        "lines": "42"
+                      },
+                      {
+                        "in": "metalean",
+                        "path": "Metalean/SetTheory/Cardinal/Inaccessible.lean",
+                        "lines": "16"
+                      }
+                    ]
                   },
                   {
                     "work": "con-leche: `model_exists`",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "96"
+                      }
+                    ]
                   },
                   {
                     "work": "MetaCoq's verified checker for Coq",
@@ -1296,7 +2013,19 @@
                 "known": [
                   {
                     "work": "Flypitch (Lean 3, Apache-2.0): `ZFC_is_consistent` for its encoded ZFC; a Lean 4 port exists",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "flypitch",
+                        "path": "src/summary.lean",
+                        "lines": "77"
+                      },
+                      {
+                        "in": "flypitch4",
+                        "path": "flypitch4/Flypitch4/Summary.lean",
+                        "lines": "116"
+                      }
+                    ]
                   },
                   {
                     "work": "Mathlib's ZFSet",
@@ -1334,15 +2063,36 @@
                   },
                   {
                     "work": "con-leche: `model_exists`, every environment it accepts has a set model",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "96"
+                      }
+                    ]
                   },
                   {
                     "work": "metalean: `consistency`, relative to ZFC with ω inaccessibles, for an idealised type theory",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metalean",
+                        "path": "Metalean/SetSemantics/Consistency/Main.lean",
+                        "lines": "42"
+                      }
+                    ]
                   },
                   {
                     "work": "lean4lean-model: its main theorem is still `sorry`",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "l4l-model",
+                        "path": "README.md",
+                        "lines": "25"
+                      }
+                    ]
                   },
                   {
                     "work": "Werner, 'Sets in types, types in sets' (1997), for Coq",
@@ -1384,8 +2134,18 @@
                 ],
                 "known": [
                   {
-                    "work": "281 pm* labels in set.mm and 198 in iset.mm (CC0), reaching ✱10–✱14 and ✱54, not only ✱1–✱5",
-                    "evidence": "measured"
+                    "work": "281 pm* theorems in set.mm and 198 in iset.mm (CC0), reaching ✱10–✱14 and ✱54, not only ✱1–✱5",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "setmm",
+                        "path": "set.mm"
+                      },
+                      {
+                        "in": "setmm",
+                        "path": "iset.mm"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1408,16 +2168,40 @@
                 "note": "docs/FORMALIZATION_COMPARISON.md is itself the survey.",
                 "known": [
                   {
-                    "work": "l-pommeret/Principia-Mathematica unchanged since it was measured",
-                    "evidence": "measured"
+                    "work": "l-pommeret/Principia-Mathematica: HEAD is still the commit docs/FORMALIZATION_COMPARISON.md measured",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pommeret",
+                        "path": "README.md"
+                      }
+                    ]
                   },
                   {
-                    "work": "The Agda PM development's ✱9 does not build as published (a missing module)",
-                    "evidence": "measured"
+                    "work": "The Agda PM development's ✱9 imports a module, PMClasses, that is not in the repository, so it cannot build as published",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "agda-pm",
+                        "path": "Star9.agda",
+                        "lines": "10"
+                      }
+                    ]
                   },
                   {
-                    "work": "Lacrimae-Angeli: ✱1 only, no license",
-                    "evidence": "measured"
+                    "work": "Lacrimae-Angeli: ✱1 only (135 lines of Rocq), no LICENSE file",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "lacrimae",
+                        "path": "pm/ch1.v"
+                      },
+                      {
+                        "in": "lacrimae",
+                        "path": "README.md",
+                        "lines": "19"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1456,11 +2240,25 @@
                 "known": [
                   {
                     "work": "Mathlib: `Cardinal.eq`, `mk_sum`, `mk_prod`, `lift_mk_eq`",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "mathlib4",
+                        "path": "Mathlib/SetTheory/Cardinal/Defs.lean",
+                        "lines": "115-279"
+                      }
+                    ]
                   },
                   {
                     "work": "ZFLean (Apache-2.0): isomorphisms of products, powersets and function spaces",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "zflean",
+                        "path": "ZFLean/Isomorphisms.lean",
+                        "lines": "194-668"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1485,7 +2283,19 @@
                 "known": [
                   {
                     "work": "Mathlib: `RelIso`, `Ordinal.type_eq` (well-orders only)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "mathlib4",
+                        "path": "Mathlib/Order/RelIso/Basic.lean",
+                        "lines": "558"
+                      },
+                      {
+                        "in": "mathlib4",
+                        "path": "Mathlib/SetTheory/Ordinal/Basic.lean",
+                        "lines": "131"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1514,11 +2324,30 @@
                 "known": [
                   {
                     "work": "Mathlib: `inducedOrderRingIso`",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "mathlib4",
+                        "path": "Mathlib/Algebra/Order/CompleteField.lean",
+                        "lines": "279"
+                      }
+                    ]
                   },
                   {
                     "work": "Spivak Lean (Apache-2.0): Dedekind cuts made a field, then `isoFun_eq_inducedOrderRingIso`",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "spivak",
+                        "path": "SpivakCalculus/Chapter29.lean",
+                        "lines": "59"
+                      },
+                      {
+                        "in": "spivak",
+                        "path": "SpivakCalculus/Chapter30.lean",
+                        "lines": "675"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1549,11 +2378,33 @@
                 "known": [
                   {
                     "work": "Gerrata (MIT): transcription against scans, the same architecture",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "gerrata",
+                        "path": "README.md",
+                        "lines": "5-17"
+                      },
+                      {
+                        "in": "gerrata",
+                        "path": "pyproject.toml",
+                        "lines": "10"
+                      }
+                    ]
                   },
                   {
                     "work": "PM-MATS: counts only (all rights reserved)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "pmmats",
+                        "path": "src/pmdata.json"
+                      },
+                      {
+                        "in": "pmmats",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "Project Gutenberg eBooks #78050 (Vol I) and #78255 (Vol II)",
@@ -1661,7 +2512,14 @@
                 "known": [
                   {
                     "work": "FormalizedFormalLogic/Foundation (Apache-2.0): locally nameless first-order formulas",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Syntax/Classical/Formula.lean",
+                        "lines": "28"
+                      }
+                    ]
                   },
                   {
                     "work": "HOL_in_HOL_Deep (BSD): a locally nameless deep embedding",
@@ -1669,15 +2527,44 @@
                   },
                   {
                     "work": "lean-hoas: in Lean, a parametric encoding does not exclude exotic terms; no license, ideas only",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "lean-hoas",
+                        "path": "LeanHoas/PHOAS/Exotic.lean",
+                        "lines": "27"
+                      },
+                      {
+                        "in": "lean-hoas",
+                        "path": "LeanHoas/PHOAS/Exotic.lean",
+                        "lines": "91"
+                      }
+                    ]
                   },
                   {
                     "work": "Grenrus (2025, Agda): a well-formedness predicate and a proved round trip between de Bruijn and parametric terms; no license",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "nbexp",
+                        "path": "src/NbEXP/SelfContained/Conv.agda",
+                        "lines": "127"
+                      },
+                      {
+                        "in": "nbexp",
+                        "path": "src/NbEXP/SelfContained/Conv.agda",
+                        "lines": "261"
+                      }
+                    ]
                   },
                   {
                     "work": "Hybrid (Isabelle): an encoding over de Bruijn terms with an admissibility predicate and adequacy results",
                     "evidence": "documented"
+                  },
+                  {
+                    "work": "Landini (2000), §5: ✱9 with his repair is semantically complete for predicate logic without identity, by a Russellian prenex normal form; for the core's ✱9 part, a completeness proof to follow or check against",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §5, pp. 64–75; read in full"
                   },
                   {
                     "work": "Nothing for ramified types, or for derivations with an infinitary generalization rule",
@@ -1755,11 +2642,65 @@
                 "effect": [
                   "reuse"
                 ],
-                "note": "Foundation's theorems are stated for first-order theories, hence the first-order presentation.",
+                "note": "Foundation's incompleteness theorems are stated for arithmetic theories, in the language of ordered rings, or abstractly for a theory and a base theory in one language; hence the first-order presentation, and an arithmetic theory of PM (the arithmetic sentences whose translations PM proves) to apply them to. That theory is consistent if PM is, and r.e. if PM's proof relation is decidable; it contains IΣ₁ only if PM proves the translation of every axiom of IΣ₁. A sentence it leaves undecided, PM leaves undecided.",
                 "known": [
                   {
-                    "work": "Foundation (Lean 4, Apache-2.0): the first theorem for Δ₁, Σ₁-sound theories containing R₀; Gödel–Rosser for any encodable first-order theory; the second theorem for consistent Δ₁ theories containing IΣ₁, with the derivability conditions proved; no `sorry` in its incompleteness part (not built)",
-                    "evidence": "measured"
+                    "work": "Foundation (Lean 4, Apache-2.0): Gödel's first theorem as `incomplete`, for an arithmetic theory T with a Δ₁ axiomatization, R₀ ⪯ T and T Σ₁-sound",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/First.lean",
+                        "lines": "19"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Basic/Misc.lean",
+                        "lines": "42"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Bootstrapping/Syntax/Theory.lean",
+                        "lines": "16-25"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "Foundation: Gödel–Rosser as `incomplete_GR`, for an arithmetic theory T with a Δ₁ axiomatization, IΣ₁ ⪯ T and T consistent, and `incomplete_GR_of_RE`, the same with T r.e.; the abstract `rosser_first_incompleteness` needs a base theory with diagonalization in T's own language",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/RosserProvability.lean",
+                        "lines": "164-172"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/ProvabilityAbstraction/Basic.lean",
+                        "lines": "334-350"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Schemata.lean",
+                        "lines": "62-68"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "Foundation: Gödel's second theorem as `consistent_unprovable`, for a consistent arithmetic theory with a Δ₁ axiomatization and IΣ₁ ⪯ T, with the derivability conditions proved; no `sorry` under its Incompleteness directory (not built)",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/Second.lean",
+                        "lines": "16-19"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/StandardProvability.lean",
+                        "lines": "33-71"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1784,8 +2725,19 @@
                 ],
                 "known": [
                   {
-                    "work": "Foundation, as above",
-                    "evidence": "measured"
+                    "work": "Foundation: the coding of formulas and proofs, and the classes Δ₁ and RE of theories",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Bootstrapping/Syntax/Proof/Coding.lean"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Bootstrapping/Syntax/Theory.lean",
+                        "lines": "16-25"
+                      }
+                    ]
                   },
                   {
                     "work": "Paulson, Gödel's theorems in Isabelle/HOL (hereditarily finite sets)",
@@ -1796,12 +2748,12 @@
             },
             {
               "id": "g-arith",
-              "name": "Robinson's Q interpreted inside the chosen PM theory, with Infinity as hypothesis",
-              "short": "Q interpreted",
+              "name": "Arithmetic interpreted inside the chosen PM theory, with Infinity as hypothesis: Robinson's Q, and IΣ₁ for the library's Gödel–Rosser theorem",
+              "short": "arithmetic interpreted",
               "size": "L",
-              "size_reason": "Every axiom of Q proved inside the theory, with typical ambiguity resolved to one type.",
+              "size_reason": "Every axiom of Q proved inside the theory, with typical ambiguity resolved to one type; then induction for Σ₁ formulas, from PM's induction for inductive cardinals. Foundation's Gödel–Rosser theorem needs IΣ₁ ⪯ T, which Q alone does not give.",
               "status": "not started",
-              "status_note": "PM's cardinal route (✱100–✱126) is the default; a shorter internal interpretation may exist.",
+              "status_note": "PM's cardinal route (✱100–✱126) is the default; a shorter internal interpretation may exist. Default: interpret IΣ₁, so that the library's theorem applies as stated; the alternative, a Gödel–Rosser proof from Q written here, is extra work the library does not provide.",
               "hard_deps": [
                 "v2-100-126"
               ],
@@ -1818,6 +2770,22 @@
                   {
                     "work": "Burgess and Hazen (1998): arithmetic in ramified PM",
                     "evidence": "documented"
+                  },
+                  {
+                    "work": "Foundation: Q, R₀ and IΣₙ as arithmetic theories, the targets of the interpretation",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Q/Basic.lean",
+                        "lines": "26"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Schemata.lean",
+                        "lines": "62-68"
+                      }
+                    ]
                   }
                 ]
               }
@@ -1827,7 +2795,7 @@
               "name": "Gödel's first theorem for PM, in the Gödel–Rosser form",
               "short": "Gödel I",
               "size": "L",
-              "size_reason": "The diagonal argument is reused; the work is representability inside PM's own arithmetic for the first-order presentation.",
+              "size_reason": "The diagonal argument is reused (Foundation's `incomplete_GR`); the work is the translation of PM's arithmetic into the language of ordered rings and the theorem's hypotheses for it: a Δ₁ or r.e. axiomatization, IΣ₁ ⪯ T, and consistency, which stays a hypothesis.",
               "status": "not started",
               "hard_deps": [
                 "g-fo",
@@ -1852,12 +2820,30 @@
                 "note": "Nothing for any type theory or for PM.",
                 "known": [
                   {
-                    "work": "Foundation, as above",
-                    "evidence": "measured"
+                    "work": "Foundation: `incomplete_GR`, as above",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/RosserProvability.lean",
+                        "lines": "164-172"
+                      }
+                    ]
                   },
                   {
-                    "work": "O'Connor (Coq, MIT): essential incompleteness of arithmetic",
-                    "evidence": "measured"
+                    "work": "O'Connor (Coq, MIT): the Gödel–Rosser first theorem; essential incompleteness of arithmetic",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "goedel",
+                        "path": "README.md",
+                        "lines": "26"
+                      },
+                      {
+                        "in": "goedel",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "Popescu and Traytel: abstract, syntax-independent formalization in Isabelle",
@@ -1883,23 +2869,64 @@
                 "effect": [
                   "ideas"
                 ],
-                "note": "Because a too-weak specification of the provability predicate is reported to have given a spurious second theorem, the predicate's adequacy is stated here as an explicit theorem.",
+                "note": "A too-weak specification of the provability predicate can give a theorem that only looks like the second theorem, so the predicate's adequacy is stated here as an explicit theorem.",
                 "known": [
                   {
                     "work": "Foundation: the second theorem over IΣ₁, with the derivability conditions proved",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/Second.lean",
+                        "lines": "16-19"
+                      },
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Incompleteness/StandardProvability.lean",
+                        "lines": "33-71"
+                      }
+                    ]
                   },
                   {
                     "work": "Paulson; Popescu and Traytel",
                     "evidence": "documented"
                   },
                   {
-                    "work": "O'Connor's Coq development assumes two of the derivability conditions",
-                    "evidence": "measured"
+                    "work": "O'Connor's Coq development assumes two of the derivability conditions (HBL2, HBL3) and proves the first",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "hydra",
+                        "path": "theories/goedel/goedel2.v",
+                        "lines": "88"
+                      },
+                      {
+                        "in": "hydra",
+                        "path": "theories/goedel/goedel2.v",
+                        "lines": "179-180"
+                      }
+                    ]
                   },
                   {
-                    "work": "A reported case where a too-weak specification of the provability predicate gave a spurious second theorem",
-                    "evidence": "documented"
+                    "work": "Coquand (Agda): Gödel I and II for Basic Recursive Arithmetic, `--safe`, no postulates; no LICENSE file, so ideas only",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "agda-godel-tree",
+                        "path": "README.md",
+                        "lines": "17-18"
+                      },
+                      {
+                        "in": "agda-godel-tree",
+                        "path": "README.md",
+                        "lines": "161-163"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "A paper by Coquand reported to describe an earlier attempt whose too-weak specification of the verifier gave a theorem with the appearance of the second theorem; the paper has not been read here",
+                    "evidence": "unverified",
+                    "cite": "arXiv:2606.01898"
                   }
                 ]
               }
@@ -1959,11 +2986,18 @@
                 "effect": [
                   "ideas"
                 ],
-                "note": "Tags of rule use do not certify provability in PRA.",
+                "note": "Tags of rule use do not certify provability in PRA. No PRA object theory in Lean found.",
                 "known": [
                   {
-                    "work": "No PRA object theory in Lean found; Foundation has IΣ₀ and IΣ₁",
-                    "evidence": "measured"
+                    "work": "Foundation has IΣ₀ and IΣ₁ as arithmetic theories",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "foundation",
+                        "path": "Foundation/FirstOrder/Arithmetic/Schemata.lean",
+                        "lines": "62-68"
+                      }
+                    ]
                   },
                   {
                     "work": "Tait, 'Finitism' (1981)",
@@ -2023,7 +3057,18 @@
                 "known": [
                   {
                     "work": "reverse-mathlib (Lean 4, Apache-2.0): ω-model facts and one syntactic result, kept apart",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "revmathlib",
+                        "path": "README.md",
+                        "lines": "14-18"
+                      },
+                      {
+                        "in": "revmathlib",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
                     "work": "Simpson, Subsystems of Second Order Arithmetic",
@@ -2099,7 +3144,19 @@
                 "known": [
                   {
                     "work": "Coq library of undecidability proofs (MPL-2.0): decides finite satisfiability for monadic signatures",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "undec",
+                        "path": "theories/FOL/TRAKHTENBROT/Sig1.v",
+                        "lines": "145"
+                      },
+                      {
+                        "in": "undec",
+                        "path": "theories/FOL/TRAKHTENBROT/red_dec.v",
+                        "lines": "179"
+                      }
+                    ]
                   },
                   {
                     "work": "Orlandelli and Tesi (2024): a syntactic decision procedure; models of size at most 2^k",
@@ -2141,11 +3198,33 @@
                   },
                   {
                     "work": "Théry (Coq, LGPL-2.1)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "presburger",
+                        "path": "description"
+                      },
+                      {
+                        "in": "presburger",
+                        "path": "LICENSE"
+                      }
+                    ]
                   },
                   {
-                    "work": "Lean's `omega` is not a decision procedure, so not relied on for metatheory",
-                    "evidence": "measured"
+                    "work": "Lean's `omega` is not a decision procedure (no dark and grey shadows), so not relied on for metatheory",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "lean4",
+                        "path": "src/Lean/Elab/Tactic/Omega.lean",
+                        "lines": "16"
+                      },
+                      {
+                        "in": "lean4",
+                        "path": "src/Lean/Elab/Tactic/Omega.lean",
+                        "lines": "93"
+                      }
+                    ]
                   }
                 ]
               }
@@ -2174,15 +3253,36 @@
                 "known": [
                   {
                     "work": "Cohen and Mahboubi (Coq, CeCILL-B)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "real-closed",
+                        "path": "theories/qe_rcf.v",
+                        "lines": "983"
+                      }
+                    ]
                   },
                   {
                     "work": "Rocq CAD, `cylindrical_decomposition` (LGPL-3.0)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "cad",
+                        "path": "theories/cylinder.v",
+                        "lines": "2202"
+                      }
+                    ]
                   },
                   {
                     "work": "Sturm–Tarski theorems in Lean (Apache-2.0; no quantifier elimination)",
-                    "evidence": "measured"
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "rcf-lean",
+                        "path": "RealClosedField/SturmTarski/Theorem.lean",
+                        "lines": "15-135"
+                      }
+                    ]
                   },
                   {
                     "work": "McLaughlin and Harrison (HOL Light, proof-producing)",
