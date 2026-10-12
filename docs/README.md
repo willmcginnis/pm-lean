@@ -3,6 +3,7 @@
 | Page | What it covers |
 |---|---|
 | [PRINCIPLES.md](PRINCIPLES.md) | the project's standing design principles |
+| [ROADMAP.md](ROADMAP.md) | what comes next: checking PM's claims, coverage, independent checking, cross-checking between foundations |
 | [PM_CLAIMS.md](PM_CLAIMS.md) | PM's claims about its own system (Introduction, ✱1–✱21), each with its page and whether it is checked in Lean |
 | [PROGRESS.md](PROGRESS.md) | coverage by volume, range and chapter; milestones; the units counted (generated tables) |
 | [FIDELITY.md](FIDELITY.md) | how closely the proofs follow PM: labels, glue, the three counts, findings in the text |
