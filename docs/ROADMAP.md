@@ -25,7 +25,7 @@ What this project plans to do next, roughly in order. Status words: **in progres
 
 ## Independent checking
 
-Consistency can only be vouched for by a stronger system, and that system by a stronger one again (Gödel's second incompleteness theorem): that stack is documented, not finished. Checking, by contrast, can be repeated side by side by independent tools, which is where this project spends its effort.
+Consistency cannot be vouched for from inside: by Gödel's second incompleteness theorem, a consistent, recursively axiomatized theory that interprets enough arithmetic does not prove its own consistency. A consistency proof has to be given in another theory, whose own consistency is then assumed; those links are documented, not finished. Checking, by contrast, can be repeated side by side by independent tools, which is where this project spends its effort.
 
 - **Next.** Re-check the whole build with independent implementations of Lean's kernel (for example nanoda in Rust, Lean4Lean in Lean, or Tenet on .NET; see the Lean Kernel Arena) in CI.
 - **Later.** Export the PM derivations to Metamath with PM's own primitive propositions as the axioms, and check them with several independent Metamath verifiers. This needs no Lean at all, which is possible because the PM derivations use none of Lean's axioms.
@@ -35,7 +35,7 @@ Consistency can only be vouched for by a stronger system, and that system by a s
 Two different things are meant by "checking both ways", and Gödel separates them:
 
 - **Proofs, both ways: possible.** The same theorem checked in two systems, with proofs translated in each direction (Lean ⟷ Metamath, Metamath's set.mm being ZFC). Each direction catches errors the other might miss.
-- **Consistency, both ways: impossible.** If two consistent systems (strong enough for arithmetic) each proved the other consistent, each would in effect prove its own consistency, which the second incompleteness theorem rules out. So every consistency link goes up a step: Lean proves ZFC consistent (it can build a model of ZFC), and ZFC needs added inaccessible cardinals to prove Lean consistent (Carneiro, 2019).
+- **Consistency, both ways: impossible.** If two consistent systems (strong enough for arithmetic) each proved the other consistent, each would in effect prove its own consistency, which the second incompleteness theorem rules out. So every consistency link goes up a step: Lean proves ZFC consistent (it can build a model of ZFC), and in the other direction ZFC with added inaccessible cardinals suffices to prove Lean consistent (Carneiro, 2019, builds a model of Lean's type theory there, with inaccessibles for its universes). That assumption is sufficient; it is not shown to be necessary.
 
 - **Later.** A model of ZFC in Lean, and Lean's metatheory checked in a ZFC-based system with inaccessibles, so that each direction is a checked theorem rather than a paper argument.
 - **Later.** Translation of the PM derivations and the relevant set.mm results between Lean and Metamath, re-checked on each side.
