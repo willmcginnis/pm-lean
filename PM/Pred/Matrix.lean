@@ -1,7 +1,7 @@
 import PM.Quant
 /-!
   "Predicative" as "matrix" (✱12, p. 172), as a style of comprehension: the PRIMARY style
-  (Will, 2026-10-11, open question Q1: both readings, the matrix one primary as the more elegant;
+  (maintainer, 2026-10-11, open question Q1: both readings, the matrix one primary as the more elegant;
   docs/TYPES_DESIGN.md, decision 3).
 
   ✱12 p. 172: "A function is said to be *predicative* when it is a matrix", and "'Matrix' or

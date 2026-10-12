@@ -2,7 +2,7 @@ import PM.Quant
 /-!
   Comprehension at function types, as an opt-in rule. It is OUR reading; PM never states it as a
   proposition, and PM's own proofs get every function they need from ✱12·1 instead (e.g. ✱14·17,
-  p. 188). It is kept, marked for what it is for (Will, 2026-10-11, open question Q2):
+  p. 188). It is kept, marked for what it is for (maintainer, 2026-10-11, open question Q2):
   - it is the rule that forms functions in the predicative fragment (no ✱12·1), which the 1925 second
     edition needs;
   - it gives the check `q12_1_of_var` (PM/Star12.lean);

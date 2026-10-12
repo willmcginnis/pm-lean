@@ -1,7 +1,7 @@
 import PM.Orders
 import PM.Pred.Matrix
 /-!
-  Partial application and p. 56's second clause (Will, 2026-10-11 evening, items (ii) and (iii);
+  Partial application and p. 56's second clause (maintainer, 2026-10-11 evening, items (ii) and (iii);
   docs/TYPES_DESIGN.md, decisions 3 and 5, questions Q3 and Q4).
 
   (ii) Currying. φ!x can be seen as a function of the two arguments φ and x, of order 2 (p. 54, p. 170:

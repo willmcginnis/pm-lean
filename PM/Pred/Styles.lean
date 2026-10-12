@@ -8,13 +8,13 @@ import PM.Orders
 import PM.Models.Finite
 import PM.Models.Collapse
 /-!
-  The styles of predicativity side by side (Will, 2026-10-11, open question Q1: do both, as a
+  The styles of predicativity side by side (maintainer, 2026-10-11, open question Q1: do both, as a
   deliberate, documented style choice; docs/TYPES_DESIGN.md, decision 3).
 
   A style is a reading of "predicative" (`PredReading`: ✱12 p. 172 matrix, the primary style; or
   Introduction p. 56 lowest order, the alternative) combined with a reading of how a real function
   variable counts in the order check (`RealReading`: p. 55, at its own order, the default; or p. 54, as
-  an argument; Will, 2026-10-11 ~19:00, open question Q3: both as styles). `Style.of P R` is the style;
+  an argument; maintainer, 2026-10-11 ~19:00, open question Q3: both as styles). `Style.of P R` is the style;
   `Sys.full (Style.of P R)` etc. are the systems. There are four styles.
 
   Every PM theorem here is stated for an arbitrary system, so it holds in every style; StyleCheck.lean

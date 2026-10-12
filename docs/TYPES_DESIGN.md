@@ -73,7 +73,7 @@ order possible for an argument of order 1, so it is predicative by p. 56. It is 
 not predicative by p. 172. Likewise (y) . ψ(x, y), a first-order function of x (p. 54): predicative by
 p. 56, not by p. 172. Holmes calls the matrix definition "completely destructive" (Notes p. 4).
 
-**Decision (Will, 2026-10-11): both, as a deliberate, documented style choice.** Each reading is its own
+**Decision (maintainer, 2026-10-11): both, as a deliberate, documented style choice.** Each reading is its own
 module, and the proof system takes the style as a parameter (`Sys.style`, the same mechanism as the
 rule capabilities of decision 13):
 - `PM/Pred/Matrix.lean`, `Style.matrix`: comprehension at a predicative type (`fn1 a 0`, `fn2 a b 0`)
@@ -85,7 +85,7 @@ rule capabilities of decision 13):
 - At non-predicative types (k > 0) the two styles accept the same formulas.
 - `PM/Pred/Styles.lean` puts them side by side (`PredReading`, `Style.of`).
 
-**The matrix style is primary** (Will: "the more elegant one"), in the docs and the entry files
+**The matrix style is primary** (the maintainer: "the more elegant one"), in the docs and the entry files
 (`Style.primary`); the lowest-order style is the alternative (`Style.alternative`). Reasons:
 - it is ✱12's own definition, where the formal system starts, and it is "a primitive idea" there
   (p. 172), so the formal reading should use it; p. 56 is in the informal Introduction;
@@ -180,7 +180,7 @@ shows the two shapes agree (decision 7).
 
 ### 5. The order check: two readings of a real function variable (revised 2026-10-11, the maintainer's decision on Q3)
 
-**Decision (Will, 2026-10-11 ~19:00): both readings, as styles; both must pass.** Each is its own
+**Decision (maintainer, 2026-10-11 ~19:00): both readings, as styles; both must pass.** Each is its own
 module, and it combines with either reading of "predicative" (decision 3), giving four styles
 `Style.of P R` (PM/Pred/Styles.lean):
 - `PM/Pred/RealOwnOrder.lean`, `Lvl`: a real function variable counts with its own order (p. 55). The
@@ -236,7 +236,7 @@ to them"), which links this to Q4.
 
 ### 6. (b) Comprehension
 
-The decision is to **keep** comprehension (Will, 2026-10-11, Q2: as its own module, marked for what it
+The decision is to **keep** comprehension (maintainer, 2026-10-11, Q2: as its own module, marked for what it
 is for), as the constructors `compr1` and `compr2`, available in a system with `compr` (class
 `Comprehension S`, PM/Rules/Comprehension.lean, decision 13):
 
@@ -516,10 +516,10 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
-| **S1** every PM theorem under every style (Will, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 485 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 485/485 each; 0 without a parameter `S`; per system, in every style: reducibility 484, predicative 348, base 347 (the 137 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
-| **S2** `styles_equiv` (Will, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
-| **S3** currying (Will, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
-| **S4** p. 56 second clause vs lowest order (Will, item (iii)) | **no case exists within this encoding** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements, comparing the same definitions. Both partial applications are evaluated at `()` in `U` with the same body order, so the result is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1; it does not show that the encoding captures PM's "assignment of values", nor extend to arbitrary variable families. Not added as a style (none needed within this encoding) |
+| **S1** every PM theorem under every style (maintainer, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 485 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 485/485 each; 0 without a parameter `S`; per system, in every style: reducibility 484, predicative 348, base 347 (the 137 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
+| **S2** `styles_equiv` (maintainer, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
+| **S3** currying (maintainer, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
+| **S4** p. 56 second clause vs lowest order (maintainer, item (iii)) | **no case exists within this encoding** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements, comparing the same definitions. Both partial applications are evaluated at `()` in `U` with the same body order, so the result is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1; it does not show that the encoding captures PM's "assignment of values", nor extend to arbitrary variable families. Not added as a style (none needed within this encoding) |
 
 ### U6: cost numbers
 

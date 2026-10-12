@@ -1,6 +1,6 @@
 import PM.Pred.Styles
 /-!
-  `styles_equiv` (Will, 2026-10-11 evening, item (i)): with the axiom of reducibility, the styles of
+  `styles_equiv` (maintainer, 2026-10-11 evening, item (i)): with the axiom of reducibility, the styles of
   predicativity derive exactly the same theorems.
 
   The styles differ only in which formulas comprehension accepts (PM/Pred/). With ✱12·1 / ✱12·11 every

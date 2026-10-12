@@ -1,5 +1,5 @@
 -- Search for a two-argument function on which p. 56's second clause and the lowest-order rule disagree
--- (Will, 2026-10-11 evening, item (iii)). Run with `lake env lean ClauseSearch.lean`.
+-- (maintainer, 2026-10-11 evening, item (iii)). Run with `lake env lean ClauseSearch.lean`.
 --
 -- `PM.second_clause_iff_lowestOrder` (PM/Pred/Curry.lean) proves that there is none within this
 -- encoding (both partial applications evaluated at `()` in `U`, with the same body order O, so the

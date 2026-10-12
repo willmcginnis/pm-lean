@@ -1,7 +1,7 @@
 import PM.Orders
 /-!
   The order check `LvlArg`, reading p. 54: a real (free) function variable counts as an argument, so
-  it raises the order (Will, 2026-10-11 ~19:00, open question Q3: both readings as styles, both must
+  it raises the order (maintainer, 2026-10-11 ~19:00, open question Q3: both readings as styles, both must
   pass; docs/TYPES_DESIGN.md, decision 5).
 
   p. 54 and p. 170 treat φ!x as a function of φ as well as of x: "It will be seen that "φ!x" is a
