@@ -7,7 +7,7 @@ import PM.Pred.Matrix
   (ii) Currying. φ!x can be seen as a function of the two arguments φ and x, of order 2 (p. 54, p. 170:
   "It will be seen that "φ!x" is a function of two variables, namely φ!ẑ and x"), or, with φ fixed, as a
   function of x alone, which is predicative (p. 55: "if f!(φ!ẑ, x) is φ!x, the assignment of a value to
-  φ gives us a predicative function of x"). Will's framing: the same body seen as a two-parameter
+  φ gives us a predicative function of x"). The maintainer's framing: the same body seen as a two-parameter
   function and as a one-parameter closure, "syntactic sugar"? `curry_order` makes it a checked fact:
   the order of the two-argument function is the larger of the first argument's lowest compatible order
   and the order of the partial application. So the p. 55 reading of a real variable (its own order) is

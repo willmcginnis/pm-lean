@@ -44,5 +44,5 @@ import PM.Trap
   PM/Vol3.lean).
 
   Which theorem needs which rule is in its signature (`[Reducibility S]`, `[Comprehension S]`);
-  README.md has the table, and RedCheck.lean cross-checks it against the proofs.
+  docs/VERIFICATION.md has the table, and RedCheck.lean cross-checks it against the proofs.
 -/

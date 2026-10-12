@@ -1,6 +1,6 @@
 import PM.Quant
 /-!
-  The finite coded model (docs/TYPES_DESIGN.md, decision 11; Will 2026-10-11, open question Q5): a
+  The finite coded model (docs/TYPES_DESIGN.md, decision 11; the maintainer's decision on Q5, 2026-10-11): a
   structure in which every type has finitely many values, function values are truth tables, and every
   quantifier is computed by enumeration. So `consistent` and the counter-models use no axioms, for
   every system `S` (every combination of rules and every style), since `qsound` holds for all of them.

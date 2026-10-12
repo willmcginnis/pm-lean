@@ -20,7 +20,7 @@ import PM.Star10
   The steps that join two asserted lines (Syll, ✱4·22) are tacit throughout (PM/Star11.lean's header).
   The ones that join lines under a hypothesis use, besides these, Comp (✱3·43), ✱2·02 (to put an
   asserted line under the hypothesis), ✱2·83, and Syll in the form ✱2·05 under the hypothesis. The
-  ledgers list them per proposition, as `glue`, alongside the fidelity (README, Fidelity).
+  ledgers list them per proposition, as `glue`, alongside the fidelity (docs/FIDELITY.md).
 
   Notation (scoped to `PM`): `A ≡ B` is `⊢ . A ≡ B` and `A ⊃ B` is `⊢ . A ⊃ B`, between formulas;
   `A ≡[H] B` is `⊢ : H . ⊃ : A . ≡ . B` and `A ⊃[H] B` is `⊢ : H . ⊃ : A . ⊃ . B`. Each is a

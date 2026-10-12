@@ -101,7 +101,7 @@ theorem styles_equiv (c : Bool) (P P' : PredReading) (R R' : RealReading) (p : Q
   ⟨restyle (S := ⟨c, true, Style.of P R⟩) (S' := ⟨c, true, Style.of P' R'⟩) id (admitsPredApp_of P' R'),
    restyle (S := ⟨c, true, Style.of P' R'⟩) (S' := ⟨c, true, Style.of P R⟩) id (admitsPredApp_of P R)⟩
 
-/-- The case Will asked for (Q1): in PM 1910 as built here (`Sys.full`), the matrix style and the
+/-- The case the maintainer asked for (Q1): in PM 1910 as built here (`Sys.full`), the matrix style and the
     lowest-order style derive the same theorems. -/
 theorem styles_equiv_full (R : RealReading) (p : QF V) :
     QThm (Sys.full (Style.of .matrix R)) p ↔ QThm (Sys.full (Style.of .lowestOrder R)) p :=

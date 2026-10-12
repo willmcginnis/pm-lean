@@ -1,6 +1,6 @@
 # PM 1910 ramified types with the axiom of reducibility: design and acceptance tests
 
-Will's decision (2026-10-11): the main road is the 1910 ramified theory of types with the axiom of
+The maintainer's decision (2026-10-11): the main road is the 1910 ramified theory of types with the axiom of
 reducibility (✱12·1, ✱12·11), "if it actually is consistent and usable". The 1925 second edition is
 a later, separate pass.
 
@@ -55,7 +55,7 @@ QF  := atom P xs | app1 f x | app2 f x y | neg p | or p q | all {τ} (φ : V τ 
     a first-order function of a second-order function;
   - Church's cumulative r-types.
 
-### 3. (a) "Predicative": two styles (revised 2026-10-11, Will's decision on Q1)
+### 3. (a) "Predicative": two styles (revised 2026-10-11, the maintainer's decision on Q1)
 
 PM's text has two definitions.
 
@@ -114,7 +114,7 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   `p171_reducibility` derives it in every style by ✱12·1. Whether it is derivable at all in the
   matrix-style predicative fragment, by another route, is not proved either way (test F4).
 - **With reducibility the styles derive exactly the same theorems: `styles_equiv`** (PM/StylesEquiv.lean;
-  Will's item (i)). For either setting of comprehension `c` and any two styles,
+  the maintainer's item (i)). For either setting of comprehension `c` and any two styles,
   `QThm ⟨c, true, Style.of P R⟩ p ↔ QThm ⟨c, true, Style.of P' R'⟩ p`. The proof is an induction over
   derivations (`restyle`): at a predicative type the conclusion of comprehension is literally ✱12·1
   (✱12·11); at `fn1 a (k+1)`, ✱12·1 gives a predicative g with ψx ≡ₓ g!x, every style admits g!x there
@@ -152,7 +152,7 @@ function of those variables, i.e. to a matrix" (p. 174) agrees. The clause that 
 several arguments is predicative if there is one of its arguments such that, when the other arguments
 have values assigned to them, we obtain a predicative function of the one undetermined argument",
 agrees with that rule within this encoding (both partial applications evaluated at `()` in `U`, with
-the same body order; Will's item (iii), searched): see Q4 (§5) and PM/Pred/Curry.lean.
+the same body order; the maintainer's item (iii), searched): see Q4 (§5) and PM/Pred/Curry.lean.
 
 ### 4. Real and apparent function variables
 
@@ -178,7 +178,7 @@ x = b, …) would then need three extra steps:
 PM does none of this; it substitutes. `q12_1_var` keeps that shape as a corollary, and `q12_1_of_var`
 shows the two shapes agree (decision 7).
 
-### 5. The order check: two readings of a real function variable (revised 2026-10-11, Will's decision on Q3)
+### 5. The order check: two readings of a real function variable (revised 2026-10-11, the maintainer's decision on Q3)
 
 **Decision (Will, 2026-10-11 ~19:00): both readings, as styles; both must pass.** Each is its own
 module, and it combines with either reading of "predicative" (decision 3), giving four styles
@@ -220,10 +220,10 @@ It is decided at the one-element variable family `U` (`lvl_iff_order`, with a `D
 
 The p. 54 reading (`LvlArg`) counts a real variable φ as an argument that raises the order of φ!x to 2.
 That is the order of φ!x as a function of φ *and* x (pp. 54, 170), and it refuses φ!x to
-comprehension at `pred1 ind` (the existential itself still holds, with φ as witness). Before Will's
+comprehension at `pred1 ind` (the existential itself still holds, with φ as witness). Before the maintainer's
 decision it was rejected for that reason; it is now the alternative style.
 
-**The p. 55 reading is partial application** (Will's item (ii): "syntactic sugar"?). φ!x seen as a
+**The p. 55 reading is partial application** (the maintainer's item (ii): "syntactic sugar"?). φ!x seen as a
 function of (φ, x) and φ!x with φ fixed, seen as a function of x, are the same body as a
 two-parameter function and as a one-parameter closure. `curry_order` (PM/Pred/Curry.lean) makes this a
 checked fact: `fnOrder2 a b ψ = max (a.ord + 1) (fnOrder b (ψ φ))`, the order of the two-argument
@@ -371,7 +371,7 @@ type, for any domain. With reducibility, PM 1910 is no stronger than the simple 
 (Holmes 2023), so forgetting orders gives a model. `classicalAll`, its specification and
 `QModel.classical` use `propext`, `Classical.choice` and `Quot.sound`, necessarily.
 
-**The finite coded model** (PM/Models/Finite.lean; Will's decision on Q5, 2026-10-11). Values are
+**The finite coded model** (PM/Models/Finite.lean; the maintainer's decision on Q5, 2026-10-11). Values are
 coded by shapes (empty, unit, Booleans, pairs); the values of a function type are the truth tables of
 the Boolean functions of its argument values (`Sh.pow`, with `Sh.ap`, `Sh.lam`, `Sh.ap_lam`), and every
 quantifier is computed by enumeration (`Sh.all`, `Sh.all_spec`). `finModel D R` is the structure with
@@ -406,7 +406,7 @@ not help. `trap_unit_compr` (from an external review) does the same at `U` with 
 **Rejected:** an eigenvariable form of ✱10·11 over explicit contexts. It would change the statement or
 proof of every ✱10–✱11 theorem.
 
-### 13. Rules as opt-in capabilities (revised 2026-10-11, Will's decision on Q2)
+### 13. Rules as opt-in capabilities (revised 2026-10-11, the maintainer's decision on Q2)
 
 The proof system is `QThm S` for a system `S : Sys` (PM/Quant.lean): two flags, `compr` and `red`, and a
 style of predicativity (decision 3). The constructors `compr1`/`compr2` need a proof of `S.compr = true`,
@@ -501,7 +501,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 |---|---|---|
 | **C1** soundness covers every constructor, axiom-free | **pass** | `qsound`: "does not depend on any axioms" |
 | **C2** consistency at a model's own V | **pass** | `consistent S` (at `twoModel.den`, the finite coded model), `consistent_all S` (∀ V), for every system `S`. No axioms (decision 11) |
-| **C3** degenerate V documented or removed | **pass (documented, not removed)** | `trap_empty`, `trap_unit` in PM/Trap.lean; header of `consistent` and README |
+| **C3** degenerate V documented or removed | **pass (documented, not removed)** | `trap_empty`, `trap_unit` in PM/Trap.lean; header of `consistent` and docs/SEMANTICS.md |
 | **C4** old counter-models still refute | **pass** | `not_qthm_phiy_imp_all` (φy ⊃ (x).φx), `not_qthm_ex_imp_all` ((∃x).φx ⊃ (x).φx), `not_qthm_all_imp_ex_empty` ((x).φx ⊃ (∃x).φx, empty D); also `not_qthm_converse_11_26` and the new `not_qthm_neg_desc_imp_exists1` |
 | **U1** ✱2–✱5, ✱9–✱11 unchanged | **pass** | PM/QuantLift.lean, PM/Star10.lean, PM/Star11.lean: no line changed by the types work (✱11·71's chains were later written as `calc` blocks, PM/Chain.lean); all compile against the new `QF`/`QThm` |
 | **U2** ✱10 used at a function sort | **pass** | `q13_101` uses ✱10·1, ✱10·27, ✱10·23 at `pred1 a`; `q20_14` uses ✱10·23 at `pred1 a`; `q12_1_of_var` at `fn1 a k` and `pred1 a` |
@@ -593,26 +593,26 @@ theorems and the golden theorems are axiom-free.
 No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` anywhere (checked by
 search).
 
-## 5. Open questions for Will
+## 5. Decisions log and open questions
 
-1. **"Predicative": p. 56 or p. 172?** DECIDED by Will (2026-10-11): both, as a deliberate,
+1. **"Predicative": p. 56 or p. 172?** DECIDED by the maintainer (2026-10-11): both, as a deliberate,
    documented style choice, the matrix reading (p. 172) primary as the more elegant one. Done: decision
    3; `PM/Pred/Matrix.lean` (matrix test conjoined with the order check, after an external review),
    `PM/Pred/LowestOrder.lean`, `PM/Pred/Styles.lean`; every PM theorem checked under both
    (`StyleCheck.lean`); consistency for both.
-2. **Keep comprehension?** DECIDED by Will (2026-10-11): keep it, "mark it for what it's for", as its
+2. **Keep comprehension?** DECIDED by the maintainer (2026-10-11): keep it, "mark it for what it's for", as its
    own module imported where needed. Done: `PM/Rules/Comprehension.lean`, class `Comprehension S`
    (decisions 6 and 13).
-3. **Real variables count with their own order (p. 55) or as arguments (p. 54)?** DECIDED by Will
+3. **Real variables count with their own order (p. 55) or as arguments (p. 54)?** DECIDED by the maintainer
    (2026-10-11 ~19:00): both, as styles, both must pass. Done: decision 5;
    `PM/Pred/RealOwnOrder.lean` (default) and `PM/Pred/RealAsArgument.lean`, each combined with both
    readings of "predicative" (four styles); every PM theorem checked under every combination
    (`StyleCheck.lean`); consistency for each; golden tests where they differ; `styles_equiv` (and
-   `styles_equiv_real`) shows that with reducibility they derive the same theorems. Will's framing
+   `styles_equiv_real`) shows that with reducibility they derive the same theorems. The maintainer's framing
    ("syntactic sugar"?) is made precise by `curry_order` (decision 5): the two readings are the same
    body seen as a closure and as a two-argument function.
-4. **Several-argument predicativity.** Proceeding on the recommended default (no separate type; Will has
-   not objected, 2026-10-11), and SEARCHED as Will asked (item (iii), 2026-10-11 evening): is there a
+4. **Several-argument predicativity.** Proceeding on the recommended default (no separate type; the maintainer
+   has not objected, 2026-10-11), and SEARCHED as the maintainer asked (item (iii), 2026-10-11 evening): is there a
    function of our types on which p. 56's second clause ("if there is one of its arguments such that,
    when the other arguments have values assigned to them, we obtain a predicative function of the one
    undetermined argument") and the lowest-order rule stated just before it disagree? **None exists
@@ -631,12 +631,11 @@ search).
    different reading of "assignment of values" (one in which assigning a value can change the order
    of the remaining function other than through max (oᵢ + 1) O) could make the clause differ; that
    question stays open.
-5. **Axiom-free consistency.** DECIDED by Will (2026-10-11): yes, "its own little module". Done:
+5. **Axiom-free consistency.** DECIDED by the maintainer (2026-10-11): yes, "its own little module". Done:
    PM/Models/Finite.lean; `consistent`, `consistent_all` and the counter-models use no axioms; the
    classical collapse model is kept as the general one (decision 11).
 
-6. **Classes of classes (✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41).** OPEN, for Will.
-   NEEDS WILL: classes of classes (✱20·08 etc.). ✱20·08 is
+6. **Classes of classes (✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41).** OPEN: maintainer decision. ✱20·08 is
    `f{α̂(ψα)} . = : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` and ✱20·081 `α ∈ ψ!α̂ . = . ψ!α` (p. 200); "Cls"
    (✱20·03) is the class of classes α̂{(∃φ) . α = ẑ(φ!z)}, and ✱20·4, ✱20·41 are about α ∈ Cls. The
    definiens binds φ, a predicative function whose argument is a class, ranges ≡_α over classes
@@ -648,16 +647,16 @@ search).
    e.g. cardinal numbers, p. 199). Nothing else in ✱20 depends on the choice. The same
    question covers ✱21·03 (Rel), ✱21·08–✱21·083 (relations of relations, classes of relations) and
    ✱21·4, ✱21·41.
-7. **Which fidelity counts to show.** OPEN, for Will. NEEDS WILL: which count columns to show. The
-   `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43, ✱2·02,
-   ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under (∃x)
-   (`order`, `under-exists`) as extra. That is a choice, so README.md (Fidelity) shows three columns per
+7. **Which fidelity counts to show.** DECIDED by the maintainer (2026-10-12): (A), keep all three.
+   The `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43,
+   ✱2·02, ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under
+   (∃x) (`order`, `under-exists`) as extra. That is a choice, so docs/FIDELITY.md shows three columns per
    chapter from `data/fidelity_counts.py`: strict (all glue extra), as recorded, and all glue tacit.
-   Options: (A) keep all three; (B) show one (which) and keep the others in the script; (C) change
-   what `fidelity` records. The columns differ at ✱11, ✱13, ✱14 (as recorded 34/17, 12/13, 9/38;
+   The options were: (A) keep all three; (B) show one (which) and keep the others in the script; (C)
+   change what `fidelity` records. The columns differ at ✱11, ✱13, ✱14 (as recorded 34/17, 12/13, 9/38;
    all glue tacit 39/12, 16/9, 12/35) and at ✱14·25, ✱20·11, ✱21·11 (strict).
-8. **A type of propositions, so that ✱14·3 could be stated as printed.** OPEN, for Will. NEEDS WILL:
-   a type of propositions. ✱14·3 is proved as a schema (§2; `q14_3`): PM's antecedent
+8. **A type of propositions, so that ✱14·3 could be stated as printed.** OPEN: maintainer decision.
+   ✱14·3 is proved as a schema (§2; `q14_3`): PM's antecedent
    p ≡ q . ⊃_{p,q} . f(p) ≡ f(q) is a premise with p, q real, asserted for every p, q, and f is a Lean
    function `QF V → QF V`. Below is a cost estimate for the printed form. It is an estimate only; none of
    it is built.
@@ -706,7 +705,7 @@ search).
 
    *Size.* About 300–500 Lean lines of infrastructure across about twelve files, plus about 40 for
    ✱14·3 itself. That is less than ✱20 (781 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,
-   `QThm`, `Sys`), so every file is rechecked and the design note and README change in several places.
+   `QThm`, `Sys`), so every file is rechecked and the design note and documentation change in several places.
    The payoff in Vol. I is one proposition, which PM itself "ha[s] not used … in subsequent proofs"
    (p. 194).
 

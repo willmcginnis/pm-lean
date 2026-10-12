@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  If you use this formalization, please cite it as below. It changes often,
+  so please also give the commit you used. For Principia Mathematica itself,
+  cite the book; for errata in its digital texts, cite the companion text
+  audit.
+type: software
+title: "Principia Mathematica in Lean 4"
+abstract: >-
+  A deep embedding of Whitehead and Russell's Principia Mathematica (first
+  edition, 1910) in Lean 4. Its proofs are derived from PM's own primitive
+  propositions and follow PM's Dem. lines, with per-proposition fidelity
+  ledgers. It covers propositional logic, apparent variables, ramified types
+  with the axiom of reducibility, identity, descriptions, and most of the
+  general theory of classes and relations (part of Volume I).
+authors:
+  - family-names: McGinnis
+    given-names: Will
+repository-code: "https://github.com/willmcginnis/principia-mathematica-lean"
+license: MIT
+keywords:
+  - Principia Mathematica
+  - Lean 4
+  - formalization
+  - type theory
+  - ramified type theory
+  - mathematical logic
