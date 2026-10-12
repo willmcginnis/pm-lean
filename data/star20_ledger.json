@@ -21,9 +21,116 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
-  "glue": [],
-  "glue_kind": []
+  "reason": ""
+ },
+ {
+  "id": "*20.11",
+  "page": 200,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.86",
+   "*4.36",
+   "*10.281",
+   "*20.1"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.111",
+  "page": 200,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.11",
+   "*10.21",
+   "*10.281",
+   "*20.1"
+  ],
+  "extra_used": [
+   "*10.1",
+   "*4.36",
+   "*4.3"
+  ],
+  "cited_unused": [
+   "Fact (*3.45)"
+  ],
+  "note": "",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's first line has f(psi!z) == g(psi!z) from Hp, which is *10.1 at psi. 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), here on the second factor, so with *4.3 (qandCongrRImp)."
+ },
+ {
+  "id": "*20.112",
+  "page": 200,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*12.1",
+   "*20.111"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "cites *12.1, at the type of predicative functions; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.12",
+  "page": 201,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.11",
+   "*12.1"
+  ],
+  "extra_used": [
+   "*10.32",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*12.1 gives psi x ==_x phi!x; the first factor, in *20.01's orientation phi!x ==_x psi x, is got by *10.32 and joined with *20.11 by Comp (*3.43), under (Ephi)."
  },
  {
   "id": "*20.13",
@@ -62,15 +169,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm.",
-  "glue": [
-   "*2.04",
-   "*10.28"
-  ],
-  "glue_kind": [
-   "order",
-   "under-exists"
-  ]
+  "reason": "PM's lines write psi x ==_x phi!x, *20.01 phi!x ==_x psi x, so *12.1 is turned by *10.32 (*3.27 takes that factor of the product). The step PM takes by *13.195 (from F phi to (Etheta) . theta = phi . F theta) is taken by its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04). The two hypotheses are joined by Comp and Exp (*3.43, *3.3) and carried under (Ephi) by *10.11.21 and *10.28; the final (1).(2) uses Comm."
  },
  {
   "id": "*20.14",
@@ -106,15 +205,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit.",
-  "glue": [
-   "*4.3",
-   "*10.281"
-  ],
-  "glue_kind": [
-   "order",
-   "under-exists"
-  ]
+  "reason": "*13.195 needs theta = phi . F theta where *20.01 gives F theta : phi = theta: the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and the result used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi x ==_x phi!x; with *20.01's phi!x ==_x psi x it is *10.321. The (Ephi) is then removed by *10.11 and *10.23, which PM leaves tacit."
  },
  {
   "id": "*20.15",
@@ -138,9 +229,358 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
-  "glue": [],
-  "glue_kind": []
+  "reason": ""
+ },
+ {
+  "id": "*20.151",
+  "page": 201,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.15",
+   "*10.11",
+   "*10.28",
+   "*12.1"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "cites *12.1; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.16",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.12"
+  ],
+  "extra_used": [
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The second factor of *20.12 is taken by *3.27 under (Ephi)."
+ },
+ {
+  "id": "*20.17",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.16",
+   "*10.1"
+  ],
+  "extra_used": [
+   "*3.27",
+   "*2.06",
+   "*10.11",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "For each phi, *10.1 and the converse half of *20.16's equivalence (*3.27) are chained by *2.06; the (Ephi) of *20.16 is removed by *10.11 and *10.23."
+ },
+ {
+  "id": "*20.18",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.11",
+   "*20.15"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.19",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.18",
+   "*10.11",
+   "*20.15",
+   "*10.27",
+   "*20.112",
+   "*10.1",
+   "*4.2",
+   "*10.301",
+   "*10.32",
+   "*10.23",
+   "*12.1"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*4.84",
+   "*4.85",
+   "*10.21",
+   "*2.06",
+   "*10.13",
+   "*10.24",
+   "*3.22",
+   "*2.27",
+   "*3.3",
+   "*2.04"
+  ],
+  "cited_unused": [
+   "*10.33",
+   "*10.35"
+  ],
+  "note": "cites *12.1; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1), *20.18's == is used from left to right (*3.26). In (2), *20.15 and *20.18 are used for each factor of Hp, picked by *3.26 and *3.27, joined by *4.84, *4.85, and the converse half taken (*3.27). (2) is kept in the exported form Hp ⊃ : f!z(psi z) ⊃ f!z(chi z) . ⊃ . f!z(phi!z) ⊃ f!z(theta!z), so in (3) *10.33 (which needs a real variable here) is not used: *10.11.21 and *10.27 carry (2) under (f). '[*20.112 . *10.1]': *20.112 for the context phi!x ==_x chi!x gives g; *10.1 at g, and at phi and theta (joined by *4.84, *4.85, the converse half by *3.27, chained by *2.06), gives the implication for the context, and (Eg) is removed by *10.11, *10.23. PM reads the context of z(theta!z) as phi!x ==_x theta!x; from its *20.01 form (Echi) : chi!x ==_x theta!x : phi!x ==_x chi!x it follows by *10.301 (factors commuted, *3.22) under (Echi) (*10.11, *10.23), and the form at phi holds by *4.2 (under *10.11), *10.13 and *10.24, detached by *2.27 ('[*4.2]'). '[*10.301.32 . Hp]' uses *10.301 twice, with Exp (*3.3) and Comm (*2.04). (4), (5): the two existentials of *12.1 (turned by *10.32) are used one after the other, with Exp, Comm, *10.11 and *10.23, not combined by *10.35."
+ },
+ {
+  "id": "*20.191",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.18",
+   "*20.19",
+   "*10.22"
+  ],
+  "extra_used": [
+   "*10.11",
+   "*10.21",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.18 is generalized over f by *10.11.21; *10.22 is used with Simp (*3.26, qfiffMp)."
+ },
+ {
+  "id": "*20.2",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.15",
+   "*4.2",
+   "*10.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.21",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.15",
+   "*10.32"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.22",
+  "page": 202,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.15",
+   "*10.301"
+  ],
+  "extra_used": [
+   "*3.47"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.15 is used on both factors of the hypothesis, joined by *3.47."
+ },
+ {
+  "id": "*20.23",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.21",
+   "*20.22"
+  ],
+  "extra_used": [
+   "*3.45"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.21 acts on the first factor (Fact, *3.45)."
+ },
+ {
+  "id": "*20.24",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.21",
+   "*20.22"
+  ],
+  "extra_used": [
+   "*3.47",
+   "*2.08"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.21 acts on the second factor (*3.47 with Id, *2.08: qandR)."
+ },
+ {
+  "id": "*20.25",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*20.2",
+   "*20.22",
+   "*3.3",
+   "*2.04",
+   "*20.24",
+   "*10.11",
+   "*10.21"
+  ],
+  "extra_used": [
+   "*12.1",
+   "*10.32",
+   "*20.11",
+   "*4.86",
+   "*3.26",
+   "*2.06",
+   "*10.23",
+   "*2.27",
+   "*3.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "alpha apparent (*20.07); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Line (1)'s *10.1 instantiates the apparent alpha at z(phi z), whose defining function need not be predicative: the class analogue (p. 206: '(alpha) . f alpha . ⊃ . f{z(psi z)} ... This is *20.17'). *12.1 gives a predicative theta with theta!x ==_x phi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to z(phi z) by *20.11 and joined by *4.86 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches z(phi z) = z(phi z) by *3.26 and *2.27. In (3), *20.24 has the factors in the other order (*3.22). (2) and (3) are joined by Comp (*3.43)."
  },
  {
   "id": "*20.3",
@@ -172,14 +612,911 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2.",
-  "glue": [
-   "*10.281",
+  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
+ },
+ {
+  "id": "*20.31",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.15",
+   "*20.3"
+  ],
+  "extra_used": [
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3 replaces both members under (x) by *4.86 (with *4.21 for the second member), *10.11.271."
+ },
+ {
+  "id": "*20.32",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*20.15"
+  ],
+  "extra_used": [
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3 is generalized over x by *10.11 before *20.15."
+ },
+ {
+  "id": "*20.33",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.31",
+   "*20.3"
+  ],
+  "extra_used": [
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "alpha real (an expression z(psi z)); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1).*20.3 the second member is replaced under (x) by *4.86 (with *4.21, qiffCongrRImp), *10.11.271."
+ },
+ {
+  "id": "*20.34",
+  "page": 203,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*20.07",
+   "*20.3",
+   "*13.1"
+  ],
+  "extra_used": [
+   "*4.84",
+   "*4.85"
+  ],
+  "cited_unused": [],
+  "note": "alpha apparent (*20.07), each x in alpha with the smallest scope; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3 replaces both sides of the implication under (phi) by *4.84 and *4.85, *10.11.271."
+ },
+ {
+  "id": "*20.35",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*13.11"
+  ],
+  "extra_used": [
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3 replaces both members under (phi) by *4.86 (with *4.21 for the second member), *10.11.271."
+ },
+ {
+  "id": "*20.42",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*10.11",
+   "*20.15"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "alpha real (an expression z(psi z)); takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.43",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "alpha, beta real: the statement is that of *20.31; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.5",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*20.3"
+  ],
+  "extra_used": [
+   "*4.36",
    "*4.3"
   ],
-  "glue_kind": [
-   "under-exists",
-   "order"
-  ]
+  "cited_unused": [],
+  "note": "the description has the larger scope (p. 204); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.3 acts on the second factor of *14.1's product: *4.36 with *4.3 (qandCongrR), under (Ec) by *10.11.281."
+ },
+ {
+  "id": "*20.51",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.5",
+   "*20.3",
+   "*10.11",
+   "*14.17"
+  ],
+  "extra_used": [
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.5 and *20.3 at alpha = z(psi!z) are joined by *4.86 (with *4.21 for the second member) and carried under (psi) by *10.11.271."
+ },
+ {
+  "id": "*20.52",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.51",
+   "*10.11",
+   "*10.281",
+   "*14.204"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.53",
+  "page": 204,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*20.2",
+   "*20.18",
+   "*20.21",
+   "*2.04",
+   "*10.11",
+   "*10.21"
+  ],
+  "extra_used": [
+   "*12.1",
+   "*10.32",
+   "*20.11",
+   "*4.84",
+   "*4.85",
+   "*3.26",
+   "*2.06",
+   "*10.23",
+   "*2.27"
+  ],
+  "cited_unused": [],
+  "note": "beta apparent, alpha real (an expression z(psi z)), phi beta generic (cls beta f, p. 199); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Line (1)'s *10.1 instantiates the apparent beta at alpha, whose defining function need not be predicative: the class analogue (p. 206, *20.17). *12.1 gives a predicative theta with theta!x ==_x psi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to alpha by *20.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches alpha = alpha by *2.27. In (2), *20.18's == is used from left to right (*3.26)."
+ },
+ {
+  "id": "*20.54",
+  "page": 205,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.18",
+   "*10.11",
+   "*10.23",
+   "*20.2",
+   "*3.2",
+   "*10.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.31",
+   "*12.1",
+   "*10.32",
+   "*20.13",
+   "*2.02",
+   "*3.27",
+   "*2.06",
+   "*3.43",
+   "*2.05"
+  ],
+  "cited_unused": [],
+  "note": "alpha real (an expression z(psi z)), phi beta generic (cls beta f); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1): *20.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23. (2): PM's *10.24 is used at alpha, whose defining function need not be predicative: the class analogue (qclsExAt). *12.1 gives a predicative phi with phi!x ==_x psi x (turned by *10.32); z(phi!z) = alpha follows by *20.13, and phi beta is carried from alpha to z(phi!z) by *20.18 (the converse half, *3.27); the two are joined by Comp (*3.43, with *2.02 and *2.06), *10.24 is used at phi (with *2.05), and (Ephi) is removed by *10.11, *10.23. The Lean proof is qcls54 with *20.18."
+ },
+ {
+  "id": "*20.55",
+  "page": 205,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.33",
+   "*20.54",
+   "*14.1"
+  ],
+  "extra_used": [
+   "*10.11",
+   "*20.22",
+   "*20.24",
+   "*3.3",
+   "*2.04",
+   "*3.22",
+   "*4.86",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*20.21",
+   "*4.36",
+   "*10.281",
+   "*3.26",
+   "*3.31",
+   "*20.2",
+   "*3.2",
+   "*10.24",
+   "*12.1",
+   "*10.32",
+   "*20.13",
+   "*2.02",
+   "*3.27",
+   "*2.06",
+   "*3.43",
+   "*2.05",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "the description has the larger scope (p. 204); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.33 is generalized over alpha by *10.11 (*20.62) and read from right to left. '[*20.54]' is applied to phi beta = (x in alpha ==_x phi x . ==_alpha . alpha = beta), in which beta occurs under (alpha): *20.54's argument is used (qcls54, with the extras listed for *20.54), with the analogue of *20.18 for this phi beta got from *20.22 and *20.24 (Exp, Comm, factors commuted by *3.22, joined by Comp *3.43) under (alpha) by *4.86 (with *4.21), *10.11.21 and *10.271 (qclsEqR, qdescClsEq). PM's line (Ebeta) : ... : z(phi z) = beta comes from *20.54's beta = z(phi z) . ... by *20.21 and *4.3 (with *4.36) under (Ebeta), *10.11.281."
+ },
+ {
+  "id": "*20.56",
+  "page": 205,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.55",
+   "*14.21"
+  ],
+  "extra_used": [
+   "*10.5",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*14.21 for descriptions of classes (qdescClsE) is proved as *14.21 is, by *10.5 and *3.26. E!(i alpha)(phi alpha) is the analogue of *14.02 (exists1Cls), which *20 does not print."
+ },
+ {
+  "id": "*20.57",
+  "page": 205,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*20.54"
+  ],
+  "extra_used": [
+   "*20.22",
+   "*20.24",
+   "*3.3",
+   "*2.04",
+   "*3.22",
+   "*4.86",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*20.21",
+   "*4.36",
+   "*10.281",
+   "*3.26",
+   "*3.31",
+   "*20.2",
+   "*3.2",
+   "*10.24",
+   "*12.1",
+   "*10.32",
+   "*20.13",
+   "*2.02",
+   "*3.27",
+   "*2.06",
+   "*3.43",
+   "*2.05",
+   "*10.11",
+   "*10.23",
+   "*10.27",
+   "*20.25"
+  ],
+  "cited_unused": [
+   "*13.183"
+  ],
+  "note": "f alpha any expression containing alpha; g generic; the descriptions have the larger scope (p. 204); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1) is the step of *20.55 (qdescClsEq: *20.54's argument for f alpha ==_alpha alpha = beta, with the extras listed there, *20.21 and *4.3). (1).(2): f alpha is replaced by alpha = z(phi z) under (alpha) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (Ebeta) by *10.11.21 and *10.281. '[*13.183]' is its class analogue *20.25, and beta = z(phi z) is turned by *20.21 for *20.54 (with *4.36)."
+ },
+ {
+  "id": "*20.58",
+  "page": 205,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*10.11",
+   "*20.54",
+   "*14.1"
+  ],
+  "extra_used": [
+   "*20.22",
+   "*20.24",
+   "*3.3",
+   "*2.04",
+   "*3.22",
+   "*4.86",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*20.21",
+   "*4.36",
+   "*10.281",
+   "*3.26",
+   "*3.31",
+   "*20.2",
+   "*3.2",
+   "*10.24",
+   "*12.1",
+   "*10.32",
+   "*20.13",
+   "*2.02",
+   "*3.27",
+   "*2.06",
+   "*3.43",
+   "*2.05",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "the description has the larger scope (p. 204); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "'[*20.54] [*14.1]' is the step of *20.55 (qdescClsEq: *20.54's argument for alpha = z(phi z) . ==_alpha . alpha = beta, with the extras listed for *20.54 and *20.55, *20.21 and *4.3)."
+ },
+ {
+  "id": "*20.59",
+  "page": 206,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*20.21",
+   "*4.36",
+   "*4.3",
+   "*10.11",
+   "*10.281"
+  ],
+  "cited_unused": [
+   "*20.1",
+   "*14.13"
+  ],
+  "note": "the description has the larger scope on both sides (p. 204); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's Dem. eliminates z(phi z) first (*20.1), against p. 204's convention, and then cites *14.13 for the description and the predicative function psi!z put for the class; its last line, read back by *20.1, would give (i alpha)(f alpha) = z(phi z) with the class eliminated first, against the convention that the first-written symbol has the larger scope. With the description eliminated first on both sides, the step is *14.13's own argument: *20.21 (for *13.16) on the second factor (*4.36 with *4.3) under (Ebeta) by *10.11.281."
+ },
+ {
+  "id": "*20.6",
+  "page": 206,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*20.071",
+   "*10.01",
+   "*20.07"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the analogue of *10.01",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.61",
+  "page": 206,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*20.07"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "beta of the form z(psi!z) (p. 208); the analogue of *10.1",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.62",
+  "page": 207,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [
+   "*10.11",
+   "*20.07"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "rule; the analogue of *10.11",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.63",
+  "page": 207,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*20.07",
+   "*10.12"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the analogue of *10.12",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.633",
+  "page": 207,
+  "category": "rule/prose",
+  "method": "explicit",
+  "cited_used": [
+   "*11.07"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "rule; the analogue of *11.07, which 'follows at once from *11.07'",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.64",
+  "page": 207,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*20.07",
+   "*10.14"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "beta of the form z(psi!z) (p. 208); the analogue of *10.14",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.7",
+  "page": 208,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.112"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the analogue of *12.1; by *20.07 the statement is *20.112; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.701",
+  "page": 208,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*12.11",
+   "*20.111"
+  ],
+  "extra_used": [
+   "*11.1",
+   "*4.36",
+   "*4.3",
+   "*11.11",
+   "*11.3"
+  ],
+  "cited_unused": [],
+  "note": "[The proof proceeds as in *20.112, using *12.11 instead of *12.1]; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*20.111 is for one argument; its lines are repeated for two (qcls111_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), and *11.11.3 for the generalization over (phi, x)."
+ },
+ {
+  "id": "*20.702",
+  "page": 208,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*12.11",
+   "*20.111"
+  ],
+  "extra_used": [
+   "*11.1",
+   "*4.36",
+   "*4.3",
+   "*11.11",
+   "*11.3"
+  ],
+  "cited_unused": [],
+  "note": "[Proof as in *20.701]; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "As in *20.701, with the class second (qcls111_2r): *11.1 at (x, psi), *4.36 with *4.3, *10.11.21, *10.281 and *11.11.3."
+ },
+ {
+  "id": "*20.703",
+  "page": 208,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.11",
+   "*11.3",
+   "*11.341",
+   "*20.1",
+   "*10.35",
+   "*10.11",
+   "*10.281",
+   "*12.11"
+  ],
+  "extra_used": [
+   "*11.1",
+   "*4.36",
+   "*4.3"
+  ],
+  "cited_unused": [
+   "*10.311"
+  ],
+  "note": "the first class has the larger scope; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice (qandCongrRImp). '[*20.1 . *10.35]' uses *10.35 under (Echi) (*10.11.281). In (3), (2) is an implication and is carried under (Eg) by *10.11.28; PM prints '*10.11.281'."
+ },
+ {
+  "id": "*20.71",
+  "page": 208,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.19"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "alpha, beta real: the statement is *20.19; the analogue of *13.01; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.8",
+  "page": 209,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.3",
+   "*10.11",
+   "*10.21",
+   "*20.15"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*20.81",
+  "page": 209,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.8",
+   "*3.43",
+   "*20.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [
+   "*10.121",
+   "*10.13"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Hp's factors are picked by *3.26 and *3.27 for the two uses of *20.8. *10.121 and *10.13 identify the a's of (1) and (2) (pp. 209-210): here they are one variable of one Lean type, so the lines are joined by Comp directly."
  }
 ]
