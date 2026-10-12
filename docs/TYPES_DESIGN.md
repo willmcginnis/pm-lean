@@ -674,8 +674,8 @@ search).
    as ✱12·1" (p. 194).
 
    *Where propositions are apparent variables.* A scan of the 1910 Vol. I text (Gutenberg #78050,
-   pp. 1–666, ✱1–✱56) finds, among numbered propositions, only ✱14·3. Elsewhere it is prose:
-   `(p) . p` (pp. 44–45), `(p) . p ∨ ∼p` (✱9, p. 134), p. 172, and the truth-function remark p. 120–121.
+   pp. 1–666, ✱1–✱97) finds, among numbered propositions, only ✱14·3. Elsewhere it is prose:
+   `(p) . p` (pp. 44–45), `(p) . p ∨ ∼p` (✱9, p. 134), p. 172, and the truth-function remark pp. 120–121.
    From ✱40 on, p "must not be used for a variable" (p. 5); in ✱72·16 p is ✱40·01's constant (p. 465).
    Vols. II and III are not in this text and were not scanned.
 
