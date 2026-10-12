@@ -120,7 +120,7 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <path d="M559.5,517.8 A5,5 0 0 0 559.5,527.8 Z" class="st"/>
 <text x="568.5" y="527.0" font-size="12.5" class="t2">1 in progress</text>
 <circle cx="690.2" cy="522.8" r="5" class="sto"/>
-<text x="699.2" y="527.0" font-size="12.5" class="t2">16 not started</text>
+<text x="699.2" y="527.0" font-size="12.5" class="t2">17 not started</text>
 <text x="24.0" y="596.1" font-size="18" font-weight="700" class="t1">Milestones</text>
 <text x="24.0" y="618.1" font-size="13" class="t2">Each is named by what is true when it is reached. They are not walls between phases: the gates are</text>
 <text x="24.0" y="635.3" font-size="13" class="t2">dependencies between individual tasks, shown in the dependency view.</text>

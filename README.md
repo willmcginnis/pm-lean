@@ -17,14 +17,29 @@ it is not used to prove PM's theorems directly.
 
 PM gives two ways of founding the theory of apparent variables, ✱9's and ✱10's (p. 144).
 The repository is built on ✱10's. Beside it, `PM/Found9/` builds ✱9's own method from
-✱9's primitive propositions and proves ✱9·2–✱9·52 along PM's lines, except ✱9·31. The theorem
-`star9_iff_star10` states that the two agree. Every ✱9 theorem is a ✱10 theorem, given a
-variable of every type. The converse holds given ✱1·2–✱1·6 for every ✱9 proposition, which
-is PM's claim on p. 142 and is not proved: for one apparent variable per letter, 50 of 70 cases
-are proved by the method of PM's ✱9·3–✱9·52. ✱9's definitions are applied as printed; under them
-one step of PM's proof of ✱9·31, which cites only definitions, is not a definitional rewrite, and
-whether ✱9's method derives ✱9·31 is open (28 numbered ✱9 propositions, 27 proved). In a
-structure with no individuals, ✱9's method asserts an instance of ✱9·1 that is false there; ✱10's is sound in every structure. Details: [docs/STAR9_FOUNDATION.md](docs/STAR9_FOUNDATION.md).
+✱9's primitive propositions and proves ✱9·2–✱9·52 along PM's lines. ✱9's definitions of
+disjunction, as printed, do not support one step of PM's proof of ✱9·31, which cites only
+definitions; Landini found this flaw and published a repair (*History and Philosophy of Logic* 21,
+2000). The authors' own later fix is Russell's rule ✱8·13 of the second edition (1925, Vol. I,
+p. 636, page image): "If all occurrences of x are separated from all occurrences of y by a certain
+stroke, we can change the order of x and y in the prefix ... and vice versa." So ✱9 is formalized
+under four readings, each registered as a repair or kept as printed ([docs/REPAIRS.md](docs/REPAIRS.md)):
+- A, as printed, kept and marked: 27 of the 28 numbered propositions, ✱9·31 open;
+- C, as printed + ✱8·13 (working, default): the printed definitions and Russell's ✱8·13 carried
+  over to ✱9: all 28. ✱8·13 takes one step of PM's proofs, the step of ✱9·31;
+- L, Landini's ✱9+ (a published variant, cross-check): the printed definitions with two for
+  quantifiers of the same kind (✱9·yy, from PM's Introduction, 1910 p. 49, second edition p. 47;
+  and ✱9·zz) and his rule Switch: all 28;
+- B, an alternative convention of our own (cross-check): all 28. It is kept to show that the
+  ambiguity at ✱9·31 is real, not as precedent.
+
+The theorem `star9_iff_star10` states that ✱9's method and ✱10's agree. Every ✱9 theorem is a ✱10
+theorem, given a variable of every type. The converse holds given ✱1·2–✱1·6 for every ✱9
+proposition, which is PM's claim on p. 142 and is not proved. For one apparent variable per letter,
+the method of PM's ✱9·3–✱9·52 proves 50, 65, 63 and 67 of the 70 cases under A, C, L and B, 15 of C's
+with ✱8·13 ([docs/STAR9_READINGS.md](docs/STAR9_READINGS.md)). In a structure with no individuals, ✱9's method
+asserts an instance of ✱9·1 that is false there; ✱10's is sound in every structure. Details:
+[docs/STAR9_FOUNDATION.md](docs/STAR9_FOUNDATION.md).
 
 The proofs follow PM's own: one Lean line per line of PM's *Dem.*, or one step per
 proposition of its bracketed hint. A ledger records, for each proposition, anything a
@@ -68,7 +83,7 @@ Not yet done:
 - No `sorry`, no `native_decide`, no added axioms.
 - Every PM theorem, and the ✱1–✱5 completeness theorem, reports
   "does not depend on any axioms" under `#print axioms`.
-- An exhaustive check finds 33 declarations that use Lean's standard axioms.
+- An exhaustive check finds 39 declarations that use Lean's standard axioms.
   None is a PM derivation: they are compiler-generated lemmas (8 of them
   for the syntax of ✱9's method), three propositional metatheorems, and a
   general classical model.
@@ -179,7 +194,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>4. Results about PM</b>: adequacy, incompleteness, the finitist audit, WKL₀, decision procedures (1 in progress, 16 not started)</summary>
+<summary><b>4. Results about PM</b>: adequacy, incompleteness, the finitist audit, WKL₀, decision procedures (1 in progress, 17 not started)</summary>
 
 ![Group 4, Results about PM: its subgroups and tasks](docs/roadmap/group-about.svg)
 
@@ -187,6 +202,7 @@ The work is split into four groups that run side by side. Each group is split in
   - Adequacy, stage 1: ✱1–✱5, a finite certificate format and both translations: *not started*
   - Adequacy, stage 2: a finite first-order core for ✱9–✱14, with derivations as data, and the easy direction (every core derivation gives a QThm theorem): *not started*
   - Adequacy, stage 2, the converse: from QThm back to the finite core: *not started*
+  - Completeness of ✱9's working reading C (the definitions as printed with Russell's ✱8·13): every expression true in every structure is a theorem: *not started*
   - Adequacy, stage 3: classes and beyond: *not started*
 - **Incompleteness**
   - PM as a many-sorted first-order theory (the finite core), in a separate package that reuses the Foundation library: *not started*
@@ -217,7 +233,7 @@ Install the Lean toolchain named in `lean-toolchain` with
 ```
 lake build                      # builds and checks every file
 lake env lean AxiomCheck.lean   # 1010 of 1017 theorems and models use no axioms
-lake env lean AllAxioms.lean    # every declaration; lists the 33 that use one
+lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
 python3 data/fidelity_counts.py # fidelity counts from the ledgers

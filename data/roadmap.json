@@ -2,7 +2,7 @@
   "meta": {
     "title": "Roadmap: Principia Mathematica in Lean 4",
     "as_of": "2026-10-12",
-    "status_source": "Statuses are read from the repository at commit efbb89d: docs/PROGRESS.md (whose tables name the commit they measure), docs/PM_CLAIMS.md, docs/STAR9_FOUNDATION.md and data/star9f_ledger.json; counts in the notes are cited with {...} and filled in from those files by scripts/roadmap_chart.py. 'in progress' means some of the task's work is in the repository or under way in the companion text audit.",
+    "status_source": "Statuses are read from the repository at the commit that contains this file: docs/PROGRESS.md (whose tables name the commit they measure), docs/PM_CLAIMS.md, docs/STAR9_FOUNDATION.md and data/star9f_ledger.json; counts in the notes are cited with {...} and filled in from those files by scripts/roadmap_chart.py. 'in progress' means some of the task's work is in the repository or under way in the companion text audit.",
     "structure": "Four groups, each split into subgroups, each split into leaves (tasks). A leaf is a chapter-sized or stage-sized task.",
     "deps": "hard_deps: leaves whose results this leaf's deliverable needs; these edges are the gates. soft_deps: leaves that help (shared infrastructure, comparisons, experience) but are not needed. Dependencies are on particular leaves, not on whole volumes or phases.",
     "order": "'by dependency': the task is placed as early as its hard dependencies allow. 'by choice': it is placed later than they require, after the tasks in placed_after, by the maintainer's order of priorities; order_reason says why. The order is a plan, not a contract: a task that moved records where it was and why in 'moved'.",
@@ -471,7 +471,7 @@
               "size": "M",
               "size_reason": "A second set of primitive propositions, ✱9's development and an equivalence theorem.",
               "status": "in progress",
-              "status_note": "Built (PM/Found9, docs/STAR9_FOUNDATION.md): {star9f} numbered ✱9 propositions proved by ✱9's own method, along PM's lines; ✱9·31 is open. `star9_iff_star10` makes the agreement conditional on Rep (✱1·2–✱1·6 for every ✱9 proposition) and on a variable of every type (PM_CLAIMS A29: {claims:A29}).",
+              "status_note": "Built (PM/Found9, docs/STAR9_FOUNDATION.md), under four readings (docs/REPAIRS.md, docs/STAR9_READINGS.md): {star9f} numbered ✱9 propositions proved by ✱9's own method, along PM's lines, in the working reading C (the definitions as printed with Russell's ✱8·13 carried over to ✱9), and in Landini's ✱9+ (L) and the cross-check B; 27 under the definitions as printed (A), where ✱9·31 is open. `star9_iff_star10` makes the agreement conditional on Rep (✱1·2–✱1·6 for every ✱9 proposition) and on a variable of every type (PM_CLAIMS A29: {claims:A29}).",
               "hard_deps": [],
               "soft_deps": [],
               "order": "by dependency",
@@ -513,11 +513,11 @@
             {
               "id": "v1-931",
               "name": "✱9·31 and the one-variable cases of p. 142: derived by ✱9's method, or shown underivable",
-              "short": "✱9·31 as printed",
+              "short": "✱9·31 and p. 142",
               "size": "M",
-              "size_reason": "One proposition and 20 cases of ✱1·2–✱1·6 for one apparent variable per letter; a proof of underivability would need a model of ✱9's method.",
+              "size_reason": "The cases of ✱1·2–✱1·6 for one apparent variable per letter left in each reading (5 in the working reading, 20 and ✱9·31 under the definitions as printed); a proof of underivability would need a model of ✱9's method.",
               "status": "in progress",
-              "status_note": "✱9·31's lines (1)–(3) are proved; line (4), cited as definitional, is not a definitional rewrite under the definitions as printed, and no other step is cited. 50 of the 70 cases are proved (PM_CLAIMS A10, A28: {claims:A28}). The plan: the maintainer has ruled that the working reading of ✱9 is the definitions as printed with Russell's own rule ✱8·13 of the second edition (p. 636) carried over to ✱9, and PM's own definition of a disjunction of two universal propositions (1910, p. 49; second edition, p. 47), each added as a marked repair. Landini's repair (✱9·yy, ✱9·zz and his rule Switch) is kept as a checked variant, and the reading by convention only as a cross-check labelled as such. That work is on a separate branch; the counts here are those of this branch's base and are regenerated when it lands. Whether ✱9·31 follows from the definitions as printed alone stays an open question in its own right.",
+              "status_note": "By the maintainer's ruling the working reading of ✱9 is C: the definitions as printed, with two quantifiers of the same kind the left side's first (the order ✱8 states and the Introduction defines: 1910 p. 49; second edition p. 47), and Russell's own rule ✱8·13 of the second edition (1925, Vol. I, Appendix A, p. 636) carried over to ✱9 as a primitive rule, each a marked repair (docs/REPAIRS.md, R1, R2). In C ✱9·31 is derived along PM's lines, ✱8·13 taking the step (3)–(4) (`f9_31_russell`). Landini's ✱9+ is kept as a checked variant, reading L, where his rule Switch takes the same step (`f9_31_switch`; R3), and our own convention as a cross-check, reading B (R4). Under the definitions as printed alone (reading A) ✱9·31 stays open, a question in its own right: line (4), cited as definitional, is not a definitional rewrite (`f9_31_step`), and no other step is cited. Of the 70 one-variable cases of p. 142 (PM_CLAIMS A10, A28: {claims:A28}), 65 are proved in C, 63 in L, 50 under A and 67 under B (docs/STAR9_READINGS.md). Left: in C, 5 cases of ✱1·5–✱1·6 that the methods of ✱9·3–✱9·52 do not reach even with ✱8·13; in L, 7; under A, ✱9·31 and 20 cases; under B, 3 cases of ✱1·6 (docs/STAR9_FOUNDATION.md §5, §7): for each, a derivation in ✱9's method, or a proof that there is none. For C, first formalize ✱8·13 with a separating stroke that is not the principal one, as Russell allows (p. xxvi; R1; it needs, in ✱10, a normal form for formulas with one occurrence of a subformula); then whether C and L prove the same expressions, and whether either derives the prenex Switch (R5). Landini (2000) and ✱8 of the second edition are read (R1–R3; docs/STAR9_FOUNDATION.md §10). Still to read or check: whether Landini's paper restricts the formula A of Switch where our formalization must (`switch_wide_unsound`); Landini (1996), reported to give the same definitions and Switch; and the second edition's text against a 1925 printing, since the copy read is a 1963 impression, described as a photographic reprint.",
               "hard_deps": [],
               "soft_deps": [
                 "v1-9eq"
@@ -530,17 +530,17 @@
                 ],
                 "known": [
                   {
-                    "work": "Landini (2000), §4: the flaw located in ✱9·31's demonstration (the moves from his lines 2 to 3 and 4 to 5 apply ✱9·03, stated for a quantifier-free p), and the repair: ✱9·yy, (x)Ax ∨ (y)By for (x)(y)(Ax ∨ By); ✱9·zz, (∃x)Ax ∨ (∃y)By for (∃x)(∃y)(Ax ∨ By); and Switch, from B[(x)(∃y)Axy] infer B[(∃y)(x)Axy] when a connective in A separates every free x from every free y",
+                    "work": "Landini (2000), §4: the flaw located in ✱9·31's demonstration (the moves from his lines 2 to 3 and 4 to 5 apply ✱9·03, stated for a quantifier-free p), and the repair: ✱9·yy, (x)Ax ∨ (y)By for (x)(y)(Ax ∨ By); ✱9·zz, (∃x)Ax ∨ (∃y)By for (∃x)(∃y)(Ax ∨ By); and Switch, from B[(x)(∃y)Axy] infer B[(∃y)(x)Axy] when a connective in A separates every free x from every free y. Formalized and kept as reading L, a checked variant (docs/REPAIRS.md, R3)",
                     "evidence": "documented",
                     "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §4, pp. 63–64; read in full"
                   },
                   {
                     "work": "PM's own Introduction defines the disjunction of two universal propositions: \"(x).φx .∨. (y).ψy\" as meaning \"(x, y). φx ∨ ψy\", which is Landini's ✱9·yy; ✱9 never states it",
                     "evidence": "documented",
-                    "cite": "Whitehead and Russell, Principia Mathematica Vol. I (1910), Introduction, Chapter II: p. 49 of the 1910 printing as paginated in Project Gutenberg eBook #78050 (not yet checked against a scan); Landini, who uses the second edition's pages, cites it as p. 47"
+                    "cite": "Whitehead and Russell, Principia Mathematica Vol. I (1910), Introduction, Chapter II: 1910 p. 49 (Project Gutenberg eBook #78050, #Page_49; our transcription is from a scan of the 1910 edition); second edition p. 47, the page Landini cites"
                   },
                   {
-                    "work": "Russell's own rule in the second edition, ✱8·13: \"If all occurrences of x are separated from all occurrences of y by a certain stroke, we can change the order of x and y in the prefix … and vice versa. Pp\" (a primitive proposition, both directions, on the prefix)",
+                    "work": "Russell's own rule in the second edition, ✱8·13: \"If all occurrences of x are separated from all occurrences of y by a certain stroke, we can change the order of x and y in the prefix … and vice versa. Pp\" (a primitive proposition, both directions, on the prefix). Carried over to ✱9 as the working reading C (docs/REPAIRS.md, R1)",
                     "evidence": "measured",
                     "source": [
                       {
@@ -558,12 +558,13 @@
               "name": "A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142)",
               "short": "Rep",
               "size": "L",
-              "size_reason": "A normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory.",
+              "size_reason": "A normal-form theorem for ✱9 derivations, in the style of Herbrand's work on quantification theory, or a completeness theorem for the reading (for the working reading C, the completeness task).",
               "status": "not started",
               "status_note": "With it, the agreement of the two methods (p. 144) rests only on a variable of every type. For the variables of a structure (`QModel.den`) an individual gives a value of every type (`den_nonempty`); for an arbitrary family of variables it does not, so there that assumption stays as stated.",
               "hard_deps": [],
               "soft_deps": [
-                "v1-931"
+                "v1-931",
+                "adq-9c"
               ],
               "order": "by dependency",
               "prior_work": {
@@ -573,7 +574,7 @@
                 "note": "No search of its own yet; found while reading Landini (2000).",
                 "known": [
                   {
-                    "work": "Landini (2000), §5: completeness of ✱9 with his repair, through a Russellian prenex normal form",
+                    "work": "Landini (2000), §5: completeness of ✱9 with his repair (reading L here), semantically, for predicate logic without identity, through a Russellian prenex normal form; adapting his proof is the first thing to try",
                     "evidence": "documented",
                     "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §5, pp. 64–75; read in full"
                   }
@@ -1786,7 +1787,7 @@
               "size": "S",
               "size_reason": "An instrumented re-check of the build, extending the axiom reports, taken twice: for a restricted export of the PM derivations and for the whole build. The questions that decide stage (c): does the development, with what it imports, use nested inductives, or Nat and String literals (the orders of types use Nat, atoms use String)?",
               "status": "not started",
-              "status_note": "The axiom reports already show that no PM derivation uses propext, Quot.sound or Classical.choice; the repository's metatheorems and models do (33 declarations, docs/VERIFICATION.md), so the whole build needs a checker that accepts the three standard axioms.",
+              "status_note": "The axiom reports already show that no PM derivation uses propext, Quot.sound or Classical.choice; the repository's metatheorems and models do (39 declarations, docs/VERIFICATION.md), so the whole build needs a checker that accepts the three standard axioms.",
               "hard_deps": [],
               "soft_deps": [],
               "order": "by dependency",
@@ -2599,6 +2600,35 @@
               }
             },
             {
+              "id": "adq-9c",
+              "name": "Completeness of ✱9's working reading C (the definitions as printed with Russell's ✱8·13): every expression true in every structure is a theorem",
+              "short": "C complete",
+              "size": "M",
+              "size_reason": "A normal form for ✱9 expressions and a completeness proof for the reading, over the semantics ✱9's soundness already uses (`thm9_sound`).",
+              "status": "not started",
+              "status_note": "It is ours to prove: the prior work is for a different system. Soundness of C is proved (`exchStep_q10`, `thm9_sound`); completeness is not attempted yet. It is one route to Rep for C, since each instance of ✱1·2–✱1·6 is true in every structure.",
+              "hard_deps": [],
+              "soft_deps": [
+                "v1-931",
+                "v1-9eq"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "check against"
+                ],
+                "note": "No search of its own yet; found while reading Landini (2000).",
+                "known": [
+                  {
+                    "work": "Landini (2000), §5: completeness of ✱9+ (reading L here), semantically, for predicate logic without identity, through a Russellian prenex normal form; L's rule Switch is a derived rule of C (`switch_russell`), so the proof is a model to adapt, not a result about C",
+                    "evidence": "documented",
+                    "cite": "G. Landini, 'Quantification Theory in ✱9 of Principia Mathematica', History and Philosophy of Logic 21(1) (2000), 57–77, doi:10.1080/01445340050044646, §5, pp. 64–75; read in full"
+                  }
+                ]
+              }
+            },
+            {
               "id": "adq-3",
               "name": "Adequacy, stage 3: classes and beyond",
               "short": "adequacy from ✱20",
@@ -3300,7 +3330,7 @@
   "established": [
     "✱1–✱5: {progress:✱1–✱5} numbered assertions derived from ✱1·1–✱1·6, and ✱1–✱5 complete for two-valued truth tables.",
     "Vol I: {progress:Vol I} numbered assertions proved (✱1–✱5 from ✱1·1–✱1·6; from ✱9 on, from the primitive propositions of ✱10's method and ✱12·1, ✱12·11), as counted in docs/PROGRESS.md at commit {progress-commit}. Vols II and III are not started.",
-    "✱9 by its own method (PM/Found9): {star9f} numbered ✱9 propositions proved; ✱9·31 is open under the definitions as printed. Every ✱9 theorem is a ✱10 theorem given a variable of every type; the converse is proved given Rep and a variable of every type.",
+    "✱9 by its own method (PM/Found9): {star9f} numbered ✱9 propositions proved in the working reading, the definitions as printed with Russell's ✱8·13 of the second edition carried over to ✱9; under the definitions as printed alone ✱9·31 is open (docs/STAR9_READINGS.md). Every ✱9 theorem is a ✱10 theorem given a variable of every type; the converse is proved given Rep and a variable of every type.",
     "Every class and relation expression that PM's notation forms is extensional (pp. 200, 213).",
     "No PM derivation depends on any Lean axiom; consistency is shown in a finite model, at the model's variables.",
     "PM's claims, with their status, are in PM_CLAIMS.md. {claims-counts}",

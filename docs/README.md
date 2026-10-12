@@ -12,6 +12,8 @@
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the files, chapter by chapter |
 | [FORMALIZATION_COMPARISON.md](FORMALIZATION_COMPARISON.md) | a dated survey of the formalizations of PM (CC0) |
 | [STAR9_DESIGN.md](STAR9_DESIGN.md) | design note for ✱9–✱11: ✱10's alternative method |
+| [REPAIRS.md](REPAIRS.md) | the register of repairs: where the working formalization reads PM other than as printed, what PM printed, why, what depends on it, and the evidence (Russell's ✱8·13 of the second edition carried over to ✱9, the working repair; the left side's quantifier first; Landini's ✱9+, a published variant; our alternative convention, a cross-check; the prenex Switch) |
+| [STAR9_READINGS.md](STAR9_READINGS.md) | ✱9 under its four readings (A as printed; C as printed + ✱8·13, the working reading; L, Landini's ✱9+, a cross-check; B, the cross-check): what each derives, and where C uses ✱8·13 and L uses Switch (generated) |
 | [STAR9_FOUNDATION.md](STAR9_FOUNDATION.md) | ✱9 by its own method (`PM/Found9/`), its agreement with ✱10 and the assumptions of that agreement, p. 142 for one apparent variable per letter, open questions |
 | [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md) | design note for classes of classes and classes of relations (✱20·03–✱20·081, ✱21·03–✱21·083) |
 | [TYPES_DESIGN.md](TYPES_DESIGN.md) | design note for ✱12 onward: ramified types, decisions with their pages, acceptance tests, decisions log and open questions |

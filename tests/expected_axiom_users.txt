@@ -9,9 +9,15 @@ PM.F9.EF.app2.injEq propext
 PM.F9.EF.atom.injEq propext
 PM.F9.EF.neg.injEq propext
 PM.F9.EF.or.injEq propext
+PM.F9.PE.all.injEq propext
+PM.F9.PE.ex.injEq propext
+PM.F9.PE.neg.injEq propext
+PM.F9.PE.or.injEq propext
+PM.F9.PE.pf.injEq propext
 PM.F9.PF.all.injEq propext
 PM.F9.PF.el.injEq propext
 PM.F9.PF.ex.injEq propext
+PM.F9.Reading.mk.injEq propext
 PM.QF.all.injEq propext
 PM.QF.app1.injEq propext
 PM.QF.app2.injEq propext

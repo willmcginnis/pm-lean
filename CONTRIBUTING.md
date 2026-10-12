@@ -55,11 +55,12 @@ and the labels in [docs/FIDELITY.md](docs/FIDELITY.md). When you add or change a
 ```
 lake build                       # no errors
 lake env lean AxiomCheck.lean    # the new theorems report "does not depend on any axioms"
-lake env lean AllAxioms.lean     # still 33 declarations using an axiom, none of them a PM derivation
+lake env lean AllAxioms.lean     # still 39 declarations using an axiom, none of them a PM derivation
 lake env lean RedCheck.lean      # 0 disagreements between signatures and proofs
 lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of all four styles
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines
 lake env lean Checks/LedgerCheck.lean  # every proposition a proof uses is listed in its ledger row
+lake env lean Checks/Star9Readings.lean  # ✱9 under its four readings (scripts/star9_readings.py writes docs/STAR9_READINGS.md)
 tests/run_all.sh                 # all of the above, ClauseSearch and the regression tests
 ```
 

@@ -21,20 +21,29 @@ def files():
 
 def declared(text):
     """(full name, is theorem) of each public theorem and def of a file, with the enclosing namespaces
-    (`namespace X` ... `end X`) prefixed, so `theorem and` inside `namespace ClsExpr` is `PM.ClsExpr.and`."""
-    ns = []  # the open namespaces and sections, innermost last; a section is None
+    (`namespace X` ... `end X`) prefixed, so `theorem and` inside `namespace ClsExpr` is `PM.ClsExpr.and`.
+    A `mutual` block, like a section, opens no namespace but is closed by `end`; a name written
+    `_root_.A.b` is `A.b` whatever the namespaces."""
+    ns = []  # the open namespaces, sections and mutual blocks, innermost last; the last two are None
     for line in text.splitlines():
         if m := re.match(r"namespace ([\w.]+)\s*$", line):
             ns.append(m.group(1))
-        elif re.match(r"(?:noncomputable )?section\b", line):
+        elif re.match(r"(?:noncomputable )?section\b", line) or re.match(r"mutual\s*$", line):
             ns.append(None)
         elif re.match(r"end\b\s*[\w.]*\s*$", line):
             if ns:
                 ns.pop()
         elif m := re.match(THM, line):
-            yield ".".join([n for n in ns if n] + [m.group(1)]), True
+            yield full(ns, m.group(1)), True
         elif m := re.match(DEF, line):
-            yield ".".join([n for n in ns if n] + [m.group(1)]), False
+            yield full(ns, m.group(1)), False
+
+
+def full(ns, name):
+    """The full name of `name` declared inside the namespaces `ns`."""
+    if name.startswith("_root_."):
+        return name.removeprefix("_root_.")
+    return ".".join([n for n in ns if n] + [name])
 
 
 def names():

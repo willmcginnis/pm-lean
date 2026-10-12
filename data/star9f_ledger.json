@@ -370,7 +370,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "For elementary p and every function phi it is distribEl (PM/Found9/Base.lean). For a p with apparent variables the two sides can be the same proposition (p = (Eu).chi u, phi elementary: both are (x):(Eu).chi u v phi x, pinned in Checks/PinnedStatements.lean) or differ (p = (Eu).chi u, phi x = (w).psi(x,w): distrib_sides_ne). Rep.distrib (PM/Found9/FromStar10.lean) proves it for every p given Rep and a variable of every type; an instance whose two sides are the same proposition needs neither.",
+  "reason": "For elementary p and every function phi it is distribEl (PM/Found9/Base.lean), under every reading. For a p with apparent variables: as printed (A, and C, the default) and in *9+ (L), Rep.distrib (PM/Found9/FromStar10.lean) proves it for every p given Rep and a variable of every type; as printed the two sides can be the same proposition (p = (Eu).chi u, phi elementary: both are (x):(Eu).chi u v phi x, pinned in Checks/PinnedStatements.lean) or differ (p = (Eu).chi u, phi x = (w).psi(x,w): distrib_sides_ne). Under the alternative convention B it is distrib_convention, from the primitive propositions; with the prenex Switch, distrib_switch.",
   "glue": [],
   "glue_kind": []
  },
@@ -402,7 +402,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp), after *9.2 for that function (allE), both proved in PM/Found9/Base.lean. allE gets *9.2 for that function from ai, which uses Id (*2.08) for its elementary matrix.",
+  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp, PM/Found9/Base.lean), whose premiss is line (4) with x real, taken from (2) by the same definitions. Under the alternative convention B, allImp uses *9.2 for every function (allE, through ai), which uses Id (*2.08) for its elementary matrix; as printed (A and C) and in *9+ (L) it does not.",
   "glue": [],
   "glue_kind": []
  },
@@ -410,19 +410,18 @@
   "id": "*9.31",
   "page": 140,
   "category": "assertion",
-  "method": "open",
+  "method": "explicit",
   "cited_used": [
    "*9.11",
    "*9.13",
    "*9.03",
-   "*9.02"
-  ],
-  "extra_used": [],
-  "cited_unused": [
+   "*9.02",
    "*9.05",
    "*9.06"
   ],
-  "note": "not proved. f9_31_3 proves PM's Dem. lines (1)-(3). Line (4), cited as [(3).(*9.03.02)], reads *9.03 with p = (Ez).phi z; by *9.07, which applies also when phi is not elementary, (4) is a different proposition, (x):(Ez):(y) where (3) is (x):(y):(Ez) (f9_31_step). So the cited step fails as a definitional rewrite, and no step exchanging quantifiers is cited. This does not show *9.31 false or underivable: whether *9's primitive propositions prove *9.31 as the definitions print it is open; given Rep it is an instance of *1.2",
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Reading C, the default (the definitions as printed with Russell's *8.13 of the second edition carried over to *9; f9_31_russell): all of PM's Dem. lines, each step as cited, except the step (3)-(4), [(3).(*9.03.02)], which is not a definitional rewrite under the definitions as printed (f9_31_step): by *9.07, which applies also when phi is not elementary, line (4) is (x):(Ez):(y) where (3) is (x):(y):(Ez); *8.13 changes the order of (y) and (Ez), which the v of the matrix separates. Landini found the flaw (2000, §4). Reading A (as printed, without *8.13): whether *9's primitive propositions prove *9.31 by another route is open. Reading L (Landini's *9+, f9_31_switch): the same step is not a definitional rewrite under its definitions either (f9_31_step_plus) and is taken by his rule Switch. Under the alternative convention B (f9_31, a cross-check) the step is a definitional rewrite (docs/REPAIRS.md, R4)",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -430,7 +429,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "",
+  "reason": "Lines (1)-(3) are f9_31_dem and the last step f9_31_last, for every reading; the readings differ in the step (3)-(4) only (docs/STAR9_READINGS.md). Landini's lines 2-3 and 4-5 are PM's (1)-(2) and (3)-(4) (docs/STAR9_FOUNDATION.md).",
   "glue": [],
   "glue_kind": []
  },
@@ -814,7 +813,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -845,7 +844,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -874,7 +873,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -903,7 +902,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -933,7 +932,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -963,7 +962,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (1), cited as *1.6, is *2.38 (q \u2283 r . \u2283 : q v p . \u2283 . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
+  "reason": "Line (1), cited as *1.6, is *2.38 (q ⊃ r . ⊃ : q v p . ⊃ . r v p), which is *1.6 with the disjunctions in the other order; *2.38 holds for elementary propositions (*2-*5 follow from *1).",
   "glue": [],
   "glue_kind": []
  },
@@ -1017,7 +1016,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "*9.2 is proved in *9 for elementary phi (f9_2). The alternative method needs it for every function: Lean's proof (ai) goes by the prefix of the function, with *9.13 for each (x), *9.1 for each (Ex) (applied to a function that may contain apparent variables), and Id for the elementary matrix.",
+  "reason": "*9.2 is proved in *9 for elementary phi (f9_2). The alternative method needs it for every function: as printed (A and C) and under B, Lean's proof (ai) goes by the prefix of the function, with *9.13 for each (x), *9.1 for each (Ex) (applied to a function that may contain apparent variables), and Id for the elementary matrix; C does not use *8.13 for it. In *9+ (L) the same steps, with Switch where *9.zz puts an existential quantifier of phi y before the universal one whose variable it needs (inst_plus, exDrinker_plus).",
   "glue": [],
   "glue_kind": []
  },
@@ -1057,7 +1056,7 @@
    "*9.13"
   ],
   "cited_unused": [],
-  "note": "for an elementary p and every phi; for every p, given Rep and a variable of every type: Rep.distrib (PM/Found9/FromStar10.lean). Those are assumptions of the proof for every p: an instance whose two sides are the same proposition, as for p = (Eu).chi u with phi elementary, is Id",
+  "note": "for an elementary p and every phi, under every reading; for every p: in A, C and L given Rep and a variable of every type (Rep.distrib, PM/Found9/FromStar10.lean), under B distrib_convention, with the prenex Switch distrib_switch. Those are assumptions of the proof for every p: an instance whose two sides are the same proposition, as for p = (Eu).chi u with phi elementary, is Id",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -1065,7 +1064,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "For elementary p it is 'a mere example of q \u2283 q' (p. 146; f9_25): by *9.04 the two sides are the same proposition, and Lean's proof (distribEl) is Id for every proposition (idt), which uses *9.1 and *9.13 as for *10.1.",
+  "reason": "For elementary p it is 'a mere example of q ⊃ q' (p. 146; f9_25): by *9.04 the two sides are the same proposition, and Lean's proof (distribEl) is Id for every proposition (idt), which uses *9.1 and *9.13 as for *10.1.",
   "glue": [],
   "glue_kind": []
  }

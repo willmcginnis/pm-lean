@@ -87,40 +87,157 @@ example (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) := co
 /-- ✱9·07 "(x) . φx . ∨ . (∃y) . ψy : = : (x) : (∃y) . φx ∨ ψy", which is "to apply also when φ and ψ
     are not both elementary functions" (pp. 135–136). An external review found that ✱9's disjunction
     took every universal quantifier of the left side out first, giving (x) : (z) : (∃y) here; as
-    printed, ✱9·07 takes out (x) and (∃y) and leaves φx ∨ ψy, which then gives (z). -/
+    printed, ✱9·07 takes out (x) and (∃y) and leaves φx ∨ ψy, which then gives (z). The printed
+    reading is kept as `PF.orPrinted` (reading A). -/
 example {V : Ty → Type} :
-    F9.PF.or (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z])) (.ex fun y => .el (.atom "S" [y]))
+    F9.PF.orPrinted (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z]))
+      (.ex fun y => .el (.atom "S" [y]))
       = .all fun x => .ex fun y => .all fun z => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
   rfl
-/-- ✱9·08 "(∃y) . ψy . ∨ . (x) . φx : = : (x) : (∃y) . ψy ∨ φx", for the same φ and ψ. -/
+/-- ✱9·08 "(∃y) . ψy . ∨ . (x) . φx : = : (x) : (∃y) . ψy ∨ φx", as printed, for the same φ and ψ. -/
 example {V : Ty → Type} :
-    F9.PF.or (V := V) (.ex fun y => .el (.atom "S" [y])) (.all fun x => .all fun z => .el (.atom "R" [x, z]))
+    F9.PF.orPrinted (V := V) (.ex fun y => .el (.atom "S" [y]))
+      (.all fun x => .all fun z => .el (.atom "R" [x, z]))
       = .all fun x => .ex fun y => .all fun z => .el (.or (.atom "S" [y]) (.atom "R" [x, z])) :=
   rfl
-/-- The earlier reading, kept as `PF.orL`, gives the other order. -/
+/-- ✱9+ (reading L, Landini 2000) has ✱9·07 as printed. -/
 example {V : Ty → Type} :
-    F9.PF.orL (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z])) (.ex fun y => .el (.atom "S" [y]))
+    F9.PF.orPlus (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z]))
+      (.ex fun y => .el (.atom "S" [y]))
+      = .all fun x => .ex fun y => .all fun z => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
+  rfl
+/-- ✱9·yy "(x)Ax ∨ (y)By = df (x)(y)(Ax ∨ By)" and ✱9·zz "(∃x)Ax ∨ (∃y)By = df (∃x)(∃y)(Ax ∨ By)" in
+    ✱9+: the outermost quantifier of each side, the left one first, then Ax ∨ By. Where the left side
+    has a further quantifier this differs from ✱9·03 or ✱9·05 with p the other side, the order of A and
+    C, which ✱8 of the second edition states: "applied first to the one on the left, treating the one
+    on the right as if it were elementary" (p. 635, page image). -/
+example {V : Ty → Type} :
+    F9.PF.orPlus (V := V) (.ex fun x => .ex fun u => .el (.atom "R" [x, u]))
+      (.ex fun y => .el (.atom "S" [y]))
+      = .ex fun x => .ex fun y => .ex fun u => .el (.or (.atom "R" [x, u]) (.atom "S" [y])) :=
+  rfl
+example {V : Ty → Type} :
+    F9.PF.orPrinted (V := V) (.ex fun x => .ex fun u => .el (.atom "R" [x, u]))
+      (.ex fun y => .el (.atom "S" [y]))
+      = .ex fun x => .ex fun u => .ex fun y => .el (.or (.atom "R" [x, u]) (.atom "S" [y])) :=
+  rfl
+/-- The alternative convention (reading B, `PF.or`; docs/REPAIRS.md, R4, a cross-check) gives the
+    other order, the order of PM's proof of ✱9·31. -/
+example {V : Ty → Type} :
+    F9.PF.or (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z]))
+      (.ex fun y => .el (.atom "S" [y]))
       = .all fun x => .all fun z => .ex fun y => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
   rfl
 
-/-- ✱9·25 (= ✱10·12) for p = (∃u) . χu, not elementary, and φ elementary: by ✱9·08 and ✱9·06 its two
-    sides are the same proposition, (x) : (∃u) . χu ∨ φx, so this instance is Id, with neither `Rep`
-    nor a variable of every type. An external review found it against a claim that apparent
+/-- The step (3)–(4) of PM's proof of ✱9·31 is not a definitional rewrite under the definitions as
+    printed (readings A and C), nor in ✱9+ (L), and is one under the alternative convention (B). -/
+example {V : Ty → Type} {τ : Ty} (d : ∀ τ, V τ) (φ : V τ → F9.EF V) :
+    (F9.PF.all fun x => F9.Reading.printed.imp (.ex fun y => .el (.or (φ x) (φ y))) (.ex fun z => .el (φ z))) ≠
+      F9.Reading.printed.imp (.ex fun x => .ex fun y => .el (.or (φ x) (φ y))) (.ex fun z => .el (φ z)) :=
+  F9.f9_31_step d φ
+example {V : Ty → Type} {τ : Ty} (d : ∀ τ, V τ) (φ : V τ → F9.EF V) :
+    (F9.PF.all fun x => F9.Reading.withSwitch.imp (.ex fun y => .el (.or (φ x) (φ y))) (.ex fun z => .el (φ z))) ≠
+      F9.Reading.withSwitch.imp (.ex fun x => .ex fun y => .el (.or (φ x) (φ y))) (.ex fun z => .el (φ z)) :=
+  F9.f9_31_step_plus d φ
+
+/-- ✱9·25 (= ✱10·12) for p = (∃u) . χu, not elementary, and φ elementary: under either definitions its
+    two sides are the same proposition, (x) : (∃u) . χu ∨ φx, so this instance is Id, with neither
+    `Rep` nor a variable of every type. An external review found it against a claim that apparent
     variables in p always make the two sides different propositions. -/
+example {V : Ty → Type} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+    (F9.PF.all fun x => F9.PF.orPrinted (.ex fun u => .el (χ u)) (.el (φ x))) =
+      F9.PF.orPrinted (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)) :=
+  rfl
+example {V : Ty → Type} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+    (F9.PF.all fun x => F9.PF.orPlus (.ex fun u => .el (χ u)) (.el (φ x))) =
+      F9.PF.orPlus (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)) :=
+  rfl
 example {V : Ty → Type} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
     (F9.PF.all fun x => F9.PF.or (.ex fun u => .el (χ u)) (.el (φ x))) =
       F9.PF.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)) :=
   rfl
-example {V : Ty → Type} {S : Sys} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
-    F9.Thm9 S (F9.PF.imp (.all fun x => F9.PF.or (.ex fun u => .el (χ u)) (.el (φ x)))
-      (F9.PF.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)))) :=
-  F9.idt _
+example {V : Ty → Type} {S : Sys} {R : F9.Reading} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+    F9.Thm9 S R (R.imp (.all fun x => R.or (.ex fun u => .el (χ u)) (.el (φ x)))
+      (R.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)))) := by
+  rcases R with ⟨_ | _ | _, _⟩ <;> exact F9.idt _
+
+/-- The working reading C has the definitions as printed and Russell's ✱8·13 carried over (R1);
+    Switch is the rule of ✱9+ (reading L): a reading has it exactly when its definitions are ✱9+'s.
+    The prenex Switch (R5) is opt-in, and none of A, C, L, B has it. -/
+example : F9.Reading.printed.defs ≠ .plus ∧ F9.Reading.russell.defs ≠ .plus ∧
+    F9.Reading.convention.defs ≠ .plus ∧ F9.Reading.withSwitch.defs = .plus := ⟨nofun, nofun, nofun, rfl⟩
+example : F9.Reading.printed.rule = .basic ∧ F9.Reading.russell.rule = .exch ∧
+    F9.Reading.russell.defs = .printed ∧ F9.Reading.withSwitch.rule = .basic ∧
+    F9.Reading.convention.rule = .basic ∧ F9.Reading.prenexSwitch.rule = .prenex :=
+  ⟨rfl, rfl, rfl, rfl, rfl, rfl⟩
+
+/-- Russell's ✱8·13 (second edition, p. 636, page image): "we can change the order of x and y in the
+    prefix ... and vice versa", carried over to ✱9: two adjacent quantifiers of the prefix, of any
+    kinds, whose variables the ∨ of the matrix separates (`Sep`), inside the quantifiers in front; a
+    primitive rule of C, both ways. -/
+example {V : Ty → Type} {S : Sys} {R : F9.Reading} (h : R.rule = .exch) {k₁ k₂ : Bool} {X Y : F9.PF V}
+    (hs : F9.ExchStep k₁ k₂ X Y) (hX : F9.Thm9 S R X) : F9.Thm9 S R Y :=
+  F9.Thm9.exch h hs hX
+example {V : Ty → Type} (k₁ k₂ : Bool) {τ σ : Ty} (L : V τ → F9.PF V) (R : V σ → F9.PF V)
+    (Z : V τ → V σ → F9.PF V) (h : ∀ x y, F9.Merge (L x) (R y) (Z x y)) :
+    F9.ExchStep k₁ k₂ (F9.PF.qu k₁ fun x => F9.PF.qu k₂ fun y => Z x y)
+      (F9.PF.qu k₂ fun y => F9.PF.qu k₁ fun x => Z x y) :=
+  .here (.left L R h)
+example {V : Ty → Type} {k₁ k₂ : Bool} {X Y : F9.PF V} (h : F9.ExchStep k₁ k₂ X Y) :
+    F9.ExchStep k₂ k₁ Y X :=
+  h.symm
+
+/-- C and L: Landini's Switch is the direction (x)(∃y) to (∃y)(x) of ✱8·13, so a derived rule of C;
+    and every step of ✱8·13 is derivable in ✱9+. -/
+example {V : Ty → Type} {X Y : F9.PF V} : F9.SwitchStep X Y ↔ F9.ExchStep true false X Y :=
+  ⟨F9.SwitchStep.toExch, F9.ExchStep.toSwitch⟩
+example {V : Ty → Type} {S : Sys} (pr : F9.Rule) {k₁ k₂ : Bool} {X Y : F9.PF V}
+    (h : F9.ExchStep k₁ k₂ X Y) (hX : F9.Thm9 S ⟨.plus, pr⟩ X) : F9.Thm9 S ⟨.plus, pr⟩ Y :=
+  F9.exch_plus pr h hX
+
+/-- ✱9·31 in C, along PM's Dem., the step (3)–(4) taken by ✱8·13. -/
+example {V : Ty → Type} {S : Sys} {τ : Ty} (φ : V τ → F9.EF V) :
+    F9.Thm9 S F9.Reading.russell (F9.Reading.russell.imp
+      (F9.Reading.russell.or (.ex fun x => .el (φ x)) (.ex fun x => .el (φ x))) (.ex fun x => .el (φ x))) :=
+  F9.f9_31_russell φ
+
+/-- Landini's Switch (2000, p. 64): "From B[(x)(∃y)Axy] infer B[(∃y)(x)Axy]", one way, inside the
+    quantifiers in front, for A that `Sep` admits: a merge of a part with x and a part with y, joined
+    by the ∨ of their matrices, in either order. -/
+example {V : Ty → Type} {S : Sys} {R : F9.Reading} (h : R.defs = .plus) {X Y : F9.PF V}
+    (hs : F9.SwitchStep X Y) (hX : F9.Thm9 S R X) : F9.Thm9 S R Y :=
+  F9.Thm9.switch h hs hX
+example {V : Ty → Type} {τ σ : Ty} (L : V τ → F9.PF V) (R : V σ → F9.PF V) (Z : V τ → V σ → F9.PF V)
+    (h : ∀ x y, F9.Merge (L x) (R y) (Z x y)) :
+    F9.SwitchStep (.all fun x => .ex fun y => Z x y) (.ex fun y => .all fun x => Z x y) :=
+  .here (.left L R h)
+
+/-- Landini's side condition needs the restriction of `Sep` on the quantifiers of A: read without it,
+    Switch takes a theorem to a proposition false where R is identity on two individuals. -/
+example (S : Sys) :
+    ∃ Z : F9.eqModel.den .ind → F9.eqModel.den .ind → F9.PF F9.eqModel.den,
+      F9.SepWide Z ∧ (∀ R : F9.Reading, F9.Thm9 S R (.all fun x => .ex fun y => Z x y)) ∧
+      (F9.PF.ex fun y => .all fun x => Z x y).toQ.eval F9.eqModel = false ∧ ¬ F9.Sep Z :=
+  F9.switch_wide_unsound S
+
+/-- Neither rule exchanges a quantifier with one in whose scope it stands unless a connective
+    separates their variables: (x) : (∃y) . ⊃ . (∃y) : (x) is asserted neither in C nor in L. -/
+example (S : Sys) :
+    ¬ F9.Thm9 (V := F9.eqModel.den) S F9.Reading.russell
+      (F9.Reading.russell.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
+        (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
+  F9.exch_not_general S
+example (S : Sys) :
+    ¬ F9.Thm9 (V := F9.eqModel.den) S F9.Reading.withSwitch
+      (F9.Reading.withSwitch.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
+        (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
+  F9.switch_not_general S
 
 /-- The agreement of ✱9's method with ✱10's has two hypotheses, a variable of every type and ✱1·2–✱1·6
     for every ✱9 proposition (`Rep`); an external review asked that both be stated wherever it is
-    cited. -/
-example {V : Ty → Type} {S : Sys} (hV : ∀ τ, Nonempty (V τ)) (hR : F9.Rep S V) (q : QF V) :
-    QThm S q ↔ F9.Thm9 S q.toF9 :=
+    cited. It holds under every reading, with `Rep` of that reading. -/
+example {V : Ty → Type} {S : Sys} {R : F9.Reading} (hV : ∀ τ, Nonempty (V τ)) (hR : F9.Rep S R V)
+    (q : QF V) : QThm S q ↔ F9.Thm9 S R (q.toF9 R.defs) :=
   F9.star9_iff_star10 hV hR q
 
 end PM

@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1636" viewBox="0 0 900 1636" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1707" viewBox="0 0 900 1707" role="img" aria-labelledby="title desc">
 <title id="title">Group 4: Results about PM</title>
 <desc id="desc">The subgroups and tasks of the group Results about PM, with status, size, hard dependencies and placements by choice.</desc>
 <style>
@@ -51,34 +51,35 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 }
 </style>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahc"/></marker></defs>
-<rect x="0" y="0" width="900" height="1636" class="bg"/>
-<rect x="16.0" y="195.8" width="868.0" height="353.8" rx="8" class="band"/>
-<rect x="16.0" y="195.8" width="5.0" height="353.8" rx="2" class="g3"/>
+<rect x="0" y="0" width="900" height="1707" class="bg"/>
+<rect x="16.0" y="195.8" width="868.0" height="424.5" rx="8" class="band"/>
+<rect x="16.0" y="195.8" width="5.0" height="424.5" rx="2" class="g3"/>
 <rect x="30.0" y="235.8" width="272.0" height="187.1" rx="6" class="card"/>
 <rect x="314.0" y="235.8" width="272.0" height="187.1" rx="6" class="card"/>
 <rect x="598.0" y="235.8" width="272.0" height="187.1" rx="6" class="card"/>
-<rect x="30.0" y="434.9" width="272.0" height="98.7" rx="6" class="card"/>
-<rect x="16.0" y="565.5" width="868.0" height="419.0" rx="8" class="band"/>
-<rect x="16.0" y="565.5" width="5.0" height="419.0" rx="2" class="g3"/>
-<rect x="30.0" y="605.5" width="272.0" height="169.4" rx="6" class="card"/>
-<rect x="314.0" y="605.5" width="272.0" height="169.4" rx="6" class="card"/>
-<rect x="598.0" y="605.5" width="272.0" height="169.4" rx="6" class="card"/>
-<rect x="30.0" y="786.9" width="272.0" height="181.6" rx="6" class="card"/>
-<rect x="314.0" y="786.9" width="272.0" height="181.6" rx="6" class="card"/>
-<rect x="16.0" y="1000.6" width="868.0" height="221.3" rx="8" class="band"/>
-<rect x="16.0" y="1000.6" width="5.0" height="221.3" rx="2" class="g3"/>
-<rect x="30.0" y="1040.6" width="272.0" height="165.3" rx="6" class="card"/>
-<rect x="314.0" y="1040.6" width="272.0" height="165.3" rx="6" class="card"/>
-<rect x="598.0" y="1040.6" width="272.0" height="165.3" rx="6" class="card"/>
-<rect x="16.0" y="1237.9" width="868.0" height="171.0" rx="8" class="band"/>
-<rect x="16.0" y="1237.9" width="5.0" height="171.0" rx="2" class="g3"/>
-<rect x="30.0" y="1277.9" width="272.0" height="115.0" rx="6" class="card"/>
-<rect x="314.0" y="1277.9" width="272.0" height="115.0" rx="6" class="card"/>
-<rect x="16.0" y="1424.9" width="868.0" height="187.3" rx="8" class="band"/>
-<rect x="16.0" y="1424.9" width="5.0" height="187.3" rx="2" class="g3"/>
-<rect x="30.0" y="1464.9" width="272.0" height="131.3" rx="6" class="card"/>
-<rect x="314.0" y="1464.9" width="272.0" height="131.3" rx="6" class="card"/>
-<rect x="598.0" y="1464.9" width="272.0" height="131.3" rx="6" class="card"/>
+<rect x="30.0" y="434.9" width="272.0" height="169.4" rx="6" class="card"/>
+<rect x="314.0" y="434.9" width="272.0" height="169.4" rx="6" class="card"/>
+<rect x="16.0" y="636.3" width="868.0" height="419.0" rx="8" class="band"/>
+<rect x="16.0" y="636.3" width="5.0" height="419.0" rx="2" class="g3"/>
+<rect x="30.0" y="676.3" width="272.0" height="169.4" rx="6" class="card"/>
+<rect x="314.0" y="676.3" width="272.0" height="169.4" rx="6" class="card"/>
+<rect x="598.0" y="676.3" width="272.0" height="169.4" rx="6" class="card"/>
+<rect x="30.0" y="857.7" width="272.0" height="181.6" rx="6" class="card"/>
+<rect x="314.0" y="857.7" width="272.0" height="181.6" rx="6" class="card"/>
+<rect x="16.0" y="1071.3" width="868.0" height="221.3" rx="8" class="band"/>
+<rect x="16.0" y="1071.3" width="5.0" height="221.3" rx="2" class="g3"/>
+<rect x="30.0" y="1111.3" width="272.0" height="165.3" rx="6" class="card"/>
+<rect x="314.0" y="1111.3" width="272.0" height="165.3" rx="6" class="card"/>
+<rect x="598.0" y="1111.3" width="272.0" height="165.3" rx="6" class="card"/>
+<rect x="16.0" y="1308.6" width="868.0" height="171.0" rx="8" class="band"/>
+<rect x="16.0" y="1308.6" width="5.0" height="171.0" rx="2" class="g3"/>
+<rect x="30.0" y="1348.6" width="272.0" height="115.0" rx="6" class="card"/>
+<rect x="314.0" y="1348.6" width="272.0" height="115.0" rx="6" class="card"/>
+<rect x="16.0" y="1495.6" width="868.0" height="187.3" rx="8" class="band"/>
+<rect x="16.0" y="1495.6" width="5.0" height="187.3" rx="2" class="g3"/>
+<rect x="30.0" y="1535.6" width="272.0" height="131.3" rx="6" class="card"/>
+<rect x="314.0" y="1535.6" width="272.0" height="131.3" rx="6" class="card"/>
+<rect x="598.0" y="1535.6" width="272.0" height="131.3" rx="6" class="card"/>
 <text x="24.0" y="30.0" font-size="12.5" class="t3">Group 4 of 4</text>
 <text x="40.0" y="60.0" font-size="22" font-weight="700" class="t1">Results about PM</text>
 <rect x="24.0" y="42.0" width="6.0" height="24.0" rx="2" class="g3"/>
@@ -117,111 +118,120 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <circle cx="615.0" cy="310.8" r="5" class="sto"/>
 <text x="626.0" y="314.8" font-size="12" class="t2">not started · size L</text>
 <text x="610.0" y="332.8" font-size="12" class="t2">needs: finite core</text>
-<text x="42.0" y="457.9" font-size="13" font-weight="700" class="t1">Adequacy, stage 3: classes</text>
-<text x="42.0" y="475.5" font-size="13" font-weight="700" class="t1">and beyond</text>
-<circle cx="47.0" cy="492.2" r="5" class="sto"/>
-<text x="58.0" y="496.2" font-size="12" class="t2">not started · size M</text>
-<text x="42.0" y="514.2" font-size="12" class="t2">needs: finite core</text>
-<text x="30.0" y="588.5" font-size="15" font-weight="700" class="t1">Incompleteness</text>
-<text x="42.0" y="628.5" font-size="13" font-weight="700" class="t1">PM as a many-sorted</text>
-<text x="42.0" y="646.2" font-size="13" font-weight="700" class="t1">first-order theory (the</text>
-<text x="42.0" y="663.9" font-size="13" font-weight="700" class="t1">finite core), in a separate</text>
-<text x="42.0" y="681.6" font-size="13" font-weight="700" class="t1">package that reuses the</text>
-<text x="42.0" y="699.3" font-size="13" font-weight="700" class="t1">Foundation library</text>
-<circle cx="47.0" cy="715.9" r="5" class="sto"/>
-<text x="58.0" y="719.9" font-size="12" class="t2">not started · size M</text>
-<text x="42.0" y="737.9" font-size="12" class="t2">needs: finite core</text>
-<text x="326.0" y="628.5" font-size="13" font-weight="700" class="t1">Numbering of the core's</text>
-<text x="326.0" y="646.2" font-size="13" font-weight="700" class="t1">formulas and derivations;</text>
-<text x="326.0" y="663.9" font-size="13" font-weight="700" class="t1">'is a derivation of'</text>
-<text x="326.0" y="681.6" font-size="13" font-weight="700" class="t1">representable</text>
-<circle cx="331.0" cy="698.3" r="5" class="sto"/>
-<text x="342.0" y="702.3" font-size="12" class="t2">not started · size M</text>
-<text x="326.0" y="720.3" font-size="12" class="t2">needs: first-order PM</text>
-<text x="610.0" y="628.5" font-size="13" font-weight="700" class="t1">Arithmetic interpreted</text>
-<text x="610.0" y="646.2" font-size="13" font-weight="700" class="t1">inside the chosen PM</text>
-<text x="610.0" y="663.9" font-size="13" font-weight="700" class="t1">theory, with Infinity as</text>
-<text x="610.0" y="681.6" font-size="13" font-weight="700" class="t1">hypothesis: Robinson's Q,</text>
-<text x="610.0" y="699.3" font-size="13" font-weight="700" class="t1">and IΣ₁ for the library's</text>
-<text x="610.0" y="716.9" font-size="13" font-weight="700" class="t1">Gödel–Rosser theorem</text>
-<circle cx="615.0" cy="733.6" r="5" class="sto"/>
-<text x="626.0" y="737.6" font-size="12" class="t2">not started · size L</text>
-<text x="610.0" y="755.6" font-size="12" class="t2">needs: ✱100–✱126</text>
-<text x="42.0" y="809.9" font-size="13" font-weight="700" class="t1">Gödel's first theorem for</text>
-<text x="42.0" y="827.6" font-size="13" font-weight="700" class="t1">PM, in the Gödel–Rosser</text>
-<text x="42.0" y="845.3" font-size="13" font-weight="700" class="t1">form</text>
-<circle cx="47.0" cy="862.0" r="5" class="sto"/>
-<text x="58.0" y="866.0" font-size="12" class="t2">not started · size L</text>
-<text x="42.0" y="884.0" font-size="12" class="t2">needs: first-order PM,</text>
-<text x="42.0" y="900.3" font-size="12" class="t2">numbering, arithmetic</text>
-<text x="42.0" y="916.6" font-size="12" class="t2">interpreted</text>
-<text x="42.0" y="932.9" font-size="12" class="t2">later by choice: after</text>
-<text x="42.0" y="949.3" font-size="12" class="t2">✱250–✱276, ✱300–✱375</text>
-<text x="326.0" y="809.9" font-size="13" font-weight="700" class="t1">Gödel's second theorem for</text>
-<text x="326.0" y="827.6" font-size="13" font-weight="700" class="t1">PM: derivability</text>
-<text x="326.0" y="845.3" font-size="13" font-weight="700" class="t1">conditions, then Con</text>
-<text x="326.0" y="863.0" font-size="13" font-weight="700" class="t1">unprovable</text>
-<circle cx="331.0" cy="879.7" r="5" class="sto"/>
-<text x="342.0" y="883.7" font-size="12" class="t2">not started · size L</text>
-<text x="326.0" y="901.7" font-size="12" class="t2">needs: Gödel I, ✱90–✱97</text>
-<text x="30.0" y="1023.6" font-size="15" font-weight="700" class="t1">Finitist audit</text>
-<text x="42.0" y="1063.6" font-size="13" font-weight="700" class="t1">Assumption provenance:</text>
-<text x="42.0" y="1081.3" font-size="13" font-weight="700" class="t1">which results use</text>
-<text x="42.0" y="1098.9" font-size="13" font-weight="700" class="t1">reducibility, infinity, the</text>
-<text x="42.0" y="1116.6" font-size="13" font-weight="700" class="t1">multiplicative axiom</text>
-<circle cx="47.0" cy="1133.3" r="5" class="sto"/>
-<path d="M47.0,1128.3 A5,5 0 0 0 47.0,1138.3 Z" class="st"/>
-<text x="58.0" y="1137.3" font-size="12" class="t2">in progress · size S</text>
-<text x="42.0" y="1155.3" font-size="12" class="t2">needs: nothing</text>
-<text x="326.0" y="1063.6" font-size="13" font-weight="700" class="t1">PRA readings: which results</text>
-<text x="326.0" y="1081.3" font-size="13" font-weight="700" class="t1">have an arithmetic reading</text>
-<text x="326.0" y="1098.9" font-size="13" font-weight="700" class="t1">provable in PRA</text>
-<circle cx="331.0" cy="1115.6" r="5" class="sto"/>
-<text x="342.0" y="1119.6" font-size="12" class="t2">not started · size L</text>
-<text x="326.0" y="1137.6" font-size="12" class="t2">needs: assumption tags, PRA,</text>
-<text x="326.0" y="1153.9" font-size="12" class="t2">RCA₀, WKL₀</text>
-<text x="326.0" y="1170.3" font-size="12" class="t2">later by choice: after</text>
-<text x="326.0" y="1186.6" font-size="12" class="t2">✱250–✱276, ✱300–✱375</text>
-<text x="610.0" y="1063.6" font-size="13" font-weight="700" class="t1">Complete census of</text>
-<text x="610.0" y="1081.3" font-size="13" font-weight="700" class="t1">assumptions, all three</text>
-<text x="610.0" y="1098.9" font-size="13" font-weight="700" class="t1">volumes</text>
-<circle cx="615.0" cy="1115.6" r="5" class="sto"/>
-<text x="626.0" y="1119.6" font-size="12" class="t2">not started · size S</text>
-<text x="610.0" y="1137.6" font-size="12" class="t2">needs: assumption tags,</text>
-<text x="610.0" y="1153.9" font-size="12" class="t2">✱100–✱126, ✱150–✱186,</text>
-<text x="610.0" y="1170.3" font-size="12" class="t2">✱200–✱234, ✱250–✱276,</text>
-<text x="610.0" y="1186.6" font-size="12" class="t2">✱300–✱375</text>
-<text x="30.0" y="1260.9" font-size="15" font-weight="700" class="t1">WKL₀</text>
-<text x="42.0" y="1300.9" font-size="13" font-weight="700" class="t1">PRA, RCA₀ and WKL₀ as</text>
-<text x="42.0" y="1318.6" font-size="13" font-weight="700" class="t1">formal systems</text>
-<circle cx="47.0" cy="1335.3" r="5" class="sto"/>
-<text x="58.0" y="1339.3" font-size="12" class="t2">not started · size M</text>
-<text x="42.0" y="1357.3" font-size="12" class="t2">needs: nothing; can start now</text>
-<text x="42.0" y="1373.6" font-size="12" class="t2">later by choice: after Gödel I</text>
-<text x="326.0" y="1300.9" font-size="13" font-weight="700" class="t1">WKL₀ is Π⁰₂-conservative</text>
-<text x="326.0" y="1318.6" font-size="13" font-weight="700" class="t1">over PRA</text>
-<circle cx="331.0" cy="1335.3" r="5" class="sto"/>
-<text x="342.0" y="1339.3" font-size="12" class="t2">not started · size L</text>
-<text x="326.0" y="1357.3" font-size="12" class="t2">needs: PRA, RCA₀, WKL₀</text>
-<text x="30.0" y="1447.9" font-size="15" font-weight="700" class="t1">Decision procedures</text>
-<text x="42.0" y="1487.9" font-size="13" font-weight="700" class="t1">Monadic first-order</text>
-<text x="42.0" y="1505.6" font-size="13" font-weight="700" class="t1">fragment</text>
-<circle cx="47.0" cy="1522.3" r="5" class="sto"/>
-<text x="58.0" y="1526.3" font-size="12" class="t2">not started · size M</text>
-<text x="42.0" y="1544.3" font-size="12" class="t2">needs: finite core</text>
-<text x="42.0" y="1560.6" font-size="12" class="t2">later by choice: after PRA,</text>
-<text x="42.0" y="1576.9" font-size="12" class="t2">RCA₀, WKL₀</text>
-<text x="326.0" y="1487.9" font-size="13" font-weight="700" class="t1">Presburger arithmetic</text>
-<text x="326.0" y="1505.6" font-size="13" font-weight="700" class="t1">(addition only)</text>
-<circle cx="331.0" cy="1522.3" r="5" class="sto"/>
-<text x="342.0" y="1526.3" font-size="12" class="t2">not started · size M</text>
-<text x="326.0" y="1544.3" font-size="12" class="t2">needs: ✱100–✱126</text>
-<text x="326.0" y="1560.6" font-size="12" class="t2">later by choice: after PRA,</text>
-<text x="326.0" y="1576.9" font-size="12" class="t2">RCA₀, WKL₀</text>
-<text x="610.0" y="1487.9" font-size="13" font-weight="700" class="t1">Tarski: real closed fields</text>
-<circle cx="615.0" cy="1504.6" r="5" class="sto"/>
-<text x="626.0" y="1508.6" font-size="12" class="t2">not started · size L</text>
-<text x="610.0" y="1526.6" font-size="12" class="t2">needs: ✱300–✱375</text>
-<text x="610.0" y="1542.9" font-size="12" class="t2">later by choice: after PRA,</text>
-<text x="610.0" y="1559.2" font-size="12" class="t2">RCA₀, WKL₀</text>
+<text x="42.0" y="457.9" font-size="13" font-weight="700" class="t1">Completeness of ✱9's</text>
+<text x="42.0" y="475.5" font-size="13" font-weight="700" class="t1">working reading C (the</text>
+<text x="42.0" y="493.2" font-size="13" font-weight="700" class="t1">definitions as printed with</text>
+<text x="42.0" y="510.9" font-size="13" font-weight="700" class="t1">Russell's ✱8·13): every</text>
+<text x="42.0" y="528.6" font-size="13" font-weight="700" class="t1">expression true in every</text>
+<text x="42.0" y="546.3" font-size="13" font-weight="700" class="t1">structure is a theorem</text>
+<circle cx="47.0" cy="562.9" r="5" class="sto"/>
+<text x="58.0" y="566.9" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="584.9" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="326.0" y="457.9" font-size="13" font-weight="700" class="t1">Adequacy, stage 3: classes</text>
+<text x="326.0" y="475.5" font-size="13" font-weight="700" class="t1">and beyond</text>
+<circle cx="331.0" cy="492.2" r="5" class="sto"/>
+<text x="342.0" y="496.2" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="514.2" font-size="12" class="t2">needs: finite core</text>
+<text x="30.0" y="659.3" font-size="15" font-weight="700" class="t1">Incompleteness</text>
+<text x="42.0" y="699.3" font-size="13" font-weight="700" class="t1">PM as a many-sorted</text>
+<text x="42.0" y="716.9" font-size="13" font-weight="700" class="t1">first-order theory (the</text>
+<text x="42.0" y="734.6" font-size="13" font-weight="700" class="t1">finite core), in a separate</text>
+<text x="42.0" y="752.3" font-size="13" font-weight="700" class="t1">package that reuses the</text>
+<text x="42.0" y="770.0" font-size="13" font-weight="700" class="t1">Foundation library</text>
+<circle cx="47.0" cy="786.7" r="5" class="sto"/>
+<text x="58.0" y="790.7" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="808.7" font-size="12" class="t2">needs: finite core</text>
+<text x="326.0" y="699.3" font-size="13" font-weight="700" class="t1">Numbering of the core's</text>
+<text x="326.0" y="716.9" font-size="13" font-weight="700" class="t1">formulas and derivations;</text>
+<text x="326.0" y="734.6" font-size="13" font-weight="700" class="t1">'is a derivation of'</text>
+<text x="326.0" y="752.3" font-size="13" font-weight="700" class="t1">representable</text>
+<circle cx="331.0" cy="769.0" r="5" class="sto"/>
+<text x="342.0" y="773.0" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="791.0" font-size="12" class="t2">needs: first-order PM</text>
+<text x="610.0" y="699.3" font-size="13" font-weight="700" class="t1">Arithmetic interpreted</text>
+<text x="610.0" y="716.9" font-size="13" font-weight="700" class="t1">inside the chosen PM</text>
+<text x="610.0" y="734.6" font-size="13" font-weight="700" class="t1">theory, with Infinity as</text>
+<text x="610.0" y="752.3" font-size="13" font-weight="700" class="t1">hypothesis: Robinson's Q,</text>
+<text x="610.0" y="770.0" font-size="13" font-weight="700" class="t1">and IΣ₁ for the library's</text>
+<text x="610.0" y="787.7" font-size="13" font-weight="700" class="t1">Gödel–Rosser theorem</text>
+<circle cx="615.0" cy="804.3" r="5" class="sto"/>
+<text x="626.0" y="808.3" font-size="12" class="t2">not started · size L</text>
+<text x="610.0" y="826.3" font-size="12" class="t2">needs: ✱100–✱126</text>
+<text x="42.0" y="880.7" font-size="13" font-weight="700" class="t1">Gödel's first theorem for</text>
+<text x="42.0" y="898.3" font-size="13" font-weight="700" class="t1">PM, in the Gödel–Rosser</text>
+<text x="42.0" y="916.0" font-size="13" font-weight="700" class="t1">form</text>
+<circle cx="47.0" cy="932.7" r="5" class="sto"/>
+<text x="58.0" y="936.7" font-size="12" class="t2">not started · size L</text>
+<text x="42.0" y="954.7" font-size="12" class="t2">needs: first-order PM,</text>
+<text x="42.0" y="971.0" font-size="12" class="t2">numbering, arithmetic</text>
+<text x="42.0" y="987.3" font-size="12" class="t2">interpreted</text>
+<text x="42.0" y="1003.7" font-size="12" class="t2">later by choice: after</text>
+<text x="42.0" y="1020.0" font-size="12" class="t2">✱250–✱276, ✱300–✱375</text>
+<text x="326.0" y="880.7" font-size="13" font-weight="700" class="t1">Gödel's second theorem for</text>
+<text x="326.0" y="898.3" font-size="13" font-weight="700" class="t1">PM: derivability</text>
+<text x="326.0" y="916.0" font-size="13" font-weight="700" class="t1">conditions, then Con</text>
+<text x="326.0" y="933.7" font-size="13" font-weight="700" class="t1">unprovable</text>
+<circle cx="331.0" cy="950.4" r="5" class="sto"/>
+<text x="342.0" y="954.4" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="972.4" font-size="12" class="t2">needs: Gödel I, ✱90–✱97</text>
+<text x="30.0" y="1094.3" font-size="15" font-weight="700" class="t1">Finitist audit</text>
+<text x="42.0" y="1134.3" font-size="13" font-weight="700" class="t1">Assumption provenance:</text>
+<text x="42.0" y="1152.0" font-size="13" font-weight="700" class="t1">which results use</text>
+<text x="42.0" y="1169.7" font-size="13" font-weight="700" class="t1">reducibility, infinity, the</text>
+<text x="42.0" y="1187.3" font-size="13" font-weight="700" class="t1">multiplicative axiom</text>
+<circle cx="47.0" cy="1204.0" r="5" class="sto"/>
+<path d="M47.0,1199.0 A5,5 0 0 0 47.0,1209.0 Z" class="st"/>
+<text x="58.0" y="1208.0" font-size="12" class="t2">in progress · size S</text>
+<text x="42.0" y="1226.0" font-size="12" class="t2">needs: nothing</text>
+<text x="326.0" y="1134.3" font-size="13" font-weight="700" class="t1">PRA readings: which results</text>
+<text x="326.0" y="1152.0" font-size="13" font-weight="700" class="t1">have an arithmetic reading</text>
+<text x="326.0" y="1169.7" font-size="13" font-weight="700" class="t1">provable in PRA</text>
+<circle cx="331.0" cy="1186.3" r="5" class="sto"/>
+<text x="342.0" y="1190.3" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="1208.3" font-size="12" class="t2">needs: assumption tags, PRA,</text>
+<text x="326.0" y="1224.7" font-size="12" class="t2">RCA₀, WKL₀</text>
+<text x="326.0" y="1241.0" font-size="12" class="t2">later by choice: after</text>
+<text x="326.0" y="1257.3" font-size="12" class="t2">✱250–✱276, ✱300–✱375</text>
+<text x="610.0" y="1134.3" font-size="13" font-weight="700" class="t1">Complete census of</text>
+<text x="610.0" y="1152.0" font-size="13" font-weight="700" class="t1">assumptions, all three</text>
+<text x="610.0" y="1169.7" font-size="13" font-weight="700" class="t1">volumes</text>
+<circle cx="615.0" cy="1186.3" r="5" class="sto"/>
+<text x="626.0" y="1190.3" font-size="12" class="t2">not started · size S</text>
+<text x="610.0" y="1208.3" font-size="12" class="t2">needs: assumption tags,</text>
+<text x="610.0" y="1224.7" font-size="12" class="t2">✱100–✱126, ✱150–✱186,</text>
+<text x="610.0" y="1241.0" font-size="12" class="t2">✱200–✱234, ✱250–✱276,</text>
+<text x="610.0" y="1257.3" font-size="12" class="t2">✱300–✱375</text>
+<text x="30.0" y="1331.6" font-size="15" font-weight="700" class="t1">WKL₀</text>
+<text x="42.0" y="1371.6" font-size="13" font-weight="700" class="t1">PRA, RCA₀ and WKL₀ as</text>
+<text x="42.0" y="1389.3" font-size="13" font-weight="700" class="t1">formal systems</text>
+<circle cx="47.0" cy="1406.0" r="5" class="sto"/>
+<text x="58.0" y="1410.0" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="1428.0" font-size="12" class="t2">needs: nothing; can start now</text>
+<text x="42.0" y="1444.3" font-size="12" class="t2">later by choice: after Gödel I</text>
+<text x="326.0" y="1371.6" font-size="13" font-weight="700" class="t1">WKL₀ is Π⁰₂-conservative</text>
+<text x="326.0" y="1389.3" font-size="13" font-weight="700" class="t1">over PRA</text>
+<circle cx="331.0" cy="1406.0" r="5" class="sto"/>
+<text x="342.0" y="1410.0" font-size="12" class="t2">not started · size L</text>
+<text x="326.0" y="1428.0" font-size="12" class="t2">needs: PRA, RCA₀, WKL₀</text>
+<text x="30.0" y="1518.6" font-size="15" font-weight="700" class="t1">Decision procedures</text>
+<text x="42.0" y="1558.6" font-size="13" font-weight="700" class="t1">Monadic first-order</text>
+<text x="42.0" y="1576.3" font-size="13" font-weight="700" class="t1">fragment</text>
+<circle cx="47.0" cy="1593.0" r="5" class="sto"/>
+<text x="58.0" y="1597.0" font-size="12" class="t2">not started · size M</text>
+<text x="42.0" y="1615.0" font-size="12" class="t2">needs: finite core</text>
+<text x="42.0" y="1631.3" font-size="12" class="t2">later by choice: after PRA,</text>
+<text x="42.0" y="1647.6" font-size="12" class="t2">RCA₀, WKL₀</text>
+<text x="326.0" y="1558.6" font-size="13" font-weight="700" class="t1">Presburger arithmetic</text>
+<text x="326.0" y="1576.3" font-size="13" font-weight="700" class="t1">(addition only)</text>
+<circle cx="331.0" cy="1593.0" r="5" class="sto"/>
+<text x="342.0" y="1597.0" font-size="12" class="t2">not started · size M</text>
+<text x="326.0" y="1615.0" font-size="12" class="t2">needs: ✱100–✱126</text>
+<text x="326.0" y="1631.3" font-size="12" class="t2">later by choice: after PRA,</text>
+<text x="326.0" y="1647.6" font-size="12" class="t2">RCA₀, WKL₀</text>
+<text x="610.0" y="1558.6" font-size="13" font-weight="700" class="t1">Tarski: real closed fields</text>
+<circle cx="615.0" cy="1575.3" r="5" class="sto"/>
+<text x="626.0" y="1579.3" font-size="12" class="t2">not started · size L</text>
+<text x="610.0" y="1597.3" font-size="12" class="t2">needs: ✱300–✱375</text>
+<text x="610.0" y="1613.6" font-size="12" class="t2">later by choice: after PRA,</text>
+<text x="610.0" y="1629.9" font-size="12" class="t2">RCA₀, WKL₀</text>
 </svg>

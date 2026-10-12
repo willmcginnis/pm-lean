@@ -88,7 +88,10 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 Rows per file: `replay2` 85; `star11` 55 (51 assertions, 4 rules); `star12` 2 (the primitive propositions
 ✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 53 (51 assertions, 2 rules); `star21` 46 (44
 assertions, 2 rules); `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) The 32 assertions of `star9f` are
-the 28 numbered ✱9 propositions, 27 proved, and four of ✱10, all proved: 31 of 32. There is no ledger for ✱9–✱10 by
+the 28 numbered ✱9 propositions and four of ✱10, all proved under the working reading C, the definitions
+as printed with Russell's ✱8·13 carried over: 32 of 32 (also under Landini's ✱9+, L; under the
+definitions as printed alone, ✱9·31 is not; the row says so, and
+[docs/STAR9_READINGS.md](../docs/STAR9_READINGS.md) gives each reading). There is no ledger for ✱9–✱10 by
 ✱10's method, the one the rest of the repository builds on; `star9f` is ✱9 by its own method.
 
 ## Overlap, precedence and how to total

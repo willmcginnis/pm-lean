@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Every check of the repository, from its root: the build (with the pinned statements of
 # Checks/PinnedStatements.lean), a search for sorry / native_decide / added axioms, the root checks
-# (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), and
+# (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), ✱9's
+# readings (Checks/Star9Readings.lean), and
 # the Python tests in tests/ (which also run AllAxioms.lean, AxiomCheck.lean and
 # fidelity_counts.py). Exits nonzero if any of them fails.
 #
@@ -46,6 +47,8 @@ fi
 lean_check Checks/LedgerCheck.lean '; 0 citations not used by the proof' \
   'ledgers: [0-9]+ rows checked against their proofs; 0 propositions used but not listed' \
   '✱9 ledger: [0-9]+ rows checked .*; 0 propositions used but not listed'
+
+lean_check Checks/Star9Readings.lean '"kind": "simul", "reading": "C"'
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"

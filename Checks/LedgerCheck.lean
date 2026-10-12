@@ -266,7 +266,9 @@ open LedgerCheck
     logError m!"{id} {u} is in tests/ledger_unlisted_uses.txt but no longer found; remove the line"
 
 /-! 3. The ledger of ✱9's own method, data/star9f_ledger.json (PM/Found9): the same check as 2, with
-  ✱9's names. A row `*9.N` (`*10.N`) is `PM.F9.f9_N` (`PM.F9.f10_N`). The propositions a proof can use
+  ✱9's names. A row `*9.N` (`*10.N`) is `PM.F9.f9_N` (`PM.F9.f10_N`), and also `PM.F9.f9_N_russell`
+  and `PM.F9.f9_N_switch` where reading C, the default, and reading L need a proof of their own
+  (✱9·31). The propositions a proof can use
   are the ✱9 theorems `PM.F9.fA_B` and `PM.F9.eA_B` (✱A·B for elementary propositions), the ✱2–✱5
   theorems `PM.tA_B` that `elift` carries to elementary propositions, and the primitive propositions
   of `Thm9`: ✱1·2–✱1·6 (`taut` … `sum`), ✱9·1 (`ex1`), ✱9·11 (`ex2`), ✱9·13 (`gen`). ✱9·12 (`mp`) is
@@ -345,11 +347,14 @@ end LedgerCheck
     rows := rows + 1
     let listed := (["cited_used", "extra_used", "glue", "tacit"].toArray.flatMap (strs r ·)).flatMap
       idsOfEntry |>.push id
-    let used ← liftCoreM ((reachProps9 c).run' {})
-    for d in used do
-      for u in (stars9Of d).filter (!listed.contains ·) do
-        let line := s!"{id} {u}  # {d}"
-        unless bad.contains line do bad := bad.push line
+    let variants := #[c] ++ (#["_russell", "_switch"].map (Name.str c.getPrefix <| c.getString! ++ ·)
+      |>.filter env.contains)
+    for c' in variants do
+      let used ← liftCoreM ((reachProps9 c').run' {})
+      for d in used do
+        for u in (stars9Of d).filter (!listed.contains ·) do
+          let line := s!"{id} {u}  # {d}"
+          unless bad.contains line do bad := bad.push line
   logInfo m!"✱9 ledger: {rows} rows checked against their proofs ({notStated} rows not stated, built into the syntax; {opens.size} open: {opens}); {bad.size} propositions used but not listed"
   unless missing.isEmpty do logError m!"{path}: rows with no declaration of that name: {missing}"
   for b in bad do logError m!"not listed in its ledger row: {b}"

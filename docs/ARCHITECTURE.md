@@ -43,11 +43,18 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   variable.
 - `PM/Found9/` (namespace `PM.F9`): ✱9 by its own method, beside the foundation above and changing none of
   it ([STAR9_FOUNDATION.md](STAR9_FOUNDATION.md)). Elementary formulas `EF` and ✱9 propositions `PF`, with
-  ∼ and ∨ of quantified propositions computed by ✱9·01–✱9·08 (`Syntax.lean`); ✱9's primitive propositions
-  as the inductive `Thm9 S`, for every `Sys` (`System.lean`); ✱9·2–✱9·52 along PM's lines (✱9·31 open:
-  one step of PM's proof, cited as definitions, is not a definitional rewrite under them as printed) and ✱10·01, ✱10·1, ✱10·11, ✱10·12 in ✱9
-  (`Base.lean`, `Star9.lean`); p. 142 for one apparent variable per letter, 50 of 70 cases
-  (`Simul.lean`); the agreement with ✱10's method, `star9_iff_star10`, with ✱9's soundness and its
+  ∼ and ∨ of quantified propositions computed by ✱9·01–✱9·08: as printed (`PF.orPrinted`), in Landini's
+  ✱9+ with ✱9·yy and ✱9·zz (`PF.orPlus`), and by an alternative convention (`PF.or`) (`Syntax.lean`);
+  ✱9's primitive propositions as the inductive `Thm9 S R`, for every `Sys` and every reading `R`: A, as
+  printed; C, as printed + ✱8·13, the printed definitions with Russell's rule ✱8·13 of the second
+  edition carried over, the working reading and the default; L, Landini's ✱9+ with his rule Switch, a
+  published variant and cross-check; B, the alternative convention, a cross-check (`System.lean`,
+  `Switch.lean`, `Exch.lean`; [REPAIRS.md](REPAIRS.md)); ✱9·2–✱9·52 along PM's lines, for every reading
+  except ✱9·31, which is proved in C (with ✱8·13), in L (with Switch) and under B and open under A, and
+  ✱10·01, ✱10·1, ✱10·11, ✱10·12 in ✱9 (`Base.lean`, `Star9.lean`); p. 142 for one apparent variable per
+  letter, 50, 65, 63 and 67 of 70 cases under A, C, L and B (`Simul.lean`, with the search's meta code in
+  `SearchTactic.lean`;
+  [STAR9_READINGS.md](STAR9_READINGS.md)); the agreement with ✱10's method, `star9_iff_star10`, with ✱9's soundness and its
   failure without an individual (`ToStar10.lean`, `FromStar10.lean`, `Equiv.lean`). The agreement
   assumes a variable of every type (`hV`) and ✱1·2–✱1·6 for every ✱9 proposition (`Rep`, PM's claim on
   p. 142, not proved); every ✱9 theorem is a ✱10 theorem given `hV` alone.
@@ -206,7 +213,10 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
 - Root check files: `AxiomCheck.lean`, `AllAxioms.lean`, `RedCheck.lean`, `StyleCheck.lean`,
   `ClauseSearch.lean` ([VERIFICATION.md](VERIFICATION.md)).
 - `Checks/`: `PinnedStatements.lean` (part of `lake build`: the exact statements of propositions whose
-  statement was once corrected) and `LedgerCheck.lean` (citations and ledger rows against proof terms).
+  statement was once corrected), `LedgerCheck.lean` (citations and ledger rows against proof terms) and
+  `Star9Readings.lean` (✱9 under its four readings, read from the statements, and where C uses ✱8·13 and
+  L uses Switch;
+  docs/STAR9_READINGS.md).
 - `tests/`: the regression tests and `run_all.sh`, which runs every check
   ([tests/README.md](../tests/README.md)).
 - `scripts/`: the statement parser and generators, and the progress counter
