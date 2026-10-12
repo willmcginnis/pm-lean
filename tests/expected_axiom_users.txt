@@ -4,6 +4,14 @@
 PM.F.neg.injEq propext
 PM.F.or.injEq propext
 PM.F.var.injEq propext
+PM.F9.EF.app1.injEq propext
+PM.F9.EF.app2.injEq propext
+PM.F9.EF.atom.injEq propext
+PM.F9.EF.neg.injEq propext
+PM.F9.EF.or.injEq propext
+PM.F9.PF.all.injEq propext
+PM.F9.PF.el.injEq propext
+PM.F9.PF.ex.injEq propext
 PM.QF.all.injEq propext
 PM.QF.app1.injEq propext
 PM.QF.app2.injEq propext
