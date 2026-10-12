@@ -82,4 +82,32 @@ example {V : Ty → Type} {c r : Bool} (R : RealReading) {p : QF V}
 example (S : Sys) : ¬ QThm (V := twoModel.den) S (.atom "p" []) := consistent S
 example (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) := consistent_all S
 
+/-! ## ✱9's definitions and the agreement of ✱9's method with ✱10's -/
+
+/-- ✱9·07 "(x) . φx . ∨ . (∃y) . ψy : = : (x) : (∃y) . φx ∨ ψy", which is "to apply also when φ and ψ
+    are not both elementary functions" (pp. 135–136). An external review found that ✱9's disjunction
+    took every universal quantifier of the left side out first, giving (x) : (z) : (∃y) here; as
+    printed, ✱9·07 takes out (x) and (∃y) and leaves φx ∨ ψy, which then gives (z). -/
+example {V : Ty → Type} :
+    F9.PF.or (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z])) (.ex fun y => .el (.atom "S" [y]))
+      = .all fun x => .ex fun y => .all fun z => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
+  rfl
+/-- ✱9·08 "(∃y) . ψy . ∨ . (x) . φx : = : (x) : (∃y) . ψy ∨ φx", for the same φ and ψ. -/
+example {V : Ty → Type} :
+    F9.PF.or (V := V) (.ex fun y => .el (.atom "S" [y])) (.all fun x => .all fun z => .el (.atom "R" [x, z]))
+      = .all fun x => .ex fun y => .all fun z => .el (.or (.atom "S" [y]) (.atom "R" [x, z])) :=
+  rfl
+/-- The earlier reading, kept as `PF.orL`, gives the other order. -/
+example {V : Ty → Type} :
+    F9.PF.orL (V := V) (.all fun x => .all fun z => .el (.atom "R" [x, z])) (.ex fun y => .el (.atom "S" [y]))
+      = .all fun x => .all fun z => .ex fun y => .el (.or (.atom "R" [x, z]) (.atom "S" [y])) :=
+  rfl
+
+/-- The agreement of ✱9's method with ✱10's has two hypotheses, a variable of every type and ✱1·2–✱1·6
+    for every ✱9 proposition (`Rep`); an external review asked that both be stated wherever it is
+    cited. -/
+example {V : Ty → Type} {S : Sys} (hV : ∀ τ, Nonempty (V τ)) (hR : F9.Rep S V) (q : QF V) :
+    QThm S q ↔ F9.Thm9 S q.toF9 :=
+  F9.star9_iff_star10 hV hR q
+
 end PM

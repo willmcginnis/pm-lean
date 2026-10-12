@@ -5,6 +5,20 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **✱9·07–✱9·08 as printed** (after an external review; `PM/Found9/Syntax.lean`): ✱9's disjunction
+  `PF.or` now applies ✱9·03–✱9·08 to the outermost quantifier of each side, as printed, with ✱9·07·08
+  "also when φ and ψ are not both elementary" (pp. 135–136). It had taken every leading universal
+  quantifier of the left side out first, so that, for φx = (z) . R(x, z), "(x) . φx . ∨ . (∃y) . ψy" was
+  (x) : (z) : (∃y) instead of (x) : (∃y) : (z) (pinned in `Checks/PinnedStatements.lean`). Changed
+  results, which correct the entry below: PM's proof of ✱9·31 does not follow the printed definitions
+  (its line (4) reads ✱9·03 where ✱9·07 applies; `f9_31_step`), so ✱9·31 is open (lines (1)–(3) are
+  proved) and PM_CLAIMS A10 is partly checked (28 checked, 21 partly checked); p. 142 for one apparent
+  variable per letter: 50 of 70 cases (was 67), the 20 open ones listed in docs/STAR9_FOUNDATION.md §7;
+  ✱10·12 is proved in ✱9 for an elementary p, and for every p given `Rep` and a variable of every type
+  (`Rep.distrib`), so `qthm_toF9` now takes `hV` as `star9_iff_star10` already did. ✱9·21 and ✱9·22
+  are now direct rules for every function. `star9_iff_star10`, `thm9_toQ`, `thm9_sound`, `consistent9`
+  and `thm9_unsound_empty` are unchanged. The earlier reading is kept as `PF.orL`, only to state the
+  ✱9·31 finding. Ledger rows may now have method `open` (✱9·31).
 - **✱9 by its own method** (`PM/Found9/`, docs/STAR9_FOUNDATION.md): ✱9's primitive propositions as
   `Thm9 S`, ✱9·2–✱9·52 along PM's lines, ✱10's primitive propositions proved in ✱9. `star9_iff_star10`:
   every ✱9 theorem is a ✱10 theorem (given a variable of every type), and every ✱10 theorem is a ✱9

@@ -8,7 +8,8 @@ import PM.Star10
   substantial propositions: ✱10·2, ✱10·252, ✱10·253 and ✱10·36. The last needs a real variable y (PM's
   proof uses one; without it the proposition fails in an empty structure, PM/Star10.lean). So the
   results here assume that every type has a variable (`hV : ∀ τ, Nonempty (V τ)`), as PM's proofs
-  assume an individual. PM/Found9/Empty.lean shows that the assumption cannot be dropped.
+  assume an individual. `thm9_unsound_empty` (PM/Found9/Equiv.lean) shows that the assumption cannot be
+  dropped.
 
   - `toQ_neg`, `toQ_or`: ✱10 proves the ✱9 negation and disjunction equivalent to ✱10's own;
   - `toQ_toF9`: a ✱10 formula is equivalent to the ✱9 proposition for which it stands;
@@ -72,21 +73,25 @@ theorem toQ_orEl (hV : ∀ τ, Nonempty (V τ)) (a : EF V) :
   | @PF.ex _ τ ψ =>
     (hV τ).elim fun y => qiffTrans (qexCong fun y => toQ_orEl hV a (ψ y)) (q_ex_or' _ _ y)
 
-/-- (∃x) . φx . ∨ . q (✱9·05, ✱9·08) is equivalent, in ✱10, to ✱10's disjunction, given the same
-    for each φx ∨ q. -/
-theorem toQ_orEx (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} (φ : V τ → PF V)
-    (ih : ∀ x B, QThm S (iff (PF.or (φ x) B).toQ (.or (φ x).toQ B.toQ))) :
-    ∀ B : PF V, QThm S (iff (PF.orEx (fun x q => PF.or (φ x) q) B).toQ (.or (PF.ex φ).toQ B.toQ))
-  | .all ψ => qiffTrans (q10_11_271 fun y => toQ_orEx hV φ ih (ψ y)) (q10_2 _ _)
-  | .el b => (hV τ).elim fun y => qiffTrans (qexCong fun x => ih x (.el b)) (q10_36 _ _ y)
-  | .ex ψ => (hV τ).elim fun y => qiffTrans (qexCong fun x => ih x (.ex ψ)) (q10_36 _ _ y)
-
-/-- The ✱9 disjunction of two propositions is equivalent, in ✱10, to their ✱10 disjunction. -/
+/-- The ✱9 disjunction of two propositions is equivalent, in ✱10, to their ✱10 disjunction:
+    ✱9·03 and ✱9·05 by ✱10·2 and ✱10·36, ✱9·07 and ✱9·08 by both. -/
 theorem toQ_or (hV : ∀ τ, Nonempty (V τ)) :
     ∀ A B : PF V, QThm S (iff (PF.or A B).toQ (.or A.toQ B.toQ))
   | .el a, B => toQ_orEl hV a B
-  | .all φ, B => qiffTrans (q10_11_271 fun x => toQ_or hV (φ x) B) (q_all_or _ _)
-  | .ex φ, B => toQ_orEx hV φ (fun x B => toQ_or hV (φ x) B) B
+  | .all φ, .el b => qiffTrans (q10_11_271 fun x => toQ_or hV (φ x) (.el b)) (q_all_or _ _)
+  | .all φ, .all ψ => qiffTrans (q10_11_271 fun x => toQ_or hV (φ x) (.all ψ)) (q_all_or _ _)
+  | .all φ, @PF.ex _ σ ψ => (hV σ).elim fun y₀ =>
+    qiffTrans (q10_11_271 fun x =>
+        qiffTrans (qexCong fun y => toQ_or hV (φ x) (ψ y)) (q_ex_or' _ _ y₀))
+      (q_all_or _ _)
+  | @PF.ex _ σ ψ, .el b => (hV σ).elim fun y₀ =>
+    qiffTrans (qexCong fun y => toQ_or hV (ψ y) (.el b)) (q10_36 _ _ y₀)
+  | @PF.ex _ σ ψ, .ex χ => (hV σ).elim fun y₀ =>
+    qiffTrans (qexCong fun y => toQ_or hV (ψ y) (.ex χ)) (q10_36 _ _ y₀)
+  | @PF.ex _ σ ψ, .all φ => (hV σ).elim fun y₀ =>
+    qiffTrans (q10_11_271 fun x =>
+        qiffTrans (qexCong fun y => toQ_or hV (ψ y) (φ x)) (q10_36 _ _ y₀))
+      (q10_2 _ _)
 
 /-- ✱9's implication (✱1·01 over ✱9·01–✱9·08) and ✱10's. -/
 theorem toQ_imp (hV : ∀ τ, Nonempty (V τ)) (A B : PF V) :

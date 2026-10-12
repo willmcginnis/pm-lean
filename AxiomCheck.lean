@@ -96,12 +96,9 @@ import PM
 #print axioms PM.F9.idt
 #print axioms PM.F9.inst
 #print axioms PM.F9.allE
-#print axioms PM.F9.allE_or
-#print axioms PM.F9.exI_orL
 #print axioms PM.F9.allImp
-#print axioms PM.F9.AllInst.of_all
-#print axioms PM.F9.allInst_or_all
-#print axioms PM.F9.distrib
+#print axioms PM.F9.exImp
+#print axioms PM.F9.distribEl
 #print axioms PM.F9.star9_iff_star10
 #print axioms PM.F9.den_nonempty
 #print axioms PM.F9.thm9_sound
@@ -109,6 +106,12 @@ import PM
 #print axioms PM.F9.thm9_unsound_empty
 #print axioms PM.F9.Rep.lift
 #print axioms PM.F9.Rep.exNegNeg
+#print axioms PM.F9.Rep.syl
+#print axioms PM.F9.Rep.orElim
+#print axioms PM.F9.Rep.exIn
+#print axioms PM.F9.Rep.allOrL
+#print axioms PM.F9.Rep.allOr
+#print axioms PM.F9.Rep.distrib
 #print axioms PM.F9.qthm_toF9
 #print axioms PM.F9.exI'
 #print axioms PM.F9.t1_2
@@ -127,7 +130,9 @@ import PM
 #print axioms PM.F9.f9_24
 #print axioms PM.F9.f9_25
 #print axioms PM.F9.f9_3
-#print axioms PM.F9.f9_31
+#print axioms PM.F9.f9_31_3
+#print axioms PM.F9.f9_31_step
+#print axioms PM.F9.f9_31_step_orL
 #print axioms PM.F9.f9_32
 #print axioms PM.F9.f9_33
 #print axioms PM.F9.f9_34
@@ -163,7 +168,6 @@ import PM
 #print axioms PM.F9.q_ex_or'
 #print axioms PM.F9.toQ_neg
 #print axioms PM.F9.toQ_orEl
-#print axioms PM.F9.toQ_orEx
 #print axioms PM.F9.toQ_or
 #print axioms PM.F9.toQ_imp
 #print axioms PM.F9.toQ_iff

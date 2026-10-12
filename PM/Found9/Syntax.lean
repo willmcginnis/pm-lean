@@ -20,23 +20,41 @@ import PM.Quant
     Implication, the logical product and equivalence are "transferred unchanged" (p. 136): ✱1·01, ✱3·01
     and ✱4·01 as macros over `PF.neg`, `PF.or`.
 
-  The order of the quantifiers moved to the front. ✱9·03–✱9·08 fix it when one side is elementary or
-  each side has one apparent variable; ✱9·07 and ✱9·08 put the universal quantifier first, and PM
-  adds: "(The definitions ✱9·07·08 are to apply also when φ and ψ are not both elementary.)" (p. 136).
-  For longer prefixes PM says only that "the above definitions can be repeated for successive types"
-  (p. 136). `PF.or` repeats them one quantifier at a time, outermost first:
-  - a universal quantifier at the front of the left side comes out first (✱9·03, ✱9·07);
-  - otherwise a universal quantifier at the front of the right side (✱9·04, ✱9·08);
-  - otherwise an existential quantifier at the front of the left side (✱9·05), then of the right
-    (✱9·06).
-  So of two quantifiers of the same kind the left one comes first, as in the last lines of PM's ✱9·3
-  ("(x) : φx . ∨ . (y) . φy" read as "(x) . φx . ∨ . (y) . φy" by ✱9·03) and ✱9·31 (by ✱9·05·06), p. 140.
-  Two readings of PM's repetition would give different orders: with p = (y) . ψy, ✱9·06 read for this p
-  gives "p . ∨ . (∃x) . φx : = . (∃x) : (y) . ψy ∨ φx", while ✱9·07 gives "(y) : (∃x) . ψy ∨ φx". PM's
-  note on ✱9·07·08 settles this case for ✱9·07, and `PF.or` follows it: a universal quantifier at the
-  front of either side always precedes an existential one. The two orders are equivalent in every
-  structure with at least one individual (the quantified variables are distinct and each occurs on one
-  side only), but in ✱9 they are different propositions.
+  The definitions of disjunction, as printed (pp. 135–136):
+    "To define disjunction when one or both of the propositions concerned is of the first order, we
+    have to distinguish six cases, as follows:
+    ✱9·03. (x) . φx . ∨ . p : = . (x) . φx ∨ p   Df
+    ✱9·04. p . ∨ . (x) . φx : = . (x) . p ∨ φx   Df
+    ✱9·05. (∃x) . φx . ∨ . p : = . (∃x) . φx ∨ p   Df
+    ✱9·06. p . ∨ . (∃x) . φx : = . (∃x) . p ∨ φx   Df
+    ✱9·07. (x) . φx . ∨ . (∃y) . ψy : = : (x) : (∃y) . φx ∨ ψy   Df
+    ✱9·08. (∃y) . ψy . ∨ . (x) . φx : = : (x) : (∃y) . ψy ∨ φx   Df
+    (The definitions ✱9·07·08 are to apply also when φ and ψ are not both elementary functions.)"
+  and, after the definitions of implication, product and equivalence: "The above definitions can be
+  repeated for successive types, and thus reach propositions of any type." (p. 136)
+
+  `PF.or` applies these equations as printed, to the outermost quantifier of each side, and then
+  computes the disjunction that the right-hand side contains (φx ∨ p, p ∨ φx, φx ∨ ψy, ψy ∨ φx) by the
+  same definitions, for the functions φ and ψ as they are:
+  - p, q both elementary: ✱1's primitive ∨;
+  - one side elementary (p), the other (x) . φx or (∃x) . φx: ✱9·03–✱9·06;
+  - (x) . φx on one side and (∃y) . ψy on the other: ✱9·07 or ✱9·08, which take out both quantifiers,
+    the universal first, "also when φ and ψ are not both elementary". So, with φx = (z) . R(x, z) and
+    ψy = S(y), "(x) . φx . ∨ . (∃y) . ψy" is (x) : (∃y) : (z) . R(x, z) ∨ S(y), the (z) of φ coming
+    after both (pinned in Checks/PinnedStatements.lean).
+  Where the text is silent. PM prints no definition for two quantifiers of the same kind,
+  "(x) . φx . ∨ . (y) . ψy" and "(∃x) . φx . ∨ . (∃y) . ψy": ✱9·03 and ✱9·05 are printed for an
+  elementary p only, and "repeated for successive types" does not say which side's quantifier comes
+  out first. `PF.or` follows PM's own proofs, which take the left one out first: the last lines of
+  ✱9·3 read "(x) : φx . ∨ . (y) . φy" as "(x) . φx . ∨ . (y) . φy" [(✱9·03)], and those of ✱9·31 read
+  "(∃x) : (∃y) . φx ∨ φy" as "(∃x) . φx . ∨ . (∃y) . φy" [(✱9·05·06)] (p. 140). That is, ✱9·03 and
+  ✱9·05 are repeated with p = (y) . ψy, p = (∃y) . ψy. Every other case is fixed by the printed text.
+  Where the text disagrees with itself. PM's proof of ✱9·31 also reads ✱9·03 with p = (∃z) . φz,
+  where ✱9·07 applies; `PF.or` follows ✱9·07 (PM/Found9/Star9.lean, `f9_31_3`, `f9_31_step`).
+
+  The orders that different readings give are equivalent in every structure with at least one
+  individual (the quantified variables are distinct and each occurs on one side only), but in ✱9 they
+  are different propositions.
 
   ✱9·14 and ✱9·15 (significance and types, p. 138) are built into the syntax, as in PM/Quant.lean:
   every `φ : V τ → PF V` is a function, and `φ a` with `a : V τ` is a proposition. ✱9·131 (being of the
@@ -85,27 +103,53 @@ def orEl (a : EF V) : PF V → PF V
   | .all ψ => .all fun y => orEl a (ψ y)    -- ✱9·04
   | .ex ψ  => .ex fun y => orEl a (ψ y)     -- ✱9·06
 
-/-- (∃x) . φx . ∨ . q, given `r x q` = φx ∨ q: ✱9·08 if q begins with a universal quantifier, else
-    ✱9·05. -/
-def orEx {τ : Ty} (r : V τ → PF V → PF V) : PF V → PF V
-  | .all ψ => .all fun y => orEx r (ψ y)    -- ✱9·08
-  | .el b  => .ex fun x => r x (.el b)      -- ✱9·05
-  | .ex ψ  => .ex fun x => r x (.ex ψ)      -- ✱9·05, repeated
-
-/-- Disjunction (✱9·03–✱9·08, repeated for longer prefixes; see the module note). -/
+/-- Disjunction: ✱9·03–✱9·08 applied, as printed, to the outermost quantifier of each side (see the
+    module note; for two quantifiers of the same kind, the order of PM's proofs of ✱9·3 and ✱9·31). -/
 def or : PF V → PF V → PF V
+  | .el a, q        => orEl a q                                        -- ✱1, ✱9·04, ✱9·06
+  | .all φ, .el b   => .all fun x => or (φ x) (.el b)                  -- ✱9·03
+  | .all φ, .all ψ  => .all fun x => or (φ x) (.all ψ)                 -- ✱9·03 repeated (✱9·3)
+  | .all φ, .ex ψ   => .all fun x => .ex fun y => or (φ x) (ψ y)       -- ✱9·07
+  | .ex ψ, .el b    => .ex fun y => or (ψ y) (.el b)                   -- ✱9·05
+  | .ex ψ, .ex χ    => .ex fun y => or (ψ y) (.ex χ)                   -- ✱9·05 repeated (✱9·31)
+  | .ex ψ, .all φ   => .all fun x => .ex fun y => or (ψ y) (φ x)       -- ✱9·08
+
+/-- Not ✱9's disjunction: the earlier reading, kept only to state where PM's proof of ✱9·31 departs
+    from its definitions (PM/Found9/Star9.lean). It applies ✱9·03 and ✱9·05 for every p, so a
+    universal quantifier at the front of the left side comes out first, then one at the front of the
+    right side, then an existential one on the left, then on the right. It agrees with `PF.or` when
+    one side is elementary or each side has one apparent variable, and differs when ✱9·07 or ✱9·08
+    is applied to a function with an apparent variable: for the example of the module note it gives
+    (x) : (z) : (∃y) . R(x, z) ∨ S(y). -/
+def orL : PF V → PF V → PF V
   | .el a, q  => orEl a q
-  | .all φ, q => .all fun x => or (φ x) q                -- ✱9·03, ✱9·07
-  | .ex φ, q  => orEx (fun x q' => or (φ x) q') q        -- ✱9·05, ✱9·08
+  | .all φ, q => .all fun x => orL (φ x) q
+  | .ex φ, q  => orLEx (fun x q' => orL (φ x) q') q
+where
+  /-- (∃x) . φx . ∨ . q in the earlier reading, given `r x q` = φx ∨ q. -/
+  orLEx {τ : Ty} (r : V τ → PF V → PF V) : PF V → PF V
+    | .all ψ => .all fun y => orLEx r (ψ y)
+    | .el b  => .ex fun x => r x (.el b)
+    | .ex ψ  => .ex fun x => r x (.ex ψ)
+
+/-- The kinds of the quantifiers in front (`true` for (x), `false` for (∃x)), reading each apparent
+    variable as the given variable of its type. -/
+def kinds (d : ∀ τ, V τ) : PF V → List Bool
+  | .el _  => []
+  | .all φ => true :: kinds d (φ (d _))
+  | .ex φ  => false :: kinds d (φ (d _))
 
 @[reducible] def imp (p q : PF V) : PF V := PF.or (PF.neg p) q                    -- ✱1·01
 @[reducible] def and (p q : PF V) : PF V := PF.neg (PF.or (PF.neg p) (PF.neg q))  -- ✱3·01
 @[reducible] def iff (p q : PF V) : PF V := PF.and (PF.imp p q) (PF.imp q p)      -- ✱4·01
 
 example (a b : EF V) : PF.or (.el a) (.el b) = .el (.or a b) := rfl
-example {τ : Ty} (φ : V τ → PF V) (q : PF V) : PF.or (.all φ) q = .all fun x => PF.or (φ x) q := rfl
 example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
-    PF.or (.ex φ) (.all ψ) = .all fun y => PF.or (.ex φ) (ψ y) := rfl
+    PF.or (.all φ) (.ex ψ) = .all fun x => .ex fun y => PF.or (φ x) (ψ y) := rfl
+example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+    PF.or (.ex ψ) (.all φ) = .all fun x => .ex fun y => PF.or (ψ y) (φ x) := rfl
+example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+    PF.or (.all φ) (.all ψ) = .all fun x => PF.or (φ x) (.all ψ) := rfl
 example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.or (.ex φ) (.ex ψ) = .ex fun x => PF.or (φ x) (.ex ψ) := rfl
 

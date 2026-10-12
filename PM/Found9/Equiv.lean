@@ -27,7 +27,7 @@ variable {V : Ty → Type} {S : Sys}
     hold in ✱9 for every proposition (`Rep`, PM's claim on p. 142, not proved here). -/
 theorem star9_iff_star10 (hV : ∀ τ, Nonempty (V τ)) (hR : Rep S V) (q : QF V) :
     QThm S q ↔ Thm9 S q.toF9 :=
-  ⟨qthm_toF9 hR, fun h => qiffMpRule (toQ_toF9 hV q) (thm9_toQ hV h)⟩
+  ⟨qthm_toF9 hV hR, fun h => qiffMpRule (toQ_toF9 hV q) (thm9_toQ hV h)⟩
 
 /-- In a structure with an individual, every type has a value: a function value is given by `lam1`,
     `lam2` (the structure's abstraction). -/

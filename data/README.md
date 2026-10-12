@@ -74,7 +74,7 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 | `id` | `*N.M` |
 | `page` | page of the 1910 print (`star*` only) |
 | `category` | `assertion`, `rule/prose` or `primitive` (`star*` only); `type` in `star9f` for ✱9·131 and ✱9·6–✱9·63, which are Lean's typing and not stated |
-| `method` | how the Lean proof is built (`explicit`: a term following PM's lines) |
+| `method` | how the Lean proof is built (`explicit`: a term following PM's lines); in `star9f` also `primitive`, `not stated` (built into the syntax) and `open` (not proved; the note says what is) |
 | `pm_text` | what PM prints to follow: `dem`, `hint` or `none` |
 | `cited_used`, `cited_unused` | PM's citations that the proof uses, and does not use |
 | `extra_used` | propositions used that PM does not cite (not chain glue, not a step in `tacit`) |

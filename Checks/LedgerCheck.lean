@@ -325,12 +325,19 @@ end LedgerCheck
   let mut bad : Array String := #[]
   let mut missing : Array String := #[]
   let mut notStated : Nat := 0
+  let mut opens : Array String := #[]
   for r in arr do
     let some id := (r.getObjValAs? String "id").toOption | throwError "{path}: row without id"
     let c := declOf9 id
+    let method := (r.getObjValAs? String "method").toOption
+    if method == some "open" then
+      -- not proved (the row's note says what is); there must be no declaration of that name
+      if env.contains c then logError m!"{id}: method \"open\" but {c} is a theorem"
+      opens := opens.push id
+      continue
     unless env.contains c do
       -- ✱9·14, ✱9·15, ✱9·131, ✱9·6–✱9·63 are built into the syntax and not stated
-      if (r.getObjValAs? String "method").toOption == some "not stated" then
+      if method == some "not stated" then
         notStated := notStated + 1
       else
         missing := missing.push s!"{id} ({c})"
@@ -343,6 +350,6 @@ end LedgerCheck
       for u in (stars9Of d).filter (!listed.contains ·) do
         let line := s!"{id} {u}  # {d}"
         unless bad.contains line do bad := bad.push line
-  logInfo m!"✱9 ledger: {rows} rows checked against their proofs ({notStated} rows not stated, built into the syntax); {bad.size} propositions used but not listed"
+  logInfo m!"✱9 ledger: {rows} rows checked against their proofs ({notStated} rows not stated, built into the syntax; {opens.size} open: {opens}); {bad.size} propositions used but not listed"
   unless missing.isEmpty do logError m!"{path}: rows with no declaration of that name: {missing}"
   for b in bad do logError m!"not listed in its ledger row: {b}"

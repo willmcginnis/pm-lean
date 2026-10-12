@@ -103,8 +103,9 @@ theorem f9_24 (φ : V τ → EF V) : Thm9 S (imp (Ex φ) (Ex φ)) :=
   Thm9.mp (Thm9.gen fun x => eId (φ x)) (f9_22 φ φ)
 
 /-- ✱9·25 `⊢ :. (x) . p ∨ φx . ⊃ : p . ∨ . (x) . φx` [✱9·23 . (✱9·04)]. By ✱9·04 the two sides are
-    the same proposition: ✱10·12 "is a mere example of "q ⊃ q"" (p. 146). For every p (with or without
-    apparent variables) and every φ it is `distrib` (PM/Found9/Base.lean). -/
+    the same proposition: ✱10·12 "is a mere example of "q ⊃ q"" (p. 146). For every function φ it is
+    `distribEl` (PM/Found9/Base.lean); for a p with apparent variables, `Rep.distrib`
+    (PM/Found9/FromStar10.lean). -/
 theorem f9_25 (p : EF V) (φ : V τ → EF V) :
     Thm9 S (imp (.all fun x => .el (.or p (φ x))) (PF.or (.el p) (Al φ))) :=
   f9_23 fun x => .or p (φ x)
@@ -127,18 +128,38 @@ theorem f9_3 (φ : V τ → EF V) : Thm9 S (imp (PF.or (Al φ) (Al φ)) (Al φ))
     allImp fun x => allE h4 x                                                    -- (4).✱9·21 (5)
   h5                                                                             -- [(5).(✱9·03)]
 
-/-- ✱9·31 `⊢ :. (∃x) . φx . ∨ . (∃x) . φx : ⊃ . (∃x) . φx` (p. 140). "This is the only proposition
-    which employs ✱9·11." -/
-theorem f9_31 (φ : V τ → EF V) : Thm9 S (imp (PF.or (Ex φ) (Ex φ)) (Ex φ)) :=
+/-- ✱9·31 `⊢ :. (∃x) . φx . ∨ . (∃x) . φx : ⊃ . (∃x) . φx` (p. 140), PM's Dem. lines (1)–(3). "This is
+    the only proposition which employs ✱9·11." Line (3) is `⊢ : (x) : (∃y) . φx ∨ φy . ⊃ . (∃z) . φz`.
+    PM passes to line (4), `(∃x) : (∃y) . φx ∨ φy : ⊃ . (∃z) . φz`, by "[(3).(✱9·03·02)]": it reads
+    `(x) : (y) . ∼(φx ∨ φy) . ∨ . (∃z) . φz` by ✱9·03, with p = (∃z) . φz, as
+    (x) : (y) : (∃z) . ∼(φx ∨ φy) ∨ φz, which is line (3). The definitions as printed do not give
+    that: the left side begins with (x) and the right with (∃z), so ✱9·07 applies, "also when φ and ψ
+    are not both elementary", and line (4) is (x) : (∃z) : (y) . ∼(φx ∨ φy) ∨ φz (`f9_31_step`). So
+    ✱9·31 itself is not proved here (docs/STAR9_FOUNDATION.md); with ✱1·2 for every proposition
+    (`Rep`) it is an instance of ✱1·2. -/
+theorem f9_31_3 (φ : V τ → EF V) :
+    Thm9 S (.all fun x => imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) :=
   have h1 : ∀ x, Thm9 S (.all fun y => imp (.el (.or (φ x) (φ y))) (Ex φ)) :=
     fun x => Thm9.gen fun y => Thm9.ex2 (fun z => .el (φ z)) x y                 -- ✱9·11·13 (1)
   have h2 : ∀ x, Thm9 S (imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) :=
     h1                                                                           -- [(1).(✱9·03·02)] (2)
-  have h3 : Thm9 S (.all fun x => imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) :=
-    Thm9.gen h2                                                                  -- (2).✱9·13 (3)
-  have h4 : Thm9 S (imp (.ex fun x => .ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) :=
-    h3                                                                           -- [(3).(✱9·03·02)] (4)
-  h4                                                                             -- [(4).(✱9·05·06)]
+  Thm9.gen h2                                                                    -- (2).✱9·13 (3)
+
+/-- PM's step from line (3) to line (4) of ✱9·31 is not an application of the definitions as
+    printed: given a variable of every type, the two propositions differ in the order of their
+    quantifiers, (x) : (y) : (∃z) and (x) : (∃z) : (y). In the earlier reading `PF.orL`, which applies
+    ✱9·03 for every p, they are the same proposition (`f9_31_step_orL`). -/
+theorem f9_31_step (d : ∀ τ, V τ) (φ : V τ → EF V) :
+    (PF.all fun x => imp (.ex fun y => .el (.or (φ x) (φ y))) (Ex φ)) ≠
+      imp (PF.or (Ex φ) (Ex φ)) (Ex φ) := by
+  intro h
+  have h' : [true, true, false] = [true, false, true] := congrArg (PF.kinds d) h
+  exact absurd h' (by decide)
+
+/-- In the earlier reading `PF.orL`, PM's line (4) of ✱9·31 is line (3). -/
+theorem f9_31_step_orL (φ : V τ → EF V) :
+    (PF.all fun x => PF.orL (PF.neg (.ex fun y => .el (.or (φ x) (φ y)))) (Ex φ)) =
+      PF.orL (PF.neg (PF.orL (Ex φ) (Ex φ))) (Ex φ) := rfl
 
 /-- ✱9·32 `⊢ :. q . ⊃ : (x) . φx . ∨ . q` (p. 140). Line (2) cites ✱9·25, which is Id here. -/
 theorem f9_32 (φ : V τ → EF V) (q : EF V) : Thm9 S (imp (.el q) (PF.or (Al φ) (.el q))) :=
@@ -352,8 +373,9 @@ theorem f9_521 (φ : V τ → EF V) (q r : EF V) :
 /-! ## ✱10's primitive propositions, proved by ✱9's method
 
   "✱10·1 is ✱9·2, ✱10·11 is ✱9·13, ✱10·12 is ✱9·25" (p. 144). Here they are stated for every function
-  φ and every p, with or without apparent variables, as the alternative method takes them. ✱10·121 and
-  ✱10·122 are ✱9·14 and ✱9·15, built into the syntax. -/
+  φ, with or without apparent variables, as the alternative method takes them; ✱10·12 for an
+  elementary p (for every p it needs ✱1·2–✱1·6 for every proposition: `Rep.distrib`,
+  PM/Found9/FromStar10.lean). ✱10·121 and ✱10·122 are ✱9·14 and ✱9·15, built into the syntax. -/
 
 /-- ✱10·1 `⊢ : (x) . φx . ⊃ . φy` [✱9·2], for every function φ. -/
 theorem f10_1 (φ : V τ → PF V) (y : V τ) : Thm9 S (imp (.all φ) (φ y)) := inst φ y
@@ -361,9 +383,10 @@ theorem f10_1 (φ : V τ → PF V) (y : V τ) : Thm9 S (imp (.all φ) (φ y)) :=
 /-- ✱10·11 "If φy is true whatever possible argument y may be, then (x) . φx is true." [✱9·13] -/
 theorem f10_11 {φ : V τ → PF V} (h : ∀ y, Thm9 S (φ y)) : Thm9 S (.all φ) := Thm9.gen h
 
-/-- ✱10·12 `⊢ :. (x) . p ∨ φx . ⊃ : p . ∨ . (x) . φx` [✱9·25], for every p and every function φ. -/
-theorem f10_12 (p : PF V) (φ : V τ → PF V) :
-    Thm9 S (imp (.all fun x => PF.or p (φ x)) (PF.or p (.all φ))) := distrib p φ
+/-- ✱10·12 `⊢ :. (x) . p ∨ φx . ⊃ : p . ∨ . (x) . φx` [✱9·25], for an elementary p and every
+    function φ. -/
+theorem f10_12 (p : EF V) (φ : V τ → PF V) :
+    Thm9 S (imp (.all fun x => PF.or (.el p) (φ x)) (PF.or (.el p) (.all φ))) := distribEl p φ
 
 /-- ✱10·01, read as a theorem: "This definition is only to be used when we discard the method of ✱9
     in favour of the alternative method already explained. In either case we have
