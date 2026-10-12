@@ -27,7 +27,7 @@ What this project plans to do next, roughly in order. Status words: **in progres
 
 Consistency cannot be vouched for from inside: by Gödel's second incompleteness theorem, a consistent, recursively axiomatized theory that interprets enough arithmetic does not prove its own consistency. A consistency proof has to be given in another theory, whose own consistency is then assumed; those links are documented, not finished. Checking, by contrast, can be repeated side by side by independent tools, which is where this project spends its effort.
 
-- **Next.** Re-check the whole build with independent implementations of Lean's kernel (for example nanoda in Rust, Lean4Lean in Lean, or Tenet on .NET; see the Lean Kernel Arena) in CI.
+- **Next.** Re-check the whole build in CI with external checkers of Lean's kernel (see the Lean Kernel Arena): separately written ones such as nanoda (Rust) or Tenet (.NET), and Lean4Lean (Lean), whose own documentation says it follows the C++ kernel closely and is not really an independent implementation, so it guards less against bugs the two share.
 - **Later.** Export the PM derivations to Metamath with PM's own primitive propositions as the axioms, and check them with several independent Metamath verifiers. This needs no Lean at all, which is possible because the PM derivations use none of Lean's axioms.
 
 ## Cross-checking between foundations
