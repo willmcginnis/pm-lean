@@ -760,6 +760,83 @@
   ]
  },
  {
+  "id": "*21.4",
+  "page": 215,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*21.03"
+  ],
+  "extra_used": [
+   "*12.11",
+   "*10.32",
+   "*10.1",
+   "*2.06",
+   "*10.11",
+   "*10.23",
+   "*21.11",
+   "*10.21",
+   "*10.281",
+   "*4.86",
+   "*3.26",
+   "*5.32",
+   "*4.2",
+   "*11.11",
+   "*10.24",
+   "*3.31",
+   "*4.3",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "R real (an expression x y psi(x, y)); *20.3 is its analogue for classes of relations, proved by *20.3's Dem. with *21.082, *21.083 for *20.01, *20.02 and *21.7 for *12.1 (qrelCls20_3); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "As *20.4, for relations: *10.43 is used at R, whose defining function need not be predicative (qrelAllAt: *12.11 turned by *10.32 under (x), *10.1, *2.06, *10.11, *10.23), the members carried by *21.11 and joined by *4.86 (the ⊃ half by *3.26), then *5.32. The defining expression of Rel is extensional by *21.11 under (Ephi) (*10.11.21, *10.281; relExt_Rel). *21.7 is joined with the expression's generic form (qrelGen: *4.2, *11.11, *10.24, *3.26 with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 with p second (*4.3); '[*12.1]' (here *21.7) drops the asserted factor by *3.27 and *3.2.",
+  "glue": [
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "order",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*21.41",
+  "page": 215,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.4",
+   "*21.151"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
   "id": "*21.42",
   "page": 215,
   "category": "assertion",

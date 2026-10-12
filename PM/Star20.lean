@@ -2,9 +2,8 @@ import PM.Star14
 /-!
   ✱20: general theory of classes (1910 print, pp. 196–210; summary pp. 196–199, definitions
   pp. 197–200, numbered propositions pp. 200–210). The print has 55 numbered propositions, ✱20·1 to
-  ✱20·81. 51 are proved here. ✱20·631 and ✱20·632 concern significance and are built into the syntax,
-  as ✱10·121 and ✱10·122 are (PM/Star10.lean). ✱20·4 and ✱20·41 are not formalized; they are about
-  "Cls" (see "Not formalized" below).
+  ✱20·81. 53 are proved here. ✱20·631 and ✱20·632 concern significance and are built into the syntax,
+  as ✱10·121 and ✱10·122 are (PM/Star10.lean).
 
   Statements are read from the Gutenberg #78050 transcription of the 1910 print (its formula source),
   not from the scan images. Each proof follows PM's Dem. line by line, or uses the propositions of PM's
@@ -21,6 +20,9 @@ import PM.Star14
     ✱20·07  (α) . fα . = . (φ) . f{ẑ(φ!z)}                 Df   (`QF.clsAll`)
     ✱20·071 (∃α) . fα . = . (∃φ) . f{ẑ(φ!z)}               Df   (`QF.clsEx`)
     ✱20·072 [(ια)(φα)] . f(ια)(φα) . = : (∃γ) : φα . ≡_α . α = γ : fγ   Df   (`QF.descCls`)
+    ✱20·03  Cls = α̂{(∃φ) . α = ẑ(φ!z)}                       Df   (`QF.Cls`)
+    ✱20·08  f{α̂(ψα)} . = : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)   Df   (`QF.clsCls Ψ f`)
+    ✱20·081 α ∈ ψ!α̂ . = . ψ!α                               Df   (`QF.memCls α ψ`)
   Identity of classes is ✱13·01 at the type of predicative functions, eliminated by ✱20·01 twice, the
   first class having the larger scope "because it occurs first" (p. 201): `QF.clsEq ψ χ`. So ✱13·01 is
   used at the type `Ty.pred1 a`, and ✱12·1 at the type of its argument, through ✱13·195 (typical
@@ -47,10 +49,19 @@ import PM.Star14
   φ, and each occurrence of the class is carried from φ!ẑ to ẑ(φz) by ✱20·11 (`qclsAllAt`,
   `qclsExAt`).
 
+  Classes of classes (✱20·03, ✱20·08, ✱20·081; docs/CLASSES_OF_CLASSES.md) are built as printed. A
+  class of classes α̂(Ψα) is written by its defining expression `Ψ : (V a → QF V) → QF V`, as a class
+  is by its defining function. ✱20·08 binds φ, a predicative function whose argument is a class
+  (type `pred1 (pred1 a)`); ≡_α ranges over classes (✱20·07, `clsAll`); and φ!α, a predicative
+  function applied to a class, is eliminated by ✱20·01 with context φ!χ!ẑ (`QF.clsApp`). So α ∈ κ
+  has two layers: a statement about a predicative function φ of classes (✱20·08, ✱20·081), and φ!α
+  one about predicative functions χ of individuals (✱20·01). Each layer is one named step
+  (`qclsCls1`, `qmemCls`, `qclsClsMem`, `qclsApp`), and statements use the notation `x ∈ α` and
+  `α ∈ κ` (scoped to `PM`). ✱20·4 and ✱20·41 are proved after ✱20·7, whose analogue of ✱12·1
+  their ✱20·3 needs: the ✱20·3 of ✱20·4's hint is its analogue for classes of classes (p. 206: the
+  analogues "will, therefore, be quoted by the numbers of the original propositions").
+
   Not formalized:
-  - ✱20·03 (Cls), ✱20·08 and ✱20·081 (classes of classes, f{α̂(ψα)} and α ∈ ψ!α̂), and so ✱20·4
-    and ✱20·41, which state α ∈ Cls. ✱20·08 binds a predicative function of classes and ranges
-    ≡_α over classes; how to encode that is a design decision that has not been made.
   - ✱20·631, ✱20·632 (significance, built into the syntax as ✱10·121, ✱10·122 are). ✱20·62 and
     ✱20·633, the analogues of the rules ✱10·11 and ✱11·07, are proved as rules (`q20_62`, `q20_633`).
   - E!(ια)(φα), which ✱20·56 uses, is not among PM's definitions; p. 206 keeps "the analogues of
@@ -64,7 +75,7 @@ import PM.Star14
 
   Names: `q20_1` is ✱20·1, and so on. ψ, χ, φ are formulas with a hole (defining functions of classes,
   PM's real function variables of any order); f, g are contexts of a predicative function; F, G, Φ are
-  expressions containing a class.
+  expressions containing a class; Ψ is the defining expression of a class of classes.
 -/
 namespace PM
 open QF
@@ -102,7 +113,34 @@ variable {V : Ty → Type} {S : Sys}
     definition in ✱20). -/
 @[reducible] def exists1Cls {a : Ty} (Φ : (V a → QF V) → QF V) : QF V :=
   clsEx fun γ => clsAll fun α => iff (Φ α) (clsEq α γ)
+/-- ✱20·03 `Cls = α̂{(∃φ) . α = ẑ(φ!z)}` Df: the defining expression of the class of classes, with α the
+    smallest scope. "Cls" "has no meaning in isolation, but merely in certain uses", and is "ambiguous as
+    to type" (p. 198): `a` is implicit. (The summary on p. 198 prints ẑ!(φ!z); the list of definitions,
+    p. 199, ẑ(φ!z).) -/
+@[reducible] def Cls {a : Ty} : (V a → QF V) → QF V := fun α => ex (τ := Ty.pred1 a) fun φ => clsEq α (pf φ)
+/-- φ!α, a predicative function φ of classes applied to the class α = ẑ(ψz): ✱20·01 with context φ!χ!ẑ,
+    the class having the smallest scope. -/
+@[reducible] def clsApp {a : Ty} (φ : V (Ty.pred1 (Ty.pred1 a))) (α : V a → QF V) : QF V :=
+  cls α fun χ => .app1 φ χ
+/-- ✱20·08 `f{α̂(ψα)} . = : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` Df. `Ψ` is the defining expression ψα, `f` the
+    context of the predicative function of classes φ!α̂; ≡_α ranges over classes (✱20·07). -/
+@[reducible] def clsCls {a : Ty} (Ψ : (V a → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred1 a)) → QF V) : QF V :=
+  ex (τ := Ty.pred1 (Ty.pred1 a)) fun φ => QF.and (clsAll fun α => iff (Ψ α) (clsApp φ α)) (f φ)
+/-- ✱20·081 `α ∈ ψ!α̂ . = . ψ!α` Df -/
+@[reducible] def memCls {a : Ty} (α : V a → QF V) (ψ : V (Ty.pred1 (Ty.pred1 a))) : QF V := clsApp ψ α
+/-- `α ∈ α̂(Ψα)`: ✱20·081 with ✱20·08 applied to the class of classes, whose scope is α ∈ α̂(Ψα) (the
+    smallest). -/
+@[reducible] def clsClsMem {a : Ty} (α : V a → QF V) (Ψ : (V a → QF V) → QF V) : QF V :=
+  clsCls Ψ fun φ => memCls α φ
 end QF
+
+/-! The membership notations (scoped to `PM`, used from here on): `x ∈ α` is `clsMem x α` (✱20·02 with
+    ✱20·01), and `α ∈ κ` for a class of classes κ is `clsClsMem α κ` (✱20·081 with ✱20·08). Each
+    unfolds to the formula it names, so a statement written with them is the same Lean statement. -/
+/-- `x ∈ α`: `clsMem x α`. -/
+scoped infix:50 " ∈ " => QF.clsMem
+/-- `α ∈ κ`, κ a class of classes: `clsClsMem α κ`. -/
+scoped infix:50 " ∈ " => QF.clsClsMem
 
 variable {V : Ty → Type} {S : Sys} {a : Ty}
 
@@ -763,6 +801,145 @@ theorem q20_81 [Reducibility S] {τ : Ty} (φ ψ : V τ → QF V) (a : V τ) :
     _ ⊃ clsEq (fun x => .or (φ x) (.neg (φ x))) (fun x => .or (ψ x) (.neg (ψ x))) :=
         q20_24 (fun x => .or (ident x a) (nident x a)) (fun x => .or (φ x) (.neg (φ x)))
           (fun x => .or (ψ x) (.neg (ψ x)))                                       -- [✱20·24]
+
+/-! ## Classes of classes: ✱20·03, ✱20·08, ✱20·081; ✱20·4, ✱20·41
+
+  "Classes of classes have all the formal properties of classes of individuals" (p. 199), by
+  "merely repeating previous proofs", the analogues "quoted by the numbers of the original
+  propositions" (p. 206). ✱20·4's hint "✱20·3 . (✱20·03)" cites ✱20·3 for the class of classes Cls;
+  that analogue is `qcls20_3`, ✱20·3's Dem. with ✱20·08, ✱20·081 for ✱20·01, ✱20·02 and ✱20·7 (the
+  analogue of ✱12·1) for ✱12·1.
+
+  α in ✱20·4 is real, an expression ẑ(ψz) whose defining function need not be predicative, so ✱20·3's
+  ✱10·43 is used at a class that need not be predicative, as ✱20·17 is (p. 206; `qclsAllAt`). That
+  needs the defining expression Ψα of the class of classes to be extensional (`ClsExt`): "every
+  proposition about a class expresses an extensional property of the determining function of the
+  class" (p. 200), which ✱20·11 proves for each context; `clsExt_cls` and `clsExt_ex` give it for the
+  expressions used here. -/
+
+/-- `Ψ` is extensional: `⊢ :. ψx . ≡ₓ . χx : ⊃ : Ψ{ẑ(ψz)} . ≡ . Ψ{ẑ(χz)}` for all ψ, χ, i.e. ✱20·11 for the
+    expression Ψα. -/
+def ClsExt (S : Sys) (Ψ : (V a → QF V) → QF V) : Prop :=
+  ∀ ψ χ : V a → QF V, QThm S (imp (fiff ψ χ) (iff (Ψ ψ) (Ψ χ)))
+
+/-- A generic expression f{α} (`cls α f`, p. 199) is extensional: ✱20·11. -/
+theorem clsExt_cls (f : V (Ty.pred1 a) → QF V) : ClsExt S fun α => cls α f :=
+  fun ψ χ => q20_11 ψ χ f
+
+/-- (∃v) . Ψ(v, α) is extensional when each Ψ(v, α) is: ✱10·11·21 and ✱10·281, as at the end of ✱20·11. -/
+theorem clsExt_ex {τ : Ty} (Ψ : V τ → (V a → QF V) → QF V) (h : ∀ v, ClsExt S (Ψ v)) :
+    ClsExt S fun α => ex fun v => Ψ v α :=
+  fun ψ χ => qsyl (q10_11_21 fun v => h v ψ χ) (q10_281 _ _)
+
+/-- The defining expression of Cls, (∃φ) . α = ẑ(φ!z), is extensional (`clsExt_ex`, `clsExt_cls`). -/
+theorem clsExt_Cls : ClsExt S (Cls (V := V) (a := a)) :=
+  clsExt_ex (fun φ α => clsEq α (pf φ)) fun _ => clsExt_cls _
+
+/-- ✱20·1 for classes of classes: `⊢ :. f{α̂(ψα)} . ≡ : (∃φ) : ψα . ≡_α . φ!α : f(φ!α̂)` [✱4·2 . (✱20·08)]. -/
+theorem qclsCls1 (Ψ : (V a → QF V) → QF V) (f : V (Ty.pred1 (Ty.pred1 a)) → QF V) :
+    QThm S (iff (clsCls Ψ f) (ex (τ := Ty.pred1 (Ty.pred1 a)) fun φ =>
+      QF.and (clsAll fun α => iff (Ψ α) (clsApp φ α)) (f φ))) :=
+  QL.t4_2 _
+
+/-- `⊢ : α ∈ φ!α̂ . ≡ . φ!α` [✱4·2 . (✱20·081)] -/
+theorem qmemCls (α : V a → QF V) (φ : V (Ty.pred1 (Ty.pred1 a))) : QThm S (iff (memCls α φ) (clsApp φ α)) :=
+  QL.t4_2 _
+
+/-- `⊢ :. α ∈ α̂(ψα) . ≡ : (∃φ) : ψβ . ≡_β . φ!β : φ!α` [✱4·2 . (✱20·08) . (✱20·081)]: the first two lines of
+    ✱20·3's Dem. for classes of classes, as one step. -/
+theorem qclsClsMem (Ψ : (V a → QF V) → QF V) (α : V a → QF V) :
+    QThm S (iff (α ∈ Ψ) (ex (τ := Ty.pred1 (Ty.pred1 a)) fun φ =>
+      QF.and (clsAll fun β => iff (Ψ β) (clsApp φ β)) (clsApp φ α))) :=
+  QL.t4_2 _
+
+/-- `⊢ :. φ!{ẑ(ψz)} . ≡ : (∃χ) : χ!x . ≡ₓ . ψx : φ!(χ!ẑ)` [✱20·1]: ✱20·01 with context φ!χ!ẑ. -/
+theorem qclsApp (φ : V (Ty.pred1 (Ty.pred1 a))) (ψ : V a → QF V) :
+    QThm S (iff (clsApp φ ψ) (ex (τ := Ty.pred1 a) fun χ => QF.and (fiff (pf χ) ψ) (.app1 φ χ))) :=
+  q20_1 ψ _
+
+/-- An extensional expression of a predicative class ẑ(θ!z) is f{ẑ(θ!z)} for the context f(χ!ẑ) that is the
+    expression of ẑ(χ!z) (p. 199: fα "is, in reality, a function of φẑ, namely the extensional function
+    associated with f(ψ!ẑ) by means of ✱20·01"). ⊃: θ!x ≡ₓ θ!x (✱4·2, ✱10·11) is joined (✱3·2) and ✱10·24
+    is used at θ. ⊂: `hΨ` (its ⊃ half, ✱3·26) with Imp (✱3·31), under (∃χ) by ✱10·11, ✱10·23. -/
+theorem qclsGen (Ψ : (V a → QF V) → QF V) (hΨ : ClsExt S Ψ) (θ : V (Ty.pred1 a)) :
+    QThm S (iff (Ψ (pf θ)) (cls (pf θ) fun χ => Ψ (pf χ))) :=
+  have h1 : QThm S (imp (Ψ (pf θ)) (cls (pf θ) fun χ => Ψ (pf χ))) :=
+    qsyl (QThm.mp (q10_11 fun x => QL.t4_2 (.app1 θ x)) (QL.t3_2 _ _))
+      (q10_24 (fun χ => QF.and (fiff (pf χ) (pf θ)) (Ψ (pf χ))) θ)
+  have h2 : QThm S (imp (cls (pf θ) fun χ => Ψ (pf χ)) (Ψ (pf θ))) :=
+    QThm.mp (q10_11 fun χ => QThm.mp (qsyl (hΨ (pf χ) (pf θ)) (QL.t3_26 _ _)) (QL.t3_31 _ _ _))
+      (qiffMp (q10_23 _ _))
+  qiffI h1 h2
+
+/-- ✱20·7, the analogue of ✱12·1, for an extensional expression Ψα: `⊢ : (∃g) : Ψα . ≡_α . g!α`. ✱20·7 for
+    the context f(χ!ẑ) = Ψ{ẑ(χ!z)}, and `qclsGen` for the first member, under (α) and (∃g)
+    (✱10·11·27·28). -/
+theorem qclsRed [Reducibility S] (Ψ : (V a → QF V) → QF V) (hΨ : ClsExt S Ψ) :
+    QThm S (ex (τ := Ty.pred1 (Ty.pred1 a)) fun g => clsAll fun α => iff (Ψ α) (clsApp g α)) :=
+  QThm.mp (q20_7 fun χ => Ψ (pf χ)) (q10_11_28 fun _ => q10_11_27 fun θ =>
+    qsyl (QThm.mp (qclsGen Ψ hΨ θ) (QL.t3_2 _ _)) (QL.t4_22 _ _ _))                -- ✱20·7
+
+/-- ✱10·43 for classes, at a class ẑ(ψz) whose defining function need not be predicative:
+    `⊢ :. Ψβ . ≡_β . Φβ : Ψ{ẑ(ψz)} : ≡ : Ψβ . ≡_β . Φβ : Φ{ẑ(ψz)}`. ✱10·43's lines, with the class analogue
+    of ✱10·1 (`qclsAllAt`; p. 206, ✱20·17) for ✱10·1, the two members carried by `hΨ`, `hΦ` and joined by
+    ✱4·86 (the ⊃ half by ✱3·26); then ✱5·32. -/
+theorem qcls10_43 [Reducibility S] (Ψ Φ : (V a → QF V) → QF V) (hΨ : ClsExt S Ψ) (hΦ : ClsExt S Φ)
+    (ψ : V a → QF V) :
+    QThm S (iff (QF.and (clsAll fun β => iff (Ψ β) (Φ β)) (Ψ ψ))
+      (QF.and (clsAll fun β => iff (Ψ β) (Φ β)) (Φ ψ))) :=
+  QThm.mp (qclsAllAt (fun β => iff (Ψ β) (Φ β)) ψ fun θ =>
+      qsyl (qimpIffIffCongr (hΨ (pf θ) ψ) (hΦ (pf θ) ψ)) (QL.t3_26 _ _))           -- ✱10·1
+    (qiffMp (QL.t5_32 _ (Ψ ψ) (Φ ψ)))                                             -- ✱5·32
+
+/-- ✱20·3 for classes of classes: `⊢ : α ∈ α̂(Ψα) . ≡ . Ψα`, α real (an expression ẑ(ψz)) and Ψα extensional.
+    ✱20·3's Dem.: ✱20·08 and ✱20·081 (`qclsClsMem`) for ✱20·1 and ✱20·02; ✱10·43 at α (`qcls10_43`), under
+    (∃φ) by ✱10·11·281; ✱10·35 with p second (✱4·3, `qex_and_perm`); and ✱20·7 (`qclsRed`) for ✱12·1,
+    dropping the asserted factor (✱3·27, ✱3·2). The orientation ψα ≡_α φ!α of ✱20·08 is that of PM's
+    lines, so ✱10·32 is not needed here. -/
+theorem qcls20_3 [Reducibility S] (Ψ : (V a → QF V) → QF V) (hΨ : ClsExt S Ψ) (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
+  let P : V (Ty.pred1 (Ty.pred1 a)) → QF V := fun φ => clsAll fun β => iff (Ψ β) (clsApp φ β)
+  calc (ψ ∈ Ψ)
+      ≡ ex (fun φ => QF.and (P φ) (clsApp φ ψ)) := qclsClsMem Ψ ψ                   -- (✱20·08) . (✱20·081)
+    _ ≡ ex (fun φ => QF.and (P φ) (Ψ ψ)) :=
+        q10_11_281 fun φ => qiffSymm (qcls10_43 Ψ (clsApp φ) hΨ (clsExt_cls _) ψ)  -- [✱10·43]
+    _ ≡ QF.and (ex P) (Ψ ψ) := qex_and_perm P (Ψ ψ)                                -- [✱10·35]
+    _ ≡ Ψ ψ := qand_true_left (qclsRed Ψ hΨ)                                      -- [✱12·1]
+
+/-- ✱20·4 `⊢ : α ∈ Cls . ≡ . (∃φ) . α = ẑ(φ!z)` [✱20·3 . (✱20·03)], α real (an expression ẑ(ψz)). ✱20·3 is
+    its analogue for classes of classes (`qcls20_3`), at the defining expression of Cls, extensional by
+    ✱20·11 under (∃φ) (`clsExt_Cls`). -/
+theorem q20_4 [Reducibility S] (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ Cls) (ex (τ := Ty.pred1 a) fun φ => clsEq ψ (pf φ))) :=
+  qcls20_3 Cls clsExt_Cls ψ                                                       -- ✱20·3 . (✱20·03)
+
+/-- ✱20·41 `⊢ . ẑ(ψz) ∈ Cls` [✱20·4·151]. "We need further ⊢ . (∃α) . ẑ(ψz) = α. This is ✱20·41" (p. 206). -/
+theorem q20_41 [Reducibility S] (ψ : V a → QF V) : QThm S (ψ ∈ Cls) :=
+  QThm.mp (q20_151 ψ) (qiffMpr (q20_4 ψ))                                         -- ✱20·4·151
+
+/-! Two checks of the notation and the layers (docs/CLASSES_OF_CLASSES.md); neither is a PM proposition.
+
+  (1) α ∈ α̂(Ψα), unfolded one layer per line: ✱20·08 (a predicative function φ of classes), ✱20·081 (φ!α),
+  ✱20·01 (a predicative function χ of individuals, with φ!χ!ẑ). -/
+example (Ψ : (V a → QF V) → QF V) (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ Ψ) (ex (τ := Ty.pred1 (Ty.pred1 a)) fun φ =>
+      QF.and (clsAll fun β => iff (Ψ β) (clsApp φ β))
+        (ex (τ := Ty.pred1 a) fun χ => QF.and (fiff (pf χ) ψ) (.app1 φ χ)))) :=
+  let P : V (Ty.pred1 (Ty.pred1 a)) → QF V := fun φ => clsAll fun β => iff (Ψ β) (clsApp φ β)
+  calc (ψ ∈ Ψ)
+      ≡ ex (fun φ => QF.and (P φ) (memCls ψ φ)) := qclsCls1 Ψ _                    -- (✱20·08)
+    _ ≡ ex (fun φ => QF.and (P φ) (clsApp φ ψ)) :=
+        q10_11_281 fun φ => qandCongrR _ (qmemCls ψ φ)                           -- (✱20·081)
+    _ ≡ ex (fun φ => QF.and (P φ) (ex fun χ => QF.and (fiff (pf χ) ψ) (.app1 φ χ))) :=
+        q10_11_281 fun φ => qandCongrR _ (qclsApp φ ψ)                           -- (✱20·01)
+
+/-! (2) ✱52·01 `1 = α̂{(∃x) . α = ι'x}` Df (p. 364) can be stated, and ✱52·1 `⊢ : α ∈ 1 . ≡ . (∃x) . α = ι'x`
+  [✱20·3 . (✱52·01)] follows as ✱20·4 does. ι'x is written ŷ(y = x) (✱51·11, p. 357); ✱30's
+  descriptive functions are not built. -/
+example [Reducibility S] (ψ : V a → QF V) :
+    QThm S (iff (ψ ∈ (fun α => ex fun x => clsEq α fun y => ident y x))
+      (ex fun x => clsEq ψ fun y => ident y x)) :=
+  qcls20_3 _ (clsExt_ex _ fun _ => clsExt_cls _) ψ
 
 /-! ## Typical ambiguity (docs/TYPES_DESIGN.md, test F5)
 
