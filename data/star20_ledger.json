@@ -31,9 +31,7 @@
   "cited_used": [
    "*20.1",
    "*12.1",
-   "*10.321",
-   "*10.11",
-   "*10.28"
+   "*10.321"
   ],
   "extra_used": [
    "*10.32",
@@ -44,7 +42,9 @@
    "*10.24",
    "*3.43",
    "*3.3",
-   "*10.21"
+   "*10.11",
+   "*10.21",
+   "*10.28"
   ],
   "cited_unused": [
    "*13.195"
@@ -75,6 +75,7 @@
    "*4.3",
    "*13.16",
    "*4.36",
+   "*10.281",
    "*3.47",
    "*2.08",
    "*10.321",
@@ -134,6 +135,7 @@
    "*12.1"
   ],
   "extra_used": [
+   "*10.281",
    "*4.3",
    "*10.32",
    "*3.27"
@@ -150,6 +152,6 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
+  "reason": "PM's lines have psi y ==_y phi!y; *20.01 gives phi!y ==_y psi y, so *12.1 is turned by *10.32 (under (Ephi), *10.11.281, also used to carry *10.43 there). *10.35 is used with p as the second factor (*4.3). '[*12.1]' drops the asserted factor by *3.27 and *3.2."
  }
 ]

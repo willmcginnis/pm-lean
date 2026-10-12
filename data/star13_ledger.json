@@ -40,6 +40,7 @@
   "extra_used": [
    "*10.1",
    "*3.43",
+   "*10.28",
    "*3.47",
    "*3.27",
    "*2.04"
@@ -588,7 +589,8 @@
    "*10.51"
   ],
   "extra_used": [
-   "*4.3"
+   "*4.3",
+   "*10.281"
   ],
   "cited_unused": [],
   "note": "Transp read as *4.11",
@@ -602,7 +604,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.51 has the factors phi y . y = x; they are commuted under (Ey) by *4.3 (with *10.11.281)."
+  "reason": "*10.51 has the factors phi y . y = x; they are commuted under (Ey) by *4.3 with *10.11.281."
  },
  {
   "id": "*13.21",

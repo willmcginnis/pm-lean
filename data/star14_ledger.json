@@ -71,6 +71,93 @@
   "reason": ""
  },
  {
+  "id": "*14.111",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*14.04",
+   "*14.03",
+   "*14.1",
+   "*11.55"
+  ],
+  "extra_used": [
+   "*11.23",
+   "*4.32",
+   "*4.3",
+   "*4.36",
+   "*11.11",
+   "*11.341"
+  ],
+  "cited_unused": [],
+  "note": "the first three lines are definitional (*14.04, *14.03, *14.1 twice); the two descriptions may have different types",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*11.55 gives (Ec, b) . psi x ==_x x = c . phi x ==_x x = b . f(b, c); PM's last line (whose transcription has 'x = c' twice) has (Eb, c) and the factors in the order of the statement: the variables are interchanged by *11.23 and the factors permuted by *4.32, *4.3 (with *4.36), under (b, c) by *11.11.341."
+ },
+ {
+  "id": "*14.112",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*14.03",
+   "*14.1",
+   "*11.55"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "[Proof as in *14.111]; the unmarked f{(ix)(phi x), (ix)(psi x)} gives the first description the larger scope (p. 182), i.e. *14.03; the definitional lines, then *11.55",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.113",
+  "page": 184,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.111",
+   "*14.112"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "explicit term following the propositions of PM's bracketed hint, in PM's order",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
   "id": "*14.12",
   "page": 184,
   "category": "assertion",
@@ -139,6 +226,510 @@
   "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, *3.26 turns phi b == b = c into phi b ⊃ b = c on the second factor (*3.47 with Id, *2.08)."
  },
  {
+  "id": "*14.122",
+  "page": 185,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.22",
+   "*13.191",
+   "*4.71",
+   "*10.11",
+   "*10.27",
+   "*10.281",
+   "*13.195",
+   "*5.32"
+  ],
+  "extra_used": [
+   "*4.36",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; the chain A == B == C is stated as A == B . B == C",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "In (1), *13.191 replaces the second factor (*4.36 with *4.3); in (2), *13.195 needs x = b . phi x, so the factors are commuted (*4.3) under (Ex) by *10.11.281."
+ },
+ {
+  "id": "*14.123",
+  "page": 185,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31",
+   "*13.21",
+   "*4.71",
+   "*11.11",
+   "*11.32",
+   "*11.341",
+   "*13.22",
+   "*5.32"
+  ],
+  "extra_used": [
+   "*4.36",
+   "*4.3",
+   "*4.32"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; the chain A == B == C is stated as A == B . B == C",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "In (1), *13.21 replaces the second factor (*4.36 with *4.3); in (2), *13.22 needs z = x . (w = y . phi(z, w)), so the factors of phi(z, w) . (z = x . w = y) are rearranged (*4.3, *4.32) under (z, w) by *11.11.341."
+ },
+ {
+  "id": "*14.124",
+  "page": 186,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.123",
+   "*3.27",
+   "*11.1",
+   "*3.47",
+   "*13.172",
+   "*11.11",
+   "*11.35",
+   "*11.3",
+   "*5.33",
+   "*11.34",
+   "*11.45"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.43",
+   "*2.08",
+   "*3.22",
+   "*2.06",
+   "*3.3",
+   "*11.32",
+   "*3.31",
+   "*11.36",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; ⊃_{z,w,u,v} read as (z, w) : (u, v) (*11.01 twice)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "(1) takes *14.123's chain end to end (*3.26, *3.27) and removes (Ex, y) by *11.11.35 (cited in (3)). In (2), the ⊃ halves of the two *11.1 instances are taken by *3.26 and joined by Comp (*3.43) before *3.47, and the factors for the two uses of *13.172 are picked out by *3.26, *3.27 and joined by Comp. (4) uses *11.11.3 twice. In (5), *11.1 is carried under (z, w) by *11.11.3 and applied to the second factor (*3.47 with Id, *2.08); *5.33 needs phi(x, y) . phi(z, w) where Hp has phi(z, w) . phi(x, y) (*3.22, *2.06), is exported by *3.27 and Exp (*3.3), carried under (z, w) by *11.11.3 and *11.32 and imported by *3.31, phi(x, y) being kept by *3.26 and Comp; (Ez, w) . phi(z, w) is got from phi(x, y) by *11.36. (6) needs U . phi(x, y) for *11.45 (*4.3, *3.22). The last line joins (1) and (4) by Comp."
+ },
+ {
+  "id": "*14.13",
+  "page": 186,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.16",
+   "*4.36",
+   "*10.11",
+   "*10.281"
+  ],
+  "extra_used": [
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*4.36 acts on the first factor; a = b is the second, so the factors are commuted (*4.3) (qandCongrR)."
+ },
+ {
+  "id": "*14.131",
+  "page": 186,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*11.6",
+   "*14.13"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.36",
+   "*10.281"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; PM's first Dem. (the second, by *14.111, p. 187, is not used); each description written first has the larger scope",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*11.6 needs (Eb) : (Ec) . b = c . psi x ==_x x = c : phi x ==_x x = b, so the factors of the *14.1 lines are commuted (*4.3, with *4.36) under (Eb), (Ec) by *10.11.281, before *11.6 and back after it; *14.13 replaces the second factor (*4.36 with *4.3)."
+ },
+ {
+  "id": "*14.14",
+  "page": 187,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.13"
+  ],
+  "extra_used": [
+   "*13.16",
+   "*3.22",
+   "*3.47",
+   "*2.08"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*13.13 with psi z := z = (ix)(phi x), b for x and a for y needs b = (ix)(phi x) . b = a: a = b is turned by *13.16 on the second factor (*3.47 with Id, *2.08) and the factors commuted by *3.22."
+ },
+ {
+  "id": "*14.142",
+  "page": 187,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.195",
+   "*10.35",
+   "*14.121",
+   "*3.27"
+  ],
+  "extra_used": [
+   "*13.16",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*3.26",
+   "*3.43",
+   "*10.28",
+   "*3.45"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "'[*13.195]' in the second line takes (Eb) : phi x ==_x x = b : a = b to phi x ==_x x = a, which needs b = a . F b: the factors are commuted (*4.3) and a = b turned by *13.16 (with *4.36) under (Eb) by *10.11.281 (qidentDesc), and the result used on the first factor of Hp (*4.36). '[*14.121]' picks out the two formal equivalences by *3.26, *3.27 and joins them by Comp (*3.43); it and the last line act under (Ec) by *10.11.28. In the last line *13.195 needs c = a, got from a = c by *13.16 with Fact (*3.45)."
+ },
+ {
+  "id": "*14.144",
+  "page": 187,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.195",
+   "*11.54",
+   "*14.121"
+  ],
+  "extra_used": [
+   "*14.112",
+   "*10.35",
+   "*13.16",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*3.47",
+   "*3.26",
+   "*3.27",
+   "*3.43",
+   "*11.11",
+   "*11.34"
+  ],
+  "cited_unused": [
+   "*14.111",
+   "*11.42"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "PM cites *14.111 for (Ea, b) : phi x ==_x x = a : psi x ==_x x = b : a = b; with PM's convention (p. 182) the unmarked (ix)(phi x) = (ix)(psi x) is *14.112's form (equivalent by *14.113), so *14.112 is used, in the first and the last line. The two factors of Hp are treated by *3.47; '[*13.195]' is *10.35 with qidentDesc (*13.195, *13.16, *4.3, *4.36, *10.11.281). '[*14.121 . *11.42]' picks out the factors (*3.26, *3.27, Comp *3.43) and is carried under (Ea, c) by *11.11.34; *11.42 distributes (Ea, c) over a product, which this step does not need."
+ },
+ {
+  "id": "*14.145",
+  "page": 187,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.195",
+   "*10.35"
+  ],
+  "extra_used": [
+   "*13.16",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.24",
+   "*14.112"
+  ],
+  "cited_unused": [
+   "*14.111"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "Line (1) is qidentDesc (*13.195 needs b = a . F b: *4.3, *13.16 with *4.36, under (Eb) by *10.11.281), used on the first factor of Hp by *4.36. The last line takes (Eb) : phi x ==_x x = a : psi x ==_x x = b : a = b to (Ea, b) . ... by *10.24 and, as in *14.144, PM's *14.111 is *14.112 for the unmarked descriptions."
+ },
+ {
+  "id": "*14.15",
+  "page": 188,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.195",
+   "*13.192"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*10.281",
+   "*4.86",
+   "*10.27",
+   "*10.271",
+   "*4.36",
+   "*10.21"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; Dem. (1) of the transcription has 'x ≡ b' for 'x = b'",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "In (1), *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. Between *14.1 and *13.192 in (2), PM leaves tacit the step from phi x ==_x x = b to psi{(ix)(phi x)} == (Ec) : x = b ==_x x = c : psi c; it is the argument of *14.272's Dem. (*4.86 under (x) by *10.11.27 and *10.271, *4.36, *10.11.21, *10.281; qdescCongr)."
+ },
+ {
+  "id": "*14.16",
+  "page": 188,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.192",
+   "*14.13",
+   "*14.15",
+   "*10.23"
+  ],
+  "extra_used": [
+   "*3.47",
+   "*10.11",
+   "*4.86",
+   "*10.27",
+   "*10.271",
+   "*4.36",
+   "*10.21",
+   "*10.281"
+  ],
+  "cited_unused": [
+   "*10.1"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "(2) is line (2) of *14.15 (qdescAt), with the same tacit step (*14.272's argument: *4.86, *10.27, *10.271, *4.36, *10.21, *10.281). In (4), (2) and (3) are joined on the product by *3.47 (and *4.22). The last line's '*10.1.23' is done by *10.11 and *10.23; *10.1 is not needed (probably *10.11.23 is meant)."
+ },
+ {
+  "id": "*14.17",
+  "page": 188,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.15",
+   "*10.11",
+   "*10.21",
+   "*10.1",
+   "*4.22",
+   "*13.15",
+   "*3.3",
+   "*10.23",
+   "*12.1"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*4.36",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "cites *12.1; takes [Reducibility S]; psi ranges over the predicative functions (Ty.pred1), psi!(ix)(phi x) has the smallest scope",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*12.1 gives x = b ==_x chi!x; lines (2)-(3) are written with that orientation (PM writes chi!x ==_x x = b), so *10.1 at b gives b = b == chi!b, read from right to left. (2) picks the factors of its hypothesis by *3.26, *3.27; the step from chi!(ix)(phi x) to (ix)(phi x) = b, which PM leaves tacit, is qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' is *3.27 with Comm (*2.04)."
+ },
+ {
+  "id": "*14.171",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.17",
+   "*10.1",
+   "*12.1",
+   "*13.15"
+  ],
+  "extra_used": [
+   "*10.22",
+   "*3.27",
+   "*3.26",
+   "*4.36",
+   "*4.3",
+   "*10.11",
+   "*10.21",
+   "*10.281",
+   "*2.27",
+   "*3.3",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "cites *12.1; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "In (1), the converse halves of *14.17's ==_psi are taken by *10.22 and *3.27 (qfiffMpr). In (2), *12.1 gives chi with x = b ==_x chi!x; the hypothesis is picked apart by *3.26, *3.27; chi!(ix)(phi x) is turned into (ix)(phi x) = b by qdescScope (*10.1, *4.36 with *4.3, *10.11.21, *10.281); '[*13.15]' detaches b = b by *2.27; chi is removed by Exp (*3.3), *10.11 and *10.23."
+ },
+ {
+  "id": "*14.18",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*10.11",
+   "*10.28",
+   "*10.35",
+   "*14.1",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*3.47",
+   "*2.08",
+   "*4.3",
+   "*3.3"
+  ],
+  "cited_unused": [
+   "Fact (*3.45)"
+  ],
+  "note": "",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor (*4.3). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3)."
+ },
+ {
   "id": "*14.2",
   "page": 189,
   "category": "assertion",
@@ -150,6 +741,7 @@
   ],
   "extra_used": [
    "*4.3",
+   "*10.281",
    "*10.11"
   ],
   "cited_unused": [],
@@ -164,7 +756,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*13.195 needs the factors b = a . F b; *14.101 gives F b : b = a, commuted under (Eb) by *4.3 (with *10.11.281). 'Id' (x = a . ==_x . x = a) is *4.2 generalized by *10.11."
+  "reason": "*13.195 needs the factors b = a . F b; *14.101 gives F b : b = a, commuted under (Eb) by *4.3 with *10.11.281. 'Id' (x = a . ==_x . x = a) is *4.2 generalized by *10.11."
  },
  {
   "id": "*14.201",
@@ -177,11 +769,12 @@
    "*13.15"
   ],
   "extra_used": [
+   "*10.28",
    "*3.27",
    "*2.04"
   ],
   "cited_unused": [],
-  "note": "*10.1 and [*13.15] act under (Eb) (*10.11.28)",
+  "note": "",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -192,7 +785,146 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04)."
+  "reason": "*10.1 and '[*13.15]' act under (Eb), by *10.11.28; '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04)."
+ },
+ {
+  "id": "*14.202",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*13.195"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*10.281",
+   "*13.16",
+   "*4.36",
+   "*4.86",
+   "*4.21",
+   "*10.271"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; the chain A == B == C == D is stated as A == B . B == C . C == D",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "First half (A == B): *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. 'The second half is proved in the same way': D == A by qidentDesc (*13.195 with *13.16, *4.3, *4.36). The links through C need A == C, which PM does not print: *13.16 under (x) (*4.86 with *4.21, *10.11.271)."
+ },
+ {
+  "id": "*14.203",
+  "page": 189,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.12",
+   "*14.201",
+   "*10.1",
+   "*5.33",
+   "*13.191",
+   "*10.22",
+   "*10.28",
+   "*10.35",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*10.11",
+   "*10.21",
+   "*3.47",
+   "*2.08",
+   "*3.22",
+   "*2.06",
+   "*3.27",
+   "*3.3",
+   "*10.27",
+   "*3.31",
+   "*3.26",
+   "*3.45",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second (*4.3)."
+ },
+ {
+  "id": "*14.204",
+  "page": 190,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.202",
+   "*10.11",
+   "*10.281",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "The first link of *14.202's chain is taken by *3.26."
+ },
+ {
+  "id": "*14.205",
+  "page": 190,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.202",
+   "*14.1"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*4.36",
+   "*10.281"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*14.202 is used end to end (its links taken by *3.26, *3.27; qfiffDescEq), on the first factor (*4.36), under (Eb) by *10.11.281."
  },
  {
   "id": "*14.21",
@@ -220,5 +952,531 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
   "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191)."
+ },
+ {
+  "id": "*14.22",
+  "page": 190,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.122",
+   "*4.71",
+   "*10.11",
+   "*10.281",
+   "*14.11",
+   "*14.101"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "In (1), the first link of *14.122's chain is taken by *3.26 and its second factor phi b by *3.27."
+ },
+ {
+  "id": "*14.23",
+  "page": 191,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.22",
+   "*3.26",
+   "*14.21"
+  ],
+  "extra_used": [
+   "*3.47",
+   "*2.08",
+   "*10.28"
+  ],
+  "cited_unused": [
+   "*10.5"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "PM notes (p. 191) that '*10.5, not only *3.26, is required', the scope being the whole product. The step from (Eb) : phi x . psi x ==_x x = b : phi b . psi b to (Eb) : ... : phi b is *3.26 on the second factor (*3.47 with Id, *2.08) carried under (Eb) by *10.11.28; *10.5 (distributing (Eb) over a product) does not give it."
+ },
+ {
+  "id": "*14.24",
+  "page": 191,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*4.24",
+   "*10.281",
+   "*14.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "the description's scope is the whole formal equivalence; *10.11 before *10.281 as in the pattern",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.241",
+  "page": 191,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.203",
+   "*3.3",
+   "*10.11",
+   "*10.21",
+   "*4.71",
+   "*13.191",
+   "*10.22",
+   "*14.202"
+  ],
+  "extra_used": [
+   "*3.27",
+   "*10.1",
+   "*13.16",
+   "*4.84",
+   "*10.271",
+   "*4.36",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; the description has the smallest scope y = (ix)(phi x)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*14.203's second factor is taken by *3.27 and instantiated at y and x by *10.1 (twice). '[*13.191]' needs y = x . ⊃_x . phi x where *13.191 gives x = y . ⊃_x . phi x: turned by *13.16 (with *4.84, *10.11.271), and acts on the first factor (*4.36). '[*10.22]' needs the factors in the other order (*4.3). '[*14.202]' is its third link (*3.27 twice). PM's last line is for one y under Hp; it is generalized by *10.11.21."
+ },
+ {
+  "id": "*14.242",
+  "page": 192,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.202",
+   "*14.15"
+  ],
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "The first link of *14.202's chain is taken by *3.26."
+ },
+ {
+  "id": "*14.25",
+  "page": 192,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.84",
+   "*10.27",
+   "*10.271",
+   "*13.191",
+   "*14.242",
+   "*10.11",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.26",
+  "page": 192,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.11",
+   "*10.311",
+   "*10.281",
+   "*13.195",
+   "*14.242",
+   "*10.11",
+   "*10.23",
+   "*14.25"
+  ],
+  "extra_used": [
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; the chain A == B == C is stated as A == B . B == C",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "The last line joins (3) with *14.25 (read from right to left) by Comp (*3.43)."
+ },
+ {
+  "id": "*14.27",
+  "page": 192,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.86",
+   "*4.21",
+   "*10.11",
+   "*10.27",
+   "*10.271",
+   "*14.202",
+   "*14.242",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "'[*14.202]' is used end to end (its links taken by *3.26, *3.27; qfiffDescEq)."
+ },
+ {
+  "id": "*14.271",
+  "page": 192,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.86",
+   "*10.11",
+   "*10.27",
+   "*10.271",
+   "*10.21",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.272",
+  "page": 193,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.86",
+   "*10.11",
+   "*10.21",
+   "*10.281",
+   "*14.101"
+  ],
+  "extra_used": [
+   "*10.27",
+   "*10.271",
+   "*4.36"
+  ],
+  "cited_unused": [
+   "*10.414",
+   "Fact (*3.45)"
+  ],
+  "note": "",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "The second line's '[*10.11.414]' takes (x) : phi x == x = b . == . psi x == x = b to phi x ==_x x = b . == . psi x ==_x x = b, which is *10.11.27 with *10.271 (as in *14.271's Dem.), not *10.414 (a formal equivalence ==_x, not an equivalence of the two (x)'s). 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃)."
+ },
+ {
+  "id": "*14.28",
+  "page": 193,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.15",
+   "*4.73",
+   "*10.11",
+   "*10.281",
+   "*14.1",
+   "*14.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "one Lean step per Dem. line; PM's Dem. eliminates the description once, with scope z = z, so the statement does too",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": ""
+ },
+ {
+  "id": "*14.31",
+  "page": 194,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.242",
+   "*4.37",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*4.31",
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*4.37 has the varied disjunct first; here it is second (*4.31). *10.23 needs (b) first (*10.11)."
+ },
+ {
+  "id": "*14.32",
+  "page": 194,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.242",
+   "*4.11",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]; stated with ⊃ after E!(ix)(phi x): the transcription prints ==, the hint gives the implication (as for *14.31, *14.33), and *30.13 cites *14.32 as an implication; the scan was not consulted",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*10.23 needs (b) first (*10.11)."
+ },
+ {
+  "id": "*14.33",
+  "page": 195,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.242",
+   "*4.85",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*10.23 needs (b) first (*10.11)."
+ },
+ {
+  "id": "*14.331",
+  "page": 195,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.84",
+   "*14.242",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*10.23 needs (b) first (*10.11)."
+ },
+ {
+  "id": "*14.332",
+  "page": 195,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.86",
+   "*14.242",
+   "*10.23",
+   "*14.11"
+  ],
+  "extra_used": [
+   "*4.21",
+   "*10.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "*4.86 has the varied member first; here it is second (*4.21, qiffCongrRImp). *10.23 needs (b) first (*10.11)."
+ },
+ {
+  "id": "*14.34",
+  "page": 195,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*14.1",
+   "*10.35"
+  ],
+  "extra_used": [
+   "*4.32",
+   "*4.3",
+   "*4.36",
+   "*10.281"
+  ],
+  "cited_unused": [],
+  "note": "without E!(ix)(phi x)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
+   "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (qimpIffTrans, qimpIffTransR, qimpIffTransL, qimpImpTrans, qimpImpTransR, qimpIffSymm: Comp *3.43, *3.33, *2.02 or *2.05, and *4.21 for reading such a line from right to left)"
+  ],
+  "reason": "PM's middle line (Eb) : p : phi x ==_x x = b : chi b is rearranged to the scope p . chi b of the last line by *4.32, *4.3 (with *4.36), under (Eb) by *10.11.281."
  }
 ]
