@@ -16,35 +16,40 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # for `common`, 
 from common import DATA, STAR_LEDGERS, ledger
 
 README = DATA / "README.md"
-ENTRY = re.compile(r"`(\w+)` (\d+)(?: \((\d+) assertions, (\d+) rules\)| \((the primitive propositions))?")
+ENTRY = re.compile(r"`(\w+)` (\d+)(?: \(([^)]*)\))?")
+# The parts of an entry's parenthesis, "51 assertions, 2 rules", and the ledger category of each word.
+PART = re.compile(r"(\d+) (assertions|rules|primitive propositions|rows on types)")
+CATEGORY = {"assertions": "assertion", "rules": "rule/prose", "primitive propositions": "primitive",
+            "rows on types": "type"}
 
 
 def rows_per_file():
-    """The sentence's entries: {name: (rows, assertions, rules, whether all rows are primitive)}."""
+    """The sentence's entries: {name: (rows, {category: count}, whether all rows are primitive)}."""
     text = " ".join(README.read_text(encoding="utf-8").split())
-    m = re.search(r"Rows per file: (.*?)\. There is no ledger", text)
+    m = re.search(r"Rows per file: (.*?)\. \(`tests/test_data_readme\.py`", text)
     if not m:
         raise AssertionError("data/README.md: the sentence 'Rows per file: ...' was not found")
     out = {}
     for e in ENTRY.finditer(m.group(1)):
-        name, n, a, r, p = e.groups()
-        out[name] = (int(n), a and int(a), r and int(r), p is not None)
+        name, n, paren = e.groups()
+        parts = {CATEGORY[w]: int(k) for k, w in PART.findall(paren or "")}
+        out[name] = (int(n), parts, (paren or "").startswith("the primitive propositions"))
     return out
 
 
 class DataReadmeCounts(unittest.TestCase):
     def test_every_ledger_listed(self):
-        self.assertEqual(sorted(rows_per_file()), sorted(["replay2"] + STAR_LEDGERS))
+        self.assertEqual(sorted(rows_per_file()), sorted(["replay2"] + STAR_LEDGERS + ["star9f"]))
 
     def test_counts(self):
-        for name, (n, a, r, p) in rows_per_file().items():
+        for name, (n, parts, p) in rows_per_file().items():
             rows = ledger(name)
             c = Counter(row.get("category") for row in rows)
             with self.subTest(name):
                 self.assertEqual(n, len(rows), "rows")
-                if a is not None:
-                    self.assertEqual((a, r), (c["assertion"], c["rule/prose"]), "assertions, rules")
-                    self.assertEqual(a + r, n, "assertions + rules")
+                if parts:
+                    self.assertEqual(parts, {k: c[k] for k in parts}, "rows per category")
+                    self.assertEqual(sum(parts.values()), n, "the categories add up to the rows")
                 if p:
                     self.assertEqual(c["primitive"], n, "primitive propositions")
 

@@ -1,7 +1,7 @@
 -- Citations against proof terms. Run from the repository root with
 -- `lake env lean Checks/LedgerCheck.lean`.
 --
--- Two checks, both reading which PM propositions a proof uses from its proof term: the constants of
+-- Three checks, all reading which PM propositions a proof uses from its proof term: the constants of
 -- its value, followed transitively through helper declarations under `PM` (`qsyl`, `qandI`, the
 -- `Trans` instances, private lemmas, ...), stopping at PM propositions (`QL.tA_B` for ✱A·B in ✱2–✱5,
 -- `qA_B` for ✱A·B from ✱9 on; `q10_11_28` is ✱10·11 and ✱10·28; a suffix as in `q14_21_neg` is a
@@ -28,7 +28,9 @@
 --    Uses awaiting a decision on their row can be put in tests/ledger_unlisted_uses.txt (empty
 --    now); they are reported, not failed. A use not in that file fails, and so does an entry of
 --    the file that no longer occurs (remove it when the row is fixed).
--- Either check fails (an error) on any disagreement.
+-- 3. The ledger data/star9f_ledger.json of ✱9's own method (PM/Found9), as check 2 with ✱9's names
+--    (below, before the third `#eval`).
+-- Each check fails (an error) on any disagreement.
 import Lean
 import PM
 open Lean Elab Command
@@ -262,3 +264,85 @@ open LedgerCheck
     logError m!"{x}: listed in extra_used or glue, but the proof uses it only to read a ≡ as ⊃ outside a chain (tacit)"
   for (id, u) in stale do
     logError m!"{id} {u} is in tests/ledger_unlisted_uses.txt but no longer found; remove the line"
+
+/-! 3. The ledger of ✱9's own method, data/star9f_ledger.json (PM/Found9): the same check as 2, with
+  ✱9's names. A row `*9.N` (`*10.N`) is `PM.F9.f9_N` (`PM.F9.f10_N`). The propositions a proof can use
+  are the ✱9 theorems `PM.F9.fA_B` and `PM.F9.eA_B` (✱A·B for elementary propositions), the ✱2–✱5
+  theorems `PM.tA_B` that `elift` carries to elementary propositions, and the primitive propositions
+  of `Thm9`: ✱1·2–✱1·6 (`taut` … `sum`), ✱9·1 (`ex1`), ✱9·11 (`ex2`), ✱9·13 (`gen`). ✱9·12 (`mp`) is
+  the rule of inference and, like ✱1·1 in check 2, is not listed. `elift` itself is not followed: it
+  replays a ✱1–✱5 derivation, whose proposition the row lists. -/
+namespace LedgerCheck
+
+/-- The ledger ids a declaration stands for in ✱9's method; empty if it is not a ✱9 proposition. -/
+def stars9Of (n : Name) : Array String :=
+  let prims : List (String × String) := [("taut", "*1.2"), ("add", "*1.3"), ("perm", "*1.4"),
+    ("assoc", "*1.5"), ("sum", "*1.6"), ("ex1", "*9.1"), ("ex2", "*9.11"), ("gen", "*9.13")]
+  match n with
+  | .str (.str (.str (.str .anonymous "PM") "F9") "Thm9") c =>
+      ((prims.lookup c).map (#[·])).getD #[]
+  | .str (.str (.str .anonymous "PM") "F9") s =>
+      if s.startsWith "f" || s.startsWith "e" then starsOf ((`PM).str ("q" ++ (s.drop 1).toString))
+      else #[]
+  | .str (.str .anonymous "PM") s =>
+      if s.startsWith "t" then starsOf ((`PM).str ("q" ++ (s.drop 1).toString)) else #[]
+  | _ => #[]
+
+/-- The declaration of ledger id `*A.B` in ✱9's method. -/
+def declOf9 (id : String) : Name :=
+  match ((id.drop 1).toString.splitOn ".") with
+  | [a, b] => (`PM.F9).str s!"f{a}_{b}"
+  | _ => .anonymous
+
+/-- The ✱9 propositions `c`'s value reaches through helpers, as `reachProps` does for check 2. -/
+partial def reachProps9 (c : Name) : StateT (Std.HashMap Name (Array Name)) CoreM (Array Name) := do
+  if let some r := (← get).get? c then return r
+  modify (·.insert c #[])
+  let env ← getEnv
+  let mut out : Array Name := #[]
+  if let some ci := env.find? c then
+    if let some v := ci.value? (allowOpaque := true) then
+      for d in v.getUsedConstants do
+        if d == c then continue
+        if !(stars9Of d).isEmpty then
+          unless out.contains d do out := out.push d
+        else if underPM d && !isAux env d && d != `PM.F9.elift then
+          for e in ← reachProps9 d do
+            unless out.contains e do out := out.push e
+  modify (·.insert c out)
+  return out
+
+end LedgerCheck
+
+#eval show CommandElabM Unit from do
+  let env ← getEnv
+  let path := "data/star9f_ledger.json"
+  let j ← match Json.parse (← IO.FS.readFile path) with
+    | .ok j => pure j
+    | .error e => throwError "{path}: {e}"
+  let some arr := j.getArr?.toOption | throwError "{path}: not an array"
+  let mut rows : Nat := 0
+  let mut bad : Array String := #[]
+  let mut missing : Array String := #[]
+  let mut notStated : Nat := 0
+  for r in arr do
+    let some id := (r.getObjValAs? String "id").toOption | throwError "{path}: row without id"
+    let c := declOf9 id
+    unless env.contains c do
+      -- ✱9·14, ✱9·15, ✱9·131, ✱9·6–✱9·63 are built into the syntax and not stated
+      if (r.getObjValAs? String "method").toOption == some "not stated" then
+        notStated := notStated + 1
+      else
+        missing := missing.push s!"{id} ({c})"
+      continue
+    rows := rows + 1
+    let listed := (["cited_used", "extra_used", "glue", "tacit"].toArray.flatMap (strs r ·)).flatMap
+      idsOfEntry |>.push id
+    let used ← liftCoreM ((reachProps9 c).run' {})
+    for d in used do
+      for u in (stars9Of d).filter (!listed.contains ·) do
+        let line := s!"{id} {u}  # {d}"
+        unless bad.contains line do bad := bad.push line
+  logInfo m!"✱9 ledger: {rows} rows checked against their proofs ({notStated} rows not stated, built into the syntax); {bad.size} propositions used but not listed"
+  unless missing.isEmpty do logError m!"{path}: rows with no declaration of that name: {missing}"
+  for b in bad do logError m!"not listed in its ledger row: {b}"

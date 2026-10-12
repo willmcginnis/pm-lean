@@ -55,7 +55,7 @@ and the labels in [docs/FIDELITY.md](docs/FIDELITY.md). When you add or change a
 ```
 lake build                       # no errors
 lake env lean AxiomCheck.lean    # the new theorems report "does not depend on any axioms"
-lake env lean AllAxioms.lean     # still 25 declarations using an axiom, none of them a PM derivation
+lake env lean AllAxioms.lean     # still 33 declarations using an axiom, none of them a PM derivation
 lake env lean RedCheck.lean      # 0 disagreements between signatures and proofs
 lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of all four styles
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines

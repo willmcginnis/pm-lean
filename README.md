@@ -15,6 +15,15 @@ of an embedded proof system. Every PM theorem here is derived from those rules a
 the axiom of reducibility (✱12·1, ✱12·11). Lean's own logic checks the derivations;
 it is not used to prove PM's theorems directly.
 
+PM gives two ways of founding the theory of apparent variables, ✱9's and ✱10's (p. 144).
+The repository is built on ✱10's. Beside it, `PM/Found9/` builds ✱9's own method from
+✱9's primitive propositions and proves ✱9·2–✱9·52 along PM's lines. The theorem
+`star9_iff_star10` states that the two agree. Every ✱9 theorem is a ✱10 theorem, given a
+variable of every type. The converse holds given ✱1·2–✱1·6 for every ✱9 proposition, which
+is PM's claim on p. 142 and is not proved: it is checked for one apparent variable per letter,
+67 of 70 cases. In a structure with no individuals, ✱9's method asserts an instance of ✱9·1
+that is false there; ✱10's is sound in every structure. Details: [docs/STAR9_FOUNDATION.md](docs/STAR9_FOUNDATION.md).
+
 The proofs follow PM's own: one Lean line per line of PM's *Dem.*, or one step per
 proposition of its bracketed hint. A ledger records, for each proposition, anything a
 proof needs that PM does not cite.
@@ -42,6 +51,7 @@ axiom of reducibility they derive the same theorems (row B4). What comes next is
 Vols II and III are not started.
 Per-chapter tables, milestones and the units counted: [docs/PROGRESS.md](docs/PROGRESS.md).
 The two ✱10 assertions not counted (✱10·1, ✱10·12) are primitive rules here.
+✱9 is counted by ✱10's method; ✱9 by its own method (`PM/Found9/`) is not counted.
 
 Not yet done:
 
@@ -56,9 +66,10 @@ Not yet done:
 - No `sorry`, no `native_decide`, no added axioms.
 - Every PM theorem, and the ✱1–✱5 completeness theorem, reports
   "does not depend on any axioms" under `#print axioms`.
-- An exhaustive check finds 25 declarations that use Lean's standard axioms.
-  None is a PM derivation: they are compiler-generated lemmas, three
-  propositional metatheorems, and a general classical model.
+- An exhaustive check finds 33 declarations that use Lean's standard axioms.
+  None is a PM derivation: they are compiler-generated lemmas (8 of them
+  for the syntax of ✱9's method), three propositional metatheorems, and a
+  general classical model.
   Details: [docs/VERIFICATION.md](docs/VERIFICATION.md).
 
 The limits matter as much
@@ -78,9 +89,9 @@ Install the Lean toolchain named in `lean-toolchain` with
 [elan](https://github.com/leanprover/elan). There are no other dependencies.
 
 ```
-lake build                      # about 17 s from clean
-lake env lean AxiomCheck.lean   # 821 of 825 selected declarations use no axioms
-lake env lean AllAxioms.lean    # every declaration; lists the 25 that use one
+lake build                      # builds and checks every file
+lake env lean AxiomCheck.lean   # 1010 of 1017 theorems and models use no axioms
+lake env lean AllAxioms.lean    # every declaration; lists the 33 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
 python3 data/fidelity_counts.py # fidelity counts from the ledgers
@@ -96,6 +107,7 @@ The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION
 | `PM.lean`, `PM/Vol1.lean` | entry points |
 | `PM/Basic.lean`, `PM/Replay*.lean` | ✱1–✱5 |
 | `PM/Quant.lean`, `PM/Star10.lean`, `PM/Star11.lean` | ✱9–✱11 |
+| `PM/Found9/` | ✱9 by its own method, and its agreement with ✱10 |
 | `PM/Star12.lean` … `PM/Star21.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱21, rules, styles of predicativity |
 | `PM/Models/` | the models: soundness, consistency, counter-models |
 | `*.lean` at the root, `Checks/` | the checks |

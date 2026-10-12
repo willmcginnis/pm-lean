@@ -145,20 +145,35 @@ formula q, `QThm S q ↔ Thm9 S q.toF9`. It assumes that every type has a variab
 
 ## 8. Open questions
 
-1. `Rep` (§6): prove it, refute it, or leave the agreement conditional.
+1. `Rep` (§6): prove it, refute it, or leave the agreement conditional. *As it stands:* the agreement
+   is stated conditional on `Rep`; a normal-form proof of `Rep` is listed as a next item in
+   [ROADMAP.md](ROADMAP.md).
 2. The three ✱1·6 cases of §7: do ✱9's primitives prove them? If not, PM's claim on p. 142 fails for
-   ✱9's method as formalized here, already for one apparent variable per letter.
+   ✱9's method as formalized here, already for one apparent variable per letter. *As it stands:* an
+   open finding ([PM_CLAIMS.md](PM_CLAIMS.md), A28, partly checked), not a failure of PM's claim, since
+   no proof that they are underivable is given.
 3. The order of quantifiers for longer prefixes (§3) is a reading. Another reading of "repeated for
    successive types" (e.g. one in which each stage adds one apparent variable) would give a different
-   `PF.or` and possibly different answers to 1 and 2.
+   `PF.or` and possibly different answers to 1 and 2. *As it stands:* (x) before (∃x), and among
+   quantifiers of the same kind the left side's first, the order PM's own last lines of ✱9·3 and ✱9·31
+   use (§3). The three cases of 2 do not depend on it: the order there is fixed by ✱9·07.
+4. ✱9's comprehension rule takes a ✱10 formula, because the styles of predicativity (`PM/Pred/`) are
+   written for ✱10's formulas (§4). *As it stands:* kept; a style written for ✱9's propositions would
+   let the rule take a ✱9 function directly.
 
 ## 9. Measurements
 
-- New files: PM/Found9/*.lean (1156 lines with PM/Found9.lean), data/star9f_ledger.json; PM.lean imports
-  PM/Found9.lean. No existing file changed otherwise. **[MEAS]**
+- Files: PM/Found9/*.lean (1158 lines with PM/Found9.lean), data/star9f_ledger.json; PM.lean imports
+  PM/Found9.lean. No file of ✱10's foundation was changed for it. **[MEAS]**
 - Each PM/Found9 file checks in under 3 s (PM/Found9/Simul.lean, the slowest, 2.3 s). **[MEAS]**
 - `AllAxioms.lean`: 33 declarations use an axiom, against 25 before. The 8 new ones are Lean's
   generated `injEq` lemmas for the constructors of `EF` (5) and `PF` (3), as for every inductive type
   with data. No theorem of PM/Found9 uses an axiom. **[MEAS]**
-- `AxiomCheck.lean` is unchanged: its generator lists files by name and does not include PM/Found9.
-  `AllAxioms.lean` covers them. **[MEAS]**
+- `AxiomCheck.lean` prints every public theorem of PM/Found9 (its generator globs every file under PM/);
+  each reports "does not depend on any axioms". **[MEAS]**
+- `Checks/LedgerCheck.lean`, check 3, checks data/star9f_ledger.json against the proofs: every ✱9
+  proposition, ✱2–✱5 theorem (through `elift`) and primitive of `Thm9` a row's proof uses is listed in
+  the row. 36 rows, 0 disagreements; the 7 rows of ✱9·14, ✱9·15, ✱9·131, ✱9·6–✱9·63 have no
+  declaration. **[MEAS]**
+- RedCheck and StyleCheck read the `q…` theorems of ✱10's method only; the `PM.F9.f…` theorems are not
+  among their 485 PM propositions. **[MEAS]**

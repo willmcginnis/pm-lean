@@ -5,6 +5,17 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-12
 
+- **✱9 by its own method** (`PM/Found9/`, docs/STAR9_FOUNDATION.md): ✱9's primitive propositions as
+  `Thm9 S`, ✱9·2–✱9·52 along PM's lines, ✱10's primitive propositions proved in ✱9. `star9_iff_star10`:
+  every ✱9 theorem is a ✱10 theorem (given a variable of every type), and every ✱10 theorem is a ✱9
+  theorem given `Rep`, ✱1·2–✱1·6 for every ✱9 proposition (PM's claim on p. 142, not proved). p. 142 for
+  one apparent variable per letter: 67 of 70 cases; the three ✱1·6 cases with p universal and q
+  existential are open. Without an individual ✱9's method asserts a false instance of ✱9·1
+  (`thm9_unsound_empty`); ✱10's is sound in every structure. PM_CLAIMS: new rows A28, A29; A10, A12
+  checked, A11 (use) checked, A15, A17 partly checked; 77 rows. Ledger `data/star9f_ledger.json`, checked
+  by `Checks/LedgerCheck.lean` (check 3). AllAxioms: 33 declarations use an axiom (was 25), the 8 new
+  ones Lean's `injEq` lemmas of ✱9's syntax; no PM derivation uses one. AxiomCheck now prints every
+  public theorem of every file under PM/ (1017).
 - **PM's claim of p. 200 checked** (docs/PM_CLAIMS.md, D1): "every proposition about a class expresses an
   extensional property of the determining function of the class". `ClsExpr` (PM/Star20.lean) is the
   expressions of a class that PM's notation forms, and `clsExpr_ext` proves each of them extensional, so the

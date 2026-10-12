@@ -41,6 +41,13 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   ✱10·121, ✱10·122 and ✱10·221 concern significance and are built into the syntax. The proofs follow PM's
   lines; each docstring names the steps PM leaves tacit. Each theorem holds at every type of its apparent
   variable.
+- `PM/Found9/` (namespace `PM.F9`): ✱9 by its own method, beside the foundation above and changing none of
+  it ([STAR9_FOUNDATION.md](STAR9_FOUNDATION.md)). Elementary formulas `EF` and ✱9 propositions `PF`, with
+  ∼ and ∨ of quantified propositions computed by ✱9·01–✱9·08 (`Syntax.lean`); ✱9's primitive propositions
+  as the inductive `Thm9 S`, for every `Sys` (`System.lean`); ✱9·2–✱9·52 along PM's lines and ✱10·01,
+  ✱10·1, ✱10·11, ✱10·12 in ✱9 (`Base.lean`, `Star9.lean`); p. 142 for one apparent variable per letter
+  (`Simul.lean`); the agreement with ✱10's method, `star9_iff_star10`, with ✱9's soundness and its
+  failure without an individual (`ToStar10.lean`, `FromStar10.lean`, `Equiv.lean`).
 - `PM/Chain.lean`: PM's displayed chains as Lean `calc` blocks.
   - `A ≡ B` and `A ⊃ B` are asserted lines; `A ≡[H] B` and `A ⊃[H] B` are lines under the hypothesis H
     (PM's "Hp . ⊃ : A . ≡ . B . [✱x] ≡ . C").

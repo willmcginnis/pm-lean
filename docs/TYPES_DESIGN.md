@@ -576,22 +576,23 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 825 names; 821 report no axioms. The other 4 belong to the classical collapse model
-(below). Every PM theorem (✱2–✱5 and the ✱9–✱21 `q…` theorems), `complete`, `qsound`, `QThm.mono`,
+`AxiomCheck.lean`: 1017 names, every public theorem under `PM/`; 1010 report no axioms. The other 7 are the
+three propositional metatheorems and four declarations of the classical collapse model (below). Every PM
+theorem (✱2–✱5, the ✱9–✱21 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 1693 declarations under `PM` and all 31 private declarations of the PM modules
-(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 25 use an axiom:
+`AllAxioms.lean`: all 2018 declarations under `PM` and all 31 private declarations of the PM modules
+(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 33 use an axiom:
 
 | Declarations | Axioms | Why |
 |---|---|---|
 | `classicalAll`, `classicalAll_spec`, `QModel.classical` | propext, Classical.choice, Quot.sound | the general collapse model, kept: classical quantifiers over arbitrary function spaces (`Classical.propDecidable`) |
 | `consistent_collapse`, `consistent_collapse_of_style` | propext, Classical.choice, Quot.sound | consistency evaluated in the classical collapse model (the axiom-free consistency proofs are `consistent`, `consistent_of_style`) |
 | `PM.sound`, `PM.not_thm_of_countermodel`, `PM.star1_4_variant_not_a_theorem` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
-| `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel` (15), `instReprF`, `instReprF.repr` | propext | compiler-generated |
+| `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel`, and of ✱9's syntax `F9.EF`, `F9.PF` (23), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
 No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` anywhere (checked by
 search).
@@ -707,7 +708,7 @@ search).
      functions (F4).
    - Checks: RedCheck and AllAxioms need nothing new. `Sys` gets a third flag, so every `Sys` literal
      changes (PM/Systems.lean, StyleCheck.lean). The new constructors of `Ty` and `QF` add two
-     compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 25.
+     compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 33.
 
    *Size.* About 300–500 Lean lines of infrastructure across about twelve files, plus about 40 for
    ✱14·3 itself. That is less than ✱20 (1089 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,

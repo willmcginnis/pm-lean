@@ -8,6 +8,7 @@
 | `replay_ledger.json` | ✱2–✱5, first ledger: all 188 propositions | by hand, with the proofs |
 | `replay2_ledger.json` | ✱2–✱5, second ledger: the 85 proofs of `PM/Replay2.lean` | by hand, with the proofs |
 | `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
+| `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
 | `fidelity_counts.py` | the three fidelity counts per chapter, and consistency checks on the ledgers | — |
 
 The meaning of the labels is in [docs/FIDELITY.md](../docs/FIDELITY.md); how the progress tables use these
@@ -72,7 +73,7 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 |---|---|
 | `id` | `*N.M` |
 | `page` | page of the 1910 print (`star*` only) |
-| `category` | `assertion`, `rule/prose` or `primitive` (`star*` only) |
+| `category` | `assertion`, `rule/prose` or `primitive` (`star*` only); `type` in `star9f` for ✱9·131 and ✱9·6–✱9·63, which are Lean's typing and not stated |
 | `method` | how the Lean proof is built (`explicit`: a term following PM's lines) |
 | `pm_text` | what PM prints to follow: `dem`, `hint` or `none` |
 | `cited_used`, `cited_unused` | PM's citations that the proof uses, and does not use |
@@ -85,8 +86,8 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 
 Rows per file: `replay2` 85; `star11` 55 (51 assertions, 4 rules); `star12` 2 (the primitive propositions
 ✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 53 (51 assertions, 2 rules); `star21` 46 (44
-assertions, 2 rules). There is no ledger for ✱9–✱10. (`tests/test_data_readme.py` checks these counts
-against the files.)
+assertions, 2 rules); `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) There is no ledger for ✱9–✱10 by
+✱10's method, the one the rest of the repository builds on; `star9f` is ✱9 by its own method.
 
 ## Overlap, precedence and how to total
 
@@ -106,6 +107,12 @@ against the files.)
 - **✱12.** Its two rows are primitive propositions, rules of the system: neither assertions nor proved
   theorems.
 - **✱14.** One row per numbered proposition; the variant `q14_21_neg` has no row of its own.
+- **`star9f`.** ✱9 by ✱9's own method (`PM.F9.f9_…`), a second foundation beside the one the other files
+  use; its 4 rows for ✱10 are ✱10's propositions proved in ✱9. Its primitive rows (✱9·1–✱9·15) and its
+  rows on types (✱9·131, ✱9·6–✱9·63, built into the syntax and not stated) are not assertions, and
+  [docs/PROGRESS.md](../docs/PROGRESS.md) does not count it (it counts ✱9 by ✱10's method).
+  `Checks/LedgerCheck.lean`, check 3, checks its rows against the proofs; `data/fidelity_counts.py` does not
+  read it.
 - Each `star*` file covers one chapter, and the files do not overlap.
 
 To recompute: `python3 data/fidelity_counts.py` (the three fidelity counts) and `python3 scripts/progress.py`

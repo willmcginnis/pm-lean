@@ -43,7 +43,9 @@ lean_check StyleCheck.lean 'no parameter S : Sys: 0 ' 'failing in Sys.full of so
 if [ -z "${SKIP_SLOW:-}" ]; then
   lean_check ClauseSearch.lean 'disagreements: 0"'
 fi
-lean_check Checks/LedgerCheck.lean '; 0 citations not used by the proof'
+lean_check Checks/LedgerCheck.lean '; 0 citations not used by the proof' \
+  'ledgers: [0-9]+ rows checked against their proofs; 0 propositions used but not listed' \
+  '✱9 ledger: [0-9]+ rows checked .*; 0 propositions used but not listed'
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"

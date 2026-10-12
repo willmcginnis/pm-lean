@@ -390,7 +390,8 @@
    "*9.03"
   ],
   "extra_used": [
-   "*9.2"
+   "*9.2",
+   "*2.08"
   ],
   "cited_unused": [],
   "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
@@ -401,7 +402,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp), after *9.2 for that function (allE), both proved in PM/Found9/Base.lean.",
+  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp), after *9.2 for that function (allE), both proved in PM/Found9/Base.lean. allE gets *9.2 for that function from ai, which uses Id (*2.08) for its elementary matrix.",
   "glue": [],
   "glue_kind": []
  },
