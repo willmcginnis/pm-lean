@@ -86,8 +86,9 @@ scoped notation:50 A:51 " ⊃[" H "] " B:51 => QImpImp S H A B
 
 /-! ## Joining two lines (the `Trans` instances `calc` uses) -/
 
-/-- `A ≡ B`, `B ≡ C` give `A ≡ C` (✱4·22, tacit: p. 123). -/
-instance transIff : @Trans (QF V) (QF V) (QF V) (QIff S) (QIff S) (QIff S) := ⟨qiffTrans⟩
+/-- `A ≡ B`, `B ≡ C` give `A ≡ C` (✱4·22, tacit: p. 123; the two lines joined by ✱3·2). -/
+instance transIff : @Trans (QF V) (QF V) (QF V) (QIff S) (QIff S) (QIff S) :=
+  ⟨fun h1 h2 => QThm.mp (qandI h1 h2) (QL.t4_22 _ _ _)⟩
 /-- `A ⊃ B`, `B ⊃ C` give `A ⊃ C` (Syll, tacit: ✱2·31, pp. 109–110). -/
 instance transImp : @Trans (QF V) (QF V) (QF V) (QImp S) (QImp S) (QImp S) := ⟨qsyl⟩
 /-- `A ≡ B`, `B ⊃ C` give `A ⊃ C` (the ≡ read as ⊃ by ✱3·26, then Syll). -/

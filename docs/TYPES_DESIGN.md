@@ -647,7 +647,7 @@ search).
    question covers ✱21·03 (Rel), ✱21·08–✱21·083 (relations of relations, classes of relations) and
    ✱21·4, ✱21·41.
 7. **Which fidelity counts to show.** OPEN, for Will. NEEDS WILL: which count columns to show. The
-   `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱3·43, ✱2·02,
+   `fidelity` field counts the steps that join the lines of a chain under a hypothesis (✱4·22, ✱3·43, ✱2·02,
    ✱2·83, ✱2·05, ✱3·26: `glue` of kind `chain`) as tacit and reordering or carrying a step under (∃x)
    (`order`, `under-exists`) as extra. That is a choice, so README.md (Fidelity) shows three columns per
    chapter from `data/fidelity_counts.py`: strict (all glue extra), as recorded, and all glue tacit.

@@ -17,3 +17,7 @@ for ch in ["star11", "star13", "star14", "star20", "star21"]:
     for r in rows:
         if (r["fidelity"] == "pm-lines") != (not r["extra_used"]):
             print(f"  {r['id']}: fidelity {r['fidelity']} but extra_used {r['extra_used']}")
+        chain = {g for g, k in zip(r["glue"], r["glue_kind"]) if k == "chain"}
+        clash = set(r["extra_used"]) & (chain | set(r["tacit"]))
+        if clash:
+            print(f"  {r['id']}: extra_used lists tacit steps or chain glue {sorted(clash)}")
