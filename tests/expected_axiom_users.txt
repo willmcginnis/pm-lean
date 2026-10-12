@@ -1,0 +1,28 @@
+# The declarations AllAxioms.lean reports as using an axiom, with their axioms, sorted by name.
+# tests/test_axiom_users.py compares the report with this list; change it only deliberately, and say
+# why in the commit (docs/TYPES_DESIGN.md explains each entry).
+PM.F.neg.injEq propext
+PM.F.or.injEq propext
+PM.F.var.injEq propext
+PM.QF.all.injEq propext
+PM.QF.app1.injEq propext
+PM.QF.app2.injEq propext
+PM.QF.atom.injEq propext
+PM.QF.neg.injEq propext
+PM.QF.or.injEq propext
+PM.QModel.classical Classical.choice Quot.sound propext
+PM.QModel.mk.injEq propext
+PM.Sh.prod.injEq propext
+PM.Style.mk.injEq propext
+PM.Sys.mk.injEq propext
+PM.Ty.fn1.injEq propext
+PM.Ty.fn2.injEq propext
+PM.classicalAll Classical.choice Quot.sound propext
+PM.classicalAll_spec Classical.choice Quot.sound propext
+PM.consistent_collapse Classical.choice Quot.sound propext
+PM.consistent_collapse_of_style Classical.choice Quot.sound propext
+PM.instReprF propext
+PM.instReprF.repr propext
+PM.not_thm_of_countermodel Quot.sound propext
+PM.sound Quot.sound propext
+PM.star1_4_variant_not_a_theorem Quot.sound propext
