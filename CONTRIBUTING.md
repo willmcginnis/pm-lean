@@ -66,5 +66,5 @@ generated files (`PM/Statements.lean`, `PM/QuantLift.lean`, `AxiomCheck.lean`) b
 [scripts/README.md](scripts/README.md).
 
 By contributing you agree that your contribution is licensed under the repository's MIT License, except
-that contributions to `docs/FORMALIZATION_COMPARISON.md` are dedicated to the public domain under CC0 1.0,
-as that document is.
+that contributions to `docs/FORMALIZATION_COMPARISON.md` are dedicated to the public domain under CC0 1.0
+(`LICENSE-CC0`), as that document is.

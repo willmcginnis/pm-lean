@@ -138,7 +138,9 @@ and the book for PM itself.
 ## License
 
 Code, ledgers and documentation are under the MIT License ([LICENSE](LICENSE)),
-except [docs/FORMALIZATION_COMPARISON.md](docs/FORMALIZATION_COMPARISON.md), which is CC0 1.0.
+with one exception: [docs/FORMALIZATION_COMPARISON.md](docs/FORMALIZATION_COMPARISON.md)
+is dedicated to the public domain under CC0 1.0 ([LICENSE-CC0](LICENSE-CC0)).
+LICENSE-CC0 covers that file only.
 The files in `data/` derived from Project Gutenberg's ebooks reproduce
 public-domain text; see [data/README.md](data/README.md).
 *Principia Mathematica* (1910–1913) is in the public domain in the USA.
