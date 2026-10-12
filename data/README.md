@@ -84,8 +84,9 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 | `scan_check` | the result of checking the 1910 print (3 rows of `replay2_ledger.json`) |
 
 Rows per file: `replay2` 85; `star11` 55 (51 assertions, 4 rules); `star12` 2 (the primitive propositions
-✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 51 (49 assertions, 2 rules); `star21` 44 (42
-assertions, 2 rules). There is no ledger for ✱9–✱10.
+✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 53 (51 assertions, 2 rules); `star21` 46 (44
+assertions, 2 rules). There is no ledger for ✱9–✱10. (`tests/test_data_readme.py` checks these counts
+against the files.)
 
 ## Overlap, precedence and how to total
 

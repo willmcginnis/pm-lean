@@ -15,6 +15,7 @@ request. Each test was checked to fail when its mistake is put back.
 | Claims stated more strongly than proved (now `styles_equiv`, `realPhi_every_system`, `second_clause_iff_lowestOrder`, ...) | `Checks/PinnedStatements.lean` |
 | (the list of axiom users must change only deliberately) | `test_axiom_users.py` against `expected_axiom_users.txt` |
 | A count of proved propositions included primitive propositions | `test_proved_counts.py`: the docs' counts per chapter equal the ledgers' |
+| data/README.md gave the ✱20 and ✱21 ledgers 51 and 44 rows; they have 53 and 46 | `test_data_readme.py`: the rows (and assertions and rules) data/README.md gives for each ledger file equal the file's |
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built.
