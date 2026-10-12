@@ -1,0 +1,67 @@
+# Scripts
+
+Python 3 (standard library only). Run from the repository root; every script finds the root from its own
+path. Building the Lean project needs none of them: their outputs are committed.
+
+| Script | Reads | Writes |
+|---|---|---|
+| `parse_vol1.py HTML` | Project Gutenberg eBook #78050, HTML edition | `data/vol1.jsonl` |
+| `vol1_items.py` | `data/vol1.jsonl` | `data/vol1_items.json` |
+| `gen_lean.py` | `data/vol1.jsonl` | `PM/Statements.lean` |
+| `gen_quant_lift.py` | `PM/Statements.lean`, `PM/Replay.lean`, `PM/Replay2.lean` | `PM/QuantLift.lean` |
+| `gen_axiomcheck.py` | the PM source files | `AxiomCheck.lean` |
+| `progress.py` | the PM files and ledgers at a git commit; `data/vol1_items.json`, `data/vol2_labels.json` | the tables of `docs/PROGRESS.md` (with `--update`) |
+
+## Getting the source texts
+
+The ebooks are not in this repository. To regenerate from scratch, download the HTML editions from Project
+Gutenberg:
+
+- Vol I, eBook #78050: https://www.gutenberg.org/cache/epub/78050/pg78050-images.html
+- Vol II, eBook #78255 (only for `data/vol2_labels.json`):
+  https://www.gutenberg.org/cache/epub/78255/pg78255-images.html
+
+The committed files were made from copies with these SHA-256 sums:
+
+```
+080479efccf705a165c5c7699ea1c66d239c7d639db0a6c12e8a2087ebf44ec9  pg78050-images.html
+617238413ccc1dc622a05645554f4aaeb34cbdaf88834e89cbafa7f268dc32cb  pg78255-images.html
+```
+
+Ebooks are sometimes revised after release. If your download differs, the parse may differ too. Compare the
+outputs with `git diff`.
+
+## Regenerating the statements
+
+```
+python3 scripts/parse_vol1.py path/to/pg78050-images.html   # data/vol1.jsonl: records 3449
+python3 scripts/vol1_items.py                               # data/vol1_items.json: items 3449
+python3 scripts/gen_lean.py                                 # PM/Statements.lean: statements 193
+python3 scripts/gen_quant_lift.py                           # PM/QuantLift.lean: 188 theorems lifted
+python3 scripts/gen_axiomcheck.py                           # AxiomCheck.lean: 796 names
+git diff --stat                                             # expect no change
+lake build
+```
+
+From the committed `data/vol1.jsonl`, the last four commands reproduce the committed files byte for byte. The
+same holds for `parse_vol1.py` with the copy of eBook #78050 whose SHA-256 sum is given above.
+
+`gen_lean.py` overrides one statement: ✱1·4, where the ebook has `p ∨ p` and the 1910 print has `q ∨ p`
+([docs/FIDELITY.md](../docs/FIDELITY.md)). It skips the ✱1 rules stated in words and ✱3·03, which have no
+assertion sign; so 193 statements are written for the ✱1–✱5 items that are not definitions. The proofs use
+the 188 of ✱2–✱5.
+
+Its dot-notation parser is copied from `scripts/dots.py` of the companion
+[text audit](https://github.com/willmcginnis/principia-mathematica-text-audit) (same author, MIT), so the
+script needs nothing outside this repository.
+
+## Regenerating the progress tables
+
+```
+python3 scripts/progress.py --update                         # docs/PROGRESS.md, from HEAD
+python3 scripts/progress.py --ref <commit>                   # print the tables for another commit
+python3 scripts/progress.py --vol2-html path/to/pg78255-images.html --update   # also rebuild data/vol2_labels.json
+```
+
+`progress.py` reads the Lean files and ledgers from git, not the working tree, so commit first and then
+update `docs/PROGRESS.md`. The tables name the commit they were measured at.
