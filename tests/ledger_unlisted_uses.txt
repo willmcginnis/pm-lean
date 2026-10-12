@@ -1,0 +1,62 @@
+# Baseline of Checks/LedgerCheck.lean (check 2): PM propositions a row's proof uses that the row of
+# data/star*_ledger.json does not list, found when the check was written and awaiting a decision on
+# each row (list the proposition in extra_used/glue, or extend the tacit entries to cover it). They are
+# reported, not failed. Any use not in this file fails the check, and so does a line here that no
+# longer occurs: remove it when the row is fixed.
+#
+# Format: row proposition  # the helpers of the row's proof that bring it in (or the theorem itself)
+#
+# ✱10·11·21 carries a step under (x) by ✱10·11 and ✱10·21 (q10_11_21); ✱10·21 is not in the tacit
+# pattern ✱10·11 + ✱10·27/271/28/281.
+*20.11 *10.21  # through PM.q20_11
+*20.701 *10.21  # through PM.qcls111_2
+*20.702 *10.21  # through PM.qcls111_2r
+*21.11 *10.21  # through PM.q21_11
+*21.701 *10.21  # through PM.qelim1_2
+*21.702 *10.21  # through PM.qelim1_2
+#
+# Pattern steps (✱10·11, ✱10·27, ✱10·271, ✱10·28, ✱10·281) taken inside a helper rather than in the
+# row's own proof. ✱11·71 through qex_and_perm is the case a review found at ✱14·18 and ✱14·203
+# (factors commuted under (∃x) by ✱10·11·281), whose rows now list ✱10·281.
+*11.71 *10.11  # through PM.qex_and_perm
+*11.71 *10.281  # through PM.qex_and_perm
+*14.142 *10.11  # through PM.qidentDesc
+*14.144 *10.11  # through PM.qdescEqCommon
+*14.145 *10.11  # through PM.qidentDesc
+*14.15 *10.11  # through PM.qdescCongr
+*20.19 *10.28  # through PM.qred1cls
+*20.25 *10.28  # through PM.qclsAllAt
+*20.53 *10.28  # through PM.qclsAllAt
+*20.54 *10.28  # through PM.qcls54
+*20.55 *10.28  # through PM.qdescClsEq
+*20.57 *10.28  # through PM.qdescClsEq
+*20.58 *10.28  # through PM.qdescClsEq
+*20.701 *10.11  # through PM.qcls111_2
+*20.701 *10.281  # through PM.qcls111_2
+*20.702 *10.11  # through PM.qcls111_2r
+*20.702 *10.281  # through PM.qcls111_2r
+*21.11 *10.11  # through PM.qfiff2CongrR
+*21.11 *10.27  # through PM.qfiff2CongrR
+*21.11 *10.271  # through PM.qfiff2CongrR
+*21.12 *10.11  # through PM.qfiff2Symm
+*21.12 *10.271  # through PM.qfiff2Symm
+*21.13 *10.271  # through PM.qfiff2Symm PM.qfiff2_321
+*21.14 *10.271  # through PM.qfiff2_321
+*21.19 *10.271  # through PM.qfiff2Symm PM.qred2rel
+*21.19 *10.28  # through PM.qred2rel
+*21.21 *10.11  # through PM.qfiff2Symm
+*21.21 *10.271  # through PM.qfiff2Symm
+*21.3 *10.11  # through PM.qred2rel
+*21.3 *10.28  # through PM.qred2rel
+*21.3 *10.271  # through PM.qred2rel
+*21.53 *10.28  # through PM.qrelAllAt
+*21.53 *10.271  # through PM.qrelAllAt
+*21.54 *10.28  # through PM.qrel54
+*21.54 *10.271  # through PM.qrel54
+*21.55 *10.28  # through PM.qdescRelEq
+*21.57 *10.28  # through PM.qdescRelEq PM.qrel183
+*21.58 *10.28  # through PM.qdescRelEq
+*21.701 *10.11  # through PM.qelim1_2
+*21.701 *10.281  # through PM.qelim1_2
+*21.702 *10.11  # through PM.qelim1_2
+*21.702 *10.281  # through PM.qelim1_2

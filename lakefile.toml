@@ -1,5 +1,9 @@
 name = "PM"
-defaultTargets = ["PM"]
+defaultTargets = ["PM", "Checks"]
 
 [[lean_lib]]
 name = "PM"
+
+[[lean_lib]]
+name = "Checks"
+roots = ["Checks.PinnedStatements"]
