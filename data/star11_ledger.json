@@ -1553,7 +1553,9 @@
    "*11.2",
    "*4.3",
    "*3.27",
-   "*3.22"
+   "*3.22",
+   "*10.11",
+   "*10.281"
   ],
   "cited_unused": [],
   "note": "Comm = *2.04, Comp = *3.43",
@@ -1567,18 +1569,22 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(4) needs Exp (*3.3) before Comm; 'Similarly' (6) takes (w) : (z) from Hp by *11.2, uses *10.35 with p second (*4.3) and *3.27 for *3.26; in (7) the *3.47 factors are commuted by *3.22 before Comp; (2).(7) adds Hp to (2) by *2.02.",
+  "reason": "(4) needs Exp (*3.3) before Comm; 'Similarly' (6) takes (w) : (z) from Hp by *11.2, uses *10.35 with p second (*4.3) and *3.27 for *3.26; in (7) the *3.47 factors are commuted by *3.22 before Comp; (2).(7) adds Hp to (2) by *2.02. In (6), the factors are commuted under (Ex) by *10.11.281 inside qex_and_perm, as in *14.18.",
   "glue": [
    "*11.2",
    "*4.3",
    "*3.22",
-   "*2.02"
+   "*2.02",
+   "*10.11",
+   "*10.281"
   ],
   "glue_kind": [
    "order",
    "order",
    "order",
-   "chain"
+   "chain",
+   "under-exists",
+   "under-exists"
   ]
  }
 ]

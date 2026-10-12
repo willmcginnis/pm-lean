@@ -17,12 +17,17 @@
 --    ✱2·06; "✱10·27/271/28/281" is ✱10·27, ✱10·271, ✱10·28, ✱10·281). A review found ✱10·281
 --    missing from two rows (✱14·18, ✱14·203): there a helper carried a step under (∃x) by ✱10·281.
 --    So the propositions of the tacit pattern (✱10·11, ✱10·27, ✱10·271, ✱10·28, ✱10·281) count as
---    listed only where the row's own proof term uses them, not where they come from a helper. An
---    equivalence used as an implication (`qiffMp`, `qiffMpr`: ✱4·01 with ✱3·26 or ✱3·27) is the
---    rows' tacit "definitions" step and is not followed; ✱3·26 or ✱3·27 used directly must be listed.
---    The uses this finds today that the rows do not list are in tests/ledger_unlisted_uses.txt,
---    awaiting a decision on each row; they are reported, not failed. A use not in that file fails,
---    and so does an entry of the file that no longer occurs (remove it when the row is fixed).
+--    listed only where the row's own proof term uses them, not where they come from a helper.
+--    An equivalence read as an implication (✱4·01 with ✱3·26 or ✱3·27 on (a ⊃ b) . (b ⊃ a), as in
+--    `qiffMp`, `qiffMpr`, or written out) is, outside a displayed chain, the rows' tacit
+--    "definitions" step, and is not a use; inside one (the `Trans` instances `transIffImp`,
+--    `transImpIff`, a ≡ line joined to a ⊃ line) it is chain glue, a use of ✱3·26 that the row
+--    lists in glue (docs/FIDELITY.md). Conversely, a row that lists ✱3·26 or ✱3·27 in extra_used
+--    or glue must use it in one of these listed ways (Simp on a product that is not an
+--    equivalence, or chain glue): reading a ≡ as ⊃ outside a chain is not an extra.
+--    Uses awaiting a decision on their row can be put in tests/ledger_unlisted_uses.txt (empty
+--    now); they are reported, not failed. A use not in that file fails, and so does an entry of
+--    the file that no longer occurs (remove it when the row is fixed).
 -- Either check fails (an error) on any disagreement.
 import Lean
 import PM
@@ -61,22 +66,54 @@ def isAux (env : Environment) (c : Name) : Bool :=
 
 def underPM (c : Name) : Bool := (`PM).isPrefixOf c || c.toString.startsWith "_private.PM."
 
+/-- Is `e` Simp (✱3·26 or ✱3·27) applied to an equivalence, `(a ⊃ b) . (b ⊃ a)` (✱4·01): an
+    equivalence read as an implication? -/
+def isIffRead (e : Expr) : Bool :=
+  match e.getAppFn with
+  | .const n _ =>
+    (n == `PM.QL.t3_26 || n == `PM.QL.t3_27) && e.getAppNumArgs == 4 &&
+      match e.getArg! 2 |>.getAppFnArgs, e.getArg! 3 |>.getAppFnArgs with
+      | (`PM.QF.imp, #[_, a, b]), (`PM.QF.imp, #[_, b', a']) => a == a' && b == b'
+      | _, _ => false
+  | _ => false
+
+/-- The constants of `e`; with `iffTacit`, leaving out ✱3·26 and ✱3·27 where they read an
+    equivalence as an implication (`isIffRead`). -/
+partial def constsOf (iffTacit : Bool) (e : Expr) (acc : Array Name) : Array Name :=
+  match e with
+  | .const n _ => if acc.contains n then acc else acc.push n
+  | .app .. =>
+    let acc := e.getAppArgs.foldl (fun a x => constsOf iffTacit x a) acc
+    if iffTacit && isIffRead e then acc else constsOf iffTacit e.getAppFn acc
+  | .lam _ t b _ | .forallE _ t b _ => constsOf iffTacit b (constsOf iffTacit t acc)
+  | .letE _ t v b _ => constsOf iffTacit b (constsOf iffTacit v (constsOf iffTacit t acc))
+  | .mdata _ e | .proj _ _ e => constsOf iffTacit e acc
+  | _ => acc
+
+/-- The `Trans` instances of PM/Chain.lean that join a ≡ line and a ⊃ line in a displayed chain,
+    reading the ≡ as ⊃ by ✱3·26: chain glue, so check 2 counts them as a use of ✱3·26. -/
+def chainIffReads : Array Name := #[`PM.transIffImp, `PM.transImpIff]
+
 /-- The PM propositions `c`'s value reaches through helpers (not through other PM propositions),
-    except those in `skip`; with `within := some r`, only through `r`'s own auxiliary declarations. -/
-partial def reachProps (skip : Array Name) (within : Option Name) (c : Name) :
+    except those in `skip`; with `within := some r`, only through `r`'s own auxiliary declarations.
+    With `iffTacit` (check 2), an equivalence read as an implication is not a use of ✱3·26 or
+    ✱3·27, except in the chain instances `chainIffReads`, which count as ✱3·26. -/
+partial def reachProps (skip : Array Name) (within : Option Name) (c : Name) (iffTacit := false) :
     StateT (Std.HashMap Name (Array Name)) CoreM (Array Name) := do
   if let some r := (← get).get? c then return r
   modify (·.insert c #[])   -- in progress
   let env ← getEnv
   let mut out : Array Name := #[]
-  if let some ci := env.find? c then
+  if iffTacit && chainIffReads.contains c then
+    out := #[`PM.QL.t3_26]
+  else if let some ci := env.find? c then
     if let some v := ci.value? (allowOpaque := true) then
-      for d in v.getUsedConstants do
+      for d in constsOf iffTacit v #[] do
         if d == c then continue
         if isPMProp d then
           unless out.contains d do out := out.push d
         else if underPM d && !isAux env d && !skip.contains d && (within.all (·.isPrefixOf d)) then
-          for e in ← reachProps skip within d do
+          for e in ← reachProps skip within d iffTacit do
             unless out.contains e do out := out.push e
   modify (·.insert c out)
   return out
@@ -178,6 +215,7 @@ open LedgerCheck
   let mut bad : Array (String × String) := #[]   -- (row, proposition used but not listed)
   let mut via : Array (List Name) := #[]          -- the helpers of the row's proof that bring it in
   let mut missing : Array String := #[]
+  let mut iffListed : Array String := #[]          -- ✱3·26 / ✱3·27 listed for a ≡ read as ⊃
   for ch in ["star11", "star12", "star13", "star14", "star20", "star21"] do
     let path := s!"data/{ch}_ledger.json"
     let j ← match Json.parse (← IO.FS.readFile path) with
@@ -193,8 +231,13 @@ open LedgerCheck
       let listed := (["cited_used", "extra_used", "glue"].toArray.flatMap (strs r ·) ++ tacit).flatMap
         idsOfEntry |>.push id
       let pattern := ((strs r "tacit").filter isPattern).flatMap idsOfEntry
-      let used ← liftCoreM ((reachProps tacitRules none c).run' {})
-      let direct ← liftCoreM ((reachProps tacitRules (some c) c).run' {})
+      let used ← liftCoreM ((reachProps tacitRules none c true).run' {})
+      let direct ← liftCoreM ((reachProps tacitRules (some c) c true).run' {})
+      -- ✱3·26 and ✱3·27 listed as extra or glue must be used other than to read a ≡ as ⊃
+      for u in ["*3.26", "*3.27"] do
+        if (["extra_used", "glue"].toArray.flatMap (strs r ·)).contains u &&
+            !(used.flatMap starsOf).contains u then
+          iffListed := iffListed.push s!"{id} {u}"
       for d in used do
         let ok (u : String) := listed.contains u || (pattern.contains u && direct.contains d)
         for u in (starsOf d).filter (!ok ·) do
@@ -204,7 +247,7 @@ open LedgerCheck
               |>.getD #[]
             let mut vs : List Name := []
             for h in hs do
-              if !isPMProp h && underPM h && (← liftCoreM ((reachProps tacitRules none h).run' {})).contains d then
+              if !isPMProp h && underPM h && (← liftCoreM ((reachProps tacitRules none h true).run' {})).contains d then
                 vs := vs ++ [h]
             via := via.push (if direct.contains d then [c] else vs)
   let new := bad.filter (!known.contains ·)
@@ -215,5 +258,7 @@ open LedgerCheck
     let (id, u) := bad[i]!
     let line := s!"{id} {u}  # through {" ".intercalate (via[i]!.map toString)}"
     unless known.contains (id, u) do logError m!"not listed in its ledger row: {line}"
+  for x in iffListed do
+    logError m!"{x}: listed in extra_used or glue, but the proof uses it only to read a ≡ as ⊃ outside a chain (tacit)"
   for (id, u) in stale do
     logError m!"{id} {u} is in tests/ledger_unlisted_uses.txt but no longer found; remove the line"

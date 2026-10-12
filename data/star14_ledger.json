@@ -199,8 +199,7 @@
    "*10.23"
   ],
   "extra_used": [
-   "*3.43",
-   "*3.26"
+   "*3.43"
   ],
   "cited_unused": [],
   "note": "",
@@ -214,7 +213,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (2), *10.1 is used at x and at y and the two joined by Comp (*3.43); the == of *4.38 is used left to right (*3.26) and chained with *13.172 by *2.05.",
+  "reason": "In (2), *10.1 is used at x and at y and the two joined by Comp (*3.43); the == of *4.38 is used left to right (== read as ⊃, tacit) and chained with *13.172 by *2.05.",
   "glue": [
    "*2.05"
   ],
@@ -233,12 +232,10 @@
   ],
   "extra_used": [
    "*10.14",
-   "*3.27",
    "*2.04",
    "*3.45",
    "*3.47",
-   "*2.08",
-   "*3.26"
+   "*2.08"
   ],
   "cited_unused": [
    "*10.1"
@@ -254,7 +251,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, *3.26 turns phi b == b = c into phi b ⊃ b = c on the second factor (*3.47 with Id, *2.08).",
+  "reason": "*10.1 at b for both factors of Hp is *10.14. '[*13.15]' (from phi b == b = b to phi b) reads the == as ⊃ (tacit) and uses Comm (*2.04), carried onto the first factor by Fact (*3.45); before Ass, phi b == b = c is read as phi b ⊃ b = c (tacit) on the second factor (*3.47 with Id, *2.08).",
   "glue": [
    "*2.04"
   ],
@@ -547,7 +544,8 @@
    "*3.26",
    "*3.43",
    "*10.28",
-   "*3.45"
+   "*3.45",
+   "*10.11"
   ],
   "cited_unused": [],
   "note": "takes [Reducibility S]",
@@ -566,10 +564,12 @@
   "glue": [
    "*4.3",
    "*10.281",
-   "*10.28"
+   "*10.28",
+   "*10.11"
   ],
   "glue_kind": [
    "order",
+   "under-exists",
    "under-exists",
    "under-exists"
   ]
@@ -596,7 +596,8 @@
    "*3.27",
    "*3.43",
    "*11.11",
-   "*11.34"
+   "*11.34",
+   "*10.11"
   ],
   "cited_unused": [
    "*14.111",
@@ -620,11 +621,13 @@
    "*4.3",
    "*10.281",
    "*11.11",
-   "*11.34"
+   "*11.34",
+   "*10.11"
   ],
   "glue_kind": [
    "chain",
    "order",
+   "under-exists",
    "under-exists",
    "under-exists",
    "under-exists"
@@ -646,7 +649,8 @@
    "*4.36",
    "*10.281",
    "*10.24",
-   "*14.112"
+   "*14.112",
+   "*10.11"
   ],
   "cited_unused": [
    "*14.111"
@@ -667,11 +671,13 @@
   "glue": [
    "*3.26",
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*10.11"
   ],
   "glue_kind": [
    "chain",
    "order",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -692,7 +698,8 @@
    "*10.27",
    "*10.271",
    "*4.36",
-   "*10.21"
+   "*10.21",
+   "*10.11"
   ],
   "cited_unused": [],
   "note": "takes [Reducibility S]; Dem. (1) of the transcription has 'x ≡ b' for 'x = b'",
@@ -712,12 +719,14 @@
    "*2.02",
    "*3.43",
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*10.11"
   ],
   "glue_kind": [
    "chain",
    "chain",
    "order",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -970,7 +979,6 @@
   ],
   "extra_used": [
    "*10.28",
-   "*3.27",
    "*2.04"
   ],
   "cited_unused": [],
@@ -985,7 +993,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 and '[*13.15]' act under (Eb), by *10.11.28; '[*13.15]' (from phi b == b = b to phi b) uses *3.27 and Comm (*2.04).",
+  "reason": "*10.1 and '[*13.15]' act under (Eb), by *10.11.28; '[*13.15]' (from phi b == b = b to phi b) reads the == as ⊃ (tacit) and uses Comm (*2.04).",
   "glue": [
    "*10.28",
    "*2.04"
@@ -1683,7 +1691,6 @@
   ],
   "extra_used": [
    "*10.11",
-   "*3.27",
    "*2.54",
    "*14.21",
    "*3.44"
@@ -1701,7 +1708,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): from the right-hand side, *3.27 takes ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x).",
+  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): the right-hand side, its == read as ⊃ (tacit), gives ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x).",
   "glue": [
    "*3.43"
   ],

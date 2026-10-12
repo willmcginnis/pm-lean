@@ -30,26 +30,24 @@ def claims():
     r2 = Counter(r["fidelity"] for r in ledger("replay2"))
     return [
         ("✱2–✱5 propositions", r"all (\d+) ✱2–✱5 propositions", (len(ledger("replay")),)),
-        ("✱11 assertions", r"all (\d+) numbered ✱11 assertions", (star11["assertion"],)),
-        ("✱11 rules", r"and so are the (\w+) numbered rules ✱11·07",
+        ("✱11 assertions", r"\*\*✱11\*\* \((\d+) assertions; `star11_ledger\.json`\)", (star11["assertion"],)),
+        ("✱11 rules", r"✱11 is counted without its (\w+) numbered rules \(✱11·07",
          ({4: "four"}.get(star11["rule/prose"], str(star11["rule/prose"])),)),
-        ("✱13 proved", r"all (\d+) numbered ✱13 propositions", (proved("star13"),)),
-        ("✱14 proved", r"all (\d+) numbered ✱14 propositions", (proved("star14"),)),
-        ("✱20 proved", r"(\d+) of the \d+ numbered ✱20 propositions", (proved("star20"),)),
-        ("✱21 proved", r"(\d+) of the \d+ numbered ✱21 propositions", (proved("star21"),)),
+        ("✱13, ✱14 proved", r"\| ✱13, ✱14 \| (\d+) of \d+; (\d+) of \d+", (proved("star13"), proved("star14"))),
+        ("✱20, ✱21 proved", r"\| ✱20, ✱21 \| (\d+) of \d+; (\d+) of \d+", (proved("star20"), proved("star21"))),
         ("✱13–✱21 formalized", r"Of the (\d+) formalized ✱13, ✱14, ✱20 and ✱21 propositions \(counting one variant of ✱14·21\)",
          (sum(proved(c) for c in ["star13", "star14", "star20", "star21"]) + 1,)),
-        ("✱11 fidelity", r"Fidelity of ✱11[^\n]*? (\d+) are `pm-lines`:[^\n]*? (\d+) are `pm-lines\+extra`",
+        ("✱11 fidelity", r"All \d+ follow PM's Dem\. lines or bracketed hint: (\d+)\s+`pm-lines`, (\d+) `pm-lines\+extra`",
          fidelity("star11", "assertion")),
-        ("✱13 fidelity", r"✱13: (\d+) of the (\d+) proofs are `pm-lines`, (\d+) `pm-lines\+extra`",
-         (fidelity("star13")[0], proved("star13"), fidelity("star13")[1])),
-        ("✱14 fidelity", r"✱14: (\d+) and (\d+) of (\d+)[;.]", fidelity("star14") + (proved("star14"),)),
-        ("✱20 fidelity", r"✱20: (\d+) and (\d+) of (\d+)[;.]", fidelity("star20") + (proved("star20"),)),
-        ("✱21 fidelity", r"✱21: (\d+) and (\d+) of (\d+)[;.]", fidelity("star21") + (proved("star21"),)),
-        ("Replay2 follows PM", r"In `PM/Replay2.lean`, (\d+) of the (\d+) proofs follow PM's own proof",
-         (r2["pm-lines"] + r2["pm-lines+extra"], sum(r2.values()))),
-        ("Replay2 fidelity", r"`fidelity` field is `pm-lines` for (\d+) proofs\. It is `pm-lines\+extra` for (\d+) proofs"
-         r"[^\n]*?It is `unchanged` for (\d+) proofs", (r2["pm-lines"], r2["pm-lines+extra"], r2["unchanged"])),
+        ("✱13 fidelity", r"✱13 (\d+) / (\d+) of (\d+)", fidelity("star13") + (proved("star13"),)),
+        ("✱14 fidelity", r"✱14\s+(\d+) / (\d+) of (\d+)", fidelity("star14") + (proved("star14"),)),
+        ("✱20 fidelity", r"✱20 (\d+) / (\d+) of (\d+)", fidelity("star20") + (proved("star20"),)),
+        ("✱21 fidelity", r"✱21 (\d+) / (\d+) of (\d+)", fidelity("star21") + (proved("star21"),)),
+        ("Replay2 follows PM", r"The other (\d+) were first proved with derived rules \(`PM/Derived\.lean`\)\. (\d+) of these",
+         (sum(r2.values()), r2["pm-lines"] + r2["pm-lines+extra"])),
+        ("Replay2 pm-lines", r"Of the (\d+) that are `pm-lines`", (r2["pm-lines"],)),
+        ("Replay2 pm-lines+extra", r"The (\d+) `pm-lines\+extra` proofs need", (r2["pm-lines+extra"],)),
+        ("Replay2 unchanged", r"(\d+) are `unchanged`: the transcription", (r2["unchanged"],)),
     ]
 
 
@@ -58,7 +56,7 @@ class ProvedCounts(unittest.TestCase):
         rows = ledger("star12")
         self.assertEqual(sorted(r["id"] for r in rows), ["*12.1", "*12.11"])
         self.assertTrue(all(r["category"] == "primitive" for r in rows))
-        self.assertIn("✱12·1 and ✱12·11 (primitive)", docs_text())
+        self.assertRegex(docs_text(), r"✱12 \| no assertions: ✱12·1, ✱12·11 are rules")
 
     def test_claims(self):
         text = docs_text()

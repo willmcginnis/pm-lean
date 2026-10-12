@@ -40,7 +40,10 @@ lists the propositions a proof uses only for structural moves PM leaves unstated
 - **`order`**: putting factors, disjuncts, members, antecedents or apparent variables in the order the next
   cited proposition needs (✱4·3, ✱3·22, ✱4·31, ✱4·32, ✱2·04, ✱4·21, ✱11·2, ✱11·23, with ✱4·36 or ✱4·38
   inside such a permutation).
-- **`under-exists`**: carrying a step under (∃x) (✱10·281, ✱10·28, ✱11·11·34·341).
+- **`under-exists`**: carrying a step under an apparent variable, (x) or (∃x): ✱10·11 with ✱10·21, ✱10·27,
+  ✱10·271, ✱10·28 or ✱10·281, and ✱11·11·34·341. The steps ✱10·11 + ✱10·27/271/28/281 are tacit where a
+  row's own proof takes them (pp. 161–162, below); taken inside a helper lemma, or with ✱10·21, which that
+  passage does not cover, they are listed as `under-exists` glue.
 
 **PM's warrant** for leaving the first kind unstated: "The use of ✱4·22 will often be tacit" (p. 123), as Syll
 is in a chain of implications (✱2·31, pp. 109–110; Introduction p. 9). `PM/Chain.lean`'s header gives these
@@ -48,6 +51,21 @@ passages.
 
 The `fidelity` field counts chain glue as tacit and the other glue as extra. So `extra_used` lists neither
 chain glue nor a step in the row's `tacit` list; `data/fidelity_counts.py` reports any row that does.
+
+**An equivalence read as an implication.** PM passes from p ≡ q to p ⊃ q (or q ⊃ p) without citing
+anything: p ≡ q is (p ⊃ q) . (q ⊃ p) by definition (✱4·01), and Simp (✱3·26, ✱3·27) takes one factor. The
+ledgers count this step as follows.
+- Outside a displayed chain it is the tacit "definitions" step of every row's `tacit` list, so it is not
+  listed. In Lean it is `qiffMp` or `qiffMpr`, or ✱3·26 or ✱3·27 written out on (p ⊃ q) . (q ⊃ p).
+- Inside a displayed chain, where a ≡ line is joined to a ⊃ line (the `Trans` instances `transIffImp` and
+  `transImpIff` of `PM/Chain.lean`), it is chain glue: ✱3·26 is listed in `glue` with kind `chain`, as for
+  ✱14·145 and ✱20·14.
+- Simp on any other product (dropping an asserted factor, taking one factor of a hypothesis) is an
+  ordinary step, listed in `extra_used` unless PM cites it. If a proof uses ✱3·26 both ways, it is listed
+  once, in `extra_used` (✱14·142).
+
+`Checks/LedgerCheck.lean` applies these rules to every row: each proposition a proof uses is listed in its
+row, and a row lists ✱3·26 or ✱3·27 as extra or glue only if its proof uses it in one of the listed ways.
 
 ## The three counts
 
@@ -59,16 +77,18 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 |---|---|---|---|
 | ✱11 (51) | 34 / 17 | 34 / 17 | 39 / 12 |
 | ✱13 (25) | 12 / 13 | 12 / 13 | 16 / 9 |
-| ✱14 (47) | 8 / 39 | 9 / 38 | 12 / 35 |
-| ✱20 (49) | 17 / 32 | 18 / 31 | 18 / 31 |
-| ✱21 (42) | 12 / 30 | 13 / 29 | 13 / 29 |
+| ✱14 (47) | 8 / 39 | 9 / 38 | 13 / 34 |
+| ✱20 (51) | 18 / 33 | 18 / 33 | 19 / 32 |
+| ✱21 (44) | 12 / 32 | 12 / 32 | 14 / 30 |
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
-- The strict count differs from the recorded one only at three proofs. ✱14·25's displayed chain under
-  φx ≡ₓ x = b needs ✱3·43 and ✱2·02, which its Dem. does not cite. ✱20·11 and ✱21·11 have a ✱4·86 step for
-  the second member (`qiffCongrRImp`, a chain under its hypothesis) that needs the same two.
-- In ✱20 and ✱21 no proof's extras are all glue, so the last column equals the recorded one.
+- The strict count differs from the recorded one only at ✱14·25, whose displayed chain under
+  φx ≡ₓ x = b needs ✱3·43 and ✱2·02, which its Dem. does not cite. (✱20·11 and ✱21·11 also have such a
+  chain, for a ✱4·86 step, but their ✱10·21 makes them `pm-lines+extra` in both readings.)
+- In ✱20 and ✱21 the last column differs from the recorded one at ✱20·11, ✱21·11 and ✱21·21, whose only
+  extras are steps carried under an apparent variable (✱10·21, or ✱10·11 with ✱10·27 or ✱10·271 inside a
+  helper).
 
 ## By chapter
 
@@ -103,10 +123,10 @@ per-proposition ledger for ✱9–✱10, so they count 0 in the "followed PM's l
 **✱12** (`star12_ledger.json`). The two primitive propositions have no Dem. to follow (`unchanged`).
 
 **✱13, ✱14, ✱20, ✱21** (`star13_ledger.json` … `star21_ledger.json`), as recorded: ✱13 12 / 13 of 25; ✱14
-9 / 38 of 47; ✱20 20 / 31 of 51 and ✱21 15 / 29 of 44 (rules included). Typical extras:
+9 / 38 of 47; ✱20 20 / 33 of 53 and ✱21 14 / 32 of 46 (rules included). Typical extras:
 - factors commuted (✱3·22, ✱4·3), or a lemma applied to one factor (✱3·45, ✱3·47), where PM's cited
   proposition has them in the other order;
-- one half of an equivalence taken by Simp (✱3·26, ✱3·27);
+- one factor of a product taken by Simp (✱3·26, ✱3·27), where the product is not an equivalence;
 - ✱13·16 to turn y = x into x = y; ✱10·32 for the orientation of ≡ₓ in ✱20;
 - ✱10·28 or ✱10·281 (with ✱10·11) to carry a step under (∃b) where PM does not cite them, and ✱10·11
   before an uncited ✱10·23.
@@ -117,8 +137,8 @@ lists these per file.
 
 ## Reducibility
 
-Of the 168 formalized ✱13, ✱14, ✱20 and ✱21 propositions (counting one variant of ✱14·21), 129 depend on
-✱12·1.
+Of the 172 formalized ✱13, ✱14, ✱20 and ✱21 propositions (counting one variant of ✱14·21), 133 depend on
+✱12·1 or ✱12·11.
 - Fifteen cite ✱12·1 or ✱12·11 directly, as PM's proofs do: ✱13·101, ✱14·17, ✱14·171, ✱20·112, ✱20·12,
   ✱20·13, ✱20·151, ✱20·19, ✱20·3, ✱20·703, ✱21·112, ✱21·12, ✱21·13, ✱21·151, ✱21·3.
 - ✱20·701 and ✱20·702 use it by their hint.

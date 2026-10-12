@@ -29,7 +29,7 @@ The types are PM's 1910 ramified types, with functions of one and two arguments.
 | Apparent variables | ✱9, ✱10, ✱11 | 4 of 28 (✱9 in part); 46 of 48; 51 of 51 |
 | Types and reducibility | ✱12 | no assertions: ✱12·1, ✱12·11 are rules |
 | Identity, descriptions | ✱13, ✱14 | 25 of 25; 47 of 47 (✱14·3 as a schema) |
-| Classes, relations | ✱20, ✱21 | 51 of 55; 44 of 48 |
+| Classes, relations | ✱20, ✱21 | 53 of 55; 46 of 48 |
 | **Vol I** | ✱1–✱97 | **456 of 3,230 (14.1%)** |
 
 Vols II and III are not started.

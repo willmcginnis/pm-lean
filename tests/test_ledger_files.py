@@ -36,10 +36,6 @@ VALUES = {"fidelity": {"pm-lines", "pm-lines+extra", "unchanged"},
           "tag": {"FAITHFUL", "REPAIRED", "UNRESOLVED"}}
 GLUE_KINDS = {"chain", "order", "under-exists"}
 
-# Files that have never ended with a newline, awaiting a fix of the data. The test below fails once
-# one of them is fixed, so that it is removed from this set.
-NO_FINAL_NEWLINE_YET = {"replay_ledger.json"}
-
 
 class LedgerFiles(unittest.TestCase):
     def files(self):
@@ -53,11 +49,7 @@ class LedgerFiles(unittest.TestCase):
     def test_final_newline(self):
         for f in self.files():
             with self.subTest(f.name):
-                ends = f.read_bytes().endswith(b"\n")
-                if f.name in NO_FINAL_NEWLINE_YET:
-                    self.assertFalse(ends, f"{f.name} now ends with a newline: remove it from NO_FINAL_NEWLINE_YET")
-                else:
-                    self.assertTrue(ends, f"{f.name} does not end with a newline")
+                self.assertTrue(f.read_bytes().endswith(b"\n"), f"{f.name} does not end with a newline")
 
     def test_rows(self):
         for f in self.files():

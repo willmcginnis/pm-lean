@@ -44,7 +44,6 @@
    "*3.43",
    "*10.28",
    "*3.47",
-   "*3.27",
    "*2.04"
   ],
   "cited_unused": [],
@@ -59,7 +58,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken by *3.27; Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2).",
+  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken (== read as ⊃, tacit); Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2).",
   "glue": [
    "*10.28",
    "*2.04"
@@ -419,7 +418,6 @@
    "*13.15"
   ],
   "extra_used": [
-   "*3.26",
    "*2.27"
   ],
   "cited_unused": [],
@@ -434,7 +432,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (2), *10.1 gives x = x . == . x = y; its ⊃ half is taken by *3.26 and x = x (*13.15) detached by *2.27.",
+  "reason": "In (2), *10.1 gives x = x . == . x = y; its ⊃ half is taken (== read as ⊃, tacit) and x = x (*13.15) detached by *2.27.",
   "glue": [],
   "glue_kind": []
  },
@@ -478,8 +476,7 @@
    "*10.21"
   ],
   "extra_used": [
-   "*2.27",
-   "*3.27"
+   "*2.27"
   ],
   "cited_unused": [],
   "note": "Comm = *2.04",
@@ -493,7 +490,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (1), x = x (*13.15) is detached by *2.27; in (2), the half phi x ⊃ phi y of *13.12 is taken by *3.27.",
+  "reason": "In (1), x = x (*13.15) is detached by *2.27; in (2), the half phi x ⊃ phi y of *13.12 is taken (== read as ⊃, tacit).",
   "glue": [],
   "glue_kind": []
  },

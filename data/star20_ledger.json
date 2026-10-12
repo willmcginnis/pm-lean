@@ -36,10 +36,12 @@
    "*10.281",
    "*20.1"
   ],
-  "extra_used": [],
+  "extra_used": [
+   "*10.21"
+  ],
   "cited_unused": [],
   "note": "",
-  "fidelity": "pm-lines",
+  "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
    "Syll",
@@ -49,14 +51,16 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
+  "reason": "*4.86 for the second member is carried under (x) by *10.11.27 and *10.271, then under (phi) by *10.11.21 (q10_11_21). *10.21 is not among the steps PM leaves tacit (*10.11 + *10.27/271/28/281, pp. 161-162), so it is listed as under-exists glue.",
   "glue": [
    "*2.02",
-   "*3.43"
+   "*3.43",
+   "*10.21"
   ],
   "glue_kind": [
    "chain",
-   "chain"
+   "chain",
+   "under-exists"
   ]
  },
  {
@@ -341,7 +345,6 @@
    "*10.1"
   ],
   "extra_used": [
-   "*3.27",
    "*2.06",
    "*10.11",
    "*10.23"
@@ -358,7 +361,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "For each phi, *10.1 and the converse half of *20.16's equivalence (*3.27) are chained by *2.06; the (Ephi) of *20.16 is removed by *10.11 and *10.23.",
+  "reason": "For each phi, *10.1 and the converse half of *20.16's equivalence (== read as ⊃, tacit) are chained by *2.06; the (Ephi) of *20.16 is removed by *10.11 and *10.23.",
   "glue": [],
   "glue_kind": []
  },
@@ -418,7 +421,8 @@
    "*3.22",
    "*2.27",
    "*3.3",
-   "*2.04"
+   "*2.04",
+   "*10.28"
   ],
   "cited_unused": [
    "*10.33",
@@ -435,20 +439,22 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "In (1), *20.18's == is used from left to right (*3.26). In (2), *20.15 and *20.18 are used for each factor of Hp, picked by *3.26 and *3.27, joined by *4.84, *4.85, and the converse half taken (*3.27). (2) is kept in the exported form Hp ⊃ : f!z(psi z) ⊃ f!z(chi z) . ⊃ . f!z(phi!z) ⊃ f!z(theta!z), so in (3) *10.33 (which needs a real variable here) is not used: *10.11.21 and *10.27 carry (2) under (f). '[*20.112 . *10.1]': *20.112 for the context phi!x ==_x chi!x gives g; *10.1 at g, and at phi and theta (joined by *4.84, *4.85, the converse half by *3.27, chained by *2.06), gives the implication for the context, and (Eg) is removed by *10.11, *10.23. PM reads the context of z(theta!z) as phi!x ==_x theta!x; from its *20.01 form (Echi) : chi!x ==_x theta!x : phi!x ==_x chi!x it follows by *10.301 (factors commuted, *3.22) under (Echi) (*10.11, *10.23), and the form at phi holds by *4.2 (under *10.11), *10.13 and *10.24, detached by *2.27 ('[*4.2]'). '[*10.301.32 . Hp]' uses *10.301 twice, with Exp (*3.3) and Comm (*2.04). (4), (5): the two existentials of *12.1 (turned by *10.32) are used one after the other, with Exp, Comm, *10.11 and *10.23, not combined by *10.35.",
+  "reason": "In (1), *20.18's == is used from left to right (*3.26). In (2), *20.15 and *20.18 are used for each factor of Hp, picked by *3.26 and *3.27, joined by *4.84, *4.85, and the converse half taken (*3.27). (2) is kept in the exported form Hp ⊃ : f!z(psi z) ⊃ f!z(chi z) . ⊃ . f!z(phi!z) ⊃ f!z(theta!z), so in (3) *10.33 (which needs a real variable here) is not used: *10.11.21 and *10.27 carry (2) under (f). '[*20.112 . *10.1]': *20.112 for the context phi!x ==_x chi!x gives g; *10.1 at g, and at phi and theta (joined by *4.84, *4.85, the converse half by *3.27, chained by *2.06), gives the implication for the context, and (Eg) is removed by *10.11, *10.23. PM reads the context of z(theta!z) as phi!x ==_x theta!x; from its *20.01 form (Echi) : chi!x ==_x theta!x : phi!x ==_x chi!x it follows by *10.301 (factors commuted, *3.22) under (Echi) (*10.11, *10.23), and the form at phi holds by *4.2 (under *10.11), *10.13 and *10.24, detached by *2.27 ('[*4.2]'). '[*10.301.32 . Hp]' uses *10.301 twice, with Exp (*3.3) and Comm (*2.04). (4), (5): the two existentials of *12.1 (turned by *10.32) are used one after the other, with Exp, Comm, *10.11 and *10.23, not combined by *10.35. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qred1cls.",
   "glue": [
    "*3.43",
    "*2.83",
    "*2.05",
    "*3.22",
-   "*2.04"
+   "*2.04",
+   "*10.28"
   ],
   "glue_kind": [
    "chain",
    "chain",
    "chain",
    "order",
-   "order"
+   "order",
+   "under-exists"
   ]
  },
  {
@@ -640,12 +646,12 @@
    "*10.32",
    "*20.11",
    "*4.86",
-   "*3.26",
    "*2.06",
    "*10.23",
    "*2.27",
    "*3.22",
-   "*3.43"
+   "*3.43",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "alpha apparent (*20.07); takes [Reducibility S]",
@@ -659,14 +665,16 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1)'s *10.1 instantiates the apparent alpha at z(phi z), whose defining function need not be predicative: the class analogue (p. 206: '(alpha) . f alpha . ⊃ . f{z(psi z)} ... This is *20.17'). *12.1 gives a predicative theta with theta!x ==_x phi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to z(phi z) by *20.11 and joined by *4.86 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches z(phi z) = z(phi z) by *3.26 and *2.27. In (3), *20.24 has the factors in the other order (*3.22). (2) and (3) are joined by Comp (*3.43).",
+  "reason": "Line (1)'s *10.1 instantiates the apparent alpha at z(phi z), whose defining function need not be predicative: the class analogue (p. 206: '(alpha) . f alpha . ⊃ . f{z(psi z)} ... This is *20.17'). *12.1 gives a predicative theta with theta!x ==_x phi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to z(phi z) by *20.11 and joined by *4.86 (the ⊃ half: == read as ⊃, tacit), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches z(phi z) = z(phi z) by *2.27 (== read as ⊃, tacit). In (3), *20.24 has the factors in the other order (*3.22). (2) and (3) are joined by Comp (*3.43). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qclsAllAt.",
   "glue": [
    "*2.02",
-   "*3.22"
+   "*3.22",
+   "*10.28"
   ],
   "glue_kind": [
    "chain",
-   "order"
+   "order",
+   "under-exists"
   ]
  },
  {
@@ -890,13 +898,16 @@
    "*10.21",
    "*10.281",
    "*4.86",
-   "*3.26",
    "*5.32",
    "*4.2",
    "*10.24",
    "*3.31",
    "*4.3",
-   "*3.27"
+   "*3.27",
+   "*10.35",
+   "*20.7",
+   "*10.27",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "alpha real (an expression z(psi z)); *20.3 is its analogue for classes of classes (p. 206: analogues are quoted by the numbers of the original propositions), proved by *20.3's Dem. with *20.08, *20.081 for *20.01, *20.02 and *20.7 for *12.1 (qcls20_3); takes [Reducibility S]",
@@ -910,13 +921,21 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.3's *10.43 is used at alpha, whose defining function need not be predicative: the class analogue of *10.1 (p. 206, *20.17; qclsAllAt: *12.1 turned by *10.32, *10.1, *2.06, *10.11, *10.23), the two members carried by *20.11 and joined by *4.86 (the ⊃ half by *3.26), then *10.43's own step *5.32. This needs the defining expression of Cls, (Ephi) . alpha = z(phi!z), to be extensional: *20.11 under (Ephi) by *10.11.21 and *10.281 (clsExt_Cls). *20.7 is stated for a generic f{alpha}; for this expression it is joined with the expression's generic form (p. 199; qclsGen: *4.2, *10.11, *10.24, and *3.26 with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 is used with p second (*4.3); '[*12.1]' (here *20.7) drops the asserted factor by *3.27 and *3.2.",
+  "reason": "*20.3's *10.43 is used at alpha, whose defining function need not be predicative: the class analogue of *10.1 (p. 206, *20.17; qclsAllAt: *12.1 turned by *10.32, *10.1, *2.06, *10.11, *10.23), the two members carried by *20.11 and joined by *4.86 (the ⊃ half: == read as ⊃, tacit), then *10.43's own step *5.32. This needs the defining expression of Cls, (Ephi) . alpha = z(phi!z), to be extensional: *20.11 under (Ephi) by *10.11.21 and *10.281 (clsExt_Cls). *20.7 is stated for a generic f{alpha}; for this expression it is joined with the expression's generic form (p. 199; qclsGen: *4.2, *10.11, *10.24, and an == read as ⊃ (tacit) with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 is used with p second (*4.3); '[*12.1]' (here *20.7) drops the asserted factor by *3.27 and *3.2. The steps of *20.3's Dem. repeated in the analogue are listed as well: *10.35 and *20.7 (for *12.1) as extra, the chain under Hp (*2.02, *3.43) as chain glue, and *10.27, *10.28 (with *10.11), taken inside the analogue, as under-exists glue.",
   "glue": [
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*2.02",
+   "*3.43",
+   "*10.27",
+   "*10.28"
   ],
   "glue_kind": [
    "order",
+   "under-exists",
+   "chain",
+   "chain",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -1119,10 +1138,10 @@
    "*20.11",
    "*4.84",
    "*4.85",
-   "*3.26",
    "*2.06",
    "*10.23",
-   "*2.27"
+   "*2.27",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "beta apparent, alpha real (an expression z(psi z)), phi beta generic (cls beta f, p. 199); takes [Reducibility S]",
@@ -1136,12 +1155,14 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1)'s *10.1 instantiates the apparent beta at alpha, whose defining function need not be predicative: the class analogue (p. 206, *20.17). *12.1 gives a predicative theta with theta!x ==_x psi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to alpha by *20.11 and joined by *4.84, *4.85 (the ⊃ half by *3.26), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches alpha = alpha by *2.27. In (2), *20.18's == is used from left to right (*3.26).",
+  "reason": "Line (1)'s *10.1 instantiates the apparent beta at alpha, whose defining function need not be predicative: the class analogue (p. 206, *20.17). *12.1 gives a predicative theta with theta!x ==_x psi x (turned by *10.32), *10.1 is used at theta, the occurrences of the class are carried from z(theta!z) to alpha by *20.11 and joined by *4.84, *4.85 (the ⊃ half: == read as ⊃, tacit), chained by *2.06, and (Etheta) is removed by *10.11, *10.23 (qclsAllAt). '[*20.2]' detaches alpha = alpha by *2.27. In (2), *20.18's == is used from left to right (== read as ⊃, tacit). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qclsAllAt.",
   "glue": [
-   "*3.43"
+   "*3.43",
+   "*10.28"
   ],
   "glue_kind": [
-   "chain"
+   "chain",
+   "under-exists"
   ]
  },
  {
@@ -1158,7 +1179,6 @@
    "*10.24"
   ],
   "extra_used": [
-   "*3.26",
    "*3.31",
    "*12.1",
    "*10.32",
@@ -1167,7 +1187,8 @@
    "*3.27",
    "*2.06",
    "*3.43",
-   "*2.05"
+   "*2.05",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "alpha real (an expression z(psi z)), phi beta generic (cls beta f); takes [Reducibility S]",
@@ -1181,9 +1202,13 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1): *20.18's == is used from left to right (*3.26) and imported (*3.31) for *10.23. (2): PM's *10.24 is used at alpha, whose defining function need not be predicative: the class analogue (qclsExAt). *12.1 gives a predicative phi with phi!x ==_x psi x (turned by *10.32); z(phi!z) = alpha follows by *20.13, and phi beta is carried from alpha to z(phi!z) by *20.18 (the converse half, *3.27); the two are joined by Comp (*3.43, with *2.02 and *2.06), *10.24 is used at phi (with *2.05), and (Ephi) is removed by *10.11, *10.23. The Lean proof is qcls54 with *20.18.",
-  "glue": [],
-  "glue_kind": []
+  "reason": "(1): *20.18's == is used from left to right (== read as ⊃, tacit) and imported (*3.31) for *10.23. (2): PM's *10.24 is used at alpha, whose defining function need not be predicative: the class analogue (qclsExAt). *12.1 gives a predicative phi with phi!x ==_x psi x (turned by *10.32); z(phi!z) = alpha follows by *20.13, and phi beta is carried from alpha to z(phi!z) by *20.18 (the converse half, *3.27); the two are joined by Comp (*3.43, with *2.02 and *2.06), *10.24 is used at phi (with *2.05), and (Ephi) is removed by *10.11, *10.23. The Lean proof is qcls54 with *20.18. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qcls54.",
+  "glue": [
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists"
+  ]
  },
  {
   "id": "*20.55",
@@ -1209,7 +1234,6 @@
    "*20.21",
    "*4.36",
    "*10.281",
-   "*3.26",
    "*3.31",
    "*20.2",
    "*10.24",
@@ -1221,7 +1245,8 @@
    "*2.06",
    "*3.43",
    "*2.05",
-   "*10.23"
+   "*10.23",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "the description has the larger scope (p. 204); takes [Reducibility S]",
@@ -1235,17 +1260,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.33 is generalized over alpha by *10.11 (*20.62) and read from right to left. '[*20.54]' is applied to phi beta = (x in alpha ==_x phi x . ==_alpha . alpha = beta), in which beta occurs under (alpha): *20.54's argument is used (qcls54, with the extras listed for *20.54), with the analogue of *20.18 for this phi beta got from *20.22 and *20.24 (Exp, Comm, factors commuted by *3.22, joined by Comp *3.43) under (alpha) by *4.86 (with *4.21), *10.11.21 and *10.271 (qclsEqR, qdescClsEq). PM's line (Ebeta) : ... : z(phi z) = beta comes from *20.54's beta = z(phi z) . ... by *20.21 and *4.3 (with *4.36) under (Ebeta), *10.11.281.",
+  "reason": "*20.33 is generalized over alpha by *10.11 (*20.62) and read from right to left. '[*20.54]' is applied to phi beta = (x in alpha ==_x phi x . ==_alpha . alpha = beta), in which beta occurs under (alpha): *20.54's argument is used (qcls54, with the extras listed for *20.54), with the analogue of *20.18 for this phi beta got from *20.22 and *20.24 (Exp, Comm, factors commuted by *3.22, joined by Comp *3.43) under (alpha) by *4.86 (with *4.21), *10.11.21 and *10.271 (qclsEqR, qdescClsEq). PM's line (Ebeta) : ... : z(phi z) = beta comes from *20.54's beta = z(phi z) . ... by *20.21 and *4.3 (with *4.36) under (Ebeta), *10.11.281. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescClsEq.",
   "glue": [
    "*2.04",
    "*3.22",
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*10.28"
   ],
   "glue_kind": [
    "order",
    "order",
    "order",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -1300,7 +1327,6 @@
    "*20.21",
    "*4.36",
    "*10.281",
-   "*3.26",
    "*3.31",
    "*20.2",
    "*10.24",
@@ -1315,7 +1341,8 @@
    "*10.11",
    "*10.23",
    "*10.27",
-   "*20.25"
+   "*20.25",
+   "*10.28"
   ],
   "cited_unused": [
    "*13.183"
@@ -1331,17 +1358,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "(1) is the step of *20.55 (qdescClsEq: *20.54's argument for f alpha ==_alpha alpha = beta, with the extras listed there, *20.21 and *4.3). (1).(2): f alpha is replaced by alpha = z(phi z) under (alpha) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (Ebeta) by *10.11.21 and *10.281. '[*13.183]' is its class analogue *20.25, and beta = z(phi z) is turned by *20.21 for *20.54 (with *4.36).",
+  "reason": "(1) is the step of *20.55 (qdescClsEq: *20.54's argument for f alpha ==_alpha alpha = beta, with the extras listed there, *20.21 and *4.3). (1).(2): f alpha is replaced by alpha = z(phi z) under (alpha) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (Ebeta) by *10.11.21 and *10.281. '[*13.183]' is its class analogue *20.25, and beta = z(phi z) is turned by *20.21 for *20.54 (with *4.36). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescClsEq.",
   "glue": [
    "*2.04",
    "*3.22",
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*10.28"
   ],
   "glue_kind": [
    "order",
    "order",
    "order",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -1369,7 +1398,6 @@
    "*20.21",
    "*4.36",
    "*10.281",
-   "*3.26",
    "*3.31",
    "*20.2",
    "*10.24",
@@ -1381,7 +1409,8 @@
    "*2.06",
    "*3.43",
    "*2.05",
-   "*10.23"
+   "*10.23",
+   "*10.28"
   ],
   "cited_unused": [],
   "note": "the description has the larger scope (p. 204); takes [Reducibility S]",
@@ -1395,17 +1424,19 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'[*20.54] [*14.1]' is the step of *20.55 (qdescClsEq: *20.54's argument for alpha = z(phi z) . ==_alpha . alpha = beta, with the extras listed for *20.54 and *20.55, *20.21 and *4.3).",
+  "reason": "'[*20.54] [*14.1]' is the step of *20.55 (qdescClsEq: *20.54's argument for alpha = z(phi z) . ==_alpha . alpha = beta, with the extras listed for *20.54 and *20.55, *20.21 and *4.3). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescClsEq.",
   "glue": [
    "*2.04",
    "*3.22",
    "*4.3",
-   "*10.281"
+   "*10.281",
+   "*10.28"
   ],
   "glue_kind": [
    "order",
    "order",
    "order",
+   "under-exists",
    "under-exists"
   ]
  },
@@ -1649,7 +1680,10 @@
    "*4.36",
    "*4.3",
    "*11.11",
-   "*11.3"
+   "*11.3",
+   "*10.21",
+   "*10.11",
+   "*10.281"
   ],
   "cited_unused": [],
   "note": "[The proof proceeds as in *20.112, using *12.11 instead of *12.1]; takes [Reducibility S]",
@@ -1667,12 +1701,18 @@
   "glue": [
    "*2.02",
    "*3.43",
-   "*4.3"
+   "*4.3",
+   "*10.21",
+   "*10.11",
+   "*10.281"
   ],
   "glue_kind": [
    "chain",
    "chain",
-   "order"
+   "order",
+   "under-exists",
+   "under-exists",
+   "under-exists"
   ]
  },
  {
@@ -1689,7 +1729,10 @@
    "*4.36",
    "*4.3",
    "*11.11",
-   "*11.3"
+   "*11.3",
+   "*10.21",
+   "*10.11",
+   "*10.281"
   ],
   "cited_unused": [],
   "note": "[Proof as in *20.701]; takes [Reducibility S]",
@@ -1707,12 +1750,18 @@
   "glue": [
    "*2.02",
    "*3.43",
-   "*4.3"
+   "*4.3",
+   "*10.21",
+   "*10.11",
+   "*10.281"
   ],
   "glue_kind": [
    "chain",
    "chain",
-   "order"
+   "order",
+   "under-exists",
+   "under-exists",
+   "under-exists"
   ]
  },
  {

@@ -1,6 +1,6 @@
 # Classes of classes and classes of relations
 
-Decision (Will, 2026-10-12, docs/TYPES_DESIGN.md §5 Q6): option (A), the literal reading,
+Decision (maintainer, 2026-10-12, [TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q6): option (A), the literal reading,
 "explicit is better than implicit". ✱20·08 is built as printed, with no use of typical ambiguity in
 place of the definition, no new axiom and no new rule. The same holds for relations (✱21·03,
 ✱21·08–✱21·083). Page numbers are those of the 1910 print, read from the Gutenberg #78050
@@ -151,7 +151,10 @@ The analogue of ✱12·1 is ✱20·7, (∃g) : fα ≡_α g!α, stated for a gen
 `qclsGen` writes Ψ{ẑ(θ!z)} as f{ẑ(θ!z)} for the context f(χ!ẑ) = Ψ{ẑ(χ!z)} (p. 199: fα "is, in
 reality, a function of φẑ, namely the extensional function associated with f(ψ!ẑ) by means of
 ✱20·01"), and `qclsRed` is ✱20·7 for Ψ. The ledgers list these steps as `extra_used` of ✱20·4 and
-✱21·4.
+✱21·4. They also list the steps of ✱20·3's Dem. as the analogue repeats them: ✱10·35 and ✱20·7 (✱21·7)
+as extra, the chain under Hp (✱2·02, ✱3·43) as chain glue, and ✱10·27, ✱10·28 (and ✱10·271 for
+relations), which the analogue takes inside `qcls20_3`, as under-exists glue
+([FIDELITY.md](FIDELITY.md)).
 
 ## Reuse
 
