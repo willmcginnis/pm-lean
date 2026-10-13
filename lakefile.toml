@@ -1,6 +1,10 @@
 name = "PM"
 defaultTargets = ["PM", "Checks"]
 
+# every variable is declared: no auto-bound implicits (a platform export once tripped on one)
+[leanOptions]
+autoImplicit = false
+
 [[lean_lib]]
 name = "PM"
 

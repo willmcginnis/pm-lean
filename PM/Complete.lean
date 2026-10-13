@@ -155,7 +155,7 @@ theorem upd_other {v : String → Bool} {x s : String} (b : Bool) (hne : ¬ s = 
   · rfl
   · exact absurd (of_decide_eq_true e) hne
 
-theorem upd_self {v : String → Bool} {x s : String} (hvx : v x = b) :
+theorem upd_self {v : String → Bool} {x s : String} {b : Bool} (hvx : v x = b) :
     (if s == x then b else v s) = v s := by
   cases e : (s == x)
   · rfl
