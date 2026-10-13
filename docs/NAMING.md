@@ -8,69 +8,106 @@ The names under which PM's propositions are exported to formalization platforms 
 ## The rule
 
 ```
-PM.star<N>_<M>_<descriptor>[_reading_<word>]
+PM.star<N>_<M>[_<pmname>][_df|_rule][_reading_<word>][_v<N>]
 ```
 
-1. **PM's number.** ✱N·M is `star<N>_<M>`: ✱2·01 is `star2_01`, ✱9·521 is `star9_521`. PM's numbers
-   have no trailing zeros after the point, so the map is one to one.
-2. **PM's own name**, lowercased, when PM gives one, right after the number: ✱2·01 Abs is
-   `star2_01_abs_…`. The names are those of PM's "Alphabetical list of propositions referred to by
-   names" (Vol I, front matter; [data/naming/pm_names.json](../data/naming/pm_names.json)). PM gives one
-   name to several numbers (Transp names seven, Syll four, Simp three), so a name never identifies a
-   proposition on its own; the number does.
-3. **A descriptor of PM's printed statement**, and of nothing else: not of our proof, our reading or our
-   encoding. It is generated from the statement's shape in the style of Mathlib's names, then reviewed
-   by people (below). Its words come from a closed vocabulary,
-   [data/naming/vocabulary.json](../data/naming/vocabulary.json): Mathlib's symbol words (`imp`, `and`,
-   `or`, `not`, `iff`, `all`, `exists`, `eq`, `ne`, `mem`), its axiomatic words (`self`, `left`, `right`,
-   `comm`), PM's names, and three words for PM's notions Mathlib has no word for (`desc`, `cls`, `rel`).
-4. **A reading**, for a statement of ✱9 by its own method, as the last part: `_reading_<word>`, the word
-   from a closed list, [data/naming/readings.json](../data/naming/readings.json). All readings of one
-   proposition share everything before the suffix.
+1. **PM's number.** ✱N·M is `star<N>_<M>`: ✱2·01 is `star2_01`, ✱9·521 is `star9_521`. The number is
+   kept as PM prints it, as a string: ✱2·01 and ✱2·1 are `star2_01` and `star2_1`.
+2. **PM's own name**, lowercased, when PM gives one: ✱2·01 Abs is `PM.star2_01_abs`. The names are those
+   of PM's "Alphabetical list of propositions referred to by names" (Vol I, front matter;
+   [data/naming/pm_names.json](../data/naming/pm_names.json)). PM gives one name to several numbers
+   (Transp names seven, Syll four, Simp three), so a name never identifies a proposition on its own; the
+   number does.
+3. **Nothing else describes the statement**: no descriptor generated from it and no Mathlib word. A
+   readable description belongs in the card's title and description (below).
+4. **A slot for what is not an asserted proposition**: `_df` for a definition (PM's Df), `_rule` for an
+   inference rule (✱1·1, ✱9·12, …), from [data/naming/slots.json](../data/naming/slots.json). Twelve
+   export names use them now, for nine items: the rules ✱9·12, ✱9·13, ✱10·11, ✱10·13, ✱11·07, ✱11·11,
+   ✱11·13 and ✱11·311, which the repository states as theorems about its systems, and the definition
+   ✱10·01 stated under ✱9's reading. No other definition or rule is exported yet; when one is, the slot is
+   in its name.
+5. **A reading**, for a statement of ✱9 by its own method: `_reading_<word>`, the word from a closed list,
+   [data/naming/readings.json](../data/naming/readings.json). All readings of one item share everything
+   before the suffix.
+6. **A version**, last: `_v<N>` (N ≥ 2) names the replacement of a superseded statement
+   ([VERSIONING.md](VERSIONING.md)). Nothing ever follows it.
 
-ASCII snake_case throughout, all under `PM.`. Results about PM's system rather than in it (soundness,
-completeness) are `PM.meta_<words>`, named by hand from the same vocabulary.
+ASCII snake_case throughout, one component under `PM.`. Results about PM's system rather than in it
+(soundness, completeness) are `PM.meta_<words>`, named by hand.
 
 ### Examples
 
-| PM | Printed | Export name |
-|---|---|---|
-| ✱1·4 Perm | p ∨ q . ⊃ . q ∨ p | `PM.star1_4_perm_or_comm` |
-| ✱2·01 Abs | p ⊃ ∼p . ⊃ . ∼p | `PM.star2_01_abs_not_of_imp_not` |
-| ✱2·14 | ∼∼p . ⊃ . p | `PM.star2_14_of_not_not` |
-| ✱3·26 Simp | p . q . ⊃ . p | `PM.star3_26_simp_left_of_and` |
-| ✱3·27 Simp | p . q . ⊃ . q | `PM.star3_27_simp_right_of_and` |
-| ✱4·2 | p ≡ p | `PM.star4_2_iff_self` |
-| ✱13·15 | x = x | `PM.star13_15_eq_self` |
-| ✱9·31, reading C | (∃x) . φx . ∨ . (∃x) . φx : ⊃ . (∃x) . φx | `PM.star9_31_exists_of_exists_or_self_reading_russell` |
-| ✱9·31, reading L | the same | `PM.star9_31_exists_of_exists_or_self_reading_landini` |
+| PM | Printed | Export name | Exact counterpart (metadata) |
+|---|---|---|---|
+| ✱1·4 Perm | p ∨ q . ⊃ . q ∨ p | `PM.star1_4_perm` | `Or.symm` |
+| ✱2·01 Abs | p ⊃ ∼p . ⊃ . ∼p | `PM.star2_01_abs` | none found |
+| ✱2·14 | ∼∼p . ⊃ . p | `PM.star2_14` | `of_not_not` (classical) |
+| ✱2·16 Transp | p ⊃ q . ⊃ . ∼q ⊃ ∼p | `PM.star2_16_transp` | `mt` |
+| ✱2·17 Transp | ∼q ⊃ ∼p . ⊃ . p ⊃ q | `PM.star2_17_transp` | `Function.mtr` (classical) |
+| ✱3·26 Simp | p . q . ⊃ . p | `PM.star3_26_simp` | `And.left` |
+| ✱9·12 | what is implied by a true premiss is true | `PM.star9_12_rule` | |
+| ✱10·01, reading C | (∃x) . φx . = . ∼(x) . ∼φx Df | `PM.star10_01_df_reading_russell` | |
+| ✱9·31, reading C | (∃x) . φx . ∨ . (∃x) . φx : ⊃ . (∃x) . φx | `PM.star9_31_reading_russell` | |
+| ✱9·31, reading L | the same | `PM.star9_31_reading_landini` | |
+| ✱9·31, reading L, superseded once | the same, corrected | `PM.star9_31_reading_landini_v2` | |
 
-The full list, with each name's Lean declaration, source file and descriptor, is
-[data/export_names.json](../data/export_names.json).
+The full list, with each name's Lean declaration, source file, digests and descriptor, is
+[data/export_names.json](../data/export_names.json): 523 names, the longest
+`PM.star10_11_rule_reading_russell` (33 characters).
 
-### How the descriptor is generated
+A definition uploaded to a platform as a definition rather than as a card may need a name without dots
+(Prove2Me's definition names are `[a-zA-Z_][a-zA-Z0-9_]*`); its slug (`PM_star1_01_df`) is that name.
+None is uploaded yet.
 
-`scripts/export_names.py` reads each statement as Lean elaborates it (`Checks/ExportStatements.lean`
-prints it as a tree) and reads it left to right:
+## Outside the name
 
-- each connective gives its word and variables give none: ∼p ∨ p is `not_or`, ∼∼p is `not_not`;
-- an asserted implication A ⊃ B is named conclusion first, `B_of_A`; a hypothesis H of the Lean statement
-  adds `_of_H` (Mathlib: "the conclusion is stated first");
-- an asserted equivalence A ≡ B is `A_iff_B`;
-- X ∨ X is `or_self`; A ⊃ B or A ≡ B whose sides are one connective with its operands swapped is
-  `or_comm`, `and_comm`; a variable on one side that is the left or right operand of the other side is
-  `left` or `right` (`left_of_and`, `or_of_right`).
+### Descriptor
 
-A descriptor longer than six words is replaced by its shape (the connectives of the top two levels), and
-the entry is marked `needs_human`; so are the `meta` names and a statement with no connective. Every name
-is reviewed before release: a spot review per chapter, and the maintainer's review before anything is
-made public. A reviewed descriptor that differs from the generated one is not yet supported; until it is,
-review changes the generator or the vocabulary.
+Each entry of data/export_names.json keeps the descriptor the generator reads off the statement's shape
+in the style of Mathlib's names (`not_of_imp_not` for ✱2·01), from a closed vocabulary,
+[data/naming/vocabulary.json](../data/naming/vocabulary.json). It is a search key and a starting point for
+a card's title, not part of the name; one longer than six words is cut to the statement's top two levels
+and marked `descriptor_needs_human`. It is kept because it costs nothing, is already checked, and gives
+every card some words for search, including the ones that have neither a PM name nor a counterpart.
 
-Two names with the same descriptor are possible (✱2·05 and ✱2·06 are both
-`syll_imp_imp_imp_of_imp`): the number keeps them apart, and the descriptor is a reading aid, not a key.
+### Counterparts
 
-### Readings
+A Lean or Mathlib declaration that states the same law is recorded as metadata, for the card's title and
+description, in [data/naming/counterparts.json](../data/naming/counterparts.json): for ✱1–✱5, 68 of the
+193 numbered propositions have one. Each record gives the declaration, its signature, its statement in
+PM's variables, the repository, the file and line at the pinned commit, whether its proof is classical
+(uses `Classical.choice`), whether and where the two sides of an equivalence are the other way round, and
+how it was checked. The pins are the platform's environment: Lean
+`819816b2e0a3bf405af45ae5c7af2491d8f5bee6` (v4.33.1) and Mathlib
+`0df444a360eaa60ab8c11dca51a86af692955474`, not this repository's toolchain. A later rename upstream
+changes nothing here: the record says what the declaration was called at the pin.
+
+**The criterion** (an exact propositional schema counterpart; the exported statements are about PM's
+formulas in a deep embedding, so they are never literally a library statement about Lean propositions):
+
+1. Translate PM's formula as displayed, connective for connective: ∼ is `Not`, ∨ `Or`, ⊃ `→`, . `And`,
+   ≡ `Iff`. PM's defined connectives are kept, not expanded into ∼ and ∨.
+2. Take the declaration's complete elaborated type, with every hypothesis, implicit ones included, in its
+   own order.
+3. Allow a one-to-one renaming of the propositional variables, and, for a declaration polymorphic in
+   `Sort`, the specialization of those sort parameters to propositions.
+4. Treat `Not A` and `A → False` as the same.
+5. Allow the two sides of an equivalence to be the other way round, and record where. Never reverse an
+   implication.
+6. Require the two formula trees to be equal after that. No associativity, commutativity, distributivity,
+   double negation, currying, reordering of hypotheses, identification of variables, or compound
+   formulas substituted for variables.
+7. Keep every extra assumption, `[Decidable p]` included; prefer the unconditional classical declaration
+   where there is one.
+8. Record what the counterpart's proof depends on separately from whether its statement matches.
+
+So `imp_self` is not ✱2·08 (it states `(a → a) ↔ True`; `id` specialized to propositions is), `or_comm` is
+not ✱1·4 (an equivalence for an implication; `Or.symm` is), `Function.comp` is ✱2·05 but not ✱2·06 (its
+hypotheses come in the other order), and `And.imp` is not ✱3·47 (curried where PM has a conjunction).
+That no counterpart is listed is the result of a search of Lean's core and of Mathlib's source, not a proof
+that none exists.
+
+## Readings
 
 | Tag | Word | What it is | Why this word |
 |---|---|---|---|
@@ -83,34 +120,47 @@ Two names with the same descriptor are possible (✱2·05 and ✱2·06 are both
 A ✱9 statement proved for every reading is exported under the working reading C, `_reading_russell`.
 ✱9's and ✱10's propositions stated in ✱10's system (`PM/Star10.lean`) carry no reading.
 
+Reading meanings are append-only. At a release each reading's word and meaning go into
+[data/naming/readings.lock](../data/naming/readings.lock); after that a reading can be added but never
+changed or removed, and a word is never reused. The lock of names records the reading each card was
+released under, so a statement proved for every reading keeps its name if the working reading changes
+later.
+
 ## Checks
 
-`python3 scripts/export_names.py --check` (a step of `tests/run_all.sh`; tested with seeded mutations in
-`tests/test_export_names.py`):
+`python3 scripts/export_names.py --check` (a step of `tests/run_all.sh`; each rule tested with seeded
+mutations in `tests/test_export_names.py`):
 
-- the pattern above, ASCII, with the number matching the proposition;
-- every full name unique, and every platform slug unique (`.` → `_`: a platform module is named after the
-  slug, so `PM.star2_01_…` and a top-level `PM_star2_01_…` would collide);
-- only vocabulary words after the number;
-- PM's name first, when PM gives one, and only then;
-- readings only from the closed list, only as the last part;
-- no top-level `PM_` names;
-- frozen names: every name in [data/export_names.lock](../data/export_names.lock) is still there, unchanged.
-  The lock is empty until the first public release fills it;
+- `pattern`: the rule above, in lower-case ASCII, with the number matching the proposition;
+- `suffix_order`: each optional part at most once and in the order of the rule, so `_v<N>` is last;
+- `pm_name_only`: PM's name when PM gives one, and no other word;
+- `slots`: `_df` exactly for definitions and `_rule` exactly for inference rules;
+- `readings`: readings only from the closed list, only as the suffix;
+- `readings_frozen`: the locked readings unchanged;
+- `unique_name` and `unique_slug`: every full name unique, and every platform slug (`.` → `_`) ASCII and
+  unique, also ignoring case (a platform module is named after the slug, so `PM.star2_01_abs` and a
+  top-level `PM_star2_01_abs` would collide);
+- `no_top_level`: every name is `PM.` and one component; no top-level `PM_`;
+- `vocabulary`: the descriptor only from vocabulary words;
+- `lock`: every name in [data/export_names.lock](../data/export_names.lock) still exported, with the same
+  statement, definitions and reading ([VERSIONING.md](VERSIONING.md)); empty until the first release;
+- `versions`: a `_v<N>` name has its row in [data/changes.tsv](../data/changes.tsv);
+- `counterparts`: each record pinned to its repository's commit, with a well-formed `file.lean:line`, a
+  statement equal to PM's formula up to the recorded equivalence reversals, and a PM formula equal to the
+  statement exported now. No network is needed: `--verify-counterparts DIR` checks the files and lines
+  in local checkouts, by hand;
 - data/export_names.json is what the generator produces from the current statements.
 
 ## Why
 
-- **Number first.** Every PM formalization surveyed keys on PM's numbers: Metamath set.mm (`pm2.27`;
-  "Proofs of theorems from Principia Mathematica often use a special naming convention: 'pm' followed by
-  its identifier", us.metamath.org conventions-labels), Neo-Principia and principia-rewrite (`n2_01`,
-  `Simp3_26`), l-pommeret's Lean development (`star_2_01`). A Lean name component cannot start with a
-  digit, hence a word in front; `star` says which word.
-- **PM's names next, descriptor after.** PM's names are fixed text, but cover few propositions; the
-  descriptor makes every name readable. Mathlib names a theorem after its statement with a fixed
-  dictionary of symbol words ([naming conventions](https://leanprover-community.github.io/contribute/naming.html));
-  its descriptors are written by hand and are renamed often (the `not_mem` → `notMem` change touched 696
-  files). A platform name cannot be renamed, so ours are generated from a closed vocabulary and reviewed
-  once, before release.
-- **Readings as words, last.** One prefix per proposition, and a word that says whose reading it is, not a
-  letter that needs a key.
+- **Number first, then PM's name.** Every PM formalization surveyed keys on PM's numbers, and the ones
+  that use PM's names put them beside the number: Neo-Principia (Rocq: `n2_01`, `Syll2_05`, `Simp3_26`)
+  and principia-rewrite (Coq: `Taut1_2`, `Sum1_6`); Metamath set.mm names them `pm` and the number
+  (`pm2.27`). A Lean name component cannot start with a digit, hence a word in front; `star` says which.
+- **No description in the name.** A platform name cannot be renamed, and a description can go stale or be
+  disputed: Mathlib renames its own often (the `not_mem` → `notMem` change touched 696 files), and set.mm
+  later renamed many of its pm labels to descriptive words. Prove2Me gives every card a free-text title
+  for readability, so that the theorem name need not carry it; the descriptor and the counterparts serve
+  the title and description.
+- **Readings as words, last but for the version.** One prefix per item, and a word that says whose reading
+  it is, not a letter that needs a key.

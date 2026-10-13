@@ -10,10 +10,13 @@
 | `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
 | `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order, prior work and the rows of `docs/PM_CLAIMS.md` it checks, and the repositories whose source the prior work was read in, each at a full commit ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
 | `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
-| `export_names.json` | the export name of every PM proposition the repository states, with its PM number, PM's name, descriptor, reading and source ([docs/NAMING.md](../docs/NAMING.md)) | `scripts/export_names.py` |
-| `export_names.lock` | export names that have been released and may never change; empty until the first public release | by hand, at a release |
-| `naming/vocabulary.json` | the closed list of words export names may use, and the word for each Lean connective | by hand |
+| `export_names.json` | the export name of every PM proposition the repository states, with its PM number, PM's name, slot, reading, the digests of its statement and of the definitions it uses, a descriptor for titles and search, and its source ([docs/NAMING.md](../docs/NAMING.md)) | `scripts/export_names.py` |
+| `export_names.lock` | export names that have been released, each with its Lean declaration, reading and digests; rows are only added; empty until the first public release ([docs/VERSIONING.md](../docs/VERSIONING.md)) | `scripts/export_names.py --write-lock`, at a release |
+| `naming/vocabulary.json` | the closed list of words descriptors may use, and the word for each Lean connective | by hand |
 | `naming/readings.json` | the closed list of reading words (A `printed`, C `russell`, L `landini`, B `convention`, P `prenex`) | by hand |
+| `naming/readings.lock` | the reading words and meanings released, which never change; empty until the first public release | `scripts/export_names.py --write-lock`, at a release |
+| `naming/slots.json` | which items take the `_rule` slot besides Vol I's rules in words: the primitive propositions PM states as rules | by hand |
+| `naming/counterparts.json` | the 68 exact Lean and Mathlib counterparts of ✱1–✱5, each with its declaration, statement, file and line at a pinned commit, and whether it is classical or has an equivalence reversed (metadata, not names) | by hand, from an external review |
 | `naming/pm_names.json` | PM's "Alphabetical list of propositions referred to by names" (Vol I front matter, Gutenberg eBook #78050) | `scripts/export_names.py --pm-names` |
 | `changes.tsv` | dated changes of export names: a statement superseded by `name_vN` ([docs/VERSIONING.md](../docs/VERSIONING.md)); header only until the first change | by hand, with the change |
 | `fidelity_counts.py` | the three fidelity counts per chapter, and consistency checks on the ledgers | — |

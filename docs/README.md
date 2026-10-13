@@ -16,8 +16,8 @@
 | [STAR9_READINGS.md](STAR9_READINGS.md) | ✱9 under its four readings (A as printed; C as printed + ✱8·13, the working reading; L, Landini's ✱9+, a cross-check; B, the cross-check): what each derives, and where C uses ✱8·13 and L uses Switch (generated) |
 | [STAR9_FOUNDATION.md](STAR9_FOUNDATION.md) | ✱9 by its own method (`PM/Found9/`), its agreement with ✱10 and the assumptions of that agreement, p. 142 for one apparent variable per letter, open questions |
 | [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md) | design note for classes of classes and classes of relations (✱20·03–✱20·081, ✱21·03–✱21·083) |
-| [NAMING.md](NAMING.md) | export names for formalization platforms: the rule `PM.star<N>_<M>_<descriptor>[_reading_<word>]`, how descriptors are generated, the reading words, the checks |
-| [VERSIONING.md](VERSIONING.md) | how exported names, statements and proofs change: permanent names, `_vN` for a new statement, deprecations kept forever, SemVer releases with a Merkle root, worked examples |
+| [NAMING.md](NAMING.md) | export names for formalization platforms: the rule `PM.star<N>_<M>[_<pmname>][_df\|_rule][_reading_<word>][_v<N>]`, the slots for definitions and rules, the reading words, Lean and Mathlib counterparts as metadata and the criterion for them, the checks |
+| [VERSIONING.md](VERSIONING.md) | how exported names, statements and proofs change: permanent names locked to their statements, `_vN` for a new statement, frozen reading meanings, deprecations kept forever, SemVer releases with a Merkle root, worked examples |
 | [EXPORT_LOG.md](EXPORT_LOG.md) | the dated public log of exports and export-tooling fixes |
 | [TYPES_DESIGN.md](TYPES_DESIGN.md) | design note for ✱12 onward: ramified types, decisions with their pages, acceptance tests, decisions log and open questions |
 

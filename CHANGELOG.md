@@ -5,6 +5,24 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Export names: PM's number and PM's own name only** (docs/NAMING.md), before any release. A name is
+  `PM.star<N>_<M>[_<pmname>][_df|_rule][_reading_<word>][_v<N>]`: no generated descriptor and no Mathlib
+  word (✱2·01 is `PM.star2_01_abs`, ✱2·14 `PM.star2_14`); 523 names, the longest 33 characters (was 56).
+  The descriptor stays in data/export_names.json as a field for titles and search. New slots `_df` for
+  definitions and `_rule` for inference rules (data/naming/slots.json), used now by twelve names (✱9·12,
+  ✱9·13, ✱10·01, ✱10·11, ✱10·13, ✱11·07, ✱11·11, ✱11·13, ✱11·311). `_vN` is the last part. Exact Lean and
+  Mathlib counterparts of ✱1–✱5 are metadata, data/naming/counterparts.json: 68 records pinned to Lean
+  `819816b` and Mathlib `0df444a`, under a structural criterion stated in docs/NAMING.md (only the two
+  sides of an equivalence may be swapped; 20 counterparts are classical, 17 swap sides). The lock binds
+  meaning: `Checks/ExportStatements.lean` also prints each statement's elaborated type in a canonical text
+  and the definitions it uses, data/export_names.json carries a statement digest and a definitions digest,
+  and data/export_names.lock (empty until the first release) records them with the reading each card is
+  released under; a locked name whose statement or definitions change fails with a pointer to `_vN` and
+  data/changes.tsv, and a later change of ✱9's working reading renames nothing locked. Reading meanings
+  are append-only once locked (data/naming/readings.lock). Checks for slug uniqueness ignoring case, the
+  order of suffixes, the slots, a changes.tsv row for each `_vN`, and the counterparts (pinned commit,
+  well-formed file:line, statement equal to the exported one up to the recorded swaps); 33 seeded
+  mutations in tests/test_export_names.py. Follows an external review of the naming plan.
 - **Licence: `MIT OR Apache-2.0`.** The code, ledgers and documentation are now dual licensed, at the
   user's option, under the MIT License (`LICENSE`, renamed `LICENSE-MIT`, same holder) and the Apache
   License 2.0 (`LICENSE-APACHE`, the text of apache.org, sha256 `cfc7749b…`). docs/FORMALIZATION_COMPARISON.md

@@ -1,0 +1,15 @@
+{
+ "about": "Name slots for PM's numbered items that are not asserted propositions (docs/NAMING.md). A definition is PM.star<N>_<M>_df: the items of category Df in data/vol1_items.json. An inference rule is PM.star<N>_<M>_rule: the items of category rule/prose there (rules PM states in words), and the primitive propositions (Pp) listed here, which PM states as rules or in words rather than as an asserted formula. Every other Pp (*1.2-*1.6, *9.1, *9.11, *12.1, *12.11) is an asserted formula and takes no slot.",
+ "pp_rules": {
+  "*1.1": "anything implied by a true elementary proposition is true (modus ponens)",
+  "*1.11": "modus ponens for asserted propositional functions of a real variable",
+  "*1.7": "if p is an elementary proposition, ~p is one",
+  "*1.71": "if p and q are elementary propositions, p v q is one",
+  "*1.72": "if phi p and psi p are elementary propositional functions, phi p v psi p is one",
+  "*3.03": "two asserted propositional functions give their product (adjunction)",
+  "*9.12": "what is implied by a true premiss is true (modus ponens for *9)",
+  "*9.13": "a real variable of an assertion may be turned into an apparent variable (generalization)",
+  "*9.14": "if phi x is significant and a is of the type of x, phi a is significant, and conversely",
+  "*9.15": "if there is a proposition phi a, there is a function phi x-hat, and conversely"
+ }
+}

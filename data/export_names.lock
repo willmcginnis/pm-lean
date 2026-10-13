@@ -1,0 +1,4 @@
+# Released export names (docs/VERSIONING.md): each name with the Lean declaration it was
+# released from, its reading, and the digests of its statement and of the definitions it
+# uses. Rows are only ever added. Written by scripts/export_names.py --write-lock.
+export	lean	reading	statement_digest	definitions_digest
