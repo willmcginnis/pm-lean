@@ -11,6 +11,7 @@ import importlib.util
 import json
 import os
 import pathlib
+import shutil
 import sys
 import tempfile
 import unittest
@@ -412,6 +413,43 @@ class TestExportNames(unittest.TestCase):
             rows, defs = export_names.lean_output()
             self.assertEqual(export_names.build(rows, defs, ctx)[0], es)
             self.assertEqual(clean(export_names.check(es, ctx)), {})
+
+    def lock_fixed_point(self, rows, defs, d):
+        """generate → --write-lock → generate (→ --write-lock) in the directory d: the same entries, and the
+        same lock written twice. Returns the entries."""
+        lock, rlock = pathlib.Path(d) / "export_names.lock", pathlib.Path(d) / "readings.lock"
+        ctx = export_names.context(lock, rlock)
+        es = export_names.build(rows, defs, ctx)[0]
+        export_names.write_lock(es, ctx, lock, rlock)
+        written = lock.read_bytes(), rlock.read_bytes()
+        ctx = export_names.context(lock, rlock)
+        again = export_names.build(rows, defs, ctx)[0]
+        self.assertEqual(again, es)
+        export_names.write_lock(again, ctx, lock, rlock)
+        self.assertEqual((lock.read_bytes(), rlock.read_bytes()), written)
+        return es
+
+    def test_lock_is_a_fixed_point(self):
+        # for the declarations as Lean has them now, whatever is locked already: locking changes no entry
+        rows, defs = export_names.lean_output()
+        with tempfile.TemporaryDirectory() as d:
+            shutil.copy2(export_names.LOCK, pathlib.Path(d) / "export_names.lock")
+            shutil.copy2(export_names.READINGS_LOCK, pathlib.Path(d) / "readings.lock")
+            self.lock_fixed_point(rows, defs, d)
+
+    def test_locked_replacements_keep_their_chain(self):
+        # q21_71 → q21_71_v2 → q21_71_v3, each generation locked in turn: every replacement keeps the link
+        # to the one it replaces (end to end, with Lean and data/changes.tsv: tests/test_versioning.py)
+        rows, defs = export_names.lean_output()
+        q = next(r for r in rows if r["name"] == "PM.q21_71")
+        with tempfile.TemporaryDirectory() as d:
+            for n in (2, 3):
+                rows = rows + [{**copy.deepcopy(q), "name": f"PM.q21_71_v{n}"}]
+                es = {e["lean"]: e for e in self.lock_fixed_point(rows, defs, d)}
+            self.assertNotIn("supersedes", es["PM.q21_71"])
+            self.assertEqual(es["PM.q21_71_v2"]["supersedes"], "PM.star21_71")
+            self.assertEqual(es["PM.q21_71_v3"]["supersedes"], "PM.star21_71_v2")
+            self.assertEqual(es["PM.q21_71_v3"]["export"], "PM.star21_71_v3")
 
     def test_working_reading_change_renames_nothing_released(self):
         # statements valid under every reading are exported under the working reading; after a release, a

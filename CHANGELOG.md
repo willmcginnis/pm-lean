@@ -5,6 +5,13 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **A locked replacement keeps its link to the card it replaces.** Found by a release review of the
+  export names, before any release. Once a replacement `_v2` was itself locked, the generator dropped
+  its `supersedes`, and the next check failed with no change to the source. The link now comes from the
+  Lean names whether or not the replacement is locked, so locking is a fixed point: generate,
+  `--write-lock`, generate gives the same files. `tests/test_versioning.py` now runs the whole life
+  cycle twice (supersede, release, regenerate; then `_v3`), and `tests/test_export_names.py` checks the
+  fixed point for the repository and for a chain locked in turn (docs/VERSIONING.md).
 - **Counterparts checked against their declarations' types; superseded cards keep their names.** Found by
   a release review of the export names, before any release.
   - **Counterparts.** A counterpart's record was trusted for its formula. Another real declaration with

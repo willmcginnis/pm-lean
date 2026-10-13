@@ -653,7 +653,8 @@ def without_version(name):
 def build(rows, defs, ctx):
     """The entries for the statements of `rows`. A locked declaration keeps its locked name and reading,
     also when it has moved to PM.Deprecated (docs/VERSIONING.md); a declaration `<lean>_v<N>` is the
-    replacement of `<lean>` (or `<lean>_v<N-1>`) and is exported as that one's name with `_v<N>`."""
+    replacement of `<lean>` (or `<lean>_v<N-1>`) and is exported as that one's name with `_v<N>`; it
+    supersedes that one, locked or not, so that locking a replacement changes nothing (a fixed point)."""
     vocab, readings = ctx["vocab"], ctx["readings"]
     names_by_num = {}
     for r in ctx["pm_names"]["names"]:
@@ -666,12 +667,13 @@ def build(rows, defs, ctx):
 
     def named(lean, pm, pmn, reading):
         """(export name, reading tag) of the declaration `lean`, and the export name it supersedes."""
+        base, n = without_version(lean)
+        before = None if n == 1 else base if n == 2 else f"{base}_v{n - 1}"   # the declaration it replaces
         if lean in locked:             # released: the name and reading stay as locked
             lk = locked[lean]
-            return lk["export"], (tag_of_word.get(lk["reading"]) if lk["reading"] else None), None
-        base, n = without_version(lean)
-        if n > 1:                      # the replacement of the declaration before it
-            before = base if n == 2 else f"{base}_v{n - 1}"
+            return (lk["export"], (tag_of_word.get(lk["reading"]) if lk["reading"] else None),
+                    named(before, pm, pmn, reading)[0] if before else None)
+        if before:                     # the replacement of the declaration before it
             old, reading, _ = named(before, pm, pmn, reading)
             return f"{without_version(old)[0]}_v{n}", reading, old
         return compose(pm, pmn, slot_of.get(pm), readings[reading]["word"] if reading else None), reading, None

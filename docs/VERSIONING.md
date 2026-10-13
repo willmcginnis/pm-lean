@@ -34,6 +34,11 @@ Nothing here has been released yet: the first public export will be 1.0.0. The p
    `@[deprecated]` target. The generator gives a locked declaration its locked name wherever it now
    lives. It exports `<lean>_v<N>` as the name of the declaration it replaces with `_v<N>`, and marks the
    old entry `deprecated`, with `superseded_by` and `deprecated_since`, and the new one `supersedes`.
+   The links come from the Lean names, so they stay when the replacement is itself locked: locking
+   changes no entry (generate, `--write-lock`, generate again gives the same files, byte for byte). A
+   replacement superseded in turn moves to `PM/Deprecated/` like any other, so a chain
+   `PM.star21_71` → `PM.star21_71_v2` → `PM.star21_71_v3` has each deprecated card pointing to its direct
+   replacement (`superseded_by`) and each replacement to the card it replaces (`supersedes`).
 6. **Every change of name is dated** in [data/changes.tsv](../data/changes.tsv): `date`, `old`, `new`,
    `reason`, `statement_id` (the new statement's digest, below), one row per card. A row renames nothing:
    the names come from the declarations. The `versions` check requires that the three records agree: the
@@ -115,10 +120,21 @@ Lean statement is corrected, its statement digest differs from the locked one an
   new statement digest;
 - release 1.0.0 → 1.1.0, with a new root.
 
-`tests/test_versioning.py` does this end to end for ✱21·71 in a scratch copy of the repository: release,
-supersede, rebuild. It checks that both names are exported, that the old one keeps its digest and the
-new one is `_v2`, and that every check passes, the lock included; and that the check fails without the
-row of changes.tsv, or without the old declaration.
+`tests/test_versioning.py` does this end to end for ✱21·71 in a scratch copy of the repository, through
+the whole life cycle, twice:
+
+1. release: `--check --write-lock` locks every name;
+2. supersede: `PM.q21_71` to `PM/Deprecated/Star21.lean` unchanged, `PM.q21_71_v2` in `PM/Star21.lean`,
+   rebuild, the row of changes.tsv; both names are exported, the old one with its digest, the new one as
+   `_v2`, and every check passes, the lock included (and fails without the row);
+3. release `_v2`: `--check --write-lock`, then regenerate, lock again and check: every generated file and
+   the lock are byte for byte the same, and `_v2` still `supersedes` `PM.star21_71`;
+4. supersede `_v2` by `PM.q21_71_v3` and release it the same way: the chain of three stays linked, each
+   deprecated card to its direct replacement;
+5. without the old declarations the check fails.
+
+`tests/test_export_names.py` checks the same fixed point without Lean, for the repository as it is (under
+its current lock) and for a chain `_v2`, `_v3` locked in turn.
 
 **A definition changed, rippling to 40 cards.** Suppose ✱20·01, the definition of a class in a context,
 must change. The definition gets a new name (`…_v2`), and every card whose statement uses it, directly or
