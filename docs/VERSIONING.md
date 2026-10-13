@@ -1,9 +1,9 @@
 # Versioning of exports
 
 How exported names, statements and proofs change over time, and how export releases are numbered.
-The first export release, 1.0.0 (✱1–✱5 on Prove2Me), is prepared: its names are locked, and it becomes
-public when the maintainer approves ([EXPORT_LOG.md](EXPORT_LOG.md)). The private pilot of ✱1–✱5 has no
-version.
+The first export release, 1.0.0 (✱1–✱5 on Prove2Me), is public since 2026-10-13: its names are locked,
+and it is tagged `export-v1.0.0` on the commit exported ([EXPORT_LOG.md](EXPORT_LOG.md)). The private
+pilot of ✱1–✱5 has no version.
 
 ## Rules
 
@@ -78,7 +78,9 @@ the content: two releases with the same root export the same statements. 1.0.0 i
 message gives the full version with its root and the platform environment, e.g.
 `export-v1.0.0` with message `1.0.0+m.7d40537313d3, Lean v4.33.1`. The root is left out of the tag's name
 because `+` in a tag name is awkward in URLs, and because one version never has two roots. Repository tags
-for other purposes stay separate.
+for other purposes stay separate. The tag of 1.0.0, `export-v1.0.0` on 2e43991, gives the full version and
+the commit that corrected its descriptions before release, not the environment (Lean v4.33.1, recorded in
+EXPORT_LOG.md).
 
 ### Digests
 
@@ -110,8 +112,11 @@ Built for 1.0.0. The root is the Merkle Tree Hash of [RFC 6962](https://www.rfc-
 name, `<export name>\t<statement_digest>\t<definitions_digest>` in UTF-8, the leaves sorted by export
 name: a leaf is hashed as SHA-256(0x00 ‖ leaf), two subtrees as SHA-256(0x01 ‖ left ‖ right), and a
 tree of n > 1 leaves splits after the largest power of two less than n. `tests/test_export_names.py`
-checks the implementation against the RFC's published test vectors. A deprecated name stays in the lock,
-so it stays a leaf. Proofs are not hashed: a PATCH release keeps the root.
+checks the implementation against the test vectors of Certificate Transparency's reference
+implementation (github.com/google/certificate-transparency): the roots of the trees of 1 to 8 leaves in
+its tests,
+[python/ct/crypto/merkle_test.py](https://github.com/google/certificate-transparency/blob/ab756a77a5f4b49d609b73040fbe710f4e05e0fa/python/ct/crypto/merkle_test.py).
+RFC 6962 itself publishes no test vectors. A deprecated name stays in the lock, so it stays a leaf. Proofs are not hashed: a PATCH release keeps the root.
 
 Still planned: a hash of each definition and card computed without its own name and with the hashes of
 the definitions it refers to in place of their names (as in Unison), so that a renamed definition changes

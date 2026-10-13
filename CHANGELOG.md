@@ -5,6 +5,13 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Export release 1.0.0 is public** (docs/EXPORT_LOG.md): version 1.0.0+m.7d40537313d3, PM ✱1–✱5 on
+  Prove2Me, exported from 2e43991 and tagged `export-v1.0.0` there; its 68 roots were made public, and with
+  them all 196 cards and the 4 definition bundles. Its descriptions were corrected by aeb8eab before
+  release. The lock and its root are unchanged. The Merkle test vectors are attributed to their source:
+  they come from the tests of Certificate Transparency's reference implementation
+  (python/ct/crypto/merkle_test.py), not from RFC 6962, which publishes none; the entry below called them
+  the RFC's (docs/VERSIONING.md).
 - **Two descriptions of export 1.0.0 corrected before release** (docs/EXPORT_LOG.md). Found by a release
   review. The bundle `PM_core_statement_formulas` was described as containing a tautology check after
   each definition; the checks are in PM/Statements.lean, not in the bundle, and the description now

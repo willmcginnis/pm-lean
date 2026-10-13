@@ -526,8 +526,10 @@ class TestExportNames(unittest.TestCase):
             self.assertIn(f"1.0.0+m.{root[:12]}", text, doc)
             self.assertEqual(set(re.findall(r"1\.0\.0\+m\.([0-9a-f]+)", text)), {root[:12]}, doc)
 
-    def test_merkle_tree_hash_rfc6962_vectors(self):
-        # the test vectors of Certificate Transparency's reference implementation, for 1 to 8 leaves
+    def test_merkle_tree_hash_ct_vectors(self):
+        # the test vectors of Certificate Transparency's reference implementation, for 1 to 8 leaves:
+        # test_vector_leaves and test_vector_hashes in python/ct/crypto/merkle_test.py of
+        # github.com/google/certificate-transparency (RFC 6962 itself publishes none)
         leaves = [bytes.fromhex(h) for h in ["", "00", "10", "2021", "3031", "40414243", "5051525354555657",
                                              "606162636465666768696a6b6c6d6e6f"]]
         roots = ["6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
