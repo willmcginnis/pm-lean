@@ -5,6 +5,16 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Two descriptions of export 1.0.0 corrected before release** (docs/EXPORT_LOG.md). Found by a release
+  review. The bundle `PM_core_statement_formulas` was described as containing a tautology check after
+  each definition; the checks are in PM/Statements.lean, not in the bundle, and the description now
+  links them. The bundle `PM_core_star1_system` said every card states that a formula is a theorem of ✱1,
+  which is true of the numbered propositions only. Only `metadata.json` changes; the Lean files and the
+  lock do not, and the version stays 1.0.0+m.7d40537313d3.
+- **The search for forbidden keywords exempts one file only.** Found by the same review: the exemption
+  for `unsafe def main` covered any Lean file under scripts/; it now covers
+  scripts/prove2me/extract_commands.lean alone, by path and line (`tests/forbidden_keywords.sh`), and
+  `tests/test_forbidden_keywords.py` checks that the same line anywhere else is found.
 - **Export release 1.0.0 prepared** (docs/EXPORT_LOG.md), not yet public: PM ✱1–✱5 on Prove2Me, 196
   cards and 4 definition bundles, version **1.0.0+m.7d40537313d3**. `data/export_names.lock` now holds the
   196 names released (`scripts/export_names.py --write-lock --chapters 1-5`, which locks only the chapters

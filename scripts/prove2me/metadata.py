@@ -180,7 +180,7 @@ def main(argv):
                             "tags": [], "explanation": explanation(pm, label, f, vars_, nd, led1, led2, is_pp),
                             "pm": pm, "pm_name": pname, "page": page, "formula_latex": f["latex"]}
     for d in man["definitions"]:
-        meta["definitions"][d["definition_name"]] = definition_meta(d, cfg, bundles)
+        meta["definitions"][d["definition_name"]] = definition_meta(d, cfg, bundles, repo, out)
     json.dump(meta, open(os.path.join(out, "metadata.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     longest = max(len(m["theorem_title"]) for m in meta["nodes"].values())
     print(f"metadata: {len(meta['definitions'])} definitions, {len(meta['nodes'])} cards, longest title {longest} characters")
@@ -336,7 +336,8 @@ DEFS = {
                  "for all formulas $p, q, r$, and closed under the rule ✱1·1: from $p$ and $p \\supset q$ infer $q$.\n"
                  "4. **Truth tables**: the two-valued value of a formula under a valuation, the variables of a formula, "
                  "and the decidable test that a formula is a tautology.\n\n"
-                 "Every card of PM ✱1–✱5 states that some formula is a theorem of ✱1 in this sense.\n\n"
+                 "The card of each numbered proposition of ✱1–✱5 states that its formula is a theorem of ✱1 in "
+                 "this sense.\n\n"
                  "**Formalization Note** PM states the primitive propositions with real variables and a rule of "
                  "substitution; here they are schemas over arbitrary formulas, which has the same effect (✱1·11)."),
     "PM.Statements": ("PM ✱2–✱5: the statement formulas",
@@ -345,8 +346,7 @@ DEFS = {
                       "$(p \\supset {\\sim}p) \\supset {\\sim}p$, as a function of its propositional variables. "
                       "The formulas use the connectives of the bundle `PM_core_star1_system` (✱1·01, ✱3·01, ✱4·01 as "
                       "definitions).\n\n"
-                      "Each definition is followed by a check, run by Lean's kernel at compile time, that the formula "
-                      "is a truth-table tautology.\n\n"
+                      "{checks}\n\n"
                       "These are the statements of the cards: the card for ✱x·y asserts that `sx_y` is a theorem of "
                       "✱1 for all formulas substituted for its variables.\n\n"
                       "**Formalization Note** Generated in the source repository (`scripts/gen_lean.py`) from the "
@@ -374,9 +374,26 @@ DEFS = {
 }
 
 
-def definition_meta(d, cfg, bundles):
+def statement_checks(d, repo, out):
+    """Where the source checks that each formula of the bundle is a tautology: the `example … := by decide`
+    after each `def` in PM/Statements.lean. The bundle keeps the definitions only, so the checks are not in it."""
+    defs = re.findall(r"^def (s\w+) ", open(os.path.join(out, d["file"]), encoding="utf-8").read(), re.M)
+    src = open(os.path.join(repo, "PM", "Statements.lean"), encoding="utf-8").read().splitlines()
+    rows = [(i + 1, m.group(1)) for i, l in enumerate(src)
+            if (m := re.fullmatch(r"example : \((s\w+)[ )].*\)\.isTaut = true := by decide", l)) and m.group(1) in defs]
+    assert sorted(n for _, n in rows) == sorted(defs), "a definition of the bundle without its check in the source"
+    first, last = rows[0][0], rows[-1][0]
+    return (f"In the source repository each of these definitions is followed by a check, run by Lean's kernel when "
+            f"the file is compiled, that the formula is a truth-table tautology (`{src[first - 1]}`): {len(rows)} "
+            f"checks, in [PM/Statements.lean, lines {first}–{last}]({d['source']}#L{first}-L{last}). The checks are "
+            "not part of this bundle, which keeps the definitions only.")
+
+
+def definition_meta(d, cfg, bundles, repo, out):
     title, nls = DEFS[d["module"]]
     assert bundles[d["definition_name"]]["module"] == d["module"]
+    if "{checks}" in nls:
+        nls = nls.replace("{checks}", statement_checks(d, repo, out))
     return {"definition_title": title,
             "natural_language_statement": draft(cfg) + "\n\n" + nls + f"\n\nSource: [{d['module']}]({d['source']}).",
             "source": f"Whitehead and Russell, Principia Mathematica, Vol. I (1910), ✱1–✱5; formalization: {d['source']}",
