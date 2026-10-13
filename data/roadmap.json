@@ -2847,9 +2847,9 @@
               "name": "Statement mutation: are statements tied to their proofs and to PM?",
               "short": "statement mutation",
               "size": "S",
-              "size_reason": "A Lean meta-program over the proof terms and a driver that recompiles mutated sources: unused hypotheses in every theorem; one-change mutants of every ✱1–✱5 and ✱9–✱21 statement checked against the original proof term by the kernel; for ✱1–✱5, the proof scripts re-elaborated against every mutant that is a tautology. Two tiers: the full run (about 9 minutes on the maintainer's machine) and a quick sample for the export path (under 10 seconds).",
+              "size_reason": "A Lean meta-program over the proof terms and a driver that recompiles mutated sources: unused hypotheses in every theorem written in the source; one-change mutants of every ✱1–✱5 and ✱9–✱21 statement checked against the original proof term by the kernel; for the ✱1–✱5 statements proved in the replay files, the proof scripts re-elaborated against every mutant that is a tautology. Two tiers, each building first: the full run (about 10 minutes on the maintainer's machine) and a quick sample for the export path (about 10 seconds).",
               "status": "in progress",
-              "status_note": "A trial (docs/STATEMENT_MUTATION.md). No theorem has an unused hypothesis (661 hypotheses in 1134 theorems), and none of the 171 recompiled with a hypothesis replaced by True compiles. No proof term accepts any of 12,711 mutants, among them 836 one-change misreadings of ✱1–✱5 that are still tautologies, which the truth-table test alone would accept. Re-elaborating the ✱1–✱5 proof scripts, 14 of 1,155 tautological mutants compile, all renamings of the variables in eight natural-deduction proofs, so equivalent. Which parts become standing checks awaits a ruling.",
+              "status_note": "A trial (docs/STATEMENT_MUTATION.md). No theorem has an unused hypothesis (673 hypotheses in 1147 theorems written in the source), and none of the 174 recompiled with a hypothesis replaced by True compiles. No proof term accepts any of 12,711 mutants, among them 836 one-change misreadings of ✱1–✱5 that are still tautologies, which the truth-table test alone would accept. Re-elaborating the ✱1–✱5 proof scripts, 14 of 1,155 tautological mutants compile, all renamings of the variables in eight natural-deduction proofs, so equivalent; 813 of the 836 misreadings are among the 1,155. The other 23 are mutants of the primitive propositions ✱1·2–✱1·6, Thm's constructors, which have no script and are checked against the proof term only. Which parts become standing checks awaits a ruling.",
               "hard_deps": [],
               "soft_deps": [],
               "order": "by dependency",
@@ -2857,7 +2857,7 @@
                 "effect": [
                   "ideas"
                 ],
-                "note": "Listed from memory; not yet searched with several engines. Lean's own unused-variables linter sees two of the five cases the check plants for itself (docs/STATEMENT_MUTATION.md).",
+                "note": "Listed from memory; not yet searched with several engines. Lean's own unused-variables linter sees four of the seven cases the check plants for itself (docs/STATEMENT_MUTATION.md).",
                 "known": [
                   {
                     "work": "Vacuity detection in model checking: a specification that holds for a reason other than the intended one (Beer, Ben-David, Eisner and Rodeh, 1997; Kupferman and Vardi, 1999)",

@@ -4,15 +4,19 @@
     python3 scripts/mutation/mutate.py --quick   the export-path tier, well under a minute
     python3 scripts/mutation/mutate.py --full    everything; several minutes to tens of minutes
 
-Both run scripts/mutation/StatementMutation.lean (Part 1, unused hypotheses, on every theorem; Part 2,
-statement mutants checked against the original proof term by the kernel: in --quick on a fixed sample
-of ✱1–✱5, in --full on all of ✱1–✱5 and ✱9–✱21). --full adds two recompilations:
+Both first run `lake build` on the modules the meta-program imports, so that what is analysed is the
+proofs in the sources; then scripts/mutation/StatementMutation.lean (Part 1, unused hypotheses, on every
+theorem written in the source; Part 2, statement mutants checked against the original proof term by
+the kernel: in --quick on a fixed sample of ✱1–✱5, in --full on all of ✱1–✱5 and ✱9–✱21). --full adds
+two recompilations:
 
-  re-elaboration   each ✱1–✱5 mutant that is a tautology (and every 10th of the others, and the
-                   unchanged statement as a control) is compiled with the original proof SCRIPT, the
-                   statement's definition `s…` replaced by the mutant. Only a tautology can have a
-                   proof at all (✱1–✱5 is sound, `PM.sound`), so these are the mutants a proof by a
-                   decision procedure, rather than by PM's derivation, could still prove.
+  re-elaboration   each mutant that is a tautology of a ✱1–✱5 statement proved in a replay file (and
+                   every 10th of the others, and the unchanged statement as a control) is compiled with
+                   the original proof SCRIPT, the statement's definition `s…` replaced by the mutant.
+                   Only a tautology can have a proof at all (✱1–✱5 is sound, `PM.sound`), so these are
+                   the mutants a proof by a decision procedure, rather than by PM's derivation, could
+                   still prove. The primitive propositions ✱1·2–✱1·6 are `Thm`'s constructors and have
+                   no script: their mutants are checked against the proof term only.
   hypotheses       each hypothesis of a theorem proved by tactics (and every 25th of the others) is
                    replaced by `True` (a class argument is removed) in a copy of its file cut after
                    the theorem, and the copy is compiled.
@@ -55,6 +59,22 @@ def module_lines(module, cache={}):
     return cache[module]
 
 
+def build_targets(path=ROOT / LEAN_FILE):
+    """The repository's modules the meta-program imports (`import Lean` is the toolchain's)."""
+    mods = re.findall(r"^import\s+(\S+)", path.read_text(encoding="utf-8"), re.M)
+    return [m for m in mods if m.split(".")[0] != "Lean"]
+
+
+def build():
+    """Bring the oleans of what the meta-program imports up to date, so that it reads the proofs in the
+    sources and not those of an earlier build; on an up-to-date tree this takes about a second. The
+    recompilations import only modules within the same closure."""
+    r = subprocess.run(["lake", "build", *build_targets()], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode != 0:
+        print(r.stdout + r.stderr)
+        sys.exit("lake build failed: the proofs are not analysed")
+
+
 def run_meta(mode):
     WORK.mkdir(parents=True, exist_ok=True)
     out = WORK / f"{mode}.jsonl"
@@ -68,6 +88,12 @@ def run_meta(mode):
 
 # ---------------------------------------------------------------- re-elaboration (✱1–✱5, --full)
 
+def has_script(st):
+    """A ✱1–✱5 statement proved in a replay file. The others, ✱1·2–✱1·6, are `Thm`'s constructors:
+    no proof script, so only the check against the proof term applies to them."""
+    return st["isF"] and st["module"] in ("PM.Replay", "PM.Replay2", "PM.Derived")
+
+
 def reelab_files(stmts, muts):
     """One file per theorem: the control, then each selected mutant, each in its own namespace with
     the statement's definition replaced. Returns [(path, decl, [(key, first line, last line)])]."""
@@ -79,7 +105,7 @@ def reelab_files(stmts, muts):
     d.mkdir(parents=True, exist_ok=True)
     files = []
     for st in stmts:
-        if not st["isF"] or st["module"] not in ("PM.Replay", "PM.Replay2", "PM.Derived"):
+        if not has_script(st):
             continue
         L = module_lines(st["module"])
         theorem = L[st["line"] - 1:st["endLine"]]
@@ -227,8 +253,10 @@ def main():
     args = ap.parse_args()
     mode = "full" if args.full else "quick"
     t0 = time.time()
+    build()
+    t_build = time.time() - t0
     recs = run_meta(mode)
-    t_meta = time.time() - t0
+    t_meta = time.time() - t0 - t_build
     expected = json.loads(EXPECTED.read_text())
     problems = []
     for cat in ("unusedHypotheses", "termSurvivors", "scriptSurvivors", "droppableHypotheses"):
@@ -241,7 +269,9 @@ def main():
     unused = [r for r in recs if r["part"] == "hyp"]
     print(f"Part 1, unused hypotheses: {summ['theorems']} theorems, {summ['hypotheses']} hypotheses "
           f"({', '.join(f'{k} {v}' for d in summ['byKind'] for k, v in d.items())}); unused: {len(unused)}; "
-          f"planted cases flagged: {len(summ['plantedFlagged'])} of 5")
+          f"planted cases flagged: {len(summ['plantedFlagged'])} of {summ['plantedExpected']}")
+    print(f"  left out as generated by Lean: "
+          f"{', '.join(f'{n} {k}' for d in summ['generated'] for k, n in sorted(d.items()))}")
     known = {e["id"] for e in expected["unusedHypotheses"]}
     for r in unused:
         key = f"{r['decl']}:{r['binder']}"
@@ -298,6 +328,11 @@ def main():
         print(f"Re-elaboration of ✱1–✱5 proof scripts: {len(ctrl)} controls ({len(bad)} fail), "
               f"{sum(r['taut'] is True for r in mres)} tautological mutants and "
               f"{sum(r['taut'] is not True for r in mres)} others; {len(surv)} still compile ({t_re:.0f} s)")
+        prim = {s["decl"] for s in stmts if s["isF"] and not has_script(s)}
+        ptaut = [m for m in muts if m["decl"] in prim and m["taut"] is True]
+        print(f"  not re-elaborated: {len(prim)} primitive propositions (Thm's constructors, no proof "
+              f"script), {len(ptaut)} tautological mutants ({sum(m['op'].split()[0] != 'swap' for m in ptaut)} not "
+              f"renamings); checked against the proof term only")
         problems += [f"re-elaboration control fails: {d}" for d in bad]
         known = {e["id"] for e in expected["scriptSurvivors"]}
         for r in surv:
@@ -336,7 +371,7 @@ def main():
         for e in expected[cat]:
             if e["id"] not in found[cat]:
                 problems.append(f"stale entry of expected.json ({cat}): {e['id']}")
-    print(f"wall time: {time.time() - t0:.0f} s (Lean meta-program {t_meta:.0f} s)")
+    print(f"wall time: {time.time() - t0:.0f} s (lake build {t_build:.0f} s, Lean meta-program {t_meta:.0f} s)")
     if problems:
         print("FAILED:\n  " + "\n  ".join(problems))
         sys.exit(1)

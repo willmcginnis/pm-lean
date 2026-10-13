@@ -3,12 +3,16 @@
 `mutate.py --full` recompiles theorems with one hypothesis replaced by `True` (a class argument removed),
 editing a copy of the source file (docs/STATEMENT_MUTATION.md). An edit that hit the wrong binder, or
 none, would make a needed hypothesis look needed for the wrong reason, or skip it silently. These tests
-pin the edit on each binder form the repository uses, without running Lean; and every finding listed in
+pin the edit on each binder form the repository uses, without running Lean; the driver runs `lake build`
+before it analyses anything, and stops if the build fails; and every finding listed in
 scripts/mutation/expected.json has a class the file explains.
 """
+import contextlib
 import importlib.util
+import io
 import json
 import os
+import subprocess
 import sys
 import unittest
 
@@ -83,6 +87,46 @@ class SourceEditor(unittest.TestCase):
         text, why = mutate.drop_hypothesis(h, lines)
         self.assertIsNone(why)
         self.assertIn("theorem syl {a b c : F} (h1 : True) (h2 : Thm (imp b c))", text)
+
+
+class BuildFirst(unittest.TestCase):
+    """The driver builds before it analyses: run against oleans older than the sources, it would report
+    on proofs that are no longer there. `subprocess.run` is replaced, so no Lean runs."""
+
+    def run_main(self, build_rc):
+        calls = []
+
+        def fake_run(cmd, **kw):
+            calls.append(cmd)
+            if cmd[:2] == ["lake", "build"]:
+                return subprocess.CompletedProcess(cmd, build_rc, "", "error: stale" if build_rc else "")
+            raise RuntimeError("analysed")   # the meta-program would run here
+
+        saved, argv = mutate.subprocess.run, sys.argv
+        mutate.subprocess.run, sys.argv = fake_run, ["mutate.py", "--quick"]
+        try:
+            with contextlib.redirect_stdout(io.StringIO()):
+                mutate.main()
+        except (SystemExit, RuntimeError) as e:
+            return calls, e
+        finally:
+            mutate.subprocess.run, sys.argv = saved, argv
+        return calls, None
+
+    def test_targets_are_the_imports(self):
+        self.assertEqual(mutate.build_targets(), ["PM", "Checks.PinnedStatements"])
+
+    def test_build_before_analysis(self):
+        calls, e = self.run_main(0)
+        self.assertEqual(calls[0], ["lake", "build", "PM", "Checks.PinnedStatements"])
+        self.assertEqual(calls[1][:3], ["lake", "env", "lean"])
+        self.assertIsInstance(e, RuntimeError)
+
+    def test_failed_build_stops_the_run(self):
+        calls, e = self.run_main(1)
+        self.assertEqual(len(calls), 1)
+        self.assertIsInstance(e, SystemExit)
+        self.assertIn("lake build failed", str(e.code))
 
 
 class Expected(unittest.TestCase):

@@ -2,7 +2,8 @@
 -- sets PM_MUTATION_MODE (`full` or `quick`) and PM_MUTATION_OUT (a JSON-lines file this writes);
 -- docs/STATEMENT_MUTATION.md says what each record means.
 --
--- Part 1, unused hypotheses (every theorem of the PM and Checks libraries). A hypothesis is a binder of
+-- Part 1, unused hypotheses (every theorem of the PM and Checks libraries written in the source, told
+-- from what Lean generates by its declaration range, not by its name). A hypothesis is a binder of
 -- the statement that is a premise (its type is a proposition), an instance of a class of ours
 -- (`[Reducibility S]`), or a variable that occurs nowhere in the rest of the statement (a real variable
 -- such as ✱10·25's y, which only asks for an argument to exist). It is unused when the proof term, with
@@ -28,7 +29,8 @@ import Checks.PinnedStatements
 open Lean Meta Elab Command
 
 /-! Planted cases that Part 1 must classify as marked (it fails otherwise). Lean's unused-variables
-    linter sees only the first and fourth. -/
+    linter sees only the first, fourth and the last two. The last two are named the way Lean names what
+    it generates (`eq_…`, a private name): they must not be mistaken for generated declarations. -/
 namespace PMMutationTest
 open PM
 set_option linter.unusedVariables false
@@ -46,6 +48,10 @@ theorem unusedVariable {V : Ty → Type} {S : Sys} {τ : Ty} (p : QF V) (y : V �
 /-- unused: a class of ours the proof does not need -/
 theorem unusedClass {V : Ty → Type} {S : Sys} [Reducibility S] (p : QF V) :
     QThm S (QF.imp p p) := QL.t2_08 p
+/-- unused: a premise the proof never mentions, in a theorem named like an equation lemma -/
+theorem eq_unusedPremise (n : Nat) (h : True) : n = n := rfl
+/-- unused: a premise the proof never mentions, in a private theorem -/
+private theorem privateUnusedPremise (p : F) (h : Thm (.neg p)) : Thm (F.imp p p) := t2_08 p
 /-- used: the control -/
 theorem usedPremise (p q : F) (h : Thm p) (hpq : Thm (F.imp p q)) : Thm q := Thm.mp h hpq
 end PMMutationTest
@@ -61,15 +67,27 @@ def modOf (env : Environment) (c : Name) : Name :=
 
 def inRepo (m : Name) : Bool := (`PM).isPrefixOf m || (`Checks).isPrefixOf m
 
-/-- Declarations Lean generates (equation lemmas, injectivity, matchers, …): not statements of ours. -/
-def isGenerated (env : Environment) (c : Name) : Bool :=
-  c.isInternal || isAuxRecursor env c || isNoConfusion env c || Meta.isMatcherCore env c ||
-  env.isProjectionFn c ||
-  match c with
-  | .str _ s => s.startsWith "eq_" || s == "eq_def" || s == "injEq" || s == "inj" ||
-      s == "sizeOf_spec" || s == "induct" || s.startsWith "match_" || s == "brecOn" || s == "below" ||
-      s == "binductionOn" || s == "ibelow" || s == "recOn" || s == "casesOn"
-  | _ => false
+/-- Is `c` written in the source? Lean records a declaration range (`declRangeExt`) for every
+    declaration elaborated from the text, private theorems and a structure's fields included, and for
+    none that it generates (equation lemmas, injectivity, `sizeOf`, matchers, auxiliary proofs …). The
+    name does not decide: a theorem of ours may well be called `eq_…`. -/
+def isWritten (c : Name) : MetaM Bool := return (← findDeclarationRangesCore? c).isSome
+
+/-- Lean's own mark of a generated declaration, as a cross-check of `isWritten`: a theorem with no
+    declaration range must carry one, or the run fails. -/
+def generatedMark? (env : Environment) (c : Name) : Option String :=
+  if c.isInternal then some "internal name"
+  else if isReservedName env c then some "reserved name (equation lemma)"
+  else if isAuxRecursor env c || isNoConfusion env c then some "auxiliary recursor"
+  else if Meta.isMatcherCore env c || Meta.Match.isMatchEqnTheorem env c then some "matcher"
+  else match c with
+    | .str p _ =>
+      if isAuxRecursor env p then some "equation of an auxiliary recursor"
+      else match env.find? p with
+        | some (.ctorInfo _) => some "lemma of a constructor (injectivity, size)"
+        | some (.inductInfo _) => some "lemma of an inductive type"
+        | _ => none
+    | _ => none
 
 def jstr (s : String) : Json := Json.str s
 
@@ -166,14 +184,22 @@ def unusedOf (ig : Ignored) (type value : Expr) (hs : Array Hyp) : MetaM (Array 
     let body := value.beta xs
     return (hs.filter fun h => !occurs ig xs[h.idx]!.fvarId! body).map (·.idx)
 
+def isTest (c : Name) : Bool := (`PMMutationTest).isPrefixOf (privateToUserName c)
+
 def part1 (out : IO.FS.Handle) : MetaM (Nat × Nat × Nat) := do
   let env ← getEnv
-  let thms := (env.constants.fold (init := #[]) fun acc c ci =>
+  let all := (env.constants.fold (init := #[]) fun acc c ci =>
     match ci with
-    | .thmInfo v =>
-      if (inRepo (modOf env c) || (`PMMutationTest).isPrefixOf c) && !isGenerated env c then
-        acc.push (c, v) else acc
+    | .thmInfo v => if inRepo (modOf env c) || isTest c then acc.push (c, v) else acc
     | _ => acc).qsort (fun a b => Name.lt a.1 b.1)
+  -- the theorems written in the source; every other one must carry a mark of a generated declaration
+  let mut thms := #[]
+  let mut generated : Std.HashMap String Nat := {}
+  for (c, v) in all do
+    if ← isWritten c then thms := thms.push (c, v)
+    else match generatedMark? env c with
+      | some why => generated := generated.insert why ((generated.getD why 0) + 1)
+      | none => throwError "{c} has no declaration range and no mark of a generated declaration"
   let mut withHyps : Array (Name × TheoremVal × Array Hyp) := #[]
   let mut nh := 0
   for (c, v) in thms do
@@ -197,7 +223,6 @@ def part1 (out : IO.FS.Handle) : MetaM (Nat × Nat × Nat) := do
       unless u.isEmpty do next := next.insert c u
       if u.size != ((ig.find? c).getD #[]).size then changed := true
     ig := next
-  let isTest (c : Name) : Bool := (`PMMutationTest).isPrefixOf c
   let mut nflag := 0
   let mut testFlags : Array String := #[]
   for (c, _, hs) in withHyps do
@@ -226,8 +251,9 @@ def part1 (out : IO.FS.Handle) : MetaM (Nat × Nat × Nat) := do
         ("binderInfo", jstr (biStr h.bi)), ("type", jstr h.ty), ("unused", toJson (d.contains h.idx))])
       out.putStrLn j.compress
   -- the planted cases: exactly these, with these shallow verdicts
-  let expected := #["deadHave:premise:true", "passesToUnused:premise:false",
-    "unusedClass:class:true", "unusedPremise:premise:true", "unusedVariable:unreferenced variable:true"]
+  let expected := #["deadHave:premise:true", "eq_unusedPremise:premise:true",
+    "passesToUnused:premise:false", "privateUnusedPremise:premise:true", "unusedClass:class:true",
+    "unusedPremise:premise:true", "unusedVariable:unreferenced variable:true"]
   let got := testFlags.qsort (· < ·)
   unless got == expected do
     throwError "Part 1 misclassifies its planted cases: got {got}, expected {expected}"
@@ -237,7 +263,9 @@ def part1 (out : IO.FS.Handle) : MetaM (Nat × Nat × Nat) := do
     ("theorems", toJson ((thms.filter fun (c, _) => !isTest c).size)),
     ("withHypotheses", toJson (withHyps.size - ntest)), ("hypotheses", toJson (nh - nhTest)),
     ("byKind", toJson (byKind.toList.map fun (k, n) => Json.mkObj [(k, toJson n)])),
-    ("unused", toJson nflag), ("rounds", toJson rounds), ("plantedFlagged", toJson got)]
+    ("unused", toJson nflag), ("rounds", toJson rounds), ("plantedFlagged", toJson got),
+    ("plantedExpected", toJson expected.size),
+    ("generated", toJson (generated.toList.map fun (k, n) => Json.mkObj [(k, toJson n)]))]
   out.putStrLn j.compress
   return ((thms.filter fun (c, _) => !isTest c).size, nh - nhTest, nflag)
 

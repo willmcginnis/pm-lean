@@ -31,7 +31,8 @@ request. Each test was checked to fail when its mistake is put back.
 
 `test_statement_mutation.py` guards a tool rather than a past mistake: the source editor of the
 statement-mutation trial (`scripts/mutation/mutate.py`, [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md)),
-which replaces one hypothesis by `True` on each binder form the repository uses, and the classes of the
+which replaces one hypothesis by `True` on each binder form the repository uses; the driver's `lake build`
+before any analysis, without which it would read proofs older than the sources; and the classes of the
 findings listed in `scripts/mutation/expected.json`. The trial itself is not part of `run_all.sh`.
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
