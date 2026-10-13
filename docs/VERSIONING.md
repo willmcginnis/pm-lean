@@ -1,13 +1,15 @@
 # Versioning of exports
 
 How exported names, statements and proofs change over time, and how export releases are numbered.
-Nothing here has been released yet: the first public export will be 1.0.0. The private pilot of ✱1–✱5
-([EXPORT_LOG.md](EXPORT_LOG.md)) has no version.
+The first export release, 1.0.0 (✱1–✱5 on Prove2Me), is prepared: its names are locked, and it becomes
+public when the maintainer approves ([EXPORT_LOG.md](EXPORT_LOG.md)). The private pilot of ✱1–✱5 has no
+version.
 
 ## Rules
 
 1. **Names are permanent and never reused**, also across platform environments: once released, a name
    always denotes the same statement. At a release, `scripts/export_names.py --write-lock` adds each name
+   released (`--chapters 1-5` for the names of ✱1–✱5 and the results about the system, as in 1.0.0)
    to [data/export_names.lock](../data/export_names.lock) with the Lean declaration it came from, the
    reading it was released under, and two digests (below): of its statement, and of the definitions the
    statement uses. A check fails if a locked name disappears, or if its statement, its definitions or its
@@ -18,9 +20,10 @@ Nothing here has been released yet: the first public export will be 1.0.0. The p
    reason and the replacement's name in its description. The old card stays importable and stays
    exported, under its name and bound to its original statement digest. `_vN` is the last part of a
    name, after the reading: `PM.star9_31_reading_landini_v2`.
-3. **Reading meanings are frozen.** At a release each reading's word and meaning are copied to
+3. **Reading meanings are frozen.** At a release each reading a released name uses (with `--chapters`;
+   without it, every reading) has its word and meaning copied to
    [data/naming/readings.lock](../data/naming/readings.lock); readings can be added later, never changed
-   or removed.
+   or removed. 1.0.0 uses none: ✱1–✱5 have no readings, so its readings lock is empty.
 4. **Proofs and descriptions change in place.** A better proof is a new submission for the same card, and
    the old submission is deprecated; a description is edited. Counterparts (data/naming/counterparts.json)
    are description, not name.
@@ -47,6 +50,14 @@ Nothing here has been released yet: the first public export will be 1.0.0. The p
    declaration fails, and so does a `_v<N>` without its row; a deleted old declaration fails the lock.
    Changes caused by one decision (a definition changed, below) are one generation: one date, one reason,
    one release.
+7. **A Lean or Mathlib upgrade is examined by a person and re-locked in a MAJOR release.** The digests are
+   of the statement as Lean elaborates it, so a new Lean or Mathlib, in this repository or on a platform,
+   can change a statement's canonical text with no change of its meaning (an elaborator detail, a renamed
+   internal constant). The lock check then fails for that name, and nothing changes silently: a person
+   examines each such statement, and if its meaning is unchanged, re-locks it under the same name (the
+   row's two digests replaced; its export name, Lean declaration and reading kept), in a MAJOR release
+   whose entry in [EXPORT_LOG.md](EXPORT_LOG.md) lists the names re-locked and why. A statement whose
+   meaning did change is superseded instead (rule 2).
 
 ## Release numbers
 
@@ -58,13 +69,14 @@ Export releases follow [Semantic Versioning 2.0.0](https://semver.org/spec/v2.0.
 | MINOR | cards are added, or statements are superseded (`_vN` plus a deprecation; SemVer: "MUST be incremented if any public API functionality is marked as deprecated") |
 | PATCH | only proofs, descriptions or documentation change |
 
-The **build metadata** carries the Merkle root of the exported statements: `1.4.0+m.<root>`, `<root>` the
-first 12 hexadecimal digits. SemVer ignores build metadata for precedence; here it identifies the content:
-two releases with the same root export the same statements.
+The **build metadata** carries the Merkle root of the released statements (below): `1.4.0+m.<root>`,
+`<root>` the first 12 hexadecimal digits. SemVer ignores build metadata for precedence; here it identifies
+the content: two releases with the same root export the same statements. 1.0.0 is
+**`1.0.0+m.7d40537313d3`** (`python3 scripts/export_names.py --root`).
 
 **Tags** (proposal): an annotated git tag `export-v<MAJOR>.<MINOR>.<PATCH>` on the commit exported, whose
 message gives the full version with its root and the platform environment, e.g.
-`export-v1.0.0` with message `1.0.0+m.3f9c0a1b2d4e, Lean v4.33.1`. The root is left out of the tag's name
+`export-v1.0.0` with message `1.0.0+m.7d40537313d3, Lean v4.33.1`. The root is left out of the tag's name
 because `+` in a tag name is awkward in URLs, and because one version never has two roots. Repository tags
 for other purposes stay separate.
 
@@ -86,17 +98,25 @@ The digests are not yet the identity scheme planned below: a definition is named
 its hash, so renaming a definition changes the digests of the cards that use it, as a changed definition
 does. Both are digests of the statement as Lean elaborates it in this repository's environment; an
 environment move can change the canonical text with no change of meaning, which then fails the lock
-check, to be examined and re-locked by a person (MAJOR release).
+check, to be examined and re-locked by a person (rule 7, a MAJOR release). The canonical text is printed
+by [Checks/Canon.lean](../Checks/Canon.lean), which the check of a platform export also uses on the
+uploaded files ([scripts/prove2me/](../scripts/prove2me/README.md)): for 1.0.0 the digests computed from
+the cards with the platform's Lean v4.33.1 equal those computed here with v4.34.1, for all 196 cards.
 
-### The Merkle root (planned)
+### The Merkle root
 
-Not built yet. The plan:
+Built for 1.0.0. The root is the Merkle Tree Hash of [RFC 6962](https://www.rfc-editor.org/rfc/rfc6962#section-2.1)
+(the hash tree of Certificate Transparency) over the rows of data/export_names.lock, one leaf per released
+name, `<export name>\t<statement_digest>\t<definitions_digest>` in UTF-8, the leaves sorted by export
+name: a leaf is hashed as SHA-256(0x00 ‖ leaf), two subtrees as SHA-256(0x01 ‖ left ‖ right), and a
+tree of n > 1 leaves splits after the largest power of two less than n. `tests/test_export_names.py`
+checks the implementation against the RFC's published test vectors. A deprecated name stays in the lock,
+so it stays a leaf. Proofs are not hashed: a PATCH release keeps the root.
 
-- each definition and each card has a hash of its canonical statement, computed without its own name and
-  with the hashes of the definitions it refers to in place of their names (as in Unison), so that a
-  changed definition changes the hash of every card that uses it, and a renamed one changes none;
-- the root is the root of a binary Merkle tree whose leaves are the pairs (export name, statement hash),
-  sorted by export name. Proofs are not hashed: a PATCH release keeps the root.
+Still planned: a hash of each definition and card computed without its own name and with the hashes of
+the definitions it refers to in place of their names (as in Unison), so that a renamed definition changes
+no card's hash. Until then the definitions digest names the definitions it covers, and a renamed
+definition changes the root as a changed one does.
 
 ## Worked examples
 
@@ -146,8 +166,10 @@ use the old definition, so their digests stay). The lock check lists the 40; nob
 **A platform environment move.** The platform's default environment moves from Lean v4.33.1 to a later
 version. The export is re-checked there and every card is uploaded again under the same name with the
 same statement: a name is never reused for anything else, so the same name in the new environment is the
-same card. Release 1.4.2 → 2.0.0; the root is unchanged if no statement had to change. A statement that
-must change to elaborate in the new environment gets `_vN` like any other.
+same card. Release 1.4.2 → 2.0.0; the root is unchanged if no canonical text changed. A statement whose
+canonical text changed with no change of meaning is examined and re-locked (rule 7), which changes the
+root, and the log says which. A statement that must change to elaborate in the new environment gets
+`_vN` like any other.
 
 ## Precedents
 

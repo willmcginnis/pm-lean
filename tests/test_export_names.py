@@ -11,6 +11,7 @@ import importlib.util
 import json
 import os
 import pathlib
+import re
 import shutil
 import sys
 import tempfile
@@ -281,6 +282,33 @@ def m_counterpart_signature(es, ctx):
     counterpart(ctx, "*1.3")["signature"] = "NOT A LEAN TYPE"
 
 
+# ---- bundle_names: PM_core_<words>, a platform definition name, unique
+
+def bundle(ctx, module):
+    ctx["bundles"] = copy.deepcopy(ctx["bundles"])
+    return next(b for b in ctx["bundles"]["bundles"] if b["module"] == module)
+
+
+def m_bundle_module_style(es, ctx):
+    bundle(ctx, "PM.Basic")["name"] = "PM_Basic"           # a name in the style of a module, not PM_core_
+
+
+def m_bundle_dotted(es, ctx):
+    bundle(ctx, "PM.Basic")["name"] = "PM.core_star1_system"
+
+
+def m_bundle_collides(es, ctx):
+    bundle(ctx, "PM.Derived")["name"] = "PM_core_STAR1_system"
+
+
+def m_bundle_card_slug(es, ctx):
+    rename(find(es, "*2.01"), "PM.core_star1_system")
+
+
+def m_bundle_no_module(es, ctx):
+    bundle(ctx, "PM.Complete")["module"] = "PM.Kalmar"
+
+
 MUTATIONS = [
     ("pattern", m_pattern_case), ("pattern", m_pattern_ascii), ("pattern", m_pattern_number),
     ("suffix_order", m_suffix_version_before_reading), ("suffix_order", m_suffix_reading_before_slot),
@@ -295,6 +323,8 @@ MUTATIONS = [
     ("lock", m_lock_reading_changed), ("versions", m_version_without_row),
     ("versions", m_version_row_for_unchanged), ("versions", m_deprecated_without_row),
     ("versions", m_deprecated_unreleased), ("versions", m_version_skips),
+    ("bundle_names", m_bundle_module_style), ("bundle_names", m_bundle_dotted),
+    ("bundle_names", m_bundle_collides), ("bundle_names", m_bundle_card_slug), ("bundle_names", m_bundle_no_module),
     ("counterparts", m_counterpart_commit), ("counterparts", m_counterpart_source),
     ("counterparts", m_counterpart_source_escapes), ("counterparts", m_counterpart_export),
     ("counterparts", m_counterpart_not_exact), ("counterparts", m_counterpart_iff_flag),
@@ -477,10 +507,60 @@ class TestExportNames(unittest.TestCase):
                                                     "meaning": "a later reading", "why": "test"}}
         self.assertEqual(export_names.check(es, ctx)["readings_frozen"], [])
 
-    def test_lock_files_exist(self):
-        # filled at the first public release; every name in them must then stay
-        self.assertEqual(export_names.read_tsv(export_names.LOCK, export_names.LOCK_COLUMNS), [])
+    def test_release_1_0_0_lock(self):
+        # release 1.0.0 locked exactly the names of ✱1–✱5 and the three results about the system, with the
+        # digests they have now, and no reading (✱1–✱5 have none)
+        lock = export_names.read_tsv(export_names.LOCK, export_names.LOCK_COLUMNS)
+        sel = export_names.select_chapters(entries(), (1, 5))
+        self.assertEqual(len(lock), 196)
+        self.assertEqual({(r["export"], r["lean"], r["statement_digest"], r["definitions_digest"]) for r in lock},
+                         {(e["export"], e["lean"], e["statement_digest"], e["definitions_digest"]) for e in sel})
+        self.assertTrue(all(r["reading"] == "" for r in lock))
         self.assertEqual(json.loads(export_names.READINGS_LOCK.read_text(encoding="utf-8")), {})
+
+    def test_release_version_names_the_root(self):
+        # the documented version of 1.0.0 carries the Merkle root of the lock
+        root = export_names.merkle_root(export_names.read_tsv(export_names.LOCK, export_names.LOCK_COLUMNS))
+        for doc in ("docs/VERSIONING.md", "docs/EXPORT_LOG.md", "CHANGELOG.md"):
+            text = (ROOT / doc).read_text(encoding="utf-8")
+            self.assertIn(f"1.0.0+m.{root[:12]}", text, doc)
+            self.assertEqual(set(re.findall(r"1\.0\.0\+m\.([0-9a-f]+)", text)), {root[:12]}, doc)
+
+    def test_merkle_tree_hash_rfc6962_vectors(self):
+        # the test vectors of Certificate Transparency's reference implementation, for 1 to 8 leaves
+        leaves = [bytes.fromhex(h) for h in ["", "00", "10", "2021", "3031", "40414243", "5051525354555657",
+                                             "606162636465666768696a6b6c6d6e6f"]]
+        roots = ["6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+                 "fac54203e7cc696cf0dfcb42c92a1d9dbaf70ad9e621f4bd8d98662f00e3c125",
+                 "aeb6bcfe274b70a14fb067a5e5578264db0fa9b51af5e0ba159158f329e06e77",
+                 "d37ee418976dd95753c1c73862b9398fa2a2cf9b4ff0fdfe8b30cd95209614b7",
+                 "4e3bbb1f7b478dcfe71fb631631519a3bca12c9aefca1612bfce4c13a86264d4",
+                 "76e67dadbcdf1e10e1b74ddc608abd2f98dfb16fbce75277b5232a127f2087ef",
+                 "ddb89be403809e325750d3d263cd78929c2942b7942a34b77e122c9594a74c8c",
+                 "5dc9da79a70659a9ad559cb701ded9a2ab9d823aad2f4960cfe370eff4604328"]
+        for n, want in enumerate(roots, 1):
+            self.assertEqual(export_names.merkle_tree_hash(leaves[:n]).hex(), want)
+
+    def test_root_binds_names_and_digests(self):
+        lock = export_names.read_tsv(export_names.LOCK, export_names.LOCK_COLUMNS)
+        root = export_names.merkle_root(lock)
+        self.assertEqual(export_names.merkle_root(list(reversed(lock))), root)     # the order of rows: none
+        for k in ("export", "statement_digest", "definitions_digest"):
+            changed = copy.deepcopy(lock)
+            changed[7][k] += "x"
+            self.assertNotEqual(export_names.merkle_root(changed), root, k)
+
+    def test_rules_proved_as_theorems_table(self):
+        # docs/NAMING.md lists exactly the exported _rule names, each at a line that declares its theorem
+        text = (ROOT / "docs" / "NAMING.md").read_text(encoding="utf-8")
+        sec = text.split("### Rules proved as theorems", 1)[1].split("\n## ", 1)[0]
+        rows = re.findall(r"^\| ✱[^|]*\| `([^`]+)` \| `([^`]+)`, \[([^\]:]+):(\d+)\]", sec, re.M)
+        self.assertEqual(sorted(r[0] for r in rows), sorted(e["export"] for e in entries() if e["slot"] == "rule"))
+        by = {e["export"]: e for e in entries()}
+        for export, lean, path, line in rows:
+            self.assertEqual(by[export]["lean"], lean)
+            src = (ROOT / path).read_text(encoding="utf-8").splitlines()[int(line) - 1]
+            self.assertRegex(src, rf"^theorem {re.escape(lean.rsplit('.', 1)[1])}\b", f"{path}:{line}")
 
     def test_star1_5_cards(self):
         # the private pilot's 196 theorems: ✱1·2–✱1·6, the 188 theorems of ✱2–✱5, and three results

@@ -1,0 +1,27 @@
+{
+ "about": "The export of PM ✱1–✱5 to Prove2Me (scripts/prove2me/README.md). Card names come from data/export_names.json, definition bundle names from data/naming/definition_bundles.json, counterparts from data/naming/counterparts.json.",
+ "release": "1.0.0",
+ "repo_url": "https://github.com/willmcginnis/principia-mathematica-lean",
+ "log_url": "https://github.com/willmcginnis/principia-mathematica-lean/blob/main/docs/EXPORT_LOG.md",
+ "platform": "Prove2Me (https://prove2.me)",
+ "environment": {
+  "toolchain": "leanprover/lean4:v4.33.1",
+  "mathlib_rev": "0df444a360eaa60ab8c11dca51a86af692955474"
+ },
+ "platform_scripts": {
+  "repository": "https://github.com/prove2me/prove2me_workspace",
+  "commit": "78989800ba0b3149ee34205257025bd0f617e8ef",
+  "files": ["scripts/extract_decl_graph.lean", "scripts/extract_sketch_info.lean"]
+ },
+ "project_prefix": "PM",
+ "modules": ["PM.Basic", "PM.Star2", "PM.Statements", "PM.Replay", "PM.Derived", "PM.Replay2", "PM.Complete"],
+ "chapters": [1, 5],
+ "targets": {
+  "about": "Every proposition of ✱1–✱5 is a card whatever its proof length (PM's numbering is the decomposition), plus the three results about the system. ✱1·2–✱1·6 are the constructors of PM.Thm: their cards state each constructor's type, and their proofs are the constructor.",
+  "modules": ["PM.Replay", "PM.Replay2"],
+  "names": ["PM.sound", "PM.complete", "PM.star1_4_variant_not_a_theorem"],
+  "constructors": ["PM.Thm.taut", "PM.Thm.add", "PM.Thm.perm", "PM.Thm.assoc", "PM.Thm.sum"]
+ },
+ "thresholds": {"node_lines": 40, "inline_lines": 10},
+ "expand_macros": true
+}

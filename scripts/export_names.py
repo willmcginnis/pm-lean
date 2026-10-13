@@ -41,6 +41,10 @@ Usage (from the repository root, after `lake build`):
   python3 scripts/export_names.py --check            exit 1 if they are not up to date or break a rule
   python3 scripts/export_names.py --tsv PATH [--chapters 1-5]   also write a review table
   python3 scripts/export_names.py --write-lock       at a release: lock every name and reading meaning
+  python3 scripts/export_names.py --write-lock --chapters 1-5   lock only the names of ✱1–✱5 and the results
+                                                     about the system, and only the readings they use
+  python3 scripts/export_names.py --root             print the Merkle root of the lock and the release's
+                                                     build metadata `m.<first 12 digits>` (docs/VERSIONING.md)
   python3 scripts/export_names.py --verify-counterparts DIR    check each counterpart's file:line (and a
                                                      Mathlib one's header) in checkouts
                                                      DIR/<repository>-<commit> (not run in CI)
@@ -69,6 +73,7 @@ PM_NAMES = NAMING / "pm_names.json"
 SLOTS = NAMING / "slots.json"
 COUNTERPARTS = NAMING / "counterparts.json"
 COUNTERPARTS_LEAN = ROOT / "Checks" / "Counterparts.lean"
+BUNDLES = NAMING / "definition_bundles.json"
 MAX_WORDS = 6
 WORKING_READING = "C"   # a ✱9 statement for every reading is exported under the working reading
 
@@ -96,6 +101,7 @@ STAR_RE = re.compile(r"PM\.star([1-9][0-9]*)_([0-9]+)((?:_[a-z0-9]+)*)")
 META_RE = re.compile(rf"PM\.meta_{WORD}(?:_{WORD})*")
 VERSION_RE = re.compile(r"v([2-9]|[1-9][0-9]+)")   # a superseded statement's replacement: name_vN
 DIGEST_RE = re.compile(r"sha256:[0-9a-f]{64}")
+BUNDLE_RE = re.compile(r"PM_core_[a-z0-9]+(?:_[a-z0-9]+)*")   # a definition bundle (not a proposition of PM)
 COMMIT_RE = re.compile(r"[0-9a-f]{40}")
 SOURCE_RE = re.compile(r"[A-Za-z0-9_][A-Za-z0-9_./-]*\.lean:[1-9][0-9]*")
 LOCK_COLUMNS = ["export", "lean", "reading", "statement_digest", "definitions_digest"]
@@ -1057,6 +1063,32 @@ def check_counterparts(entries, ctx):
 
 CHECKED = {"lean4": ("lean",), "mathlib4": ("source", "lean-mathlib")}
 
+
+def check_bundle_names(entries, ctx):
+    """Definition bundles (data/naming/definition_bundles.json): `PM_core_<words>`, lower-case ASCII with no
+    dot, a valid platform definition name; one per source module, which exists; and unique, also ignoring
+    case, among themselves and against every card's slug."""
+    bad = []
+    slugs = {e["slug"].lower(): e["export"] for e in entries}
+    seen, mods = {}, set()
+    for b in ctx["bundles"]["bundles"]:
+        n, m = b.get("name", ""), b.get("module", "")
+        if not BUNDLE_RE.fullmatch(n) or not re.fullmatch(r"[a-zA-Z_][a-zA-Z0-9_]*", n):
+            bad.append(f"bundle {n!r}: not PM_core_<word>[_<word>]… in lower-case ASCII")
+        if n.lower() in seen:
+            bad.append(f"bundle {n}: also {seen[n.lower()]}")
+        if n.lower() in slugs:
+            bad.append(f"bundle {n}: the slug of {slugs[n.lower()]}")
+        seen[n.lower()] = n
+        if m in mods:
+            bad.append(f"bundle {n}: a second bundle for {m}")
+        mods.add(m)
+        if not (ROOT / module_file(m)).exists():
+            bad.append(f"bundle {n}: no module {m}")
+        if not b.get("what"):
+            bad.append(f"bundle {n}: says nothing about what it holds")
+    return bad
+
 LEAN_CHECK_HEAD = '''\
 -- Lean decides whether each Lean core counterpart of data/naming/counterparts.json states PM's formula
 -- (docs/NAMING.md, "Counterparts"). Written by scripts/export_names.py from that file and the statements
@@ -1169,7 +1201,7 @@ CHECKS = {"pattern": check_pattern, "suffix_order": check_suffix_order, "pm_name
           "slots": check_slots, "readings": check_readings, "readings_frozen": check_readings_frozen,
           "unique_name": check_unique_name, "unique_slug": check_unique_slug, "no_top_level": check_no_top_level,
           "vocabulary": check_vocabulary, "lock": check_lock, "versions": check_versions,
-          "counterparts": check_counterparts}
+          "counterparts": check_counterparts, "bundle_names": check_bundle_names}
 
 
 def read_tsv(path, columns):
@@ -1189,7 +1221,7 @@ def context(lock=LOCK, readings_lock=READINGS_LOCK):
     return {"vocab": load(VOCAB), "readings": load(READINGS), "pm_names": load(PM_NAMES), "slots": load(SLOTS),
             "items": load(ITEMS), "counterparts": load(COUNTERPARTS), "lock": read_tsv(lock, LOCK_COLUMNS),
             "readings_lock": load(readings_lock) if readings_lock.exists() else {},
-            "changes": read_tsv(CHANGES, CHANGES_COLUMNS), "rows": rows}
+            "changes": read_tsv(CHANGES, CHANGES_COLUMNS), "rows": rows, "bundles": load(BUNDLES)}
 
 
 def check(entries, ctx, skip=()):
@@ -1208,20 +1240,44 @@ def lock_rows(entries, ctx):
     return list(old.values())
 
 
-def write_lock(entries, ctx, lock=LOCK, readings_lock=READINGS_LOCK):
-    """At a release: every exported name with its Lean declaration, reading and digests, and every
-    reading's word and meaning. Names already locked stay; new ones are added."""
+def write_lock(entries, ctx, lock=LOCK, readings_lock=READINGS_LOCK, all_readings=True):
+    """At a release: each name of `entries` with its Lean declaration, reading and digests, and each
+    reading's word and meaning: every reading, or with all_readings=False only those the locked names use.
+    Names and readings already locked stay; new ones are added."""
     head =["# Released export names (docs/VERSIONING.md): each name with the Lean declaration it was",
             "# released from, its reading, and the digests of its statement and of the definitions it",
             "# uses. Rows are only ever added. Written by scripts/export_names.py --write-lock.",
             "\t".join(LOCK_COLUMNS)]
-    lock.write_text("\n".join(head + ["\t".join(r[c] for c in LOCK_COLUMNS) for r in lock_rows(entries, ctx)])
-                    + "\n",
+    rows = lock_rows(entries, ctx)
+    lock.write_text("\n".join(head + ["\t".join(r[c] for c in LOCK_COLUMNS) for r in rows]) + "\n",
                     encoding="utf-8")
     rl = dict(ctx["readings_lock"])
+    used = {r["reading"] for r in rows}
     for tag, r in ctx["readings"].items():
-        rl.setdefault(tag, {"word": r["word"], "meaning": r["meaning"]})
+        if all_readings or r["word"] in used:
+            rl.setdefault(tag, {"word": r["word"], "meaning": r["meaning"]})
     readings_lock.write_text(json.dumps(rl, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+
+
+def merkle_root(rows):
+    """The Merkle root of released names (docs/VERSIONING.md): the Merkle Tree Hash of RFC 6962 (Certificate
+    Transparency) over one leaf per name, `<export>\t<statement_digest>\t<definitions_digest>` in UTF-8,
+    sorted by export name; a leaf is hashed as SHA-256(0x00 ‖ leaf), two subtrees as SHA-256(0x01 ‖ left ‖
+    right), and a tree of n > 1 leaves splits after the largest power of two less than n."""
+    leaves = sorted(f"{r['export']}\t{r['statement_digest']}\t{r['definitions_digest']}" for r in rows)
+    return merkle_tree_hash([x.encode("utf-8") for x in leaves]).hex()
+
+
+def merkle_tree_hash(leaves):
+    """RFC 6962, section 2.1, for a list of byte strings (the hash of the empty list is SHA-256 of nothing)."""
+    if not leaves:
+        return hashlib.sha256(b"").digest()
+    if len(leaves) == 1:
+        return hashlib.sha256(b"\x00" + leaves[0]).digest()
+    k = 1
+    while k * 2 < len(leaves):
+        k *= 2
+    return hashlib.sha256(b"\x01" + merkle_tree_hash(leaves[:k]) + merkle_tree_hash(leaves[k:])).digest()
 
 
 def verify_counterparts(ctx, base):
@@ -1277,11 +1333,16 @@ def chapter_counts(entries):
     return out
 
 
-def write_tsv(entries, ctx, path, chapters=None):
+def select_chapters(entries, chapters=None):
+    """The entries of ✱a–✱b, and the results about the system when ✱1 is in the range."""
     lo, hi = chapters or (0, 10 ** 6)
-    sel = [e for e in entries
-           if (e.get("meta") and lo <= 1 <= hi) or (e["pm"] and lo <= int(e["pm"][1:].split(".")[0]) <= hi
-                                                    and not e.get("meta"))]
+    return [e for e in entries
+            if (e.get("meta") and lo <= 1 <= hi) or (e["pm"] and lo <= int(e["pm"][1:].split(".")[0]) <= hi
+                                                     and not e.get("meta"))]
+
+
+def write_tsv(entries, ctx, path, chapters=None):
+    sel = select_chapters(entries, chapters)
     rows = {r["name"]: r for r in ctx["rows"]}
     cps = {r["export"]: r["declaration"] for r in ctx["counterparts"]["counterparts"]}
     cols = ["pm", "pm_name", "export", "formula", "counterpart"]
@@ -1320,14 +1381,18 @@ def main(args):
         for p in v:
             print(f"{k}: {p}")
         failed |= bool(v)
+    ch = None
+    if "--chapters" in args:
+        a, b = args[args.index("--chapters") + 1].split("-")
+        ch = (int(a), int(b))
     if "--write-lock" in args and not failed:
-        write_lock(entries, ctx)
-        print("wrote data/export_names.lock and data/naming/readings.lock")
+        write_lock(select_chapters(entries, ch), ctx, all_readings=ch is None)
+        print("wrote data/export_names.lock and data/naming/readings.lock"
+              + (f" for ✱{ch[0]}–✱{ch[1]} and the results about the system" if ch else ""))
+    if "--root" in args:
+        root = merkle_root(read_tsv(LOCK, LOCK_COLUMNS))
+        print(f"Merkle root of data/export_names.lock: {root}; build metadata m.{root[:12]}")
     if "--tsv" in args:
-        ch = None
-        if "--chapters" in args:
-            a, b = args[args.index("--chapters") + 1].split("-")
-            ch = (int(a), int(b))
         n = write_tsv(entries, ctx, args[args.index("--tsv") + 1], ch)
         print(f"wrote {n} rows")
     counts = chapter_counts(entries)

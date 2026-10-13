@@ -10,4 +10,4 @@ name = "PM"
 
 [[lean_lib]]
 name = "Checks"
-roots = ["Checks.PinnedStatements"]
+roots = ["Checks.PinnedStatements", "Checks.Canon"]

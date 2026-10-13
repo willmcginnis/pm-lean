@@ -23,9 +23,9 @@ PM.star<N>_<M>[_<pmname>][_df|_rule][_reading_<word>][_v<N>]
 4. **A slot for what is not an asserted proposition**: `_df` for a definition (PM's Df), `_rule` for an
    inference rule (✱1·1, ✱9·12, …), from [data/naming/slots.json](../data/naming/slots.json). Twelve
    export names use them now, for nine items: the rules ✱9·12, ✱9·13, ✱10·11, ✱10·13, ✱11·07, ✱11·11,
-   ✱11·13 and ✱11·311, which the repository states as theorems about its systems, and the definition
-   ✱10·01 stated under ✱9's reading. No other definition or rule is exported yet; when one is, the slot is
-   in its name.
+   ✱11·13 and ✱11·311, which the repository proves as theorems about its systems
+   ([Rules proved as theorems](#rules-proved-as-theorems)), and the definition ✱10·01 stated under ✱9's
+   reading. No other definition or rule is exported yet; when one is, the slot is in its name.
 5. **A reading**, for a statement of ✱9 by its own method: `_reading_<word>`, the word from a closed list,
    [data/naming/readings.json](../data/naming/readings.json). All readings of one item share everything
    before the suffix.
@@ -55,9 +55,77 @@ The full list, with each name's Lean declaration, source file, digests and descr
 [data/export_names.json](../data/export_names.json): 523 names, the longest
 `PM.star10_11_rule_reading_russell` (33 characters).
 
-A definition uploaded to a platform as a definition rather than as a card may need a name without dots
-(Prove2Me's definition names are `[a-zA-Z_][a-zA-Z0-9_]*`); its slug (`PM_star1_01_df`) is that name.
-None is uploaded yet.
+A definition of PM uploaded to a platform as a definition rather than as a card may need a name without
+dots (Prove2Me's definition names are `[a-zA-Z_][a-zA-Z0-9_]*`); its slug (`PM_star1_01_df`) is that
+name. None is uploaded yet. The Lean infrastructure an export also uploads as definitions is not a
+definition of PM, and is named apart ([Definition bundles](#definition-bundles)).
+
+### Rules proved as theorems
+
+PM states some propositions as rules, in words: "if ⊢ φ and ⊢ ψ, then ⊢ φ . ψ" (✱10·13), not an asserted
+formula. Their export names keep `_rule`, PM's own classification (data/naming/slots.json), although on a
+platform each card is a Lean `theorem`, and in this repository each is proved as one:
+
+| PM | Export name | Lean declaration | Proved |
+|---|---|---|---|
+| ✱9·12 | `PM.star9_12_rule` | `PM.q9_12`, [PM/Star10.lean:205](../PM/Star10.lean#L205) | the constructor `QThm.mp` (✱1·1, ✱9·12) |
+| ✱9·12, reading C | `PM.star9_12_rule_reading_russell` | `PM.F9.f9_12`, [PM/Found9/Star9.lean:47](../PM/Found9/Star9.lean#L47) | the constructor `Thm9.mp` |
+| ✱9·13 | `PM.star9_13_rule` | `PM.q9_13`, [PM/Star10.lean:209](../PM/Star10.lean#L209) | the constructor `QThm.gen` (✱10·11) |
+| ✱9·13, reading C | `PM.star9_13_rule_reading_russell` | `PM.F9.f9_13`, [PM/Found9/Star9.lean:52](../PM/Found9/Star9.lean#L52) | the constructor `Thm9.gen` |
+| ✱10·11 | `PM.star10_11_rule` | `PM.q10_11`, [PM/Star10.lean:44](../PM/Star10.lean#L44) | the constructor `QThm.gen` |
+| ✱10·11, reading C | `PM.star10_11_rule_reading_russell` | `PM.F9.f10_11`, [PM/Found9/Star9.lean:481](../PM/Found9/Star9.lean#L481) | the constructor `Thm9.gen` |
+| ✱10·13 | `PM.star10_13_rule` | `PM.q10_13`, [PM/Star10.lean:51](../PM/Star10.lean#L51) | derived, as PM does, from ✱2·11, ✱2·32 and ✱9·12 |
+| ✱11·07 | `PM.star11_07_rule` | `PM.q11_07`, [PM/Star11.lean:106](../PM/Star11.lean#L106) | derived from ✱11·1 and ✱10·11 (PM takes it as primitive) |
+| ✱11·11 | `PM.star11_11_rule` | `PM.q11_11`, [PM/Star11.lean:111](../PM/Star11.lean#L111) | derived: ✱10·11 twice, PM's Dem. |
+| ✱11·13 | `PM.star11_13_rule` | `PM.q11_13`, [PM/Star11.lean:122](../PM/Star11.lean#L122) | derived from ✱10·13, as PM says |
+| ✱11·311 | `PM.star11_311_rule` | `PM.q11_311`, [PM/Star11.lean:213](../PM/Star11.lean#L213) | derived from ✱10·13 (it repeats ✱11·13) |
+
+Why a rule proved as a theorem is sound:
+
+- **The theorem states the rule, not an asserted formula.** Its hypotheses are the rule's premisses as
+  judgments of the system (`QThm S a`: a is an asserted proposition of the system S) and its conclusion is
+  the judgment the rule licenses: ✱10·13 is `(ha : QThm S a) (hb : QThm S b) : QThm S (QF.and a b)`. It
+  does not assert the implication `⊢ a ⊃ (b ⊃ a . b)` inside the system, which would be a different
+  proposition, and no card claims it does.
+- **Proving it is more than PM needs.** PM uses a rule as licence for particular steps, each on particular
+  asserted propositions. The theorem proves every such step valid at once, for every formula, and, in ✱10's
+  system, for every system `S` (no opt-in rule is assumed). Where it is derived (✱10·13, ✱11·07, ✱11·11,
+  ✱11·13, ✱11·311), it adds nothing to the system: no constructor, axiom or inference.
+- **Where PM takes the rule as primitive and so does the system** (✱9·12, ✱9·13, ✱10·11), the rule is a
+  constructor, and the theorem is that constructor under PM's number: it states the rule and derives it from
+  nothing weaker. ✱11·07, primitive in PM, is derived here.
+- **The name keeps PM's classification visible**, so a reader of a card that is a Lean `theorem` sees from
+  `_rule` that PM states it as a rule.
+
+Not exported, so not named yet: ✱1·1 (the constructor `PM.Thm.mp`), ✱1·11, ✱1·7–✱1·72 (formation: the type
+of formulas), ✱3·03, ✱9·14 and ✱9·15, and the rules of data/vol1_items.json that no declaration states
+under its number. `tests/test_export_names.py` checks this table: it lists exactly the exported `_rule`
+names, and each file and line declares the theorem named.
+
+## Definition bundles
+
+An export also uploads the Lean infrastructure its cards need: the formulas and the system of ✱1, the
+statement formulas, the derivation layer and the like, one bundle per source module, each a platform
+definition. These are not propositions of PM, so they have no PM number and are not export names. Their
+names follow their own rule, in [data/naming/definition_bundles.json](../data/naming/definition_bundles.json):
+
+```
+PM_core_<word>[_<word>]…
+```
+
+lower-case ASCII words that say what the bundle holds, joined by `_`, with no dot (a Prove2Me definition
+name is `[a-zA-Z_][a-zA-Z0-9_]*`). `core` keeps them apart from every export name (`PM.star…`, `PM.meta_…`,
+whose slugs are `PM_star…` and `PM_meta_…`) and from any name in PM's own style. The export of ✱1–✱5 has four:
+
+| Bundle | Source module | What it holds |
+|---|---|---|
+| `PM_core_star1_system` | PM/Basic.lean | formulas, the defined connectives, the theorems of ✱1, truth tables |
+| `PM_core_statement_formulas` | PM/Statements.lean | the formula of each numbered proposition of ✱2–✱5 |
+| `PM_core_hypothetical_derivations` | PM/Derived.lean | derivations under hypotheses (contexts) |
+| `PM_core_valuation_literals` | PM/Complete.lean | the literals of a valuation, for completeness |
+
+A bundle name is permanent once released, like an export name; a bundle whose content must change gets a
+new name with `_v<N>`, as a card does.
 
 ## Outside the name
 
@@ -177,6 +245,8 @@ mutations in `tests/test_export_names.py`):
 - `versions`: a superseded card and its replacement are both exported and linked: the `_v<N>` name has
   its row in [data/changes.tsv](../data/changes.tsv), and the old name is released, `@[deprecated]` in
   favour of the new one, and has the same row ([VERSIONING.md](VERSIONING.md));
+- `bundle_names`: each definition bundle `PM_core_<words>`, a valid platform definition name, one per source
+  module that exists, and unique, also ignoring case, among bundles and against every card's slug;
 - `counterparts`: each record pinned to its repository's commit, with a well-formed `file.lean:line`; a
   PM formula equal to the statement exported now; and a signature that, read strictly and instantiated as
   recorded, states that formula under the criterion. No network is needed: `--verify-counterparts DIR`

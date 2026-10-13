@@ -31,7 +31,10 @@ propositions" of RedCheck and StyleCheck are the `q…` theorems of ✱9–✱21
 that page defines both.
 
 The repository contains no `sorry`, no `native_decide`, no `axiom` declaration, and no `unsafe`,
-`implemented_by` or `extern`.
+`implemented_by` or `extern`, with one exception outside the library: the export tool
+`scripts/prove2me/extract_commands.lean`, which no Lean file imports, declares `unsafe def main`, because
+Lean requires unsafe code to enable initializers before it re-elaborates a file. `tests/run_all.sh`
+allows exactly that line.
 
 ## Lean's axioms
 

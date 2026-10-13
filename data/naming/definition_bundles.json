@@ -1,0 +1,14 @@
+{
+ "about": "Names of the definition bundles of an export (docs/NAMING.md, \"Definition bundles\"): the Lean infrastructure a card's statement or proof needs, one bundle per source module, uploaded as a platform definition. A bundle is not a proposition of PM, so it has no PM number: its name is PM_core_<words>, lower-case ASCII words joined by _, with no dot (a platform definition name is [a-zA-Z_][a-zA-Z0-9_]*). Like an export name, a bundle name is permanent once released, and is checked by scripts/export_names.py --check (bundle_names).",
+ "pattern": "PM_core_<word>[_<word>]…",
+ "bundles": [
+  {"name": "PM_core_star1_system", "module": "PM.Basic",
+   "what": "formulas of ✱1, the defined connectives ✱1·01, ✱3·01, ✱4·01, the theorems of ✱1 (an inductive predicate whose constructors are ✱1·1–✱1·6), and truth tables"},
+  {"name": "PM_core_statement_formulas", "module": "PM.Statements",
+   "what": "the formula of each numbered proposition of ✱1–✱5, with a kernel check that it is a tautology"},
+  {"name": "PM_core_hypothetical_derivations", "module": "PM.Derived",
+   "what": "derivations under hypotheses: a context of hypotheses as an iterated implication, and its n-th hypothesis"},
+  {"name": "PM_core_valuation_literals", "module": "PM.Complete",
+   "what": "the literals of a valuation, the hypotheses of Kalmár's lemma in the completeness proof"}
+ ]
+}

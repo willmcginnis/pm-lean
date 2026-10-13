@@ -32,8 +32,14 @@ lake build 2>&1 | tail -n 3
 [ "${PIPESTATUS[0]}" -eq 0 ] || fail "lake build"
 
 step "no sorry, native_decide, axiom, unsafe, implemented_by or extern"
-if grep -rnE --include='*.lean' --exclude-dir=.lake \
-    '\b(sorry|native_decide|implemented_by|extern)\b|^\s*((private|protected|noncomputable|partial)\s+)*(unsafe\s|axiom\s+[^[:space:]]+\s*[:({[])' . ; then
+# One exception, by its exact line: a Lean program under scripts/ that is run with `lean --run` and never
+# imported (scripts/prove2me/extract_commands.lean) may declare `unsafe def main`, since Lean requires
+# unsafe code to enable initializers before it re-elaborates a file. Nothing else in it is exempt.
+hits=$(grep -rnE --include='*.lean' --exclude-dir=.lake \
+    '\b(sorry|native_decide|implemented_by|extern)\b|^\s*((private|protected|noncomputable|partial)\s+)*(unsafe\s|axiom\s+[^[:space:]]+\s*[:({[])' . \
+  | grep -vE '^\./scripts/[^:]+\.lean:[0-9]+:unsafe def main \(args : List String\) : IO UInt32 := do$')
+if [ -n "$hits" ]; then
+  echo "$hits"
   fail "forbidden keyword"
 else
   echo "none"

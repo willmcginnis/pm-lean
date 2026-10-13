@@ -5,6 +5,26 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Export release 1.0.0 prepared** (docs/EXPORT_LOG.md), not yet public: PM ✱1–✱5 on Prove2Me, 196
+  cards and 4 definition bundles, version **1.0.0+m.7d40537313d3**. `data/export_names.lock` now holds the
+  196 names released (`scripts/export_names.py --write-lock --chapters 1-5`, which locks only the chapters
+  given and only the readings they use; none here). The Merkle root is built: RFC 6962's tree hash over
+  the lock (`--root`), tested against the RFC's test vectors (docs/VERSIONING.md).
+  - **The exporter is in the repository**, `scripts/prove2me/`: the platform's files from a commit, built
+    with the platform's Lean, with names read from data/export_names.json and counterparts from
+    data/naming/counterparts.json; titles and descriptions (each beginning with a DRAFT line); and the
+    checks before upload. One check is new: each card's statement and definitions digests, computed from
+    the uploaded files, must equal the locked ones. The canonical text of statements moved to
+    `Checks/Canon.lean` for that, shared with `Checks/ExportStatements.lean` (whose output is unchanged).
+    No credentials or network calls are in the repository.
+  - **Definition bundles have their own names**, `PM_core_<words>` (data/naming/definition_bundles.json),
+    checked by the new `bundle_names` rule (docs/NAMING.md).
+  - **docs/NAMING.md lists the rules proved as theorems** (✱9·12, ✱9·13, ✱10·11, ✱10·13, ✱11·07,
+    ✱11·11, ✱11·13, ✱11·311): their names keep `_rule`, PM's classification, and each theorem states the
+    rule, with the premisses as hypotheses, not an asserted implication. A test checks the table against
+    the export names and the source lines.
+  - **docs/VERSIONING.md, rule 7**: a Lean or Mathlib upgrade that changes a statement's canonical text
+    without changing its meaning is examined by a person and re-locked in a MAJOR release.
 - **A locked replacement keeps its link to the card it replaces.** Found by a release review of the
   export names, before any release. Once a replacement `_v2` was itself locked, the generator dropped
   its `supersedes`, and the next check failed with no change to the source. The link now comes from the
