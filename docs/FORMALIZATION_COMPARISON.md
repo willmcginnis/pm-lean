@@ -9,7 +9,7 @@ re-measured since. If your project's row is wrong or out of date, please open an
 
 **License.** As in the text audit, where it first appeared, this document is dedicated to the public domain under
 [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/); the legal code is in
-[LICENSE-CC0](../LICENSE-CC0). The rest of this repository is under the MIT License (see
+[LICENSE-CC0](../LICENSE-CC0). The rest of this repository is under `MIT OR Apache-2.0` (see
 [the README](../README.md#license)).
 
 Measured by us on 2026-10-11 from each project's own files. Only facts and numbers are given here; no code or

@@ -17,7 +17,7 @@ authors:
   - family-names: McGinnis
     given-names: Will
 repository-code: "https://github.com/willmcginnis/principia-mathematica-lean"
-license: MIT
+license: "MIT OR Apache-2.0"
 keywords:
   - Principia Mathematica
   - Lean 4

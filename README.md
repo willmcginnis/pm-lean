@@ -311,11 +311,17 @@ and the book for PM itself.
 
 ## License
 
-Code, ledgers and documentation are under the MIT License ([LICENSE](LICENSE)),
-with one exception: [docs/FORMALIZATION_COMPARISON.md](docs/FORMALIZATION_COMPARISON.md)
-is dedicated to the public domain under CC0 1.0 ([LICENSE-CC0](LICENSE-CC0)).
-LICENSE-CC0 covers that file only.
+Code, ledgers and documentation are licensed under either of
+
+- the Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE)), or
+- the MIT License ([LICENSE-MIT](LICENSE-MIT)),
+
+at your option (SPDX: `MIT OR Apache-2.0`), with one exception:
+[docs/FORMALIZATION_COMPARISON.md](docs/FORMALIZATION_COMPARISON.md) is dedicated to the public domain
+under CC0 1.0 ([LICENSE-CC0](LICENSE-CC0)). LICENSE-CC0 covers that file only.
 The files in `data/` derived from Project Gutenberg's ebooks reproduce
 public-domain text; see [data/README.md](data/README.md).
-*Principia Mathematica* (1910–1913) is in the public domain in the USA.
+*Principia Mathematica* (1910–1913) is in the public domain in the USA; terms in other countries may differ.
+Copies of this work on formalization platforms are under the terms of those platforms; Prove2Me's public
+contributions are Apache-2.0, the Apache side of the choice above.
 Contributions: [CONTRIBUTING.md](CONTRIBUTING.md).

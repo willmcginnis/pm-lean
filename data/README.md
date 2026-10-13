@@ -10,6 +10,12 @@
 | `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
 | `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order, prior work and the rows of `docs/PM_CLAIMS.md` it checks, and the repositories whose source the prior work was read in, each at a full commit ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
 | `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
+| `export_names.json` | the export name of every PM proposition the repository states, with its PM number, PM's name, descriptor, reading and source ([docs/NAMING.md](../docs/NAMING.md)) | `scripts/export_names.py` |
+| `export_names.lock` | export names that have been released and may never change; empty until the first public release | by hand, at a release |
+| `naming/vocabulary.json` | the closed list of words export names may use, and the word for each Lean connective | by hand |
+| `naming/readings.json` | the closed list of reading words (A `printed`, C `russell`, L `landini`, B `convention`, P `prenex`) | by hand |
+| `naming/pm_names.json` | PM's "Alphabetical list of propositions referred to by names" (Vol I front matter, Gutenberg eBook #78050) | `scripts/export_names.py --pm-names` |
+| `changes.tsv` | dated changes of export names: a statement superseded by `name_vN` ([docs/VERSIONING.md](../docs/VERSIONING.md)); header only until the first change | by hand, with the change |
 | `fidelity_counts.py` | the three fidelity counts per chapter, and consistency checks on the ledgers | — |
 
 The meaning of the labels is in [docs/FIDELITY.md](../docs/FIDELITY.md); how the progress tables use these
@@ -21,10 +27,13 @@ files is in [docs/PROGRESS.md](../docs/PROGRESS.md).
 Gutenberg eBooks #78050 (*Principia Mathematica*, Vol. I, release date February 26, 2026) and #78255 (Vol. II,
 March 20, 2026). These are transcriptions of the 1910 and 1912 printings, prepared by Distributed Proofreaders
 volunteers. The derived files reproduce the ebook's statements and proof lines (its LaTeX), its page markers
-and its labels. They do not reproduce the ebook's front or back matter.
+and its labels. They do not reproduce the ebook's front or back matter, except that `naming/pm_names.json`
+reproduces Vol I's list of propositions referred to by names (each name, number and formula).
 
-The ebooks and the 1910–1913 books are in the public domain in the USA. If you are outside the USA, check the
-laws of your country before using these files. The HTML files themselves are not in this repository; see
+The ebooks and the 1910–1913 books are in the public domain in the USA. Terms elsewhere may differ: in some
+countries copyright runs for a fixed period after an author's death, and for a joint work from the death of
+the last surviving author (in the UK, 70 years from the end of that year); Whitehead died in 1947 and Russell
+in 1970. If you are outside the USA, check the laws of your country before using these files. The HTML files themselves are not in this repository; see
 [scripts/README.md](../scripts/README.md) for where to get them and how to regenerate everything from them.
 
 `vol1.jsonl` records, one JSON object per line, in the order of the text:

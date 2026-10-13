@@ -24,6 +24,10 @@ proved in each particular case"), add it to [docs/PM_CLAIMS.md](docs/PM_CLAIMS.m
 
 ## Naming and source references
 
+The names below are the repository's own. Names for export to formalization platforms
+(`PM.star2_01_abs_not_of_imp_not`) are generated from these by `scripts/export_names.py`; see
+[docs/NAMING.md](docs/NAMING.md).
+
 - ✱N·M is `tN_M` for ✱2–✱5 (namespace `PM`, statements `sN_M` in `PM/Statements.lean`) and `qN_M` from ✱9
   on. For example ✱20·11 is `q20_11` and ✱14·21's variant is `q14_21_neg`. Helpers that are not PM items
   get descriptive names (`qiffCongrRImp`), or a suffix after the number (`q12_1_var`).
@@ -70,6 +74,19 @@ in `README.md` and `docs/FIDELITY.md` if they change, and add a line to `CHANGEL
 generated files (`PM/Statements.lean`, `PM/QuantLift.lean`, `AxiomCheck.lean`) by hand; see
 [scripts/README.md](scripts/README.md).
 
-By contributing you agree that your contribution is licensed under the repository's MIT License, except
-that contributions to `docs/FORMALIZATION_COMPARISON.md` are dedicated to the public domain under CC0 1.0
-(`LICENSE-CC0`), as that document is.
+## Questions, corrections and proposals
+
+Open a GitHub issue: a question about a proof or a reading, a correction to a statement, a name or a
+document, or a proposal (a new export, a change of convention). Proposals that would change an export name
+or a released statement follow [docs/VERSIONING.md](docs/VERSIONING.md).
+
+## License
+
+The repository is licensed under either of the Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE))
+or the MIT License ([LICENSE-MIT](LICENSE-MIT)), at your option; `docs/FORMALIZATION_COMPARISON.md` is
+dedicated to the public domain under CC0 1.0 ([LICENSE-CC0](LICENSE-CC0)).
+
+Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in the work
+by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms
+or conditions. Contributions to `docs/FORMALIZATION_COMPARISON.md` are dedicated to the public domain under
+CC0 1.0, as that document is.

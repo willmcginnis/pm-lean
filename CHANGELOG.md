@@ -3,6 +3,37 @@
 Coverage and semantic changes, newest first, from the git history. Commit hashes are given where a change is
 one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## 2026-10-13
+
+- **Licence: `MIT OR Apache-2.0`.** The code, ledgers and documentation are now dual licensed, at the
+  user's option, under the MIT License (`LICENSE`, renamed `LICENSE-MIT`, same holder) and the Apache
+  License 2.0 (`LICENSE-APACHE`, the text of apache.org, sha256 `cfc7749b…`). docs/FORMALIZATION_COMPARISON.md
+  stays CC0 1.0. CITATION.cff gives the SPDX expression. CONTRIBUTING.md has an inbound=outbound clause
+  (contributions are dual licensed the same way unless stated otherwise) and a section on questions,
+  corrections and proposals (GitHub issues). data/README.md adds, as fact, that terms outside the USA may
+  differ (in the UK a joint work's term runs from the death of the last author; Russell died in 1970).
+- **Export names** (docs/NAMING.md). Each PM proposition the repository states has an export name for
+  formalization platforms, `PM.star<N>_<M>_<descriptor>[_reading_<word>]`: PM's number, PM's own name when
+  it gives one (data/naming/pm_names.json, from PM's list of propositions referred to by names), a
+  descriptor generated from the elaborated statement in Mathlib's style from a closed vocabulary
+  (data/naming/vocabulary.json), and for ✱9 by its own method the reading (data/naming/readings.json:
+  A `printed`, C `russell`, L `landini`, B `convention`, P `prenex`). `Checks/ExportStatements.lean` prints
+  the statements; `scripts/export_names.py` writes data/export_names.json (523 names: ✱1–✱5 196 with three
+  results about the system, 156 marked for review) and checks it: pattern, unique names and platform
+  slugs, vocabulary, PM's name first, readings, no top-level `PM_`, and released names frozen in
+  data/export_names.lock (empty until the first release). A step of tests/run_all.sh;
+  tests/test_export_names.py seeds a mutation for each rule.
+- **Versioning of exports** (docs/VERSIONING.md): names permanent and never reused; a new statement is
+  `name_vN` and the old card is deprecated; proofs and descriptions change in place; superseded
+  declarations kept forever as `@[deprecated]`; SemVer releases (MAJOR an environment move, MINOR cards
+  added or superseded, PATCH proofs and documentation) with the Merkle root of the statements as build
+  metadata (planned); data/changes.tsv for dated name changes (header only). The first public export will
+  be 1.0.0.
+- **Export log** (docs/EXPORT_LOG.md): a dated public log, starting with the private pilot of ✱1–✱5
+  (2026-10-12).
+- **No auto-bound implicits.** `upd_self` (PM/Complete.lean) declares its binder `{b : Bool}`; it was the
+  only declaration that relied on an auto-bound implicit, and lakefile.toml now sets `autoImplicit = false`.
+
 ## 2026-10-12
 
 - **Roadmap: ✱25, and every claim of PM_CLAIMS.md in a task.** A task for ✱25 (the universal and null
