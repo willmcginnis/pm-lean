@@ -1,0 +1,67 @@
+{
+  "about": "Findings of scripts/mutation/mutate.py that have been examined, each with its class (docs/STATEMENT_MUTATION.md). A finding not listed here fails the run, and so, in --full, does an entry no longer found.",
+  "classes": {
+    "equivalent (renaming)": "Equivalent mutant: two variables exchanged throughout a schematic statement, which is the same proposition under another naming. The proof is a natural-deduction script (`ofPf <| by unfold …; split_iff; …`) that names its hypotheses by position (`hy n`) and no formula, so it proves the renamed statement as well. Not a fidelity problem; the script is still tied to the connectives: every non-renaming mutant of the same statement fails."
+  },
+  "unusedHypotheses": [],
+  "termSurvivors": [],
+  "scriptSurvivors": [
+    {
+      "id": "PM.t4_7:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t4_71:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t4_72:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t4_78:swap p r#1",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t4_79:swap p r#1",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_71:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_71:swap p r#1",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_71:swap q r#2",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_74:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_74:swap p r#1",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_74:swap q r#2",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_75:swap p q#0",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_75:swap p r#1",
+      "class": "equivalent (renaming)"
+    },
+    {
+      "id": "PM.t5_75:swap q r#2",
+      "class": "equivalent (renaming)"
+    }
+  ],
+  "droppableHypotheses": []
+}

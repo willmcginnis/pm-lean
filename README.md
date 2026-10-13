@@ -186,7 +186,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text, formalization platforms (5 in progress, 4 not started)</summary>
+<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text, formalization platforms (6 in progress, 4 not started)</summary>
 
 ![Group 3, Comparing across: its subgroups and tasks](docs/roadmap/group-across.svg)
 
@@ -201,6 +201,7 @@ The work is split into four groups that run side by side. Each group is split in
   - Vol I and Vol II transcriptions checked against scans; errata reported: *in progress*
   - Vol III transcription proofread and checked against scans: *in progress*
   - ✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable: *in progress*
+  - Statement mutation: are statements tied to their proofs and to PM?: *in progress*
 - **Formalization platforms**
   - Export to formalization platforms, with a private pilot on Prove2Me (✱1–✱5): *in progress*
 

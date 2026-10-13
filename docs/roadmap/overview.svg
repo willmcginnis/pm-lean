@@ -108,7 +108,7 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="58.0" y="579.8" font-size="12.5" class="t2">0 done</text>
 <circle cx="125.5" cy="575.6" r="5" class="sto"/>
 <path d="M125.5,570.6 A5,5 0 0 0 125.5,580.6 Z" class="st"/>
-<text x="134.5" y="579.8" font-size="12.5" class="t2">5 in progress</text>
+<text x="134.5" y="579.8" font-size="12.5" class="t2">6 in progress</text>
 <circle cx="256.2" cy="575.6" r="5" class="sto"/>
 <text x="265.2" y="579.8" font-size="12.5" class="t2">4 not started</text>
 <text x="478.0" y="391.8" font-size="18" font-weight="700" class="t1">4  Results about PM</text>

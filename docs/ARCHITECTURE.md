@@ -221,6 +221,7 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
 - `tests/`: the regression tests and `run_all.sh`, which runs every check
   ([tests/README.md](../tests/README.md)).
 - `scripts/`: the statement parser and generators, and the progress counter
-  ([scripts/README.md](../scripts/README.md)).
+  ([scripts/README.md](../scripts/README.md)). `scripts/mutation/` is the statement-mutation trial, a Lean
+  meta-program and its driver ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)).
 - `data/`: the fidelity ledgers, the parsed Vol I text and the item lists
   ([data/README.md](../data/README.md)).

@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Roadmap: Principia Mathematica in Lean 4",
-    "as_of": "2026-10-12",
+    "as_of": "2026-10-13",
     "status_source": "Statuses are read from the repository at the commit that contains this file: docs/PROGRESS.md (whose tables name the commit they measure), docs/PM_CLAIMS.md, docs/STAR9_FOUNDATION.md and data/star9f_ledger.json; counts in the notes are cited with {...} and filled in from those files by scripts/roadmap_chart.py. 'in progress' means some of the task's work is in the repository or under way in the companion text audit.",
     "structure": "Four groups, each split into subgroups, each split into leaves (tasks). A leaf is a chapter-sized or stage-sized task.",
     "deps": "hard_deps: leaves whose results this leaf's deliverable needs; these edges are the gates. soft_deps: leaves that help (shared infrastructure, comparisons, experience) but are not needed. Dependencies are on particular leaves, not on whole volumes or phases.",
@@ -2840,6 +2840,38 @@
                 ],
                 "note": "The text audit sets PM's dots aside; this check is what the formalization adds.",
                 "known": []
+              }
+            },
+            {
+              "id": "tx-mut",
+              "name": "Statement mutation: are statements tied to their proofs and to PM?",
+              "short": "statement mutation",
+              "size": "S",
+              "size_reason": "A Lean meta-program over the proof terms and a driver that recompiles mutated sources: unused hypotheses in every theorem; one-change mutants of every ✱1–✱5 and ✱9–✱21 statement checked against the original proof term by the kernel; for ✱1–✱5, the proof scripts re-elaborated against every mutant that is a tautology. Two tiers: the full run (about 9 minutes on the maintainer's machine) and a quick sample for the export path (under 10 seconds).",
+              "status": "in progress",
+              "status_note": "A trial (docs/STATEMENT_MUTATION.md). No theorem has an unused hypothesis (661 hypotheses in 1134 theorems), and none of the 171 recompiled with a hypothesis replaced by True compiles. No proof term accepts any of 12,711 mutants, among them 836 one-change misreadings of ✱1–✱5 that are still tautologies, which the truth-table test alone would accept. Re-elaborating the ✱1–✱5 proof scripts, 14 of 1,155 tautological mutants compile, all renamings of the variables in eight natural-deduction proofs, so equivalent. Which parts become standing checks awaits a ruling.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "note": "Listed from memory; not yet searched with several engines. Lean's own unused-variables linter sees two of the five cases the check plants for itself (docs/STATEMENT_MUTATION.md).",
+                "known": [
+                  {
+                    "work": "Vacuity detection in model checking: a specification that holds for a reason other than the intended one (Beer, Ben-David, Eisner and Rodeh, 1997; Kupferman and Vardi, 1999)",
+                    "evidence": "from memory"
+                  },
+                  {
+                    "work": "Mutated conjectures used to evaluate Isabelle's counterexample generators (Blanchette and Nipkow, Nitpick, 2010)",
+                    "evidence": "from memory"
+                  },
+                  {
+                    "work": "The unusedArguments linter of Batteries, run on Mathlib by #lint: a declaration with an argument its value does not use",
+                    "evidence": "from memory"
+                  }
+                ]
               }
             }
           ]

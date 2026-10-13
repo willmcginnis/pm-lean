@@ -5,6 +5,20 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Statement mutation, a trial: are statements tied to their proofs and to PM?** New
+  `scripts/mutation/` (a Lean meta-program and its driver), with two tiers: `--quick`, under 10 s, for
+  the export path, and `--full`, about 9 minutes. The results:
+  - No theorem has an unused hypothesis: 661 hypotheses in 1134 theorems, found from the proof terms. Of
+    171 hypotheses recompiled as `True`, none compiles.
+  - No proof term accepts any of 12,711 one-change mutants of the ✱1–✱5 and ✱9–✱21 statements. Among
+    them are 836 misreadings of ✱1–✱5 that remain tautologies, which the truth-table test of
+    `PM/Statements.lean` alone would pass.
+  - The ✱1–✱5 proof scripts were re-elaborated against every tautological mutant. Only 14 compile, all
+    renamings of the variables in eight natural-deduction proofs, which are equivalent statements.
+  - No fidelity problem was found. Which parts become standing checks awaits a ruling
+    (docs/STATEMENT_MUTATION.md; roadmap task "statement mutation"). Not in `tests/run_all.sh`. New:
+    `tests/test_statement_mutation.py`, for the trial's source editor.
+
 - **Export release 1.0.0 is public** (docs/EXPORT_LOG.md): version 1.0.0+m.7d40537313d3, PM ✱1–✱5 on
   Prove2Me, exported from 2e43991 and tagged `export-v1.0.0` there; its 68 roots were made public, and with
   them all 196 cards and the 4 definition bundles. Its descriptions were corrected by aeb8eab before

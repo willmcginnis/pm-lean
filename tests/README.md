@@ -29,5 +29,10 @@ request. Each test was checked to fail when its mistake is put back.
 | Locking a replacement (`_v2`) dropped its link to the card it replaces, so the next check failed with no change to the source | `test_versioning.py`: `_v2` is released, regenerated, locked again and checked, every generated file and the lock byte for byte the same; then superseded by `_v3`, released the same way, the chain of three linked in both directions. `test_export_names.py`: generate, `--write-lock`, generate is a fixed point for the repository under its current lock, and for a chain `_v2`, `_v3` locked in turn |
 | The search for forbidden keywords exempted `unsafe def main` in any Lean file under scripts/, not only in scripts/prove2me/extract_commands.lean | `test_forbidden_keywords.py`: on scratch trees outside the repository, `tests/forbidden_keywords.sh` (the step of run_all.sh) passes the exempt line in its own file and finds the same line in four other files under scripts/ and one outside it, and any other `unsafe` line in the exempt file; the repository passes |
 
+`test_statement_mutation.py` guards a tool rather than a past mistake: the source editor of the
+statement-mutation trial (`scripts/mutation/mutate.py`, [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md)),
+which replaces one hypothesis by `True` on each binder form the repository uses, and the classes of the
+findings listed in `scripts/mutation/expected.json`. The trial itself is not part of `run_all.sh`.
+
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built.

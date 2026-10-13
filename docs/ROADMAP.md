@@ -333,12 +333,14 @@ Prior work:
 | Vol I and Vol II transcriptions checked against scans; errata reported | in progress. Companion text audit; errata prepared, awaiting the scan check and reporting. | M: Errata are prepared; each needs a check against the scan. | nothing | nothing | by dependency |
 | Vol III transcription proofread and checked against scans | in progress. At Distributed Proofreaders (companion text audit). | M: Volunteer proofreading under way; then the same scan checks. | nothing | nothing | by dependency |
 | ✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable | in progress. PM/Statements.lean was generated from the transcription by a dot parser (scripts/gen_lean.py), and ✱1·4 and ✱4·42 were found this way; not yet a standing check. It catches underivable transcriptions only: a derivable formula can still be mistranscribed. | S: The dot parser and the completeness theorem exist; the task runs them on the raw transcription as a standing check and reports each failure to the text audit. | nothing | Vol I–II text | by dependency |
+| Statement mutation: are statements tied to their proofs and to PM? | in progress. A trial (docs/STATEMENT_MUTATION.md). No theorem has an unused hypothesis (661 hypotheses in 1134 theorems), and none of the 171 recompiled with a hypothesis replaced by True compiles. No proof term accepts any of 12,711 mutants, among them 836 one-change misreadings of ✱1–✱5 that are still tautologies, which the truth-table test alone would accept. Re-elaborating the ✱1–✱5 proof scripts, 14 of 1,155 tautological mutants compile, all renamings of the variables in eight natural-deduction proofs, so equivalent. Which parts become standing checks awaits a ruling. | S: A Lean meta-program over the proof terms and a driver that recompiles mutated sources: unused hypotheses in every theorem; one-change mutants of every ✱1–✱5 and ✱9–✱21 statement checked against the original proof term by the kernel; for ✱1–✱5, the proof scripts re-elaborated against every mutant that is a tautology. Two tiers: the full run (about 9 minutes on the maintainer's machine) and a quick sample for the export path (under 10 seconds). | nothing | nothing | by dependency |
 
 Prior work:
 
 - **Vol I–II text** (ideas, check against). No tool found that certifies formula transcriptions against scans. Gerrata (MIT): transcription against scans, the same architecture (*measured*: [Gerrata@045eebc README.md:5-17](https://github.com/Impression-Editions/Gerrata/blob/045eebc7e3328d2a7321d1f525fd95e82e5adf61/README.md#L5-L17), [Gerrata@045eebc pyproject.toml:10](https://github.com/Impression-Editions/Gerrata/blob/045eebc7e3328d2a7321d1f525fd95e82e5adf61/pyproject.toml#L10)); PM-MATS: counts only (all rights reserved) (*measured*: [PM-MATS@53c587c src/pmdata.json](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/src/pmdata.json), [PM-MATS@53c587c LICENSE](https://github.com/LogicalAtomist/PM-MATS/blob/53c587ce95c5c66d2489f10b8b5b2dce10e522a4/LICENSE)); Project Gutenberg eBooks #78050 (Vol I) and #78255 (Vol II) (*from memory*).
 - **Vol III text** (ideas). Distributed Proofreaders' LaTeX workflow (*documented*).
 - **dots check** (nothing found). The text audit sets PM's dots aside; this check is what the formalization adds.
+- **statement mutation** (ideas). Listed from memory; not yet searched with several engines. Lean's own unused-variables linter sees two of the five cases the check plants for itself (docs/STATEMENT_MUTATION.md). Vacuity detection in model checking: a specification that holds for a reason other than the intended one (Beer, Ben-David, Eisner and Rodeh, 1997; Kupferman and Vardi, 1999) (*from memory*); Mutated conjectures used to evaluate Isabelle's counterexample generators (Blanchette and Nipkow, Nitpick, 2010) (*from memory*); the unusedArguments linter of Batteries, run on Mathlib by #lint: a declaration with an argument its value does not use (*from memory*).
 
 #### Formalization platforms
 
@@ -442,7 +444,7 @@ Every task under way, and every task whose gates are all done and that is not he
 <!-- generated:now:start -->
 - **PM itself.** Under way: ✱9–✱14; ✱9 beside ✱10; ✱9·31 and p. 142; ✱20–✱24; classes of classes; ✱9 claims; metatheorems ✱1–✱11; reducibility claims; hierarchy claims; descriptions claims; class claims; non-theorems; whole-work claims. Can start: Rep; order-seeing model; Vol II list; edition differences.
 - **Checking underneath.** Can start: kernels in CI; our Metamath verifier; kernel census; Lean4Lean run; Lean proves Con(ZFC); ZFC + inaccessibles proves Con(Lean).
-- **Comparing across.** Under way: other formalizations; Vol I–II text; Vol III text; dots check; platform export. Can start: set.mm comparison.
+- **Comparing across.** Under way: other formalizations; Vol I–II text; Vol III text; dots check; statement mutation; platform export. Can start: set.mm comparison.
 - **Results about PM.** Under way: assumption tags. Can start: adequacy ✱1–✱5; C complete.
 <!-- generated:now:end -->
 
@@ -799,7 +801,7 @@ since; an entry says what was true at the commit given.
 <!-- generated:sources:end -->
 
 <!-- generated:evidence:start -->
-Of the 147 prior-work entries above: 81 *measured*, 50 *documented*, 3 *unverified*, 13 *from memory*.
+Of the 150 prior-work entries above: 81 *measured*, 50 *documented*, 3 *unverified*, 16 *from memory*.
 <!-- generated:evidence:end -->
 
 ## Maintaining this page
