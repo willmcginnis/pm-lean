@@ -2,7 +2,7 @@
 # Every check of the repository, from its root: the build (with the pinned statements of
 # Checks/PinnedStatements.lean), a search for sorry / native_decide / added axioms, the root checks
 # (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), ✱9's
-# readings (Checks/Star9Readings.lean), and
+# readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), and
 # the Python tests in tests/ (which also run AllAxioms.lean, AxiomCheck.lean and
 # fidelity_counts.py). Exits nonzero if any of them fails.
 #
@@ -49,6 +49,9 @@ lean_check Checks/LedgerCheck.lean '; 0 citations not used by the proof' \
   '✱9 ledger: [0-9]+ rows checked .*; 0 propositions used but not listed'
 
 lean_check Checks/Star9Readings.lean '"kind": "simul", "reading": "C"'
+
+step "export names (docs/NAMING.md)"
+python3 scripts/export_names.py --check || fail "export names"
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"

@@ -1,0 +1,141 @@
+{
+ "source": "Project Gutenberg eBook #78050 (Principia Mathematica, Vol. I), \"Alphabetical list of propositions referred to by names\"; the formula is the transcription's TeX",
+ "note": "PM gives one name to several numbers (Syll, Transp, Simp), so a name is never a key on its own: the key is the number.",
+ "names": [
+  {
+   "name": "Abs",
+   "number": "*2.01",
+   "printed": "\\(\\vdash : p \\supset  {\\sim}p . \\supset .{\\sim}p\\)"
+  },
+  {
+   "name": "Add",
+   "number": "*1.3",
+   "printed": "\\(\\vdash : q. \\supset .p \\lor q\\)"
+  },
+  {
+   "name": "Ass",
+   "number": "*3.35",
+   "printed": "\\(\\vdash : p .p \\supset q. \\supset .q\\)"
+  },
+  {
+   "name": "Assoc",
+   "number": "*1.5",
+   "printed": "\\(\\vdash : p \\lor (q \\lor r). \\supset .q \\lor (p \\lor r)\\)"
+  },
+  {
+   "name": "Comm",
+   "number": "*2.04",
+   "printed": "\\(\\vdash\\colon\\ldotp p. \\supset .q \\supset r \\colon  \\supset \\colon q. \\supset .p \\supset r\\)"
+  },
+  {
+   "name": "Comp",
+   "number": "*3.43",
+   "printed": "\\(\\vdash\\colon\\ldotp p \\supset q. p \\supset r. \\supset \\colon p. \\supset .q. r\\)"
+  },
+  {
+   "name": "Exp",
+   "number": "*3.3",
+   "printed": "\\(\\vdash\\colon\\ldotp p. q. \\supset . r: \\supset \\colon p.  \\supset . q \\supset r\\)"
+  },
+  {
+   "name": "Fact",
+   "number": "*3.45",
+   "printed": "\\(\\vdash\\colon\\ldotp p \\supset q. \\supset \\colon p. r. \\supset . q. r\\)"
+  },
+  {
+   "name": "Id",
+   "number": "*2.08",
+   "printed": "\\(\\vdash. p \\supset p\\)"
+  },
+  {
+   "name": "Imp",
+   "number": "*3.31",
+   "printed": "\\(\\vdash\\colon\\ldotp p. \\supset . q \\supset r \\colon \\supset \\colon p. q. \\supset . r\\)"
+  },
+  {
+   "name": "Perm",
+   "number": "*1.4",
+   "printed": "\\(\\vdash : p \\lor q. \\supset . q \\lor p\\)"
+  },
+  {
+   "name": "Simp",
+   "number": "*2.02",
+   "printed": "\\(\\vdash : q. \\supset . p \\supset q\\)"
+  },
+  {
+   "name": "Simp",
+   "number": "*3.26",
+   "printed": "\\(\\vdash : p. q. \\supset . p\\)"
+  },
+  {
+   "name": "Simp",
+   "number": "*3.27",
+   "printed": "\\(\\vdash : p. q. \\supset . q\\)"
+  },
+  {
+   "name": "Sum",
+   "number": "*1.6",
+   "printed": "\\(\\vdash\\colon\\ldotp q \\supset r. \\supset \\colon p \\lor q. \\supset . p \\lor r\\)"
+  },
+  {
+   "name": "Syll",
+   "number": "*2.05",
+   "printed": "\\(\\vdash\\colon\\ldotp q \\supset r. \\supset \\colon p \\supset q. \\supset . p \\supset r\\)"
+  },
+  {
+   "name": "Syll",
+   "number": "*2.06",
+   "printed": "\\(\\vdash\\colon\\ldotp p \\supset q. \\supset \\colon q \\supset r. \\supset . p \\supset r\\)"
+  },
+  {
+   "name": "Syll",
+   "number": "*3.33",
+   "printed": "\\(\\vdash : p \\supset q. q \\supset r. \\supset . p \\supset r\\)"
+  },
+  {
+   "name": "Syll",
+   "number": "*3.34",
+   "printed": "\\(\\vdash : q \\supset r. p \\supset q. \\supset . p \\supset r\\)"
+  },
+  {
+   "name": "Taut",
+   "number": "*1.2",
+   "printed": "\\(\\vdash : p \\lor p. \\supset . p\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*2.03",
+   "printed": "\\(\\vdash : p \\supset {\\sim}q. \\supset . q \\supset {\\sim}p\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*2.15",
+   "printed": "\\(\\vdash : {\\sim}p \\supset q. \\supset . {\\sim}q \\supset p\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*2.16",
+   "printed": "\\(\\vdash : p \\supset q. \\supset . {\\sim}q \\supset {\\sim} p\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*2.17",
+   "printed": "\\(\\vdash : {\\sim}q \\supset{\\sim}p. \\supset . p \\supset q\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*3.37",
+   "printed": "\\(\\vdash\\colon\\ldotp p. q. \\supset . r \\colon \\supset \\colon p. {\\sim}r. \\supset . {\\sim}q\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*4.1",
+   "printed": "\\(\\vdash : p \\supset q. \\equiv . {\\sim}q \\supset {\\sim}p\\)"
+  },
+  {
+   "name": "Transp",
+   "number": "*4.11",
+   "printed": "\\(\\vdash : p \\equiv q. \\equiv . {\\sim}p \\equiv {\\sim}q\\)"
+  }
+ ]
+}

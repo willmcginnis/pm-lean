@@ -216,7 +216,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   statement was once corrected), `LedgerCheck.lean` (citations and ledger rows against proof terms) and
   `Star9Readings.lean` (✱9 under its four readings, read from the statements, and where C uses ✱8·13 and
   L uses Switch;
-  docs/STAR9_READINGS.md).
+  docs/STAR9_READINGS.md) and `ExportStatements.lean` (each PM proposition's statement as a tree, from
+  which `scripts/export_names.py` generates export names; [NAMING.md](NAMING.md)).
 - `tests/`: the regression tests and `run_all.sh`, which runs every check
   ([tests/README.md](../tests/README.md)).
 - `scripts/`: the statement parser and generators, and the progress counter

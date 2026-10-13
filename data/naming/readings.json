@@ -1,0 +1,7 @@
+{
+ "A": {"word": "printed", "lean": "PM.F9.Reading.printed", "meaning": "✱9's definitions as printed (1910)", "why": "says what it is: the text as printed, with no repair"},
+ "C": {"word": "russell", "lean": "PM.F9.Reading.russell", "meaning": "the definitions as printed with Russell's ✱8·13 (1925) carried over to ✱9; the working reading", "why": "names whose repair it is, as landini does; the authors' own fix, so the author's name"},
+ "L": {"word": "landini", "lean": "PM.F9.Reading.withSwitch", "meaning": "Landini's ✱9+ (2000): ✱9·yy, ✱9·zz and the rule Switch; a published variant kept as a cross-check", "why": "names whose repair it is; the Lean name withSwitch names a mechanism, and Switch alone would not say whose"},
+ "B": {"word": "convention", "lean": "PM.F9.Reading.convention", "meaning": "an alternative convention of this project's, kept as a cross-check", "why": "the word the repository already uses (Reading.convention, docs/REPAIRS.md); it says this is a convention, not PM's text or anyone's published repair"},
+ "P": {"word": "prenex", "lean": "PM.F9.Reading.prenexSwitch", "meaning": "the definitions as printed with this project's prenex Switch (R5), kept for comparison", "why": "names the mechanism, which is this project's own construction and has no author to name"}
+}
