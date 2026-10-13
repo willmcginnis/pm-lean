@@ -74,10 +74,12 @@ every card some words for search, including the ones that have neither a PM name
 
 A Lean or Mathlib declaration that states the same law is recorded as metadata, for the card's title and
 description, in [data/naming/counterparts.json](../data/naming/counterparts.json): for ✱1–✱5, 68 of the
-193 numbered propositions have one. Each record gives the declaration, its signature, its statement in
-PM's variables, the repository, the file and line at the pinned commit, whether its proof is classical
-(uses `Classical.choice`), whether and where the two sides of an equivalence are the other way round, and
-how it was checked. The pins are the platform's environment: Lean
+193 numbered propositions have one. Each record gives the declaration, its signature, the PM variable each
+of its propositional variables is instantiated with (`instantiation`, in the order of its binders), its
+statement in PM's variables, the repository, the file and line at the pinned commit, whether its proof is
+classical (uses `Classical.choice`), whether and where the two sides of an equivalence are the other way
+round, whether a `Sort` parameter is specialized to `Prop`, and how it was checked. The pins are the
+platform's environment: Lean
 `819816b2e0a3bf405af45ae5c7af2491d8f5bee6` (v4.33.1) and Mathlib
 `0df444a360eaa60ab8c11dca51a86af692955474`, not this repository's toolchain. A later rename upstream
 changes nothing here: the record says what the declaration was called at the pin.
@@ -106,6 +108,34 @@ not ✱1·4 (an equivalence for an implication; `Or.symm` is), `Function.comp` i
 hypotheses come in the other order), and `And.imp` is not ✱3·47 (curried where PM has a conjunction).
 That no counterpart is listed is the result of a search of Lean's core and of Mathlib's source, not a proof
 that none exists.
+
+**How each record is checked.** The declaration's own type is bound to the statement exported now, not
+only the record's account of it:
+
+- **The 54 Lean core counterparts are checked by Lean** (`checked: "lean"`).
+  [Checks/Counterparts.lean](../Checks/Counterparts.lean), generated from the records and the exported
+  statements, states PM's formula as a schema over propositional variables, translated by the criterion
+  (sides of an equivalence swapped only where the record says so), and has the kernel check
+  `example : <schema> := @<declaration> <variables>`. Its `#counterpart` command also checks that the
+  declaration's type prints as the recorded signature; that the instantiated binders are propositional
+  variables, `Sort u` only where the record says `specialized`; that no two get the same variable; and
+  that the instantiated type is the schema exactly, with no unfolding (but `A → False` read as `¬A`). It
+  runs in `tests/run_all.sh` with this repository's Lean, and was also run with the pinned Lean v4.33.1
+  (`819816b`), with the same result; `tests/test_counterparts.py` reruns it with v4.33.1 when that
+  toolchain is installed.
+- **The 14 Mathlib counterparts are checked from their source** (`checked: "source"`): this repository does
+  not depend on Mathlib, and they have not been compiled. `scripts/export_names.py --check` reads each
+  recorded signature, the declaration's header as written at the pin, with a strict parser of the
+  propositional fragment (Lean's precedences; anything that is not a type over `Prop` variables is
+  rejected). For the variables it takes from its section, the record also gives the section's `variable`
+  line. The check then instantiates the variables as recorded and compares the result with PM's formula
+  under the criterion. `--verify-counterparts DIR`, run by hand against checkouts of the pins, checks that
+  the header at the recorded line is the recorded signature, and the `variable` line the recorded one, up
+  to whitespace. Compiling them against Mathlib `0df444a` is a follow-up; a record so checked would say
+  `checked: "lean-mathlib"`.
+
+The same strict parser also reads the 54 Lean core signatures, so without Lean the Python check already
+rejects a signature that is not a type, or a declaration that does not state PM's formula.
 
 ## Readings
 
@@ -144,12 +174,16 @@ mutations in `tests/test_export_names.py`):
 - `vocabulary`: the descriptor only from vocabulary words;
 - `lock`: every name in [data/export_names.lock](../data/export_names.lock) still exported, with the same
   statement, definitions and reading ([VERSIONING.md](VERSIONING.md)); empty until the first release;
-- `versions`: a `_v<N>` name has its row in [data/changes.tsv](../data/changes.tsv);
-- `counterparts`: each record pinned to its repository's commit, with a well-formed `file.lean:line`, a
-  statement equal to PM's formula up to the recorded equivalence reversals, and a PM formula equal to the
-  statement exported now. No network is needed: `--verify-counterparts DIR` checks the files and lines
-  in local checkouts, by hand;
-- data/export_names.json is what the generator produces from the current statements.
+- `versions`: a superseded card and its replacement are both exported and linked: the `_v<N>` name has
+  its row in [data/changes.tsv](../data/changes.tsv), and the old name is released, `@[deprecated]` in
+  favour of the new one, and has the same row ([VERSIONING.md](VERSIONING.md));
+- `counterparts`: each record pinned to its repository's commit, with a well-formed `file.lean:line`; a
+  PM formula equal to the statement exported now; and a signature that, read strictly and instantiated as
+  recorded, states that formula under the criterion. No network is needed: `--verify-counterparts DIR`
+  checks the files, lines and source headers in local checkouts, by hand. The Lean core ones are also
+  checked by Lean (`Checks/Counterparts.lean`, above);
+- data/export_names.json and Checks/Counterparts.lean are what the generator produces from the current
+  statements and records.
 
 ## Why
 

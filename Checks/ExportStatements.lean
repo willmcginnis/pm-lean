@@ -4,8 +4,10 @@
 -- object `{"name", "module", "vars", "hyps", "concl"}`.
 --
 -- Printed: every theorem under `PM` whose last name component is a letter `t`, `q` or `f` followed by
--- a digit (scripts/export_names.py picks the ones it exports by module), the constructors of `PM.Thm`
--- (✱1·2–✱1·6), and `PM.sound`, `PM.complete` and `PM.star1_4_variant_not_a_theorem`.
+-- a digit (scripts/export_names.py picks the ones it exports by module), every theorem of a module
+-- under `PM.Deprecated` (the superseded declarations kept by docs/VERSIONING.md), the constructors of
+-- `PM.Thm` (✱1·2–✱1·6), and `PM.sound`, `PM.complete` and `PM.star1_4_variant_not_a_theorem`. A
+-- declaration marked `@[deprecated new (since := "…")]` also has `"deprecated": {"new", "since"}`.
 --
 -- A tree is the elaborated statement read as written: `{"c": constant, "a": [arguments]}` for an
 -- application of a constant (explicit arguments only, and not those that are types), `{"v": name}` for
@@ -154,6 +156,12 @@ partial def deps (e : Expr) : MetaM NameSet := do
       todo := (← defCanon n).2.toList ++ todo
   return seen
 
+/-- The module that declares `c` (anonymous if none). -/
+def moduleOf (env : Environment) (c : Name) : Name :=
+  match env.getModuleIdxFor? c with
+  | some i => env.header.moduleNames[i.toNat]!
+  | none => .anonymous
+
 def statement (c : Name) : MetaM (String × NameSet) := do
   let info ← getConstInfo c
   let ty ← unfoldStatements info.type
@@ -172,13 +180,15 @@ def statement (c : Name) : MetaM (String × NameSet) := do
       else if !(← isType x) && !(← forallTelescopeReducing d.type fun _ b => pure b.isSort) then
         vars := vars.push (jstr d.userName.toString)
     let env ← getEnv
-    let mod := match env.getModuleIdxFor? c with
-      | some i => (env.header.moduleNames[i.toNat]!).toString
+    let mod := (moduleOf env c).toString
+    let dep := match Linter.deprecatedAttr.getParam? env c with
+      | some d => ", \"deprecated\": {\"new\": " ++ jstr ((d.newName?.map toString).getD "") ++
+          ", \"since\": " ++ jstr (d.since?.getD "") ++ "}"
       | none => ""
     return ("{\"name\": " ++ jstr c.toString ++ ", \"module\": " ++ jstr mod ++
       ", \"vars\": [" ++ ", ".intercalate vars.toList ++ "], \"hyps\": [" ++
       ", ".intercalate hyps.toList ++ "], \"concl\": " ++ (← tree [] concl) ++
-      ", \"canon\": " ++ jstr (canon ty) ++ ", \"deps\": [" ++ depsJ ++ "]}", ds)
+      ", \"canon\": " ++ jstr (canon ty) ++ ", \"deps\": [" ++ depsJ ++ "]" ++ dep ++ "}", ds)
 
 /-- A last name component `t`, `q` or `f` followed by a digit. -/
 def numbered (c : Name) : Bool :=
@@ -199,7 +209,7 @@ def main : MetaM Unit := do
     unless (`PM).isPrefixOf c do continue
     unless info matches .thmInfo _ do continue
     if c.isInternal then continue
-    if numbered c then names := names.push c
+    if numbered c || (`PM.Deprecated).isPrefixOf (moduleOf env c) then names := names.push c
   names := names.qsort (·.toString < ·.toString)
   let mut used : NameSet := {}
   for c in extra ++ names.toList do

@@ -2,9 +2,9 @@
 # Every check of the repository, from its root: the build (with the pinned statements of
 # Checks/PinnedStatements.lean), a search for sorry / native_decide / added axioms, the root checks
 # (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), ✱9's
-# readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), and
-# the Python tests in tests/ (which also run AllAxioms.lean, AxiomCheck.lean and
-# fidelity_counts.py). Exits nonzero if any of them fails.
+# readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), the Lean
+# core counterparts of ✱1–✱5 (Checks/Counterparts.lean), and the Python tests in tests/ (which also run
+# AllAxioms.lean, AxiomCheck.lean and fidelity_counts.py). Exits nonzero if any of them fails.
 #
 #   tests/run_all.sh            everything (ClauseSearch takes about a minute)
 #   SKIP_SLOW=1 tests/run_all.sh  without ClauseSearch
@@ -52,6 +52,8 @@ lean_check Checks/Star9Readings.lean '"kind": "simul", "reading": "C"'
 
 step "export names (docs/NAMING.md)"
 python3 scripts/export_names.py --check || fail "export names"
+
+lean_check Checks/Counterparts.lean 'counterparts: 54 checked by Lean'
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"

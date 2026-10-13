@@ -1,5 +1,5 @@
 {
- "about": "Exact Lean and Mathlib counterparts of PM's propositions *1-*5 (docs/NAMING.md, 'Counterparts'): metadata for card titles and descriptions, never part of a name. A counterpart is listed only if it is an exact propositional schema counterpart under the criterion of docs/NAMING.md. statement is the counterpart's type with its propositional variables renamed to PM's (and a Sort parameter specialized to Prop where specialized is true); pm_formula is PM's statement as exported, connective for connective; iff_reversed_at lists the equivalences whose two sides the counterpart states the other way round (root, or operand positions such as 2 or 2.1). classical: the counterpart's proof uses Classical.choice at the pin, from #print axioms (classical_from axioms) or read from its proof (classical_from source). checked: lean if the specialized statement was checked by Lean at the pin, source if read from the pinned source only. No counterpart listed for an item is a search result, not a proof that none exists.",
+ "about": "Exact Lean and Mathlib counterparts of PM's propositions *1-*5 (docs/NAMING.md, 'Counterparts'): metadata for card titles and descriptions, never part of a name. A counterpart is listed only if it is an exact propositional schema counterpart under the criterion of docs/NAMING.md. signature is the declaration's type as Lean prints it (Lean core) or its header as written at the pin (Mathlib; section_variables is then the section's variable line it takes variables from, at section_variables_source); instantiation is the PM variable given to each of its propositional variables, in the order of its binders; statement is the counterpart's type so instantiated (a Sort parameter specialized to Prop where specialized is true); pm_formula is PM's statement as exported, connective for connective; iff_reversed_at lists the equivalences whose two sides the counterpart states the other way round (root, or operand positions such as 2 or 2.1). classical: the counterpart's proof uses Classical.choice at the pin, from #print axioms (classical_from axioms) or read from its proof (classical_from source). checked: lean if Lean checks it (Checks/Counterparts.lean: the kernel checks @declaration applied to the instantiation as a proof of PM's formula, and the instantiated type is that formula exactly), source if its signature is read from the pinned source only (strictly, by scripts/export_names.py), lean-mathlib if compiled against the pinned Mathlib. No counterpart listed for an item is a search result, not a proof that none exists.",
  "criterion_version": 1,
  "reviewed": "2026-10-13",
  "repositories": {
@@ -20,6 +20,10 @@
    "export": "PM.star1_3_add",
    "declaration": "Or.inr",
    "signature": "∀ {a b : Prop}, b → a ∨ b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(q → (p ∨ q))",
    "pm_formula": "(q → (p ∨ q))",
    "repository": "lean4",
@@ -37,6 +41,10 @@
    "export": "PM.star1_4_perm",
    "declaration": "Or.symm",
    "signature": "∀ {a b : Prop}, a ∨ b → b ∨ a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∨ q) → (q ∨ p))",
    "pm_formula": "((p ∨ q) → (q ∨ p))",
    "repository": "lean4",
@@ -54,6 +62,11 @@
    "export": "PM.star1_6_sum",
    "declaration": "Or.imp_right",
    "signature": "∀ {b c a : Prop}, (b → c) → a ∨ b → a ∨ c",
+   "instantiation": [
+    "q",
+    "r",
+    "p"
+   ],
    "statement": "((q → r) → ((p ∨ q) → (p ∨ r)))",
    "pm_formula": "((q → r) → ((p ∨ q) → (p ∨ r)))",
    "repository": "lean4",
@@ -71,6 +84,10 @@
    "export": "PM.star2_02_simp",
    "declaration": "imp_intro",
    "signature": "∀ {α β : Prop}, α → β → α",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "(q → (p → q))",
    "pm_formula": "(q → (p → q))",
    "repository": "lean4",
@@ -88,6 +105,10 @@
    "export": "PM.star2_03_transp",
    "declaration": "Mathlib.Tactic.Contrapose.contrapose₃",
    "signature": "lemma contrapose₃ {p q : Prop} : (q → ¬ p) → (p → ¬ q)",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "((p → ¬q) → (q → ¬p))",
    "pm_formula": "((p → ¬q) → (q → ¬p))",
    "repository": "mathlib4",
@@ -106,6 +127,11 @@
    "export": "PM.star2_04_comm",
    "declaration": "flip",
    "signature": "{α : Sort u} → {β : Sort v} → {φ : Sort w} → (α → β → φ) → β → α → φ",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p → (q → r)) → (q → (p → r)))",
    "pm_formula": "((p → (q → r)) → (q → (p → r)))",
    "repository": "lean4",
@@ -123,6 +149,11 @@
    "export": "PM.star2_05_syll",
    "declaration": "Function.comp",
    "signature": "{α : Sort u} → {β : Sort v} → {δ : Sort w} → (β → δ) → (α → β) → α → δ",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((q → r) → ((p → q) → (p → r)))",
    "pm_formula": "((q → r) → ((p → q) → (p → r)))",
    "repository": "lean4",
@@ -140,6 +171,9 @@
    "export": "PM.star2_08_id",
    "declaration": "id",
    "signature": "{α : Sort u} → α → α",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(p → p)",
    "pm_formula": "(p → p)",
    "repository": "lean4",
@@ -157,6 +191,9 @@
    "export": "PM.star2_1",
    "declaration": "em'",
    "signature": "theorem em' (p : Prop) : ¬p ∨ p",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(¬p ∨ p)",
    "pm_formula": "(¬p ∨ p)",
    "repository": "mathlib4",
@@ -174,6 +211,9 @@
    "export": "PM.star2_11",
    "declaration": "Classical.em",
    "signature": "∀ (p : Prop), p ∨ ¬p",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(p ∨ ¬p)",
    "pm_formula": "(p ∨ ¬p)",
    "repository": "lean4",
@@ -191,6 +231,9 @@
    "export": "PM.star2_12",
    "declaration": "not_not_intro",
    "signature": "∀ {p : Prop}, p → ¬¬p",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(p → ¬¬p)",
    "pm_formula": "(p → ¬¬p)",
    "repository": "lean4",
@@ -208,6 +251,9 @@
    "export": "PM.star2_14",
    "declaration": "of_not_not",
    "signature": "theorem of_not_not {a : Prop} : ¬¬a → a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(¬¬p → p)",
    "pm_formula": "(¬¬p → p)",
    "repository": "mathlib4",
@@ -218,13 +264,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*2.15",
    "export": "PM.star2_15_transp",
    "declaration": "Not.imp_symm",
    "signature": "theorem Not.imp_symm : (¬a → b) → ¬b → a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((¬p → q) → (¬q → p))",
    "pm_formula": "((¬p → q) → (¬q → p))",
    "repository": "mathlib4",
@@ -235,13 +287,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*2.16",
    "export": "PM.star2_16_transp",
    "declaration": "mt",
    "signature": "∀ {a b : Prop}, (a → b) → ¬b → ¬a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p → q) → (¬q → ¬p))",
    "pm_formula": "((p → q) → (¬q → ¬p))",
    "repository": "lean4",
@@ -259,6 +317,10 @@
    "export": "PM.star2_17_transp",
    "declaration": "Function.mtr",
    "signature": "protected theorem Function.mtr : (¬a → ¬b) → b → a",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "((¬q → ¬p) → (p → q))",
    "pm_formula": "((¬q → ¬p) → (p → q))",
    "repository": "mathlib4",
@@ -269,13 +331,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*2.2",
    "export": "PM.star2_2",
    "declaration": "Or.inl",
    "signature": "∀ {a b : Prop}, a → a ∨ b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(p → (p ∨ q))",
    "pm_formula": "(p → (p ∨ q))",
    "repository": "lean4",
@@ -293,6 +361,10 @@
    "export": "PM.star2_21",
    "declaration": "Not.elim",
    "signature": "{a : Prop} → {α : Sort u_1} → ¬a → a → α",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(¬p → (p → q))",
    "pm_formula": "(¬p → (p → q))",
    "repository": "lean4",
@@ -310,6 +382,10 @@
    "export": "PM.star2_24",
    "declaration": "absurd",
    "signature": "{a : Prop} → {b : Sort v} → a → ¬a → b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(p → (¬p → q))",
    "pm_formula": "(p → (¬p → q))",
    "repository": "lean4",
@@ -327,6 +403,11 @@
    "export": "PM.star2_38",
    "declaration": "Or.imp_left",
    "signature": "∀ {a b c : Prop}, (a → b) → a ∨ c → b ∨ c",
+   "instantiation": [
+    "q",
+    "r",
+    "p"
+   ],
    "statement": "((q → r) → ((q ∨ p) → (r ∨ p)))",
    "pm_formula": "((q → r) → ((q ∨ p) → (r ∨ p)))",
    "repository": "lean4",
@@ -344,6 +425,10 @@
    "export": "PM.star2_53",
    "declaration": "Or.resolve_left",
    "signature": "∀ {a b : Prop}, a ∨ b → ¬a → b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∨ q) → (¬p → q))",
    "pm_formula": "((p ∨ q) → (¬p → q))",
    "repository": "lean4",
@@ -361,6 +446,10 @@
    "export": "PM.star2_61",
    "declaration": "Classical.byCases",
    "signature": "∀ {p q : Prop}, (p → q) → (¬p → q) → q",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p → q) → ((¬p → q) → q))",
    "pm_formula": "((p → q) → ((¬p → q) → q))",
    "repository": "lean4",
@@ -378,6 +467,10 @@
    "export": "PM.star3_14",
    "declaration": "not_and_of_not_or_not",
    "signature": "∀ {a b : Prop}, ¬a ∨ ¬b → ¬(a ∧ b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((¬p ∨ ¬q) → ¬(p ∧ q))",
    "pm_formula": "((¬p ∨ ¬q) → ¬(p ∧ q))",
    "repository": "lean4",
@@ -395,6 +488,10 @@
    "export": "PM.star3_2",
    "declaration": "And.intro",
    "signature": "∀ {a b : Prop}, a → b → a ∧ b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(p → (q → (p ∧ q)))",
    "pm_formula": "(p → (q → (p ∧ q)))",
    "repository": "lean4",
@@ -412,6 +509,10 @@
    "export": "PM.star3_22",
    "declaration": "And.symm",
    "signature": "∀ {a b : Prop}, a ∧ b → b ∧ a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∧ q) → (q ∧ p))",
    "pm_formula": "((p ∧ q) → (q ∧ p))",
    "repository": "lean4",
@@ -429,6 +530,9 @@
    "export": "PM.star3_24",
    "declaration": "and_not_self",
    "signature": "∀ {a : Prop}, ¬(a ∧ ¬a)",
+   "instantiation": [
+    "p"
+   ],
    "statement": "¬(p ∧ ¬p)",
    "pm_formula": "¬(p ∧ ¬p)",
    "repository": "lean4",
@@ -446,6 +550,10 @@
    "export": "PM.star3_26_simp",
    "declaration": "And.left",
    "signature": "∀ {a b : Prop}, a ∧ b → a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∧ q) → p)",
    "pm_formula": "((p ∧ q) → p)",
    "repository": "lean4",
@@ -463,6 +571,10 @@
    "export": "PM.star3_27_simp",
    "declaration": "And.right",
    "signature": "∀ {a b : Prop}, a ∧ b → b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∧ q) → q)",
    "pm_formula": "((p ∧ q) → q)",
    "repository": "lean4",
@@ -480,6 +592,11 @@
    "export": "PM.star3_31_imp",
    "declaration": "And.elim",
    "signature": "{a b : Prop} → {α : Sort u_1} → (a → b → α) → a ∧ b → α",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p → (q → r)) → ((p ∧ q) → r))",
    "pm_formula": "((p → (q → r)) → ((p ∧ q) → r))",
    "repository": "lean4",
@@ -497,6 +614,11 @@
    "export": "PM.star3_45_fact",
    "declaration": "And.imp_left",
    "signature": "∀ {a b c : Prop}, (a → b) → a ∧ c → b ∧ c",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p → q) → ((p ∧ r) → (q ∧ r)))",
    "pm_formula": "((p → q) → ((p ∧ r) → (q ∧ r)))",
    "repository": "lean4",
@@ -514,6 +636,10 @@
    "export": "PM.star4_1_transp",
    "declaration": "not_imp_not",
    "signature": "theorem not_imp_not : ¬a → ¬b ↔ b → a",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "((¬q → ¬p) ↔ (p → q))",
    "pm_formula": "((p → q) ↔ (¬q → ¬p))",
    "repository": "mathlib4",
@@ -526,13 +652,19 @@
     "root"
    ],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.11",
    "export": "PM.star4_11_transp",
    "declaration": "not_iff_not",
    "signature": "theorem not_iff_not : (¬a ↔ ¬b) ↔ (a ↔ b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((¬p ↔ ¬q) ↔ (p ↔ q))",
    "pm_formula": "((p ↔ q) ↔ (¬p ↔ ¬q))",
    "repository": "mathlib4",
@@ -545,13 +677,19 @@
     "root"
    ],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.12",
    "export": "PM.star4_12",
    "declaration": "iff_not_comm",
    "signature": "theorem iff_not_comm : (a ↔ ¬b) ↔ (b ↔ ¬a)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ↔ ¬q) ↔ (q ↔ ¬p))",
    "pm_formula": "((p ↔ ¬q) ↔ (q ↔ ¬p))",
    "repository": "mathlib4",
@@ -562,13 +700,18 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.13",
    "export": "PM.star4_13",
    "declaration": "Classical.not_not",
    "signature": "∀ {a : Prop}, ¬¬a ↔ a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(¬¬p ↔ p)",
    "pm_formula": "(p ↔ ¬¬p)",
    "repository": "lean4",
@@ -588,6 +731,9 @@
    "export": "PM.star4_2",
    "declaration": "Iff.rfl",
    "signature": "∀ {a : Prop}, a ↔ a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "(p ↔ p)",
    "pm_formula": "(p ↔ p)",
    "repository": "lean4",
@@ -605,6 +751,10 @@
    "export": "PM.star4_21",
    "declaration": "iff_comm",
    "signature": "∀ {a b : Prop}, (a ↔ b) ↔ (b ↔ a)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ↔ q) ↔ (q ↔ p))",
    "pm_formula": "((p ↔ q) ↔ (q ↔ p))",
    "repository": "lean4",
@@ -622,6 +772,9 @@
    "export": "PM.star4_24",
    "declaration": "and_self_iff",
    "signature": "∀ {a : Prop}, a ∧ a ↔ a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "((p ∧ p) ↔ p)",
    "pm_formula": "(p ↔ (p ∧ p))",
    "repository": "lean4",
@@ -641,6 +794,9 @@
    "export": "PM.star4_25",
    "declaration": "or_self_iff",
    "signature": "∀ {a : Prop}, a ∨ a ↔ a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "((p ∨ p) ↔ p)",
    "pm_formula": "(p ↔ (p ∨ p))",
    "repository": "lean4",
@@ -660,6 +816,10 @@
    "export": "PM.star4_3",
    "declaration": "and_comm",
    "signature": "∀ {a b : Prop}, a ∧ b ↔ b ∧ a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∧ q) ↔ (q ∧ p))",
    "pm_formula": "((p ∧ q) ↔ (q ∧ p))",
    "repository": "lean4",
@@ -677,6 +837,10 @@
    "export": "PM.star4_31",
    "declaration": "or_comm",
    "signature": "∀ {a b : Prop}, a ∨ b ↔ b ∨ a",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∨ q) ↔ (q ∨ p))",
    "pm_formula": "((p ∨ q) ↔ (q ∨ p))",
    "repository": "lean4",
@@ -694,6 +858,11 @@
    "export": "PM.star4_32",
    "declaration": "and_assoc",
    "signature": "∀ {a b c : Prop}, (a ∧ b) ∧ c ↔ a ∧ b ∧ c",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "(((p ∧ q) ∧ r) ↔ (p ∧ (q ∧ r)))",
    "pm_formula": "(((p ∧ q) ∧ r) ↔ (p ∧ (q ∧ r)))",
    "repository": "lean4",
@@ -711,6 +880,11 @@
    "export": "PM.star4_33",
    "declaration": "or_assoc",
    "signature": "∀ {a b c : Prop}, (a ∨ b) ∨ c ↔ a ∨ b ∨ c",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "(((p ∨ q) ∨ r) ↔ (p ∨ (q ∨ r)))",
    "pm_formula": "(((p ∨ q) ∨ r) ↔ (p ∨ (q ∨ r)))",
    "repository": "lean4",
@@ -728,6 +902,11 @@
    "export": "PM.star4_36",
    "declaration": "and_congr_left'",
    "signature": "∀ {a b c : Prop}, (a ↔ b) → (a ∧ c ↔ b ∧ c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p ↔ q) → ((p ∧ r) ↔ (q ∧ r)))",
    "pm_formula": "((p ↔ q) → ((p ∧ r) ↔ (q ∧ r)))",
    "repository": "lean4",
@@ -745,6 +924,11 @@
    "export": "PM.star4_37",
    "declaration": "or_congr_left",
    "signature": "∀ {a b c : Prop}, (a ↔ b) → (a ∨ c ↔ b ∨ c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p ↔ q) → ((p ∨ r) ↔ (q ∨ r)))",
    "pm_formula": "((p ↔ q) → ((p ∨ r) ↔ (q ∨ r)))",
    "repository": "lean4",
@@ -762,6 +946,11 @@
    "export": "PM.star4_4",
    "declaration": "and_or_left",
    "signature": "∀ {a b c : Prop}, a ∧ (b ∨ c) ↔ a ∧ b ∨ a ∧ c",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p ∧ (q ∨ r)) ↔ ((p ∧ q) ∨ (p ∧ r)))",
    "pm_formula": "((p ∧ (q ∨ r)) ↔ ((p ∧ q) ∨ (p ∧ r)))",
    "repository": "lean4",
@@ -779,6 +968,11 @@
    "export": "PM.star4_41",
    "declaration": "or_and_left",
    "signature": "∀ {a b c : Prop}, a ∨ b ∧ c ↔ (a ∨ b) ∧ (a ∨ c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p ∨ (q ∧ r)) ↔ ((p ∨ q) ∧ (p ∨ r)))",
    "pm_formula": "((p ∨ (q ∧ r)) ↔ ((p ∨ q) ∧ (p ∨ r)))",
    "repository": "lean4",
@@ -796,6 +990,10 @@
    "export": "PM.star4_5",
    "declaration": "and_iff_not_or_not",
    "signature": "theorem and_iff_not_or_not : a ∧ b ↔ ¬(¬a ∨ ¬b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∧ q) ↔ ¬(¬p ∨ ¬q))",
    "pm_formula": "((p ∧ q) ↔ ¬(¬p ∨ ¬q))",
    "repository": "mathlib4",
@@ -806,13 +1004,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.51",
    "export": "PM.star4_51",
    "declaration": "Classical.not_and_iff_not_or_not",
    "signature": "∀ {a b : Prop}, ¬(a ∧ b) ↔ ¬a ∨ ¬b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(¬(p ∧ q) ↔ (¬p ∨ ¬q))",
    "pm_formula": "(¬(p ∧ q) ↔ (¬p ∨ ¬q))",
    "repository": "lean4",
@@ -830,6 +1034,10 @@
    "export": "PM.star4_56",
    "declaration": "not_or",
    "signature": "∀ {p q : Prop}, ¬(p ∨ q) ↔ ¬p ∧ ¬q",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(¬(p ∨ q) ↔ (¬p ∧ ¬q))",
    "pm_formula": "((¬p ∧ ¬q) ↔ ¬(p ∨ q))",
    "repository": "lean4",
@@ -849,6 +1057,10 @@
    "export": "PM.star4_57",
    "declaration": "or_iff_not_and_not",
    "signature": "theorem or_iff_not_and_not : a ∨ b ↔ ¬(¬a ∧ ¬b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∨ q) ↔ ¬(¬p ∧ ¬q))",
    "pm_formula": "(¬(¬p ∧ ¬q) ↔ (p ∨ q))",
    "repository": "mathlib4",
@@ -861,13 +1073,19 @@
     "root"
    ],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.6",
    "export": "PM.star4_6",
    "declaration": "imp_iff_not_or",
    "signature": "theorem imp_iff_not_or : a → b ↔ ¬a ∨ b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p → q) ↔ (¬p ∨ q))",
    "pm_formula": "((p → q) ↔ (¬p ∨ q))",
    "repository": "mathlib4",
@@ -878,13 +1096,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.61",
    "export": "PM.star4_61",
    "declaration": "Classical.not_imp_iff_and_not",
    "signature": "∀ {a b : Prop}, ¬(a → b) ↔ a ∧ ¬b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(¬(p → q) ↔ (p ∧ ¬q))",
    "pm_formula": "(¬(p → q) ↔ (p ∧ ¬q))",
    "repository": "lean4",
@@ -902,6 +1126,10 @@
    "export": "PM.star4_64",
    "declaration": "Classical.or_iff_not_imp_left",
    "signature": "∀ {a b : Prop}, a ∨ b ↔ ¬a → b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ∨ q) ↔ (¬p → q))",
    "pm_formula": "((¬p → q) ↔ (p ∨ q))",
    "repository": "lean4",
@@ -921,6 +1149,10 @@
    "export": "PM.star4_71",
    "declaration": "iff_self_and",
    "signature": "∀ {p q : Prop}, (p ↔ p ∧ q) ↔ p → q",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ↔ (p ∧ q)) ↔ (p → q))",
    "pm_formula": "((p → q) ↔ (p ↔ (p ∧ q)))",
    "repository": "lean4",
@@ -940,6 +1172,10 @@
    "export": "PM.star4_72",
    "declaration": "iff_or_self",
    "signature": "∀ {a b : Prop}, (b ↔ a ∨ b) ↔ a → b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((q ↔ (p ∨ q)) ↔ (p → q))",
    "pm_formula": "((p → q) ↔ (q ↔ (p ∨ q)))",
    "repository": "lean4",
@@ -959,6 +1195,10 @@
    "export": "PM.star4_73",
    "declaration": "and_iff_left",
    "signature": "∀ {b a : Prop}, b → (a ∧ b ↔ a)",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "(q → ((p ∧ q) ↔ p))",
    "pm_formula": "(q → (p ↔ (p ∧ q)))",
    "repository": "lean4",
@@ -978,6 +1218,10 @@
    "export": "PM.star4_74",
    "declaration": "or_iff_right",
    "signature": "∀ {a b : Prop}, ¬a → (a ∨ b ↔ b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(¬p → ((p ∨ q) ↔ q))",
    "pm_formula": "(¬p → (q ↔ (p ∨ q)))",
    "repository": "lean4",
@@ -997,6 +1241,11 @@
    "export": "PM.star4_76",
    "declaration": "imp_and",
    "signature": "∀ {b c : Prop} {α : Sort u_1}, (∀ (a : α), b ∧ c) ↔ (∀ (a : α), b) ∧ ∀ (a : α), c",
+   "instantiation": [
+    "q",
+    "r",
+    "p"
+   ],
    "statement": "((p → (q ∧ r)) ↔ ((p → q) ∧ (p → r)))",
    "pm_formula": "(((p → q) ∧ (p → r)) ↔ (p → (q ∧ r)))",
    "repository": "lean4",
@@ -1016,6 +1265,11 @@
    "export": "PM.star4_77",
    "declaration": "or_imp",
    "signature": "∀ {a b c : Prop}, a ∨ b → c ↔ (a → c) ∧ (b → c)",
+   "instantiation": [
+    "q",
+    "r",
+    "p"
+   ],
    "statement": "(((q ∨ r) → p) ↔ ((q → p) ∧ (r → p)))",
    "pm_formula": "(((q → p) ∧ (r → p)) ↔ ((q ∨ r) → p))",
    "repository": "lean4",
@@ -1035,6 +1289,11 @@
    "export": "PM.star4_78",
    "declaration": "imp_or",
    "signature": "theorem imp_or {a b c : Prop} : a → b ∨ c ↔ (a → b) ∨ (a → c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p → (q ∨ r)) ↔ ((p → q) ∨ (p → r)))",
    "pm_formula": "(((p → q) ∨ (p → r)) ↔ (p → (q ∨ r)))",
    "repository": "mathlib4",
@@ -1047,13 +1306,18 @@
     "root"
    ],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.8",
    "export": "PM.star4_8",
    "declaration": "imp_not_self",
    "signature": "∀ {a : Prop}, a → ¬a ↔ ¬a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "((p → ¬p) ↔ ¬p)",
    "pm_formula": "((p → ¬p) ↔ ¬p)",
    "repository": "lean4",
@@ -1071,6 +1335,9 @@
    "export": "PM.star4_81",
    "declaration": "not_imp_self",
    "signature": "@[simp] theorem not_imp_self : ¬a → a ↔ a",
+   "instantiation": [
+    "p"
+   ],
    "statement": "((¬p → p) ↔ p)",
    "pm_formula": "((¬p → p) ↔ p)",
    "repository": "mathlib4",
@@ -1081,13 +1348,19 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*4.83",
    "export": "PM.star4_83",
    "declaration": "Classical.imp_and_neg_imp_iff",
    "signature": "∀ (p : Prop) {q : Prop}, (p → q) ∧ (¬p → q) ↔ q",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(((p → q) ∧ (¬p → q)) ↔ q)",
    "pm_formula": "(((p → q) ∧ (¬p → q)) ↔ q)",
    "repository": "lean4",
@@ -1106,6 +1379,11 @@
    "export": "PM.star4_84",
    "declaration": "imp_congr_left",
    "signature": "∀ {a b c : Prop}, (a ↔ b) → (a → c ↔ b → c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "((p ↔ q) → ((p → r) ↔ (q → r)))",
    "pm_formula": "((p ↔ q) → ((p → r) ↔ (q → r)))",
    "repository": "lean4",
@@ -1123,6 +1401,9 @@
    "export": "PM.star5_19",
    "declaration": "iff_not_self",
    "signature": "∀ {a : Prop}, ¬(a ↔ ¬a)",
+   "instantiation": [
+    "p"
+   ],
    "statement": "¬(p ↔ ¬p)",
    "pm_formula": "¬(p ↔ ¬p)",
    "repository": "lean4",
@@ -1140,6 +1421,10 @@
    "export": "PM.star5_23",
    "declaration": "iff_iff_and_or_not_and_not",
    "signature": "theorem iff_iff_and_or_not_and_not : (a ↔ b) ↔ a ∧ b ∨ ¬a ∧ ¬b",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "((p ↔ q) ↔ ((p ∧ q) ∨ (¬p ∧ ¬q)))",
    "pm_formula": "((p ↔ q) ↔ ((p ∧ q) ∨ (¬p ∧ ¬q)))",
    "repository": "mathlib4",
@@ -1150,13 +1435,20 @@
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "source",
+   "section_variables": "variable {a b : Prop}",
+   "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
   {
    "pm": "*5.32",
    "export": "PM.star5_32",
    "declaration": "and_congr_right_iff",
    "signature": "∀ {a b c : Prop}, (a ∧ b ↔ a ∧ c) ↔ a → (b ↔ c)",
+   "instantiation": [
+    "p",
+    "q",
+    "r"
+   ],
    "statement": "(((p ∧ q) ↔ (p ∧ r)) ↔ (p → (q ↔ r)))",
    "pm_formula": "((p → (q ↔ r)) ↔ ((p ∧ q) ↔ (p ∧ r)))",
    "repository": "lean4",
@@ -1176,6 +1468,10 @@
    "export": "PM.star5_5",
    "declaration": "imp_iff_right",
    "signature": "∀ {b a : Prop}, a → (a → b ↔ b)",
+   "instantiation": [
+    "q",
+    "p"
+   ],
    "statement": "(p → ((p → q) ↔ q))",
    "pm_formula": "(p → ((p → q) ↔ q))",
    "repository": "lean4",
@@ -1193,6 +1489,10 @@
    "export": "PM.star5_501",
    "declaration": "iff_true_left",
    "signature": "∀ {a b : Prop}, a → ((a ↔ b) ↔ b)",
+   "instantiation": [
+    "p",
+    "q"
+   ],
    "statement": "(p → ((p ↔ q) ↔ q))",
    "pm_formula": "(p → (q ↔ (p ↔ q)))",
    "repository": "lean4",

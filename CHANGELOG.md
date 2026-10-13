@@ -5,6 +5,28 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-13
 
+- **Counterparts checked against their declarations' types; superseded cards keep their names.** Found by
+  a release review of the export names, before any release.
+  - **Counterparts.** A counterpart's record was trusted for its formula. Another real declaration with
+    its real signature and line (`Or.inl` for ✱1·3), or the signature `NOT A LEAN TYPE`, passed the
+    check. Now each record gives the instantiation of the declaration's variables. The 54 Lean core
+    counterparts are checked by Lean, in the new `Checks/Counterparts.lean`, generated from the records
+    and the exported statements and run by `tests/run_all.sh`. The kernel checks each declaration as a
+    proof of PM's formula, and a `#counterpart` command checks that its type is that formula exactly,
+    with its printed signature, its variables, and the recorded swaps and specializations. It also
+    passes with the pinned Lean v4.33.1. The 14 Mathlib counterparts are checked from source:
+    `scripts/export_names.py` reads every signature strictly as a type of the propositional fragment and
+    compares it, instantiated, with PM's formula. `--verify-counterparts` also checks the header at the
+    pinned line. Compiling the Mathlib ones remains a follow-up (docs/NAMING.md). New:
+    `tests/test_counterparts.py`.
+  - **Versions.** Adding a row to data/changes.tsv renamed the unchanged locked declaration to `_v2`, and
+    declarations moved to `Deprecated/` were not exported. Now a row renames nothing. A superseded
+    declaration keeps its Lean name in `PM/Deprecated/<module>.lean` with `@[deprecated]`, and is still
+    exported under its locked name and digest, marked deprecated and pointing to its replacement. The
+    replacement is the Lean declaration `<name>_v<N>`, exported as `_v<N>` with its own digest.
+    `Checks/ExportStatements.lean` prints `PM.Deprecated` and each `@[deprecated]` target. The `versions`
+    check requires the row, the attribute and both declarations to agree (docs/VERSIONING.md). New:
+    `tests/test_versioning.py` supersedes ✱21·71 end to end in a scratch copy.
 - **Export names: PM's number and PM's own name only** (docs/NAMING.md), before any release. A name is
   `PM.star<N>_<M>[_<pmname>][_df|_rule][_reading_<word>][_v<N>]`: no generated descriptor and no Mathlib
   word (✱2·01 is `PM.star2_01_abs`, ✱2·14 `PM.star2_14`); 523 names, the longest 33 characters (was 56).

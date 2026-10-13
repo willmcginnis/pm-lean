@@ -16,7 +16,7 @@
 | `naming/readings.json` | the closed list of reading words (A `printed`, C `russell`, L `landini`, B `convention`, P `prenex`) | by hand |
 | `naming/readings.lock` | the reading words and meanings released, which never change; empty until the first public release | `scripts/export_names.py --write-lock`, at a release |
 | `naming/slots.json` | which items take the `_rule` slot besides Vol I's rules in words: the primitive propositions PM states as rules | by hand |
-| `naming/counterparts.json` | the 68 exact Lean and Mathlib counterparts of ✱1–✱5, each with its declaration, statement, file and line at a pinned commit, and whether it is classical or has an equivalence reversed (metadata, not names) | by hand, from an external review |
+| `naming/counterparts.json` | the 68 exact Lean and Mathlib counterparts of ✱1–✱5, each with its declaration, signature, the instantiation of its variables, statement, file and line at a pinned commit, whether it is classical or has an equivalence reversed, and how it is checked: the 54 of Lean's core by Lean (`Checks/Counterparts.lean`), the 14 of Mathlib from their source (metadata, not names) | by hand, from an external review |
 | `naming/pm_names.json` | PM's "Alphabetical list of propositions referred to by names" (Vol I front matter, Gutenberg eBook #78050) | `scripts/export_names.py --pm-names` |
 | `changes.tsv` | dated changes of export names: a statement superseded by `name_vN` ([docs/VERSIONING.md](../docs/VERSIONING.md)); header only until the first change | by hand, with the change |
 | `fidelity_counts.py` | the three fidelity counts per chapter, and consistency checks on the ledgers | — |

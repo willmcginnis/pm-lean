@@ -15,21 +15,31 @@ Nothing here has been released yet: the first public export will be 1.0.0. The p
    name is used whatever the generator would now produce, so a later change of the working reading of ✱9
    renames nothing released.
 2. **A new statement gets a new name**, `name_vN` (`_v2`, `_v3`, …), and the old card is deprecated, with the
-   reason and the replacement's name in its description. The old card stays importable. `_vN` is the last
-   part of a name, after the reading: `PM.star9_31_reading_landini_v2`.
+   reason and the replacement's name in its description. The old card stays importable and stays
+   exported, under its name and bound to its original statement digest. `_vN` is the last part of a
+   name, after the reading: `PM.star9_31_reading_landini_v2`.
 3. **Reading meanings are frozen.** At a release each reading's word and meaning are copied to
    [data/naming/readings.lock](../data/naming/readings.lock); readings can be added later, never changed
    or removed.
 4. **Proofs and descriptions change in place.** A better proof is a new submission for the same card, and
    the old submission is deprecated; a description is edited. Counterparts (data/naming/counterparts.json)
    are description, not name.
-5. **Superseded declarations are kept forever** in the repository, in a `Deprecated/` folder, as
-   `@[deprecated <new name> (since := "YYYY-MM-DD")]` declarations that still build. The folder is created
-   with the first superseded statement; `Checks/ExportStatements.lean` will then print them too, so that
-   the lock still finds the old names.
+5. **Superseded declarations are kept forever** in the repository, under their own Lean names, in
+   `PM/Deprecated/`: a superseded declaration of `PM/Star21.lean` goes to `PM/Deprecated/Star21.lean`
+   (module `PM.Deprecated.Star21`, imported by `PM.lean`), as a
+   `@[deprecated <new declaration> (since := "YYYY-MM-DD")]` declaration that still builds. Its
+   replacement is the Lean declaration of the same name with `_v<N>` (`PM.q21_71_v2` replaces
+   `PM.q21_71`), in the original module. The folder is created with the first superseded statement.
+   `Checks/ExportStatements.lean` prints every declaration of `PM.Deprecated` and each declaration's
+   `@[deprecated]` target. The generator gives a locked declaration its locked name wherever it now
+   lives. It exports `<lean>_v<N>` as the name of the declaration it replaces with `_v<N>`, and marks the
+   old entry `deprecated`, with `superseded_by` and `deprecated_since`, and the new one `supersedes`.
 6. **Every change of name is dated** in [data/changes.tsv](../data/changes.tsv): `date`, `old`, `new`,
-   `reason`, `statement_id` (the new statement's digest, below), one row per card. The generator follows
-   these rows from a locked name to its replacement, and a check requires a row for every `_vN` name.
+   `reason`, `statement_id` (the new statement's digest, below), one row per card. A row renames nothing:
+   the names come from the declarations. The `versions` check requires that the three records agree: the
+   row, the `@[deprecated]` attribute, and the two declarations (the old one released and deprecated,
+   the new one `_v<N>` with the row's digest, N one more than the old). So a row without a superseded
+   declaration fails, and so does a `_v<N>` without its row; a deleted old declaration fails the lock.
    Changes caused by one decision (a definition changed, below) are one generation: one date, one reason,
    one release.
 
@@ -94,19 +104,28 @@ it, with ⊃ after E!(ιx)(φx) where PM prints ≡ (corrected after an external
 Lean statement is corrected, its statement digest differs from the locked one and the check fails:
 `PM.star14_32` cannot change, so:
 
-- a new card `PM.star14_32_v2` states ✱14·32 with ≡;
-- the old card is deprecated, its description saying "Superseded by PM.star14_32_v2: PM prints ≡, not ⊃";
-- the old Lean declaration moves to `Deprecated/` with `@[deprecated … (since := "…")]`;
+- the old Lean declaration `PM.q14_32` moves unchanged to `PM/Deprecated/Star14.lean` with
+  `@[deprecated PM.q14_32_v2 (since := "…")]`; it is still exported as `PM.star14_32`, with its locked
+  digest, marked deprecated and superseded by `PM.star14_32_v2`;
+- the corrected statement is `PM.q14_32_v2` in `PM/Star14.lean`, exported as a new card
+  `PM.star14_32_v2` with its own digest;
+- the old card is deprecated on the platform, its description saying "Superseded by PM.star14_32_v2: PM
+  prints ≡, not ⊃";
 - changes.tsv gets one row: date, `PM.star14_32`, `PM.star14_32_v2`, "statement corrected to PM's ≡", the
-  new statement digest; the generator then names the corrected declaration `PM.star14_32_v2`;
+  new statement digest;
 - release 1.0.0 → 1.1.0, with a new root.
+
+`tests/test_versioning.py` does this end to end for ✱21·71 in a scratch copy of the repository: release,
+supersede, rebuild. It checks that both names are exported, that the old one keeps its digest and the
+new one is `_v2`, and that every check passes, the lock included; and that the check fails without the
+row of changes.tsv, or without the old declaration.
 
 **A definition changed, rippling to 40 cards.** Suppose ✱20·01, the definition of a class in a context,
 must change. The definition gets a new name (`…_v2`), and every card whose statement uses it, directly or
 through other definitions, has a new definitions digest: say 40 cards. All 40 get `_v2` names and are
 deprecated in one generation: one release (MINOR), one date and one reason on 40 rows of changes.tsv,
-and the old definition and the 40 old declarations kept in `Deprecated/`. The lock check lists the 40;
-nobody lists them by hand.
+and the old definition and the 40 old declarations kept in `PM/Deprecated/` (the old declarations still
+use the old definition, so their digests stay). The lock check lists the 40; nobody lists them by hand.
 
 **A platform environment move.** The platform's default environment moves from Lean v4.33.1 to a later
 version. The export is re-checked there and every card is uploaded again under the same name with the

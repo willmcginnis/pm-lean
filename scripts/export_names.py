@@ -28,16 +28,22 @@ elaborated statement as a tree and in a canonical text. The descriptor is read f
   only), and the entry is marked `descriptor_needs_human`.
 
 A released name keeps its spelling whatever the generator would now produce: an entry whose Lean
-declaration is in data/export_names.lock takes the locked name and reading, and a row of data/changes.tsv
-whose `old` is that name gives the name it is superseded by.
+declaration is in data/export_names.lock takes the locked name and reading, also once the declaration has
+moved to PM/Deprecated/ because its statement was superseded. The replacement is the declaration of the
+same Lean name with `_v<N>`, exported as the old one's name with `_v<N>`; data/changes.tsv records the
+pair and renames nothing (docs/VERSIONING.md).
+
+Checks/Counterparts.lean, which has Lean check the Lean core counterparts, is also written from
+data/naming/counterparts.json and the statements.
 
 Usage (from the repository root, after `lake build`):
-  python3 scripts/export_names.py                    write data/export_names.json
-  python3 scripts/export_names.py --check            exit 1 if it is not up to date or breaks a rule
+  python3 scripts/export_names.py                    write data/export_names.json, Checks/Counterparts.lean
+  python3 scripts/export_names.py --check            exit 1 if they are not up to date or break a rule
   python3 scripts/export_names.py --tsv PATH [--chapters 1-5]   also write a review table
   python3 scripts/export_names.py --write-lock       at a release: lock every name and reading meaning
-  python3 scripts/export_names.py --verify-counterparts DIR    check each counterpart's file:line in
-                                                     checkouts DIR/<repository>-<commit> (not run in CI)
+  python3 scripts/export_names.py --verify-counterparts DIR    check each counterpart's file:line (and a
+                                                     Mathlib one's header) in checkouts
+                                                     DIR/<repository>-<commit> (not run in CI)
   python3 scripts/export_names.py --pm-names HTML    first rewrite data/naming/pm_names.json from
                                                      Project Gutenberg eBook #78050 (pg78050-images.html)
 """
@@ -62,15 +68,20 @@ READINGS_LOCK = NAMING / "readings.lock"
 PM_NAMES = NAMING / "pm_names.json"
 SLOTS = NAMING / "slots.json"
 COUNTERPARTS = NAMING / "counterparts.json"
+COUNTERPARTS_LEAN = ROOT / "Checks" / "Counterparts.lean"
 MAX_WORDS = 6
 WORKING_READING = "C"   # a ✱9 statement for every reading is exported under the working reading
 
-# which declarations state PM's propositions, by module: (module, regex on the last name component)
+# which declarations state PM's propositions, by module: (module, regex on the full name). A Lean name
+# ending `_v<N>` is the replacement of a superseded declaration (docs/VERSIONING.md); the superseded one
+# keeps its Lean name in the same module under PM.Deprecated (PM/Deprecated/Star21.lean for PM/Star21.lean).
+LEAN_VERSION = r"(?:_v(?P<v>[2-9]|[1-9][0-9]+))?"
 SOURCES = [
     ("PM.Replay", r"PM\.t(\d+)_(\d+)"), ("PM.Replay2", r"PM\.t(\d+)_(\d+)"),
     *[(f"PM.Star{c}", r"PM\.q(\d+)_(\d+)") for c in (10, 11, 12, 13, 14, 20, 21)],
     ("PM.Found9.Star9", r"PM\.F9\.f(\d+)_(\d+)(?:_(?:russell|switch|prenex))?"),
 ]
+DEPRECATED = "PM.Deprecated."
 # ✱1's primitive propositions are the constructors of `PM.Thm`
 PRIMITIVES = {"PM.Thm.taut": "*1.2", "PM.Thm.add": "*1.3", "PM.Thm.perm": "*1.4",
               "PM.Thm.assoc": "*1.5", "PM.Thm.sum": "*1.6"}
@@ -354,6 +365,246 @@ def parse_formula(s):
     return out
 
 
+SIG_TOKEN = re.compile(r"\s*(@\[[^\]]*\]|[∀,:{}()→↔∧∨¬*]|[^\W\d][\w'.₀-₉]*)")
+
+
+def parse_signature(sig, section_variables=""):
+    """A declaration's type, read strictly as a schema of the propositional fragment: (binders, body).
+    `binders` are its leading variables in order, each (name, "Prop" or "Sort"); `body` is a tree as
+    parse_formula's over their names. Accepted: a type as Lean prints it (`∀ {a b : Prop}, b → a ∨ b`,
+    `{α : Sort u} → α → α`) or a declaration header as written in the source (`theorem em' (p : Prop) :
+    ¬p ∨ p`, with the section's `variable {a b : Prop}` for the variables it uses but does not bind).
+    Lean's precedences: ¬ binds tightest, then ∧, ∨ (both to the right), → (to the right), ↔ (neither).
+    A binder `(x : α)` with α a Sort variable and x unused is the implication α → …, as in Lean, and
+    `A → False` is ¬A (docs/NAMING.md, the criterion). Anything else raises ValueError."""
+    def tokens(s):
+        out, pos, s = [], 0, s.strip()
+        while pos < len(s):
+            m = SIG_TOKEN.match(s, pos)
+            if not m or not m[1]:
+                raise ValueError(f"cannot read {s[pos:pos + 20]!r} in {sig!r}")
+            out.append(m[1]); pos = m.end()
+        return out
+
+    toks, pos = tokens(sig), 0
+    sorts = {}                                     # bound name -> "Prop" | "Sort" (a variable)
+    leading = []
+
+    def peek(k=0):
+        return toks[pos + k] if pos + k < len(toks) else None
+
+    def take(want=None):
+        nonlocal pos
+        t = peek()
+        if t is None or (want is not None and t != want):
+            raise ValueError(f"expected {want or 'more'} at {t!r} in {sig!r}")
+        pos += 1
+        return t
+
+    def ident():
+        t = take()
+        if not re.fullmatch(r"[^\W\d][\w'₀-₉]*", t) or t in ("Prop", "Sort", "False", "Type"):
+            raise ValueError(f"not a variable: {t!r} in {sig!r}")
+        return t
+
+    def sort_of():
+        """The type in a binder: Prop, Sort u, Sort*, or a Sort variable (then a hypothesis)."""
+        t = take()
+        if t == "Prop":
+            return "Prop"
+        if t == "Sort":
+            if peek() == "*":
+                take()
+            else:
+                ident()
+            return "Sort"
+        if sorts.get(t) == "Sort":
+            return ("var", t)
+        raise ValueError(f"binder type {t!r} is not Prop, a Sort or a Sort variable in {sig!r}")
+
+    def group(close):
+        names = []
+        while peek() != ":":
+            names.append(ident())
+        take(":")
+        s = sort_of()
+        take(close)
+        if not names:
+            raise ValueError(f"empty binder in {sig!r}")
+        return names, s
+
+    def bind(names, s, top):
+        """Bind variables; a hypothesis binder over a Sort variable is returned for the caller."""
+        if isinstance(s, tuple):
+            return [s[1]] * len(names), names
+        if not top:
+            raise ValueError(f"a propositional variable bound inside the formula in {sig!r}")
+        for n in names:
+            if n in sorts:
+                raise ValueError(f"{n} bound twice in {sig!r}")
+            sorts[n] = s
+            leading.append((n, s))
+        return [], []
+
+    def binders_then(top, sep):
+        """`∀ groups, T` (sep ",") or `{x : S} → T` (sep "→")."""
+        hyps, hnames = [], []
+        while peek() in ("{", "("):
+            close = "}" if take() == "{" else ")"
+            h, hn = bind(*group(close), top)
+            hyps += h; hnames += hn
+            if sep == "→":
+                break
+        take(sep)
+        body = typ(top)
+        for n in hnames:
+            if n in leaves(body):
+                raise ValueError(f"{n} used as a term in {sig!r}")
+        for h in reversed(hyps):
+            body = ("→", h, body)
+        return body
+
+    def binder_ahead():
+        """`{` always opens a binder; `(` does when names and then `:` follow."""
+        if peek() == "{":
+            return True
+        k = pos + 1
+        while k < len(toks) and re.fullmatch(r"[^\W\d][\w'₀-₉]*", toks[k]):
+            k += 1
+        return peek() == "(" and k > pos + 1 and k < len(toks) and toks[k] == ":"
+
+    def typ(top=False):
+        if peek() == "∀":
+            take()
+            return binders_then(top, ",")
+        if peek() in ("{", "(") and binder_ahead():
+            return binders_then(top, "→")
+        return iff()
+
+    def iff():
+        a = imp()
+        if peek() == "↔":
+            take()
+            b = imp()
+            if peek() == "↔":
+                raise ValueError(f"↔ does not associate, in {sig!r}")
+            return ("↔", a, b)
+        return a
+
+    def imp():
+        a = disj()
+        if peek() == "→":
+            take()
+            return ("→", a, imp())
+        return a
+
+    def disj():
+        a = conj()
+        if peek() == "∨":
+            take()
+            return ("∨", a, disj())
+        return a
+
+    def conj():
+        a = neg()
+        if peek() == "∧":
+            take()
+            return ("∧", a, conj())
+        return a
+
+    def neg():
+        if peek() == "¬":
+            take()
+            return ("¬", neg())
+        if peek() == "∀":
+            take()
+            return binders_then(False, ",")
+        return atom()
+
+    def atom():
+        t = take()
+        if t == "(":
+            a = typ()
+            take(")")
+            return a
+        if t == "False":
+            return "False"
+        if sorts.get(t) is None:
+            raise ValueError(f"{t!r} is not a bound variable in {sig!r}")
+        return t
+
+    if peek() and (peek().startswith("@[") or peek() in ("protected", "theorem", "lemma")):
+        # a source header: [@[attrs]] [protected] theorem|lemma name binders : type
+        while peek() and peek().startswith("@["):
+            take()
+        if peek() == "protected":
+            take()
+        if take() not in ("theorem", "lemma"):
+            raise ValueError(f"not a theorem or lemma header: {sig!r}")
+        take()                                     # the declaration's name
+        header_binders = []
+        while peek() in ("{", "("):
+            close = "}" if take() == "{" else ")"
+            header_binders.append(group(close))
+        take(":")
+        rest = toks[pos:]
+        bound = {n for ns, _ in header_binders for n in ns}
+        if section_variables:                      # `variable {a b : Prop}`: those the header uses
+            vt = tokens(section_variables)
+            if not vt or vt[0] != "variable":
+                raise ValueError(f"not a variable command: {section_variables!r}")
+            toks_save, pos_save = toks, pos
+            toks, pos = vt, 1
+            groups = []
+            while peek() in ("{", "("):
+                close = "}" if take() == "{" else ")"
+                groups.append(group(close))
+            if pos != len(toks):
+                raise ValueError(f"cannot read {section_variables!r}")
+            toks, pos = toks_save, pos_save
+            for ns, s in groups:
+                used = [n for n in ns if n in rest and n not in bound]
+                if used:
+                    bind(used, s, True)
+        for ns, s in header_binders:
+            bind(ns, s, True)
+        body = typ(True)
+    else:
+        body = typ(True)
+    if pos != len(toks):
+        raise ValueError(f"unread {' '.join(toks[pos:])!r} in {sig!r}")
+
+    def norm(t):
+        if isinstance(t, tuple):
+            if t[0] == "→" and t[2] == "False":
+                return ("¬", norm(t[1]))
+            return (t[0], *map(norm, t[1:]))
+        if t == "False":
+            raise ValueError(f"False outside A → False in {sig!r}")
+        return t
+    return leading, norm(body)
+
+
+def leaves(t):
+    """The variables (and False) of a tree."""
+    return {t} if isinstance(t, str) else set().union(*(leaves(x) for x in t[1:]))
+
+
+def substitute(t, sub):
+    if isinstance(t, tuple):
+        return (t[0], *(substitute(x, sub) for x in t[1:]))
+    return sub[t]
+
+
+def lean_formula(t):
+    """A tree as Lean source over Prop variables, fully parenthesized."""
+    if isinstance(t, str):
+        return t
+    if t[0] == "¬":
+        return f"¬{lean_formula(t[1])}"
+    return f"({lean_formula(t[1])} {t[0]} {lean_formula(t[2])})"
+
+
 def reverse_iffs(t, paths):
     """t with the two sides of the ↔ at each path swapped; a path is `root` or operand positions
     `2`, `2.1`, … (1 the left operand, 2 the right). Raises ValueError if a path is not at a ↔."""
@@ -393,17 +644,16 @@ def compose(pm, pm_name, slot, word):
             + (f"_reading_{word}" if word else ""))
 
 
-def superseded(name, changes):
-    """The name that replaces `name`, following data/changes.tsv; `name` itself if none."""
-    nxt = {r["old"]: r["new"] for r in changes}
-    seen = set()
-    while name in nxt and name not in seen:
-        seen.add(name)
-        name = nxt[name]
-    return name
+def without_version(name):
+    """`name` without a final `_v<N>`, and N (1 if none)."""
+    m = re.fullmatch(r"(.*)_(v([2-9]|[1-9][0-9]+))", name)
+    return (m[1], int(m[3])) if m else (name, 1)
 
 
 def build(rows, defs, ctx):
+    """The entries for the statements of `rows`. A locked declaration keeps its locked name and reading,
+    also when it has moved to PM.Deprecated (docs/VERSIONING.md); a declaration `<lean>_v<N>` is the
+    replacement of `<lean>` (or `<lean>_v<N-1>`) and is exported as that one's name with `_v<N>`."""
     vocab, readings = ctx["vocab"], ctx["readings"]
     names_by_num = {}
     for r in ctx["pm_names"]["names"]:
@@ -414,17 +664,25 @@ def build(rows, defs, ctx):
     W = Words(vocab)
     out = []
 
+    def named(lean, pm, pmn, reading):
+        """(export name, reading tag) of the declaration `lean`, and the export name it supersedes."""
+        if lean in locked:             # released: the name and reading stay as locked
+            lk = locked[lean]
+            return lk["export"], (tag_of_word.get(lk["reading"]) if lk["reading"] else None), None
+        base, n = without_version(lean)
+        if n > 1:                      # the replacement of the declaration before it
+            before = base if n == 2 else f"{base}_v{n - 1}"
+            old, reading, _ = named(before, pm, pmn, reading)
+            return f"{without_version(old)[0]}_v{n}", reading, old
+        return compose(pm, pmn, slot_of.get(pm), readings[reading]["word"] if reading else None), reading, None
+
     def entry(row, pm, reading=None, how=None):
         hyps = [h for h in row["hyps"] if not mentions_reading(h)] if reading else row["hyps"]
         desc, human = W.descriptor(row["concl"], hyps)
         pmn = names_by_num.get(pm, [])
         assert len(pmn) <= 1, (pm, pmn)
         pmn = pmn[0] if pmn else None
-        name = compose(pm, pmn, slot_of.get(pm), readings[reading]["word"] if reading else None)
-        if row["name"] in locked:          # released: the name and reading stay as locked
-            lk = locked[row["name"]]
-            name, reading = lk["export"], (tag_of_word.get(lk["reading"]) if lk["reading"] else None)
-        name = superseded(name, ctx["changes"])
+        name, reading, supersedes = named(row["name"], pm, pmn, reading)
         sd, dd = digests(row, defs)
         e = {"export": name, "slug": name.replace(".", "_"), "lean": row["name"], "pm": pm,
              "pm_name": pmn, "slot": slot_of.get(pm), "reading": readings[reading]["word"] if reading else None,
@@ -432,16 +690,24 @@ def build(rows, defs, ctx):
              "statement_digest": sd, "definitions_digest": dd, "source": module_file(row["module"])}
         if reading:
             e["reading_from"] = how
+        if supersedes:
+            e["supersedes"] = supersedes
+        if row["module"].startswith(DEPRECATED) or "deprecated" in row:
+            e["deprecated"] = True
+            e["deprecated_lean"] = row.get("deprecated", {})   # the Lean attribute; resolved below
         out.append(e)
 
     by_name = {r["name"]: r for r in rows}
     for lean, pm in PRIMITIVES.items():
         entry(by_name[lean], pm)
     for row in rows:
+        module = row["module"]
+        if module.startswith(DEPRECATED):  # a superseded declaration, kept with its Lean name
+            module = "PM." + module[len(DEPRECATED):]
         for mod, rx in SOURCES:
-            if row["module"] != mod:
+            if module != mod:
                 continue
-            m = re.fullmatch(rx, row["name"])
+            m = re.fullmatch(rx + LEAN_VERSION, row["name"])
             if not m:
                 continue
             pm = f"*{m[1]}.{m[2]}"
@@ -450,6 +716,13 @@ def build(rows, defs, ctx):
                 entry(row, pm, tag, how)
             else:
                 entry(row, pm)
+    # a deprecated entry names its replacement: the export of the declaration its @[deprecated] names
+    export_of = {e["lean"]: e["export"] for e in out}
+    for e in out:
+        if "deprecated_lean" in e:
+            d = e.pop("deprecated_lean")
+            e["superseded_by"] = export_of.get(d.get("new"))
+            e["deprecated_since"] = d.get("since") or None
     for lean, (name, pm) in META.items():
         row = by_name[lean]
         sd, dd = digests(row, defs)
@@ -653,29 +926,68 @@ def check_lock(entries, ctx):
         for k, what in (("statement_digest", "statement"), ("definitions_digest", "definitions it uses")):
             if e[k] != r[k]:
                 bad.append(f"{n}: its {what} changed since release ({r[k][:19]}… → {e[k][:19]}…); a released "
-                           f"name always means the same statement: name the new statement {n}_v<N> and add "
-                           "a row to data/changes.tsv (docs/VERSIONING.md)")
+                           f"name always means the same statement: keep {r['lean']} as it was in "
+                           f"PM/Deprecated/, @[deprecated {r['lean']}_v<N>], state the new statement as "
+                           f"{r['lean']}_v<N> (exported as {n}_v<N>), and add a row to data/changes.tsv "
+                           "(docs/VERSIONING.md)")
         if (e["reading"] or "") != r["reading"]:
             bad.append(f"{n}: locked under reading {r['reading'] or 'none'}, now {e['reading']}")
     return bad
 
 
 def check_versions(entries, ctx):
-    """A name ending `_v<N>` is the `new` of a row of data/changes.tsv, whose statement_id is its digest."""
-    rows = {r["new"]: r for r in ctx["changes"]}
+    """Superseded statements (docs/VERSIONING.md): both generations exported, linked three ways.
+
+    - a `_v<N>` name is the `new` of a row of data/changes.tsv whose statement_id is its digest and whose
+      `old` is the name it supersedes (`_v<N-1>`, or no `_v` for N = 2);
+    - a deprecated entry (a declaration of PM/Deprecated/, marked @[deprecated]) is a released (locked)
+      name, its @[deprecated] names the replacement's declaration, and a row of data/changes.tsv gives
+      that replacement as its `new`;
+    - every row's `old` is exported and deprecated, and its `new` is exported."""
+    by = {e["export"]: e for e in entries}
+    locked = {r["export"] for r in ctx["lock"]}
+    rows_new = {r["new"]: r for r in ctx["changes"]}
+    rows_old = {r["old"]: r for r in ctx["changes"]}
     bad = []
     for r in ctx["changes"]:
         if (not re.fullmatch(r"\d{4}-\d{2}-\d{2}", r["date"]) or not r["reason"].strip()
                 or not DIGEST_RE.fullmatch(r["statement_id"])):
             bad.append(f"data/changes.tsv: malformed row {r}")
+        old, new = by.get(r["old"]), by.get(r["new"])
+        if old is None:
+            bad.append(f"data/changes.tsv: {r['old']} is not exported; a superseded card stays exported, "
+                       "from its declaration in PM/Deprecated/")
+        elif not old.get("deprecated"):
+            bad.append(f"data/changes.tsv: {r['old']} is superseded but its declaration {old['lean']} is not "
+                       "a @[deprecated] declaration of PM/Deprecated/")
+        if new is None:
+            bad.append(f"data/changes.tsv: {r['new']} is not exported")
+        base, n = without_version(r["old"])
+        if r["new"] != f"{base}_v{n + 1}":
+            bad.append(f"data/changes.tsv: {r['old']} is superseded by {base}_v{n + 1}, not {r['new']}")
     for e in entries:
-        ps = parts(e["export"]) or []
-        if any(k == "version" for k, _ in ps):
-            r = rows.get(e["export"])
+        n = e["export"]
+        if any(k == "version" for k, _ in parts(n) or []):
+            r = rows_new.get(n)
             if r is None:
-                bad.append(f"{e['export']}: no row of data/changes.tsv gives this name as new")
-            elif r["statement_id"] != e["statement_digest"]:
-                bad.append(f"{e['export']}: data/changes.tsv gives statement {r['statement_id']}, not its digest")
+                bad.append(f"{n}: no row of data/changes.tsv gives this name as new")
+            else:
+                if r["statement_id"] != e["statement_digest"]:
+                    bad.append(f"{n}: data/changes.tsv gives statement {r['statement_id']}, not its digest")
+                if r["old"] != e.get("supersedes"):
+                    bad.append(f"{n}: data/changes.tsv gives old {r['old']}, but its declaration {e['lean']} "
+                               f"replaces the one exported as {e.get('supersedes')}")
+        if e.get("deprecated"):
+            if n not in locked:
+                bad.append(f"{n}: deprecated but never released (not in data/export_names.lock); an unreleased "
+                           "statement is changed in place")
+            if not e.get("superseded_by"):
+                bad.append(f"{n}: its declaration {e['lean']} is not @[deprecated <the replacement>]")
+            r = rows_old.get(n)
+            if r is None:
+                bad.append(f"{n}: deprecated with no row of data/changes.tsv giving it as old")
+            elif e.get("superseded_by") and r["new"] != e["superseded_by"]:
+                bad.append(f"{n}: @[deprecated] names {e['superseded_by']}, data/changes.tsv {r['new']}")
     return bad
 
 
@@ -683,7 +995,7 @@ def check_counterparts(entries, ctx):
     """data/naming/counterparts.json: pinned, well formed, and an exact match under the criterion of
     docs/NAMING.md for the statement exported now. No network: the files are not fetched."""
     cp = ctx["counterparts"]
-    by = {e["pm"]: e for e in entries if not e.get("meta") and e["reading"] is None}
+    by = {e["pm"]: e for e in entries if not e.get("meta") and e["reading"] is None and not e.get("deprecated")}
     rows_by = {r["name"]: r for r in ctx["rows"]}
     bad = []
     for k, repo in cp["repositories"].items():
@@ -715,8 +1027,14 @@ def check_counterparts(entries, ctx):
                 bad.append(f"{where}: {b} must be true or false")
         if r.get("classical_from") not in ("axioms", "source"):
             bad.append(f"{where}: classical_from must be axioms or source")
-        if r.get("checked") not in ("lean", "source"):
-            bad.append(f"{where}: checked must be lean or source")
+        if r.get("checked") not in CHECKED.get(r.get("repository"), ()):
+            bad.append(f"{where}: checked must be {' or '.join(CHECKED.get(r.get('repository'), ('?',)))} for "
+                       f"{r.get('repository')}: a Lean core counterpart is checked by Lean "
+                       "(Checks/Counterparts.lean), a Mathlib one from its source unless compiled")
+        sv, svs = r.get("section_variables"), r.get("section_variables_source")
+        if bool(sv) != bool(svs) or (svs and (not SOURCE_RE.fullmatch(svs)
+                                               or svs.rsplit(":", 1)[0] != src.rsplit(":", 1)[0])):
+            bad.append(f"{where}: section_variables needs section_variables_source, a line of the same file")
         paths = r.get("iff_reversed_at", [])
         if r.get("iff_reversed") is not bool(paths):
             bad.append(f"{where}: iff_reversed must say whether iff_reversed_at is empty")
@@ -724,12 +1042,125 @@ def check_counterparts(entries, ctx):
             ours = parse_formula(render(rows_by[e["lean"]], ctx["vocab"]))
             if parse_formula(r.get("pm_formula", "")) != ours:
                 bad.append(f"{where}: pm_formula {r.get('pm_formula')} is not the statement exported now")
-            elif reverse_iffs(parse_formula(r.get("statement", "")), paths) != ours:
+                continue
+            schema = reverse_iffs(ours, paths)
+            if parse_formula(r.get("statement", "")) != schema:
                 bad.append(f"{where}: statement {r.get('statement')} is not the PM formula up to the recorded "
                            "iff reversals")
+            bad += [f"{where}: {p}" for p in signature_problems(r, schema)]
         except (ValueError, KeyError) as x:
             bad.append(f"{where}: cannot read a formula ({x})")
     return bad
+
+
+CHECKED = {"lean4": ("lean",), "mathlib4": ("source", "lean-mathlib")}
+
+LEAN_CHECK_HEAD = '''\
+-- Lean decides whether each Lean core counterpart of data/naming/counterparts.json states PM's formula
+-- (docs/NAMING.md, "Counterparts"). Written by scripts/export_names.py from that file and the statements
+-- exported now; `python3 scripts/export_names.py --check` fails if it is out of date. Run from the
+-- repository root with `lake env lean Checks/Counterparts.lean`; it needs Lean's core only.
+--
+-- For each record, PM's formula is a schema over propositional variables, translated connective for
+-- connective (∼ `Not`, ∨ `Or`, ⊃ `→`, . `And`, ≡ `Iff`), with the sides of an equivalence swapped only
+-- where the record says so. Then
+--   `example : <schema> := @<declaration> <variables>`
+-- is checked by the kernel, and
+--   `#counterpart <declaration> [<variables>] "<signature>" : <schema>`
+-- checks that the declaration's type prints as the recorded signature; that its first binders, one per
+-- listed variable, are propositional variables (`Prop`, or `Sort u` only when marked `(specialized)`);
+-- that the variables listed are distinct; and that its type so instantiated is the schema exactly, up to
+-- the names of bound variables and `A → False` read as `¬A`: no unfolding, so a declaration that only
+-- implies the schema, or states it up to definitional unfolding, fails.
+import Lean
+
+section
+open Lean Elab Command Term Meta
+
+/-- `e` with each `A → False` written `¬A`. -/
+partial def Counterparts.normNot (e : Expr) : Expr :=
+  e.replace fun
+    | .forallE _ a (.const ``False []) _ => some (mkApp (.const ``Not []) (Counterparts.normNot a))
+    | _ => none
+
+/-- See the head of this file. -/
+elab "#counterpart " spec:("(specialized) ")? d:ident " [" vs:ident,* "] " sig:str " : " s:term : command => do
+  let c ← liftCoreM <| realizeGlobalConstNoOverload d
+  let info ← getConstInfo c
+  -- printed outside the section's variables, so that no bound name is renamed to avoid them
+  let pp ← liftTermElabM do return toString (← ppExpr info.type)
+  let ws (x : String) := " ".intercalate (x.splitOn " " |>.filter (· ≠ ""))
+  unless ws pp == ws sig.getString do
+    throwError "{c}: its type is{indentD pp}\\nnot the recorded signature{indentD sig.getString}"
+  runTermElabM fun _ => do
+    let vs := vs.getElems
+    unless (vs.map (·.getId)).toList.eraseDups.length == vs.size do
+      throwError "{c}: two of its variables are instantiated with the same variable"
+    let general ← forallBoundedTelescope info.type vs.size fun xs _ => do
+      unless xs.size == vs.size do throwError "{c}: fewer than {vs.size} binders"
+      xs.mapM fun x => do
+        match ← inferType x with
+        | .sort .zero => pure false
+        | .sort _ => pure true
+        | t => throwError "{c}: its binder {x} : {t} is not a propositional variable"
+    if general.any id != spec.isSome then
+      throwError "{c}: {if spec.isSome then "marked (specialized) with no Sort parameter"
+        else "a Sort parameter specialized to Prop, but the record does not say so"}"
+    let schema ← elabType s
+    let e ← elabTerm (← `(@$d $vs*)) none
+    synthesizeSyntheticMVarsNoPostponing
+    let ty ← instantiateMVars (← inferType e)
+    unless Counterparts.normNot ty == Counterparts.normNot schema do
+      throwError "{c}: instantiated, it states{indentExpr ty}\\nnot PM's formula{indentExpr schema}"
+
+end
+'''
+
+
+def counterparts_lean(entries, ctx):
+    """The text of Checks/Counterparts.lean: every counterpart checked "lean" (docs/NAMING.md)."""
+    rows_by = {r["name"]: r for r in ctx["rows"]}
+    by = {e["export"]: e for e in entries}
+    recs = [r for r in ctx["counterparts"]["counterparts"] if r.get("checked") == "lean"]
+    blocks, names = [], set()
+    for r in recs:
+        e = by.get(r.get("export"))
+        if e is None:
+            continue
+        schema = reverse_iffs(parse_formula(render(rows_by[e["lean"]], ctx["vocab"])), r.get("iff_reversed_at", []))
+        names |= leaves(schema)
+        f, vs = lean_formula(schema), " ".join(r.get("instantiation") or [])
+        sig = json.dumps(r.get("signature", ""), ensure_ascii=False)
+        spec = "(specialized) " if r.get("specialized") else ""
+        blocks.append(f"-- {r['pm'].replace('*', '✱').replace('.', '·')} {r['export']}: {r['declaration']}, "
+                      f"{r['source']}\n"
+                      f"example : {f} := @{r['declaration']} {vs}\n"
+                      f"#counterpart {spec}{r['declaration']} [{', '.join(r.get('instantiation') or [])}] {sig} : {f}")
+    return (LEAN_CHECK_HEAD + f"\nvariable ({' '.join(sorted(names))} : Prop)\n\n" + "\n\n".join(blocks)
+            + f'\n\n#eval IO.println "counterparts: {len(blocks)} checked by Lean"\n')
+
+
+def signature_problems(r, schema):
+    """The declaration's own type (its signature, read strictly), its variables instantiated as recorded,
+    against PM's formula with the recorded iff reversals: the criterion of docs/NAMING.md."""
+    try:
+        binders, body = parse_signature(r.get("signature", ""), r.get("section_variables", ""))
+    except ValueError as x:
+        return [f"signature is not a type of the propositional fragment ({x})"]
+    inst = r.get("instantiation")
+    if (not isinstance(inst, list) or len(inst) != len(binders) or len(set(inst)) != len(inst)
+            or not all(isinstance(v, str) and re.fullmatch(r"[a-z]", v) for v in inst)):
+        return [f"instantiation {inst} must give a different PM variable to each of its "
+                f"{len(binders)} variables {[n for n, _ in binders]}"]
+    out = []
+    general = [n for n, s in binders if s == "Sort"]
+    if bool(general) != bool(r.get("specialized")):
+        out.append(f"specialized is {r.get('specialized')}, but its Sort parameters are {general or 'none'}")
+    stated = substitute(body, dict(zip([n for n, _ in binders], inst)))
+    if stated != schema:
+        out.append(f"{r.get('declaration')} instantiated as recorded states {lean_formula(stated)}, not PM's "
+                   f"formula {lean_formula(schema)} (with the recorded iff reversals {r.get('iff_reversed_at')})")
+    return out
 
 
 CHECKS = {"pattern": check_pattern, "suffix_order": check_suffix_order, "pm_name_only": check_pm_name_only,
@@ -794,7 +1225,12 @@ def write_lock(entries, ctx, lock=LOCK, readings_lock=READINGS_LOCK):
 def verify_counterparts(ctx, base):
     """Each counterpart's file:line, in a checkout `base/<repository>-<commit>`, names the declaration (or,
     for a structure's constructor such as And.intro, declares the structure, as Lean's declaration
-    ranges do)."""
+    ranges do). For a counterpart checked from its source, the declaration's header there (from its line
+    to `:=`) is the recorded signature, and its section's `variable` line the recorded one, up to
+    whitespace."""
+    def ws(s):
+        return " ".join(s.split())
+
     bad = []
     for r in ctx["counterparts"]["counterparts"]:
         path, line = r["source"].rsplit(":", 1)
@@ -808,6 +1244,22 @@ def verify_counterparts(ctx, base):
             pat += rf"|\b(structure|inductive|class)\s+{re.escape(ns[-1])}\b"
         if int(line) > len(text) or not re.search(pat, text[int(line) - 1]):
             bad.append(f"{r['pm']} {r['declaration']}: {r['source']} does not name {last}")
+            continue
+        if r["checked"] != "source":
+            continue
+        header = "\n".join(text[int(line) - 1:int(line) + 20]).split(":=", 1)[0]
+        if ws(header) != ws(r["signature"]):
+            bad.append(f"{r['pm']} {r['declaration']}: {r['source']} declares {ws(header)!r}, not the recorded "
+                       f"signature {r['signature']!r}")
+        if r.get("section_variables"):
+            vline = int(r["section_variables_source"].rsplit(":", 1)[1])
+            if vline > len(text) or ws(text[vline - 1]) != ws(r["section_variables"]):
+                bad.append(f"{r['pm']} {r['declaration']}: {r['section_variables_source']} is not "
+                           f"{r['section_variables']!r}")
+            # the declaration is in that variable's section: no `end` closes it in between
+            if vline >= int(line) or any(re.match(r"end\b", t) for t in text[vline:int(line) - 1]):
+                bad.append(f"{r['pm']} {r['declaration']}: {r['section_variables_source']} is not in scope at "
+                           f"{r['source']}")
     return bad
 
 
@@ -846,14 +1298,17 @@ def main(args):
     rows, defs = lean_output()
     entries, unknown = build(rows, defs, ctx)
     text = json.dumps(entries, ensure_ascii=False, indent=1) + "\n"
+    lean_text = counterparts_lean(entries, ctx)
     failed = False
     if "--check" in args:
-        if not OUT.exists() or OUT.read_text(encoding="utf-8") != text:
-            print("data/export_names.json is not up to date: run python3 scripts/export_names.py")
-            failed = True
+        for path, want in ((OUT, text), (COUNTERPARTS_LEAN, lean_text)):
+            if not path.exists() or path.read_text(encoding="utf-8") != want:
+                print(f"{path.relative_to(ROOT)} is not up to date: run python3 scripts/export_names.py")
+                failed = True
         checked = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else []
     else:
         OUT.write_text(text, encoding="utf-8")
+        COUNTERPARTS_LEAN.write_text(lean_text, encoding="utf-8")
         checked = entries
     problems = check(checked, ctx)
     problems["heads"] = [f"no word for {c} in data/naming/vocabulary.json" for c in unknown]

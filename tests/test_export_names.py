@@ -191,6 +191,48 @@ def m_version_without_row(es, ctx):
     rename(e, e["export"] + "_v2")
 
 
+def supersede(es, ctx, pm="*9.31", reading="landini"):
+    """Two generations, as after a release and a superseded statement: the old entry deprecated and
+    pointing to the new `_v2` one, which has its own digest; the row of data/changes.tsv; the new one."""
+    scratch_lock(es, ctx)
+    old = find(es, pm, reading)
+    new = copy.deepcopy(old)
+    rename(new, old["export"] + "_v2")
+    new.update(lean=old["lean"] + "_v2", supersedes=old["export"],
+               statement_digest=export_names.sha256("the corrected statement"))
+    old.update(deprecated=True, superseded_by=new["export"], deprecated_since="2026-10-13")
+    es.insert(es.index(old) + 1, new)
+    ctx["changes"] = [{"date": "2026-10-13", "old": old["export"], "new": new["export"], "reason": "test",
+                       "statement_id": new["statement_digest"]}]
+    return old, new
+
+
+def m_version_row_for_unchanged(es, ctx):
+    # a row of data/changes.tsv for a released card that was not superseded: its name stays, so the row's
+    # new name is not exported and the old one is not deprecated
+    scratch_lock(es, ctx)
+    e = find(es, "*9.31", "landini")
+    ctx["changes"] = [{"date": "2026-10-13", "old": e["export"], "new": e["export"] + "_v2", "reason": "test",
+                       "statement_id": e["statement_digest"]}]
+
+
+def m_deprecated_without_row(es, ctx):
+    supersede(es, ctx)
+    ctx["changes"] = []
+
+
+def m_deprecated_unreleased(es, ctx):
+    old, _ = supersede(es, ctx)
+    ctx["lock"] = [r for r in ctx["lock"] if r["export"] != old["export"]]
+
+
+def m_version_skips(es, ctx):
+    old, new = supersede(es, ctx)
+    rename(new, old["export"] + "_v3")
+    old["superseded_by"] = new["export"]
+    ctx["changes"][0]["new"] = new["export"]
+
+
 # ---- counterparts: pinned, well formed, exact for the statement exported now
 
 def m_counterpart_commit(es, ctx):
@@ -227,6 +269,17 @@ def m_counterpart_statement_changed(es, ctx):
     counterpart(ctx, "*2.16")["pm_formula"] = "((p → q) → (¬p → ¬q))"
 
 
+def m_counterpart_false_match(es, ctx):
+    # another real declaration, with its real signature and line, under the recorded formulas
+    # (more in tests/test_counterparts.py, which also has Lean check them)
+    counterpart(ctx, "*1.3").update(declaration="Or.inl", signature="∀ {a b : Prop}, a → a ∨ b",
+                                    source="src/Init/Prelude.lean:622")
+
+
+def m_counterpart_signature(es, ctx):
+    counterpart(ctx, "*1.3")["signature"] = "NOT A LEAN TYPE"
+
+
 MUTATIONS = [
     ("pattern", m_pattern_case), ("pattern", m_pattern_ascii), ("pattern", m_pattern_number),
     ("suffix_order", m_suffix_version_before_reading), ("suffix_order", m_suffix_reading_before_slot),
@@ -239,10 +292,13 @@ MUTATIONS = [
     ("no_top_level", m_top_level), ("vocabulary", m_vocabulary),
     ("lock", m_lock_statement_changed), ("lock", m_lock_definitions_changed), ("lock", m_lock_name_gone),
     ("lock", m_lock_reading_changed), ("versions", m_version_without_row),
+    ("versions", m_version_row_for_unchanged), ("versions", m_deprecated_without_row),
+    ("versions", m_deprecated_unreleased), ("versions", m_version_skips),
     ("counterparts", m_counterpart_commit), ("counterparts", m_counterpart_source),
     ("counterparts", m_counterpart_source_escapes), ("counterparts", m_counterpart_export),
     ("counterparts", m_counterpart_not_exact), ("counterparts", m_counterpart_iff_flag),
     ("counterparts", m_counterpart_classical), ("counterparts", m_counterpart_statement_changed),
+    ("counterparts", m_counterpart_false_match), ("counterparts", m_counterpart_signature),
 ]
 
 
@@ -291,6 +347,7 @@ class TestExportNames(unittest.TestCase):
         m_lock_statement_changed(es, ctx)
         (msg,) = export_names.check(es, ctx)["lock"]
         self.assertIn("PM.star2_16_transp_v<N>", msg)
+        self.assertIn("PM/Deprecated/", msg)
         self.assertIn("data/changes.tsv", msg)
 
     def test_lock_sees_changes_in_lean(self):
@@ -312,14 +369,36 @@ class TestExportNames(unittest.TestCase):
         self.assertTrue(all("definitions it uses changed" in b for b in bad))
 
     def test_version_with_its_row(self):
-        # a superseded statement's replacement is name_v2 with a row of data/changes.tsv: every rule passes
+        # both generations, linked by @[deprecated] and a row of data/changes.tsv: every rule passes, the
+        # lock included (the end-to-end version, with Lean, is tests/test_versioning.py)
         es, ctx = entries(), context()
-        e = find(es, "*9.31", "landini")
-        old = e["export"]
-        rename(e, old + "_v2")
-        ctx["changes"] = [{"date": "2026-10-13", "old": old, "new": old + "_v2", "reason": "test",
-                           "statement_id": e["statement_digest"]}]
+        supersede(es, ctx)
         self.assertEqual(clean(export_names.check(es, ctx)), {})
+
+    def test_row_does_not_rename_a_released_declaration(self):
+        # a row of data/changes.tsv never renames a declaration: the locked one keeps its name (the
+        # replacement is a different declaration, `<lean>_v<N>`)
+        es, ctx = entries(), context()
+        m_version_row_for_unchanged(es, ctx)
+        rows, defs = export_names.lean_output()
+        built = export_names.build(rows, defs, ctx)[0]
+        self.assertEqual([e["export"] for e in built], [e["export"] for e in es])
+        bad = export_names.check(built, ctx)["versions"]
+        self.assertIn("data/changes.tsv: PM.star9_31_reading_landini_v2 is not exported", bad)
+
+    def test_replacement_named_from_the_lock(self):
+        # `<lean>_v<N>` is exported as the locked name of `<lean>` with `_v<N>`, whatever the generator
+        # would now call `<lean>`
+        es, ctx = entries(), context()
+        scratch_lock(es, ctx)
+        rows, defs = export_names.lean_output()
+        row = copy.deepcopy(next(r for r in rows if r["name"] == "PM.q21_71"))
+        row["name"] += "_v2"
+        for r in ctx["lock"]:
+            if r["lean"] == "PM.q21_71":
+                r["export"] = "PM.star21_71_as_released"
+        e = next(e for e in export_names.build(rows + [row], defs, ctx)[0] if e["lean"] == "PM.q21_71_v2")
+        self.assertEqual((e["export"], e["supersedes"]), ("PM.star21_71_as_released_v2", "PM.star21_71_as_released"))
 
     def test_write_lock_round_trip(self):
         # --write-lock at a release: the names regenerated under the lock are the same, and every rule passes
