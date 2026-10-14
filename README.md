@@ -86,10 +86,10 @@ Not yet done:
 - No `sorry`, no `native_decide`, no added axioms.
 - Every PM theorem, and the ✱1–✱5 completeness theorem, reports
   "does not depend on any axioms" under `#print axioms`.
-- An exhaustive check finds 39 declarations that use Lean's standard axioms.
+- An exhaustive check finds 40 declarations that use Lean's standard axioms.
   None is a PM derivation: they are compiler-generated lemmas (14 of them
-  for the syntax of ✱9's method), three propositional metatheorems, and a
-  general classical model.
+  for the syntax of ✱9's method), three propositional metatheorems, the
+  check theorem that pins one of them, and a general classical model.
   Details: [docs/VERIFICATION.md](docs/VERIFICATION.md).
 
 The limits matter as much
@@ -161,7 +161,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (1 done, 14 not started)</summary>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (1 done, 15 not started)</summary>
 
 ![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
 
@@ -180,6 +180,7 @@ The work is split into four groups that run side by side. Each group is split in
 - **Lean's own kernel**
   - (a) Census of the kernel features the project exercises: *done*
   - (b) Lean in Lean: Lean4Lean re-checks the build: *not started*
+  - (b1) An instrumented independent checker that counts what a static census cannot (proof irrelevance, eta, unit-like types, K versus iota, literal to constructor): *not started*
   - (c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed: *not started*
   - (d) A formal proof that the checker used is correct against a specification of the fragment: *not started*
 - **Lean and ZFC: relative consistency**
@@ -249,8 +250,8 @@ Install the Lean toolchain named in `lean-toolchain` with
 
 ```
 lake build                      # builds and checks every file
-lake env lean AxiomCheck.lean   # 1443 of 1450 theorems and models use no axioms
-lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
+lake env lean AxiomCheck.lean   # 1715 of 1722 theorems and models use no axioms
+lake env lean AllAxioms.lean    # every declaration; lists the 40 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
 python3 data/fidelity_counts.py # fidelity counts from the ledgers

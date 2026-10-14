@@ -67,15 +67,15 @@ theorem phi_x_two_views :
   ⟨rfl, rfl⟩
 
 /-- φ!x as a function of (φ!ẑ, x): order 2 (pp. 54, 170). -/
-example : fnOrder2 (Ty.pred1 .ind) .ind (fun φ x => .app1 φ x) = 2 := rfl
+theorem check_two_argument_order_p170 : fnOrder2 (Ty.pred1 .ind) .ind (fun φ x => .app1 φ x) = 2 := rfl
 /-- φ!x with φ fixed, as a function of x: predicative, order 1 (p. 55). -/
-example : fnOrder .ind ((fun (φ : U (Ty.pred1 .ind)) (x : U .ind) => QF.app1 φ x) ()) = 1 := rfl
+theorem check_partial_application_predicative_p55 : fnOrder .ind ((fun (φ : U (Ty.pred1 .ind)) (x : U .ind) => QF.app1 φ x) ()) = 1 := rfl
 /-- p. 55: "if f!(φ!ẑ, x) contains a first-order function as apparent variable, the assignment of a
     value to φ!ẑ gives us a second-order function of x": (ψ) . ψ!x ⊃ φ!x with φ fixed has order 2. -/
-example : fnOrder .ind ((fun (φ : U (Ty.pred1 .ind)) (x : U .ind) =>
+theorem check_partial_application_order_two_p55 : fnOrder .ind ((fun (φ : U (Ty.pred1 .ind)) (x : U .ind) =>
     QF.all (τ := Ty.pred1 .ind) fun ψ => QF.imp (.app1 ψ x) (.app1 φ x)) ()) = 2 := rfl
 /-- … and as a function of (φ, x) it is also of order 2: currying does not lower it. -/
-example : fnOrder2 (Ty.pred1 .ind) .ind (fun φ x =>
+theorem check_currying_does_not_lower : fnOrder2 (Ty.pred1 .ind) .ind (fun φ x =>
     QF.all (τ := Ty.pred1 .ind) fun ψ => QF.imp (.app1 ψ x) (.app1 φ x)) = 2 := rfl
 
 /-! ## p. 56's second clause -/

@@ -88,13 +88,13 @@ scoped notation "Λ̇" => QF.relEmpty
 variable {V : Ty → Type} {S : Sys} {a b : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
-example : (𝐕̇ : V a → V b → QF V) = fun x y => QF.and (ident x x) (ident y y) := rfl
-example : (Λ̇ : V a → V b → QF V) = ∸𝐕̇ := rfl
-example : (Λ̇ : V a → V b → QF V) = fun x y => QF.neg (relHolds x 𝐕̇ y) := rfl
-example (R : V a → V b → QF V) : relNonempty R = ex2 fun x y => relHolds x R y := rfl
+theorem check_notation_rel_univ : (𝐕̇ : V a → V b → QF V) = fun x y => QF.and (ident x x) (ident y y) := rfl
+theorem check_notation_rel_empty : (Λ̇ : V a → V b → QF V) = ∸𝐕̇ := rfl
+theorem check_notation_rel_empty_unfolded : (Λ̇ : V a → V b → QF V) = fun x y => QF.neg (relHolds x 𝐕̇ y) := rfl
+theorem check_notation_rel_nonempty (R : V a → V b → QF V) : relNonempty R = ex2 fun x y => relHolds x R y := rfl
 /-! ✱24's signs and ✱25's are read apart: Λ and 𝐕 are classes, Λ̇ and 𝐕̇ relations. -/
-example : (Λ : V a → QF V) = clsEmpty ∧ (Λ̇ : V a → V b → QF V) = relEmpty := ⟨rfl, rfl⟩
-example : (𝐕 : V a → QF V) = clsUniv ∧ (𝐕̇ : V a → V b → QF V) = relUniv := ⟨rfl, rfl⟩
+theorem check_notation_empty_cls_and_rel : (Λ : V a → QF V) = clsEmpty ∧ (Λ̇ : V a → V b → QF V) = relEmpty := ⟨rfl, rfl⟩
+theorem check_notation_univ_cls_and_rel : (𝐕 : V a → QF V) = clsUniv ∧ (𝐕̇ : V a → V b → QF V) = relUniv := ⟨rfl, rfl⟩
 
 /-! ## Chains of identities of relations
 

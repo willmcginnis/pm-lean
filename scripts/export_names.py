@@ -90,6 +90,13 @@ SOURCES = [
     ("PM.Found9.Star9", r"PM\.F9\.f(\d+)_(\d+)(?:_(?:russell|switch|prenex))?"),
 ]
 DEPRECATED = "PM.Deprecated."
+# a check theorem (docs/NAMING.md): a test of the repository's own definitions, never a proposition of PM
+CHECK_RE = re.compile(r"(?:.*\.)?check_[^.]*")
+
+
+def is_check(lean_name):
+    """Is this Lean declaration a check theorem (its last component begins `check_`)?"""
+    return CHECK_RE.fullmatch(lean_name) is not None
 # ✱1's primitive propositions are the constructors of `PM.Thm`
 PRIMITIVES = {"PM.Thm.taut": "*1.2", "PM.Thm.add": "*1.3", "PM.Thm.perm": "*1.4",
               "PM.Thm.assoc": "*1.5", "PM.Thm.sum": "*1.6"}
@@ -712,6 +719,8 @@ def build(rows, defs, ctx):
     for lean, pm in PRIMITIVES.items():
         entry(by_name[lean], pm)
     for row in rows:
+        if is_check(row["name"]):  # never exported, whatever it is named after
+            continue
         module = row["module"]
         if module.startswith(DEPRECATED):  # a superseded declaration, kept with its Lean name
             module = "PM." + module[len(DEPRECATED):]
@@ -911,6 +920,12 @@ def check_unique_slug(entries, ctx):
 def check_no_top_level(entries, ctx):
     return [f"{e['export']}: a name is PM.<one component>, never top-level PM_ or nested"
             for e in entries if not e["export"].startswith("PM.") or e["export"].count(".") != 1]
+
+
+def check_no_checks(entries, ctx):
+    """No check theorem (`check_…`) is exported: it is not a proposition of PM."""
+    return [f"{e['export']}: its Lean declaration {e['lean']} is a check theorem, never exported"
+            for e in entries if is_check(e["lean"])]
 
 
 def check_vocabulary(entries, ctx):
@@ -1292,7 +1307,7 @@ def signature_problems(r, schema):
 CHECKS = {"pattern": check_pattern, "suffix_order": check_suffix_order, "pm_name_only": check_pm_name_only,
           "slots": check_slots, "readings": check_readings, "readings_frozen": check_readings_frozen,
           "unique_name": check_unique_name, "unique_slug": check_unique_slug, "no_top_level": check_no_top_level,
-          "vocabulary": check_vocabulary, "lock": check_lock, "versions": check_versions,
+          "no_checks": check_no_checks, "vocabulary": check_vocabulary, "lock": check_lock, "versions": check_versions,
           "counterparts": check_counterparts, "bundle_names": check_bundle_names}
 
 

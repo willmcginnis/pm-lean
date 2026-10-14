@@ -2,11 +2,12 @@
 -- scripts/kernel_census/census.py, which sets PM_CENSUS_OUT (the JSON file this writes) and
 -- PM_CENSUS_MODE (`ratchet`: the walk without the meta code's closure; `static`: the walk of every
 -- declaration; `full`, the default: also the kernel re-check below); docs/KERNEL_CENSUS.md says what
--- each feature means and how it is measured. census.py also appends the `namespace KernelCensus`
--- block to copies of the files with `example`s, so that block imports nothing beyond `Lean`.
+-- each feature means and how it is measured.
 --
 -- Static part. Every declaration of the repository's modules is put in one group by its module (the
--- lists below; a module in no list stops the run), notation and meta code by its type. For every
+-- lists below; a module in no list stops the run), notation and meta code by its type, and check
+-- theorems (`check_…`, docs/NAMING.md) in a group of their own (census.py refuses a library file with
+-- an `example`, which the kernel checks but the environment does not keep). For every
 -- declaration, of the repository and of the closure in Lean core of what they use, the walk reads
 -- its kind, its universe parameters, its
 -- `ConstantInfo` (inductive families: indices, mutual, nested, recursive, structure-like; recursors:
@@ -58,6 +59,13 @@ def metaModules : List Name := [`PM.Found9.SearchTactic, `Checks.Canon]
 def entryModules : List Name := [`PM, `PM.Vol1, `PM.Found9]
 
 def isRepoModule (m : Name) : Bool := (`PM).isPrefixOf m || (`Checks).isPrefixOf m
+
+/-- A check theorem (docs/NAMING.md): its last component begins `check_`. Checks are counted apart
+    from the group of their module, as their own column. -/
+def isCheck (c : Name) : Bool :=
+  match c with
+  | .str _ s => s.startsWith "check_"
+  | _ => false
 
 def groupOf (m : Name) : Option String :=
   if derivationModules.contains m then some "derivations"
@@ -469,13 +477,15 @@ open KernelCensus in
     unless isRepoModule m do continue
     let some g := groupOf m | throwError "module {m} is in no group of the census (scripts/kernel_census/KernelCensus.lean)"
     let g := if g != "entry" && isNotation env c then "meta" else g
+    let g := if g != "entry" && g != "meta" && isCheck c then "checks" else g
     groups := groups.insert g ((groups.getD g #[]).push c)
   unless (groups.getD "entry" #[]).isEmpty do
     throwError "entry files declare {groups.getD "entry" #[]}"
   -- every declaration's static information, for everything reachable from the repository (in mode
   -- `ratchet`, not from the meta code: two thirds of the walk, and not needed by the ratchet)
-  let walked := (if mode == "ratchet" then ["derivations", "foundations", "metatheory"]
-    else ["derivations", "foundations", "metatheory", "meta"]).foldl (fun a g => a ++ groups.getD g #[]) #[]
+  let walked := (if mode == "ratchet" then ["derivations", "foundations", "metatheory", "checks"]
+    else ["derivations", "foundations", "metatheory", "checks", "meta"]).foldl
+      (fun a g => a ++ groups.getD g #[]) #[]
   let infos ← match collectInfos env walked with
     | .ok i => pure i
     | .error e => throwError e
@@ -486,12 +496,15 @@ open KernelCensus in
   let gF := groups.getD "foundations" #[]
   let gB := groups.getD "metatheory" #[]
   let gM := groups.getD "meta" #[]
+  let gC := groups.getD "checks" #[]
   let pA := closureWithParents infos gA
   let clA := closure infos gA
   let pAFB := closureWithParents infos (gA ++ gF ++ gB)
   let clAFB := closure infos (gA ++ gF ++ gB)
   let pM := closureWithParents infos gM
   let clM := closure infos gM
+  let pC := closureWithParents infos gC
+  let clC := closure infos gC
   let core := (sorted clAFB).filter (!isRepo ·)
   let metaCore := (sorted clM).filter fun c => !isRepo c && !clAFB.contains c
   -- the derivation theorems proper: a theorem of the repository concluding `Thm`, `QThm` or `Thm9`
@@ -531,7 +544,7 @@ open KernelCensus in
       let us := (ds.filter r.contains).qsort Name.lt
       unless us.isEmpty do m := m.insert a us
     return m
-  let uAFB := users (gA ++ gF ++ gB)
+  let uAFB := users (gA ++ gF ++ gB ++ gC)
   let uM := users gM
   let axNames := ((uAFB.toList ++ uM.toList).map (·.1)).eraseDups.toArray.qsort Name.lt
   let axJson := Json.mkObj <| axNames.toList.map fun a => (a.toString, Json.mkObj [
@@ -541,14 +554,18 @@ open KernelCensus in
   let cols : List (String × Array Name × Option (Std.HashMap Name Name)) := [
     ("derivations", gA, none), ("foundations", gF, none), ("metatheory", gB, none),
     ("core", core, some pAFB), ("derivationClosure", sorted clA, some pA),
-    ("proofClosure", sorted clP, some pP), ("meta", gM, none), ("metaCore", metaCore, some pM)]
+    ("proofClosure", sorted clP, some pP), ("checks", gC, none), ("checksClosure", sorted clC, some pC),
+    ("meta", gM, none), ("metaCore", metaCore, some pM)]
   let colsJson := cols.map fun (k, ds, p) => (k, Json.mkObj [("declarations", toJson ds.size),
     ("kinds", kindCounts env ds), ("features", featureTable infos ds p)])
+  let checksByModule : Std.HashMap String Nat := gC.foldl (init := {}) fun m c =>
+    let k := (modOf env c).toString
+    m.insert k (m.getD k 0 + 1)
   -- the kernel re-check
   let mut recheckJson := Json.null
   let mut probes := Json.null
   if mode == "full" then
-    let r := recheck env (sorted clAFB)
+    let r := recheck env (sorted ((sorted clC).foldl (·.insert ·) clAFB))
     recheckJson := Json.mkObj (cols.filterMap fun (k, ds, _) =>
       if k == "meta" || k == "metaCore" then none else some (k, unfoldTable env r ds))
     probes := natProbes env
@@ -560,6 +577,7 @@ open KernelCensus in
       ("meta", toJson (metaModules.map (·.toString))),
       ("entry", toJson (entryModules.map (·.toString)))]),
     ("proofTheorems", toJson proper.size),
+    ("checksByModule", Json.mkObj (checksByModule.toList.map fun (m, n) => (m, toJson n))),
     ("closureCore", Json.mkObj [("derivationClosure", toJson ((sorted clA).filter (!isRepo ·)).size),
       ("proofClosure", toJson ((sorted clP).filter (!isRepo ·)).size)]),
     ("metaReached", toJson (metaReached.map (·.toString))),
@@ -567,4 +585,4 @@ open KernelCensus in
     ("recheck", recheckJson), ("natProbes", probes),
     ("timing", Json.mkObj [("staticMs", toJson (t1 - t0)), ("totalMs", toJson (t2 - t0))])]
   IO.FS.writeFile path (j.pretty 120 ++ "\n")
-  logInfo m!"kernel census ({mode}): {gA.size + gF.size + gB.size + gM.size} repository declarations, {infos.size} walked with their closure; {proper.size} derivation theorems; written to {path}"
+  logInfo m!"kernel census ({mode}): {gA.size + gF.size + gB.size + gC.size + gM.size} repository declarations ({gC.size} check theorems), {infos.size} walked with their closure; {proper.size} derivation theorems; written to {path}"

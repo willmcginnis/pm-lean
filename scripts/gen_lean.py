@@ -131,7 +131,7 @@ for line in open(root / "data/vol1.jsonl", encoding="utf-8"):
     vs = sorted(vars_of(ast))
     binders = " ".join(f"({v} : F)" for v in vs)
     app = " ".join(f'(.var "{v}")' for v in vs)
-    out += [f"/-- {r['id']} -/", f"def {name} {binders} : F := {lean(ast)}", f"example : ({name} {app}).isTaut = true := by decide", ""]
+    out += [f"/-- {r['id']} -/", f"def {name} {binders} : F := {lean(ast)}", f"theorem check_{name}_tautology : ({name} {app}).isTaut = true := by decide", ""]
     n += 1
 out.append("end PM")
 open(root / "PM/Statements.lean", "w", encoding="utf-8").write("\n".join(out))

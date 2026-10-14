@@ -2,9 +2,11 @@
 -- including `PM.sound`), and of every private declaration of the PM modules (`_private.PM.…`), not just
 -- the selection printed by AxiomCheck.lean. Compiler-internal auxiliaries (`match_`, `proof_`, `eq_` …)
 -- are reached through the declarations that use them, since `collectAxioms` is transitive.
+-- The pinned statements are imported too: their check theorems (`PM.check_pinned_…`) are under `PM`.
 -- Run with `lake env lean AllAxioms.lean`; it reports how many were checked and lists any that use an axiom.
 import Lean
 import PM
+import Checks.PinnedStatements
 open Lean Elab Command
 
 #eval show CommandElabM Unit from do

@@ -11,13 +11,13 @@
     python3 scripts/kernel_census/census.py --ratchet --update   rewrites the expected features
     python3 scripts/kernel_census/census.py --write --reuse      the doc again from the last full run
 
-Every mode first runs `lake build` on the modules the meta-program imports. The full census runs
+Every mode first refuses a library file with an `example` (the kernel checks one during the build, but
+the environment does not keep it, so no census could see it; a check is a theorem named `check_…`,
+docs/NAMING.md), then runs `lake build` on the modules the meta-program imports. The full census runs
 scripts/kernel_census/KernelCensus.lean in mode `full` (the static walk, the kernel re-check of every
-theorem and definition with its unfoldings recorded, and the Nat probes; about 35 s), then the
-examples pass: `example` commands are checked by the kernel during the build but are not kept in the
-environment, so each library file with examples is copied to .lake/kernel_census/examples/, its
-`example`s renamed to theorems `_kernelCensusExample_<line>`, the census functions appended, and the
-copy compiled (about 40 s). Working files go to .lake/kernel_census/.
+theorem and definition with its unfoldings recorded, and the Nat probes; about 35 s); the check
+theorems are read there like every other declaration, as a column of their own. Working files go to
+.lake/kernel_census/.
 """
 import argparse
 import json
@@ -43,7 +43,7 @@ RATCHET_COLUMNS = ["derivations", "derivationClosure", "proofClosure"]
 # The report's columns: (key in the census, heading).
 COLUMNS = [("derivations", "(a)"), ("foundations", "(f)"), ("metatheory", "(b)"), ("core", "(c)"),
            ("derivationClosure", "closure of (a)"), ("proofClosure", "closure of D"),
-           ("examples", "examples"), ("examplesClosure", "closure of examples")]
+           ("checks", "checks"), ("checksClosure", "closure of checks")]
 
 # The rows of the static table, by area: (feature, what it is).
 AREAS = [
@@ -178,7 +178,7 @@ DYNAMIC = "dynamic"
 ND = "n/d"
 SUMMARY_COLUMNS = [("proofClosure", "closure of D"), ("derivationClosure", "closure of (a)"),
                    ("foundations", "(f)"), ("metatheory", "(b)"), ("core", "(c)"),
-                   ("examples", "examples"), ("examplesClosure", "closure of examples")]
+                   ("checks", "checks"), ("checksClosure", "closure of checks")]
 SUMMARY = [
     ("Inductive types", "s:decl.inductive", STATIC),
     ("… plain (no indices, not mutual, not nested)", "s:ind.plain", STATIC),
@@ -266,6 +266,10 @@ def build_targets():
 
 
 def build():
+    left = examples_left()
+    if left:
+        sys.exit("an `example` is checked by the kernel but not kept, so the census cannot see it; "
+                 "make it a check theorem `check_…` (docs/NAMING.md): " + ", ".join(left))
     code, out = run(["lake", "build", *build_targets()])
     if code != 0:
         print(out)
@@ -283,7 +287,7 @@ def run_census(mode):
     return json.loads(out.read_text(encoding="utf-8"))
 
 
-# ---------------------------------------------------------------- the examples pass
+# ---------------------------------------------------------------- no examples
 
 def library_files():
     """The source files of the library targets of lakefile.toml."""
@@ -291,135 +295,17 @@ def library_files():
                                                  ROOT / "Checks" / "Canon.lean"]
 
 
-EXAMPLE = re.compile(r"^example\b")
+EXAMPLE = re.compile(r"^\s*example\b")
 
 
-def census_functions():
-    """The `namespace KernelCensus … end KernelCensus` block of the meta-program."""
-    text = LEAN_FILE.read_text(encoding="utf-8")
-    i = re.search(r"^namespace KernelCensus$", text, re.M).start()
-    j = re.search(r"^end KernelCensus$", text, re.M).end()
-    return text[i:j]
-
-
-EXAMPLES_MAIN = """
-open Lean Meta Elab Command KernelCensus in
-set_option maxHeartbeats 0 in
-#eval show CommandElabM Unit from do
-  let env ← getEnv
-  let path := (← IO.getEnv "PM_CENSUS_OUT").getD ".lake/kernel_census/examples.json"
-  let exs := (env.constants.toList.filterMap fun (c, _) =>
-    match c with
-    | .str _ s => if s.startsWith "_kernelCensusExample_" then some c else none
-    | _ => none).toArray.qsort Name.lt
-  let infos ← match collectInfos env exs with
-    | .ok i => pure i
-    | .error e => throwError e
-  let cl := (closure infos exs).toArray.qsort Name.lt
-  let r := recheck env exs
-  let mut sets : Std.HashMap String (Array String) := {}
-  let mut consts : Std.HashMap String (Array String) := {}
-  for c in exs do
-    for u in r.unfolded.getD c #[] do
-      for f in unfoldClasses env u do
-        sets := sets.insert f ((sets.getD f #[]).push c.toString)
-        consts := consts.insert f ((consts.getD f #[]).push u.toString)
-  let j := Json.mkObj [("examples", toJson (exs.map (·.toString))),
-    ("direct", featureSets infos exs), ("closure", featureSets infos cl),
-    ("checked", toJson (exs.filter r.unfolded.contains |>.map (·.toString))),
-    ("failed", toJson (r.failed.map (·.toString))),
-    ("unfoldSets", Json.mkObj (sets.toList.map fun (k, v) => (k, toJson v))),
-    ("unfoldConsts", Json.mkObj (consts.toList.map fun (k, v) => (k, toJson v))),
-    ("totals", Json.mkObj (exs.toList.map fun c => (c.toString, toJson (r.total.getD c 0))))]
-  IO.FS.writeFile path j.compress
-"""
-
-
-def examples_copy(path):
-    """The copy of a file with its `example`s renamed, and the census appended; None if it has none."""
-    lines = path.read_text(encoding="utf-8").split("\n")
-    n = 0
-    for i, line in enumerate(lines):
-        if EXAMPLE.match(line):
-            lines[i] = EXAMPLE.sub(f"theorem _kernelCensusExample_{i + 1}", line)
-            n += 1
-    if n == 0:
-        return None, 0
-    text = "import Lean\n" + "\n".join(lines) + "\n\nsection\nopen Lean Meta Elab Command\n" + \
-        census_functions() + "\nend\n" + EXAMPLES_MAIN
-    return text, n
-
-
-def examples_pass():
-    results = {}
-    for f in library_files():
-        text, n = examples_copy(f)
-        if text is None:
-            continue
-        rel = f.relative_to(ROOT)
-        copy = WORK / "examples" / rel
-        copy.parent.mkdir(parents=True, exist_ok=True)
-        copy.write_text(text, encoding="utf-8")
-        out = copy.with_suffix(".json")
-        if out.exists():
-            out.unlink()
-        env = dict(os.environ, PM_CENSUS_OUT=str(out))
-        code, log = run(["lake", "env", "lean", str(copy)], env)
-        if code != 0 or not out.exists():
-            print(log)
-            sys.exit(f"the examples copy of {rel} failed")
-        r = json.loads(out.read_text(encoding="utf-8"))
-        if len(r["examples"]) != n:
-            sys.exit(f"{rel}: {n} examples renamed, {len(r['examples'])} found")
-        results[str(rel)] = r
-        print(f"  examples of {rel}: {n}", flush=True)
-    return results
-
-
-def qualify(rel, names):
-    """An example's name with its file: the same line in two files gives the same name."""
-    return [f"{rel}:{n}" if "_kernelCensusExample_" in n else n for n in names]
-
-
-def merge_examples(census, results):
-    """The examples as two more columns of the census, and their re-check."""
-    def column(key):
-        sets = {}
-        names = set()
-        for rel, r in results.items():
-            names |= set(qualify(rel, r["examples"])) if key == "direct" else set()
-            for f, cs in r[key].items():
-                sets.setdefault(f, set()).update(qualify(rel, cs))
-        return sets, names
-    direct, names = column("direct")
-    clos, _ = column("closure")
-    clos_names = set().union(*clos.values()) if clos else set()
-    def table(sets):
-        return {f: {"count": len(cs), "examples": sorted(cs)[:5]} for f, cs in sorted(sets.items())}
-    census["columns"]["examples"] = {"declarations": len(names), "features": table(direct)}
-    census["columns"]["examplesClosure"] = {"declarations": len(clos_names), "features": table(clos)}
-    sets, consts, totals, checked, failed = {}, {}, {}, [], []
-    files = {}
-    for rel, r in results.items():
-        files[rel] = len(r["examples"])
-        checked += qualify(rel, r["checked"])
-        failed += qualify(rel, r["failed"])
-        totals.update({f"{rel}:{k}": v for k, v in r["totals"].items()})
-        for f, cs in r["unfoldSets"].items():
-            sets.setdefault(f, set()).update(qualify(rel, cs))
-        for f, cs in r["unfoldConsts"].items():
-            consts.setdefault(f, set()).update(cs)
-    heavy = sorted(totals.items(), key=lambda kv: (-kv[1], kv[0]))
-    census["examples"] = {"files": files}
-    if census.get("recheck"):
-        census["recheck"]["examples"] = {
-            "checked": len(checked), "failed": failed, "skipped": 0,
-            "unfoldedAnything": sum(1 for c in checked if totals.get(c, 0) > 0),
-            "totalUnfoldings": sum(totals.values()),
-            "heaviest": [{"decl": c, "unfoldings": n} for c, n in heavy[:10]],
-            "features": {f: {"count": len(cs), "examples": sorted(cs)[:5], "constants": len(consts[f]),
-                             "constantExamples": sorted(consts[f])[:8]} for f, cs in sorted(sets.items())}}
-    return census
+def examples_left(files=None):
+    """`file:line` of every `example` command in the library files."""
+    out = []
+    for f in files if files is not None else library_files():
+        for i, line in enumerate(f.read_text(encoding="utf-8").split("\n")):
+            if EXAMPLE.match(line):
+                out.append(f"{f.relative_to(ROOT)}:{i + 1}")
+    return out
 
 
 # ---------------------------------------------------------------- the report
@@ -441,9 +327,9 @@ def report(c):
                f"({c['closureCore']['derivationClosure']} of them of Lean core); "
                f"D, the {c['proofTheorems']} derivation theorems, and their closure "
                f"{n['proofClosure']} ({c['closureCore']['proofClosure']} of Lean core); "
-               f"{n['examples']} examples ("
-               + ", ".join(f"{k} {v}" for k, v in sorted(c["examples"]["files"].items()))
-               + f") and their closure {n['examplesClosure']}; (m), meta code and notation, "
+               f"{n['checks']} check theorems ("
+               + ", ".join(f"{k} {v}" for k, v in sorted(c["checksByModule"].items()))
+               + f") and their closure {n['checksClosure']}; (m), meta code and notation, "
                f"{cols['meta']['declarations']}, with {cols['metaCore']['declarations']} more "
                f"declarations of Lean core in its closure only. Meta code reached from (a), (f) or (b): "
                + (", ".join(f"`{x}`" for x in c["metaReached"]) or "none") + ".")
@@ -507,8 +393,8 @@ def report(c):
             row(f"unfolded {label}", vals)
         out += ["", "The heaviest checks (unfoldings): "
                 + "; ".join(f"(a) `{h['decl']}` {h['unfoldings']}" for h in rc["derivations"]["heaviest"][:3])
-                + "; " + "; ".join(f"examples `{h['decl']}` {h['unfoldings']}"
-                                    for h in rc.get("examples", {}).get("heaviest", [])[:3]) + ".", ""]
+                + "; " + "; ".join(f"checks `{h['decl']}` {h['unfoldings']}"
+                                    for h in rc.get("checks", {}).get("heaviest", [])[:3]) + ".", ""]
         for f in ["unfold.recursor", "unfold.attr.irreducible", "unfold.attr.externAttr",
                   "unfold.stringInternals"]:
             v = rc["proofClosure"]["features"].get(f)
@@ -528,8 +414,9 @@ def report(c):
                        + (", ".join(f"`{u}`" for u in p["unfolded"]) or "·") + " |")
     out += ["", "### The three axioms: the declarations of the repository that depend on each", ""]
     exp = expected_axiom_users()
-    out += ["Declarations of (a), (f) and (b), and separately of (m), whose closure contains the axiom.", "",
-            "| Axiom | (a), (f), (b) | of them in tests/expected_axiom_users.txt | the others | (m) |",
+    out += ["Declarations of (a), (f), (b) and the checks, and separately of (m), whose closure contains "
+            "the axiom.", "",
+            "| Axiom | (a), (f), (b), checks | of them in tests/expected_axiom_users.txt | the others | (m) |",
             "|---|---:|---:|---|---:|"]
     for a, v in sorted(c["axiomUsers"].items()):
         users = v["repository"]
@@ -636,7 +523,6 @@ def main():
         c = json.loads(merged.read_text(encoding="utf-8"))
     else:
         c = run_census("full")
-        c = merge_examples(c, examples_pass())
         merged.write_text(json.dumps(c, indent=1), encoding="utf-8")
     text = report(c)
     doc = DOC.read_text(encoding="utf-8")

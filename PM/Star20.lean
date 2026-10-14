@@ -1037,11 +1037,11 @@ theorem qclsExpr20_3 [Reducibility S] {Ψ : (V a → QF V) → QF V} (hΨ : ClsE
 /-! ✱20·4 again, from `qclsExpr20_3` and `ClsExpr.Cls`, with no premise about Cls; and an expression in which
   the class occurs several times, in the defining function of another class, under an apparent class and
   in a class of classes: α ∈ α̂{(∃β) . α = β . x ∈ ẑ(z ∈ α ∨ p)} ∨ α ∈ κ. Neither is a PM proposition. -/
-example [Reducibility S] (ψ : V a → QF V) :
+theorem check_star20_4_again [Reducibility S] (ψ : V a → QF V) :
     QThm S (iff (ψ ∈ Cls) (ex (τ := Ty.pred1 a) fun φ => clsEq ψ (pf φ))) :=
   qclsExpr20_3 ClsExpr.Cls ψ
 
-example [Reducibility S] (x : V a) (p : QF V) (κ : (V a → QF V) → QF V) (ψ : V a → QF V) :
+theorem check_star20_3_repeated_class [Reducibility S] (x : V a) (p : QF V) (κ : (V a → QF V) → QF V) (ψ : V a → QF V) :
     let Ψ : (V a → QF V) → QF V := fun α =>
       .or (clsEx fun β => QF.and (clsEq α β) (x ∈ fun z => .or (z ∈ α) p)) (α ∈ κ)
     QThm S (iff (ψ ∈ Ψ) (Ψ ψ)) :=
@@ -1052,7 +1052,7 @@ example [Reducibility S] (x : V a) (p : QF V) (κ : (V a → QF V) → QF V) (ψ
 
   (1) α ∈ α̂(Ψα), unfolded one layer per line: ✱20·08 (a predicative function φ of classes), ✱20·081 (φ!α),
   ✱20·01 (a predicative function χ of individuals, with φ!χ!ẑ). -/
-example (Ψ : (V a → QF V) → QF V) (ψ : V a → QF V) :
+theorem check_class_layers_unfolded (Ψ : (V a → QF V) → QF V) (ψ : V a → QF V) :
     QThm S (iff (ψ ∈ Ψ) (ex (τ := Ty.pred1 (Ty.pred1 a)) fun φ =>
       QF.and (clsAll fun β => iff (Ψ β) (clsApp φ β))
         (ex (τ := Ty.pred1 a) fun χ => QF.and (fiff (pf χ) ψ) (.app1 φ χ)))) :=
@@ -1067,7 +1067,7 @@ example (Ψ : (V a → QF V) → QF V) (ψ : V a → QF V) :
 /-! (2) ✱52·01 `1 = α̂{(∃x) . α = ι'x}` Df (p. 364) can be stated, and ✱52·1 `⊢ : α ∈ 1 . ≡ . (∃x) . α = ι'x`
   [✱20·3 . (✱52·01)] follows as ✱20·4 does. ι'x is written ŷ(y = x) (✱51·11, p. 357); ✱30's
   descriptive functions are not built. -/
-example [Reducibility S] (ψ : V a → QF V) :
+theorem check_star52_1_unit_class [Reducibility S] (ψ : V a → QF V) :
     QThm S (iff (ψ ∈ (fun α => ex fun x => clsEq α fun y => ident y x))
       (ex fun x => clsEq ψ fun y => ident y x)) :=
   qcls20_3 _ (clsExt_ex _ fun _ => clsExt_cls _) ψ
@@ -1077,11 +1077,11 @@ example [Reducibility S] (ψ : V a → QF V) :
   One Lean theorem is used at several types: ✱13·15 and ✱13·101 at individuals, at predicative
   functions of individuals, and at predicative functions of those. -/
 
-example {V : Ty → Type} (x : V .ind) (φ : V (Ty.pred1 .ind)) (f : V (Ty.pred1 (Ty.pred1 .ind))) :
+theorem check_star13_15_typical_ambiguity {V : Ty → Type} (x : V .ind) (φ : V (Ty.pred1 .ind)) (f : V (Ty.pred1 (Ty.pred1 .ind))) :
     QThm S (ident x x) ∧ QThm S (ident φ φ) ∧ QThm S (ident f f) :=
   ⟨q13_15 x, q13_15 φ, q13_15 f⟩
 
-example [Reducibility S] {V : Ty → Type} (x y : V .ind) (φ θ : V (Ty.pred1 .ind)) (ψ : V .ind → QF V)
+theorem check_star13_101_typical_ambiguity [Reducibility S] {V : Ty → Type} (x y : V .ind) (φ θ : V (Ty.pred1 .ind)) (ψ : V .ind → QF V)
     (χ : V (Ty.pred1 .ind) → QF V) :
     QThm S (imp (ident x y) (imp (ψ x) (ψ y))) ∧ QThm S (imp (ident φ θ) (imp (χ φ) (χ θ))) :=
   ⟨q13_101 ψ x y, q13_101 χ φ θ⟩

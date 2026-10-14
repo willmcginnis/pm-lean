@@ -157,6 +157,12 @@ def m_top_level(es, ctx):
     e["export"] = "PM_star2_08_id"
 
 
+# ---- no_checks: a check theorem (`check_…`) is never exported
+
+def m_check_exported(es, ctx):
+    find(es, "*2.01")["lean"] = "PM.check_s2_01_tautology"
+
+
 # ---- vocabulary: the descriptor field (not part of the name)
 
 def m_vocabulary(es, ctx):
@@ -318,7 +324,7 @@ MUTATIONS = [
     ("readings", m_reading_unknown),
     ("readings_frozen", m_reading_meaning_changed), ("readings_frozen", m_reading_removed),
     ("unique_name", m_unique_name), ("unique_slug", m_slug_collision), ("unique_slug", m_slug_collision_case),
-    ("no_top_level", m_top_level), ("vocabulary", m_vocabulary),
+    ("no_top_level", m_top_level), ("no_checks", m_check_exported), ("vocabulary", m_vocabulary),
     ("lock", m_lock_statement_changed), ("lock", m_lock_definitions_changed), ("lock", m_lock_name_gone),
     ("lock", m_lock_reading_changed), ("versions", m_version_without_row),
     ("versions", m_version_row_for_unchanged), ("versions", m_deprecated_without_row),
@@ -367,6 +373,21 @@ class TestExportNames(unittest.TestCase):
                     self.assertFalse(export_names.check(es, ctx)[rule])
                 finally:
                     export_names.CHECKS[rule] = real
+
+    def test_check_theorems_by_name(self):
+        for name in ["PM.check_s2_01_tautology", "PM.F9.check_or_el_merges", "PM.check_pinned_star14_32_iff"]:
+            self.assertTrue(export_names.is_check(name), name)
+        for name in ["PM.t2_01", "PM.q20_11", "PM.F9.f9_31_russell", "PM.checked_t2_01", "PM.check.t2_01",
+                     "PM.s2_01"]:
+            self.assertFalse(export_names.is_check(name), name)
+
+    def test_check_rows_are_not_exported(self):
+        # a check theorem among the statements adds no export name, and none is exported now
+        ctx = context()
+        rows, defs = export_names.lean_output()
+        check_row = dict(next(r for r in rows if r["name"] == "PM.t2_01"), name="PM.check_s2_01_tautology")
+        self.assertEqual(export_names.build(rows + [check_row], defs, ctx), export_names.build(rows, defs, ctx))
+        self.assertEqual([e["lean"] for e in entries() if export_names.is_check(e["lean"])], [])
 
     def test_scratch_lock_is_clean(self):
         es, ctx = entries(), context()

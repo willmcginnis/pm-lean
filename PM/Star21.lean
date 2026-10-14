@@ -878,13 +878,13 @@ theorem qrelExpr20_3 [Reducibility S] {Ψ : (V a → V b → QF V) → QF V} (h�
   qrelCls20_3 Ψ (relExpr_ext hΨ) ψ
 
 /-! ✱21·4 again, from `qrelExpr20_3` and `RelExpr.Rel`, with no premise about Rel; not a PM proposition. -/
-example [Reducibility S] (ψ : V a → V b → QF V) :
+theorem check_star21_4_again [Reducibility S] (ψ : V a → V b → QF V) :
     QThm S (iff (ψ ∈ Rel) (ex (τ := Ty.pred2 a b) fun φ => relEq ψ (pf2 φ))) :=
   qrelExpr20_3 RelExpr.Rel ψ
 
 /-! A check of the layers for relations of relations (docs/CLASSES_OF_CLASSES.md); not a PM proposition.
   P{R̂Ŝψ(R, S)}Q, unfolded one layer per line: ✱21·08, ✱21·081, ✱21·01 (twice, P first). -/
-example {c d : Ty} (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V) (P : V a → V b → QF V)
+theorem check_relation_layers_unfolded {c d : Ty} (Ψ : (V a → V b → QF V) → (V c → V d → QF V) → QF V) (P : V a → V b → QF V)
     (Q : V c → V d → QF V) :
     QThm S (iff (relRelHolds P Ψ Q) (ex (τ := Ty.pred2 (Ty.pred2 a b) (Ty.pred2 c d)) fun φ =>
       QF.and (relAll fun R => relAll fun T => iff (Ψ R T) (relRelApp φ R T))

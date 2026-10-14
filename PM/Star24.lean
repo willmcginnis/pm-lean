@@ -71,10 +71,10 @@ scoped notation "Λ" => QF.clsEmpty
 variable {V : Ty → Type} {S : Sys} {a : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
-example : (𝐕 : V a → QF V) = fun x => ident x x := rfl
-example : (Λ : V a → QF V) = −𝐕 := rfl
-example : (Λ : V a → QF V) = fun x => QF.neg (x ∈ 𝐕) := rfl
-example (α : V a → QF V) : clsNonempty α = ex fun x => x ∈ α := rfl
+theorem check_notation_cls_univ : (𝐕 : V a → QF V) = fun x => ident x x := rfl
+theorem check_notation_cls_empty : (Λ : V a → QF V) = −𝐕 := rfl
+theorem check_notation_cls_empty_unfolded : (Λ : V a → QF V) = fun x => QF.neg (x ∈ 𝐕) := rfl
+theorem check_notation_cls_nonempty (α : V a → QF V) : clsNonempty α = ex fun x => x ∈ α := rfl
 
 /-! ## Chains of identities of classes
 

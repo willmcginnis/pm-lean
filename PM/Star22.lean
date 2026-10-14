@@ -76,13 +76,13 @@ scoped infixl:65 " − " => QF.clsDiff
 variable {V : Ty → Type} {S : Sys} {a : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
-example (α β : V a → QF V) : (α ⊂ β) = fimp (fun x => x ∈ α) (fun x => x ∈ β) := rfl
-example (α β : V a → QF V) : (α ∩ β) = (fun x => QF.and (x ∈ α) (x ∈ β)) := rfl
-example (α β : V a → QF V) : (α ∪ β) = (fun x => QF.or (x ∈ α) (x ∈ β)) := rfl
-example (α : V a → QF V) : (−α) = (fun x => QF.neg (x ∈ α)) := rfl
-example (α β : V a → QF V) : (α − β) = α ∩ −β := rfl
-example (α β γ : V a → QF V) : clsInter3 α β γ = (α ∩ β) ∩ γ := rfl
-example (α β γ : V a → QF V) : clsUnion3 α β γ = (α ∪ β) ∪ γ := rfl
+theorem check_notation_cls_incl (α β : V a → QF V) : (α ⊂ β) = fimp (fun x => x ∈ α) (fun x => x ∈ β) := rfl
+theorem check_notation_cls_inter (α β : V a → QF V) : (α ∩ β) = (fun x => QF.and (x ∈ α) (x ∈ β)) := rfl
+theorem check_notation_cls_union (α β : V a → QF V) : (α ∪ β) = (fun x => QF.or (x ∈ α) (x ∈ β)) := rfl
+theorem check_notation_cls_compl (α : V a → QF V) : (−α) = (fun x => QF.neg (x ∈ α)) := rfl
+theorem check_notation_cls_diff (α β : V a → QF V) : (α − β) = α ∩ −β := rfl
+theorem check_notation_cls_inter_three (α β γ : V a → QF V) : clsInter3 α β γ = (α ∩ β) ∩ γ := rfl
+theorem check_notation_cls_union_three (α β γ : V a → QF V) : clsUnion3 α β γ = (α ∪ β) ∪ γ := rfl
 
 /-! ## Further steps, each listed in the ledger where used -/
 
@@ -724,7 +724,7 @@ theorem q22_95 [Reducibility S] (F : (V a → QF V) → QF V) (hF : ClsExt S F) 
     _ ≡ clsEx (fun α => F (−α)) := qiffSymm (q20_6 _)                              -- ✱20·6
 
 /-! ✱22·94 for a generic f{α} (`cls α f`, p. 199), whose extensionality is ✱20·11. Not a PM proposition. -/
-example [Reducibility S] (f : V (Ty.pred1 a) → QF V) :
+theorem check_star22_94_generic_class [Reducibility S] (f : V (Ty.pred1 a) → QF V) :
     QThm S (iff (clsAll fun α => cls α f) (clsAll fun α => cls (−α) f)) :=
   q22_94 (fun α => cls α f) (clsExt_cls f)
 

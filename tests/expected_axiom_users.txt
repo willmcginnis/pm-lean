@@ -31,6 +31,7 @@ PM.Style.mk.injEq propext
 PM.Sys.mk.injEq propext
 PM.Ty.fn1.injEq propext
 PM.Ty.fn2.injEq propext
+PM.check_pinned_star1_4_variant Quot.sound propext
 PM.classicalAll Classical.choice Quot.sound propext
 PM.classicalAll_spec Classical.choice Quot.sound propext
 PM.consistent_collapse Classical.choice Quot.sound propext

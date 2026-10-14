@@ -519,8 +519,8 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **F1** decidable order checker | **pass** | `QF.order`, `lvl_iff_order`, `instance : Decidable (Lvl p n)` at `U`; `fnOrder` |
 | **F2** golden order tests | **pass** | PM/Orders.lean: 6 type orders; 12 tests from Intro pp. 54–56; 12 from ✱12 pp. 170–171 (incl. the p. 56 / p. 172 divergence); 2 on comprehension (accepts (x) . φ!x as a function of φ; refuses (φ) . φ!x as a predicative function of x) |
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
-| **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
-| **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
+| **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, its last check theorem, `check_universal_phi_refused_comprehension`). Non-derivability is **not** proved |
+| **F5** one theorem at two sorts | **pass** | PM/Star20.lean check theorems: `q13_15` at ι, (ι)/1, ((ι)/1)/2 (`check_star13_15_typical_ambiguity`); `q13_101` at ι and (ι)/1 (`check_star13_101_typical_ambiguity`). In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
 | **S1** every PM theorem under every style (maintainer, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 770 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 770/770 each; 0 without a parameter `S`; per system, in every style: reducibility 769, predicative 364, base 363 (the 406 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
 | **S2** `styles_equiv` (maintainer, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
 | **S3** currying (maintainer, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
@@ -581,7 +581,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 1450 names, every public theorem under `PM/`; 1443 report no axioms. The other 7 are the
+`AxiomCheck.lean`: 1722 names, every public theorem under `PM/`, check theorems included; 1715 report no axioms. The other 7 are the
 three propositional metatheorems and four declarations of the classical collapse model (below). Every PM
 theorem (✱2–✱5, the ✱9–✱25 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
@@ -589,14 +589,15 @@ theorem (✱2–✱5, the ✱9–✱25 `q…` theorems, and ✱9 by its own meth
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 2778 declarations under `PM` and all 31 private declarations of the PM modules
-(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 39 use an axiom:
+`AllAxioms.lean`: all 3097 declarations under `PM` and all 31 private declarations of the PM modules
+(`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 40 use an axiom:
 
 | Declarations | Axioms | Why |
 |---|---|---|
 | `classicalAll`, `classicalAll_spec`, `QModel.classical` | propext, Classical.choice, Quot.sound | the general collapse model, kept: classical quantifiers over arbitrary function spaces (`Classical.propDecidable`) |
 | `consistent_collapse`, `consistent_collapse_of_style` | propext, Classical.choice, Quot.sound | consistency evaluated in the classical collapse model (the axiom-free consistency proofs are `consistent`, `consistent_of_style`) |
 | `PM.sound`, `PM.not_thm_of_countermodel`, `PM.star1_4_variant_not_a_theorem` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
+| `PM.check_pinned_star1_4_variant` | propext, Quot.sound | the check theorem pinning the last of them (Checks/PinnedStatements.lean) |
 | `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel`, and of ✱9's syntax `F9.EF`, `F9.PF`, `F9.PE`, `F9.Reading` (29), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
 No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` in the library (checked by
@@ -714,7 +715,7 @@ search). The one exception outside it, the export tool's `unsafe def main`, is d
      functions (F4).
    - Checks: RedCheck and AllAxioms need nothing new. `Sys` gets a third flag, so every `Sys` literal
      changes (PM/Systems.lean, StyleCheck.lean). The new constructors of `Ty` and `QF` add two
-     compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 39.
+     compiler-generated `injEq` lemmas (`propext`), so AllAxioms' count rises from 40.
 
    *Size.* About 300–500 Lean lines of infrastructure across about twelve files, plus about 40 for
    ✱14·3 itself. That is less than ✱20 (1089 lines), but unlike ✱20 it changes the core (`Ty`, `QF`,

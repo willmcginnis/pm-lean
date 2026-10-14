@@ -32,6 +32,8 @@ The names below are the repository's own. Names for export to formalization plat
   on. For example ✱20·11 is `q20_11` and ✱14·21's variant is `q14_21_neg`. Helpers that are not PM items
   get descriptive names (`qiffCongrRImp`), or a suffix after the number (`q12_1_var`).
   `scripts/progress.py` counts a theorem as stating a PM item only by these names.
+- A check that is not a PM item (a tautology, a notation, a pinned statement) is a theorem
+  `check_<words>`, never an `example` ([docs/NAMING.md](docs/NAMING.md#check-theorems)).
 - The docstring starts with the label and PM's statement, then says what the proof does where PM is silent:
   `/-- ✱20·11 ⊢ :. ψx . ≡ₓ . χx : ⊃ : … . ✱4·86 for the second member … -/`.
 - Cite pages of the **1910 print** of Vol I (Vol II: 1912), as `p. 194` or `pp. 194–195`. The page
@@ -59,7 +61,7 @@ and the labels in [docs/FIDELITY.md](docs/FIDELITY.md). When you add or change a
 ```
 lake build                       # no errors
 lake env lean AxiomCheck.lean    # the new theorems report "does not depend on any axioms"
-lake env lean AllAxioms.lean     # still 39 declarations using an axiom, none of them a PM derivation
+lake env lean AllAxioms.lean     # still 40 declarations using an axiom, none of them a PM derivation
 lake env lean RedCheck.lean      # 0 disagreements between signatures and proofs
 lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of all four styles
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines

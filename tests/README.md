@@ -62,7 +62,8 @@ variables identified. Without Mathlib that part is skipped.
 kernel that the PM derivations rely on ([docs/KERNEL_CENSUS.md](../docs/KERNEL_CENSUS.md)) must equal
 `expected_kernel_features.txt`, so a new one (a quotient, an axiom, a mutual or nested inductive type,
 a compiled-only constant reaching a derivation) fails until it is accepted on purpose. The test also checks
-the driver's copy of `example`s into theorems and the ratchet's comparison on synthetic input.
+that no library file has an `example` (every check is a theorem `check_…`, which the census reads) and the
+ratchet's comparison on synthetic input.
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long

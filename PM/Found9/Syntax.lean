@@ -207,19 +207,19 @@ def kinds (d : ∀ τ, V τ) : PF V → List Bool
 @[reducible] def and (p q : PF V) : PF V := PF.neg (PF.or (PF.neg p) (PF.neg q))  -- ✱3·01
 @[reducible] def iff (p q : PF V) : PF V := PF.and (PF.imp p q) (PF.imp q p)      -- ✱4·01
 
-example (a b : EF V) : PF.or (.el a) (.el b) = .el (.or a b) := rfl
-example {τ : Ty} (φ : V τ → PF V) (q : PF V) : PF.or (.all φ) q = .all fun x => PF.or (φ x) q := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_convention_or_elementary (a b : EF V) : PF.or (.el a) (.el b) = .el (.or a b) := rfl
+theorem check_convention_or_all_left {τ : Ty} (φ : V τ → PF V) (q : PF V) : PF.or (.all φ) q = .all fun x => PF.or (φ x) q := rfl
+theorem check_convention_or_universal_first {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.or (.ex φ) (.all ψ) = .all fun y => PF.or (.ex φ) (ψ y) := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_convention_or_two_exists {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.or (.ex φ) (.ex ψ) = .ex fun x => PF.or (φ x) (.ex ψ) := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_printed_or_all_ex {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.orPrinted (.all φ) (.ex ψ) = .all fun x => .ex fun y => PF.orPrinted (φ x) (ψ y) := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_printed_or_ex_all {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.orPrinted (.ex ψ) (.all φ) = .all fun x => .ex fun y => PF.orPrinted (ψ y) (φ x) := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_landini_or_two_alls {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.orPlus (.all φ) (.all ψ) = .all fun x => .all fun y => PF.orPlus (φ x) (ψ y) := rfl
-example {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
+theorem check_landini_or_two_exists {τ σ : Ty} (φ : V τ → PF V) (ψ : V σ → PF V) :
     PF.orPlus (.ex φ) (.ex ψ) = .ex fun x => .ex fun y => PF.orPlus (φ x) (ψ y) := rfl
 
 end PF
@@ -284,7 +284,7 @@ variable {V : Ty → Type}
   PF.neg (R.or (PF.neg p) (PF.neg q))                                                       -- ✱3·01
 @[reducible] def iff (R : Reading) (p q : PF V) : PF V := R.and (R.imp p q) (R.imp q p)      -- ✱4·01
 
-example (p q : PF V) : Reading.convention.imp p q = PF.imp p q := by cases p <;> rfl
+theorem check_convention_imp_agrees (p q : PF V) : Reading.convention.imp p q = PF.imp p q := by cases p <;> rfl
 end Reading
 
 /-! ## Printed expressions and their prenex forms (for the prenex Switch)

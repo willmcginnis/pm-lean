@@ -452,7 +452,7 @@ variable (`hV`) and `Rep S R V`. **[MEAS]** No axioms.
   PM/Found9.lean. No file of ✱10's foundation was changed for it. **[MEAS]**
 - Each PM/Found9 file checks in under 11 s (PM/Found9/Simul.lean, the slowest, 10.8 s, searching five
   readings; the others under 2 s). **[MEAS]**
-- `AllAxioms.lean`: 39 declarations use an axiom. The 14 of ✱9's syntax are Lean's generated
+- `AllAxioms.lean`: 40 declarations use an axiom. The 14 of ✱9's syntax are Lean's generated
   `injEq` lemmas, as for every inductive type with data:
   - `EF` (5), `PF` (3);
   - `PE` (5) and `Reading` (1), new with the readings.

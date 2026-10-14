@@ -67,6 +67,6 @@ def fnOrderArg (a : Ty) (ψ : U a → QF U) : Nat := max (a.ord + 1) (ψ ()).ord
 
 /-- p. 54: φ!x with φ real, as a function of x, has order 2 in this reading: the same as φ!x as a
     function of (φ, x) (`fnOrder2`, PM/Pred/Curry.lean). -/
-example : fnOrderArg .ind (fun x => .app1 (a := .ind) (k := 0) () x) = 2 := rfl
+theorem check_real_phi_order_two_p54 : fnOrderArg .ind (fun x => .app1 (a := .ind) (k := 0) () x) = 2 := rfl
 
 end PM

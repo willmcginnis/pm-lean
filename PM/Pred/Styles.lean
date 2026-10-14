@@ -102,28 +102,28 @@ theorem p171_compr_matrix {V : Ty → Type} (R : RealReading) (φ : V (Ty.pred1 
 
 /-- p. 171 (1), at a non-predicative type (`fn1 (pred1 ind) 1`, order 3): both styles admit it; the
     matrix test applies only at predicative types. -/
-example : (Style.of .matrix .ownOrder).adm1 (V := U) (a := Ty.pred1 .ind) 1
+theorem check_matrix_admits_higher_type_p171 : (Style.of .matrix .ownOrder).adm1 (V := U) (a := Ty.pred1 .ind) 1
     (fun φ => .all fun x => .app1 φ x) :=
   fun _ => ⟨.all (by decide) fun _ => .app1 (by decide), fun h => nomatch h⟩
 
 /-- p. 54: (y) . ψ(x, y), a first-order function of x. Lowest-order style: predicative. -/
-example : (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
+theorem check_lowest_order_admits_universal_p54 : (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
     (fun x => .all fun y => .atom "ψ" [x, y]) :=
   fun _ => .all (by decide) fun _ => .atom (by decide)
 
 /-- p. 54, matrix style: not predicative (it is first-order but not a matrix). -/
-example : ¬ (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
+theorem check_matrix_refuses_universal_p54 : ¬ (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
     (fun x => .all fun y => .atom "ψ" [x, y]) :=
   fun h => nomatch (h ()).2 rfl
 
 /-- p. 170: φ!x . ⊃ . ψ!x, φ and ψ real first-order functions: a matrix of order 1 in x. Both styles
     admit it. -/
-example : (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
+theorem check_matrix_admits_implication_p170 : (Style.of .matrix .ownOrder).adm1 (V := U) (a := .ind) 0
     (fun x => imp (.app1 (a := .ind) (k := 0) () x) (.app1 (a := .ind) (k := 0) () x)) :=
   fun _ => ⟨.or (.neg (.app1 (by decide))) (.app1 (by decide)), fun _ => .or (.neg .app1) .app1⟩
 
 /-- p. 171 (3): (φ) . φ!x is of order 2 as a function of x: refused by both styles at `pred1 ind`. -/
-example : ¬ (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
+theorem check_lowest_order_refuses_p171 : ¬ (Style.of .lowestOrder .ownOrder).adm1 (V := U) (a := .ind) 0
     (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app1 φ x) :=
   fun h => absurd (h ()) (by decide)
 
@@ -148,13 +148,13 @@ theorem realPhi_compr_asArgument {V : Ty → Type} (P : PredReading) (φ : V (Ty
   · intro h; cases h x with | app1 h => exact absurd h (by decide)
 
 /-- p. 54 at a type one order higher (`fn1 ind 1`, order 2): admitted. -/
-example : (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 1
+theorem check_as_argument_higher_type_p54 : (Style.of .matrix .asArgument).adm1 (V := U) (a := .ind) 1
     (fun x => .app1 (a := .ind) (k := 0) () x) :=
   fun _ => ⟨.app1 (by decide), fun h => nomatch h⟩
 
 /-- The function's own argument, applied, is admitted in both readings: (x) . φ!x as a function of φ
     (p. 171 (1)) passes the p. 54 order check at order 2 (φ is the argument, not a parameter). -/
-example : (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := Ty.pred1 .ind) 0
+theorem check_as_argument_admits_universal_p171 : (Style.of .lowestOrder .asArgument).adm1 (V := U) (a := Ty.pred1 .ind) 0
     (fun φ => .all fun x => .app1 φ x) :=
   fun _ => .all (by decide) fun _ => .app1 (by decide)
 

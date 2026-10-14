@@ -865,7 +865,7 @@ theorem q14_3 [Reducibility S] (φ χ : V α → QF V) {f : QF V → QF V}
   QThm.mp (q10_11 h4) (qiffMp (q10_23 _ _))                                     -- (4).✱10·23.✱14·11
 
 /-- ✱14·31 ff. are "immediate applications of the above", i.e. of ✱14·3 (p. 194); ✱14·31, with f(r) = p ∨ r. -/
-example [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
+theorem check_star14_31_applied [Reducibility S] (φ χ : V α → QF V) (p : QF V) :
     QThm S (imp (exists1 φ) (iff (desc φ fun z => .or p (χ z)) (.or p (desc φ χ)))) :=
   qimpIffSymm (q14_3 φ χ (qtfnCongr (.or (.const p) .hole)))
 

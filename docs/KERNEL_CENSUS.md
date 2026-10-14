@@ -30,17 +30,18 @@ derivations true (see [The ratchet](#the-ratchet)).
   structure-like types with primitive projections, universe polymorphism with `max` and `imax`,
   definitional unfolding of definitions with the hints `abbrev` and `regular`, `let`, Nat literals and the
   kernel's Nat operations on them, and String literals.
-- **They do not need** mutual inductive types, quotients, any axiom, opaque constants, `partial` or
-  `unsafe` declarations, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and `Lean.trustCompiler`.
-- **One nested inductive type, `Lean.Syntax`, reaches the derivations, by three routes, all auto-params.**
-  The premise `n < Γ.length` of `PM.Pf.hy` (PM/Derived.lean) is an auto-param: the tactic that proves it is
-  stored in the statement as a value of type `Lean.Syntax`, the declaration `PM.Pf.hy._auto_1`. The premise
-  of ✱24's `PM.qclsEqCongr` (PM/Star24.lean) that its expression is a `ClsExpr`, proved by the tactic
-  `cls_expr`, is stored the same way, as `PM.qclsEqCongr._auto_1`, and so is the premise of ✱25's
-  `PM.qrelEqCongr` (PM/Star25.lean) that its expression is a `RelExpr`, proved by the tactic `rel_expr`, as
-  `PM.qrelEqCongr._auto_1`. These values bring `Lean.Syntax`,
-  `Lean.Name` (whose constructors carry `@[implemented_by]`) and `Array` into the closure. They are the only
-  declarations of the meta code (m) that any declaration of (a), (f) or (b) reaches.
+- **They do not need** mutual or nested inductive types, quotients, any axiom, opaque constants, `partial`
+  or `unsafe` declarations, `@[implemented_by]`, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and
+  `Lean.trustCompiler`.
+- **No auto-param reaches the derivations, and no meta code.** An auto-param stores the tactic that proves
+  a premise in the statement, as a value of type `Lean.Syntax`. Three did, until the maintainer's ruling
+  of 2026-10-14: the premise `n < Γ.length` of `PM.Pf.hy` (PM/Derived.lean), the premise of ✱24's
+  `PM.qclsEqCongr` (PM/Star24.lean) that its expression is a `ClsExpr`, and the premise of ✱25's
+  `PM.qrelEqCongr` (PM/Star25.lean) that its expression is a `RelExpr`. They brought the nested inductive
+  type `Lean.Syntax` and `Lean.Name` (whose constructors carry `@[implemented_by]`) into the closure. The
+  three premises are now explicit arguments, given at each use (`hy n rfl`; `by cls_expr`; `by rel_expr`),
+  and the census finds neither type in the closure of (a) or of D. `Array` stays, with the strings: a
+  `String` is a `ByteArray`, an `Array UInt8`, and `String.decEq` names `Array.mk`.
 - **Strings come with the formulas.** ✱1–✱5's variables are named by strings (`F.var "p"`). The type
   `String` is a structure over a byte array with a proof that the bytes are valid UTF-8, so its closure
   includes `ByteArray`, UTF-8 encoding, `UInt8`, `UInt32`, `BitVec` and `Nat.div`. When the kernel compares
@@ -48,8 +49,9 @@ derivations true (see [The ratchet](#the-ratchet)).
   and its neighbours), it unfolds those definitions down to bytes.
 - **The kernel computes.** Proofs by `rfl` and `decide` are checked by evaluation. The heaviest checks of
   derivations evaluate ✱9's definitions of ∼ and ∨ over quantified formulas by structural recursion
-  (`PM.F9.PrenexSwitch.t1_6` and its neighbours). The `example`s of PM/Statements.lean evaluate
-  the truth tables of ✱1–✱5 (`decide`). The auto-param of `PM.Pf.hy` computes `Nat.ble` on list lengths.
+  (`PM.F9.PrenexSwitch.t1_6` and its neighbours). The check theorems of PM/Statements.lean
+  (`check_s2_01_tautology` …) evaluate the truth tables of ✱1–✱5 (`decide`). The bound `rfl` given to
+  `PM.Pf.hy` computes `Nat.ble` on list lengths.
 - **In its re-checks, the kernel never unfolded a theorem or an opaque constant.** It did unfold definitions that the
   elaborator treats as `@[irreducible]` (`Nat.modCore`, in core lemmas), and the Lean definitions behind
   `@[extern]` (`Array.push`, `ByteArray.push`, `Char.ofNatAux`, `Nat.add` …), not the compiled code. No
@@ -83,6 +85,12 @@ compiler's `_unsafe_rec` copies). Each module is in exactly one group. The lists
   declaration whose type names a constant of the `Lean` namespace: syntax, macros, elaborators and what Lean
   generates for them. (m) is counted separately. Its closure in core (the elaborator's own; the first
   line of the tables gives its size) is not tabled.
+- **The check theorems:** every theorem named `check_…` ([NAMING.md](NAMING.md#check-theorems)), in any
+  module of (a), (f) or (b), is in a group of its own instead: the truth-table checks of
+  PM/Statements.lean, the notation checks, the order facts of PM/Orders.lean, the pinned statements. Every
+  check of the build is such a theorem: `census.py` refuses a library file with an `example`, which the
+  kernel checks during `lake build` but the environment does not keep, so no census could see it. The
+  checks and their closure are two more columns.
 - **D, the derivation theorems:** every theorem of (a), (f) and (b) whose statement concludes `Thm …`,
   `QThm S …` or `Thm9 S R …`. That excludes definitions, notation and models that happen to sit in a
   derivation module. ✱11's counter-model, for one, is in PM/Star11.lean.
@@ -92,12 +100,6 @@ compiler's `_unsafe_rec` copies). Each module is in exactly one group. The lists
   constructor or recursor uses its type, because the kernel adds them together.
 - **The closure of (a)**, and **the closure of D**: everything they use, from the repository and from core.
   A checker of the derivations must check the closure of D.
-- **The examples:** `example` commands are checked by the kernel during `lake build` but are not kept in
-  the environment, so a census of the environment cannot see them. `census.py` copies each library file
-  that has examples to `.lake/kernel_census/examples/`, renames each `example` to a theorem
-  `_kernelCensusExample_<line>`, appends the census's functions and compiles the copy. The examples and their
-  closure are two more columns. They are mostly computations: the truth-table checks of
-  PM/Statements.lean, the order facts of PM/Orders.lean, and the pinned statements.
 
 ## How each row is measured
 
@@ -139,8 +141,8 @@ uses cannot be seen, statically or from the record:
 What can be said statically: every derivation is a proof (`Thm`, `QThm` and `Thm9` live in `Prop`), so
 proof irrelevance *may* apply anywhere in them. The structure-like types and the K-like recursors in the
 closure are listed, so the places where structure eta and K *may* apply are known. Counting the actual
-uses needs an instrumented kernel. An independent checker such as lean4lean (roadmap lk-l4l) could count
-them.
+uses needs an instrumented kernel: an instrumented independent checker that counts what this census
+cannot is a subtask of the roadmap's lk-l4l (lean4lean).
 
 The dynamic part depends on the Lean version. The figures are for the toolchain named in
 `lean-toolchain` and in the first line of the tables.
@@ -149,28 +151,28 @@ The dynamic part depends on the Lean version. The figures are for the toolchain 
 
 The figures, read as requirements:
 
-- **It must implement:** inductive families with indices; reflexive and recursive inductive types; the one
-  nested type `Lean.Syntax`, as long as the auto-params of `PM.Pf.hy`, `PM.qclsEqCongr` and `PM.qrelEqCongr`
-  stay (the three routes to it);
+- **It must implement:** inductive families with indices; reflexive and recursive inductive types;
   recursors with iota reduction and K; large elimination out of `Prop`; structure-like types and
   primitive projections; universe polymorphism with `max` and `imax`; `Prop`; structure eta and
   definitional proof irrelevance unless they are shown to be unused (this census cannot tell); delta
   with the hints `abbrev` and `regular`;
   `let`; Nat literals with the operations named in the closure of D; and String literals with their
   expansion into bytes.
-- **It can omit:** mutual inductive types, quotients, axioms, opaque constants, `partial` and `unsafe`
-  declarations, reduction by the compiler (`Lean.ofReduceBool`, `Lean.ofReduceNat`), and the
+- **It can omit:** mutual and nested inductive types (no auto-param reaches the derivations, so
+  `Lean.Syntax` does not; `PM.Pf.hy`, `PM.qclsEqCongr` and `PM.qrelEqCongr` take their premises as
+  explicit arguments),
+  quotients, axioms, opaque constants, `partial` and `unsafe` declarations, reduction by the compiler (`Lean.ofReduceBool`, `Lean.ofReduceNat`), and the
   accelerated `gcd`, `land`, `lor`, `xor`, `shiftLeft`, `shiftRight` and `log2`.
 - **Its input is the closure of D.** The first line of the tables gives its size and how much of it is
   Lean core.
-- **The examples are outside an export of the environment.** A checker that reads exported declarations
-  sees the closure of D but not the examples, so not the truth-table checks of ✱1–✱5's statements.
-  Those need either export as theorems or a check of their own.
+- **The checks are in the environment.** Every check of the build is a theorem `check_…`, so a checker
+  that reads exported declarations can check them too, the truth-table checks of ✱1–✱5's statements
+  among them; their closure is the last column of the tables. The derivations do not use them.
 
 ## The ratchet
 
-`tests/test_kernel_census.py` runs `census.py --ratchet`, which walks (a), (f) and (b) and their closures
-(not the meta code) in about 15 s. It fails in two cases. The first is when the set of features of the
+`tests/test_kernel_census.py` runs `census.py --ratchet`, which walks (a), (f), (b), the checks and their
+closures (not the meta code) in about 15 s. It fails in two cases. The first is when the set of features of the
 three columns *derivations*, *closure of (a)* and *closure of D* differs from
 `tests/expected_kernel_features.txt`. A new feature is reported with its chain of uses, and a vanished
 one is reported too. The second is when the declarations that depend on an axiom, excluding internal
@@ -182,80 +184,80 @@ in the commit.
 
 <!-- BEGIN GENERATED by scripts/kernel_census/census.py --write; do not edit by hand -->
 
-Lean 4.34.1. Declarations: (a) 1814, (f) 740, (b) 461, (c) 835; the closure of (a) 2733 (581 of them of Lean core); D, the 1289 derivation theorems, and their closure 2769 (601 of Lean core); 313 examples (Checks/PinnedStatements.lean 41, PM/Found9/Syntax.lean 9, PM/Orders.lean 31, PM/Pred/Curry.lean 4, PM/Pred/RealAsArgument.lean 1, PM/Pred/Styles.lean 7, PM/Star14.lean 1, PM/Star20.lean 6, PM/Star21.lean 2, PM/Star22.lean 8, PM/Star24.lean 4, PM/Star25.lean 6, PM/Statements.lean 193) and their closure 2197; (m), meta code and notation, 136, with 8080 more declarations of Lean core in its closure only. Meta code reached from (a), (f) or (b): `PM.qclsEqCongr._auto_1`, `PM.qrelEqCongr._auto_1`, `PM.Pf.hy._auto_1`.
+Lean 4.34.1. Declarations: (a) 1814, (f) 740, (b) 467, (c) 797; the closure of (a) 2691 (542 of them of Lean core); D, the 1289 derivation theorems, and their closure 2727 (562 of Lean core); 313 check theorems (Checks.PinnedStatements 41, PM.Found9.Syntax 9, PM.Orders 31, PM.Pred.Curry 4, PM.Pred.RealAsArgument 1, PM.Pred.Styles 7, PM.Star14 1, PM.Star20 6, PM.Star21 2, PM.Star22 8, PM.Star24 4, PM.Star25 6, PM.Statements 193) and their closure 2157; (m), meta code and notation, 133, with 8118 more declarations of Lean core in its closure only. Meta code reached from (a), (f) or (b): none.
 
 ### What of Lean's kernel we rely on
 
 Declarations with each feature (static rows), or re-checks that show it (dynamic rows); · none; — not re-checked; n/d not determinable by this census (see How each row is measured).
 
-| Feature of the kernel | closure of D | closure of (a) | (f) | (b) | (c) | examples | closure of examples | How measured |
+| Feature of the kernel | closure of D | closure of (a) | (f) | (b) | (c) | checks | closure of checks | How measured |
 |---|---:|---:|---:|---:|---:|---:|---:|---|
-| Inductive types | 91 | 90 | 29 | 13 | 67 | · | 94 | static |
-| … plain (no indices, not mutual, not nested) | 68 | 66 | 14 | 5 | 60 | · | 71 | static |
+| Inductive types | 85 | 84 | 29 | 13 | 61 | · | 88 | static |
+| … plain (no indices, not mutual, not nested) | 63 | 61 | 14 | 5 | 55 | · | 66 | static |
 | … indexed families | 22 | 23 | 15 | 8 | 6 | · | 22 | static |
 | … mutual | · | · | · | · | · | · | · | static |
-| … nested | 1 | 1 | · | · | 1 | · | 1 | static |
+| … nested | · | · | · | · | · | · | · | static |
 | … reflexive (a constructor argument is a function into the type) | 14 | 15 | 15 | 6 | · | · | 15 | static |
-| Recursors | 91 | 90 | 29 | 13 | 67 | · | 94 | static |
-| … reduced by the kernel (iota) | 494 | 467 | 178 | 144 | 116 | 255 | — | dynamic |
+| Recursors | 85 | 84 | 29 | 13 | 61 | · | 88 | static |
+| … reduced by the kernel (iota) | 495 | 468 | 178 | 150 | 116 | 255 | 578 | dynamic |
 | … large elimination out of `Prop`, used | 8 | 8 | 4 | 4 | 8 | · | 8 | static (a motive universe other than 0) |
 | … K-like recursor named | 23 | 20 | · | 3 | 30 | · | 30 | static; K reduction itself: n/d |
-| Structure-like types (eta for structures applies) | 48 | 47 | 6 | 2 | 47 | · | 50 | static; structure eta itself: n/d |
+| Structure-like types (eta for structures applies) | 46 | 45 | 6 | 2 | 45 | · | 48 | static; structure eta itself: n/d |
 | Primitive projections (`Expr.proj`) | 148 | 141 | 60 | 35 | 87 | · | 165 | static |
-| Universe-polymorphic declarations | 403 | 382 | 185 | 59 | 400 | · | 437 | static |
-| … `Prop` (`Sort 0`) | 247 | 261 | 168 | 135 | 219 | 3 | 298 | static |
-| … `Type` (`Sort 1`) | 1570 | 1537 | 461 | 201 | 23 | 71 | 746 | static |
+| Universe-polymorphic declarations | 393 | 372 | 185 | 59 | 391 | · | 427 | static |
+| … `Prop` (`Sort 0`) | 247 | 261 | 168 | 141 | 219 | 3 | 298 | static |
+| … `Type` (`Sort 1`) | 1563 | 1530 | 461 | 201 | 16 | 71 | 739 | static |
 | … `Type 1` or higher | 3 | 3 | 4 | · | · | · | 4 | static |
-| … `Sort u` | 402 | 381 | 185 | 59 | 399 | · | 436 | static |
+| … `Sort u` | 392 | 371 | 185 | 59 | 390 | · | 426 | static |
 | … `imax` | 3 | 2 | · | · | 6 | · | 5 | static |
 | Definitional proof irrelevance | n/d | n/d | n/d | n/d | n/d | n/d | n/d | n/d |
 | Eta for functions; unit-like types | n/d | n/d | n/d | n/d | n/d | n/d | n/d | n/d |
-| Delta: checks that unfold a definition | 1484 | 1436 | 222 | 230 | 273 | 286 | — | dynamic |
-| … a theorem unfolded | · | · | · | · | · | · | — | dynamic |
+| Delta: checks that unfold a definition | 1481 | 1433 | 222 | 236 | 273 | 286 | 1032 | dynamic |
+| … a theorem unfolded | · | · | · | · | · | · | · | dynamic |
 | Opaque constants | · | · | · | · | 4 | · | · | static |
-| … unfolded | · | · | · | · | · | · | — | dynamic |
+| … unfolded | · | · | · | · | · | · | · | dynamic |
 | `partial` definitions | · | 7 | 22 | 14 | · | · | · | static |
 | `unsafe` declarations | · | · | · | · | · | · | · | static |
 | `@[irreducible]` (the elaborator's attribute) | 2 | 2 | · | · | 2 | · | 2 | static |
-| … unfolded by the kernel all the same | 2 | 2 | · | · | 2 | · | — | dynamic |
-| `@[implemented_by]` (the compiler's) | 3 | 3 | · | · | 3 | · | 3 | static |
-| … unfolded | · | · | · | · | · | · | — | dynamic |
-| `@[extern]` (the compiler's) | 35 | 35 | · | · | 42 | · | 33 | static |
-| … unfolded (the Lean definition, not the code) | 265 | 255 | 32 | 25 | 48 | 228 | — | dynamic |
+| … unfolded by the kernel all the same | 2 | 2 | · | · | 2 | · | 2 | dynamic |
+| `@[implemented_by]` (the compiler's) | · | · | · | · | · | · | · | static |
+| … unfolded | · | · | · | · | · | · | · | dynamic |
+| `@[extern]` (the compiler's) | 32 | 32 | · | · | 39 | · | 30 | static |
+| … unfolded (the Lean definition, not the code) | 266 | 256 | 32 | 25 | 48 | 228 | 336 | dynamic |
 | `let` (zeta) | 386 | 376 | 12 | 23 | 24 | 3 | 122 | static |
-| Nat literals | 257 | 238 | 139 | 108 | 133 | 51 | 264 | static |
+| Nat literals | 257 | 238 | 139 | 110 | 132 | 51 | 264 | static |
 | … GMP-accelerated operations named | add, beq, ble, div, mod, mul, pow, sub | add, beq, ble, div, mod, mul, pow, sub | ble | add, ble | add, beq, ble, div, mod, mul, pow, sub | · | add, beq, ble, div, mod, mul, pow, sub | static; computed on literals: probes |
-| String literals | 210 | 202 | 4 | 26 | 5 | 209 | 270 | static |
-| … `String`, `Char`, `ByteArray` internals unfolded | 213 | 205 | · | 10 | 6 | 193 | — | dynamic |
+| String literals | 207 | 199 | 4 | 27 | 5 | 209 | 269 | static |
+| … `String`, `Char`, `ByteArray` internals unfolded | 213 | 205 | · | 10 | 6 | 193 | 245 | dynamic |
 | Proofs by `decide` (evaluated by the kernel) | 9 | 7 | · | 9 | 6 | 204 | 213 | static |
 | `Lean.ofReduceBool`, `Lean.ofReduceNat`, `Lean.trustCompiler` | · | · | · | · | · | · | · | static |
 | Quot primitives (in the closure) | · | · | · | · | 4 | · | 4 | static |
 | Axioms (in the closure; who uses which: the last table) | · | · | · | · | 3 | · | 2 | static |
-| `Eq` | 251 | 234 | 293 | 135 | 203 | 279 | 579 | static |
-| `HEq` | 84 | 77 | 62 | 34 | 37 | · | 77 | static |
+| `Eq` | 252 | 235 | 293 | 141 | 203 | 279 | 580 | static |
+| `HEq` | 84 | 77 | 62 | 40 | 37 | · | 77 | static |
 
 ### Static: the declarations with each feature
 
-| Feature | (a) | (f) | (b) | (c) | closure of (a) | closure of D | examples | closure of examples |
+| Feature | (a) | (f) | (b) | (c) | closure of (a) | closure of D | checks | closure of checks |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|
 | **Declarations** | | | | | | | | |
-| inductive types | 9 | 29 | 13 | 67 | 90 | 91 | · | 94 |
-| constructors | 37 | 141 | 50 | 91 | 204 | 205 | · | 211 |
-| recursors | 9 | 29 | 13 | 67 | 90 | 91 | · | 94 |
-| definitions | 418 | 382 | 231 | 420 | 893 | 894 | · | 882 |
+| inductive types | 9 | 29 | 13 | 61 | 84 | 85 | · | 88 |
+| constructors | 37 | 141 | 50 | 77 | 190 | 191 | · | 197 |
+| recursors | 9 | 29 | 13 | 61 | 84 | 85 | · | 88 |
+| definitions | 418 | 382 | 237 | 408 | 877 | 878 | · | 868 |
 | theorems | 1341 | 159 | 154 | 179 | 1456 | 1488 | 313 | 910 |
 | opaque constants | · | · | · | 4 | · | · | · | · |
 | axioms | · | · | · | 3 | · | · | · | 2 |
 | Quot primitives (`Quot`, `Quot.mk`, `Quot.lift`, `Quot.ind`) | · | · | · | 4 | · | · | · | 4 |
 | **Inductive types** | | | | | | | | |
-| plain: no indices, not mutual, not nested | · | 14 | 5 | 60 | 66 | 68 | · | 71 |
+| plain: no indices, not mutual, not nested | · | 14 | 5 | 55 | 61 | 63 | · | 66 |
 | indexed families | 9 | 15 | 8 | 6 | 23 | 22 | · | 22 |
 | mutual | · | · | · | · | · | · | · | · |
-| nested | · | · | · | 1 | 1 | 1 | · | 1 |
-| recursive | 8 | 20 | 9 | 9 | 30 | 28 | · | 30 |
+| nested | · | · | · | · | · | · | · | · |
+| recursive | 8 | 20 | 9 | 7 | 28 | 26 | · | 28 |
 | reflexive (an argument is a function into the type) | 6 | 15 | 6 | · | 15 | 14 | · | 15 |
 | in `Prop` | 9 | 17 | 10 | 14 | 33 | 33 | · | 34 |
-| structure-like (one constructor, no indices, not recursive): eta for structures | · | 6 | 2 | 47 | 47 | 48 | · | 50 |
+| structure-like (one constructor, no indices, not recursive): eta for structures | · | 6 | 2 | 45 | 45 | 46 | · | 48 |
 | structure-like with no fields (unit-like) | · | · | · | 2 | 2 | 2 | · | 2 |
 | uses a primitive projection (`Expr.proj`) | 25 | 60 | 35 | 87 | 141 | 148 | · | 165 |
 | K-like recursor (a `Prop` type, one constructor, no fields) | · | · | · | 3 | 3 | 3 | · | 3 |
@@ -263,35 +265,35 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | recursor of a `Prop` type into every sort (large elimination) | · | 2 | 2 | 6 | 8 | 9 | · | 10 |
 | uses one at a motive sort other than `Prop` | · | 4 | 4 | 8 | 8 | 8 | · | 8 |
 | **Universes** | | | | | | | | |
-| universe-polymorphic declarations | 10 | 185 | 59 | 400 | 382 | 403 | · | 437 |
-| mentions `Prop` (`Sort 0`) | 88 | 168 | 135 | 219 | 261 | 247 | 3 | 298 |
-| mentions `Type` (`Sort 1`) | 1324 | 461 | 201 | 23 | 1537 | 1570 | 71 | 746 |
+| universe-polymorphic declarations | 10 | 185 | 59 | 391 | 372 | 393 | · | 427 |
+| mentions `Prop` (`Sort 0`) | 88 | 168 | 141 | 219 | 261 | 247 | 3 | 298 |
+| mentions `Type` (`Sort 1`) | 1324 | 461 | 201 | 16 | 1530 | 1563 | 71 | 739 |
 | mentions `Type 1` or higher, a constant level | · | 4 | · | · | 3 | 3 | · | 4 |
-| mentions `Sort u`, a level with a parameter | 10 | 185 | 59 | 399 | 381 | 402 | · | 436 |
-| a universe parameter anywhere | 10 | 185 | 59 | 400 | 382 | 403 | · | 437 |
+| mentions `Sort u`, a level with a parameter | 10 | 185 | 59 | 390 | 371 | 392 | · | 426 |
+| a universe parameter anywhere | 10 | 185 | 59 | 391 | 372 | 393 | · | 427 |
 | `max` in a level | · | 28 | 8 | 34 | 43 | 42 | · | 47 |
 | `imax` in a level | · | · | · | 6 | 2 | 3 | · | 5 |
 | **Definitions and their unfolding** | | | | | | | | |
-| safe definitions | 411 | 360 | 217 | 420 | 886 | 894 | · | 882 |
+| safe definitions | 411 | 360 | 223 | 408 | 870 | 878 | · | 868 |
 | `partial` definitions (the compiler's `_unsafe_rec` copies) | 7 | 22 | 14 | · | 7 | · | · | · |
 | `unsafe` definitions | · | · | · | · | · | · | · | · |
 | `unsafe` opaque constants | · | · | · | · | · | · | · | · |
 | `unsafe` inductive types | · | · | · | · | · | · | · | · |
-| reducibility hint `abbrev` | 67 | 268 | 160 | 257 | 372 | 385 | · | 431 |
-| reducibility hint `regular` | 344 | 92 | 57 | 163 | 511 | 506 | · | 450 |
-| reducibility hint `opaque` | 7 | 22 | 14 | · | 10 | 3 | · | 1 |
-| attribute `@[reducible]` (the elaborator's) | 108 | 240 | 83 | 124 | 319 | 306 | · | 318 |
+| reducibility hint `abbrev` | 67 | 268 | 166 | 254 | 369 | 382 | · | 428 |
+| reducibility hint `regular` | 344 | 92 | 57 | 154 | 501 | 496 | · | 440 |
+| reducibility hint `opaque` | 7 | 22 | 14 | · | 7 | · | · | · |
+| attribute `@[reducible]` (the elaborator's) | 108 | 240 | 83 | 119 | 313 | 300 | · | 312 |
 | attribute `@[irreducible]` (the elaborator's) | · | · | · | 2 | 2 | 2 | · | 2 |
-| attribute `@[implemented_by]` (the compiler's) | · | · | · | 3 | 3 | 3 | · | 3 |
-| attribute `@[extern]` (the compiler's) | · | · | · | 42 | 35 | 35 | · | 33 |
+| attribute `@[implemented_by]` (the compiler's) | · | · | · | · | · | · | · | · |
+| attribute `@[extern]` (the compiler's) | · | · | · | 39 | 32 | 32 | · | 30 |
 | uses `let` | 360 | 12 | 23 | 24 | 376 | 386 | 3 | 122 |
 | **Literals and kernel computation** | | | | | | | | |
-| Nat literals | 111 | 139 | 108 | 133 | 238 | 257 | 51 | 264 |
-| String literals | 198 | 4 | 26 | 5 | 202 | 210 | 209 | 270 |
-| names `Nat` | 109 | 265 | 199 | 303 | 403 | 437 | 51 | 501 |
+| Nat literals | 112 | 139 | 110 | 132 | 238 | 257 | 51 | 264 |
+| String literals | 198 | 4 | 27 | 5 | 199 | 207 | 209 | 269 |
+| names `Nat` | 109 | 265 | 202 | 295 | 395 | 429 | 51 | 493 |
 | names `Nat.zero` | 1 | · | · | 41 | 39 | 39 | · | 41 |
-| names `Nat.succ` | 14 | · | 6 | 110 | 100 | 101 | · | 116 |
-| names `String` | 9 | 128 | 97 | 42 | 60 | 115 | · | 138 |
+| names `Nat.succ` | 3 | · | 5 | 110 | 89 | 89 | · | 115 |
+| names `String` | 9 | 128 | 98 | 27 | 45 | 100 | · | 123 |
 | names `Char` | 51 | · | · | 29 | 68 | 68 | · | 7 |
 | names `Nat.add` | · | · | 1 | 7 | 3 | 3 | · | 8 |
 | names `Nat.sub` | · | · | · | 3 | 3 | 3 | · | 3 |
@@ -300,7 +302,7 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | names `Nat.mod` | · | · | · | 1 | 1 | 1 | · | 1 |
 | names `Nat.gcd` | · | · | · | · | · | · | · | · |
 | names `Nat.beq` | · | · | · | 10 | 10 | 10 | · | 10 |
-| names `Nat.ble` | 12 | 8 | 6 | 11 | 25 | 25 | · | 15 |
+| names `Nat.ble` | 13 | 8 | 6 | 11 | 26 | 26 | · | 16 |
 | names `Nat.land` | · | · | · | · | · | · | · | · |
 | names `Nat.lor` | · | · | · | · | · | · | · | · |
 | names `Nat.xor` | · | · | · | · | · | · | · | · |
@@ -326,8 +328,8 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | names `Quot.sound` | · | · | · | 1 | · | · | · | 1 |
 | names `Classical.choice` | · | · | · | 2 | · | · | · | · |
 | **Equality** | | | | | | | | |
-| names `Eq` | 66 | 293 | 135 | 203 | 234 | 251 | 279 | 579 |
-| names `HEq` | 40 | 62 | 34 | 37 | 77 | 84 | · | 77 |
+| names `Eq` | 67 | 293 | 141 | 203 | 235 | 252 | 279 | 580 |
+| names `HEq` | 40 | 62 | 40 | 37 | 77 | 84 | · | 77 |
 | **Other** | | | | | | | | |
 | named `…._unsafe_rec` | 7 | 22 | 14 | · | 7 | · | · | · |
 | a free variable or metavariable (never expected) | · | · | · | · | · | · | · | · |
@@ -338,47 +340,44 @@ The first declarations with the feature, and a shortest chain of uses from a der
 
 | Feature | Declarations | Examples | From a derivation theorem |
 |---|---:|---|---|
-| inductive types | 91 | `Add`, `And`, `Append` | `PM.restyle` → `instAddNat` → `Add` |
-| constructors | 205 | `Add.mk`, `And.intro`, `Append.mk` | `PM.restyle` → `instAddNat` → `Add.mk` |
-| recursors | 91 | `Add.rec`, `And.rec`, `Append.rec` | `PM.restyle` → `instAddNat` → `Add` → `Add.rec` |
-| definitions | 894 | `Add.add`, `And.casesOn`, `Append.append` | `PM.restyle` → `instHAdd` → `Add.add` |
+| inductive types | 85 | `Add`, `And`, `Append` | `PM.t4_72` → `instAddNat` → `Add` |
+| constructors | 191 | `Add.mk`, `And.intro`, `Append.mk` | `PM.t4_72` → `instAddNat` → `Add.mk` |
+| recursors | 85 | `Add.rec`, `And.rec`, `Append.rec` | `PM.t4_72` → `instAddNat` → `Add` → `Add.rec` |
+| definitions | 878 | `Add.add`, `And.casesOn`, `Append.append` | `PM.t4_72` → `instHAdd` → `Add.add` |
 | theorems | 1488 | `And.left`, `And.right`, `Bool.ne_true_of_eq_false` | `PM.QThm.matrix_to_lowestOrder` → `PM.matrix_adm1_le` → `And.left` |
-| plain: no indices, not mutual, not nested | 68 | `Add`, `And`, `Append` | `PM.restyle` → `instAddNat` → `Add` |
+| plain: no indices, not mutual, not nested | 63 | `Add`, `And`, `Append` | `PM.t4_72` → `instAddNat` → `Add` |
 | indexed families | 22 | `Eq`, `HEq`, `List.Mem` | `PM.F9.exCongr_plus` → `Eq` |
-| nested | 1 | `Lean.Syntax` | `PM.qclsEqCongr` → `autoParam` → `Lean.Syntax` |
-| recursive | 28 | `Lean.Name`, `Lean.Syntax`, `List` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Lean.Name.mkStr1` → `Lean.Name` |
+| recursive | 26 | `List`, `List.Mem`, `List.Mem.below` | `PM.t4_72` → `List` |
 | reflexive (an argument is a function into the type) | 14 | `PM.ClsExpr`, `PM.F9.ExchStep`, `PM.F9.Merge` | `PM.q22_6` → `PM.ClsExpr` |
 | in `Prop` | 33 | `And`, `ByteArray.IsValidUTF8`, `Eq` | `PM.F9.exch_imp_prenex` → `And` |
-| structure-like (one constructor, no indices, not recursive): eta for structures | 48 | `Add`, `And`, `Append` | `PM.restyle` → `instAddNat` → `Add` |
+| structure-like (one constructor, no indices, not recursive): eta for structures | 46 | `Add`, `And`, `Append` | `PM.t4_72` → `instAddNat` → `Add` |
 | structure-like with no fields (unit-like) | 2 | `PUnit`, `True` | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.PE.readU` → `PM.F9.PE.below` → `PUnit` |
-| uses a primitive projection (`Expr.proj`) | 148 | `Add.add`, `And.left`, `And.right` | `PM.restyle` → `instHAdd` → `Add.add` |
+| uses a primitive projection (`Expr.proj`) | 148 | `Add.add`, `And.left`, `And.right` | `PM.t4_72` → `instHAdd` → `Add.add` |
 | K-like recursor (a `Prop` type, one constructor, no fields) | 3 | `Eq.rec`, `HEq.rec`, `True.rec` | `PM.F9.exCongr_plus` → `Eq` → `Eq.rec` |
 | uses a K-like recursor | 23 | `Eq.casesOn`, `Eq.mp`, `Eq.mpr` | `PM.F9.exch_plus` → `Eq.casesOn` |
 | recursor of a `Prop` type into every sort (large elimination) | 9 | `And.rec`, `Eq.rec`, `False.rec` | `PM.F9.exch_imp_prenex` → `And` → `And.rec` |
 | uses one at a motive sort other than `Prop` | 8 | `And.casesOn`, `Eq.casesOn`, `Eq.mp` | `PM.F9.exch_imp_prenex` → `And.casesOn` |
-| universe-polymorphic declarations | 403 | `Add`, `Add.add`, `Add.mk` | `PM.restyle` → `instAddNat` → `Add` |
+| universe-polymorphic declarations | 393 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
 | mentions `Prop` (`Sort 0`) | 247 | `And`, `And.casesOn`, `And.intro` | `PM.F9.exch_imp_prenex` → `And` |
-| mentions `Type` (`Sort 1`) | 1570 | `BitVec`, `Bool`, `ByteArray` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `UInt32` → `UInt32.ofBitVec` → `BitVec` |
+| mentions `Type` (`Sort 1`) | 1563 | `BitVec`, `Bool`, `ByteArray` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `UInt32` → `UInt32.ofBitVec` → `BitVec` |
 | mentions `Type 1` or higher, a constant level | 3 | `PM.OrderCheck`, `PM.Style`, `PM.Sys` | `PM.trap_unit_compr_of` → `PM.RealReading.check` → `PM.OrderCheck` |
-| mentions `Sort u`, a level with a parameter | 402 | `Add`, `Add.add`, `Add.mk` | `PM.restyle` → `instAddNat` → `Add` |
-| a universe parameter anywhere | 403 | `Add`, `Add.add`, `Add.mk` | `PM.restyle` → `instAddNat` → `Add` |
+| mentions `Sort u`, a level with a parameter | 392 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
+| a universe parameter anywhere | 393 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
 | `max` in a level | 42 | `DecidableEq`, `DecidableRel`, `HAdd` | `PM.F9.PrenexSwitch.t1_3` → `instBEqOfDecidableEq` → `DecidableEq` |
 | `imax` in a level | 3 | `List.noConfusion`, `Prod.noConfusion`, `congrFun'` | `PM.complete` → `PM.all_mem` → `PM.all_mem.match_1_13` → `List.cons.noConfusion` → `List.noConfusion` |
-| safe definitions | 894 | `Add.add`, `And.casesOn`, `Append.append` | `PM.restyle` → `instHAdd` → `Add.add` |
-| reducibility hint `abbrev` | 385 | `Add.add`, `And.casesOn`, `Append.append` | `PM.restyle` → `instHAdd` → `Add.add` |
-| reducibility hint `regular` | 506 | `Array.empty`, `Array.emptyWithCapacity`, `Array.push` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Array.empty` |
-| reducibility hint `opaque` | 3 | `PM.Pf.hy._auto_1`, `PM.qclsEqCongr._auto_1`, `PM.qrelEqCongr._auto_1` | `PM.t4_72` → `PM.Pf.hy` → `PM.Pf.hy._auto_1` |
-| attribute `@[reducible]` (the elaborator's) | 306 | `And.casesOn`, `Array.casesOn`, `Array.toList` | `PM.F9.exch_imp_prenex` → `And.casesOn` |
+| safe definitions | 878 | `Add.add`, `And.casesOn`, `Append.append` | `PM.t4_72` → `instHAdd` → `Add.add` |
+| reducibility hint `abbrev` | 382 | `Add.add`, `And.casesOn`, `Append.append` | `PM.t4_72` → `instHAdd` → `Add.add` |
+| reducibility hint `regular` | 496 | `Array.empty`, `Array.emptyWithCapacity`, `Array.push` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
+| attribute `@[reducible]` (the elaborator's) | 300 | `And.casesOn`, `Array.casesOn`, `Array.toList` | `PM.F9.exch_imp_prenex` → `And.casesOn` |
 | attribute `@[irreducible]` (the elaborator's) | 2 | `Nat.div`, `Nat.modCore` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` → `Nat.div` |
-| attribute `@[implemented_by]` (the compiler's) | 3 | `Lean.Name.anonymous`, `Lean.Name.num`, `Lean.Name.str` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Lean.Name.mkStr1` → `Lean.Name.anonymous` |
-| attribute `@[extern]` (the compiler's) | 35 | `Array.emptyWithCapacity`, `Array.mk`, `Array.push` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Array.empty` → `Array.emptyWithCapacity` |
+| attribute `@[extern]` (the compiler's) | 32 | `Array.emptyWithCapacity`, `Array.mk`, `Array.push` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` → `Array.emptyWithCapacity` |
 | uses `let` | 386 | `List.eraseDupsBy.loop.eq_def`, `Nat.ble_eq_true_of_le`, `Nat.le_trans` | `PM.complete` → `PM.mem_eraseDups'` → `PM.mem_loop` → `PM.mem_loop._f` → `List.eraseDupsBy.loop.eq_def` |
-| Nat literals | 257 | `Array.empty`, `BitVec.casesOn`, `BitVec.decEq` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Array.empty` |
-| String literals | 210 | `PM.F9.Rep.distrib`, `PM.F9.Rep.exIn`, `PM.F9.Rep.exNegNeg` | `PM.F9.Rep.distrib` |
-| names `Nat` | 437 | `Array.empty`, `Array.emptyWithCapacity`, `Array.size` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Array.empty` |
+| Nat literals | 257 | `Array.empty`, `BitVec.casesOn`, `BitVec.decEq` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
+| String literals | 207 | `PM.F9.Rep.distrib`, `PM.F9.Rep.exIn`, `PM.F9.Rep.exNegNeg` | `PM.F9.Rep.distrib` |
+| names `Nat` | 429 | `Array.empty`, `Array.emptyWithCapacity`, `BitVec` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
 | names `Nat.zero` | 39 | `Nat.add_pos_right`, `Nat.brecOn.go`, `Nat.casesOn` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
-| names `Nat.succ` | 101 | `Nat.add_pos_right`, `Nat.ble_succ_eq_true`, `Nat.brecOn.go` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
-| names `String` | 115 | `Lean.Name.mkStr1`, `Lean.Name.mkStr2`, `Lean.Name.mkStr4` | `PM.qclsEqCongr` → `PM.qclsEqCongr._auto_1` → `Lean.Name.mkStr1` |
+| names `Nat.succ` | 89 | `Nat.add_pos_right`, `Nat.ble_succ_eq_true`, `Nat.brecOn.go` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
+| names `String` | 100 | `PM.F.below`, `PM.F.brecOn.go`, `PM.F.casesOn` | `PM.F9.f10_01` → `PM.F.toE` → `PM.F.brecOn` → `PM.F.below` |
 | names `Char` | 68 | `ByteArray.IsValidUTF8.intro`, `ByteArray.IsValidUTF8.rec`, `Char.casesOn` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` |
 | names `Nat.add` | 3 | `Nat.add_pos_right`, `instAddNat`, `Nat.mul._f` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
 | names `Nat.sub` | 3 | `Nat.sub_le`, `Nat.succ_sub_succ_eq_sub`, `instSubNat` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` → `Nat.div` → `Nat.div.go` → `Nat.div.go._f` → `Nat.div_rec_fuel_lemma` → `Nat.div_rec_lemma` → `Nat.sub_lt` → `Nat.sub_le` |
@@ -386,55 +385,55 @@ The first declarations with the feature, and a shortest chain of uses from a der
 | names `Nat.div` | 1 | `Nat.instDiv` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` |
 | names `Nat.mod` | 1 | `Nat.instMod` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instMod` |
 | names `Nat.beq` | 10 | `Nat.decEq`, `Nat.eq_of_beq_eq_true`, `Nat.ne_of_beq_eq_false` | `PM.F9.ai_convention` → `PM.F9.ai_convention._f` → `PM.F9.PF.all.noConfusion` → `PM.F9.PF.noConfusion` → `PM.F9.PF.noConfusionType` → `Nat.decEq` |
-| names `Nat.ble` | 25 | `Nat.ble_eq_true_of_le`, `Nat.ble_self_eq_true`, `Nat.ble_succ_eq_true` | `PM.trap_unit_compr_of` → `Nat.decLt` → `Nat.decLe` → `Nat.not_le_of_not_ble_eq_true` → `Nat.ble_eq_true_of_le` |
+| names `Nat.ble` | 26 | `Nat.ble_eq_true_of_le`, `Nat.ble_self_eq_true`, `Nat.ble_succ_eq_true` | `PM.trap_unit_compr_of` → `Nat.decLt` → `Nat.decLe` → `Nat.not_le_of_not_ble_eq_true` → `Nat.ble_eq_true_of_le` |
 | names `Nat.pow` | 2 | `instNatPowNat`, `Nat.pow_pos._f` | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.form` → `Char.ofNat` → `BitVec.ofNatLT` → `instNatPowNat` |
 | names `Decidable.decide` | 10 | `PM.p171_compr_lowestOrder`, `PM.trap_unit_compr_of`, `decide_eq_false` | `PM.p171_lowestOrder_predicative` → `PM.p171_compr_lowestOrder` |
 | names `of_decide_eq_true` (a proof by `decide`) | 9 | `PM.p171_compr_lowestOrder`, `PM.trap_unit_compr_of`, `PM.upd_other` | `PM.p171_lowestOrder_predicative` → `PM.p171_compr_lowestOrder` |
-| names `Eq` | 251 | `BitVec.decEq`, `BitVec.noConfusion`, `Bool.decEq` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `instDecidableEqUInt32` → `UInt32.decEq` → `instDecidableEqBitVec` → `BitVec.decEq` |
+| names `Eq` | 252 | `BitVec.decEq`, `BitVec.noConfusion`, `Bool.decEq` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `instDecidableEqUInt32` → `UInt32.decEq` → `instDecidableEqBitVec` → `BitVec.decEq` |
 | names `HEq` | 84 | `BitVec.noConfusion`, `BitVec.noConfusionType`, `HEq.rec` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `instDecidableEqUInt32` → `UInt32.decEq` → `instDecidableEqBitVec` → `BitVec.decEq` → `BitVec.decEq._proof_2` → `BitVec.noConfusion` |
 
 ### Dynamic: what the kernel unfolds when it checks each declaration again
 
 Declarations re-checked, and among them those whose check unfolded a constant of each kind (in brackets: how many distinct constants).
 
-| | (a) | (f) | (b) | (c) | closure of (a) | closure of D | examples |
-|---|---:|---:|---:|---:|---:|---:|---:|
-| re-checked | 1752 | 519 | 371 | 603 | 2342 | 2382 | 313 |
-| not re-checked (inductive types, constructors, recursors, partial or unsafe) | 62 | 221 | 90 | 232 | 391 | 387 | 0 |
-| rejected | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| unfolded something | 1192 | 222 | 230 | 273 | 1436 | 1484 | 286 |
-| unfoldings in all | 342669 | 5215 | 20876 | 2998 | 347344 | 356363 | 425609 |
-| unfolded a constant of the repository | 1178 (431) | 191 (167) | 156 (237) | · | 1244 (453) | 1248 (463) | 261 (82) |
-| unfolded a constant of Lean core | 526 (166) | 155 (36) | 167 (181) | 273 (172) | 722 (216) | 767 (226) | 269 (406) |
-| unfolded a definition with hint `abbrev` | 448 (160) | 201 (147) | 198 (218) | 192 (88) | 650 (212) | 693 (218) | 266 (111) |
-| unfolded a definition with hint `regular` | 1158 (418) | 163 (40) | 198 (179) | 209 (73) | 1323 (437) | 1362 (449) | 281 (329) |
-| unfolded a definition with hint `opaque` | · | · | · | · | · | · | · |
-| unfolded a theorem | · | · | · | · | · | · | · |
-| unfolded an opaque constant | · | · | · | · | · | · | · |
-| unfolded a recursor (iota reduction) | 330 (19) | 178 (16) | 144 (21) | 116 (10) | 467 (20) | 494 (22) | 255 (16) |
-| unfolded a Quot primitive | · | · | · | 1 (1) | · | · | · |
-| unfolded anything else | · | · | · | · | · | · | · |
-| unfolded a definition marked `@[irreducible]` | · | · | · | 2 (1) | 2 (1) | 2 (1) | · |
-| unfolded a definition with `@[implemented_by]` | · | · | · | · | · | · | · |
-| unfolded a definition with `@[extern]` | 217 (18) | 32 (2) | 25 (18) | 48 (20) | 255 (27) | 265 (27) | 228 (15) |
-| unfolded a constant of `String`, `Char` or `ByteArray` | 202 (16) | · | 10 (16) | 6 (10) | 205 (18) | 213 (18) | 193 (16) |
-| unfolded `Nat.add` itself (an argument not a literal) | 2 (1) | · | 6 (1) | 20 (1) | 14 (1) | 15 (1) | · |
-| unfolded `Nat.sub` itself (an argument not a literal) | · | · | · | 2 (1) | 2 (1) | 2 (1) | · |
-| unfolded `Nat.mul` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · |
-| unfolded `Nat.div` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.mod` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · |
-| unfolded `Nat.gcd` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.beq` itself (an argument not a literal) | · | 2 (1) | 2 (1) | 5 (1) | 5 (1) | 5 (1) | · |
-| unfolded `Nat.ble` itself (an argument not a literal) | 12 (1) | · | 1 (1) | 7 (1) | 19 (1) | 20 (1) | · |
-| unfolded `Nat.land` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.lor` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.xor` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.shiftLeft` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.shiftRight` itself (an argument not a literal) | · | · | · | · | · | · | · |
-| unfolded `Nat.pow` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · |
-| unfolded `Nat.log2` itself (an argument not a literal) | · | · | · | · | · | · | · |
+| | (a) | (f) | (b) | (c) | closure of (a) | closure of D | checks | closure of checks |
+|---|---:|---:|---:|---:|---:|---:|---:|---:|
+| re-checked | 1752 | 519 | 377 | 591 | 2326 | 2366 | 313 | 1778 |
+| not re-checked (inductive types, constructors, recursors, partial or unsafe) | 62 | 221 | 90 | 206 | 365 | 361 | 0 | 379 |
+| rejected | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
+| unfolded something | 1192 | 222 | 236 | 273 | 1433 | 1481 | 286 | 1032 |
+| unfoldings in all | 342289 | 5215 | 20937 | 2998 | 346961 | 355966 | 425609 | 489631 |
+| unfolded a constant of the repository | 1178 (431) | 191 (167) | 160 (238) | · | 1244 (453) | 1248 (463) | 286 (311) | 759 (462) |
+| unfolded a constant of Lean core | 524 (165) | 155 (36) | 173 (180) | 273 (172) | 717 (214) | 762 (224) | 241 (145) | 669 (222) |
+| unfolded a definition with hint `abbrev` | 428 (159) | 201 (147) | 204 (217) | 192 (88) | 627 (210) | 670 (216) | 266 (111) | 728 (237) |
+| unfolded a definition with hint `regular` | 1158 (418) | 163 (40) | 204 (180) | 209 (73) | 1323 (437) | 1362 (449) | 281 (329) | 914 (425) |
+| unfolded a definition with hint `opaque` | · | · | · | · | · | · | · | · |
+| unfolded a theorem | · | · | · | · | · | · | · | · |
+| unfolded an opaque constant | · | · | · | · | · | · | · | · |
+| unfolded a recursor (iota reduction) | 331 (19) | 178 (16) | 150 (21) | 116 (10) | 468 (20) | 495 (22) | 255 (16) | 578 (21) |
+| unfolded a Quot primitive | · | · | · | 1 (1) | · | · | · | 1 (1) |
+| unfolded anything else | · | · | · | · | · | · | · | · |
+| unfolded a definition marked `@[irreducible]` | · | · | · | 2 (1) | 2 (1) | 2 (1) | · | 2 (1) |
+| unfolded a definition with `@[implemented_by]` | · | · | · | · | · | · | · | · |
+| unfolded a definition with `@[extern]` | 218 (18) | 32 (2) | 25 (18) | 48 (20) | 256 (27) | 266 (27) | 228 (15) | 336 (26) |
+| unfolded a constant of `String`, `Char` or `ByteArray` | 202 (16) | · | 10 (16) | 6 (10) | 205 (18) | 213 (18) | 193 (16) | 245 (18) |
+| unfolded `Nat.add` itself (an argument not a literal) | 3 (1) | · | 6 (1) | 20 (1) | 15 (1) | 16 (1) | · | 27 (1) |
+| unfolded `Nat.sub` itself (an argument not a literal) | · | · | · | 2 (1) | 2 (1) | 2 (1) | · | 2 (1) |
+| unfolded `Nat.mul` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · | 1 (1) |
+| unfolded `Nat.div` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.mod` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · | 1 (1) |
+| unfolded `Nat.gcd` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.beq` itself (an argument not a literal) | · | 2 (1) | 2 (1) | 5 (1) | 5 (1) | 5 (1) | · | 5 (1) |
+| unfolded `Nat.ble` itself (an argument not a literal) | 12 (1) | · | 1 (1) | 7 (1) | 19 (1) | 20 (1) | · | 9 (1) |
+| unfolded `Nat.land` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.lor` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.xor` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.shiftLeft` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.shiftRight` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
+| unfolded `Nat.pow` itself (an argument not a literal) | · | · | · | 1 (1) | 1 (1) | 1 (1) | · | 1 (1) |
+| unfolded `Nat.log2` itself (an argument not a literal) | · | · | · | · | · | · | · | · |
 
-The heaviest checks (unfoldings): (a) `PM.F9.PrenexSwitch.t1_6` 15558; (a) `PM.F9.Convention.t1_5` 14749; (a) `PM.F9.Convention.t1_6` 14388; examples `PM/Statements.lean:PM._kernelCensusExample_736` 7740; examples `PM/Statements.lean:PM._kernelCensusExample_464` 6962; examples `PM/Statements.lean:PM._kernelCensusExample_468` 6956.
+The heaviest checks (unfoldings): (a) `PM.F9.PrenexSwitch.t1_6` 15558; (a) `PM.F9.Convention.t1_5` 14749; (a) `PM.F9.Convention.t1_6` 14388; checks `PM.check_s5_53_tautology` 7740; checks `PM.check_s4_38_tautology` 6962; checks `PM.check_s4_39_tautology` 6956.
 
 In the closure of D, unfolded a recursor (iota reduction): `Array.rec`, `BitVec.rec`, `Bool.rec`, `ByteArray.rec`, `Decidable.rec`, `Eq.rec`, `List.rec`, `Nat.rec` and 14 more.
 
@@ -468,12 +467,12 @@ Each probe is a theorem `op a b = c` with literals of 130 to 400 bits, proved by
 
 ### The three axioms: the declarations of the repository that depend on each
 
-Declarations of (a), (f) and (b), and separately of (m), whose closure contains the axiom.
+Declarations of (a), (f), (b) and the checks, and separately of (m), whose closure contains the axiom.
 
-| Axiom | (a), (f), (b) | of them in tests/expected_axiom_users.txt | the others | (m) |
+| Axiom | (a), (f), (b), checks | of them in tests/expected_axiom_users.txt | the others | (m) |
 |---|---:|---:|---|---:|
 | `Classical.choice` | 6 | 5 | `PM.QModel.classical._proof_1` | 11 |
-| `Quot.sound` | 9 | 8 | `PM.QModel.classical._proof_1` | 11 |
-| `propext` | 43 | 39 | `PM.QModel.classical._proof_1`, `PM.instReprF.repr._f`, `PM.instReprF.repr._sunfold`, `PM.instReprF.repr._unsafe_rec` | 29 |
+| `Quot.sound` | 10 | 9 | `PM.QModel.classical._proof_1` | 11 |
+| `propext` | 44 | 40 | `PM.QModel.classical._proof_1`, `PM.instReprF.repr._f`, `PM.instReprF.repr._sunfold`, `PM.instReprF.repr._unsafe_rec` | 29 |
 
 <!-- END GENERATED -->

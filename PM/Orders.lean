@@ -86,12 +86,12 @@ def QF.isMatrix : QF U → Bool
 
 /-! ## Orders of types (Introduction pp. 53–56; ✱12 p. 174: arguments of any order) -/
 
-example : Ty.ind.ord = 0 := rfl
-example : (Ty.pred1 .ind).ord = 1 := rfl                     -- φ!x̂, x an individual: first order
-example : (Ty.pred1 (Ty.pred1 .ind)).ord = 2 := rfl          -- f!(φ̂!ẑ): second order (p. 55)
-example : (Ty.pred2 (Ty.pred1 .ind) .ind).ord = 2 := rfl     -- f!(φ̂!ẑ, x̂) (p. 55)
-example : (Ty.fn1 .ind 1).ord = 2 := rfl                     -- a second-order function of individuals
-example : (Ty.pred1 (.fn1 .ind 1)).ord = 3 := rfl            -- predicative, of an argument of order 2 (p. 174)
+theorem check_ord_of_individual : Ty.ind.ord = 0 := rfl
+theorem check_ord_first_order_predicate : (Ty.pred1 .ind).ord = 1 := rfl                  -- φ!x̂, x an individual: first order
+theorem check_ord_predicate_of_predicate_p55 : (Ty.pred1 (Ty.pred1 .ind)).ord = 2 := rfl          -- f!(φ̂!ẑ): second order (p. 55)
+theorem check_ord_two_place_predicate_p55 : (Ty.pred2 (Ty.pred1 .ind) .ind).ord = 2 := rfl     -- f!(φ̂!ẑ, x̂) (p. 55)
+theorem check_ord_second_order_function : (Ty.fn1 .ind 1).ord = 2 := rfl                     -- a second-order function of individuals
+theorem check_ord_predicate_higher_argument_p174 : (Ty.pred1 (.fn1 .ind 1)).ord = 3 := rfl            -- predicative, of an argument of order 2 (p. 174)
 
 /-! ## Golden tests, Introduction pp. 54–56
 
@@ -99,32 +99,32 @@ example : (Ty.pred1 (.fn1 .ind 1)).ord = 3 := rfl            -- predicative, of 
   f, g, F are predicative functions of first-order functions. In each test, `()` is the real variable. -/
 
 /-- p. 54: (y) . ψ(x, y) is a first-order function of x. -/
-example : fnOrder .ind (fun x => .all fun y => .atom "ψ" [x, y]) = 1 := rfl
+theorem check_order_universal_atom_p54 : fnOrder .ind (fun x => .all fun y => .atom "ψ" [x, y]) = 1 := rfl
 /-- p. 54: (y) : (∃z) . χ(x, y, z) is a first-order function of x. -/
-example : fnOrder .ind (fun x => .all fun y => ex fun z => .atom "χ" [x, y, z]) = 1 := rfl
+theorem check_order_universal_existential_p54 : fnOrder .ind (fun x => .all fun y => ex fun z => .atom "χ" [x, y, z]) = 1 := rfl
 /-- p. 54: "φ!x implies φ!a with all possible values of φ" is a function of x but "not a function of the
     form φ!x": it is of order 2. -/
-example : fnOrder .ind (fun x => .all (τ := Ty.pred1 .ind) fun φ => imp (.app1 φ x) (.app1 φ ())) = 2 := rfl
-example : ¬ Lvl (V := U) (.all (τ := Ty.pred1 .ind) fun φ => imp (.app1 φ ()) (.app1 φ ())) 1 := by decide
+theorem check_order_all_phi_implication_p54 : fnOrder .ind (fun x => .all (τ := Ty.pred1 .ind) fun φ => imp (.app1 φ x) (.app1 φ ())) = 2 := rfl
+theorem check_phi_implication_not_first_order : ¬ Lvl (V := U) (.all (τ := Ty.pred1 .ind) fun φ => imp (.app1 φ ()) (.app1 φ ())) 1 := by decide
 /-- p. 55: (φ) . g(φ!ẑ, ψ!ẑ) is a function of ψ!ẑ; of order 2. -/
-example : fnOrder (Ty.pred1 .ind)
+theorem check_order_quantified_phi_relation_p55 : fnOrder (Ty.pred1 .ind)
     (fun ψ' => .all (τ := Ty.pred1 .ind) fun φ =>
       .app2 (a := Ty.pred1 .ind) (b := Ty.pred1 .ind) (k := 0) () φ ψ') = 2 := rfl
 /-- p. 55: (x) . F(φ!ẑ, x) is a function of φ!ẑ; of order 2. -/
-example : fnOrder (Ty.pred1 .ind)
+theorem check_order_quantified_individual_p55 : fnOrder (Ty.pred1 .ind)
     (fun φ => .all fun x => .app2 (a := Ty.pred1 .ind) (b := .ind) (k := 0) () φ x) = 2 := rfl
 /-- p. 55: (φ) . F(φ!ẑ, x) is a function of x; of order 2, so not predicative (p. 56). -/
-example : fnOrder .ind
+theorem check_order_impredicative_individual_p55 : fnOrder .ind
     (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app2 (a := Ty.pred1 .ind) (b := .ind) (k := 0) () φ x) = 2 := rfl
-example : predicativeP56 .ind
+theorem check_quantified_phi_not_predicative_p56 : predicativeP56 .ind
     (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app2 (a := Ty.pred1 .ind) (b := .ind) (k := 0) () φ x) = false := rfl
 /-- p. 55: f!(φ!ẑ) is a function of φ!ẑ of order 2 (predicative: "predicative functions of first-order
     functions"), and not of order 1. -/
-example : fnOrder (Ty.pred1 .ind) (fun φ => .app1 (a := Ty.pred1 .ind) (k := 0) () φ) = 2 := rfl
-example : predicativeP56 (Ty.pred1 .ind) (fun φ => .app1 (a := Ty.pred1 .ind) (k := 0) () φ) = true := rfl
-example : ¬ Lvl (V := U) (.app1 (a := Ty.pred1 .ind) (k := 0) () ()) 1 := by decide
+theorem check_order_predicative_second_order_p55 : fnOrder (Ty.pred1 .ind) (fun φ => .app1 (a := Ty.pred1 .ind) (k := 0) () φ) = 2 := rfl
+theorem check_second_order_predicative_p55 : predicativeP56 (Ty.pred1 .ind) (fun φ => .app1 (a := Ty.pred1 .ind) (k := 0) () φ) = true := rfl
+theorem check_second_order_not_first_p55 : ¬ Lvl (V := U) (.app1 (a := Ty.pred1 .ind) (k := 0) () ()) 1 := by decide
 /-- p. 56: a function of an individual of order 3: (f) . f!(φ!ẑ) . φ!x … with f of order 2 apparent. -/
-example : fnOrder .ind (fun x => .all (τ := Ty.pred1 (Ty.pred1 .ind)) fun f =>
+theorem check_order_three_function_p56 : fnOrder .ind (fun x => .all (τ := Ty.pred1 (Ty.pred1 .ind)) fun f =>
     QF.and (.app1 f ()) (.app1 (a := .ind) (k := 0) () x)) = 3 := rfl
 
 /-! ## Golden tests, ✱12 pp. 170–171 -/
@@ -132,26 +132,26 @@ example : fnOrder .ind (fun x => .all (τ := Ty.pred1 (Ty.pred1 .ind)) fun f =>
 /-- p. 170: φ!x is a matrix (no apparent variable). As a function of x it is predicative (p. 55: "the
     assignment of a value to φ gives us a predicative function of x"); as a function of φ!ẑ and x it is
     of order 2, a second-order matrix. -/
-example : predicativeP56 .ind (fun x => .app1 (a := .ind) (k := 0) () x) = true := rfl
-example : (QF.app1 (V := U) (a := .ind) (k := 0) () ()).isMatrix = true := rfl
-example : Lvl (V := U) (.app1 (a := .ind) (k := 0) () ()) (Ty.pred2 (Ty.pred1 .ind) .ind).ord := by decide
+theorem check_phi_applied_predicative_p170 : predicativeP56 .ind (fun x => .app1 (a := .ind) (k := 0) () x) = true := rfl
+theorem check_phi_applied_matrix_p170 : (QF.app1 (V := U) (a := .ind) (k := 0) () ()).isMatrix = true := rfl
+theorem check_phi_applied_order_two_p170 : Lvl (V := U) (.app1 (a := .ind) (k := 0) () ()) (Ty.pred2 (Ty.pred1 .ind) .ind).ord := by decide
 /-- p. 170: φ!x ∨ ψ!y, φ!x . ⊃ . ψ!x are matrices of order 1 in x. -/
-example : fnOrder .ind (fun x => imp (.app1 (a := .ind) (k := 0) () x) (.app1 (a := .ind) (k := 0) () x)) = 1 := rfl
+theorem check_order_implication_matrix_p170 : fnOrder .ind (fun x => imp (.app1 (a := .ind) (k := 0) () x) (.app1 (a := .ind) (k := 0) () x)) = 1 := rfl
 /-- p. 171 (1): (x) . φ!x is a second-order function of φ!ẑ. By Introduction p. 56 it is predicative
     (order 2 = the lowest order for an argument of order 1); by ✱12 p. 172 it is not, since it is not a
     matrix. This is where the two readings of "predicative" differ (docs/TYPES_DESIGN.md, decision (a)). -/
-example : fnOrder (Ty.pred1 .ind) (fun φ => .all fun x => .app1 φ x) = 2 := rfl
-example : predicativeP56 (Ty.pred1 .ind) (fun φ => .all fun x => .app1 φ x) = true := rfl
-example : (QF.all (V := U) (τ := .ind) fun x => .app1 (a := .ind) (k := 0) () x).isMatrix = false := rfl
+theorem check_order_all_individuals_p171 : fnOrder (Ty.pred1 .ind) (fun φ => .all fun x => .app1 φ x) = 2 := rfl
+theorem check_universal_predicative_p171 : predicativeP56 (Ty.pred1 .ind) (fun φ => .all fun x => .app1 φ x) = true := rfl
+theorem check_universal_not_matrix_p171 : (QF.all (V := U) (τ := .ind) fun x => .app1 (a := .ind) (k := 0) () x).isMatrix = false := rfl
 /-- p. 171 (1): φ!x . ⊃ₓ . g!x, g constant: a function of φ!ẑ of order 2. -/
-example : fnOrder (Ty.pred1 .ind) (fun φ => fimp (fun x => .app1 φ x) fun x => .app1 (a := .ind) (k := 0) () x) = 2 := rfl
+theorem check_order_formal_implication_p171 : fnOrder (Ty.pred1 .ind) (fun φ => fimp (fun x => .app1 φ x) fun x => .app1 (a := .ind) (k := 0) () x) = 2 := rfl
 /-- p. 171 (3): (φ) . φ!x, (∃φ) . φ!x, φ!x . ⊃_φ . φ!a are functions of the individual x of order 2:
     "Such functions we shall not call predicative". -/
-example : fnOrder .ind (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app1 φ x) = 2 := rfl
-example : fnOrder .ind (fun x => ex (τ := Ty.pred1 .ind) fun φ => .app1 φ x) = 2 := rfl
-example : predicativeP56 .ind (fun x => fimp (τ := Ty.pred1 .ind) (fun φ => .app1 φ x) fun φ => .app1 φ ()) = false := rfl
+theorem check_order_universal_phi_p171 : fnOrder .ind (fun x => .all (τ := Ty.pred1 .ind) fun φ => .app1 φ x) = 2 := rfl
+theorem check_order_existential_phi_p171 : fnOrder .ind (fun x => ex (τ := Ty.pred1 .ind) fun φ => .app1 φ x) = 2 := rfl
+theorem check_phi_implication_not_predicative_p171 : predicativeP56 .ind (fun x => fimp (τ := Ty.pred1 .ind) (fun φ => .app1 φ x) fun φ => .app1 φ ()) = false := rfl
 /-- p. 171 (4): (∃ψ) : φ!x . ≡ . ψ!x, a function of φ!ẑ and x of order 2. -/
-example : Lvl (V := U) (ex (τ := Ty.pred1 .ind) fun ψ' => iff (.app1 (a := .ind) (k := 0) () ()) (.app1 ψ' ()))
+theorem check_existential_equivalence_order_two_p171 : Lvl (V := U) (ex (τ := Ty.pred1 .ind) fun ψ' => iff (.app1 (a := .ind) (k := 0) () ()) (.app1 ψ' ()))
     (Ty.pred2 (Ty.pred1 .ind) .ind).ord := by decide
 
 /-! ## Comprehension and the check
@@ -161,6 +161,6 @@ example : Lvl (V := U) (ex (τ := Ty.pred1 .ind) fun ψ' => iff (.app1 (a := .in
 
 /-- (φ) . φ!x is not of the order of a predicative function of x, so `compr1` cannot give a predicative
     f with f!x ≡ (φ) . φ!x. -/
-example : ¬ Lvl (V := U) (.all (τ := Ty.pred1 .ind) fun φ => .app1 φ ()) (Ty.pred1 .ind).ord := by decide
+theorem check_universal_phi_refused_comprehension : ¬ Lvl (V := U) (.all (τ := Ty.pred1 .ind) fun φ => .app1 φ ()) (Ty.pred1 .ind).ord := by decide
 
 end PM
