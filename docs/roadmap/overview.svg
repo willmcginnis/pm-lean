@@ -73,12 +73,12 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="44.0" y="262.7" font-size="13" class="t1">system · Vol II (1912) · Vol III (1913) · 1925</text>
 <text x="44.0" y="279.9" font-size="13" class="t1">second edition</text>
 <circle cx="49.0" cy="305.9" r="5" class="st"/>
-<text x="58.0" y="310.0" font-size="12.5" class="t2">4 done</text>
+<text x="58.0" y="310.0" font-size="12.5" class="t2">5 done</text>
 <circle cx="125.5" cy="305.9" r="5" class="sto"/>
 <path d="M125.5,300.9 A5,5 0 0 0 125.5,310.9 Z" class="st"/>
 <text x="134.5" y="310.0" font-size="12.5" class="t2">12 in progress</text>
 <circle cx="264.0" cy="305.9" r="5" class="sto"/>
-<text x="273.0" y="310.0" font-size="12.5" class="t2">21 not started</text>
+<text x="273.0" y="310.0" font-size="12.5" class="t2">20 not started</text>
 <text x="478.0" y="139.8" font-size="18" font-weight="700" class="t1">2  Checking underneath</text>
 <text x="478.0" y="163.8" font-size="13.5" class="t2">One source, many checkers: the same</text>
 <text x="478.0" y="181.7" font-size="13.5" class="t2">derivations re-checked by independent</text>

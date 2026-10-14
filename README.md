@@ -54,7 +54,7 @@ carry over "by merely repeating previous proofs"), the assertion is checked in L
 two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
 axiom of reducibility they derive the same theorems (row B4). What comes next is in the [roadmap](#roadmap) below and in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Status at a glance (2026-10-14, commit `2bad0f8`)
+## Status at a glance (2026-10-14, commit `07f82e0`)
 
 | Part of Vol I | Chapters | Numbered assertions proved |
 |---|---|---|
@@ -65,7 +65,8 @@ axiom of reducibility they derive the same theorems (row B4). What comes next is
 | Classes, relations | ✱20, ✱21 | 53 of 55; 46 of 48 |
 | Calculus of classes, of relations | ✱22, ✱23 | 72 of 72; 72 of 72 |
 | Universal class, null-class, existence of classes | ✱24 | 70 of 70 |
-| **Vol I** | ✱1–✱97 | **674 of 3,231 (20.9%)** |
+| Universal relation, null relation, existence of relations | ✱25 | 70 of 70 |
+| **Vol I** | ✱1–✱97 | **744 of 3,231 (23.0%)** |
 
 Vols II and III are not started.
 Per-chapter tables, milestones and the units counted: [docs/PROGRESS.md](docs/PROGRESS.md).
@@ -110,7 +111,7 @@ The limits matter as much
 The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view).
 
 <details>
-<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (4 done, 12 in progress, 21 not started)</summary>
+<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (5 done, 12 in progress, 20 not started)</summary>
 
 ![Group 1, PM itself: its subgroups and tasks](docs/roadmap/group-pm.svg)
 
@@ -122,7 +123,7 @@ The work is split into four groups that run side by side. Each group is split in
   - A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142): *not started*
   - Every theorem checked under both foundations, ✱9's and ✱10's: *not started*
   - ✱20–✱24: classes and relations: *done*
-  - ✱25: the universal relation, the null relation, and the existence of relations: *not started*
+  - ✱25: the universal relation, the null relation, and the existence of relations: *done*
   - Apparent classes of classes and their identity, needed from ✱40 on: *in progress*
   - Extensionality of every class and relation expression, proved once (pp. 200, 213): *done*
   - ✱30–✱38: the logic of relations: *not started*

@@ -447,7 +447,7 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="155.5" y="1648.1" font-size="11.5" font-weight="700" class="t1">and ✱10's</text>
 <rect x="132.5" y="1669.6" width="180.0" height="92.8" rx="6" class="card"/>
 <rect x="132.5" y="1669.6" width="4.0" height="92.8" rx="2" class="g0"/>
-<circle cx="146.5" cy="1684.6" r="4.5" class="sto"/>
+<circle cx="146.5" cy="1684.6" r="4.5" class="st"/>
 <text x="155.5" y="1689.1" font-size="11.5" font-weight="700" class="t1">✱25: the universal</text>
 <text x="155.5" y="1704.0" font-size="11.5" font-weight="700" class="t1">relation, the null</text>
 <text x="155.5" y="1719.0" font-size="11.5" font-weight="700" class="t1">relation, and the</text>

@@ -162,8 +162,8 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="326.0" y="550.9" font-size="13" font-weight="700" class="t1">relation, the null relation,</text>
 <text x="326.0" y="568.5" font-size="13" font-weight="700" class="t1">and the existence of</text>
 <text x="326.0" y="586.2" font-size="13" font-weight="700" class="t1">relations</text>
-<circle cx="331.0" cy="602.9" r="5" class="sto"/>
-<text x="342.0" y="606.9" font-size="12" class="t2">not started · size S</text>
+<circle cx="331.0" cy="602.9" r="5" class="st"/>
+<text x="342.0" y="606.9" font-size="12" class="t2">done · size S</text>
 <text x="326.0" y="624.9" font-size="12" class="t2">needs: ✱20–✱24</text>
 <text x="610.0" y="533.2" font-size="13" font-weight="700" class="t1">Apparent classes of classes</text>
 <text x="610.0" y="550.9" font-size="13" font-weight="700" class="t1">and their identity, needed</text>
