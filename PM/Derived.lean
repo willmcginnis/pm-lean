@@ -167,10 +167,10 @@ theorem hyN : ∀ (Γ : List F) (n : Nat), n < Γ.length → Pf Γ (nth Γ n)
   | g :: Γ, 0, _ => self_ctx Γ g
   | _ :: Γ, n + 1, h => kI (hyN Γ n (Nat.lt_of_succ_lt_succ h))
 
-/-- Use the `n`-th hypothesis (0-based, oldest first). The bound is checked by evaluation. -/
-theorem hy {Γ : List F} (n : Nat) (h : n < Γ.length := by exact Nat.le_of_ble_eq_true rfl) :
-    Pf Γ (nth Γ n) :=
-  hyN Γ n h
+/-- Use the `n`-th hypothesis (0-based, oldest first): `hy n rfl`. The bound is an explicit argument,
+    checked by evaluation. -/
+theorem hy {Γ : List F} (n : Nat) (h : Nat.ble (n + 1) Γ.length = true) : Pf Γ (nth Γ n) :=
+  hyN Γ n (Nat.le_of_ble_eq_true h)
 
 /-- Weaken by an extra (last) hypothesis. -/
 theorem weaken {Γ : List F} {h φ : F} (d : Pf Γ φ) : Pf (Γ ++ [h]) φ :=
@@ -201,9 +201,9 @@ theorem orIL {Γ : List F} {a b : F} (h : Pf Γ a) : Pf Γ (.or a b) := app (t2_
 /-- Proof by cases, as a schema: `(a ⊃ c) ⊃ ((b ⊃ c) ⊃ (a ∨ b ⊃ c))` [✱1·6, ✱1·4, ✱1·2]. -/
 theorem orE_schema (a b c : F) : Thm (imp (imp a c) (imp (imp b c) (imp (.or a b) c))) :=
   -- under [a ⊃ c, b ⊃ c, a ∨ b]
-  have hac : Pf [imp a c, imp b c, .or a b] (imp a c) := hy 0
-  have hbc : Pf [imp a c, imp b c, .or a b] (imp b c) := hy 1
-  have hab : Pf [imp a c, imp b c, .or a b] (.or a b) := hy 2
+  have hac : Pf [imp a c, imp b c, .or a b] (imp a c) := hy 0 rfl
+  have hbc : Pf [imp a c, imp b c, .or a b] (imp b c) := hy 1 rfl
+  have hab : Pf [imp a c, imp b c, .or a b] (.or a b) := hy 2 rfl
   have h1 : Pf [imp a c, imp b c, .or a b] (.or a c) := app2 (Thm.sum a b c) hbc hab
   have h2 : Pf [imp a c, imp b c, .or a b] (.or c a) := app (Thm.perm a c) h1
   have h3 : Pf [imp a c, imp b c, .or a b] (.or c c) := app2 (Thm.sum c a c) hac h2

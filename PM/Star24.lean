@@ -133,9 +133,10 @@ macro "cls_expr" : tactic => `(tactic| repeat (first
 /-- ✱20·18 for an expression F of a class whose value is a class (the analogue of ✱13·12 for identities,
     "equals put for equals"): `⊢ :. α = β . ⊃ . F(α) = F(β)`. ✱20·18 for the expression F(α) = F(β)
     (`qcls20_18`; extensional, `ClsExpr`) gives F(α) = F(β) . ≡ . F(β) = F(β), whose second member is ✱20·2
-    (detached by ✱3·27 and Comm, `qiffElimOf`). -/
+    (detached by ✱3·27 and Comm, `qiffElimOf`). That F is such an expression is an explicit argument,
+    given at each use by `by cls_expr`. -/
 theorem qclsEqCongr [Reducibility S] {b : Ty} (F : (V a → QF V) → V b → QF V) (ψ χ : V a → QF V)
-    (hF : ∀ z, ClsExpr fun α => F α z := by intro; cls_expr) :
+    (hF : ∀ z, ClsExpr fun α => F α z) :
     QThm S (imp (clsEq ψ χ) (clsEq (F ψ) (F χ))) :=
   qsyl (qcls20_18 (fun α => clsEq (F α) (F χ))
       (clsExpr_ext (ClsExpr.clsOf (fun z => hF z) fun _ => .const _)) ψ χ)
@@ -189,8 +190,8 @@ theorem qclsDistribRight [Reducibility S] (β γ δ : V a → QF V) :
   calc (β ∪ γ) ∩ δ
       ≐ δ ∩ (β ∪ γ) := q22_51 _ _                                                 -- ✱22·51
     _ ≐ (δ ∩ β) ∪ (δ ∩ γ) := qclsEqSymm (q22_68 δ β γ)                              -- ✱22·68
-    _ ≐ (β ∩ δ) ∪ (δ ∩ γ) := QThm.mp (q22_51 δ β) (qclsEqCongr (fun X => X ∪ (δ ∩ γ)) _ _)  -- ✱22·51
-    _ ≐ (β ∩ δ) ∪ (γ ∩ δ) := QThm.mp (q22_51 δ γ) (qclsEqCongr (fun X => (β ∩ δ) ∪ X) _ _)  -- ✱22·51
+    _ ≐ (β ∩ δ) ∪ (δ ∩ γ) := QThm.mp (q22_51 δ β) (qclsEqCongr (fun X => X ∪ (δ ∩ γ)) _ _ (by cls_expr))  -- ✱22·51
+    _ ≐ (β ∩ δ) ∪ (γ ∩ δ) := QThm.mp (q22_51 δ γ) (qclsEqCongr (fun X => (β ∩ δ) ∪ X) _ _ (by cls_expr))  -- ✱22·51
 
 /-! ## ✱24·1–✱24·17: V and Λ -/
 
@@ -492,7 +493,7 @@ theorem q24_4 [Reducibility S] (α β : V a → QF V) :
     have e : QThm S (clsEq ((α ∪ β) − α) (β − α)) :=
       show (α ∪ β) − α ≐ β − α from
       calc (α ∪ β) − α
-          ≐ (β ∪ α) − α := QThm.mp (q22_57 α β) (qclsEqCongr (fun X => X − α) _ _)
+          ≐ (β ∪ α) − α := QThm.mp (q22_57 α β) (qclsEqCongr (fun X => X − α) _ _ (by cls_expr))
         _ ≐ β − α := q22_9 β α
     calc clsEq (α ∩ β) Λ
         ≡ clsEq (β ∩ α) Λ := QThm.mp (q22_51 α β) (qclsEqL _ _ Λ)
@@ -504,7 +505,7 @@ theorem q24_4 [Reducibility S] (α β : V a → QF V) :
         ≡ clsEq (β ∩ α) Λ := QThm.mp (q22_51 α β) (qclsEqL _ _ Λ)
       _ ≡ clsEq ((β ∪ α) − β) α := h1 β α                                         -- (1) β, α / α, β
       _ ≡ clsEq ((α ∪ β) − β) α :=
-          QThm.mp (QThm.mp (q22_57 β α) (qclsEqCongr (fun X => X − β) _ _)) (qclsEqL _ _ α)  -- [✱22·51·57] (2)
+          QThm.mp (QThm.mp (q22_57 β α) (qclsEqCongr (fun X => X − β) _ _ (by cls_expr))) (qclsEqL _ _ α)  -- [✱22·51·57] (2)
   qandI (h1 α β) (qiffTrans (qiffSymm (h1 α β)) h2)                                 -- (1).(2)
 
 /-- ✱24·401 `⊢ : β ⊂ α . ⊃ . (β ∪ γ) − α = γ − α`. (1) is ✱22·68 with the common factor second
@@ -540,7 +541,7 @@ theorem q24_41 [Reducibility S] (α β : V a → QF V) : QThm S (clsEq α ((α �
     show (α ∩ β) ∪ (α − β) ≐ α from
     calc (α ∩ β) ∪ (α − β)
         ≐ α ∩ (β ∪ −β) := q22_68 α β (−β)                                         -- ✱22·68
-      _ ≐ α ∩ 𝐕 := QThm.mp (q24_22 β) (qclsEqCongr (fun X => α ∩ X) _ _)           -- [✱24·22]
+      _ ≐ α ∩ 𝐕 := QThm.mp (q24_22 β) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))           -- [✱24·22]
       _ ≐ α := q24_26 α                                                           -- [✱24·26]
 
 /-- ✱24·411 `⊢ : β ⊂ α . ⊃ . α = β ∪ (α − β)`, as printed (p. 235; the transcription drops the last bracket, the
@@ -567,8 +568,8 @@ theorem q24_412 [Reducibility S] (α β γ : V a → QF V) :
     show (α − β) ∩ γ ≐[H] Λ from
     calc (α − β) ∩ γ
         ≐ α ∩ (−β ∩ γ) := q22_52 α (−β) γ
-      _ ≐ α ∩ (γ − β) := QThm.mp (q22_51 (−β) γ) (qclsEqCongr (fun X => α ∩ X) _ _)
-      _ ≐[H] α ∩ Λ := qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q24_3 γ β)) (qclsEqCongr (fun X => α ∩ X) _ _))  -- ✱24·3
+      _ ≐ α ∩ (γ − β) := QThm.mp (q22_51 (−β) γ) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))
+      _ ≐[H] α ∩ Λ := qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q24_3 γ β)) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr)))  -- ✱24·3
       _ ≐ Λ := q24_23 α                                                           -- ✱24·23
   have hβ : QThm S (imp H (clsEq ((α − β) ∪ β) α)) :=
     show (α − β) ∪ β ≐[H] α from
@@ -579,7 +580,7 @@ theorem q24_412 [Reducibility S] (α β γ : V a → QF V) :
   calc (α − β) ∪ (β − γ)
       ≐ ((α − β) ∩ γ ∪ ((α − β) − γ)) ∪ (β − γ) := QThm.mp (q24_41 (α − β) γ) (q22_551 _ _ _)  -- ✱24·41
     _ ≐[H] (Λ ∪ ((α − β) − γ)) ∪ (β − γ) :=
-        qsyl hz (qclsEqCongr (fun X => (X ∪ ((α − β) − γ)) ∪ (β − γ)) _ _)          -- [✱24·3·23]
+        qsyl hz (qclsEqCongr (fun X => (X ∪ ((α − β) − γ)) ∪ (β − γ)) _ _ (by cls_expr))          -- [✱24·3·23]
     _ ≐ (((α − β) − γ) ∪ Λ) ∪ (β − γ) := QThm.mp (q22_57 _ _) (q22_551 _ _ _)
     _ ≐ ((α − β) − γ) ∪ (β − γ) := QThm.mp (q24_24 _) (q22_551 _ _ _)
     _ ≐ ((α − β) ∪ β) − γ := qclsEqSymm (qclsDistribRight (α − β) β (−γ))          -- [✱22·68]
@@ -617,16 +618,16 @@ theorem q24_431 [Reducibility S] (α β γ : V a → QF V) :
       ≐ ((α ∪ γ) ∩ β) ∪ ((α ∪ γ) ∩ −γ) := qclsEqSymm (q22_68 _ _ _)                 -- ✱22·68
     _ ≐ ((α ∩ β) ∪ (γ ∩ β)) ∪ ((α ∪ γ) ∩ −γ) := QThm.mp (qclsDistribRight α γ β) (q22_551 _ _ _)
     _ ≐ ((α ∩ β) ∪ (γ ∩ β)) ∪ ((α − γ) ∪ (γ − γ)) :=
-        QThm.mp (qclsDistribRight α γ (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∪ (γ ∩ β)) ∪ X) _ _)
+        QThm.mp (qclsDistribRight α γ (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∪ (γ ∩ β)) ∪ X) _ _ (by cls_expr))
     _ ≐ (α ∩ β) ∪ (γ ∩ β) ∪ (α − γ) ∪ (γ − γ) := qclsEqSymm (q22_7 _ _ _)           -- [✱22·68]
     _ ≐ (α ∩ β) ∪ (γ ∩ β) ∪ (α − γ) ∪ Λ :=
-        QThm.mp (q24_21 γ) (qclsEqCongr (fun X => (α ∩ β) ∪ (γ ∩ β) ∪ (α − γ) ∪ X) _ _)  -- [✱24·21]
+        QThm.mp (q24_21 γ) (qclsEqCongr (fun X => (α ∩ β) ∪ (γ ∩ β) ∪ (α − γ) ∪ X) _ _ (by cls_expr))  -- [✱24·21]
     _ ≐ (α ∩ β) ∪ (γ ∩ β) ∪ (α − γ) := q24_24 _                                    -- [✱24·24]
     _ ≐ (α ∩ β) ∪ ((γ ∩ β) ∪ (α − γ)) := q22_7 _ _ _
-    _ ≐ (α ∩ β) ∪ ((α − γ) ∪ (γ ∩ β)) := QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => (α ∩ β) ∪ X) _ _)
+    _ ≐ (α ∩ β) ∪ ((α − γ) ∪ (γ ∩ β)) := QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => (α ∩ β) ∪ X) _ _ (by cls_expr))
     _ ≐ (α ∩ β) ∪ (α − γ) ∪ (γ ∩ β) := qclsEqSymm (q22_7 _ _ _)
     _ ≐ (α ∩ β) ∪ (α − γ) ∪ (β ∩ γ) :=
-        QThm.mp (q22_51 γ β) (qclsEqCongr (fun X => (α ∩ β) ∪ (α − γ) ∪ X) _ _)      -- [✱22·51·57]
+        QThm.mp (q22_51 γ β) (qclsEqCongr (fun X => (α ∩ β) ∪ (α − γ) ∪ X) _ _ (by cls_expr))      -- [✱22·51·57]
 
 /-- ✱24·432 `⊢ . (α − γ) ∪ (β ∩ γ) = (α ∩ β) ∪ (α − γ) ∪ (β ∩ γ)`. PM's lines prove the identity from right to
     left (turned by ✱20·21). "✱24·22·35" is ✱24·35 with γ ∪ −γ = V (its product commuted, ✱22·51);
@@ -641,20 +642,20 @@ theorem q24_432 [Reducibility S] (α β γ : V a → QF V) :
       _ ≐ (α ∩ β) ∩ (γ ∪ −γ) := q22_51 _ _
       _ ≐ ((α ∩ β) ∩ γ) ∪ ((α ∩ β) − γ) := qclsEqSymm (q22_68 _ _ _)               -- [✱22·68]
       _ ≐ ((α ∩ β) ∩ γ) ∪ (α ∩ (β − γ)) :=
-          QThm.mp (q22_52 α β (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _)
+          QThm.mp (q22_52 α β (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _ (by cls_expr))
       _ ≐ ((α ∩ β) ∩ γ) ∪ (α ∩ (−γ ∩ β)) :=
-          QThm.mp (q22_51 β (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ (α ∩ X)) _ _)
+          QThm.mp (q22_51 β (−γ)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ (α ∩ X)) _ _ (by cls_expr))
       _ ≐ ((α ∩ β) ∩ γ) ∪ ((α − γ) ∩ β) :=
-          QThm.mp (qclsEqSymm (q22_52 α (−γ) β)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _)  -- [✱22·51]
+          QThm.mp (qclsEqSymm (q22_52 α (−γ) β)) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _ (by cls_expr))  -- [✱22·51]
   have l2 : QThm S (clsEq ((α ∩ β) ∪ (α − γ)) ((α − γ) ∪ ((α ∩ β) ∩ γ))) :=
     show (α ∩ β) ∪ (α − γ) ≐ (α − γ) ∪ ((α ∩ β) ∩ γ) from
     calc (α ∩ β) ∪ (α − γ)
         ≐ ((α ∩ β) ∩ γ) ∪ ((α − γ) ∩ β) ∪ (α − γ) := QThm.mp l1 (q22_551 _ _ _)      -- [✱22·551]
       _ ≐ ((α ∩ β) ∩ γ) ∪ (((α − γ) ∩ β) ∪ (α − γ)) := q22_7 _ _ _
       _ ≐ ((α ∩ β) ∩ γ) ∪ ((α − γ) ∪ ((α − γ) ∩ β)) :=
-          QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _)
+          QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _ (by cls_expr))
       _ ≐ ((α ∩ β) ∩ γ) ∪ (α − γ) :=
-          QThm.mp (q22_63 (α − γ) β) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _)  -- [✱22·63]
+          QThm.mp (q22_63 (α − γ) β) (qclsEqCongr (fun X => ((α ∩ β) ∩ γ) ∪ X) _ _ (by cls_expr))  -- [✱22·63]
       _ ≐ (α − γ) ∪ ((α ∩ β) ∩ γ) := q22_57 _ _                                  -- [✱22·57]
   qclsEqSymm <|
     show (α ∩ β) ∪ (α − γ) ∪ (β ∩ γ) ≐ (α − γ) ∪ (β ∩ γ) from
@@ -662,13 +663,13 @@ theorem q24_432 [Reducibility S] (α β γ : V a → QF V) :
         ≐ (α − γ) ∪ ((α ∩ β) ∩ γ) ∪ (β ∩ γ) := QThm.mp l2 (q22_551 _ _ _)           -- [✱22·551]
       _ ≐ (α − γ) ∪ (((α ∩ β) ∩ γ) ∪ (β ∩ γ)) := q22_7 _ _ _
       _ ≐ (α − γ) ∪ ((α ∩ (β ∩ γ)) ∪ (β ∩ γ)) :=
-          QThm.mp (q22_52 α β γ) (qclsEqCongr (fun X => (α − γ) ∪ (X ∪ (β ∩ γ))) _ _)
+          QThm.mp (q22_52 α β γ) (qclsEqCongr (fun X => (α − γ) ∪ (X ∪ (β ∩ γ))) _ _ (by cls_expr))
       _ ≐ (α − γ) ∪ (((β ∩ γ) ∩ α) ∪ (β ∩ γ)) :=
-          QThm.mp (q22_51 α (β ∩ γ)) (qclsEqCongr (fun X => (α − γ) ∪ (X ∪ (β ∩ γ))) _ _)
+          QThm.mp (q22_51 α (β ∩ γ)) (qclsEqCongr (fun X => (α − γ) ∪ (X ∪ (β ∩ γ))) _ _ (by cls_expr))
       _ ≐ (α − γ) ∪ ((β ∩ γ) ∪ ((β ∩ γ) ∩ α)) :=
-          QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => (α − γ) ∪ X) _ _)
+          QThm.mp (q22_57 _ _) (qclsEqCongr (fun X => (α − γ) ∪ X) _ _ (by cls_expr))
       _ ≐ (α − γ) ∪ (β ∩ γ) :=
-          QThm.mp (q22_63 (β ∩ γ) α) (qclsEqCongr (fun X => (α − γ) ∪ X) _ _)       -- [✱22·63]
+          QThm.mp (q22_63 (β ∩ γ) α) (qclsEqCongr (fun X => (α − γ) ∪ X) _ _ (by cls_expr))       -- [✱22·63]
 
 /-- ✱24·44 `⊢ . (α ∪ γ) ∩ (β ∪ −γ) = (α ∩ −γ) ∪ (β ∩ γ)` [✱24·431·432], joined by ✱20·24. -/
 theorem q24_44 [Reducibility S] (α β γ : V a → QF V) :
@@ -869,19 +870,19 @@ theorem q24_491 [Reducibility S] (α β γ : V a → QF V) :
     calc α − γ
         ≐[H] (α ∩ (β ∪ γ)) − γ := qsyl hα (q22_481 _ _ (−γ))                       -- [✱22·481]
       _ ≐ α ∩ ((β ∪ γ) − γ) := q22_52 _ _ _
-      _ ≐[H] α ∩ β := qsyl hC (qclsEqCongr (fun X => α ∩ X) _ _)                     -- [✱24·4] (1)
+      _ ≐[H] α ∩ β := qsyl hC (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))                     -- [✱24·4] (1)
   have h2 : QThm S (imp H (clsEq (α − β) (α ∩ γ))) :=
     show α − β ≐[H] α ∩ γ from
     calc α − β
         ≐[H] (α ∩ (β ∪ γ)) − β := qsyl hα (q22_481 _ _ (−β))
       _ ≐ α ∩ ((β ∪ γ) − β) := q22_52 _ _ _
-      _ ≐[H] α ∩ γ := qsyl hB (qclsEqCongr (fun X => α ∩ X) _ _)                     -- Similarly (2)
+      _ ≐[H] α ∩ γ := qsyl hB (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))                     -- Similarly (2)
   have h3 : QThm S (imp H (clsEq ((α − β) ∪ (α − γ)) α)) :=
     show (α − β) ∪ (α − γ) ≐[H] α from
     calc (α − β) ∪ (α − γ)
         ≐[H] (α ∩ γ) ∪ (α ∩ β) := qsyl (qcomp h2 h1) (q22_73 _ _ _ _)               -- (1).(2)
       _ ≐ α ∩ (γ ∪ β) := q22_68 _ _ _                                             -- [✱22·68]
-      _ ≐ α ∩ (β ∪ γ) := QThm.mp (q22_57 γ β) (qclsEqCongr (fun X => α ∩ X) _ _)
+      _ ≐ α ∩ (β ∪ γ) := QThm.mp (q22_57 γ β) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))
       _ ≐[H] α := qsyl (QL.t3_27 _ _) (qiffMp (q22_621 α (β ∪ γ)))                  -- [✱22·621] (3)
   qcomp (qcomp h2 h1) (qsyl h3 (qiffMp (q20_21 _ _)))                              -- (1).(2).(3)
 
@@ -895,18 +896,18 @@ theorem q24_492 [Reducibility S] (α β γ : V a → QF V) :
   have hN : QThm S (clsEq (−(α − β)) (−α ∪ β)) :=
     show −(α − β) ≐ −α ∪ β from
     calc −(α − β)
-        ≐ −(−(−α) ∩ −β) := QThm.mp (qclsEqSymm (q22_8 α)) (qclsEqCongr (fun X => −(X ∩ −β)) _ _)
+        ≐ −(−(−α) ∩ −β) := QThm.mp (qclsEqSymm (q22_8 α)) (qclsEqCongr (fun X => −(X ∩ −β)) _ _ (by cls_expr))
       _ ≐ −α ∪ β := q22_86 (−α) β                                                 -- ✱22·86
   show α − γ ≐[H] β from
   calc α − γ
       ≐[H] α − (α − β) :=
-        qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q20_21 _ _)) (qclsEqCongr (fun X => α − X) _ _))  -- ✱22·481
-    _ ≐ α ∩ (−α ∪ β) := QThm.mp hN (qclsEqCongr (fun X => α ∩ X) _ _)               -- [✱22·8·86]
+        qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q20_21 _ _)) (qclsEqCongr (fun X => α − X) _ _ (by cls_expr)))  -- ✱22·481
+    _ ≐ α ∩ (−α ∪ β) := QThm.mp hN (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))               -- [✱22·8·86]
     _ ≐ (−α ∪ β) ∩ α := q22_51 _ _
-    _ ≐ (−α ∪ β) ∩ −(−α) := QThm.mp (qclsEqSymm (q22_8 α)) (qclsEqCongr (fun X => (−α ∪ β) ∩ X) _ _)
-    _ ≐ (β ∪ −α) − (−α) := QThm.mp (q22_57 (−α) β) (qclsEqCongr (fun X => X − (−α)) _ _)
+    _ ≐ (−α ∪ β) ∩ −(−α) := QThm.mp (qclsEqSymm (q22_8 α)) (qclsEqCongr (fun X => (−α ∪ β) ∩ X) _ _ (by cls_expr))
+    _ ≐ (β ∪ −α) − (−α) := QThm.mp (q22_57 (−α) β) (qclsEqCongr (fun X => X − (−α)) _ _ (by cls_expr))
     _ ≐ β − (−α) := q22_9 β (−α)
-    _ ≐ β ∩ α := QThm.mp (q22_8 α) (qclsEqCongr (fun X => β ∩ X) _ _)
+    _ ≐ β ∩ α := QThm.mp (q22_8 α) (qclsEqCongr (fun X => β ∩ X) _ _ (by cls_expr))
     _ ≐ α ∩ β := q22_51 _ _                                                       -- [✱22·8·9]
     _ ≐ β ∩ α := q22_51 _ _
     _ ≐[H] β := qsyl (QL.t3_26 _ _) (qiffMp (q22_621 β α))                          -- [✱22·621]
@@ -925,7 +926,7 @@ theorem q24_493 [Reducibility S] (α β γ : V a → QF V) :
   calc α
       ≐ α ∩ 𝐕 := qclsEqSymm (q24_26 α)
     _ ≐[clsEq (β ∩ γ) Λ] α ∩ (−β ∪ −γ) :=
-        qsyl hV (qsyl (qiffMp (q20_21 _ _)) (qclsEqCongr (fun X => α ∩ X) _ _))     -- [✱24·26]
+        qsyl hV (qsyl (qiffMp (q20_21 _ _)) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr)))     -- [✱24·26]
     _ ≐ (α − β) ∪ (α − γ) := qclsEqSymm (q22_68 α (−β) (−γ))                        -- [✱22·68]
 
 /-- ✱24·494 `⊢ : ξ ⊂ α . η ⊂ β . α ∩ β = Λ . ⊃ . (ξ ∪ η) − α = η . (ξ ∪ η) − β = ξ`. ✱24·311 at β, α has β ∩ α
@@ -975,18 +976,18 @@ theorem q24_495 [Reducibility S] (α β γ : V a → QF V) :
     calc (γ − β) − γ
         ≐ (−β ∩ γ) ∩ −γ := QThm.mp (q22_51 γ (−β)) (q22_481 _ _ _)
       _ ≐ −β ∩ (γ ∩ −γ) := q22_52 _ _ _
-      _ ≐ −β ∩ Λ := QThm.mp (q24_21 γ) (qclsEqCongr (fun X => −β ∩ X) _ _)          -- ✱24·21
+      _ ≐ −β ∩ Λ := QThm.mp (q24_21 γ) (qclsEqCongr (fun X => −β ∩ X) _ _ (by cls_expr))          -- ✱24·21
       _ ≐ Λ := q24_23 _
   have h1 : QThm S (clsEq ((α ∪ γ) − (β ∪ γ)) ((α − β) − γ)) :=
     show (α ∪ γ) − (β ∪ γ) ≐ (α − β) − γ from
     calc (α ∪ γ) − (β ∪ γ)
         ≐ (α ∪ γ) ∩ (−β ∩ −γ) :=
-          QThm.mp (qclsEqSymm (q22_87 β γ)) (qclsEqCongr (fun X => (α ∪ γ) ∩ X) _ _)  -- ✱22·87
+          QThm.mp (qclsEqSymm (q22_87 β γ)) (qclsEqCongr (fun X => (α ∪ γ) ∩ X) _ _ (by cls_expr))  -- ✱22·87
       _ ≐ (α ∩ (−β ∩ −γ)) ∪ (γ ∩ (−β ∩ −γ)) := qclsDistribRight α γ _               -- ✱22·68
       _ ≐ ((α − β) − γ) ∪ ((γ − β) − γ) :=
           QThm.mp (qandI (qclsEqSymm (q22_52 α (−β) (−γ))) (qclsEqSymm (q22_52 γ (−β) (−γ))))
             (q22_73 _ _ _ _)
-      _ ≐ ((α − β) − γ) ∪ Λ := QThm.mp hz (qclsEqCongr (fun X => ((α − β) − γ) ∪ X) _ _)  -- [✱24·21]
+      _ ≐ ((α − β) − γ) ∪ Λ := QThm.mp hz (qclsEqCongr (fun X => ((α − β) − γ) ∪ X) _ _ (by cls_expr))  -- [✱24·21]
       _ ≐ (α − β) − γ := q24_24 _                                                 -- (1)
   have h2 : QThm S (imp (clsEq (α ∩ γ) Λ) (clsEq (α − γ) α)) :=
     qsyl (qiffMpr (q24_311 α γ)) (qiffMp (q22_621 α (−γ)))                         -- ✱24·311.✱22·621 (2)
@@ -994,7 +995,7 @@ theorem q24_495 [Reducibility S] (α β γ : V a → QF V) :
   calc (α ∪ γ) − (β ∪ γ)
       ≐ (α − β) − γ := h1                                                         -- (1)
     _ ≐ α ∩ (−β ∩ −γ) := q22_52 _ _ _
-    _ ≐ α ∩ (−γ ∩ −β) := QThm.mp (q22_51 _ _) (qclsEqCongr (fun X => α ∩ X) _ _)
+    _ ≐ α ∩ (−γ ∩ −β) := QThm.mp (q22_51 _ _) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))
     _ ≐ (α − γ) − β := qclsEqSymm (q22_52 _ _ _)
     _ ≐[clsEq (α ∩ γ) Λ] α − β := qsyl h2 (q22_481 _ _ _)                           -- (1).(2)
 
@@ -1090,7 +1091,7 @@ theorem q24_6 [Reducibility S] (α β : V a → QF V) :
   have h2 : QThm S (imp (clsEq α β) (clsEq (β − α) Λ)) :=
     show β − α ≐[clsEq α β] Λ from
     calc β − α
-        ≐[clsEq α β] β − β := qclsEqCongr (fun X => β − X) α β
+        ≐[clsEq α β] β − β := qclsEqCongr (fun X => β − X) α β (by cls_expr)
       _ ≐ Λ := q24_21 β                                                           -- ✱24·21 (2)
   have h3 : QThm S (imp (clsNonempty (β − α)) (.neg (clsEq α β))) :=
     qsyl (qiffMp (q24_54 _)) (QThm.mp h2 (QL.t2_16 _ _))                            -- (2).Transp.✱24·54 (3)
@@ -1100,14 +1101,14 @@ theorem q24_6 [Reducibility S] (α β : V a → QF V) :
 theorem q24_61 [Reducibility S] (α β : V a → QF V) : QThm S (imp (.neg (clsNonempty β)) (clsEq (α ∪ β) α)) :=
   show α ∪ β ≐[.neg (clsNonempty β)] α from
   calc α ∪ β
-      ≐[.neg (clsNonempty β)] α ∪ Λ := qsyl (qiffMp (q24_51 β)) (qclsEqCongr (fun X => α ∪ X) _ _)  -- ✱24·51
+      ≐[.neg (clsNonempty β)] α ∪ Λ := qsyl (qiffMp (q24_51 β)) (qclsEqCongr (fun X => α ∪ X) _ _ (by cls_expr))  -- ✱24·51
     _ ≐ α := q24_24 α                                                             -- ✱24·24
 
 /-- ✱24·62 `⊢ : ∼∃!β . ⊃ . α ∩ β = Λ` [✱24·51·23], ✱24·51's β = Λ put for β in α ∩ β (`qclsEqCongr`). -/
 theorem q24_62 [Reducibility S] (α β : V a → QF V) : QThm S (imp (.neg (clsNonempty β)) (clsEq (α ∩ β) Λ)) :=
   show α ∩ β ≐[.neg (clsNonempty β)] Λ from
   calc α ∩ β
-      ≐[.neg (clsNonempty β)] α ∩ Λ := qsyl (qiffMp (q24_51 β)) (qclsEqCongr (fun X => α ∩ X) _ _)  -- ✱24·51
+      ≐[.neg (clsNonempty β)] α ∩ Λ := qsyl (qiffMp (q24_51 β)) (qclsEqCongr (fun X => α ∩ X) _ _ (by cls_expr))  -- ✱24·51
     _ ≐ Λ := q24_23 α                                                             -- ✱24·23
 
 /-- ✱24·63 `⊢ :. Λ ∼∈ κ . ≡ : α ∈ κ . ⊃_α . ∃!α`, κ a class of classes ("the conditions of significance require

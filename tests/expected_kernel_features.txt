@@ -4,7 +4,6 @@
 # that disappears is removed. Rewrite with
 #   python3 scripts/kernel_census/census.py --ratchet --update
 derivationClosure attr.externAttr
-derivationClosure attr.implementedBy
 derivationClosure attr.irreducible
 derivationClosure attr.reducible
 derivationClosure const.Char
@@ -30,7 +29,6 @@ derivationClosure def.safe
 derivationClosure expr.let
 derivationClosure expr.proj
 derivationClosure ind.indexed
-derivationClosure ind.nested
 derivationClosure ind.plain
 derivationClosure ind.prop
 derivationClosure ind.recursive
@@ -95,7 +93,6 @@ derivations sort.Prop
 derivations sort.Type
 derivations sort.poly
 proofClosure attr.externAttr
-proofClosure attr.implementedBy
 proofClosure attr.irreducible
 proofClosure attr.reducible
 proofClosure const.Char
@@ -114,13 +111,11 @@ proofClosure decl.recursor
 proofClosure decl.theorem
 proofClosure decl.universePolymorphic
 proofClosure def.hints.abbrev
-proofClosure def.hints.opaque
 proofClosure def.hints.regular
 proofClosure def.safe
 proofClosure expr.let
 proofClosure expr.proj
 proofClosure ind.indexed
-proofClosure ind.nested
 proofClosure ind.plain
 proofClosure ind.prop
 proofClosure ind.recursive

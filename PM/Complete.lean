@@ -114,7 +114,7 @@ theorem mem_lits (v : String → Bool) {x : String} : ∀ {xs : List String}, x 
 /-- `∼a ⊃ (∼b ⊃ ∼(a ∨ b))` [✱2·01, ∨-elimination, ✱2·24]. -/
 theorem not_or_intro (a b : F) : Thm (imp (.neg a) (imp (.neg b) (.neg (.or a b)))) := ofPf <| by
   intro_; intro_
-  exact negI (orE (hy 2) (absurd _ (hy 3) (hy 0)) (absurd _ (hy 3) (hy 1)))
+  exact negI (orE (hy 2 rfl) (absurd _ (hy 3 rfl) (hy 0 rfl)) (absurd _ (hy 3 rfl) (hy 1 rfl)))
 
 theorem kalmar (v : String → Bool) (xs : List String) :
     ∀ φ : F, (∀ s ∈ φ.vars, s ∈ xs) → Pf (lits v xs) (sgn (φ.eval v) φ) := by

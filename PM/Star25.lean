@@ -167,9 +167,10 @@ macro "rel_expr" : tactic => `(tactic| repeat (first
 /-- ✱21·18 for an expression F of a relation whose value is a relation ("equals put for equals", as
     `qclsEqCongr` for classes): `⊢ :. R = S . ⊃ . F(R) = F(S)`. ✱21·18 for the expression F(R) = F(S)
     (`qrel21_18`; extensional, `RelExpr`) gives F(R) = F(S) . ≡ . F(S) = F(S), whose second member is ✱21·2
-    (detached by ✱3·27 and Comm, `qiffElimOf`). -/
+    (detached by ✱3·27 and Comm, `qiffElimOf`). That F is such an expression is an explicit argument,
+    given at each use by `by rel_expr`. -/
 theorem qrelEqCongr [Reducibility S] {c d : Ty} (F : (V a → V b → QF V) → V c → V d → QF V)
-    (ψ χ : V a → V b → QF V) (hF : ∀ z w, RelExpr fun R => F R z w := by rel_expr) :
+    (ψ χ : V a → V b → QF V) (hF : ∀ z w, RelExpr fun R => F R z w) :
     QThm S (imp (relEq ψ χ) (relEq (F ψ) (F χ))) :=
   qsyl (qrel21_18 (fun R => relEq (F R) (F χ))
       (relExpr_ext (RelExpr.relOf (fun z w => hF z w) fun _ => .const _)) ψ χ)
@@ -532,8 +533,8 @@ theorem qrelDistribRight [Reducibility S] (Q R T : V a → V b → QF V) :
   calc (Q ⊍ R) ∩̇ T
       ≑ T ∩̇ (Q ⊍ R) := q23_51 _ _                                                 -- ✱23·51
     _ ≑ (T ∩̇ Q) ⊍ (T ∩̇ R) := qrelEqSymm (q23_68 T Q R)                              -- ✱23·68
-    _ ≑ (Q ∩̇ T) ⊍ (T ∩̇ R) := QThm.mp (q23_51 T Q) (qrelEqCongr (fun X => X ⊍ (T ∩̇ R)) _ _)  -- ✱23·51
-    _ ≑ (Q ∩̇ T) ⊍ (R ∩̇ T) := QThm.mp (q23_51 T R) (qrelEqCongr (fun X => (Q ∩̇ T) ⊍ X) _ _)  -- ✱23·51
+    _ ≑ (Q ∩̇ T) ⊍ (T ∩̇ R) := QThm.mp (q23_51 T Q) (qrelEqCongr (fun X => X ⊍ (T ∩̇ R)) _ _ (by rel_expr))  -- ✱23·51
+    _ ≑ (Q ∩̇ T) ⊍ (R ∩̇ T) := QThm.mp (q23_51 T R) (qrelEqCongr (fun X => (Q ∩̇ T) ⊍ X) _ _ (by rel_expr))  -- ✱23·51
 
 /-- ✱25·4 `⊢ : P ∩̇ Q = Λ̇ . ≡ . (P ⊍ Q) ∸ P = Q . ≡ . (P ⊍ Q) ∸ Q = P`, the chain stated as A ≡ B . B ≡ C, as
     ✱24·4 is; ✱24·4's (1) and (2) are A ≡ B and A ≡ C, joined by ✱4·21 and ✱4·22. In (1), ✱25·311 at Q, P has
@@ -547,7 +548,7 @@ theorem q25_4 [Reducibility S] (P Q : V a → V b → QF V) :
     have e : QThm S (relEq ((P ⊍ Q) ∸ P) (Q ∸ P)) :=
       show (P ⊍ Q) ∸ P ≑ Q ∸ P from
       calc (P ⊍ Q) ∸ P
-          ≑ (Q ⊍ P) ∸ P := QThm.mp (q23_57 P Q) (qrelEqCongr (fun X => X ∸ P) _ _)
+          ≑ (Q ⊍ P) ∸ P := QThm.mp (q23_57 P Q) (qrelEqCongr (fun X => X ∸ P) _ _ (by rel_expr))
         _ ≑ Q ∸ P := q23_9 Q P
     calc relEq (P ∩̇ Q) Λ̇
         ≡ relEq (Q ∩̇ P) Λ̇ := QThm.mp (q23_51 P Q) (qrelEqL _ _ Λ̇)
@@ -559,7 +560,7 @@ theorem q25_4 [Reducibility S] (P Q : V a → V b → QF V) :
         ≡ relEq (Q ∩̇ P) Λ̇ := QThm.mp (q23_51 P Q) (qrelEqL _ _ Λ̇)
       _ ≡ relEq ((Q ⊍ P) ∸ Q) P := h1 Q P                                         -- (1) Q, P / P, Q
       _ ≡ relEq ((P ⊍ Q) ∸ Q) P :=
-          QThm.mp (QThm.mp (q23_57 Q P) (qrelEqCongr (fun X => X ∸ Q) _ _)) (qrelEqL _ _ P)  -- [✱23·51·57] (2)
+          QThm.mp (QThm.mp (q23_57 Q P) (qrelEqCongr (fun X => X ∸ Q) _ _ (by rel_expr))) (qrelEqL _ _ P)  -- [✱23·51·57] (2)
   qandI (h1 P Q) (qiffTrans (qiffSymm (h1 P Q)) h2)                                 -- (1).(2)
 
 /-- ✱25·401 `⊢ : Q ⪽ P . ⊃ . (Q ⊍ R) ∸ P = R ∸ P`, as ✱24·401. (1) is ✱23·68 with the common factor second
@@ -594,7 +595,7 @@ theorem q25_41 [Reducibility S] (R S' : V a → V b → QF V) : QThm S (relEq R 
     show (R ∩̇ S') ⊍ (R ∸ S') ≑ R from
     calc (R ∩̇ S') ⊍ (R ∸ S')
         ≑ R ∩̇ (S' ⊍ ∸S') := q23_68 R S' (∸S')                                       -- ✱23·68
-      _ ≑ R ∩̇ 𝐕̇ := QThm.mp (q25_22 S') (qrelEqCongr (fun X => R ∩̇ X) _ _)            -- [✱25·22]
+      _ ≑ R ∩̇ 𝐕̇ := QThm.mp (q25_22 S') (qrelEqCongr (fun X => R ∩̇ X) _ _ (by rel_expr))            -- [✱25·22]
       _ ≑ R := q25_26 R                                                           -- [✱25·26]
 
 /-- ✱25·411 `⊢ : S ⪽ R . ⊃ . R = S ⊍ (R ∸ S)`, as ✱24·411. ✱23·633 at S, R, R ∸ S gives (S ∩̇ R) ⊍ (R ∸ S),
@@ -629,9 +630,9 @@ theorem q25_412 [Reducibility S] (P Q S' : V a → V b → QF V) :
     show (P ∸ Q) ∩̇ S' ≑[H] Λ̇ from
     calc (P ∸ Q) ∩̇ S'
         ≑ P ∩̇ (∸Q ∩̇ S') := q23_52 P (∸Q) S'
-      _ ≑ P ∩̇ (S' ∸ Q) := QThm.mp (q23_51 (∸Q) S') (qrelEqCongr (fun X => P ∩̇ X) _ _)
+      _ ≑ P ∩̇ (S' ∸ Q) := QThm.mp (q23_51 (∸Q) S') (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))
       _ ≑[H] P ∩̇ Λ̇ :=
-          qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q25_3 S' Q)) (qrelEqCongr (fun X => P ∩̇ X) _ _))  -- ✱25·3
+          qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q25_3 S' Q)) (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr)))  -- ✱25·3
       _ ≑ Λ̇ := q25_23 P                                                           -- ✱25·23
   have hQ : QThm S (imp H (relEq ((P ∸ Q) ⊍ Q) P)) :=
     show (P ∸ Q) ⊍ Q ≑[H] P from
@@ -643,7 +644,7 @@ theorem q25_412 [Reducibility S] (P Q S' : V a → V b → QF V) :
       ≑ ((P ∸ Q) ∩̇ S' ⊍ ((P ∸ Q) ∸ S')) ⊍ (Q ∸ S') :=
         QThm.mp (q25_41 (P ∸ Q) S') (q23_551 _ _ _)                                 -- ✱25·41
     _ ≑[H] (Λ̇ ⊍ ((P ∸ Q) ∸ S')) ⊍ (Q ∸ S') :=
-        qsyl hz (qrelEqCongr (fun X => (X ⊍ ((P ∸ Q) ∸ S')) ⊍ (Q ∸ S')) _ _)          -- [✱25·3·23]
+        qsyl hz (qrelEqCongr (fun X => (X ⊍ ((P ∸ Q) ∸ S')) ⊍ (Q ∸ S')) _ _ (by rel_expr))          -- [✱25·3·23]
     _ ≑ (((P ∸ Q) ∸ S') ⊍ Λ̇) ⊍ (Q ∸ S') := QThm.mp (q23_57 _ _) (q23_551 _ _ _)
     _ ≑ ((P ∸ Q) ∸ S') ⊍ (Q ∸ S') := QThm.mp (q25_24 _) (q23_551 _ _ _)
     _ ≑ ((P ∸ Q) ⊍ Q) ∸ S' := qrelEqSymm (qrelDistribRight (P ∸ Q) Q (∸S'))          -- [✱23·68]
@@ -681,16 +682,16 @@ theorem q25_431 [Reducibility S] (P Q R : V a → V b → QF V) :
       ≑ ((P ⊍ R) ∩̇ Q) ⊍ ((P ⊍ R) ∩̇ ∸R) := qrelEqSymm (q23_68 _ _ _)                  -- ✱23·68
     _ ≑ ((P ∩̇ Q) ⊍ (R ∩̇ Q)) ⊍ ((P ⊍ R) ∩̇ ∸R) := QThm.mp (qrelDistribRight P R Q) (q23_551 _ _ _)
     _ ≑ ((P ∩̇ Q) ⊍ (R ∩̇ Q)) ⊍ ((P ∸ R) ⊍ (R ∸ R)) :=
-        QThm.mp (qrelDistribRight P R (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ⊍ (R ∩̇ Q)) ⊍ X) _ _)
+        QThm.mp (qrelDistribRight P R (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ⊍ (R ∩̇ Q)) ⊍ X) _ _ (by rel_expr))
     _ ≑ (P ∩̇ Q) ⊍ (R ∩̇ Q) ⊍ (P ∸ R) ⊍ (R ∸ R) := qrelEqSymm (q23_7 _ _ _)          -- [✱23·68]
     _ ≑ (P ∩̇ Q) ⊍ (R ∩̇ Q) ⊍ (P ∸ R) ⊍ Λ̇ :=
-        QThm.mp (q25_21 R) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ (R ∩̇ Q) ⊍ (P ∸ R) ⊍ X) _ _)  -- [✱25·21]
+        QThm.mp (q25_21 R) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ (R ∩̇ Q) ⊍ (P ∸ R) ⊍ X) _ _ (by rel_expr))  -- [✱25·21]
     _ ≑ (P ∩̇ Q) ⊍ (R ∩̇ Q) ⊍ (P ∸ R) := q25_24 _                                     -- [✱25·24]
     _ ≑ (P ∩̇ Q) ⊍ ((R ∩̇ Q) ⊍ (P ∸ R)) := q23_7 _ _ _
-    _ ≑ (P ∩̇ Q) ⊍ ((P ∸ R) ⊍ (R ∩̇ Q)) := QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ X) _ _)
+    _ ≑ (P ∩̇ Q) ⊍ ((P ∸ R) ⊍ (R ∩̇ Q)) := QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ X) _ _ (by rel_expr))
     _ ≑ (P ∩̇ Q) ⊍ (P ∸ R) ⊍ (R ∩̇ Q) := qrelEqSymm (q23_7 _ _ _)
     _ ≑ (P ∩̇ Q) ⊍ (P ∸ R) ⊍ (Q ∩̇ R) :=
-        QThm.mp (q23_51 R Q) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ (P ∸ R) ⊍ X) _ _)       -- [✱23·51·57]
+        QThm.mp (q23_51 R Q) (qrelEqCongr (fun X => (P ∩̇ Q) ⊍ (P ∸ R) ⊍ X) _ _ (by rel_expr))       -- [✱23·51·57]
 
 /-- ✱25·432 `⊢ . (P ∸ R) ⊍ (Q ∩̇ R) = (P ∩̇ Q) ⊍ (P ∸ R) ⊍ (Q ∩̇ R)`, as ✱24·432: its lines prove the identity
     from right to left (turned by ✱21·21). "✱24·22·35" is ✱25·35 with R ⊍ ∸R = V̇ (✱25·22; its product
@@ -705,20 +706,20 @@ theorem q25_432 [Reducibility S] (P Q R : V a → V b → QF V) :
       _ ≑ (P ∩̇ Q) ∩̇ (R ⊍ ∸R) := q23_51 _ _
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ ((P ∩̇ Q) ∸ R) := qrelEqSymm (q23_68 _ _ _)                  -- [✱23·68]
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ (P ∩̇ (Q ∸ R)) :=
-          QThm.mp (q23_52 P Q (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _)
+          QThm.mp (q23_52 P Q (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _ (by rel_expr))
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ (P ∩̇ (∸R ∩̇ Q)) :=
-          QThm.mp (q23_51 Q (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ (P ∩̇ X)) _ _)
+          QThm.mp (q23_51 Q (∸R)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ (P ∩̇ X)) _ _ (by rel_expr))
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ ((P ∸ R) ∩̇ Q) :=
-          QThm.mp (qrelEqSymm (q23_52 P (∸R) Q)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _)  -- [✱23·51]
+          QThm.mp (qrelEqSymm (q23_52 P (∸R) Q)) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _ (by rel_expr))  -- [✱23·51]
   have l2 : QThm S (relEq ((P ∩̇ Q) ⊍ (P ∸ R)) ((P ∸ R) ⊍ ((P ∩̇ Q) ∩̇ R))) :=
     show (P ∩̇ Q) ⊍ (P ∸ R) ≑ (P ∸ R) ⊍ ((P ∩̇ Q) ∩̇ R) from
     calc (P ∩̇ Q) ⊍ (P ∸ R)
         ≑ ((P ∩̇ Q) ∩̇ R) ⊍ ((P ∸ R) ∩̇ Q) ⊍ (P ∸ R) := QThm.mp l1 (q23_551 _ _ _)        -- [✱23·551]
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ (((P ∸ R) ∩̇ Q) ⊍ (P ∸ R)) := q23_7 _ _ _
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ ((P ∸ R) ⊍ ((P ∸ R) ∩̇ Q)) :=
-          QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _)
+          QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _ (by rel_expr))
       _ ≑ ((P ∩̇ Q) ∩̇ R) ⊍ (P ∸ R) :=
-          QThm.mp (q23_63 (P ∸ R) Q) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _)    -- [✱23·63]
+          QThm.mp (q23_63 (P ∸ R) Q) (qrelEqCongr (fun X => ((P ∩̇ Q) ∩̇ R) ⊍ X) _ _ (by rel_expr))    -- [✱23·63]
       _ ≑ (P ∸ R) ⊍ ((P ∩̇ Q) ∩̇ R) := q23_57 _ _                                     -- [✱23·57]
   qrelEqSymm <|
     show (P ∩̇ Q) ⊍ (P ∸ R) ⊍ (Q ∩̇ R) ≑ (P ∸ R) ⊍ (Q ∩̇ R) from
@@ -726,13 +727,13 @@ theorem q25_432 [Reducibility S] (P Q R : V a → V b → QF V) :
         ≑ (P ∸ R) ⊍ ((P ∩̇ Q) ∩̇ R) ⊍ (Q ∩̇ R) := QThm.mp l2 (q23_551 _ _ _)             -- [✱23·551]
       _ ≑ (P ∸ R) ⊍ (((P ∩̇ Q) ∩̇ R) ⊍ (Q ∩̇ R)) := q23_7 _ _ _
       _ ≑ (P ∸ R) ⊍ ((P ∩̇ (Q ∩̇ R)) ⊍ (Q ∩̇ R)) :=
-          QThm.mp (q23_52 P Q R) (qrelEqCongr (fun X => (P ∸ R) ⊍ (X ⊍ (Q ∩̇ R))) _ _)
+          QThm.mp (q23_52 P Q R) (qrelEqCongr (fun X => (P ∸ R) ⊍ (X ⊍ (Q ∩̇ R))) _ _ (by rel_expr))
       _ ≑ (P ∸ R) ⊍ (((Q ∩̇ R) ∩̇ P) ⊍ (Q ∩̇ R)) :=
-          QThm.mp (q23_51 P (Q ∩̇ R)) (qrelEqCongr (fun X => (P ∸ R) ⊍ (X ⊍ (Q ∩̇ R))) _ _)
+          QThm.mp (q23_51 P (Q ∩̇ R)) (qrelEqCongr (fun X => (P ∸ R) ⊍ (X ⊍ (Q ∩̇ R))) _ _ (by rel_expr))
       _ ≑ (P ∸ R) ⊍ ((Q ∩̇ R) ⊍ ((Q ∩̇ R) ∩̇ P)) :=
-          QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => (P ∸ R) ⊍ X) _ _)
+          QThm.mp (q23_57 _ _) (qrelEqCongr (fun X => (P ∸ R) ⊍ X) _ _ (by rel_expr))
       _ ≑ (P ∸ R) ⊍ (Q ∩̇ R) :=
-          QThm.mp (q23_63 (Q ∩̇ R) P) (qrelEqCongr (fun X => (P ∸ R) ⊍ X) _ _)         -- [✱23·63]
+          QThm.mp (q23_63 (Q ∩̇ R) P) (qrelEqCongr (fun X => (P ∸ R) ⊍ X) _ _ (by rel_expr))         -- [✱23·63]
 
 /-- ✱25·44 `⊢ . (P ⊍ R) ∩̇ (Q ⊍ ∸R) = (P ∩̇ ∸R) ⊍ (Q ∩̇ R)`, as ✱24·44 [✱24·431·432], joined by ✱21·24. -/
 theorem q25_44 [Reducibility S] (P Q R : V a → V b → QF V) :
@@ -938,19 +939,19 @@ theorem q25_491 [Reducibility S] (P Q R : V a → V b → QF V) :
     calc P ∸ R
         ≑[H] (P ∩̇ (Q ⊍ R)) ∸ R := qsyl hP (q23_481 _ _ (∸R))                         -- [✱23·481]
       _ ≑ P ∩̇ ((Q ⊍ R) ∸ R) := q23_52 _ _ _
-      _ ≑[H] P ∩̇ Q := qsyl hC (qrelEqCongr (fun X => P ∩̇ X) _ _)                      -- [✱25·4] (1)
+      _ ≑[H] P ∩̇ Q := qsyl hC (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))                      -- [✱25·4] (1)
   have h2 : QThm S (imp H (relEq (P ∸ Q) (P ∩̇ R))) :=
     show P ∸ Q ≑[H] P ∩̇ R from
     calc P ∸ Q
         ≑[H] (P ∩̇ (Q ⊍ R)) ∸ Q := qsyl hP (q23_481 _ _ (∸Q))
       _ ≑ P ∩̇ ((Q ⊍ R) ∸ Q) := q23_52 _ _ _
-      _ ≑[H] P ∩̇ R := qsyl hB (qrelEqCongr (fun X => P ∩̇ X) _ _)                      -- Similarly (2)
+      _ ≑[H] P ∩̇ R := qsyl hB (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))                      -- Similarly (2)
   have h3 : QThm S (imp H (relEq ((P ∸ Q) ⊍ (P ∸ R)) P)) :=
     show (P ∸ Q) ⊍ (P ∸ R) ≑[H] P from
     calc (P ∸ Q) ⊍ (P ∸ R)
         ≑[H] (P ∩̇ R) ⊍ (P ∩̇ Q) := qsyl (qcomp h2 h1) (q23_73 _ _ _ _)                 -- (1).(2)
       _ ≑ P ∩̇ (R ⊍ Q) := q23_68 _ _ _                                              -- [✱23·68]
-      _ ≑ P ∩̇ (Q ⊍ R) := QThm.mp (q23_57 R Q) (qrelEqCongr (fun X => P ∩̇ X) _ _)
+      _ ≑ P ∩̇ (Q ⊍ R) := QThm.mp (q23_57 R Q) (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))
       _ ≑[H] P := qsyl (QL.t3_27 _ _) (qiffMp (q23_621 P (Q ⊍ R)))                   -- [✱23·621] (3)
   qcomp (qcomp h2 h1) (qsyl h3 (qiffMp (q21_21 _ _)))                              -- (1).(2).(3)
 
@@ -964,18 +965,18 @@ theorem q25_492 [Reducibility S] (P Q R : V a → V b → QF V) :
   have hN : QThm S (relEq (∸(P ∸ Q)) (∸P ⊍ Q)) :=
     show ∸(P ∸ Q) ≑ ∸P ⊍ Q from
     calc ∸(P ∸ Q)
-        ≑ ∸(∸(∸P) ∩̇ ∸Q) := QThm.mp (qrelEqSymm (q23_8 P)) (qrelEqCongr (fun X => ∸(X ∩̇ ∸Q)) _ _)
+        ≑ ∸(∸(∸P) ∩̇ ∸Q) := QThm.mp (qrelEqSymm (q23_8 P)) (qrelEqCongr (fun X => ∸(X ∩̇ ∸Q)) _ _ (by rel_expr))
       _ ≑ ∸P ⊍ Q := q23_86 (∸P) Q                                                   -- ✱23·86
   show P ∸ R ≑[H] Q from
   calc P ∸ R
       ≑[H] P ∸ (P ∸ Q) :=
-        qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q21_21 _ _)) (qrelEqCongr (fun X => P ∸ X) _ _))  -- ✱23·481
-    _ ≑ P ∩̇ (∸P ⊍ Q) := QThm.mp hN (qrelEqCongr (fun X => P ∩̇ X) _ _)                 -- [✱23·8·86]
+        qsyl (QL.t3_27 _ _) (qsyl (qiffMp (q21_21 _ _)) (qrelEqCongr (fun X => P ∸ X) _ _ (by rel_expr)))  -- ✱23·481
+    _ ≑ P ∩̇ (∸P ⊍ Q) := QThm.mp hN (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))                 -- [✱23·8·86]
     _ ≑ (∸P ⊍ Q) ∩̇ P := q23_51 _ _
-    _ ≑ (∸P ⊍ Q) ∩̇ ∸(∸P) := QThm.mp (qrelEqSymm (q23_8 P)) (qrelEqCongr (fun X => (∸P ⊍ Q) ∩̇ X) _ _)
-    _ ≑ (Q ⊍ ∸P) ∸ (∸P) := QThm.mp (q23_57 (∸P) Q) (qrelEqCongr (fun X => X ∸ (∸P)) _ _)
+    _ ≑ (∸P ⊍ Q) ∩̇ ∸(∸P) := QThm.mp (qrelEqSymm (q23_8 P)) (qrelEqCongr (fun X => (∸P ⊍ Q) ∩̇ X) _ _ (by rel_expr))
+    _ ≑ (Q ⊍ ∸P) ∸ (∸P) := QThm.mp (q23_57 (∸P) Q) (qrelEqCongr (fun X => X ∸ (∸P)) _ _ (by rel_expr))
     _ ≑ Q ∸ (∸P) := q23_9 Q (∸P)
-    _ ≑ Q ∩̇ P := QThm.mp (q23_8 P) (qrelEqCongr (fun X => Q ∩̇ X) _ _)
+    _ ≑ Q ∩̇ P := QThm.mp (q23_8 P) (qrelEqCongr (fun X => Q ∩̇ X) _ _ (by rel_expr))
     _ ≑ P ∩̇ Q := q23_51 _ _                                                       -- [✱23·8·9]
     _ ≑ Q ∩̇ P := q23_51 _ _
     _ ≑[H] Q := qsyl (QL.t3_26 _ _) (qiffMp (q23_621 Q P))                           -- [✱23·621]
@@ -994,7 +995,7 @@ theorem q25_493 [Reducibility S] (P Q R : V a → V b → QF V) :
   calc P
       ≑ P ∩̇ 𝐕̇ := qrelEqSymm (q25_26 P)
     _ ≑[relEq (Q ∩̇ R) Λ̇] P ∩̇ (∸Q ⊍ ∸R) :=
-        qsyl hV (qsyl (qiffMp (q21_21 _ _)) (qrelEqCongr (fun X => P ∩̇ X) _ _))     -- [✱25·26]
+        qsyl hV (qsyl (qiffMp (q21_21 _ _)) (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr)))     -- [✱25·26]
     _ ≑ (P ∸ Q) ⊍ (P ∸ R) := qrelEqSymm (q23_68 P (∸Q) (∸R))                        -- [✱23·68]
 
 /-- ✱25·494 `⊢ : R ⪽ P . S ⪽ Q . P ∩̇ Q = Λ̇ . ⊃ . (R ⊍ S) ∸ P = S . (R ⊍ S) ∸ Q = R`, as ✱24·494. ✱25·311 at Q, P
@@ -1044,18 +1045,18 @@ theorem q25_495 [Reducibility S] (P Q R : V a → V b → QF V) :
     calc (R ∸ Q) ∸ R
         ≑ (∸Q ∩̇ R) ∩̇ ∸R := QThm.mp (q23_51 R (∸Q)) (q23_481 _ _ _)
       _ ≑ ∸Q ∩̇ (R ∩̇ ∸R) := q23_52 _ _ _
-      _ ≑ ∸Q ∩̇ Λ̇ := QThm.mp (q25_21 R) (qrelEqCongr (fun X => ∸Q ∩̇ X) _ _)           -- ✱25·21
+      _ ≑ ∸Q ∩̇ Λ̇ := QThm.mp (q25_21 R) (qrelEqCongr (fun X => ∸Q ∩̇ X) _ _ (by rel_expr))           -- ✱25·21
       _ ≑ Λ̇ := q25_23 _
   have h1 : QThm S (relEq ((P ⊍ R) ∸ (Q ⊍ R)) ((P ∸ Q) ∸ R)) :=
     show (P ⊍ R) ∸ (Q ⊍ R) ≑ (P ∸ Q) ∸ R from
     calc (P ⊍ R) ∸ (Q ⊍ R)
         ≑ (P ⊍ R) ∩̇ (∸Q ∩̇ ∸R) :=
-          QThm.mp (qrelEqSymm (q23_87 Q R)) (qrelEqCongr (fun X => (P ⊍ R) ∩̇ X) _ _)  -- ✱23·87
+          QThm.mp (qrelEqSymm (q23_87 Q R)) (qrelEqCongr (fun X => (P ⊍ R) ∩̇ X) _ _ (by rel_expr))  -- ✱23·87
       _ ≑ (P ∩̇ (∸Q ∩̇ ∸R)) ⊍ (R ∩̇ (∸Q ∩̇ ∸R)) := qrelDistribRight P R _                -- ✱23·68
       _ ≑ ((P ∸ Q) ∸ R) ⊍ ((R ∸ Q) ∸ R) :=
           QThm.mp (qandI (qrelEqSymm (q23_52 P (∸Q) (∸R))) (qrelEqSymm (q23_52 R (∸Q) (∸R))))
             (q23_73 _ _ _ _)
-      _ ≑ ((P ∸ Q) ∸ R) ⊍ Λ̇ := QThm.mp hz (qrelEqCongr (fun X => ((P ∸ Q) ∸ R) ⊍ X) _ _)  -- [✱25·21]
+      _ ≑ ((P ∸ Q) ∸ R) ⊍ Λ̇ := QThm.mp hz (qrelEqCongr (fun X => ((P ∸ Q) ∸ R) ⊍ X) _ _ (by rel_expr))  -- [✱25·21]
       _ ≑ (P ∸ Q) ∸ R := q25_24 _                                                 -- (1)
   have h2 : QThm S (imp (relEq (P ∩̇ R) Λ̇) (relEq (P ∸ R) P)) :=
     qsyl (qiffMpr (q25_311 P R)) (qiffMp (q23_621 P (∸R)))                          -- ✱25·311.✱23·621 (2)
@@ -1063,7 +1064,7 @@ theorem q25_495 [Reducibility S] (P Q R : V a → V b → QF V) :
   calc (P ⊍ R) ∸ (Q ⊍ R)
       ≑ (P ∸ Q) ∸ R := h1                                                         -- (1)
     _ ≑ P ∩̇ (∸Q ∩̇ ∸R) := q23_52 _ _ _
-    _ ≑ P ∩̇ (∸R ∩̇ ∸Q) := QThm.mp (q23_51 _ _) (qrelEqCongr (fun X => P ∩̇ X) _ _)
+    _ ≑ P ∩̇ (∸R ∩̇ ∸Q) := QThm.mp (q23_51 _ _) (qrelEqCongr (fun X => P ∩̇ X) _ _ (by rel_expr))
     _ ≑ (P ∸ R) ∸ Q := qrelEqSymm (q23_52 _ _ _)
     _ ≑[relEq (P ∩̇ R) Λ̇] P ∸ Q := qsyl h2 (q23_481 _ _ _)                           -- (1).(2)
 
@@ -1162,7 +1163,7 @@ theorem q25_6 [Reducibility S] (R S' : V a → V b → QF V) :
   have h2 : QThm S (imp (relEq R S') (relEq (S' ∸ R) Λ̇)) :=
     show S' ∸ R ≑[relEq R S'] Λ̇ from
     calc S' ∸ R
-        ≑[relEq R S'] S' ∸ S' := qrelEqCongr (fun X => S' ∸ X) R S'
+        ≑[relEq R S'] S' ∸ S' := qrelEqCongr (fun X => S' ∸ X) R S' (by rel_expr)
       _ ≑ Λ̇ := q25_21 S'                                                          -- ✱25·21 (2)
   have h3 : QThm S (imp (relNonempty (S' ∸ R)) (.neg (relEq R S'))) :=
     qsyl (qiffMp (q25_54 _)) (QThm.mp h2 (QL.t2_16 _ _))                            -- (2).Transp.✱25·54 (3)
@@ -1174,7 +1175,7 @@ theorem q25_61 [Reducibility S] (R S' : V a → V b → QF V) :
     QThm S (imp (.neg (relNonempty S')) (relEq (R ⊍ S') R)) :=
   show R ⊍ S' ≑[.neg (relNonempty S')] R from
   calc R ⊍ S'
-      ≑[.neg (relNonempty S')] R ⊍ Λ̇ := qsyl (qiffMp (q25_51 S')) (qrelEqCongr (fun X => R ⊍ X) _ _)  -- ✱25·51
+      ≑[.neg (relNonempty S')] R ⊍ Λ̇ := qsyl (qiffMp (q25_51 S')) (qrelEqCongr (fun X => R ⊍ X) _ _ (by rel_expr))  -- ✱25·51
     _ ≑ R := q25_24 R                                                             -- ✱25·24
 
 /-- ✱25·62 `⊢ : ∼∃̇!S . ⊃ . R ∩̇ S = Λ̇`, as ✱24·62 [✱24·51·23], ✱25·51's S = Λ̇ put for S in R ∩̇ S
@@ -1183,7 +1184,7 @@ theorem q25_62 [Reducibility S] (R S' : V a → V b → QF V) :
     QThm S (imp (.neg (relNonempty S')) (relEq (R ∩̇ S') Λ̇)) :=
   show R ∩̇ S' ≑[.neg (relNonempty S')] Λ̇ from
   calc R ∩̇ S'
-      ≑[.neg (relNonempty S')] R ∩̇ Λ̇ := qsyl (qiffMp (q25_51 S')) (qrelEqCongr (fun X => R ∩̇ X) _ _)  -- ✱25·51
+      ≑[.neg (relNonempty S')] R ∩̇ Λ̇ := qsyl (qiffMp (q25_51 S')) (qrelEqCongr (fun X => R ∩̇ X) _ _ (by rel_expr))  -- ✱25·51
     _ ≑ Λ̇ := q25_23 R                                                             -- ✱25·23
 
 /-- ✱21·53 for an extensional expression G (as `qrel21_18` is ✱21·18 for one, and `qcls20_53` ✱20·53), the

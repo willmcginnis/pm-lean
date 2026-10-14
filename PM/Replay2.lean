@@ -4,7 +4,7 @@ import PM.Derived
   Replay, part 2: the propositions of ✱2–✱5 left UNRESOLVED by the first replay, and the
   FAITHFUL/REPAIRED ones that depended on them. Each theorem is an explicit `Thm` derivation built from
   the primitive propositions, earlier `t…` theorems and the derived rules of PM.Derived. Proofs named
-  `ofPf` are natural-deduction derivations; `hy n` is the n-th hypothesis, and `intro_` is the
+  `ofPf` are natural-deduction derivations; `hy n rfl` is the n-th hypothesis, and `intro_` is the
   deduction theorem (definitional; see PM.Derived).
 
   Proofs written as `have` lines follow PM's own Dem. (or, where PM prints only a bracketed hint, the
@@ -569,20 +569,20 @@ theorem t4_65 (p : F) (q : F) : Thm (s4_65 p q) :=
 /-- *4.7 — [✱3·2, ✱3·27] -/
 theorem t4_7 (p : F) (q : F) : Thm (s4_7 p q) := ofPf <| by
   unfold s4_7; split_iff
-  · exact Pf.intro (andI (hy 1) (mp (hy 1) (hy 0)))
-  · exact Pf.intro (andE2 (mp (hy 1) (hy 0)))
+  · exact Pf.intro (andI (hy 1 rfl) (mp (hy 1 rfl) (hy 0 rfl)))
+  · exact Pf.intro (andE2 (mp (hy 1 rfl) (hy 0 rfl)))
 
 /-- *4.71 — [✱3·2, ✱3·26, ✱3·27] -/
 theorem t4_71 (p : F) (q : F) : Thm (s4_71 p q) := ofPf <| by
   unfold s4_71; split_iff
-  · exact iffI (Pf.intro (andI (hy 1) (mp (hy 1) (hy 0)))) (Pf.intro (andE1 (hy 1)))
-  · exact Pf.intro (andE2 (mp (hy 1) (iffMp (hy 0))))
+  · exact iffI (Pf.intro (andI (hy 1 rfl) (mp (hy 1 rfl) (hy 0 rfl)))) (Pf.intro (andE1 (hy 1 rfl)))
+  · exact Pf.intro (andE2 (mp (hy 1 rfl) (iffMp (hy 0 rfl))))
 
 /-- *4.72 — [✱1·3, ✱2·2, ∨-elimination, ✱3·2] -/
 theorem t4_72 (p : F) (q : F) : Thm (s4_72 p q) := ofPf <| by
   unfold s4_72; split_iff
-  · exact iffI (Pf.intro (orIR (hy 1))) (Pf.intro (orE (hy 1) (mp (hy 2) (hy 0)) (hy 2)))
-  · exact Pf.intro (mp (orIL (hy 1)) (iffMpr (hy 0)))
+  · exact iffI (Pf.intro (orIR (hy 1 rfl))) (Pf.intro (orE (hy 1 rfl) (mp (hy 2 rfl) (hy 0 rfl)) (hy 2 rfl)))
+  · exact Pf.intro (mp (orIL (hy 1 rfl)) (iffMpr (hy 0 rfl)))
 
 /-- *4.73 — PM: [Simp . ✱4·71] (hint only). -/
 theorem t4_73 (p : F) (q : F) : Thm (s4_73 p q) :=
@@ -620,16 +620,16 @@ theorem t4_77 (p : F) (q : F) (r : F) : Thm (s4_77 p q r) :=
 /-- *4.78 — [∨-elimination, ✱2·11 (cases), ✱1·3, ✱2·2, ✱2·24] -/
 theorem t4_78 (p : F) (q : F) (r : F) : Thm (s4_78 p q r) := ofPf <| by
   unfold s4_78; split_iff
-  · exact Pf.intro (orE (hy 0) (orIL (mp (hy 1) (hy 2))) (orIR (mp (hy 1) (hy 2))))
-  · exact Pf.cases q (orIL (Pf.intro (hy 1)))
-      (orIR (Pf.intro (orE (mp (hy 2) (hy 0)) (absurd _ (hy 3) (hy 1)) (hy 3))))
+  · exact Pf.intro (orE (hy 0 rfl) (orIL (mp (hy 1 rfl) (hy 2 rfl))) (orIR (mp (hy 1 rfl) (hy 2 rfl))))
+  · exact Pf.cases q (orIL (Pf.intro (hy 1 rfl)))
+      (orIR (Pf.intro (orE (mp (hy 2 rfl) (hy 0 rfl)) (absurd _ (hy 3 rfl) (hy 1 rfl)) (hy 3 rfl))))
 
 /-- *4.79 — [∨-elimination, ✱2·11 (cases), ✱3·2, ✱3·26, ✱3·27, ✱2·24] -/
 theorem t4_79 (p : F) (q : F) (r : F) : Thm (s4_79 p q r) := ofPf <| by
   unfold s4_79; split_iff
-  · exact Pf.intro (orE (hy 0) (mp (andE1 (hy 1)) (hy 2)) (mp (andE2 (hy 1)) (hy 2)))
-  · exact Pf.cases q (orIR (Pf.intro (mp (andI (hy 1) (hy 2)) (hy 0))))
-      (orIL (Pf.intro (absurd _ (hy 2) (hy 1))))
+  · exact Pf.intro (orE (hy 0 rfl) (mp (andE1 (hy 1 rfl)) (hy 2 rfl)) (mp (andE2 (hy 1 rfl)) (hy 2 rfl)))
+  · exact Pf.cases q (orIR (Pf.intro (mp (andI (hy 1 rfl) (hy 2 rfl)) (hy 0 rfl))))
+      (orIL (Pf.intro (absurd _ (hy 2 rfl) (hy 1 rfl))))
 
 /-- *4.82 — PM: [✱2·65 . Imp . ✱2·21 . Comp] (hint only). -/
 theorem t4_82 (p : F) (q : F) : Thm (s4_82 p q) :=
@@ -708,27 +708,27 @@ theorem t5_1 (p : F) (q : F) : Thm (s5_1 p q) :=
 theorem t5_15 (p : F) (q : F) : Thm (s5_15 p q) := ofPf <| by
   unfold s5_15
   exact Pf.cases p
-    (Pf.cases q (orIL (iffI (Pf.intro (hy 1)) (Pf.intro (hy 0))))
-      (orIR (iffI (Pf.intro (hy 1)) (Pf.intro (hy 0)))))
+    (Pf.cases q (orIL (iffI (Pf.intro (hy 1 rfl)) (Pf.intro (hy 0 rfl))))
+      (orIR (iffI (Pf.intro (hy 1 rfl)) (Pf.intro (hy 0 rfl)))))
     (Pf.cases q
-      (orIR (iffI (Pf.intro (absurd _ (hy 2) (hy 0))) (Pf.intro (absurd _ (hy 1) (hy 2)))))
-      (orIL (iffI (Pf.intro (absurd _ (hy 2) (hy 0))) (Pf.intro (absurd _ (hy 2) (hy 1))))))
+      (orIR (iffI (Pf.intro (absurd _ (hy 2 rfl) (hy 0 rfl))) (Pf.intro (absurd _ (hy 1 rfl) (hy 2 rfl)))))
+      (orIL (iffI (Pf.intro (absurd _ (hy 2 rfl) (hy 0 rfl))) (Pf.intro (absurd _ (hy 2 rfl) (hy 1 rfl))))))
 
 /-- *5.16 — [✱2·01, ✱2·11 (cases), ✱2·24, ✱3·26, ✱3·27] -/
 theorem t5_16 (p : F) (q : F) : Thm (s5_16 p q) := ofPf <| by
   unfold s5_16
   exact negI (absurd _
-    (Pf.cases q (mp (hy 1) (iffMpr (andE1 (hy 0)))) (mp (hy 1) (iffMpr (andE2 (hy 0)))))
-    (negI' q (mp (hy 1) (iffMp (andE1 (hy 0)))) (mp (hy 1) (iffMp (andE2 (hy 0))))))
+    (Pf.cases q (mp (hy 1 rfl) (iffMpr (andE1 (hy 0 rfl)))) (mp (hy 1 rfl) (iffMpr (andE2 (hy 0 rfl)))))
+    (negI' q (mp (hy 1 rfl) (iffMp (andE1 (hy 0 rfl)))) (mp (hy 1 rfl) (iffMp (andE2 (hy 0 rfl))))))
 
 /-- *5.17 — [∨-elimination, ✱2·11 (cases), ✱2·01, ✱2·18, ✱3·2] -/
 theorem t5_17 (p : F) (q : F) : Thm (s5_17 p q) := ofPf <| by
   unfold s5_17; split_iff
-  · exact iffI (Pf.intro (negI (absurd _ (andI (hy 1) (hy 2)) (andE2 (hy 0)))))
-      (Pf.intro (orE (andE1 (hy 0)) (hy 2) (absurd _ (hy 2) (hy 1))))
+  · exact iffI (Pf.intro (negI (absurd _ (andI (hy 1 rfl) (hy 2 rfl)) (andE2 (hy 0 rfl)))))
+      (Pf.intro (orE (andE1 (hy 0 rfl)) (hy 2 rfl) (absurd _ (hy 2 rfl) (hy 1 rfl))))
   · exact andI
-      (Pf.cases p (orIL (hy 1)) (orIR (byContra (absurd _ (mp (hy 2) (iffMpr (hy 0))) (hy 1)))))
-      (negI (absurd _ (andE2 (hy 1)) (mp (andE1 (hy 1)) (iffMp (hy 0)))))
+      (Pf.cases p (orIL (hy 1 rfl)) (orIR (byContra (absurd _ (mp (hy 2 rfl) (iffMpr (hy 0 rfl))) (hy 1 rfl)))))
+      (negI (absurd _ (andE2 (hy 1 rfl)) (mp (andE1 (hy 1 rfl)) (iffMp (hy 0 rfl)))))
 
 /-- *5.18 — PM: [✱5·15·16 . ✱5·17 (p ≡ q, p ≡ ∼q / p, q)] (hint only). -/
 theorem t5_18 (p : F) (q : F) : Thm (s5_18 p q) :=
@@ -1095,24 +1095,24 @@ theorem t5_7 (p : F) (q : F) (r : F) : Thm (s5_7 p q r) :=
 theorem t5_71 (p : F) (q : F) (r : F) : Thm (s5_71 p q r) := ofPf <| by
   unfold s5_71; intro_
   exact iffI
-    (Pf.intro (andI (orE (andE1 (hy 1)) (hy 2) (absurd _ (andE2 (hy 1)) (mp (hy 2) (hy 0))))
-      (andE2 (hy 1))))
-    (Pf.intro (andI (orIL (andE1 (hy 1))) (andE2 (hy 1))))
+    (Pf.intro (andI (orE (andE1 (hy 1 rfl)) (hy 2 rfl) (absurd _ (andE2 (hy 1 rfl)) (mp (hy 2 rfl) (hy 0 rfl))))
+      (andE2 (hy 1 rfl))))
+    (Pf.intro (andI (orIL (andE1 (hy 1 rfl))) (andE2 (hy 1 rfl))))
 
 /-- *5.74 — [✱1·1 under hypotheses, ✱3·2, ✱3·26, ✱3·27] -/
 theorem t5_74 (p : F) (q : F) (r : F) : Thm (s5_74 p q r) := ofPf <| by
   unfold s5_74; split_iff
-  · exact iffI (Pf.intro (Pf.intro (mp (mp (hy 2) (hy 1)) (iffMp (mp (hy 2) (hy 0))))))
-      (Pf.intro (Pf.intro (mp (mp (hy 2) (hy 1)) (iffMpr (mp (hy 2) (hy 0))))))
-  · exact Pf.intro (iffI (Pf.intro (mp (hy 1) (mp (Pf.intro (hy 2)) (iffMp (hy 0)))))
-      (Pf.intro (mp (hy 1) (mp (Pf.intro (hy 2)) (iffMpr (hy 0))))))
+  · exact iffI (Pf.intro (Pf.intro (mp (mp (hy 2 rfl) (hy 1 rfl)) (iffMp (mp (hy 2 rfl) (hy 0 rfl))))))
+      (Pf.intro (Pf.intro (mp (mp (hy 2 rfl) (hy 1 rfl)) (iffMpr (mp (hy 2 rfl) (hy 0 rfl))))))
+  · exact Pf.intro (iffI (Pf.intro (mp (hy 1 rfl) (mp (Pf.intro (hy 2 rfl)) (iffMp (hy 0 rfl)))))
+      (Pf.intro (mp (hy 1 rfl) (mp (Pf.intro (hy 2 rfl)) (iffMpr (hy 0 rfl))))))
 
 /-- *5.75 — [∨-elimination, ✱1·3, ✱2·24, ✱3·2, ✱3·26, ✱3·27] -/
 theorem t5_75 (p : F) (q : F) (r : F) : Thm (s5_75 p q r) := ofPf <| by
   unfold s5_75; intro_
   exact iffI
-    (Pf.intro (orE (mp (andE1 (hy 1)) (iffMp (andE2 (hy 0)))) (absurd _ (hy 2) (andE2 (hy 1)))
-      (hy 2)))
-    (Pf.intro (andI (mp (orIR (hy 1)) (iffMpr (andE2 (hy 0)))) (mp (hy 1) (andE1 (hy 0)))))
+    (Pf.intro (orE (mp (andE1 (hy 1 rfl)) (iffMp (andE2 (hy 0 rfl)))) (absurd _ (hy 2 rfl) (andE2 (hy 1 rfl)))
+      (hy 2 rfl)))
+    (Pf.intro (andI (mp (orIR (hy 1 rfl)) (iffMpr (andE2 (hy 0 rfl)))) (mp (hy 1 rfl) (andE1 (hy 0 rfl)))))
 
 end PM
