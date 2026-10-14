@@ -260,7 +260,9 @@ What is wired now:
     ([scripts/prove2me/README.md](../scripts/prove2me/README.md)). It runs on the copy of the commit
     exported, built with the platform's Lean v4.33.1, with that commit's own tool. It gives the same
     counts there as with the repository's Lean, and it fails on the planted unused hypothesis above. A
-    commit older than the tool fails the check rather than skipping it.
+    commit older than the tool fails the check rather than skipping it, unless `--no-mutation` is given
+    (for re-checking such a commit, for example the 1.0.0 export). Then the report records that the check
+    was skipped and why, and for a commit that has the tool the option fails the check.
 - **`--full` runs before a release**, in `scripts/release_check.sh`, with the other long checks
   ([VERIFICATION.md](VERIFICATION.md#before-a-release)). That means all of Part 2 and the
   re-elaboration. The re-elaboration is the part that can tell a proof by PM's derivation from a proof by

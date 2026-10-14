@@ -148,7 +148,9 @@ class Wiring(unittest.TestCase):
         spec = importlib.util.spec_from_file_location("verify", ROOT / "scripts" / "prove2me" / "verify.py")
         verify = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(verify)
-        self.assertIn('rep["mutation"], ok = mutation_check(P["repo"])', inspect.getsource(verify.main))
+        self.assertIn('rep["mutation"], ok = mutation_check(P["repo"], skip=no_mutation)',
+                      inspect.getsource(verify.main))
+        self.assertIn('no_mutation = "--no-mutation" in argv', inspect.getsource(verify.main))
         self.assertIn('failed.append("mutation")', inspect.getsource(verify.main))
         with tempfile.TemporaryDirectory() as d:
             with contextlib.redirect_stdout(io.StringIO()):
@@ -161,6 +163,32 @@ class Wiring(unittest.TestCase):
                 with contextlib.redirect_stdout(io.StringIO()):
                     rep, ok = verify.mutation_check(d)
                 self.assertEqual((ok, rep["rc"]), (passes, rc))
+
+    def test_no_mutation_only_for_a_commit_without_the_tool(self):
+        """--no-mutation (a commit that predates scripts/mutation, such as the 1.0.0 export): the check is
+        skipped and the report says so and why; given for a commit that has the tool, the check fails and
+        the tool is not run."""
+        spec = importlib.util.spec_from_file_location("verify", ROOT / "scripts" / "prove2me" / "verify.py")
+        verify = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verify)
+        with tempfile.TemporaryDirectory() as d:
+            with contextlib.redirect_stdout(io.StringIO()) as out:
+                rep, ok = verify.mutation_check(d, skip=True)
+            self.assertTrue(ok)
+            self.assertEqual((rep["rc"], rep["skipped"]), (None, True))
+            self.assertIn("--no-mutation", rep["reason"])
+            self.assertIn("no scripts/mutation/mutate.py", rep["reason"])
+            self.assertIn("SKIPPED", out.getvalue())
+            json.dumps(rep)
+            tool = pathlib.Path(d) / "scripts" / "mutation" / "mutate.py"
+            tool.parent.mkdir(parents=True)
+            ran = pathlib.Path(d) / "ran"
+            tool.write_text(f"open({str(ran)!r}, 'w').close()\n")
+            with contextlib.redirect_stdout(io.StringIO()):
+                rep, ok = verify.mutation_check(d, skip=True)
+            self.assertFalse(ok, "--no-mutation skipped a commit that has the tool")
+            self.assertFalse(rep["skipped"])
+            self.assertFalse(ran.exists(), "the tool ran under --no-mutation")
 
 
 class Expected(unittest.TestCase):

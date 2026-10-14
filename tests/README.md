@@ -38,7 +38,9 @@ which replaces one hypothesis by `True` on each binder form the repository uses;
 before any analysis, without which it would read proofs older than the sources; and the classes of the
 findings listed in `scripts/mutation/expected.json`; and where the tiers run: `--quick` as a step of
 `run_all.sh` and as check 0 of `scripts/prove2me/verify.py`, which fails an export if the tool fails or is
-missing (shown with stand-in tools), and `--full` in `scripts/release_check.sh`.
+missing (shown with stand-in tools) unless `--no-mutation` skips it for a commit without the tool, recorded
+as skipped with the reason (and refused for a commit with the tool), and `--full` in
+`scripts/release_check.sh`.
 
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in

@@ -7,7 +7,7 @@ canonical text of statements, docs/VERSIONING.md). Then:
 
   0. mutation   the quick tier of the statement mutation (scripts/mutation/mutate.py --quick,
                 docs/STATEMENT_MUTATION.md) passes on the copy of the commit exported, run with that
-                commit's own tool; a commit without the tool fails
+                commit's own tool; a commit without the tool fails, unless --no-mutation is given
   1. build     every generated module compiles; no `sorry` outside Theorems/; no generated file sets
                 `autoImplicit`
   2. gates      for every card: the statement is a `sorry` stub; `solution` has exactly its type (Expr
@@ -23,9 +23,10 @@ canonical text of statements, docs/VERSIONING.md). Then:
                 exactly as scripts/export_names.py computes them from the repository, equal those of
                 data/export_names.json: the card states the statement its name is bound to by the lock
 
-Usage (from the repository root): python3 scripts/prove2me/verify.py [--work DIR] [--tree DIR]
+Usage (from the repository root): python3 scripts/prove2me/verify.py [--work DIR] [--tree DIR] [--no-mutation]
 --tree checks another tree with a manifest (e.g. one pulled back from the platform) against the same
-commit. Writes <work>/verify_report.json; exits 1 if anything fails, and an export goes to upload only
+commit. --no-mutation skips check 0 for a commit that predates scripts/mutation (such as the 1.0.0 export),
+and the report records that it was skipped and why; for a commit that has the tool it fails check 0. Writes <work>/verify_report.json; exits 1 if anything fails, and an export goes to upload only
 when this prints "all checks passed".
 """
 import concurrent.futures as cf
@@ -79,13 +80,26 @@ def sha256(s):
     return "sha256:" + hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
-def mutation_check(repo):
+NO_TOOL = "the commit exported has no scripts/mutation/mutate.py"
+
+
+def mutation_check(repo, skip=False):
     """Check 0: `scripts/mutation/mutate.py --quick` of the copy `repo` of the commit exported, run with that
-    commit's own tool (docs/STATEMENT_MUTATION.md). Returns (report, passed); a commit without the tool fails."""
+    commit's own tool (docs/STATEMENT_MUTATION.md). Returns (report, passed); a commit without the tool fails.
+    With `skip` (--no-mutation), a commit without the tool passes, reported as skipped with the reason, and a
+    commit with the tool fails: the option is only for commits that predate the statement mutation."""
     mut = os.path.join(repo, "scripts", "mutation", "mutate.py")
+    if skip:
+        if os.path.exists(mut):
+            print("mutation: FAILED, --no-mutation given but the commit exported has scripts/mutation/mutate.py")
+            return {"rc": None, "skipped": False,
+                    "error": "--no-mutation given but the commit exported has scripts/mutation/mutate.py"}, False
+        reason = f"--no-mutation: {NO_TOOL}; it predates the statement mutation"
+        print(f"mutation: SKIPPED ({reason})")
+        return {"rc": None, "skipped": True, "reason": reason}, True
     if not os.path.exists(mut):
-        print("mutation: FAILED, the commit exported has no scripts/mutation/mutate.py")
-        return {"rc": None, "error": "the commit exported has no scripts/mutation/mutate.py"}, False
+        print(f"mutation: FAILED, {NO_TOOL}")
+        return {"rc": None, "error": NO_TOOL}, False
     r, dt = sh([sys.executable, mut, "--quick"], repo)
     lines = (r.stdout + r.stderr).strip().splitlines()
     print(f"mutation: --quick rc {r.returncode} in {dt:.0f}s: {lines[-1] if lines else 'no output'}")
@@ -98,6 +112,7 @@ def main(argv):
     cfg = load_config()
     work = os.path.join(ROOT, ".lake", "prove2me")
     tree = None
+    no_mutation = "--no-mutation" in argv
     for i, a in enumerate(argv):
         if a == "--work":
             work = os.path.abspath(argv[i + 1])
@@ -111,7 +126,7 @@ def main(argv):
     failed = []
 
     # 0. the quick tier of the statement mutation, on the commit exported
-    rep["mutation"], ok = mutation_check(P["repo"])
+    rep["mutation"], ok = mutation_check(P["repo"], skip=no_mutation)
     if not ok:
         failed.append("mutation")
 
