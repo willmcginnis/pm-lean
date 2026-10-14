@@ -18,6 +18,9 @@ Usage: python3 scripts/progress.py [--ref REV] [--update] [--vol2-html PATH]
   in docs/PROGRESS.md; --vol2-html PATH (pg78255-images.html) first rewrites data/vol2_labels.json from it."""
 import json, os, re, subprocess, sys
 
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from gen_axiomcheck import declared   # (full name, is theorem) of a Lean file's public declarations
+
 R = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 LEAN_GIT = R
 LEAN_REF = "HEAD"
@@ -230,7 +233,32 @@ def compute():
     ms.append({"key": "end3", "what": "End of Vol III", "pages": None, "volume": "III",
                "status": "in progress" if vol3["proved"] else "not started"})
 
+    # the wider unit of RedCheck.lean and StyleCheck.lean (their `isPMProp`): the public declarations named
+    # PM.q<s> with s starting 1, 2 or 9, and every PM.QL.<s>; each sorted into the units of docs/PROGRESS.md
+    unit = {"lifted": 0, "assertions": 0, "proved": 0, "restated": 0, "Pp": 0, "rules_in_words": 0, "other": []}
+    for f, s in src.items():
+        for name, _ in declared(s):
+            parts = name.split(".")
+            if parts[:2] == ["PM", "QL"] and len(parts) == 3:
+                unit["lifted"] += 1; continue
+            if not (len(parts) == 2 and parts[0] == "PM" and re.match(r"q[129]", parts[1])): continue
+            mm = re.fullmatch(r"q(\d+)_(\d+)", parts[1])
+            c = cat.get(f"*{mm.group(1)}.{mm.group(2)}") if mm else None
+            i = f"*{mm.group(1)}.{mm.group(2)}" if mm else None
+            if c == "assertion":
+                unit["assertions"] += 1
+                unit["proved" if i in proved else "restated" if i in restated else "other"] += 1
+            elif c == "Pp": unit["Pp"] += 1
+            elif c == "rule/prose": unit["rules_in_words"] += 1
+            else: unit["other"].append(name)
+    unit["helpers"] = len(unit.pop("other"))
+    unit["total"] = unit["lifted"] + unit["assertions"] + unit["Pp"] + unit["rules_in_words"] + unit["helpers"]
+    assert unit["assertions"] == unit["proved"] + unit["restated"], unit
+    unit["proved_2_5"] = len([i for i in proved if 2 <= ch(i) <= 5])
+    assert unit["proved"] + unit["proved_2_5"] == vol1["proved"], (unit, vol1["proved"])
+
     return {"lean_ref": LEAN_REF, "lean_commit": git("rev-parse", "--short", LEAN_REF).strip(),
+            "check_unit": unit,
             "vol1": vol1, "vol1_by_range": by_range, "vol2": vol2, "vol3": vol3,
             "restated_primitives": sorted(restated, key=lambda i: [int(x) for x in i[1:].split(".")]), "ledgers": sorted(ledgers + ["data/replay_ledger.json",
                                                                                    "data/replay2_ledger.json"]),
@@ -253,6 +281,18 @@ def lbl(i):
 
 def show_pct(p):
     return "0%" if p == 0 else f"{p}%"
+
+
+def markdown_units(d):
+    """The paragraph of docs/PROGRESS.md's Units on the wider unit of RedCheck.lean and StyleCheck.lean."""
+    u = d["check_unit"]
+    return (f"The checks use a wider unit. `RedCheck.lean` and `StyleCheck.lean` treat **{n(u['total'])} declarations "
+            f"as \"PM propositions\"**: {u['lifted']} lifted copies, {u['assertions']} numbered assertions from ✱9 on "
+            f"({u['proved']} proved and the {u['restated']} primitive-rule restatements), {u['Pp']} primitive "
+            f"propositions, {u['rules_in_words']} rules stated in words, and {u['helpers']} helpers or variants. The "
+            f"{d['vol1']['proved']} proved assertions of the tables are those {u['proved']} plus the {u['proved_2_5']} "
+            "✱2–✱5 theorems of `PM/Replay.lean` and `PM/Replay2.lean`. These figures are for the commit named with "
+            f"the tables below, `{d['lean_commit']}`, and are generated with them.\n")
 
 
 def markdown(d):
@@ -356,18 +396,36 @@ def markdown(d):
     return "\n".join(out) + "\n"
 
 
+REGION = ("<!-- progress:start -->\n", "<!-- progress:end -->")
+REGION_UNITS = ("<!-- progress-units:start -->\n", "<!-- progress-units:end -->")
+
+
+def region(t, r):
+    """The text between the markers r = (start, end) of docs/PROGRESS.md."""
+    a, b = r
+    assert t.count(a) == 1 and t.count(b) == 1, f"markers missing: {a.strip()}"
+    return t.split(a)[1].split(b)[0]
+
+
+def replace_region(t, r, body):
+    region(t, r)
+    a, b = r
+    return t.split(a)[0] + a + body + b + t.split(b)[1]
+
+
 if __name__ == "__main__":
     args = sys.argv[1:]
     if "--ref" in args:
         LEAN_REF = args[args.index("--ref") + 1]
     if "--vol2-html" in args:
         write_vol2_labels(vol2_labels_from_html(args[args.index("--vol2-html") + 1]))
-    md = markdown(compute())
+    d = compute()
+    md, mu = markdown(d), markdown_units(d)
     if "--update" in args:
         p = os.path.join(R, "docs/PROGRESS.md")
         t = open(p, encoding="utf-8").read()
-        a, b = "<!-- progress:start -->\n", "<!-- progress:end -->"
-        assert t.count(a) == 1 and t.count(b) == 1, "markers missing"
-        t = t.split(a)[0] + a + md + b + t.split(b)[1]
+        t = replace_region(t, REGION, md)
+        t = replace_region(t, REGION_UNITS, mu)
         open(p, "w", encoding="utf-8").write(t)
+    print(mu)
     print(md)

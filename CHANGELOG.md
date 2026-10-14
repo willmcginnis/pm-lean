@@ -75,6 +75,12 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   reducibility; AxiomCheck 1287 names, 1280 axiom-free; AllAxioms 2585 declarations, 39 using an axiom;
   LedgerCheck 372 rows; `lake build` 52 jobs. The AxiomCheck and AllAxioms totals and the job count
   were already stale before these chapters, and are corrected with them.
+- **docs/PROGRESS.md's paragraph on the checks' unit is generated.** Written by hand, it kept the counts
+  of an earlier revision (485 PM propositions; 276 numbered assertions from ✱9 on, 272 proved; 460 proved
+  in all) under tables of a later one, while saying that its figures were for the tables' commit.
+  `scripts/progress.py` now generates it with the tables, from the same files at the same commit: 630
+  (with the variant `q23_45_iff`; 629 before it), 420, 416 and 604. `tests/test_progress_units.py` checks
+  that both regions are their regeneration and that the total is the count RedCheck and StyleCheck print.
 
 ## 2026-10-13
 
