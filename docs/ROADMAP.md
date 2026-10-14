@@ -718,7 +718,7 @@ and [VERIFICATION.md](VERIFICATION.md):
 
 <!-- generated:established:start -->
 - ✱1–✱5: 188 of 188 numbered assertions derived from ✱1·1–✱1·6, and ✱1–✱5 complete for two-valued truth tables.
-- Vol I: 604 of 3,230 numbered assertions proved (✱1–✱5 from ✱1·1–✱1·6; from ✱9 on, from the primitive propositions of ✱10's method and ✱12·1, ✱12·11), as counted in docs/PROGRESS.md at commit `9dd403b`. Vols II and III are not started.
+- Vol I: 604 of 3,230 numbered assertions proved (✱1–✱5 from ✱1·1–✱1·6; from ✱9 on, from the primitive propositions of ✱10's method and ✱12·1, ✱12·11), as counted in docs/PROGRESS.md at commit `f0b010f`. Vols II and III are not started.
 - ✱9 by its own method (PM/Found9): 28 of 28 numbered ✱9 propositions proved in the working reading, the definitions as printed with Russell's ✱8·13 of the second edition carried over to ✱9; under the definitions as printed alone ✱9·31 is open (docs/STAR9_READINGS.md). Every ✱9 theorem is a ✱10 theorem given a variable of every type; the converse is proved given Rep and a variable of every type.
 - Every class and relation expression that PM's notation forms is extensional (pp. 200, 213).
 - No PM derivation depends on any Lean axiom; consistency is shown in a finite model, at the model's variables.
