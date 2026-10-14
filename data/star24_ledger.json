@@ -1,0 +1,2938 @@
+[
+ {
+  "id": "*24.1",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.351",
+   "*24.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "y is the real variable of *22.351 (the statement needs a non-empty type); takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.101",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.831",
+   "*24.02"
+  ],
+  "extra_used": [
+   "*20.2"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Lambda = -V, which *22.831 turns, is *20.2 by *24.02 (the definition's own step).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.102",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.15",
+   "*5.501",
+   "*10.11",
+   "*10.271",
+   "*20.15",
+   "*24.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.103",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.102",
+   "*22.392",
+   "*22.831",
+   "*24.02"
+  ],
+  "extra_used": [
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*20.21",
+   "*4.2"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*22.392] line an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL); *22.831 has -V second, so its first member is turned by *20.21; the last line is the definition *24.02, written as *4.2.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.104",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*20.3",
+   "*13.15",
+   "*10.11",
+   "*10.271"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.105",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.35",
+   "*4.12",
+   "*10.11",
+   "*10.271",
+   "*24.104"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.11",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.104",
+   "*10.1",
+   "*10.11",
+   "*2.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*22.1"
+  ],
+  "note": "alpha apparent (*20.07); Simp is *2.02; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.1 is cited for alpha c V, which is the formal implication x in alpha . c_x . x in V by *22.01 itself, so *22.1 is not used.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.12",
+  "page": 231,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.105",
+   "*10.1",
+   "*2.21",
+   "*10.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*22.1"
+  ],
+  "note": "alpha apparent (*20.07); takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.1 is cited for Lambda c alpha, which is the formal implication by *22.01 itself, so *22.1 is not used.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.13",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.12",
+   "*4.73",
+   "*22.41"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.12 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression Lambda c alpha being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.14",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.102",
+   "*20.32"
+  ],
+  "extra_used": [
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*20.32] line an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.141",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.11",
+   "*4.73",
+   "*22.41"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*20.21"
+  ],
+  "cited_unused": [],
+  "note": "PM's last line is alpha = V; the statement has V = alpha; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.11 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression alpha c V being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). *4.73's product has its factors in the other order from PM's line (*4.3). PM's last line is alpha = V; the statement's V = alpha is its turn by *20.21. Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.15",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.103",
+   "*20.32"
+  ],
+  "extra_used": [
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*20.32] line an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.17",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.83",
+   "*24.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.21",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.103",
+   "*22.89"
+  ],
+  "extra_used": [
+   "*22.33",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910 (= Lambda); the transcription has = V (text audit, Vol I entry 11); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.103 is used at the defining function of alpha cap -alpha, and *22.89's x ~in alpha - alpha is written ~(x in alpha . x in -alpha) by *22.33, inside the negation (*4.11), under (x).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.22",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.88",
+   "*24.102"
+  ],
+  "extra_used": [
+   "*22.34"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.102 is used at the defining function of alpha cup -alpha, and *22.88's x in alpha cup -alpha is written x in alpha v x in -alpha by *22.34, under (x).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.23",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.12",
+   "*22.621"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.621 gives Lambda cap alpha = Lambda, commuted by *22.51. *24.12 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression Lambda c alpha being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.24",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.12",
+   "*22.62"
+  ],
+  "extra_used": [
+   "*22.57",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.62 gives Lambda cup alpha = alpha, commuted by *22.57. *24.12 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression Lambda c alpha being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.26",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.621",
+   "*24.11"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.11 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression alpha c V being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.27",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.62",
+   "*24.11"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.11 is used at a real class by the class analogue of *10.1 (qclsAllAt, p. 206, *20.17: *12.1 turned by *10.32, *10.1, *10.11, *10.23), the expression alpha c V being extensional (clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*24.3",
+  "page": 232,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.53",
+   "*4.6",
+   "*22.35",
+   "*22.33",
+   "*10.11",
+   "*10.271",
+   "*24.15"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.36",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.35 acts on the second factor (*4.36 with *4.3, qandCongrR) and *22.33 on the product, each inside the negation (*4.11).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.31",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.6",
+   "*10.11",
+   "*10.271",
+   "*22.35",
+   "*22.34",
+   "*24.14"
+  ],
+  "extra_used": [
+   "*4.37"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.35 acts on the first disjunct (*4.37), under (x).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.311",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.35",
+   "*4.51",
+   "*4.62",
+   "*22.33",
+   "*10.11",
+   "*10.271",
+   "*24.15"
+  ],
+  "extra_used": [
+   "*4.85",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910 (= Lambda); the transcription has = V (text audit, Vol I entry 12); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.35 acts on the consequent (*4.85); *22.33 acts inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.312",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.35",
+   "*4.64",
+   "*22.34",
+   "*24.14"
+  ],
+  "extra_used": [
+   "*4.84"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.35 acts on the antecedent (*4.84), under (x).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.313",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.311",
+   "*22.621"
+  ],
+  "extra_used": [
+   "*20.21"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.621's alpha cap -beta = alpha is turned by *20.21.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.32",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.13",
+   "*22.59"
+  ],
+  "extra_used": [
+   "*4.38"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.13 is used for both factors, joined by *4.38.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.33",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.551",
+   "*24.27",
+   "*22.57"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*20.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.34",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.481",
+   "*24.23"
+  ],
+  "extra_used": [
+   "*22.51"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.23 gives beta cap Lambda = Lambda; PM's line has Lambda cap beta (*22.51).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*20.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.35",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.481",
+   "*24.26"
+  ],
+  "extra_used": [
+   "*22.51"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.26 gives beta cap V = beta; PM's line has V cap beta (*22.51).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*20.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.36",
+  "page": 233,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.551",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*22.57"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.24 gives beta cup Lambda = beta; PM's line has Lambda cup beta (*22.57).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*20.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.37",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.15",
+   "*22.33",
+   "*13.191",
+   "*2.03"
+  ],
+  "extra_used": [
+   "*13.16",
+   "*4.84",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "(x, y) is all2; Transp is *2.03; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.33 acts inside the negation (*4.11). For [*13.191], the y = x of *13.191 is written x = y by *13.16 (with *4.84, under (y)).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.38",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.481",
+   "*22.5",
+   "*20.23",
+   "*4.6",
+   "*3.3"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*20.22",
+   "*3.27",
+   "*22.51",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "Exp is *3.3; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first line (qinterSelfNull): *22.481 gives alpha cap alpha = beta cap alpha, and beta cap alpha = alpha cap beta (*22.51) = Lambda from Hp (*3.26, *3.27), joined by *20.22 under Hp (Comp *3.43). [*22.5]: an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL). [*20.23] takes alpha = beta from Hp (*3.27), joined by Comp (*3.43).",
+  "glue": [
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.39",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.311",
+   "*22.35"
+  ],
+  "extra_used": [
+   "*4.85"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.35 acts on the consequent (*4.85), under (x).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.4",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.311",
+   "*22.621",
+   "*22.9",
+   "*22.51",
+   "*22.57"
+  ],
+  "extra_used": [
+   "*20.22",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*20.23",
+   "*3.3"
+  ],
+  "cited_unused": [],
+  "note": "the chain A == B == C stated as A == B . B == C, as *14.26; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1), *24.311 at beta, alpha has beta cap alpha, written alpha cap beta by *22.51 (an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)), and *22.9 at beta, alpha has (beta cup alpha) - alpha, written (alpha cup beta) - alpha by *22.57 inside a class. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). (2) rewrites (1) at beta, alpha the same way. The two halves are joined by *4.21, *4.22 (tacit). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.401",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.68",
+   "*24.3",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*22.51",
+   "*20.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*22.551",
+   "*22.57"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1) is *22.68 with the common factor second (qclsDistribRight: *22.68 turned by *20.21, the products commuted by *22.51 inside the sum). In (1).(2), beta - alpha = Lambda is put in the sum by *22.551, under Hp (*2.02, *3.43), and [*24.24] has the sum in the other order (*22.57). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.402",
+  "page": 234,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.49",
+   "*22.55",
+   "*24.13"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*3.43",
+   "*3.35"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The factors of Hp are taken by Simp (*3.26, *3.27) and joined by Comp (*3.43); the [*22.55] line uses Hp's alpha cap beta = Lambda, joined by Ass (*3.35, qimpMpH).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.41",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.68",
+   "*24.22",
+   "*24.26"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*20.21"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910; the transcription drops the last bracket (text audit, Vol I entry 13); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's lines prove (alpha cap beta) cup (alpha - beta) = alpha, turned by *20.21. [*24.22] puts V for beta cup -beta inside alpha cap (beta cup -beta). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.411",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.633",
+   "*24.41"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*22.551",
+   "*20.21"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910; the transcription drops the last bracket (text audit, Vol I entry 14); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.633 gives (beta cap alpha) cup (alpha - beta); PM writes (alpha cap beta) (*22.51, put in the sum by *22.551). *24.41 is turned by *20.21, and so is the result.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*20.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.412",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.41",
+   "*24.3",
+   "*24.23",
+   "*22.68",
+   "*24.411"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*22.52",
+   "*22.51",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*3.27",
+   "*22.57",
+   "*3.26",
+   "*20.21",
+   "*22.551",
+   "*24.24",
+   "*22.481"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first line is *24.41 at alpha - beta, gamma, put in the sum by *22.551. [*24.3.23]: (alpha - beta) cap gamma is alpha cap (gamma - beta) (*22.52, *22.51), alpha cap Lambda by *24.3 and Hp (*3.27), and Lambda by *24.23; the term Lambda is dropped by *22.57 and *24.24. [*22.68] is *22.68 with the common factor second (qclsDistribRight), from right to left (*20.21). [*24.411] has (alpha - beta) cup beta in the other order (*22.57), *24.411 turned by *20.21 and taken from Hp (*3.26), and is put in the difference by *22.481. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.42",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.59",
+   "*24.41"
+  ],
+  "extra_used": [
+   "*20.21",
+   "*22.54"
+  ],
+  "cited_unused": [],
+  "note": "the print cites *24.41 in the last line; the transcription has *24.411; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The print cites *24.41 in the last line (p. 235; the transcription has *24.411). It puts alpha for (alpha cap beta) cup (alpha - beta) by *22.54, with *24.41 turned by *20.21. The transcription's *24.411 would need the hypothesis beta c alpha.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.43",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*5.6",
+   "*22.35",
+   "*22.33",
+   "*22.34",
+   "*10.11",
+   "*10.271"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.36",
+   "*4.84",
+   "*4.85"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The line of *5.6 is written from its first member: *22.33 and *22.35 (on the second factor, *4.36 with *4.3) act on the antecedent (*4.84), *22.34 on the consequent (*4.85).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.431",
+  "page": 235,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.68",
+   "*24.21",
+   "*24.24",
+   "*22.51",
+   "*22.57"
+  ],
+  "extra_used": [
+   "*20.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*22.551",
+   "*22.7"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910: (alpha cap beta) first; the transcription has (alpha cap gamma), here and in the Dem. (text audit, held entry H15; read from the scan, p. 235); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's first line is *22.68 from right to left (*20.21); its second is *22.68 with the common factor second (qclsDistribRight) on both terms (*22.551 and inside a class), the four terms regrouped by *22.7 (PM writes them without brackets, *22.71); [*22.51.57] also needs *22.7. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.432",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.22",
+   "*24.35",
+   "*22.68",
+   "*22.51",
+   "*22.551",
+   "*22.63",
+   "*22.57"
+  ],
+  "extra_used": [
+   "*20.21",
+   "*22.52",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*22.7"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "PM's lines prove the identity from right to left (turned by *20.21). *24.22.35 is *24.35 with gamma cup -gamma = V, its product commuted (*22.51); [*22.51] also needs *22.52; each [*22.63] is *22.63 for a term absorbed by the term beside it, after *22.7, *22.57 (and *22.51, *22.52 for alpha cap beta cap gamma). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.44",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.431",
+   "*24.432"
+  ],
+  "extra_used": [
+   "*20.24"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The two identities are joined by *20.24.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.45",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.32",
+   "*24.3",
+   "*24.311"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*4.38",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910: beta c gamma . gamma c -alpha (text audit, Vol I entry 15); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*24.3.311]: *24.311 at gamma, alpha has gamma cap alpha, written alpha cap gamma by *22.51 (an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)), and the two are joined by *4.38; PM's last line has the factors in the other order from the statement (*4.3).",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
+ },
+ {
+  "id": "*24.46",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.45",
+   "*22.44",
+   "*22.811",
+   "*24.311"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.47",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.311",
+   "*22.41",
+   "*22.59",
+   "*24.43",
+   "*4.3",
+   "*22.45"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*4.38",
+   "*4.32",
+   "*4.36"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1), *24.311 at beta, alpha has beta cap alpha (*22.51; an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)); *22.59 and *24.43 are joined by *4.38, and (1).(2) by *4.38. [*4.3] is *4.3 with *4.32 (and *4.36).",
+  "glue": [
+   "*4.32",
+   "*2.02"
+  ],
+  "glue_kind": [
+   "order",
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.48",
+  "page": 236,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.73",
+   "*22.481",
+   "*22.68",
+   "*22.621",
+   "*3.47",
+   "*22.48",
+   "*22.55",
+   "*24.13",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*20.22",
+   "*22.51",
+   "*20.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*20.23",
+   "*3.3",
+   "*3.22",
+   "*20.24",
+   "*3.35",
+   "*22.57"
+  ],
+  "cited_unused": [],
+  "note": "Hp grouped from the left; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(8) is qline24_48: in (2), [*22.68] is *22.68 with the common factor second (qclsDistribRight) in both members (an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL), and qclsEqR: *20.22, *20.24 with *3.22); in (4), *22.48 gives eta cap alpha c beta cap alpha, written alpha cap beta by *22.51 with *22.55, and the [*22.55] line uses Hp (Ass *3.35, qimpMpH); in (6), (7) the two identities are put in the sum by *22.73; (8) is *20.22 under Hp with *20.21, and Exp (*3.3). 'Similarly' (9) is (8) at eta, eta', xi, xi', beta, alpha, its Hp got from this one by Simp and Comp (beta cap alpha by *22.51) and xi cup eta, xi' cup eta' commuted by *22.57. The factors of Hp are taken by *3.26, *3.27, joined by *3.43; (1) is put under Hp by *2.02. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04",
+   "*3.22"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.481",
+  "page": 237,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.48",
+   "*22.42",
+   "*24.21",
+   "*24.311",
+   "*20.2",
+   "*4.73"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*4.32",
+   "*3.27",
+   "*4.38",
+   "*4.3",
+   "*2.02"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (2), the asserted factors alpha c alpha (*22.42) and alpha - alpha = Lambda (*24.21) are dropped (*4.73, *4.32, and *3.2, *3.27), and *24.311 at beta, alpha and gamma, alpha has beta cap alpha, gamma cap alpha (*22.51; an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)), joined by *4.38. (3): *4.73 has alpha = alpha second (*4.3). (1).(2).(3): (3) replaces the second member under Hp (*2.02, *3.43).",
+  "glue": [
+   "*4.32",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.482",
+  "page": 237,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.48",
+   "*22.42"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*2.02",
+   "*3.43",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.48's Hp is got from this one by Simp (*3.26, *3.27) and Comp (*3.43), with alpha c alpha and beta c beta (*22.42) put under it by *2.02.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.49",
+  "page": 238,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.621",
+   "*22.68",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*20.22",
+   "*22.551",
+   "*22.57",
+   "*20.21",
+   "*3.3",
+   "*2.04",
+   "*3.22",
+   "*20.24"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.621's identities are turned by *20.21; (1) puts (alpha cap beta) cup (alpha cap gamma) for alpha cap (beta cup gamma) by *22.68 (qclsEqR: *20.22, *20.24 with *3.22, Exp *3.3, Comp *3.43); in (2), Hp is put for alpha cap beta (*22.551) and *24.24 has the sum in the other order (*22.57). Comm (*2.04) is used inside qclsEqR.",
+  "glue": [
+   "*2.02",
+   "*2.04",
+   "*3.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.491",
+  "page": 238,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.621",
+   "*22.481",
+   "*24.4",
+   "*22.68"
+  ],
+  "extra_used": [
+   "*3.27",
+   "*20.21",
+   "*3.26",
+   "*3.43",
+   "*2.02",
+   "*22.52",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*22.73",
+   "*22.57"
+  ],
+  "cited_unused": [],
+  "note": "the conclusion grouped from the left; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*24.4]: alpha cap (beta cup gamma) - gamma is alpha cap ((beta cup gamma) - gamma) (*22.52), and *24.4 at beta, gamma gives (beta cup gamma) - gamma = beta from Hp (its halves by *3.26, *3.27); 'Similarly' (2) uses its first half. In (3), (1).(2) are joined by *22.73, and *22.621 needs gamma cup beta written beta cup gamma (*22.57). Hp's factors are taken by *3.26, *3.27, joined by *3.43; identities are turned by *20.21. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.492",
+  "page": 238,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.8",
+   "*22.86",
+   "*22.9",
+   "*22.621"
+  ],
+  "extra_used": [
+   "*20.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*3.27",
+   "*22.51",
+   "*22.57",
+   "*3.26"
+  ],
+  "cited_unused": [
+   "*22.481"
+  ],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*22.481] puts alpha - beta for gamma in alpha - gamma, gamma being in the negation of the second factor, where *22.481 (a first factor) does not apply: it is *20.18 for the expression alpha - xi (qclsEqCongr), with Hp turned by *20.21 (*3.27). [*22.8.86]: -(alpha - beta) is -(-(-alpha) cap -beta) (*22.8), which is -alpha cup beta by *22.86. [*22.8.9]: alpha cap (-alpha cup beta) is (beta cup -alpha) - (-alpha) by *22.51, *22.8, *22.57, beta - (-alpha) by *22.9, and alpha cap beta by *22.8, *22.51. [*22.621] gives beta cap alpha = beta (*22.51), from Hp (*3.26). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.493",
+  "page": 238,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.84",
+   "*24.17",
+   "*24.26",
+   "*22.68"
+  ],
+  "extra_used": [
+   "*22.8",
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*2.02",
+   "*20.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.84 . *24.17: *24.17 at -(beta cap gamma), whose -(-(beta cap gamma)) is beta cap gamma by *22.8, and *22.84, each identity replaced in its first member (an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)). [*24.26]: alpha = alpha cap V (*20.21), V replaced inside the class under Hp (*2.02, *3.43). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.494",
+  "page": 238,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.3",
+   "*24.311",
+   "*22.44",
+   "*22.621",
+   "*22.68",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*22.51",
+   "*20.23",
+   "*3.3",
+   "*20.22",
+   "*3.43",
+   "*2.02",
+   "*20.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*22.73",
+   "*22.57"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.311 at beta, alpha has beta cap alpha (*22.51; an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL)); (3) is *22.68 with the common factor second (qclsDistribRight); in (4), (1) and (2) are put in the sum by *22.73, and *24.24 has it in the other order (*22.57). 'Similarly' (5) is written out. Hp's factors are taken by *3.26, *3.27, joined by *3.43. Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.495",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.87",
+   "*22.68",
+   "*24.21",
+   "*24.311",
+   "*22.621"
+  ],
+  "extra_used": [
+   "*22.51",
+   "*22.481",
+   "*22.52",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04",
+   "*24.23",
+   "*20.21",
+   "*22.73",
+   "*24.24"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.87.68: -(beta cup gamma) is -beta cap -gamma (*22.87 turned by *20.21), and *22.68 with the common factor second (qclsDistribRight), each product regrouped by *22.52 (both at once by *22.73). [*24.21]: (gamma - beta) - gamma is -beta cap (gamma cap -gamma) (*22.51 by *22.481, *22.52), so -beta cap Lambda, which is Lambda by *24.23, dropped by *24.24. (1).(2): (alpha - beta) - gamma is (alpha - gamma) - beta (*22.52, *22.51), and (2) is put for alpha - gamma (*22.481). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.5",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*24.03"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.51",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.5",
+   "*10.252",
+   "*24.15"
+  ],
+  "extra_used": [
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910 (p. 239); the transcription omits it, its Dem. printed under *24.5; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.5 is used inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.52",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.51",
+   "*24.1",
+   "*2.15"
+  ],
+  "extra_used": [
+   "*20.21",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "y is the real variable of *24.1; Transp is *2.15; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.1's Lambda != V is written V != Lambda by *20.21, inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.53",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.51",
+   "*20.2"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.54",
+  "page": 239,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.51",
+   "*4.11"
+  ],
+  "extra_used": [
+   "*4.13"
+  ],
+  "cited_unused": [],
+  "note": "Transp is *4.11; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Transp is *4.11, with *4.13 for E!alpha . == . ~~E!alpha (E! here is the existence of *24.03).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.55",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.3",
+   "*24.54",
+   "*4.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "as printed in 1910: ~(alpha c beta) (text audit, Vol I entry 16); Transp is *4.11; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.56",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.42",
+   "*22.34"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.561",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.5",
+   "*22.33"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [
+   "*3.26"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.57",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.481",
+   "*22.5",
+   "*24.51",
+   "*2.03",
+   "*3.3"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*20.22",
+   "*3.27",
+   "*22.51",
+   "*3.26",
+   "*20.23"
+  ],
+  "cited_unused": [],
+  "note": "Transp is *2.03; Exp is *3.3; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first two lines are those of *24.38 (qinterSelfNull: *22.481, *22.51, Hp's factors by *3.26, *3.27, joined by *20.22 under Hp, Comp *3.43); [*22.5]: an identity is replaced in its first member by *20.22 and *20.23, each with Exp (*3.3), joined by Comp (*3.43) (qclsEqL).",
+  "glue": [
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
+ },
+ {
+  "id": "*24.571",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.57",
+   "*24.54",
+   "*2.03",
+   "*2.04",
+   "*3.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "Transp is *2.03; Comm is *2.04; Imp is *3.31; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.58",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.28"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "as printed in 1910: alpha c beta (text audit, Vol I entry 17)",
+  "fidelity": "pm-lines",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*24.6",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*22.41",
+   "*24.55",
+   "*24.21",
+   "*24.54",
+   "*2.16"
+  ],
+  "extra_used": [
+   "*3.3",
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "as printed in 1910: alpha c beta (text audit, Vol I entry 18); Transp is *2.16; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*22.41 is used with Exp (*3.3). (2): alpha = beta puts beta - beta for beta - alpha (qclsEqCongr), which is Lambda by *24.21. (1).(3): (3) is put under Hp by *2.02, and joined by Comp (*3.43). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.61",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.51",
+   "*24.24"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.51's beta = Lambda is put for beta in alpha cup beta, under Hp (*2.02, *3.43). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.62",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*24.51",
+   "*24.23"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*20.15",
+   "*20.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "hint",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.51's beta = Lambda is put for beta in alpha cap beta, under Hp (*2.02, *3.43). Putting a class for an identical one inside an expression is *20.18 for the expression with *20.2 (qclsEqCongr: qcls20_18, *20.15, and the expression's extensionality, clsExpr_ext, p. 200: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *20.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*20.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*24.63",
+  "page": 240,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.191",
+   "*24.54",
+   "*2.03"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*20.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*4.84",
+   "*4.85",
+   "*10.1",
+   "*12.1",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*20.2",
+   "*2.27",
+   "*20.21",
+   "*20.15",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "kappa a class of classes; alpha apparent (*20.07); Transp is *2.03; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "dem",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*13.191] is its class analogue *20.53 for the extensional expression alpha ~in kappa (qcls20_53, as *22.54 lists *20.18): the class analogue of *10.1 (qclsAllAt: *12.1, *10.32, *10.1, *10.11, *10.23), the occurrences carried by *20.11 and the expression's extensionality (clsExpr_ext) and joined by *4.84, *4.85, *20.2 detached by *2.27, and *20.18 for the expression (qcls20_18: *20.15) with *20.21, Comm (*2.04), *10.11.21. [*24.54] acts on the consequent (*4.85), under (alpha). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists",
+   "order"
+  ]
+ }
+]
