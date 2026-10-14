@@ -13,14 +13,14 @@
 -- `shallow` is the plain occurrence test, `deep` the refined one.
 --
 -- Part 2, statement mutants. For ✱1–✱5 (each `t…`, `pm2_7…` with a statement `Thm (s… p q …)`, and the
--- primitive propositions ✱1·2–✱1·6 against their constructors) and for ✱9–✱21 (`q…`, `QL.t…`, `F9.f…`),
+-- primitive propositions ✱1·2–✱1·6 against their constructors) and from ✱9 on (`q…`, `QL.t…`, `F9.f…`),
 -- a fixed family of one-change mutants of the asserted formula: ∨ ↔ ∧ at one node, an implication
 -- replaced by its consequent, ≡ → ⊃ at one node (and ≡ₓ → ⊃ₓ), one subformula negated, one occurrence
 -- of a variable replaced by another of the same type (the shape of the ebook's slip in ✱1·4), two
 -- variables of the same type exchanged throughout (a renaming: an equivalent statement, kept as a
 -- control). For each mutant: whether the original proof term type-checks against it (`Kernel.check` of
 -- the proof once, then `Kernel.isDefEq` of its type with the mutant), and whether it is a tautology by
--- the repository's own test `F.isTaut`, evaluated by the kernel (for ✱9–✱21: of its propositional
+-- the repository's own test `F.isTaut`, evaluated by the kernel (from ✱9 on: of its propositional
 -- skeleton, each subformula not built by a connective an atom). The control of each statement is the
 -- unchanged formula, rebuilt the way the mutants are; the proof must check against it.
 import Lean
@@ -569,7 +569,7 @@ def targetsF (only : Option (Array Name) := none) : MetaM (Array (Name × String
       out := out.push (c, (s.drop 1).toString, ci.type, Expr.const c [])
   return out
 
-/-- ✱9–✱21 targets: the numbered propositions `q…`, `QL.t…`, `F9.f…`. -/
+/-- Targets from ✱9 on: the numbered propositions `q…`, `QL.t…`, `F9.f…`. -/
 def targetsQ : MetaM (Array (Name × String × Expr × Expr)) := do
   let env ← getEnv
   let isNum (s : String) (p : String) : Bool :=
@@ -630,7 +630,7 @@ open PMMutation in
       for (c, pm, ty, pf) in tq do
         let (a, b) ← analyse h c pm ty pf false false
         qm := qm + a; qs := qs + b
-      logInfo m!"✱9–✱21: {tq.size} statements, {qm} mutants, {qs} survivors"
+      logInfo m!"from ✱9 on: {tq.size} statements, {qm} mutants, {qs} survivors"
     let t3 ← IO.monoMsNow
     let j := Json.mkObj [("part", jstr "timing"), ("hypMs", toJson (t1 - t0)),
       ("fMs", toJson (t2 - t1)), ("qMs", toJson (t3 - t2))]

@@ -7,8 +7,8 @@
 Both first run `lake build` on the modules the meta-program imports, so that what is analysed is the
 proofs in the sources; then scripts/mutation/StatementMutation.lean (Part 1, unused hypotheses, on every
 theorem written in the source; Part 2, statement mutants checked against the original proof term by
-the kernel: in --quick on a fixed sample of ✱1–✱5, in --full on all of ✱1–✱5 and ✱9–✱21). --full adds
-two recompilations:
+the kernel: in --quick on a fixed sample of ✱1–✱5, in --full on all of ✱1–✱5 and on every numbered
+proposition from ✱9 on). --full adds two recompilations:
 
   re-elaboration   each mutant that is a tautology of a ✱1–✱5 statement proved in a replay file (and
                    every 10th of the others, and the unchanged statement as a control) is compiled with
@@ -296,7 +296,7 @@ def main():
         print(f"Seeded: the ebook's ✱1·4 (p ∨ q . ⊃ . p ∨ p) is mutant {slip[0]['op']}#{slip[0]['i']} of ✱1·4: "
               "not a tautology, rejected")
     known = {e["id"] for e in expected["termSurvivors"]}
-    for isF, label in ((True, "✱1–✱5"), (False, "✱9–✱21")):
+    for isF, label in ((True, "✱1–✱5"), (False, "from ✱9 on")):
         ss = [r for r in stmts if r["isF"] == isF]
         ms = [m for m in muts if (m["src"] != "") == isF]
         if not ss:
