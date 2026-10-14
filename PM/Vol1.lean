@@ -34,6 +34,7 @@ import PM.Star20
 import PM.Star21
 import PM.Star22
 import PM.Star23
+import PM.Star24
 -- order checker, golden tests, degenerate families
 import PM.Orders
 import PM.Trap
