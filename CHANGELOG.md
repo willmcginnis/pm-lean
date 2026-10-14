@@ -68,6 +68,35 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     p. 242.
   - ✱25·47 uses ✱23·45 as an equivalence, as ✱24·47 uses ✱22·45: the variant `q23_45_iff`, as ✱23·74
     does.
+- **The maintainer's rulings 63–66.**
+  - Ruling 63: the ledger value `analogue` is adopted. data/README.md defines it once: PM omits the
+    proposition's proof and refers to an analogous earlier number, and our proof follows that analogue's.
+    Besides ✱23 and ✱25 (all their rows; neither chapter prints a hint or a Dem.), it now marks the rows of
+    the same kind that said `hint`: the 14 propositions of ✱21 where PM prints "Proof as in ✱20·…", ✱14·112
+    and ✱20·702. Only the value changed. ✱11·13 and ✱11·311 keep `hint`, since their proofs apply ✱10·13
+    rather than follow its proof; ✱22 and ✱24 print no such reference, and their "[Similar proof]" rows
+    (✱22·391, ✱22·392, ✱22·69) keep `hint` (docs/FIDELITY.md).
+  - Ruling 64: `Lean.Syntax` and `Lean.Name` left the closure of the PM derivations. The three auto-params
+    that brought them in are explicit arguments: `PM.Pf.hy n rfl` (the bound, by evaluation),
+    `qclsEqCongr F _ _ (by cls_expr)` at each of its 38 uses and `qrelEqCongr F _ _ (by rel_expr)` at each
+    of its 38. The kernel census ratchet lost five features: `@[implemented_by]` and nested inductive types
+    from the closure of (a) and of D, and the hint `opaque` from the closure of D. No auto-param and no
+    meta code reaches the derivations now (docs/KERNEL_CENSUS.md; `tests/test_census_routes.py` requires
+    the page to say so while none is found). `Array` stays, with the strings (a `String` is an
+    `Array UInt8`).
+  - Ruling 65: every `example` in the build is a named check theorem, `check_<words>` (docs/NAMING.md):
+    the 193 truth-table checks of PM/Statements.lean (`check_s2_01_tautology` …, from scripts/gen_lean.py)
+    and 120 written by hand, ✱25's six notation checks among them. They are never exported
+    (`scripts/export_names.py`, rule `no_checks`). The kernel census reads them as a column of their own,
+    its copy of the files that renamed examples is gone, and it refuses a library file with an `example`.
+    Counts: AxiomCheck 1722 names, 1715 axiom-free; AllAxioms, which now also imports the pinned
+    statements, 3097 declarations, 40 using an axiom (the new one, `PM.check_pinned_star1_4_variant`, pins
+    `PM.star1_4_variant_not_a_theorem`). The statement mutation's Part 1 now counts the check theorems
+    too: `--quick` finds 1784 theorems and 1039 hypotheses, none unused; the full run's figures below are
+    those of `07f82e0`, when the checks were `example`s.
+  - Ruling 66: the roadmap has a subtask under lk-l4l, lk-l4l-count: an instrumented independent checker
+    that counts what a static census cannot (proof irrelevance, eta, unit-like types, K versus iota,
+    literal to constructor).
 - **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
   report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
   core rely on. Each is measured three ways: statically, over every declaration and its closure; from the
@@ -75,8 +104,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   constructors, recursors and `partial` or `unsafe` definitions are not re-checked); and by probes of the
   Nat operations it computes on literals. The `example`s are included.
   - The closure of the 1289 derivation theorems (✱22–✱25 included) needs no mutual inductive, quotient,
-    axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives only through
-    three auto-params, those of `PM.Pf.hy`, of ✱24's `PM.qclsEqCongr` and of ✱25's `PM.qrelEqCongr`. `Nat.log2` is not computed on
+    axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrived only through
+    three auto-params (until ruling 64, above), those of `PM.Pf.hy`, of ✱24's `PM.qclsEqCongr` and of ✱25's `PM.qrelEqCongr`. `Nat.log2` is not computed on
     literals in Lean 4.34.1, though it is commonly listed as one of the operations that are.
   - A ratchet (`tests/test_kernel_census.py`, `tests/expected_kernel_features.txt`): a new kernel feature
     reaching the PM derivations, or a new axiom user, fails the tests until it is accepted deliberately.
