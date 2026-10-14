@@ -89,7 +89,7 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 | `page` | page of the 1910 print (`star*` only) |
 | `category` | `assertion`, `rule/prose` or `primitive` (`star*` only); `type` in `star9f` for ✱9·131 and ✱9·6–✱9·63, which are Lean's typing and not stated |
 | `method` | how the Lean proof is built (`explicit`: a term following PM's lines); in `star9f` also `primitive`, `not stated` (built into the syntax) and `open` (not proved; the note says what is) |
-| `pm_text` | what PM prints to follow: `dem`, `hint` or `none`; `analogue` (✱23) where PM prints no proof and says it is that of the analogous proposition of ✱22 (p. 226), which `note` names and whose citations, translated, are `cited_used` and `cited_unused` |
+| `pm_text` | what PM prints to follow: `dem`, `hint` or `none`; `analogue`: PM omits the proposition's proof and refers to analogous propositions; the proof followed is the analogue's, which `note` names and whose citations, translated, are `cited_used` and `cited_unused` (✱23, whose proofs are those of the analogous propositions of ✱22, p. 226; adopted by the maintainer's ruling 63, 2026-10-14) |
 | `cited_used`, `cited_unused` | PM's citations that the proof uses, and does not use |
 | `extra_used` | propositions used that PM does not cite (not chain glue, not a step in `tacit`) |
 | `tacit` | the steps PM leaves tacit throughout that the proof may use silently |

@@ -20,8 +20,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   ("precisely analogous to those of analogous propositions in ✱22", p. 226), so each proof follows the
   analogous ✱22 proof, with ✱21 for ✱20 and ✱11 for ✱10. Names and representations mirror ✱22
   (`relSubset` … `relDiff`, `RelExt`, `qrel21_18`). Ledger `data/star23_ledger.json`: 19 / 53.
-  - The ledger's rows have a new `pm_text` value, `analogue`: the proof followed is the analogous ✱22
-    proof, which each row's note names. This value is kept as it stands pending the maintainer's ruling.
+  - The ledger's rows have a new `pm_text` value, `analogue`: PM omits the proposition's proof and refers
+    to analogous propositions, and the proof followed is the analogue's, here the analogous ✱22 proof,
+    which each row's note names. The maintainer adopted the value (ruling 63, 2026-10-14);
+    data/README.md documents it.
   - ✱23·02 follows the 1910 print (the Gutenberg transcription drops an R).
   - ✱23·81, checked against the 1910 scan: the print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem.
     The ebook applies the published Errata, `∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement
