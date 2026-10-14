@@ -7,7 +7,7 @@
 | `vol2_labels.json` | the distinct ✱100–✱234 labels printed in bold in Project Gutenberg eBook #78255 (Vol II): an upper bound | `scripts/progress.py --vol2-html` |
 | `replay_ledger.json` | ✱2–✱5, first ledger: all 188 propositions | by hand, with the proofs |
 | `replay2_ledger.json` | ✱2–✱5, second ledger: the 85 proofs of `PM/Replay2.lean` | by hand, with the proofs |
-| `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json`, `star22_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
+| `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json`, `star22_ledger.json`, `star23_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
 | `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order, prior work and the rows of `docs/PM_CLAIMS.md` it checks, and the repositories whose source the prior work was read in, each at a full commit ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
 | `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
 | `export_names.json` | the export name of every PM proposition the repository states, with its PM number, PM's name, slot, reading, the digests of its statement and of the definitions it uses, a descriptor for titles and search, and its source ([docs/NAMING.md](../docs/NAMING.md)) | `scripts/export_names.py` |
@@ -89,18 +89,18 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 | `page` | page of the 1910 print (`star*` only) |
 | `category` | `assertion`, `rule/prose` or `primitive` (`star*` only); `type` in `star9f` for ✱9·131 and ✱9·6–✱9·63, which are Lean's typing and not stated |
 | `method` | how the Lean proof is built (`explicit`: a term following PM's lines); in `star9f` also `primitive`, `not stated` (built into the syntax) and `open` (not proved; the note says what is) |
-| `pm_text` | what PM prints to follow: `dem`, `hint` or `none` |
+| `pm_text` | what PM prints to follow: `dem`, `hint` or `none`; `analogue` (✱23) where PM prints no proof and says it is that of the analogous proposition of ✱22 (p. 226), which `note` names and whose citations, translated, are `cited_used` and `cited_unused` |
 | `cited_used`, `cited_unused` | PM's citations that the proof uses, and does not use |
 | `extra_used` | propositions used that PM does not cite (not chain glue, not a step in `tacit`) |
 | `tacit` | the steps PM leaves tacit throughout that the proof may use silently |
 | `fidelity` | `pm-lines`, `pm-lines+extra` or `unchanged` ([docs/FIDELITY.md](../docs/FIDELITY.md)) |
 | `reason`, `note` | why each extra is needed; other remarks |
-| `glue`, `glue_kind` | propositions used only for structural moves PM leaves unstated, and their kinds (`chain`, `order`, `under-exists`); ✱11, ✱13, ✱14, ✱20, ✱21, ✱22 only |
+| `glue`, `glue_kind` | propositions used only for structural moves PM leaves unstated, and their kinds (`chain`, `order`, `under-exists`); ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23 only |
 | `scan_check` | the result of checking the 1910 print (3 rows of `replay2_ledger.json`) |
 
 Rows per file: `replay2` 85; `star11` 55 (51 assertions, 4 rules); `star12` 2 (the primitive propositions
 ✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 53 (51 assertions, 2 rules); `star21` 46 (44
-assertions, 2 rules); `star22` 72; `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) The 32 assertions of `star9f` are
+assertions, 2 rules); `star22` 72; `star23` 72; `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) The 32 assertions of `star9f` are
 the 28 numbered ✱9 propositions and four of ✱10, all proved under the working reading C, the definitions
 as printed with Russell's ✱8·13 carried over: 32 of 32 (also under Landini's ✱9+, L; under the
 definitions as printed alone, ✱9·31 is not; the row says so, and

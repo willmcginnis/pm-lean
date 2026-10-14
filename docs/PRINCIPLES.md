@@ -11,7 +11,7 @@ edition. Every design choice that rests on PM cites the page of the 1910 print t
 
 - Statements are read from the print, through the Gutenberg transcription checked against scans of the print
   by the companion text audit. Where the transcription and the print differ, the print is followed and the
-  difference is reported (✱1·4, ✱4·42; [FIDELITY.md](FIDELITY.md)).
+  difference is reported (✱1·4, ✱4·42, ✱23·02; [FIDELITY.md](FIDELITY.md)).
 - Proofs follow PM's own: one Lean line per line of a *Dem.*, or one step per proposition of a bracketed
   hint. What a proof needs beyond that is recorded, not silently supplied ([FIDELITY.md](FIDELITY.md)).
 - Apparent slips in the print itself are reported, not corrected in silence ([FIDELITY.md](FIDELITY.md)).

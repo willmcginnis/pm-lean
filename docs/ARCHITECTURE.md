@@ -65,7 +65,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
     asserted lines, and under a hypothesis also Comp (✱3·43), ✱2·02 and ✱2·83.
   - The header gives PM's warrant for leaving the joining step tacit (Introduction p. 9, the commentary on
     ✱2·31 on pp. 109–110, p. 123). ✱11·71, ✱13, ✱14 and ✱20 write their chains this way, one `calc` line
-    per PM line with PM's citation in a comment. ✱21 prints only bracketed hints, so it has no chains.
+    per PM line with PM's citation in a comment. ✱21 prints only bracketed hints, so it has no chains; ✱23
+    prints no proofs, and writes the chains of the ✱22 proofs it follows.
 - `PM/Star11.lean`: ✱11 (pp. 157–167). The definitions ✱11·01–✱11·06 are macros.
   - All 51 numbered assertions are proved (✱11·1–✱11·71, including ✱11·521 and ✱11·53), and so are the
     four numbered rules ✱11·07, ✱11·11, ✱11·13 and ✱11·311.
@@ -207,6 +208,13 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
     −α by the class analogue of ✱10·1 (`qclsAllAt`). ✱22·94, ✱22·95 take fα as an extensional
     expression (`ClsExt`).
   - ✱22·351 (−α ≠ α) takes a real variable for ✱10·251, as `q10_251` does: it fails for an empty type.
+- `PM/Star23.lean`: the calculus of relations (pp. 226–228). PM prints no proof: each is that of the
+  analogous ✱22 proposition (p. 226), with ✱21 for ✱20 and ✱11 for ✱10. ✱23·01–✱23·05, ✱23·53, ✱23·71 are
+  macros, with PM's signs as scoped notation (`R ⪽ S`, `R ∩̇ S`, `R ⊍ S`, `∸R`, `R ∸ S`).
+  - All 72 numbered propositions ✱23·1–✱23·95 are proved. PM's relation S is `S'` in Lean, as `S` names
+    the system.
+  - ✱23·02 follows the 1910 print, which the transcription misreads (FIDELITY.md). ✱23·54, ✱23·55 and
+    ✱23·94 use ✱21·18 for an expression of R that PM's notation forms (`qrel18`, by `relExpr_ext`).
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
   ([SEMANTICS.md](SEMANTICS.md)), with ✱12·1, and at the one-element family also with comprehension alone
   (`trap_unit_compr`).

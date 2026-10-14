@@ -30,7 +30,7 @@ it combines with `replay2_ledger.json`.
 
 ## Glue
 
-`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21 and ✱22 ledgers. It leaves `fidelity` unchanged and
+`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21, ✱22 and ✱23 ledgers. It leaves `fidelity` unchanged and
 lists the propositions a proof uses only for structural moves PM leaves unstated, each with its kind
 (`glue_kind`):
 
@@ -81,6 +81,7 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 | ✱20 (51) | 18 / 33 | 18 / 33 | 19 / 32 |
 | ✱21 (44) | 12 / 32 | 12 / 32 | 14 / 30 |
 | ✱22 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
+| ✱23 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
@@ -92,6 +93,8 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
   helper).
 - In ✱22 it differs at ✱22·46 and ✱22·74, whose only extras put factors in order (✱3·22 for PM's "Perm",
   ✱4·3).
+- ✱23 has no numbered rules. Its last column differs from the recorded one at ✱23·46 and ✱23·74, whose
+  only extras put factors in order (✱3·22, ✱4·3).
 
 ## By chapter
 
@@ -146,6 +149,22 @@ Dem. of ✱22·5, ✱22·68 and ✱22·91 print, so they are listed as extras wh
   not predicative (✱22·6, ✱22·94), each through the expression's extensionality (p. 200;
   [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).
 
+**✱23** (`star23_ledger.json`; 72 propositions). PM prints no proof in ✱23: "Proofs will be omitted in the
+present number, as they are precisely analogous to those of analogous propositions in ✱22" (p. 226). The
+rows' `pm_text` is `analogue`: the proof followed is that of the analogous ✱22 proposition (its Dem. lines
+or its hint, pp. 220–225, named in each row's `note`), with ✱21 for ✱20, ✱11 for ✱10 and ✱23 for ✱22, and
+`cited_used`, `cited_unused` are its citations so translated. Where ✱10 has no counterpart in ✱11 (✱10·251,
+✱10·411, ✱10·413), the ✱10 proposition is listed as cited and unused, and its proof for two variables is
+listed instead. As recorded, 19 / 53. Typical extras:
+- ✱11·11 to generalize a line over (x, y) and ✱21·43 to read R = S as xRy ≡_{x,y} xSy, where ✱22's proof
+  cites neither (✱10·11, ✱20·43);
+- ✱23·33, ✱23·34, ✱23·35 to read x(R ∩̇ S)y, x(R ⊍ S)y, x ∸R y, which ✱22's proofs often leave tacit
+  (for classes, x ∈ α ∩ β is read as x ∈ α . x ∈ β);
+- ✱4·36–✱4·39 and ✱4·84–✱4·86 to replace a part of a formula by an equivalent, and ✱11·33 to do so under
+  (x, y);
+- ✱21·18 for an expression of R that is not a generic context f{R} (R ⪽ T, and fR in ✱23·94), by its
+  proof with `relExpr_ext` (PM/Star21.lean).
+
 **Where the print is unclear,** the docstring says so. For example, ✱14·144 and ✱14·145 cite ✱14·111 where
 the unmarked form is ✱14·112, and ✱14·272 cites ✱10·414 for a ✱10·271 step. [ARCHITECTURE.md](ARCHITECTURE.md)
 lists these per file.
@@ -160,6 +179,10 @@ Of the 172 formalized ✱13, ✱14, ✱20 and ✱21 propositions (counting one v
 - The class analogues of ✱10·1 and ✱10·24 (✱20·25, ✱20·53, ✱20·54) and their analogues for relations
   (✱21·53, ✱21·54) also use ✱12·1 or ✱12·11.
 - The others depend on it through these and ✱13·101.
+
+Of ✱23's 72 propositions, 66 take `[Reducibility S]`, through ✱21 (✱21·3 reads xRy, ✱21·43 and ✱21·15
+relate identity and formal equivalence); the six that do not are ✱23·1, ✱23·4, ✱23·42, ✱23·44, ✱23·441 and
+✱23·46.
 
 Which theorem needs which rule is in [VERIFICATION.md](VERIFICATION.md).
 
@@ -188,3 +211,7 @@ Following PM's lines line by line turned up these points. The errata themselves 
     ✱10·11. This is possibly a citation slip. It has not been checked against the 1925 edition.
 
   No published erratum touches pp. 123–125. The 1925 second edition has not been checked.
+- **✱23·02** (p. 226). The print has `R ∩̇ S = x̂ŷ(xRy . xSy)`; Gutenberg #78050 drops the R. The print is
+  followed (`QF.relInter`, PM/Star23.lean). This is entry 9 of the text audit's Vol I list, checked against
+  the scan. At ✱23·81 the ebook applies the published Errata (the audit says so); its statement, the analogue
+  of ✱22·81, is the one proved.
