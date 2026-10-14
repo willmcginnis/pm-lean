@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Every check of the repository, from its root: the build (with the pinned statements of
+# The standing checks of the repository, from its root: the build (with the pinned statements of
 # Checks/PinnedStatements.lean), a search for sorry / native_decide / added axioms, the root checks
 # (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean) with its
 # negative tests (tests/ledger_negative.sh: a fabricated claim and a removed use must fail it), ✱9's
