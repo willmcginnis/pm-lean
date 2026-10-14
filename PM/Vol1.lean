@@ -26,20 +26,21 @@ import PM.Systems
 -- semantics: the general (classical collapse) model and the finite coded model
 import PM.Models.Collapse
 import PM.Models.Finite
--- ✱12–✱22
+-- ✱12–✱23
 import PM.Star12
 import PM.Star13
 import PM.Star14
 import PM.Star20
 import PM.Star21
 import PM.Star22
+import PM.Star23
 -- order checker, golden tests, degenerate families
 import PM.Orders
 import PM.Trap
 
 /-!
   Entry file for Volume I of Principia Mathematica (1910): ✱1–✱97, as far as built (✱1–✱5, ✱9–✱14,
-  ✱20–✱22, all but a few propositions). It imports exactly what the volume uses: the propositional
+  ✱20–✱23, all but a few propositions). It imports exactly what the volume uses: the propositional
   part, the quantifier base, the opt-in rules (PM/Rules/), the styles of predicativity (PM/Pred/), the
   named systems, and the semantics. Volumes II and III will get their own entry files (PM/Vol2.lean,
   PM/Vol3.lean).
