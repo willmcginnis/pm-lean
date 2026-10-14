@@ -218,7 +218,7 @@ open LedgerCheck
   let mut via : Array (List Name) := #[]          -- the helpers of the row's proof that bring it in
   let mut missing : Array String := #[]
   let mut iffListed : Array String := #[]          -- ✱3·26 / ✱3·27 listed for a ≡ read as ⊃
-  for ch in ["star11", "star12", "star13", "star14", "star20", "star21"] do
+  for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22"] do
     let path := s!"data/{ch}_ledger.json"
     let j ← match Json.parse (← IO.FS.readFile path) with
       | .ok j => pure j

@@ -7,7 +7,7 @@ extra. The numbered rules (four in ✱11, two each in ✱20 and ✱21) are left 
 import json, pathlib
 
 root = pathlib.Path(__file__).resolve().parent
-for ch in ["star11", "star13", "star14", "star20", "star21"]:
+for ch in ["star11", "star13", "star14", "star20", "star21", "star22"]:
     rows = [r for r in json.loads((root / f"{ch}_ledger.json").read_text()) if r["category"] == "assertion"]
     strict = sum(1 for r in rows if not r["extra_used"] and not r["glue"])
     recorded = sum(1 for r in rows if r["fidelity"] == "pm-lines")
