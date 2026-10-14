@@ -129,7 +129,7 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   whole hierarchy (restricted ranges at every type, closed under comprehension) is not cheap. Only the
   syntactic half is proved: the matrix style admits less (`QThm.matrix_to_lowestOrder`, golden tests).
 - "Both must pass": every PM theorem (✱1–✱23 so far) is stated for an arbitrary system, so for both
-  styles; `StyleCheck.lean` instantiates each of the 629 PM propositions under each style and named
+  styles; `StyleCheck.lean` instantiates each of the 630 PM propositions under each style and named
   system and reports the result (§3, test S1). Consistency is proved for both styles in both models
   (`consistent_of_style`, `consistent_collapse_of_style`).
 
@@ -198,7 +198,7 @@ module, and it combines with either reading of "predicative" (decision 3), givin
   comprehension or ✱12·1, since φ itself is a witness (`realPhi_every_system`). What differs between
   the styles is whether the direct comprehension application is accepted.
 - `styles_equiv` covers all four styles: with reducibility they derive the same theorems;
-  `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 629 PM
+  `styles_equiv_real` states the p. 55 / p. 54 case for `Sys.full`. `StyleCheck.lean`: all 630 PM
   propositions pass in `Sys.full` of each of the four styles.
 
 The p. 55 reading is the default because it is what p. 55 says outright about the case at issue, and
@@ -445,8 +445,8 @@ catches evidence supplied other than by the class, directly or through any helpe
 look inside recursors, `casesOn`, `below`/`brecOn`, `noConfusion` or matchers, whose types name every
 constructor, so that a proof by induction on `QThm`, such as `qsound`, does not count as using every
 rule. A declaration uses a rule if either analysis finds it; that is compared with whether the class
-occurs in the declaration's type. Result: 269 PM propositions use reducibility, 1 uses comprehension
-(the two analyses agree on all 629), and 0 disagree with their signatures. The test
+occurs in the declaration's type. Result: 270 PM propositions use reducibility, 1 uses comprehension
+(the two analyses agree on all 630), and 0 disagree with their signatures. The test
 `RedCheckTest.red_with_explicit_evidence` (in RedCheck.lean; from an external review) calls
 `QThm.red1` with explicit evidence and no class: RedCheck flags it, and fails if it does not.
 
@@ -518,7 +518,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 | **F3** ✱12·1 shape vs the print; choices listed | **pass, against the transcription** | `red1`/`red2` and `q12_1`/`q12_11` match p. 174 term for term ((∃f) first, φx before f!x, ≡ₓ = ✱10·03, ≡ₓ,ᵧ = ✱11·06). Checked against the DP transcription's LaTeX, not against the scan image. Choices: §1 above |
 | **F4** impredicative comprehension not derivable without ✱12·1 | **skipped** | Needs a non-collapsed model (Holmes's ι⁴ or "simple recursion" model). Only the syntactic half is done: `compr1` cannot be applied to (φ) . φ!x at a predicative type (PM/Orders.lean, last example). Non-derivability is **not** proved |
 | **F5** one theorem at two sorts | **pass** | PM/Star20.lean examples: `q13_15` at ι, (ι)/1, ((ι)/1)/2; `q13_101` at ι and (ι)/1. In use: `q20_13` and `q20_14` use `q13_15`, `q13_16`, `q13_195` at `pred1 a`, hence ✱12·1 at `pred1 (pred1 a)` |
-| **S1** every PM theorem under every style (maintainer, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 629 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 629/629 each; 0 without a parameter `S`; per system, in every style: reducibility 628, predicative 360, base 359 (the 269 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
+| **S1** every PM theorem under every style (maintainer, Q1 and Q3) | **pass** | `StyleCheck.lean`: each of the 630 PM propositions instantiates in `Sys.full` of each of the four styles (matrix / lowest order × p. 55 / p. 54): 630/630 each; 0 without a parameter `S`; per system, in every style: reducibility 629, predicative 360, base 359 (the 270 that take `Reducibility` and the 1 that takes `Comprehension` drop out as expected). Consistency in every style: `consistent_of_style` (finite model, no axioms), `consistent_collapse_of_style` (collapse model, classical axioms) |
 | **S2** `styles_equiv` (maintainer, item (i)) | **pass** | PM/StylesEquiv.lean: with reducibility, any two styles derive the same `QThm` theorems, for either setting of comprehension. Kernel-checked induction (`restyle`), no axioms; uses ✱12·1/✱12·11 (RedCheck). Without reducibility, strict weakness of the matrix style: **skipped** (needs an order-aware model, F4) |
 | **S3** currying (maintainer, item (ii)) | **pass** | `curry_order`, `phi_x_two_views`, golden tests (PM/Pred/Curry.lean) |
 | **S4** p. 56 second clause vs lowest order (maintainer, item (iii)) | **no case exists within this encoding** | `second_clause_iff_lowestOrder`, `second_clause_matrix_iff`, `anyLe_iff_le_maxL` (proofs, no axioms); `ClauseSearch.lean`: 2,784,780 cases, 0 disagreements, comparing the same definitions. Both partial applications are evaluated at `()` in `U` with the same body order, so the result is the arithmetic O ≤ a + 1 ∨ O ≤ b + 1 ↔ O ≤ max a b + 1; it does not show that the encoding captures PM's "assignment of values", nor extend to arbitrary variable families. Not added as a style (none needed within this encoding) |
@@ -578,7 +578,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 1286 names, every public theorem under `PM/`; 1279 report no axioms. The other 7 are the
+`AxiomCheck.lean`: 1287 names, every public theorem under `PM/`; 1280 report no axioms. The other 7 are the
 three propositional metatheorems and four declarations of the classical collapse model (below). Every PM
 theorem (✱2–✱5, the ✱9–✱23 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
@@ -586,7 +586,7 @@ theorem (✱2–✱5, the ✱9–✱23 `q…` theorems, and ✱9 by its own meth
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 2584 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 2585 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 39 use an axiom:
 
 | Declarations | Axioms | Why |

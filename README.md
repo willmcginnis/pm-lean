@@ -247,7 +247,7 @@ Install the Lean toolchain named in `lean-toolchain` with
 
 ```
 lake build                      # builds and checks every file
-lake env lean AxiomCheck.lean   # 1279 of 1286 theorems and models use no axioms
+lake env lean AxiomCheck.lean   # 1280 of 1287 theorems and models use no axioms
 lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system

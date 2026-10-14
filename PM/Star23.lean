@@ -313,10 +313,12 @@ theorem q23_441 (R S' : V a → V b → QF V) (x : V a) (y : V b) :
   QThm.mp (q11_1 (fun x y => imp (relHolds x R y) (relHolds x S' y)) x y)
     (QL.t3_31 _ _ _)                                                              -- ✱10·1 . Imp
 
-/-- ✱23·45 `⊢ : R ⪽ S . R ⪽ T . ≡ . R ⪽ S ∩̇ T`. As ✱22·45: `✱23·1` (the definition); `[✱10·29]` is
-    ✱11·391; `[✱22·33 . ✱10·413]`: ✱23·33 replaces the consequent under (x, y), which is ✱10·413 for two
-    variables with the antecedent unchanged: ✱4·85 under (x, y) (✱11·11·33). -/
-theorem q23_45 [Reducibility S] (R S' T : V a → V b → QF V) :
+/-- ✱23·45 with ≡, the form in which ✱22·45 is printed: `⊢ : R ⪽ S . R ⪽ T . ≡ . R ⪽ S ∩̇ T`. A variant: the
+    print states ✱23·45 with ⊃ (`q23_45`), and ✱23·74's proof, which follows ✱22·74's, uses this equivalence
+    where ✱22·74's uses ✱22·45. As ✱22·45: `✱23·1` (the definition); `[✱10·29]` is ✱11·391;
+    `[✱22·33 . ✱10·413]`: ✱23·33 replaces the consequent under (x, y), which is ✱10·413 for two variables
+    with the antecedent unchanged: ✱4·85 under (x, y) (✱11·11·33). -/
+theorem q23_45_iff [Reducibility S] (R S' T : V a → V b → QF V) :
     QThm S (iff (QF.and (R ⪽ S') (R ⪽ T)) (R ⪽ S' ∩̇ T)) :=
   calc QF.and (R ⪽ S') (R ⪽ T)
       ≡ fimp2 (fun x y => relHolds x R y) (fun x y => QF.and (relHolds x S' y) (relHolds x T y)) :=
@@ -324,6 +326,14 @@ theorem q23_45 [Reducibility S] (R S' T : V a → V b → QF V) :
     _ ≡ (R ⪽ S' ∩̇ T) :=
         QThm.mp (q11_11 fun x y => QThm.mp (qiffSymm (q23_33 S' T x y)) (QL.t4_85 _ _ _))
           (q11_33 _ _)                                                            -- [✱23·33 . ✱10·413]
+
+/-- ✱23·45 `⊢ : R ⪽ S . R ⪽ T . ⊃ . R ⪽ S ∩̇ T`, as printed (p. 227): an implication, where its analogue
+    ✱22·45 (p. 221) has ≡ (checked against the scan, 2026-10-14; the Gutenberg transcription has ⊃ too).
+    PM prints no proof; ✱22·45's lines give the equivalence (`q23_45_iff`, kept as a variant because
+    ✱23·74's proof uses it), and its ⊃ half is taken as the ledgers' tacit "definitions" step. -/
+theorem q23_45 [Reducibility S] (R S' T : V a → V b → QF V) :
+    QThm S (imp (QF.and (R ⪽ S') (R ⪽ T)) (R ⪽ S' ∩̇ T)) :=
+  qiffMp (q23_45_iff R S' T)
 
 /-- ✱23·46 `⊢ : xRy . R ⪽ S . ⊃ . xSy` [as ✱22·46: ✱23·441 . Perm]; Perm, for the factors of a product, is
     ✱3·22. -/
@@ -631,14 +641,15 @@ theorem q23_73 [Reducibility S] (P Q R S' : V a → V b → QF V) :
 /-- ✱23·74 `⊢ : P ∩̇ Q ⪽ R . P ∩̇ R ⪽ Q . ≡ . P ∩̇ Q = P ∩̇ R`. As ✱22·74: `✱23·43 . ✱4·73 . ⊃ ⊢ : P ∩̇ Q ⪽ R .
     ≡ . P ∩̇ Q ⪽ P . P ∩̇ Q ⪽ R .` (✱4·73's product commuted, ✱4·3) `[✱23·45] ≡ . P ∩̇ Q ⪽ P ∩̇ R` (1);
     `(1) R, Q/Q, R` (2); `(1) . (2) . ✱4·38 . ⊃ ⊢ : P ∩̇ Q ⪽ R . P ∩̇ R ⪽ Q . ≡ . P ∩̇ Q ⪽ P ∩̇ R . P ∩̇ R ⪽ P ∩̇ Q .`
-    `[✱23·41] ≡ . P ∩̇ Q = P ∩̇ R`. -/
+    `[✱23·41] ≡ . P ∩̇ Q = P ∩̇ R`. The step (1) needs ✱23·45 as an equivalence, as ✱22·45 is printed; the
+    print states ✱23·45 with ⊃, so the step uses its variant `q23_45_iff`. -/
 theorem q23_74 [Reducibility S] (P Q R : V a → V b → QF V) :
     QThm S (iff (QF.and (P ∩̇ Q ⪽ R) (P ∩̇ R ⪽ Q)) (relEq (P ∩̇ Q) (P ∩̇ R))) :=
   have h1 : ∀ Q R : V a → V b → QF V, QThm S (iff (P ∩̇ Q ⪽ R) (P ∩̇ Q ⪽ P ∩̇ R)) := fun Q R =>
     calc (P ∩̇ Q ⪽ R)
         ≡ QF.and (P ∩̇ Q ⪽ R) (P ∩̇ Q ⪽ P) := QThm.mp (q23_43 P Q) (QL.t4_73 _ _)    -- ✱23·43 . ✱4·73
       _ ≡ QF.and (P ∩̇ Q ⪽ P) (P ∩̇ Q ⪽ R) := QL.t4_3 _ _
-      _ ≡ (P ∩̇ Q ⪽ P ∩̇ R) := q23_45 _ _ _                                            -- [✱23·45] (1)
+      _ ≡ (P ∩̇ Q ⪽ P ∩̇ R) := q23_45_iff _ _ _                                        -- [✱23·45] (1)
   calc QF.and (P ∩̇ Q ⪽ R) (P ∩̇ R ⪽ Q)
       ≡ QF.and (P ∩̇ Q ⪽ P ∩̇ R) (P ∩̇ R ⪽ P ∩̇ Q) := qandIffCongr (h1 Q R) (h1 R Q)     -- (1) . (2) . ✱4·38
     _ ≡ relEq (P ∩̇ Q) (P ∩̇ R) := q23_41 _ _                                         -- [✱23·41]

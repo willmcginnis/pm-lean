@@ -12,15 +12,15 @@ Requires the Lean toolchain named in `lean-toolchain` (install it with
 | Command | Expected result |
 |---|---|
 | `lake build` | builds every file, and the pinned statements of `Checks/PinnedStatements.lean`, with no errors (52 jobs) |
-| `lake env lean AxiomCheck.lean` | 1286 declarations, every public theorem of every file under `PM/` and the models; 1279 report "does not depend on any axioms", the other 7 are the three propositional metatheorems and the four declarations of the classical collapse model (below) |
-| `lake env lean AllAxioms.lean` | every declaration under `PM` (2584) and the 31 private declarations of the PM modules; it lists the 39 that use one of Lean's axioms |
-| `lake env lean RedCheck.lean` | which declarations use ✱12·1 / ✱12·11 or comprehension, from the proofs, compared with the signatures: 0 disagreements among the 629 PM propositions. It must flag its own test `RedCheckTest.red_with_explicit_evidence`, and fails if it does not |
-| `lake env lean StyleCheck.lean` | every PM proposition instantiated under every style and named system: 629 of 629 pass in `Sys.full` of all four styles |
+| `lake env lean AxiomCheck.lean` | 1287 declarations, every public theorem of every file under `PM/` and the models; 1280 report "does not depend on any axioms", the other 7 are the three propositional metatheorems and the four declarations of the classical collapse model (below) |
+| `lake env lean AllAxioms.lean` | every declaration under `PM` (2585) and the 31 private declarations of the PM modules; it lists the 39 that use one of Lean's axioms |
+| `lake env lean RedCheck.lean` | which declarations use ✱12·1 / ✱12·11 or comprehension, from the proofs, compared with the signatures: 0 disagreements among the 630 PM propositions. It must flag its own test `RedCheckTest.red_with_explicit_evidence`, and fails if it does not |
+| `lake env lean StyleCheck.lean` | every PM proposition instantiated under every style and named system: 630 of 630 pass in `Sys.full` of all four styles |
 | `lake env lean ClauseSearch.lean` | p. 56's second clause compared with the lowest-order rule on 2,784,780 cases: no disagreement (about 1 min) |
 | `python3 data/fidelity_counts.py` | the three fidelity counts per chapter ([FIDELITY.md](FIDELITY.md)); any other line it prints is an inconsistency in a ledger |
 | `lake env lean Checks/LedgerCheck.lean` | citations against proof terms: every proposition a `PM/Chain.lean` docstring cites is used by its proof (15 declarations), every PM proposition the proof of a ✱11–✱23 ledger row uses is listed in the row (372 rows), and the same for the ledger of ✱9's own method, `data/star9f_ledger.json` (36 rows with a proof, for the working reading C and, for ✱9·31, also L and the cross-check B; 7 more are built into the syntax); 0 disagreements, and no use left unresolved in `tests/ledger_unlisted_uses.txt` |
 | `lake env lean Checks/Star9Readings.lean` | ✱9 under its four readings (A as printed; C as printed + ✱8·13, the working reading; L, Landini's ✱9+, a cross-check; B, the cross-check): for each ✱9 proposition the readings under which it is derived, read from the Lean statements, the cases of p. 142 each leaves open, and where C's proofs use ✱8·13 and L's use Switch (occurrences of `Thm9.exch` and `Thm9.switch` in the proof terms, ✱8·13's by the kinds of the quantifiers it exchanges; each combination of p. 142 searched again without and with the rule); `scripts/star9_readings.py` writes them to [STAR9_READINGS.md](STAR9_READINGS.md), and `tests/test_star9_readings.py` pins them |
-| `python3 scripts/mutation/mutate.py --quick` | a trial, not part of `run_all.sh` ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)); runs `lake build` first: no unused hypothesis in the 1307 theorems written in the source, the seven planted cases flagged; no proof term of 13 sampled ✱1–✱5 statements accepts any of their 469 one-change mutants; about 10 s |
+| `python3 scripts/mutation/mutate.py --quick` | a trial, not part of `run_all.sh` ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)); runs `lake build` first: no unused hypothesis in the 1308 theorems written in the source, the seven planted cases flagged; no proof term of 13 sampled ✱1–✱5 statements accepts any of their 469 one-change mutants; about 10 s |
 | `python3 scripts/mutation/mutate.py --full` | the same for all 198 ✱1–✱5 and 517 ✱9–✱21 statements (12,711 mutants), with hypotheses replaced by `True` and recompiled, and the proof scripts re-elaborated against every tautological mutant of the ✱1–✱5 statements proved in the replay files (all but ✱1·2–✱1·6, `Thm`'s constructors, which have no script); only the 14 renamings listed in `scripts/mutation/expected.json` survive; about 10 min |
 | `python3 scripts/kernel_census/census.py --ratchet` | the features of Lean's kernel that the PM derivations and their closure use equal `tests/expected_kernel_features.txt`, and the axiom users equal `tests/expected_axiom_users.txt` ([KERNEL_CENSUS.md](KERNEL_CENSUS.md)); about 15 s, run by `tests/test_kernel_census.py` |
 | `python3 scripts/kernel_census/census.py --check` | the full kernel census (every declaration and its closure, re-checked by the kernel with its unfoldings recorded, the examples included) agrees with the tables of [KERNEL_CENSUS.md](KERNEL_CENSUS.md); about 80 s, not part of `run_all.sh` |
@@ -29,7 +29,7 @@ Requires the Lean toolchain named in `lean-toolchain` (install it with
 `AxiomCheck.lean` is generated by `scripts/gen_axiomcheck.py` ([scripts/README.md](../scripts/README.md)).
 It covers every public theorem of every file under `PM/`, found by globbing, with its namespace (the ✱2–✱5
 theorems, `complete`, ✱9–✱23, ✱9's own foundation in `PM/Found9/`, the rule, style and model modules), and
-the definitions of the models; `tests/test_axiomcheck_coverage.py` checks that it is up to date. The "629 PM
+the definitions of the models; `tests/test_axiomcheck_coverage.py` checks that it is up to date. The "630 PM
 propositions" of RedCheck and StyleCheck are the `q…` theorems of ✱9–✱23 by ✱10's method (✱9's own method,
 `PM.F9.f…`, is not among them), a different unit from the assertions counted in [PROGRESS.md](PROGRESS.md);
 that page defines both.
@@ -83,7 +83,7 @@ disagreements.
 | `Reducibility` (✱12·1, ✱12·11) | `q12_1`, `q12_11`, `q12_1_var`, `q12_11_var`; ✱13·101, ✱13·11, ✱13·12, ✱13·13, ✱13·14, ✱13·16, ✱13·171, ✱13·172, ✱13·181, ✱13·182, ✱13·183, ✱13·191–✱13·196, ✱13·21, ✱13·22, ✱13·3; ✱14·12, ✱14·122, ✱14·123, ✱14·124, ✱14·13, ✱14·131, ✱14·14, ✱14·142, ✱14·144, ✱14·145, ✱14·15, ✱14·16, ✱14·17, ✱14·171, ✱14·2, ✱14·202–✱14·205, ✱14·22, ✱14·23, ✱14·241, ✱14·242, ✱14·25, ✱14·26, ✱14·27, ✱14·3, ✱14·31, ✱14·32, ✱14·33, ✱14·331, ✱14·332; ✱20·112–✱20·59, ✱20·7–✱20·81; ✱21·112–✱21·58, ✱21·7–✱21·71; the other 66 of ✱22's 72 and the other 66 of ✱23's 72; `trap_empty`, `trap_unit` |
 | `Comprehension` | `q12_1_of_var` (and the rule statements `comprehension1`, `comprehension2`) |
 
-RedCheck counts 269 PM propositions that use ✱12·1 or ✱12·11 and 1 that uses comprehension, the helper
+RedCheck counts 270 PM propositions that use ✱12·1 or ✱12·11 and 1 that uses comprehension, the helper
 `q12_1_of_var` (not a numbered PM proposition). Besides the rule's own statements, 9 declarations that are
 not PM propositions (metatheorems about the system, the trap and the styles of predicativity) also use
 comprehension.

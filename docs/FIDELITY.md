@@ -221,3 +221,8 @@ Following PM's lines line by line turned up these points. The errata themselves 
   `R ⪽ S . ≡ . ∸S ⪽ ∸R`, the analogue of ✱22·81, is the one proved. Checked against the scan (2026-10-14):
   the 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem (it fails when R is empty and S is
   not), so the Errata's correction is followed, as the authors' own repair.
+- **✱23·45** (p. 227). The print has `R ⪽ S . R ⪽ T . ⊃ . R ⪽ S ∩̇ T`, an implication, where its analogue
+  ✱22·45 (p. 221) has ≡. Checked against the scan (2026-10-14); the ebook follows the print, so this is not
+  a transcription error. The statement follows the print (`q23_45`). The equivalence is proved as a variant,
+  `q23_45_iff` (not exported, and not counted among the assertions of PROGRESS.md), because ✱23·74's proof
+  uses it, as ✱22·74's uses ✱22·45; the implication is its ⊃ half.

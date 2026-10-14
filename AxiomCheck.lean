@@ -1226,6 +1226,7 @@ import PM
 #print axioms PM.q23_43
 #print axioms PM.q23_44
 #print axioms PM.q23_441
+#print axioms PM.q23_45_iff
 #print axioms PM.q23_45
 #print axioms PM.q23_46
 #print axioms PM.q23_47

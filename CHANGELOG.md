@@ -26,12 +26,16 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   - ✱23·81, checked against the 1910 scan: the print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem.
     The ebook applies the published Errata, `∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement
     proved.
+  - ✱23·45, checked against the 1910 scan (p. 227): the print has ⊃ where ✱22·45 has ≡, and the ebook
+    follows it. The statement follows the print. The equivalence is proved as a variant, `q23_45_iff`
+    (not exported, and not counted as an assertion), because ✱23·74's proof uses it, as ✱22·74's uses
+    ✱22·45. A first version proved the equivalence under the number ✱23·45 without recording the change.
 - **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
   report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
   core rely on. Each is measured three ways: statically, from the kernel's own record of a re-check of
   every declaration, and by probes of the Nat operations it computes on literals. The `example`s are
   included.
-  - The closure of the 1119 derivation theorems (✱22 and ✱23 included) needs no mutual inductive,
+  - The closure of the 1120 derivation theorems (✱22 and ✱23 included) needs no mutual inductive,
     quotient, axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives
     only through the auto-param of `PM.Pf.hy`. `Nat.log2` is not computed on literals in Lean 4.34.1,
     though it is commonly listed as one of the operations that are.
@@ -42,8 +46,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
   relations. `scripts/progress.py` lists chapters not started in runs, so a gap is not printed as a range
   across a done chapter. The supersede test no longer pins the total number of exports.
-- **Counts recounted** from the checks with both chapters in: 629 PM propositions, 269 of them using
-  reducibility; AxiomCheck 1286 names, 1279 axiom-free; AllAxioms 2584 declarations, 39 using an axiom;
+- **Counts recounted** from the checks with both chapters in: 630 PM propositions, 270 of them using
+  reducibility; AxiomCheck 1287 names, 1280 axiom-free; AllAxioms 2585 declarations, 39 using an axiom;
   LedgerCheck 372 rows; `lake build` 52 jobs. The AxiomCheck and AllAxioms totals and the job count
   were already stale before these chapters, and are corrected with them.
 

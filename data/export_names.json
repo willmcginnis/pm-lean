@@ -8628,9 +8628,9 @@
   "pm_name": null,
   "slot": null,
   "reading": null,
-  "descriptor": "and_iff_rel_subset",
+  "descriptor": "rel_subset_of_and",
   "descriptor_needs_human": true,
-  "statement_digest": "sha256:90e124d5d1dd2bbfc496b0516ee3315b4b004b01858a15c537abf2c4e1df22d3",
+  "statement_digest": "sha256:8ab5f423b76288518a8cc08425e476448f04f83a0700e6cf22a8a083e1ef27be",
   "definitions_digest": "sha256:260392143501e057377c3d0715c8ca696cc88d846ecaa5969a51d3ff4ac89089",
   "source": "PM/Star23.lean"
  },

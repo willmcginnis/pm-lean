@@ -604,7 +604,7 @@
    "*23.1",
    "*10.413"
   ],
-  "note": "PM prints no proof; as *22.45 (dem), translated",
+  "note": "PM prints no proof; as *22.45 (dem), translated; as printed (p. 227, checked against the scan 2026-10-14) an implication, where *22.45 has ≡: the equivalence that *22.45's lines give is the variant q23_45_iff (used by *23.74), and its ⊃ half is taken (tacit)",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [
@@ -1706,7 +1706,7 @@
    "*4.3"
   ],
   "cited_unused": [],
-  "note": "PM prints no proof; as *22.74 (dem), translated",
+  "note": "PM prints no proof; as *22.74 (dem), translated; [*23.45] is used as an equivalence, as *22.74 uses *22.45: the variant q23_45_iff (the print states *23.45 with ⊃)",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [
