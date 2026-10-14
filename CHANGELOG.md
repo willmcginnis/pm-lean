@@ -152,6 +152,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     comparisons and 251 s the tautology tests; re-elaboration 98 s; hypothesis recompilation 521 s; a
     maximum resident set of about 1.15 GiB for any one process. The tool takes every numbered
     proposition from ✱9 on, so its output no longer calls that group ✱9–✱21.
+  - Hypothesis recompilation stays in `--full` (the maintainer's ruling 68): at 5 to 9 minutes it is now
+    the larger part of the run, and it costs only time on our own machines.
   - The kernel now compares each proof's type with each mutant after bringing both to normal form by
     its own reductions (`Kernel.whnf` everywhere, memoized), instead of directly. The earlier full run,
     comparing directly on the Lean code of `07f82e0`, took 9142 s, 2 h 32 min (1708 s with ✱1–✱24),

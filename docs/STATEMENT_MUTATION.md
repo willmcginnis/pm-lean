@@ -429,9 +429,8 @@ What is wired now:
   re-elaboration. The re-elaboration is the part that can tell a proof by PM's derivation from a proof by
   decision. With ✱25 it measured 16 min 19 s with 8 jobs, comparing on normal forms (2 h 32 min the
   earlier way; 2026-10-14, above), and it runs on our own machines only.
-- **Hypothesis recompilation is still part of `--full`.** The recommendation called it optional: it
-  found nothing beyond the term analysis, at 5 to 9 minutes (521 s in the latest run with ✱25), now the
-  larger part of `--full`. Keeping it for
-  tactic proofs only, or dropping it, awaits a ruling. Until then it stays in, since it costs only time on our own machines.
+- **Hypothesis recompilation stays part of `--full`** (the maintainer's ruling 68, 2026-10-14). The
+  recommendation called it optional: it found nothing beyond the term analysis, at 5 to 9 minutes (521 s
+  in the latest run with ✱25), now the larger part of `--full`. It costs only time on our own machines.
 - **The link to PM's text** that mutation cannot check is now `tests/test_regeneration.py`, a test in
   `tests/run_all.sh` ([above](#what-this-says-about-the-tie-to-pms-text)).
