@@ -175,6 +175,10 @@ Following PM's lines line by line turned up these points. The errata themselves 
 - **✱4·42** (p. 124). The print cites `⊢ . ✱3·26 .` on line (2); the ebook omits it, so ✱3·26 is PM's
   citation here, not an extra (`replay2_ledger.json`). The text audit's human check confirmed this
   transcription error (2026-10-11); it is in its errata list for Vol I, §4.
+- **✱22·84, ✱22·85** (p. 224). Gutenberg #78050 has `−α ∨ −β`, the sign of disjunction between two
+  classes, where ✱22·03's sum of classes `−α ∪ −β` is the only reading that is a formula; ✱22·86 and
+  ✱22·87 on the same page have ∪. The statements are formalized with ∪ (`PM/Star22.lean`). This is not on
+  the text audit's list; it awaits a check against the scan.
 - **Apparent slips in the 1910 print itself** (the ebook follows the print):
   - ✱4·32 (p. 123): line (1) cites ✱4·12 for a step that is in fact ✱2·03 taken both ways. Awaiting a
     human check.

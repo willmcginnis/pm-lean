@@ -12,8 +12,8 @@ Requires the Lean toolchain named in `lean-toolchain` (install it with
 | Command | Expected result |
 |---|---|
 | `lake build` | builds every file, and the pinned statements of `Checks/PinnedStatements.lean`, with no errors (47 jobs) |
-| `lake env lean AxiomCheck.lean` | 1201 declarations, every public theorem of every file under `PM/` and the models; 1194 report "does not depend on any axioms", the other 7 are the three propositional metatheorems and the four declarations of the classical collapse model (below) |
-| `lake env lean AllAxioms.lean` | every declaration under `PM` (2487) and the 31 private declarations of the PM modules; it lists the 39 that use one of Lean's axioms |
+| `lake env lean AxiomCheck.lean` | 1203 declarations, every public theorem of every file under `PM/` and the models; 1196 report "does not depend on any axioms", the other 7 are the three propositional metatheorems and the four declarations of the classical collapse model (below) |
+| `lake env lean AllAxioms.lean` | every declaration under `PM` (2489) and the 31 private declarations of the PM modules; it lists the 39 that use one of Lean's axioms |
 | `lake env lean RedCheck.lean` | which declarations use ✱12·1 / ✱12·11 or comprehension, from the proofs, compared with the signatures: 0 disagreements among the 557 PM propositions. It must flag its own test `RedCheckTest.red_with_explicit_evidence`, and fails if it does not |
 | `lake env lean StyleCheck.lean` | every PM proposition instantiated under every style and named system: 557 of 557 pass in `Sys.full` of all four styles |
 | `lake env lean ClauseSearch.lean` | p. 56's second clause compared with the lowest-order rule on 2,784,780 cases: no disagreement (about 1 min) |

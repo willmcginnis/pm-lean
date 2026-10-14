@@ -474,7 +474,7 @@ occurs in the declaration's type. Result: 203 PM propositions use reducibility, 
 | `PM/Star14.lean` | 971 | ✱14·01–✱14·04 (macros); the 47 numbered propositions ✱14·1–✱14·34, ✱14·3 as a schema (`q14_3`, with `TruthFn`, `qtfnCongr`); a scope counter-model |
 | `PM/Star20.lean` | 1089 | ✱20·01, ✱20·02, ✱20·03, ✱20·04–✱20·081 (macros), class identity, Greek letters, classes of classes (`Cls`, `clsCls`, `memCls`, `clsApp`; [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)); 53 of the 55 numbered propositions ✱20·1–✱20·81 (all but ✱20·631, ✱20·632 on significance); class analogues of ✱10·1, ✱10·24, and of ✱20·3 for classes of classes (`qcls20_3`); the class expressions PM forms (`ClsExpr`) and their extensionality (`clsExpr_ext`, p. 200); typical-ambiguity checks |
 | `PM/Star21.lean` | 903 | ✱21·01, ✱21·02, ✱21·03, ✱21·07–✱21·083 (macros), identity of relations, relations of relations and classes of relations; 46 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705); `qrelCls20_3`; `RelExpr`, `relExpr_ext` (p. 213) |
-| `PM/Star22.lean` | 723 | ✱22·01–✱22·05, ✱22·53, ✱22·71 (macros, with the notation ⊂, ∩, ∪, −); all 72 numbered propositions ✱22·1–✱22·95; ✱20·18 for an extensional expression (`qcls20_18`); `clsExt_neg`, `clsExt_compl`; `ClsExpr.clsSubset_left`, `ClsExpr.clsSubset_right` |
+| `PM/Star22.lean` | 731 | ✱22·01–✱22·05, ✱22·53, ✱22·71 (macros, with the notation ⊂, ∩, ∪, −); all 72 numbered propositions ✱22·1–✱22·95; ✱20·18 for an extensional expression (`qcls20_18`); `clsExt_neg`, `clsExt_compl`; `ClsExpr.clsSubset_left`, `ClsExpr.clsSubset_right` |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
@@ -577,7 +577,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 
 ## 4. Axioms
 
-`AxiomCheck.lean`: 1201 names, every public theorem under `PM/`; 1194 report no axioms. The other 7 are the
+`AxiomCheck.lean`: 1203 names, every public theorem under `PM/`; 1196 report no axioms. The other 7 are the
 three propositional metatheorems and four declarations of the classical collapse model (below). Every PM
 theorem (✱2–✱5, the ✱9–✱22 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
@@ -585,7 +585,7 @@ theorem (✱2–✱5, the ✱9–✱22 `q…` theorems, and ✱9 by its own meth
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
 theorems and the golden theorems are axiom-free.
 
-`AllAxioms.lean`: all 2487 declarations under `PM` and all 31 private declarations of the PM modules
+`AllAxioms.lean`: all 2489 declarations under `PM` and all 31 private declarations of the PM modules
 (`_private.PM.…`, skipped before an external review; none uses an axiom). Exactly 39 use an axiom:
 
 | Declarations | Axioms | Why |

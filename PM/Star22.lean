@@ -318,7 +318,7 @@ theorem q22_54 [Reducibility S] (α β γ : V a → QF V) : QThm S (imp (clsEq �
 theorem q22_55 [Reducibility S] (α β γ : V a → QF V) : QThm S (imp (clsEq α β) (iff (γ ⊂ α) (γ ⊂ β))) :=
   qcls20_18 _ (clsExpr_ext (ClsExpr.clsSubset_right γ)) α β                       -- [✱20·18]
 
-/-- ✱22·551 `⊢ : α = β . ⊃ . α ∪ γ = β ∪ γ` [✱10·11]: α = β is x ∈ α . ≡ₓ . x ∈ β by ✱20·43; with x ∈ γ . ≡ₓ .
+/-- ✱22·551 `⊢ : α = β . ⊃ . α ∪ γ = β ∪ γ` [✱10·411]: α = β is x ∈ α . ≡ₓ . x ∈ β by ✱20·43; with x ∈ γ . ≡ₓ .
     x ∈ γ (✱4·2 under (x), joined by ✱3·2 and Comm), ✱10·411 gives the formal equivalence of the sums, which
     ✱22·34 (✱4·86 under (x)) and ✱20·43 turn into the identity. -/
 theorem q22_551 [Reducibility S] (α β γ : V a → QF V) : QThm S (imp (clsEq α β) (clsEq (α ∪ γ) (β ∪ γ))) :=
