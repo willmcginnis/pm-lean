@@ -237,8 +237,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   `𝐕̇` and `Λ̇` scoped to `PM`.
   - All 70 numbered propositions ✱25·1–✱25·63 are proved. PM prints no proofs (p. 241); each follows the
     proof of its ✱24 analogue, translated as ✱23's follow ✱22's. Statements follow the 1910 print where the
-    transcription differs (✱25·47, ✱25·56), and the published Errata where the print is not a theorem
-    (✱25·37, ✱25·412; docs/FIDELITY.md).
+    transcription differs (✱25·47, ✱25·56), and the transcription's corrections where the print is not
+    a theorem (✱25·37, ✱25·412; their source is not yet identified, docs/FIDELITY.md).
   - A chain of identities of relations is a `calc` block of `≑` lines joined by ✱21·22. Putting a relation
     for an identical one inside an expression is ✱21·18 for the expression with ✱21·2 (`qrelEqCongr`, with
     `RelExpr.relOf` and the tactic `rel_expr`); ✱25·11 and ✱25·12 are used at a real relation by

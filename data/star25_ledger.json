@@ -1123,7 +1123,7 @@
   "cited_unused": [
    "*13.191"
   ],
-  "note": "PM prints no proof; as *24.37 (dem), translated; as corrected by the published Errata (zSw), which the transcription applies; the 1910 print has zRw (p. 242), not a theorem; (x, y, z, w) is (x, y) : (z, w); Transp is *2.03; takes [Reducibility S]",
+  "note": "PM prints no proof; as *24.37 (dem), translated; the 1910 print has zRw (p. 242), not a theorem; the statement is the transcription's correction zSw, the one proved; the source of the correction is not yet identified (the Errata page bound into the 1910 print has no entry for p. 242; the ebook's Transcriber's Note says only that all items in the Errata, from all three volumes, were applied); (x, y, z, w) is (x, y) : (z, w); Transp is *2.03; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [
@@ -1513,7 +1513,7 @@
    "*23.481"
   ],
   "cited_unused": [],
-  "note": "PM prints no proof; as *24.412 (dem), translated; as corrected by the published Errata (S ⪽ Q), which the transcription applies; the 1910 print has R ⪽ Q (p. 242), not a theorem; takes [Reducibility S]",
+  "note": "PM prints no proof; as *24.412 (dem), translated; the 1910 print has R ⪽ Q (p. 242), not a theorem; the statement is the transcription's correction S ⪽ Q, the one proved; the source of the correction is not yet identified (the Errata page bound into the 1910 print has no entry for p. 242; the ebook's Transcriber's Note says only that all items in the Errata, from all three volumes, were applied); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [

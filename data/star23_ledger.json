@@ -1771,7 +1771,7 @@
    "*11.33"
   ],
   "cited_unused": [],
-  "note": "PM prints no proof; as *22.81 (hint), translated; the statement as the transcription has it, with the published Errata applied (the 1910 print has ∸R ⪽ ∸S on the right, checked against the scan: not a theorem)",
+  "note": "PM prints no proof; as *22.81 (hint), translated; the 1910 print has ∸R ⪽ ∸S on the right (p. 228, checked against the scan), not a theorem; the statement is the transcription's correction ∸S ⪽ ∸R, the one proved; the source of the correction is not yet identified (the Errata page bound into the 1910 print has no entry for p. 228; the ebook's Transcriber's Note says only that all items in the Errata, from all three volumes, were applied)",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [

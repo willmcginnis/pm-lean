@@ -46,9 +46,11 @@ import PM.Star24
   transcription leaves out none of the 70 propositions. Where it differs from the print, the print is
   followed, and the docstring says so: ✱25·47 (brackets the print does not have, no change to the
   statement) and ✱25·56 (∃̇!(R ⊍ S), with brackets), both on the text audit's list of errors for Vol I
-  (entries 19, 20). At ✱25·37 and ✱25·412 the transcription applies the published Errata: the print has zRw
-  for zSw in ✱25·37 and R ⪽ Q for S ⪽ Q in ✱25·412, neither a theorem; the corrected statements, which are the
-  analogues of ✱24·37 and ✱24·412, are proved, as at ✱23·81. One statement is printed otherwise than its
+  (entries 19, 20). At ✱25·37 and ✱25·412 the print has zRw for zSw and R ⪽ Q for S ⪽ Q, neither a theorem;
+  the transcription has the corrected statements, the analogues of ✱24·37 and ✱24·412, and they are the ones
+  proved, as at ✱23·81. The source of these corrections is not yet identified: the Errata page bound into the
+  1910 print has no entry for p. 242, and the ebook's Transcriber's Note says only "All items in the Errata,
+  from all three volumes, have been added and corrected accordingly." One statement is printed otherwise than its
   analogue, and is stated as printed: ✱25·313 has R ∸ S = R where ✱24·313 has α = α − β.
 
   Grouping, as in ✱24: an unbracketed product of three or more factors is grouped from the left, as PM's own
@@ -442,11 +444,12 @@ theorem q25_36 [Reducibility S] (R S' : V a → V b → QF V) : QThm S (imp (rel
     _ ≑ S' ⊍ Λ̇ := q23_57 _ _
     _ ≑ S' := q25_24 S'                                                           -- ✱25·24
 
-/-- ✱25·37 `⊢ :: R ∩̇ S = Λ̇ . ≡ :. xRy . zSw . ⊃_{x,y,z,w} : x ≠ z . ∨ . y ≠ w`, the statement as corrected by
-    the published Errata, which the Gutenberg transcription applies (the text audit says so and leaves it
-    out of its list). The 1910 print has zRw for zSw (scan, p. 242), which is not a theorem: with S = Λ̇ and
-    R holding between some x and y, the left side holds and the right fails at z = x, w = y. The corrected
-    statement is the analogue of ✱24·37, and is the one proved.
+/-- ✱25·37 `⊢ :: R ∩̇ S = Λ̇ . ≡ :. xRy . zSw . ⊃_{x,y,z,w} : x ≠ z . ∨ . y ≠ w`, the statement as corrected
+    in the Gutenberg transcription. The 1910 print has zRw for zSw (scan, p. 242), which is not a theorem:
+    with S = Λ̇ and R holding between some x and y, the left side holds and the right fails at z = x, w = y.
+    The corrected statement is the analogue of ✱24·37, and is the one proved. The source of the correction
+    is not yet identified: the Errata page bound into the 1910 print has no entry for p. 242, and the
+    ebook's Transcriber's Note says only that all items in the Errata, from all three volumes, were applied.
 
     (x, y, z, w) is (x, y) : (z, w), as ✱11·02 has (x, y, z) = (x) : (y, z), and ⊃_{x,y,z,w} is ✱11·05's
     pattern. As ✱24·37: ✱25·15 and ✱23·33 (under (x, y), ✱11·11·33); "[✱13·191]" is its two-variable form
@@ -606,12 +609,13 @@ theorem q25_411 [Reducibility S] (R S' : V a → V b → QF V) :
       _ ≑ R := qrelEqSymm (q25_41 R S')                                           -- [✱25·41]
   qsyl h (qiffMp (q21_21 _ _))
 
-/-- ✱25·412 `⊢ : Q ⪽ P . S ⪽ Q . ⊃ . (P ∸ Q) ⊍ (Q ∸ S) = P ∸ S`, the statement as corrected by the published
-    Errata, which the Gutenberg transcription applies (the text audit says so and leaves it out of its list).
-    The 1910 print has R ⪽ Q for S ⪽ Q (scan, p. 242), a hypothesis about a relation the conclusion does not
+/-- ✱25·412 `⊢ : Q ⪽ P . S ⪽ Q . ⊃ . (P ∸ Q) ⊍ (Q ∸ S) = P ∸ S`, the statement as corrected in the Gutenberg
+    transcription. The 1910 print has R ⪽ Q for S ⪽ Q (scan, p. 242), a hypothesis about a relation the conclusion does not
     mention, which is not a theorem: with Q = Λ̇, R = Λ̇ and P = S = V̇ the hypothesis holds, the left side is
     V̇ and the right Λ̇ (in non-empty types). The corrected statement is the analogue of ✱24·412, and is the
-    one proved.
+    one proved. The source of the correction is not yet identified: the Errata page bound into the 1910
+    print has no entry for p. 242, and the ebook's Transcriber's Note says only that all items in the
+    Errata, from all three volumes, were applied.
 
     As ✱24·412: the first line is ✱25·41 at P ∸ Q, S inside the sum (✱23·551). "[✱24·3·23]": (P ∸ Q) ∩̇ S is
     P ∩̇ (S ∸ Q) (✱23·52, ✱23·51), which is P ∩̇ Λ̇ by ✱25·3 and Hp, and Λ̇ by ✱25·23; the term Λ̇ is dropped

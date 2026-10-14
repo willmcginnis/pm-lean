@@ -37,9 +37,11 @@ import PM.Star21
   ✱23·02 is read from the 1910 print: the Gutenberg transcription drops the R of "R ∩̇ S" (the text
   audit's Vol I list, entry 9, checked against the scan). The transcription writes the sign of ✱23·04
   as ∸ there and as a dotted minus from ✱23·392 on; they are one sign, read as ∸ throughout. At ✱23·81
-  the transcription applies the published Errata (the audit says so and leaves it out of its list);
   the 1910 print has `∸R ⪽ ∸S` on the right (checked against the scan, p. 228), which is not a theorem;
-  the statement is the corrected one, which is the analogue of ✱22·81.
+  the transcription has `∸S ⪽ ∸R`, the analogue of ✱22·81, and that corrected statement is the one proved.
+  The source of the correction is not yet identified: the Errata page bound into the 1910 print has no
+  entry for p. 228, and the ebook's Transcriber's Note says only "All items in the Errata, from all three
+  volumes, have been added and corrected accordingly."
 
   An expression fR of a relation, in ✱23·94 and ✱23·95, is an extensional one (`RelExt`, PM/Star21.lean:
   "every proposition about a relation expresses an extensional property of the determining function",
@@ -666,8 +668,11 @@ theorem q23_8 [Reducibility S] (R : V a → V b → QF V) : QThm S (relEq (∸(�
       _ ≡ relHolds x R y := qiffSymm (QL.t4_13 _)                                  -- ✱4·13
 
 /-- ✱23·81 `⊢ : R ⪽ S . ≡ . ∸S ⪽ ∸R` [as ✱22·81: ✱4·1], under (x, y) by ✱11·11·33, with ✱23·35 for both
-    members (✱4·84, ✱4·85). The statement is the Gutenberg transcription's, which applies the published
-    Errata here: the 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S` (scan, p. 228), false when R is empty and S is not. -/
+    members (✱4·84, ✱4·85). The 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S` (scan, p. 228), which is not a
+    theorem: it is false when R is empty and S is not. The statement is the Gutenberg transcription's
+    correction, the one proved. Its source is not yet identified: the Errata page bound into the 1910 print
+    has no entry for p. 228, and the ebook's Transcriber's Note says only that all items in the Errata, from
+    all three volumes, were applied. -/
 theorem q23_81 [Reducibility S] (R S' : V a → V b → QF V) : QThm S (iff (R ⪽ S') (∸S' ⪽ ∸R)) :=
   QThm.mp (q11_11 fun x y => qiffTrans (QL.t4_1 _ _)
       (qimpIffCongr (qiffSymm (q23_35 S' x y)) (qiffSymm (q23_35 R x y))))          -- ✱4·1

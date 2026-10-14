@@ -277,10 +277,14 @@ Following PM's lines line by line turned up these points. The errata themselves 
   No published erratum touches pp. 123–125. The 1925 second edition has not been checked.
 - **✱23·02** (p. 226). The print has `R ∩̇ S = x̂ŷ(xRy . xSy)`; Gutenberg #78050 drops the R. The print is
   followed (`QF.relInter`, PM/Star23.lean). This is entry 9 of the text audit's Vol I list, checked against
-  the scan. At ✱23·81 the ebook applies the published Errata (the audit says so); its statement,
-  `R ⪽ S . ≡ . ∸S ⪽ ∸R`, the analogue of ✱22·81, is the one proved. Checked against the scan (2026-10-14):
-  the 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem (it fails when R is empty and S is
-  not), so the Errata's correction is followed, as the authors' own repair.
+  the scan.
+- **✱23·81** (p. 228), checked against the scan (2026-10-14): the 1910 print has
+  `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem (it fails when R is empty and S is not). The ebook applies
+  a correction, `R ⪽ S . ≡ . ∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement proved. The
+  source of the correction is not yet identified: the Errata page bound into the 1910 print (scan, djvu
+  page 15) has no entry for p. 228, and the ebook's Transcriber's Note says only "All items in the Errata,
+  from all three volumes, have been added and corrected accordingly." Which list has this entry has not
+  been checked.
 - **✱23·45** (p. 227). The print has `R ⪽ S . R ⪽ T . ⊃ . R ⪽ S ∩̇ T`, an implication, where its analogue
   ✱22·45 (p. 221) has ≡. Checked against the scan (2026-10-14); the ebook follows the print, so this is not
   a transcription error. The statement follows the print (`q23_45`). The equivalence is proved as a variant,
@@ -289,9 +293,12 @@ Following PM's lines line by line turned up these points. The errata themselves 
 - **✱25** (pp. 241–243), checked against the 1910 scan item by item, and each statement against its ✱24
   analogue. The transcription leaves out none of the 70 propositions. The statements follow the print at
   ✱25·47 (the transcription's brackets `(P ∩̇ Q)` are not printed; no change to the statement) and ✱25·56
-  (`∃̇!(R ⊍ S)`, bracketed), entries 19 and 20 of the text audit's Vol I list. At ✱25·37 and ✱25·412 the
-  ebook applies the published Errata (the audit says so): the 1910 print has `xRy . zRw` in ✱25·37 and the
-  hypothesis `R ⪽ Q` in ✱25·412, neither a theorem (✱25·37 fails when S = Λ̇ and R is not null; ✱25·412's
-  printed hypothesis does not mention the S of its conclusion); the corrected statements, the analogues of
-  ✱24·37 and ✱24·412, are proved, as at ✱23·81. ✱25·313 is printed `R ∩̇ S = Λ̇ . ≡ . R ∸ S = R`, the
+  (`∃̇!(R ⊍ S)`, bracketed), entries 19 and 20 of the text audit's Vol I list. At ✱25·37 and ✱25·412
+  (p. 242) the 1910 print has `xRy . zRw` and the hypothesis `R ⪽ Q`, neither a theorem (✱25·37 fails when
+  S = Λ̇ and R is not null; ✱25·412 fails when Q = R = Λ̇ and P = S = V̇, its printed hypothesis not
+  mentioning the S of its conclusion). The ebook applies corrections, `xRy . zSw` and `S ⪽ Q`, the
+  analogues of ✱24·37 and ✱24·412, and those are the statements proved, as at ✱23·81. As there, the source
+  of the corrections is not yet identified: the Errata page bound into the 1910 print has no entry for
+  p. 242, and the ebook's Transcriber's Note says only that all items in the Errata, from all three
+  volumes, were applied. ✱25·313 is printed `R ∩̇ S = Λ̇ . ≡ . R ∸ S = R`, the
   identity turned from ✱24·313's α = α − β; it is formalized as printed.
