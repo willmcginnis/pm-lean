@@ -54,7 +54,7 @@ carry over "by merely repeating previous proofs"), the assertion is checked in L
 two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
 axiom of reducibility they derive the same theorems (row B4). What comes next is in the [roadmap](#roadmap) below and in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Status at a glance (2026-10-14, commit `0d7c190`)
+## Status at a glance (2026-10-14, commit `2bad0f8`)
 
 | Part of Vol I | Chapters | Numbered assertions proved |
 |---|---|---|
