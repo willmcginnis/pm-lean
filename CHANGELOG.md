@@ -96,8 +96,12 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   - `verify.py --no-mutation` skips check 0 for a commit that predates the tool, such as the 1.0.0
     export, and `verify_report.json` records that the check was skipped and why. For a commit that has
     the tool, the option fails the check.
-  - `mutate.py --full` runs before a release. The tool takes every numbered proposition from ✱9 on, so
-    its output no longer calls that group ✱9–✱21.
+  - `mutate.py --full` runs before a release. Its run with ✱22–✱24 in found nothing unexpected: no
+    unused hypothesis in 1389 theorems, none of 15,458 mutants accepted by a proof term, and only the 14
+    known renamings surviving re-elaboration. It took 1708 s with 8 jobs on a shared machine (524 s
+    before ✱22–✱24): the meta-program 1277 s, 1206 s of it for the statements from ✱9 on;
+    re-elaboration 74 s; hypothesis recompilation 356 s. The tool takes every numbered proposition from
+    ✱9 on, so its output no longer calls that group ✱9–✱21.
 - **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
   "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
   counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the
