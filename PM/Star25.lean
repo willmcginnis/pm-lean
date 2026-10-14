@@ -402,8 +402,8 @@ theorem q25_313 [Reducibility S] (R S' : V a → V b → QF V) :
     _ ≡ relEq (R ∸ S') R := q23_621 R (∸S')                                        -- ✱23·621
 
 /-- ✱25·32 `⊢ : R ⊍ S = Λ̇ . ≡ . R = Λ̇ . S = Λ̇`, as ✱24·32. ✱25·13 is used for both factors, joined by ✱4·38.
-    The print has single dots where ✱24·32 has "≡ :"; a dot of logical product has less force than a dot
-    beside ≡ (p. 10), so the reading is the same. -/
+    As in ✱24·32's statement, the dots beside ≡ are single, like the dot of logical product; a dot of logical
+    product has less force than a dot of the same number beside ≡ (p. 10), so ≡ is the main connective. -/
 theorem q25_32 [Reducibility S] (R S' : V a → V b → QF V) :
     QThm S (iff (relEq (R ⊍ S') Λ̇) (QF.and (relEq R Λ̇) (relEq S' Λ̇))) :=
   calc relEq (R ⊍ S') Λ̇

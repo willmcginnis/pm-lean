@@ -382,7 +382,7 @@ theorem q24_313 [Reducibility S] (α β : V a → QF V) : QThm S (iff (clsEq (α
     _ ≡ clsEq (α ∩ −β) α := q22_621 α (−β)                                        -- ✱22·621
     _ ≡ clsEq α (α − β) := q20_21 _ _
 
-/-- ✱24·32 `⊢ :. α ∪ β = Λ . ≡ : α = Λ . β = Λ`. ✱24·13 is used for both factors, joined by ✱4·38. -/
+/-- ✱24·32 `⊢ :. α ∪ β = Λ . ≡ . α = Λ . β = Λ`. ✱24·13 is used for both factors, joined by ✱4·38. -/
 theorem q24_32 [Reducibility S] (α β : V a → QF V) :
     QThm S (iff (clsEq (α ∪ β) Λ) (QF.and (clsEq α Λ) (clsEq β Λ))) :=
   calc clsEq (α ∪ β) Λ
