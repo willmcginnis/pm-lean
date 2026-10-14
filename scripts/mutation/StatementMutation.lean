@@ -23,6 +23,30 @@
 -- the repository's own test `F.isTaut`, evaluated by the kernel (from ✱9 on: of its propositional
 -- skeleton, each subformula not built by a connective an atom). The control of each statement is the
 -- unchanged formula, rebuilt the way the mutants are; the proof must check against it.
+--
+-- How the proof's type `pty` is compared with a mutant `mty` (PM_MUTATION_METHOD; the section "How a
+-- mutant is compared" of docs/STATEMENT_MUTATION.md has the measurements):
+--   direct   `Kernel.isDefEq env {} pty mty`. On the class and relation statements of ✱22–✱25 the
+--            kernel's lazy unfolding explores many unfoldings before it concludes "not equal".
+--   normal   (the default) `Kernel.isDefEq env {} (nf pty) (nf mty)`, where `nf` applies `Kernel.whnf`
+--            at the root and then, recursively, in every argument, under every binder and in every
+--            binder type, memoized per statement.
+--   both     both, every verdict recorded twice (`mutate.py --compare-methods`); `direct` decides.
+-- Why `normal` gives `direct`'s verdict. (1) Every step of `nf` replaces a subterm by the kernel's own
+-- weak head normal form of it, which the kernel reaches by its reductions (β, δ, ι, ζ, projections,
+-- literals), so the two are definitionally equal; definitional equality is a congruence, so
+-- `nf t ≡ t`. (2) If `≡` is an equivalence on these terms, then `pty ≡ mty` iff `nf pty ≡ nf mty`, and
+-- the kernel, deciding `≡` on both pairs, gives both the same verdict. The assumption fails in general
+-- only through proof irrelevance and the eta rules for structures and unit-like types; these need a
+-- proof, a constructor of a structure, or a term of a unit-like type in the terms compared. `auditHead`
+-- checks every head of every normal form for the three; when any is found in a statement's normal
+-- forms, its comparisons fall back to `direct` (the ✱9 statements of PM/Found9/Star9.lean: their
+-- normal forms contain `Reading.mk`, `PProd.mk` and `PUnit.unit`). A comparison also falls back when a
+-- normal form needs more than the bound of steps, or the kernel reports an error, so no verdict
+-- depends on the bound. `nfSelfTest` plants a case of each kind; the run fails if one is missed.
+-- The two methods were run side by side (`--compare-methods`) on every statement of ✱1–✱25 but
+-- ✱25·431 and ✱25·432 (an hour each for `direct`): identical verdicts on every mutant and control;
+-- and a full run of each gave identical verdicts on all 16,512 mutants, those two included.
 import Lean
 import PM
 import Checks.PinnedStatements
@@ -443,6 +467,181 @@ partial def renderF (e : Expr) : MetaM String := do
 
 def ops : Array String := #["orAnd", "dropAntecedent", "iffImp", "negate"]
 
+/-! ## Comparing a proof's type with a mutant
+
+`direct` asks the kernel `Kernel.isDefEq env {} pty mty` of the two terms as they are. `normal`
+first takes each term to its normal form by the kernel's own reductions and asks `Kernel.isDefEq`
+of the two normal forms; `both` does the two and records both verdicts. -/
+
+inductive Method | direct | normal | both
+  deriving BEq, Inhabited
+
+def Method.ofString : String → Method
+  | "direct" => .direct | "both" => .both | _ => .normal
+
+def Method.str : Method → String
+  | .direct => "direct" | .normal => "normal" | .both => "both"
+
+/-- What the normal forms contain that could make the kernel's comparison more than a comparison of
+    trees: a proof (a constant or variable whose type ends in a proposition: proof irrelevance), a
+    constructor of a structure (structure eta), a term of a type with one constructor and no fields
+    (unit eta). Checked on every head of every normal form; docs/STATEMENT_MUTATION.md. -/
+structure Audit where
+  proofs : NameSet := {}
+  structCtors : NameSet := {}
+  unitLike : NameSet := {}
+  heads : Nat := 0
+
+def Audit.clean (a : Audit) : Bool := a.proofs.isEmpty && a.structCtors.isEmpty && a.unitLike.isEmpty
+
+def Audit.merge (a b : Audit) : Audit :=
+  { proofs := b.proofs.foldl (·.insert ·) a.proofs
+    structCtors := b.structCtors.foldl (·.insert ·) a.structCtors
+    unitLike := b.unitLike.foldl (·.insert ·) a.unitLike
+    heads := a.heads + b.heads }
+
+structure NfState where
+  /-- the bound on the steps of one normal form -/
+  budget : Nat
+  cache : Std.HashMap Expr Expr := {}
+  canon : Std.HashMap Expr Expr := {}
+  headSeen : Std.HashMap Expr Unit := {}
+  steps : Nat := 0
+  /-- the bound was reached, or the kernel failed: this term's comparison falls back to `direct` -/
+  over : Bool := false
+  /-- the heads of the normal forms of the current statement -/
+  audit : Audit := {}
+  /-- the heads of all normal forms of the run -/
+  runAudit : Audit := {}
+
+abbrev NfM := StateRefT NfState MetaM
+
+/-- One copy of each normal subterm, so that equal parts of the normal forms are shared. -/
+def canonical (e : Expr) : NfM Expr := do
+  match (← get).canon[e]? with
+  | some r => return r
+  | none => modify fun s => { s with canon := s.canon.insert e e }; return e
+
+/-- Record what a head of a normal form is (each distinct head once). -/
+def auditHead (h : Expr) : NfM Unit := do
+  unless h.isConst || h.isFVar do return
+  if (← get).headSeen.contains h then return
+  modify fun s => { s with headSeen := s.headSeen.insert h () }
+  let env ← getEnv
+  let ty ← inferType h
+  let nm := match h with
+    | .const c _ => c
+    | .fvar f => .str .anonymous s!"variable {f.name}"
+    | _ => .anonymous
+  let (isPf, unit) ← forallTelescopeReducing ty fun _ r => do
+    let isPf ← isProp r
+    let r ← whnfD r
+    let unit := match r.getAppFn.constName? with
+      | some i => match env.find? i with
+        | some (.inductInfo v) => v.ctors.length == 1 && v.numIndices == 0 &&
+            (match env.find? v.ctors[0]! with
+             | some (.ctorInfo c) => c.numFields == 0
+             | _ => false)
+        | _ => false
+      | none => false
+    return (isPf, unit)
+  let ctorOfStruct := match h with
+    | .const c _ => match env.find? c with
+      -- structure-like as the kernel's eta for structures takes it: one constructor, no indices,
+      -- not recursive
+      | some (.ctorInfo v) => match env.find? v.induct with
+        | some (.inductInfo i) => i.ctors.length == 1 && i.numIndices == 0 && !i.isRec
+        | _ => false
+      | _ => false
+    | _ => false
+  modify fun s => { s with audit := { s.audit with
+    heads := s.audit.heads + 1
+    proofs := if isPf then s.audit.proofs.insert nm else s.audit.proofs
+    unitLike := if unit then s.audit.unitLike.insert nm else s.audit.unitLike
+    structCtors := if ctorOfStruct then s.audit.structCtors.insert nm else s.audit.structCtors } }
+
+/-- The normal form of `e` by the kernel's reductions: `Kernel.whnf` at the root, then the same in
+    every argument, under every binder and in every binder type. Memoized on the term, so a subterm
+    met again (a definition's parameter used twice) is normalized once and its result shared. Each
+    call that is not a cache hit is a step; past `budget` steps, or if the kernel reports an error,
+    `over` is set and the comparison of this term falls back to `direct`. -/
+partial def nf (e : Expr) : NfM Expr := do
+  let s ← get
+  if s.over then return e
+  if let some r := s.cache[e]? then return r
+  if s.steps ≥ s.budget then
+    set { s with over := true }
+    return e
+  set { s with steps := s.steps + 1 }
+  let w ← match Kernel.whnf (← getEnv) (← getLCtx) e with
+    | .ok w => pure w
+    | .error _ =>
+      modify fun s => { s with over := true }
+      return e
+  let r ← match w with
+    | .app .. =>
+      let h := w.getAppFn
+      -- the head after `whnf` is a constructor, a variable, a stuck recursor or projection: only a
+      -- projection's structure argument can reduce further
+      let h' ← match h with
+        | .proj sn i b => pure (.proj sn i (← nf b))
+        | _ => auditHead h; pure h
+      let args ← w.getAppArgs.mapM nf
+      pure (mkAppN h' args)
+    | .lam n t b bi =>
+      let t' ← nf t
+      withLocalDecl n bi t fun x => do
+        let b' ← nf (b.instantiate1 x)
+        pure (.lam n t' (b'.abstract #[x]) bi)
+    | .forallE n t b bi =>
+      let t' ← nf t
+      withLocalDecl n bi t fun x => do
+        let b' ← nf (b.instantiate1 x)
+        pure (.forallE n t' (b'.abstract #[x]) bi)
+    | .proj sn i b => pure (.proj sn i (← nf b))
+    | .const .. | .fvar .. => auditHead w; pure w
+    | _ => pure w
+  let r ← canonical r
+  -- after the bound is reached the results are not normal forms: nothing more is cached
+  unless (← get).over do modify fun s => { s with cache := s.cache.insert e r }
+  return r
+
+/-- The normal form of a closed term, or none if the bound is reached or the kernel fails; and the
+    steps it took. The cache is kept across calls (the proof's type and all mutants of one statement),
+    the count of steps is per term. -/
+def nfTop (e : Expr) : NfM (Option Expr × Nat) := do
+  modify fun s => { s with steps := 0, over := false }
+  let r ← nf e
+  let s ← get
+  return (if s.over then none else some r, s.steps)
+
+/-- Start a statement: a fresh cache and audit (the run's audit keeps what the last one found). -/
+def NfState.next (s : NfState) : NfState :=
+  { s with cache := {}, canon := {}, headSeen := {}, audit := {}, runAudit := s.runAudit.merge s.audit }
+
+/-- The default bound on the steps of one normal form (`PM_MUTATION_NF_BUDGET` sets another). The
+    largest normal form of the full run takes a few hundred steps (MEASURED,
+    docs/STATEMENT_MUTATION.md): the bound only stops a pathological term. -/
+def nfBudgetDefault : Nat := 200000
+
+/-- The planted cases of the comparison, which the run fails without: the audit must flag a proof
+    (`rfl`, which normalizes to `Eq.refl`), a constructor of a structure (`Subtype.mk`) and a term of a
+    unit-like type (`PUnit.unit`), and a bound of three steps must stop a normal form that needs more. -/
+def nfSelfTest : MetaM Unit := do
+  let nat := Expr.const ``Nat []
+  let planted := mkApp4 (.const ``Prod.mk [Level.zero, Level.zero]) (.const ``PUnit [Level.one]) nat
+    (.const ``PUnit.unit [Level.one]) (mkNatLit 1)
+  let sub := mkApp4 (.const ``Subtype.mk [Level.one]) nat
+    (.lam `n nat (mkApp3 (.const ``Eq [Level.one]) nat (.bvar 0) (mkNatLit 1)) .default)
+    (mkNatLit 1) (mkApp2 (.const ``rfl [Level.one]) nat (mkNatLit 1))
+  let ((r1, _), s) ← (do let a ← nfTop planted; let _ ← nfTop sub; pure a).run { budget := 1000 }
+  unless r1.isSome && s.audit.proofs.contains ``Eq.refl && s.audit.structCtors.contains ``Subtype.mk &&
+      s.audit.unitLike.contains ``PUnit.unit do
+    throwError "the audit of normal forms misses a planted case: proofs {s.audit.proofs.toList}, \
+      structure constructors {s.audit.structCtors.toList}, unit-like {s.audit.unitLike.toList}"
+  let ((r2, n), _) ← (nfTop sub).run { budget := 3 }
+  unless r2.isNone && n == 3 do throwError "the bound on normal forms does not stop a planted term"
+
 /-- Replace the `k`-th occurrence of the variable `x` by `y` (the state counts occurrences; binder
     types are left alone). -/
 partial def replOcc (x y : FVarId) (k : Nat) : Expr → StateM Nat Expr
@@ -463,12 +662,35 @@ partial def replOcc (x y : FVarId) (k : Nat) : Expr → StateM Nat Expr
     `proof` the original proof term. Writes one record per mutant and returns
     (mutants, survivors). -/
 def analyse (out : IO.FS.Handle) (label : Name) (pmNum : String) (stmtTy proof : Expr)
-    (isF fast : Bool) : MetaM (Nat × Nat) := do
+    (isF fast : Bool) (meth : Method) (nfs : IO.Ref NfState) : MetaM (Nat × Nat) := do
   let env ← getEnv
   let tc0 ← IO.monoMsNow
   let pty ← match Kernel.check env {} proof with
     | .ok t => pure t
     | .error _ => throwError "kernel rejects the proof of {label}"
+  let directOf (mty : Expr) : Bool :=
+    match Kernel.isDefEq env {} pty mty with | .ok b => b | .error _ => false
+  -- the state of `nf`: its cache and audit are per statement
+  nfs.modify NfState.next
+  let runNf (e : Expr) : MetaM (Option Expr × Nat) := do
+    let (r, s) ← (nfTop e).run (← nfs.get)
+    nfs.set s
+    return r
+  -- the normal form of the proof's type, shared by all comparisons of this statement
+  let tn0 ← IO.monoMsNow
+  let (npty, nfPty) ← if meth == .direct then pure (none, 0) else runNf pty
+  let tn1 ← IO.monoMsNow
+  /- the verdict on the normal forms, the steps of the mutant's normal form and the time; none when
+     either normal form was not reached, the kernel reports an error, or the audit of this
+     statement's normal forms is not clean (then `direct` decides) -/
+  let normalOf (mty : Expr) : MetaM (Option Bool × Nat × Nat) := do
+    let some np := npty | return (none, 0, 0)
+    let a ← IO.monoMsNow
+    let (r, n) ← runNf mty
+    let clean := (← nfs.get).audit.clean
+    let v := if !clean then none else
+      r.bind fun nm => match Kernel.isDefEq env {} np nm with | .ok b => some b | .error _ => none
+    return (v, n, (← IO.monoMsNow) - a)
   forallTelescope stmtTy fun xs concl => do
     let f0 := concl.appArg!
     -- a ✱1–✱5 statement is `Thm (s… p …)`: mutate the formula `s…` stands for
@@ -477,9 +699,24 @@ def analyse (out : IO.FS.Handle) (label : Name) (pmNum : String) (stmtTy proof :
         | some u => pure u.headBeta
         | none => pure f0
       else pure f0
+    /- one comparison: the verdict, the direct and the normal-form verdicts where computed, whether
+       it fell back, the steps of the mutant's normal form, the milliseconds of each method -/
+    let compare (mty : Expr) : MetaM (Bool × Option Bool × Option Bool × Bool × Nat × Nat × Nat) := do
+      let (v, n, nMs) ← if meth == .direct then pure (none, 0, 0) else normalOf mty
+      let fb := meth != .direct && v.isNone
+      -- `direct` runs for its own sake (`direct`, `both`) or as the fallback
+      let a ← IO.monoMsNow
+      let d := if meth == .normal && !fb then none else some (directOf mty)
+      let b ← IO.monoMsNow
+      let verdict := match meth, d, v with
+        | .normal, _, some x => x
+        | _, some x, _ => x
+        | _, none, some x => x
+        | _, none, none => false
+      return (verdict, d, v, fb, n, b - a, nMs)
     -- control: the unchanged formula, rebuilt the way every mutant is, is accepted
-    let control := match Kernel.isDefEq env {} pty (← mkForallFVars xs (mkApp concl.appFn! f)) with
-      | .ok b => b | .error _ => false
+    let (control, controlDirect, controlNormal, controlFb, _, _, _) ←
+      compare (← mkForallFVars xs (mkApp concl.appFn! f))
     let mut muts : Array (String × Nat × Expr) := #[]
     for op in ops do
       let ms ← mutantsOf op f
@@ -509,24 +746,33 @@ def analyse (out : IO.FS.Handle) (label : Name) (pmNum : String) (stmtTy proof :
     let mut nsurv := 0
     let tc1 ← IO.monoMsNow
     let mut dMs := 0
+    let mut nMs := 0
     let mut tMs := 0
+    let mut nfMax := nfPty
+    let mut fallbacks := if controlFb then 1 else 0
+    let mut disagree := if controlDirect.isSome && controlNormal.isSome && controlDirect != controlNormal
+      then 1 else 0
     for (op, i, m) in muts do
       let mty ← mkForallFVars xs (mkApp concl.appFn! m)
-      let a ← IO.monoMsNow
-      let surv := match Kernel.isDefEq env {} pty mty with | .ok b => b | .error _ => false
+      let (surv, sd, sn, fb, steps, ms1, ms2) ← compare mty
       let b ← IO.monoMsNow
       if surv then nsurv := nsurv + 1
+      if fb then fallbacks := fallbacks + 1
+      if sd.isSome && sn.isSome && sd != sn then disagree := disagree + 1
+      nfMax := max nfMax steps
       let (skel, _) ← (skeleton m).run #[]
       let taut ← if isF then taut fast (← ground m)
         else if skel.hasFVar then pure none else taut fast skel
       let c ← IO.monoMsNow
-      dMs := dMs + (b - a); tMs := tMs + (c - b)
+      dMs := dMs + ms1; nMs := nMs + ms2; tMs := tMs + (c - b)
       let src ← if isF then renderF m else pure ""
       let pp ← if fast && !surv then pure "" else do pure (toString (← ppExpr m)).trimAscii.toString
-      let j := Json.mkObj [("part", jstr "mut"), ("decl", jstr label.toString),
-        ("pm", jstr pmNum), ("op", jstr op), ("i", toJson i), ("survives", toJson surv),
-        ("taut", toJson taut), ("src", jstr src),
-        ("mutant", jstr pp)]
+      let both := if meth == .both then
+          [("survivesDirect", toJson sd), ("survivesNormal", toJson sn)] else []
+      let j := Json.mkObj ([("part", jstr "mut"), ("decl", jstr label.toString),
+        ("pm", jstr pmNum), ("op", jstr op), ("i", toJson i), ("survives", toJson surv)] ++ both ++
+        [("fallback", toJson fb), ("taut", toJson taut), ("src", jstr src),
+        ("mutant", jstr pp)])
       out.putStrLn j.compress
     let srcOrig ← if isF then renderF f else pure ""
     let (skel0, _) ← (skeleton f).run #[]
@@ -536,7 +782,11 @@ def analyse (out : IO.FS.Handle) (label : Name) (pmNum : String) (stmtTy proof :
       (← whereOf label) ++ [("vars", toJson vars), ("stmtDef", jstr (f0.getAppFn.constName?.getD .anonymous).toString),
       ("control", toJson control), ("mutants", toJson muts.size), ("survivors", toJson nsurv),
       ("taut", toJson t0), ("src", jstr srcOrig), ("isF", toJson isF),
-      ("checkMs", toJson (tc1 - tc0)), ("defeqMs", toJson dMs), ("tautMs", toJson tMs)])
+      ("checkMs", toJson (tc1 - tc0)), ("defeqMs", toJson dMs), ("tautMs", toJson tMs),
+      ("method", jstr meth.str), ("normalMs", toJson (nMs + (tn1 - tn0))), ("normalStepsMax", toJson nfMax),
+      ("fallbacks", toJson fallbacks), ("disagreements", toJson disagree)] ++
+      (if meth == .both then [("controlDirect", toJson controlDirect), ("controlNormal", toJson controlNormal)]
+       else []))
     out.putStrLn j.compress
     return (muts.size, nsurv)
 
@@ -608,31 +858,51 @@ open PMMutation in
   let path := (← IO.getEnv "PM_MUTATION_OUT").getD ".lake/mutation/out.jsonl"
   if let some d := (System.FilePath.mk path).parent then IO.FS.createDirAll d
   let h ← IO.FS.Handle.mk path .write
+  -- the comparison (`normal`, `direct` or `both`), and optionally only some modules or declarations,
+  -- or all but some declarations
+  let meth := Method.ofString ((← IO.getEnv "PM_MUTATION_METHOD").getD "normal")
+  let listOf (v : Option String) : Option (Array Name) :=
+    v.bind fun s => if s.isEmpty then none else
+      some ((s.splitOn ",").toArray.map fun x => x.trimAscii.toString.toName)
+  let modules := listOf (← IO.getEnv "PM_MUTATION_MODULES")
+  let only := listOf (← IO.getEnv "PM_MUTATION_ONLY")
+  let skip := (listOf (← IO.getEnv "PM_MUTATION_SKIP")).getD #[]
+  let budget := ((← IO.getEnv "PM_MUTATION_NF_BUDGET").bind String.toNat?).getD nfBudgetDefault
   let t0 ← IO.monoMsNow
   liftTermElabM do
+    let env ← getEnv
+    let keep (c : Name) : Bool :=
+      modules.all (·.contains (modOf env c)) && only.all (·.contains c) && !skip.contains c
+    nfSelfTest
+    let nfs ← IO.mkRef ({ budget } : NfState)
     if mode == "full" || mode == "quick" || mode == "hyp" then
       let (nt, nh, nu) ← part1 h
       logInfo m!"hypotheses: {nt} theorems, {nh} hypotheses, {nu} unused"
     let t1 ← IO.monoMsNow
-    let tf ← targetsF (if mode == "quick" then some quickSample else none)
+    let tf := (← targetsF (if mode == "quick" then some quickSample else none)).filter (keep ·.1)
     let mut nm := 0
     let mut ns := 0
     if mode != "hyp" then
       for (c, pm, ty, pf) in tf do
-        let (a, b) ← analyse h c pm ty pf true (mode == "quick")
+        let (a, b) ← analyse h c pm ty pf true (mode == "quick") meth nfs
         nm := nm + a; ns := ns + b
       logInfo m!"✱1–✱5: {tf.size} statements, {nm} mutants, {ns} survivors"
     let t2 ← IO.monoMsNow
-    if mode == "full" then
-      let tq ← targetsQ
+    if mode == "full" || mode == "part2" then
+      let tq := (← targetsQ).filter (keep ·.1)
       let mut qm := 0
       let mut qs := 0
       for (c, pm, ty, pf) in tq do
-        let (a, b) ← analyse h c pm ty pf false false
+        let (a, b) ← analyse h c pm ty pf false false meth nfs
         qm := qm + a; qs := qs + b
       logInfo m!"from ✱9 on: {tq.size} statements, {qm} mutants, {qs} survivors"
     let t3 ← IO.monoMsNow
+    let au := (← nfs.get).next.runAudit
+    let names (s : NameSet) : Json := toJson ((s.toArray.map toString).qsort (· < ·))
     let j := Json.mkObj [("part", jstr "timing"), ("hypMs", toJson (t1 - t0)),
-      ("fMs", toJson (t2 - t1)), ("qMs", toJson (t3 - t2))]
+      ("fMs", toJson (t2 - t1)), ("qMs", toJson (t3 - t2)),
+      ("method", jstr meth.str), ("nfBudget", toJson budget), ("auditHeads", toJson au.heads),
+      ("auditProofs", names au.proofs), ("auditStructCtors", names au.structCtors),
+      ("auditUnitLike", names au.unitLike)]
     h.putStrLn j.compress
   h.flush

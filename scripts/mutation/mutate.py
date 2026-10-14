@@ -2,8 +2,8 @@
 """Statement mutation: is each statement tied to its proof? (docs/STATEMENT_MUTATION.md)
 
     python3 scripts/mutation/mutate.py --quick   the export-path tier, well under a minute
-    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 2 h 32 min and about 22 GiB of
-                                                 memory (measured 2026-10-14, a shared machine)
+    python3 scripts/mutation/mutate.py --full    everything; with ✱25, about 13 minutes with 3 jobs
+    python3 scripts/mutation/mutate.py --compare-methods   Part 2 compared both ways (see below)
 
 Both first run `lake build` on the modules the meta-program imports, so that what is analysed is the
 proofs in the sources; then scripts/mutation/StatementMutation.lean (Part 1, unused hypotheses, on every
@@ -21,6 +21,12 @@ proposition from ✱9 on). --full adds two recompilations:
   hypotheses       each hypothesis of a theorem proved by tactics (and every 25th of the others) is
                    replaced by `True` (a class argument is removed) in a copy of its file cut after
                    the theorem, and the copy is compiled.
+
+The kernel compares a proof's type with a mutant after bringing both to normal form by its own
+reductions (--method normal, the default); --method direct compares the terms as they are, which gives
+the same verdicts much more slowly on ✱22–✱25. --compare-methods runs Part 2 with both on every mutant
+(or on --modules, --only, all but --skip) and fails if they differ anywhere (docs/STATEMENT_MUTATION.md,
+"How a mutant is compared").
 
 Findings already examined and accepted are listed, with their classification, in
 scripts/mutation/expected.json; anything else makes the run fail. Working files go to .lake/mutation/.
@@ -76,10 +82,15 @@ def build():
         sys.exit("lake build failed: the proofs are not analysed")
 
 
-def run_meta(mode):
+def run_meta(mode, method="normal", modules="", only="", skip="", name=None):
+    """Run the meta-program. `method` is how a proof's type is compared with a mutant: `normal` (the
+    kernel's normal forms), `direct` (the terms as they are) or `both`; `modules`, `only` restrict
+    Part 2 to some modules or declarations, `skip` leaves some declarations out (comma-separated
+    names)."""
     WORK.mkdir(parents=True, exist_ok=True)
-    out = WORK / f"{mode}.jsonl"
-    env = dict(os.environ, PM_MUTATION_MODE=mode, PM_MUTATION_OUT=str(out))
+    out = WORK / f"{name or mode}.jsonl"
+    env = dict(os.environ, PM_MUTATION_MODE=mode, PM_MUTATION_OUT=str(out), PM_MUTATION_METHOD=method,
+               PM_MUTATION_MODULES=modules, PM_MUTATION_ONLY=only, PM_MUTATION_SKIP=skip)
     rc, _, text = lean(LEAN_FILE, env)
     if rc != 0:
         print(text)
@@ -243,6 +254,62 @@ def run_hyps(hyps, jobs):
     return results
 
 
+# ---------------------------------------------------------------- the two comparisons, side by side
+
+def compare_report(recs):
+    """The verdicts of the two comparisons on every mutant and control of a `both` run. Returns the
+    problems: any mutant or control on which they differ."""
+    stmts = [r for r in recs if r["part"] == "stmt"]
+    muts = [r for r in recs if r["part"] == "mut"]
+    rows = defaultdict(Counter)
+    problems = []
+    for s in stmts:
+        c = rows[s["module"]]
+        c["statements"] += 1
+        c["directMs"] += s["defeqMs"]
+        c["normalMs"] += s["normalMs"]
+        if s["controlNormal"] is None:
+            c["fallbacks"] += 1
+        elif s["controlNormal"] != s["controlDirect"]:
+            c["disagreements"] += 1
+            problems.append(f"control of {s['decl']}: direct {s['controlDirect']}, normal forms {s['controlNormal']}")
+    mod = {s["decl"]: s["module"] for s in stmts}
+    for m in muts:
+        c = rows[mod[m["decl"]]]
+        c["mutants"] += 1
+        if m["survivesNormal"] is None:
+            c["fallbacks"] += 1
+        elif m["survivesNormal"] != m["survivesDirect"]:
+            c["disagreements"] += 1
+            problems.append(f"{m['decl']}:{m['op']}#{m['i']}: direct {m['survivesDirect']}, "
+                            f"normal forms {m['survivesNormal']}")
+    total = sum(rows.values(), Counter())
+    print(f"Both comparisons: {total['statements']} statements (and their controls), {total['mutants']} mutants; "
+          f"{total['disagreements']} disagreements, {total['fallbacks']} fallbacks")
+    print(f"  {'module':18} {'stmts':>5} {'mutants':>7} {'disagree':>8} {'fallback':>8} {'direct s':>9} {'normal s':>9}")
+    for m, c in sorted(rows.items()) + [("total", total)]:
+        print(f"  {m:18} {c['statements']:5} {c['mutants']:7} {c['disagreements']:8} {c['fallbacks']:8} "
+              f"{c['directMs'] / 1000:9.1f} {c['normalMs'] / 1000:9.1f}")
+    return problems
+
+
+def audit_report(recs):
+    """The audit of the normal forms (docs/STATEMENT_MUTATION.md): what could make the kernel's comparison
+    of two normal forms more than a comparison of trees. Every comparison of a statement whose normal
+    forms are flagged falls back to the direct one, so a finding here costs time, not correctness."""
+    t = next(r for r in recs if r["part"] == "timing")
+    if t["method"] == "direct":
+        print("Comparison by direct: the proof's type and each mutant as they are")
+        return
+    fb = sum(r.get("fallbacks", 0) for r in recs if r["part"] == "stmt")
+    flags = t["auditProofs"] + t["auditStructCtors"] + t["auditUnitLike"]
+    print(f"Comparison by {t['method']}: {fb} fallbacks to the direct comparison (bound "
+          f"{t['nfBudget']} steps); audit of {t['auditHeads']} heads of normal forms: "
+          + ("nothing flagged" if not flags else
+             f"proofs {t['auditProofs']}, structure constructors {t['auditStructCtors']}, "
+             f"unit-like {t['auditUnitLike']}"))
+
+
 # ---------------------------------------------------------------- report
 
 def main():
@@ -250,13 +317,30 @@ def main():
     g = ap.add_mutually_exclusive_group(required=True)
     g.add_argument("--quick", action="store_true")
     g.add_argument("--full", action="store_true")
+    g.add_argument("--compare-methods", action="store_true",
+                   help="Part 2 with both comparisons on every mutant; fails if they differ anywhere")
+    ap.add_argument("--method", choices=("normal", "direct"), default="normal",
+                    help="how --quick and --full compare a proof's type with a mutant (default: normal)")
+    ap.add_argument("--modules", default="", help="--compare-methods only: these modules (comma-separated)")
+    ap.add_argument("--only", default="", help="--compare-methods only: these declarations (comma-separated)")
+    ap.add_argument("--skip", default="", help="--compare-methods only: not these declarations (comma-separated)")
     ap.add_argument("--jobs", type=int, default=os.cpu_count() or 4)
     args = ap.parse_args()
-    mode = "full" if args.full else "quick"
     t0 = time.time()
     build()
     t_build = time.time() - t0
-    recs = run_meta(mode)
+    if args.compare_methods:
+        recs = run_meta("part2", "both", args.modules, args.only, args.skip, name="compare")
+        problems = compare_report(recs)
+        audit_report(recs)
+        print(f"wall time: {time.time() - t0:.0f} s (lake build {t_build:.0f} s)")
+        if problems:
+            print("FAILED: the two comparisons differ:\n  " + "\n  ".join(problems))
+            sys.exit(1)
+        print("compare methods: identical verdicts")
+        return
+    mode = "full" if args.full else "quick"
+    recs = run_meta(mode, args.method)
     t_meta = time.time() - t0 - t_build
     expected = json.loads(EXPECTED.read_text())
     problems = []
@@ -296,6 +380,7 @@ def main():
     else:
         print(f"Seeded: the ebook's ✱1·4 (p ∨ q . ⊃ . p ∨ p) is mutant {slip[0]['op']}#{slip[0]['i']} of ✱1·4: "
               "not a tautology, rejected")
+    audit_report(recs)
     known = {e["id"] for e in expected["termSurvivors"]}
     for isF, label in ((True, "✱1–✱5"), (False, "from ✱9 on")):
         ss = [r for r in stmts if r["isF"] == isF]

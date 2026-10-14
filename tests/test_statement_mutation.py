@@ -191,6 +191,47 @@ class Wiring(unittest.TestCase):
             self.assertFalse(ran.exists(), "the tool ran under --no-mutation")
 
 
+class MethodsAgree(unittest.TestCase):
+    """The comparison by normal forms gives the same verdicts as the direct one (docs/STATEMENT_MUTATION.md,
+    "How a mutant is compared"), on a fixed sample: one statement of each module with mutants, each among
+    the quicker ones for the direct comparison. ✱1·4 carries the seeded slip; ✱9·401's normal forms are
+    flagged by the audit, so its comparisons fall back to the direct one. Runs Lean (about 20 s); the full
+    comparison is `mutate.py --compare-methods`."""
+
+    SAMPLE = ["PM.Thm.perm", "PM.t2_06", "PM.pm2_75", "PM.t4_87", "PM.QL.t4_87", "PM.F9.f9_401",
+              "PM.q10_413", "PM.q11_4", "PM.q13_182", "PM.q14_144", "PM.q20_23", "PM.q21_24", "PM.q22_49",
+              "PM.q23_73", "PM.q24_482", "PM.q25_402"]
+
+    def test_a_disagreement_fails(self):
+        """The report the run fails on, without Lean: one mutant and one control that differ, one fallback."""
+        stmt = {"part": "stmt", "decl": "PM.x", "module": "PM.M", "defeqMs": 0, "normalMs": 0,
+                "controlDirect": True, "controlNormal": True}
+        mut = {"part": "mut", "decl": "PM.x", "op": "negate", "i": 0, "survivesDirect": False}
+        recs = [dict(stmt, controlNormal=False), dict(mut, survivesNormal=True), dict(mut, i=1, survivesNormal=None),
+                dict(mut, i=2, survivesNormal=False)]
+        with contextlib.redirect_stdout(io.StringIO()) as out:
+            problems = mutate.compare_report(recs)
+        self.assertEqual(len(problems), 2)
+        self.assertIn("2 disagreements, 1 fallbacks", out.getvalue())
+
+    def test_identical_verdicts(self):
+        with contextlib.redirect_stdout(io.StringIO()):
+            recs = mutate.run_meta("part2", "both", only=",".join(self.SAMPLE), name="compare-test")
+            problems = mutate.compare_report(recs)
+        self.assertEqual(problems, [])
+        stmts = {r["decl"]: r for r in recs if r["part"] == "stmt"}
+        muts = [r for r in recs if r["part"] == "mut"]
+        self.assertEqual(sorted(stmts), sorted(self.SAMPLE))
+        compared = [m for m in muts if m["survivesNormal"] is not None]
+        self.assertGreater(len(compared), 300)
+        # every statement but ✱9·401 is decided by its normal forms, mutants and control alike
+        for d, s in stmts.items():
+            self.assertEqual(s["fallbacks"] == 0, d != "PM.F9.f9_401", d)
+            self.assertTrue(s["control"] and s["controlDirect"], d)
+        slip = [m for m in muts if m["decl"] == "PM.Thm.perm" and m["src"] == "(PM.F.imp (PM.F.or p q) (PM.F.or p p))"]
+        self.assertEqual([(m["survivesDirect"], m["survivesNormal"]) for m in slip], [(False, False)])
+
+
 class Expected(unittest.TestCase):
     def test_classes_and_ids(self):
         e = json.loads((ROOT / "scripts" / "mutation" / "expected.json").read_text(encoding="utf-8"))
