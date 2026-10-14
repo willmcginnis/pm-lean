@@ -4,9 +4,11 @@
 # (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean) with its
 # negative tests (tests/ledger_negative.sh: a fabricated claim and a removed use must fail it), ✱9's
 # readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), the Lean
-# core counterparts of ✱1–✱5 (Checks/Counterparts.lean), and the Python tests in tests/ (which also run
-# AllAxioms.lean, AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet,
-# scripts/kernel_census/census.py --ratchet). Exits nonzero if any of them fails.
+# core counterparts of ✱1–✱5 (Checks/Counterparts.lean), the quick tier of the statement mutation
+# (scripts/mutation/mutate.py --quick), and the Python tests in tests/ (which also run AllAxioms.lean,
+# AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet, scripts/kernel_census/census.py
+# --ratchet). Exits nonzero if any of them fails. The long checks run before a release are in
+# scripts/release_check.sh.
 #
 #   tests/run_all.sh            everything (ClauseSearch takes about a minute)
 #   SKIP_SLOW=1 tests/run_all.sh  without ClauseSearch
@@ -58,6 +60,9 @@ step "export names (docs/NAMING.md)"
 python3 scripts/export_names.py --check || fail "export names"
 
 lean_check Checks/Counterparts.lean 'counterparts: 54 checked by Lean'
+
+step "statement mutation, quick tier (docs/STATEMENT_MUTATION.md)"
+python3 scripts/mutation/mutate.py --quick || fail "statement mutation --quick"
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"

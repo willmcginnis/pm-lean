@@ -62,6 +62,11 @@ The ones a reader may notice:
 
 With the platform's Lean, in a workspace that has its option `autoImplicit false`:
 
+0. the quick tier of the statement mutation (`scripts/mutation/mutate.py --quick`,
+   [docs/STATEMENT_MUTATION.md](../../docs/STATEMENT_MUTATION.md)) passes on the copy of the commit
+   exported, run with that commit's own tool: no unused hypothesis in any theorem of the commit, and no
+   proof term of the sampled ✱1–✱5 statements accepts a one-change mutant. A commit without the tool
+   (one before it existed) fails this check;
 1. every generated module compiles; no `sorry` outside the statement files; no file sets `autoImplicit`;
 2. per card: the statement is a `sorry` stub; `solution` has exactly its type; the solution does not
    import its own card; its axioms, not counting imported cards, are within `propext`,

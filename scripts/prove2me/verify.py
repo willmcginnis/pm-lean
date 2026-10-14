@@ -5,7 +5,10 @@ A scratch workspace (<work>/verify_ws) mirrors the platform's: its toolchain, `a
 module layout Definitions/ Theorems/ Solutions/, plus Checks/Canon.lean of the commit exported (the
 canonical text of statements, docs/VERSIONING.md). Then:
 
-  1. build      every generated module compiles; no `sorry` outside Theorems/; no generated file sets
+  0. mutation   the quick tier of the statement mutation (scripts/mutation/mutate.py --quick,
+                docs/STATEMENT_MUTATION.md) passes on the copy of the commit exported, run with that
+                commit's own tool; a commit without the tool fails
+  1. build     every generated module compiles; no `sorry` outside Theorems/; no generated file sets
                 `autoImplicit`
   2. gates      for every card: the statement is a `sorry` stub; `solution` has exactly its type (Expr
                 equality, as the platform checks); the solution does not import its own card; the
@@ -22,7 +25,8 @@ canonical text of statements, docs/VERSIONING.md). Then:
 
 Usage (from the repository root): python3 scripts/prove2me/verify.py [--work DIR] [--tree DIR]
 --tree checks another tree with a manifest (e.g. one pulled back from the platform) against the same
-commit. Writes <work>/verify_report.json; exits 1 if anything fails.
+commit. Writes <work>/verify_report.json; exits 1 if anything fails, and an export goes to upload only
+when this prints "all checks passed".
 """
 import concurrent.futures as cf
 import glob
@@ -90,6 +94,21 @@ def main(argv):
     ws = os.path.join(work, "verify_ws")
     rep = {"tree": os.path.relpath(tree, work), "commit": man["commit"], "environment": cfg["environment"]}
     failed = []
+
+    # 0. the quick tier of the statement mutation, on the commit exported, with its own tool
+    mut = os.path.join(P["repo"], "scripts", "mutation", "mutate.py")
+    if not os.path.exists(mut):
+        rep["mutation"] = {"rc": None, "error": "the commit exported has no scripts/mutation/mutate.py"}
+        print("mutation: FAILED, the commit exported has no scripts/mutation/mutate.py")
+        failed.append("mutation")
+    else:
+        r, dt = sh([sys.executable, mut, "--quick"], P["repo"])
+        lines = (r.stdout + r.stderr).strip().splitlines()
+        rep["mutation"] = {"rc": r.returncode, "seconds": round(dt, 1), "output": lines[-40:]}
+        print(f"mutation: --quick rc {r.returncode} in {dt:.0f}s: {lines[-1] if lines else 'no output'}")
+        if r.returncode:
+            print("\n".join(lines[-40:]))
+            failed.append("mutation")
 
     # 1. workspace and build
     shutil.rmtree(ws, ignore_errors=True)
