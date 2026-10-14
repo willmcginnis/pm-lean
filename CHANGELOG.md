@@ -3,6 +3,50 @@
 Coverage and semantic changes, newest first, from the git history. Commit hashes are given where a change is
 one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## 2026-10-14
+
+- **✱22, the calculus of classes** (`PM/Star22.lean`, pp. 219–225). The definitions ✱22·01–✱22·05,
+  ✱22·53 and ✱22·71 are macros with PM's notation (⊂, ∩, ∪, −), and all 72 numbered propositions
+  ✱22·1–✱22·95 are proved along PM's Dem. lines or hints. Ledger `data/star22_ledger.json`, checked by
+  LedgerCheck: as recorded 19 `pm-lines`, 53 `pm-lines+extra`.
+  - ✱20·18 for an extensional expression (`qcls20_18`) is used for ✱22·54, ✱22·55 and ✱22·94.
+    ✱22·94·95 are stated for an extensional expression fα (`ClsExt`); the generic form follows as an
+    example.
+  - ✱22·84·85, checked against the 1910 scan: the print itself has `−α ∨ −β`, a disjunction between two
+    classes, and the transcription follows it. The statements read the sum of classes `−α ∪ −β`, as
+    ✱22·86·87 on the same page do; this repair of a slip in the print is recorded in docs/FIDELITY.md.
+- **✱23, the calculus of relations** (`PM/Star23.lean`, pp. 226–228). The 7 definitions are macros with
+  PM's relational signs (⪽, ∩̇, ⊍, ∸), and all 72 propositions are proved. PM prints no proofs here
+  ("precisely analogous to those of analogous propositions in ✱22", p. 226), so each proof follows the
+  analogous ✱22 proof, with ✱21 for ✱20 and ✱11 for ✱10. Names and representations mirror ✱22
+  (`relSubset` … `relDiff`, `RelExt`, `qrel21_18`). Ledger `data/star23_ledger.json`: 19 / 53.
+  - The ledger's rows have a new `pm_text` value, `analogue`: the proof followed is the analogous ✱22
+    proof, which each row's note names. This value is kept as it stands pending the maintainer's ruling.
+  - ✱23·02 follows the 1910 print (the Gutenberg transcription drops an R).
+  - ✱23·81, checked against the 1910 scan: the print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem.
+    The ebook applies the published Errata, `∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement
+    proved.
+- **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
+  report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
+  core rely on. Each is measured three ways: statically, from the kernel's own record of a re-check of
+  every declaration, and by probes of the Nat operations it computes on literals. The `example`s are
+  included.
+  - The closure of the 1119 derivation theorems (✱22 and ✱23 included) needs no mutual inductive,
+    quotient, axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives
+    only through the auto-param of `PM.Pf.hy`. `Nat.log2` is not computed on literals in Lean 4.34.1,
+    though it is commonly listed as one of the operations that are.
+  - A ratchet (`tests/test_kernel_census.py`, `tests/expected_kernel_features.txt`): a new kernel feature
+    reaching the PM derivations, or a new axiom user, fails the tests until it is accepted deliberately.
+    ✱22 and ✱23 added none.
+- **Supporting changes.** Export names for ✱22 and ✱23, 72 each and none locked (667 in all). One
+  descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
+  relations. `scripts/progress.py` lists chapters not started in runs, so a gap is not printed as a range
+  across a done chapter. The supersede test no longer pins the total number of exports.
+- **Counts recounted** from the checks with both chapters in: 629 PM propositions, 269 of them using
+  reducibility; AxiomCheck 1286 names, 1279 axiom-free; AllAxioms 2584 declarations, 39 using an axiom;
+  LedgerCheck 372 rows; `lake build` 52 jobs. The AxiomCheck and AllAxioms totals and the job count
+  were already stale before these chapters, and are corrected with them.
+
 ## 2026-10-13
 
 - **Statement mutation, a trial: are statements tied to their proofs and to PM?** New

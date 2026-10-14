@@ -321,7 +321,7 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="426.0" y="414.8" font-size="11.5" font-weight="700" class="t1">clarity over speed</text>
 <rect x="403.0" y="436.3" width="180.0" height="62.9" rx="6" class="card"/>
 <rect x="403.0" y="436.3" width="4.0" height="62.9" rx="2" class="g1"/>
-<circle cx="417.0" cy="451.3" r="4.5" class="sto"/>
+<circle cx="417.0" cy="451.3" r="4.5" class="st"/>
 <text x="426.0" y="455.8" font-size="11.5" font-weight="700" class="t1">(a) Census of the</text>
 <text x="426.0" y="470.7" font-size="11.5" font-weight="700" class="t1">kernel features the</text>
 <text x="426.0" y="485.7" font-size="11.5" font-weight="700" class="t1">project exercises</text>

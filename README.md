@@ -159,7 +159,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (15 not started)</summary>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (1 done, 14 not started)</summary>
 
 ![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
 
@@ -176,7 +176,7 @@ The work is split into four groups that run side by side. Each group is split in
   - A model of PM's types in ZFC: each primitive proposition and rule proved true once: *not started*
   - Every exported derivation transferred through the model: *not started*
 - **Lean's own kernel**
-  - (a) Census of the kernel features the project exercises: *not started*
+  - (a) Census of the kernel features the project exercises: *done*
   - (b) Lean in Lean: Lean4Lean re-checks the build: *not started*
   - (c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed: *not started*
   - (d) A formal proof that the checker used is correct against a specification of the fragment: *not started*
