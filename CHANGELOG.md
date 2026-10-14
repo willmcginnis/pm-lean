@@ -26,8 +26,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     data/README.md documents it.
   - ✱23·02 follows the 1910 print (the Gutenberg transcription drops an R).
   - ✱23·81, checked against the 1910 scan: the print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem.
-    The ebook applies the published Errata, `∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement
-    proved.
+    The ebook applies a correction, `∸S ⪽ ∸R`, the analogue of ✱22·81, and that is the statement proved.
+    The source of the correction is not yet identified: the Errata page bound into the 1910 print has no
+    entry for p. 228, and the ebook's Transcriber's Note says only that all items in the Errata, from all
+    three volumes, were applied.
   - ✱23·45, checked against the 1910 scan (p. 227): the print has ⊃ where ✱22·45 has ≡, and the ebook
     follows it. The statement follows the print. The equivalence is proved as a variant, `q23_45_iff`
     (not exported, and not counted as an assertion), because ✱23·74's proof uses it, as ✱22·74's uses
@@ -49,25 +51,42 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     ✱24·411, ✱24·431, ✱24·45, ✱24·55, ✱24·58 and ✱24·6 (docs/FIDELITY.md).
   - ✱24·63's "[✱13·191]" is its class analogue ✱20·53 for the expression α ∼∈ κ, proved by ✱20·53's
     lines (`qcls20_53`); the row lists ✱13·191 as cited, not used (below, LedgerCheck).
+- **✱25, the universal relation, the null relation and the existence of relations** (`PM/Star25.lean`,
+  pp. 241–243). The definitions ✱25·01–✱25·03 are macros: V̇ is `relUniv`, with the notation `𝐕̇`; Λ̇ is
+  `relEmpty`, with `Λ̇`; ∃̇!R is `relNonempty`. All 70 numbered propositions ✱25·1–✱25·63 are proved. PM
+  prints no proofs ("they proceed precisely as in ✱24", p. 241, now PM_CLAIMS D15, checked); each proof
+  follows its ✱24 analogue's, translated. Ledger `data/star25_ledger.json`, checked by LedgerCheck in both
+  directions: as recorded 15 `pm-lines`, 55 `pm-lines+extra` (`pm_text` "analogue").
+  - A chain of identities of relations is a `calc` block of `≑` lines joined by ✱21·22, counted as chain
+    glue, as ✱20·22 is in ✱24.
+  - The statements follow the 1910 print where the transcription differs: ✱25·47 and ✱25·56 (the text
+    audit's list). ✱25·313 is formalized as printed (R ∸ S = R, where ✱24·313 has α = α − β).
+  - ✱25·37 and ✱25·412, checked against the 1910 scan (p. 242): the print has zRw in ✱25·37 and the
+    hypothesis R ⪽ Q in ✱25·412, neither a theorem. The ebook applies corrections, zSw and S ⪽ Q, the
+    analogues of ✱24·37 and ✱24·412, and those are the statements proved. As at ✱23·81, the source of
+    the corrections is not yet identified: the Errata page bound into the 1910 print has no entry for
+    p. 242.
+  - ✱25·47 uses ✱23·45 as an equivalence, as ✱24·47 uses ✱22·45: the variant `q23_45_iff`, as ✱23·74
+    does.
 - **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
   report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
   core rely on. Each is measured three ways: statically, over every declaration and its closure; from the
   kernel's own record of a re-check of each theorem, definition and opaque constant (inductive types,
   constructors, recursors and `partial` or `unsafe` definitions are not re-checked); and by probes of the
   Nat operations it computes on literals. The `example`s are included.
-  - The closure of the 1205 derivation theorems (✱22–✱24 included) needs no mutual inductive, quotient,
+  - The closure of the 1289 derivation theorems (✱22–✱25 included) needs no mutual inductive, quotient,
     axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives only through
-    two auto-params, those of `PM.Pf.hy` and of ✱24's `PM.qclsEqCongr`. `Nat.log2` is not computed on
+    three auto-params, those of `PM.Pf.hy`, of ✱24's `PM.qclsEqCongr` and of ✱25's `PM.qrelEqCongr`. `Nat.log2` is not computed on
     literals in Lean 4.34.1, though it is commonly listed as one of the operations that are.
   - A ratchet (`tests/test_kernel_census.py`, `tests/expected_kernel_features.txt`): a new kernel feature
     reaching the PM derivations, or a new axiom user, fails the tests until it is accepted deliberately.
-    ✱22–✱24 added none.
+    ✱22–✱25 added none.
 - **LedgerCheck checks claimed uses too.** Before, it checked only that every proposition a proof uses is
   listed in its row; a release review found that a fabricated citation (✱5·19 added to ✱22·1) passed.
-  Checks 2 and 3 now also check the converse, over the ledgers of ✱11–✱24 and ✱9's own: every entry a row
+  Checks 2 and 3 now also check the converse, over the ledgers of ✱11–✱25 and ✱9's own: every entry a row
   claims as used (`cited_used`, `extra_used`, `glue`) is used by the row's proof, through helpers. A
   definition counts as used only where a declaration realizing it is referenced (✱22·01 by
-  `QF.clsSubset`, ✱24·01 by `QF.clsUniv`, …), and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11 and
+  `QF.clsSubset`, ✱24·01 by `QF.clsUniv`, ✱25·01 by `QF.relUniv`, …), and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11 and
   the rule where their constructor is applied. Suffix forms of a row's own proposition (`f9_31_dem`) are
   followed in both directions. `tests/ledger_negative.sh`, a new step of `tests/run_all.sh`, checks that a
   fabricated claim, a fabricated definition and a removed use each make it fail;
@@ -115,17 +134,18 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 - **docs/PROGRESS.md's paragraph on the checks' unit is generated.** Written by hand, it kept the counts
   of an earlier revision (485 PM propositions; 276 numbered assertions from ✱9 on, 272 proved; 460 proved
   in all) under tables of a later one, while saying that its figures were for the tables' commit.
-  `scripts/progress.py` now generates it with the tables, from the same files at the same commit: 700
-  (with the variant `q23_45_iff`), 490, 486 and 674. `tests/test_progress_units.py` checks that both
+  `scripts/progress.py` now generates it with the tables, from the same files at the same commit: 770
+  (with the variant `q23_45_iff`), 560, 556 and 744. `tests/test_progress_units.py` checks that both
   regions are their regeneration and that the total is the count RedCheck and StyleCheck print.
-- **Supporting changes.** Export names for ✱22, ✱23 and ✱24 (72, 72 and 70), none locked (737 in all).
-  One descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
-  relations; univ, empty and nonempty for ✱24. `scripts/progress.py` lists chapters not started in runs,
+- **Supporting changes.** Export names for ✱22, ✱23, ✱24 and ✱25 (72, 72, 70 and 70), none locked (807
+  in all). One descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers
+  classes and relations; univ, empty and nonempty for ✱24, extended to relations for ✱25 (heads
+  relUniv, relEmpty, relNonempty). `scripts/progress.py` lists chapters not started in runs,
   so a gap is not printed as a range across a done chapter. The supersede test no longer pins the total
   number of exports.
-- **Counts recounted** from the checks with ✱22–✱24 in: 700 PM propositions, 338 of them using
-  reducibility; AxiomCheck 1368 names, 1361 axiom-free; AllAxioms 2681 declarations, 39 using an axiom;
-  LedgerCheck 442 rows; `lake build` 53 jobs. Vol I: 674 of 3,231 assertions proved. The AxiomCheck and
+- **Counts recounted** from the checks with ✱22–✱25 in: 770 PM propositions, 406 of them using
+  reducibility; AxiomCheck 1450 names, 1443 axiom-free; AllAxioms 2778 declarations, 39 using an axiom;
+  LedgerCheck 512 rows; `lake build` 54 jobs. Vol I: 744 of 3,231 assertions proved. The AxiomCheck and
   AllAxioms totals and the job count were already stale before these chapters, and are corrected with
   them.
 

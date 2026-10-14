@@ -683,13 +683,16 @@
               "short": "✱25",
               "size": "S",
               "size_reason": "3 definitions and 70 assertions (pp. 241–243), the analogues for relations of ✱24's, with the same numbering; PM prints no proofs, so each is written out along ✱24's.",
-              "status": "not started",
-              "status_note": "No ✱25 proposition is stated yet. PM gives none of the proofs: \"Proofs will not be given, as they proceed precisely as in ✱24\" (p. 241), a remark of the kind PM_CLAIMS.md lists for ✱21 (D10), checked by writing each proof out. Later chapters cite ✱25, from ✱31, ✱33, ✱34 and ✱35 on.",
+              "status": "done",
+              "status_note": "✱25 {progress:✱25} proved: all 70 numbered propositions and the three definitions (PM/Star25.lean). PM gives none of the proofs (\"Proofs will not be given, as they proceed precisely as in ✱24\", p. 241); each is written out along its ✱24 analogue's, and the ledger names the analogue per row (pm_text \"analogue\"); PM_CLAIMS D15: {claims:D15}. The 1910 print's ✱25·37 and ✱25·412 are not theorems; the corrections the transcription applies, the analogues of ✱24·37 and ✱24·412, are proved (their source is not yet identified: docs/FIDELITY.md). Later chapters cite ✱25, from ✱31, ✱33, ✱34 and ✱35 on.",
               "hard_deps": [
                 "v1-20-24"
               ],
               "soft_deps": [],
               "order": "by dependency",
+              "claims": [
+                "D15"
+              ],
               "prior_work": {
                 "effect": [
                   "ideas",

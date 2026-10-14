@@ -78,7 +78,7 @@ Not yet done:
   one theorem per instance;
 - apparent classes of classes and their identity, needed from ✱40 on
   ([docs/CLASSES_OF_CLASSES.md](docs/CLASSES_OF_CLASSES.md));
-- ✱25 onward; functions of three or more arguments; the 1925 second edition.
+- ✱30 onward; functions of three or more arguments; the 1925 second edition.
 
 ## What the proofs establish
 
@@ -248,7 +248,7 @@ Install the Lean toolchain named in `lean-toolchain` with
 
 ```
 lake build                      # builds and checks every file
-lake env lean AxiomCheck.lean   # 1361 of 1368 theorems and models use no axioms
+lake env lean AxiomCheck.lean   # 1443 of 1450 theorems and models use no axioms
 lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
@@ -266,7 +266,7 @@ The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION
 | `PM/Basic.lean`, `PM/Replay*.lean` | ✱1–✱5 |
 | `PM/Quant.lean`, `PM/Star10.lean`, `PM/Star11.lean` | ✱9–✱11 |
 | `PM/Found9/` | ✱9 by its own method, and its agreement with ✱10 |
-| `PM/Star12.lean` … `PM/Star24.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱24, rules, styles of predicativity |
+| `PM/Star12.lean` … `PM/Star25.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱25, rules, styles of predicativity |
 | `PM/Models/` | the models: soundness, consistency, counter-models |
 | `*.lean` at the root, `Checks/` | the checks |
 | `tests/` | regression tests and `run_all.sh` ([tests/README.md](tests/README.md)) |
@@ -284,7 +284,7 @@ Each ledgered proof is labelled `pm-lines` (only PM's citations and the steps
 PM leaves tacit) or `pm-lines+extra` (at least one more proposition, listed
 with the reason). Of the 188 ✱2–✱5 proofs, 112 are `pm-lines`, 65 are `pm-lines+extra`, and 11 have
 no PM proof to follow. Structural steps PM leaves unstated ("glue")
-can be counted either way, so three counts are given for ✱11, ✱13, ✱14 and ✱20–✱24.
+can be counted either way, so three counts are given for ✱11, ✱13, ✱14 and ✱20–✱25.
 See [docs/FIDELITY.md](docs/FIDELITY.md).
 
 Following PM line by line also found things in the text, among them a
