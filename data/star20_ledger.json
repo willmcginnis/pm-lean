@@ -1749,7 +1749,7 @@
   ],
   "note": "[Proof as in *20.701]; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",

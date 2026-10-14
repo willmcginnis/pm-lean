@@ -144,7 +144,7 @@
   ],
   "note": "[Proof as in *14.111]; the unmarked f{(ix)(phi x), (ix)(psi x)} gives the first description the larger scope (p. 182), i.e. *14.03; the definitional lines, then *11.55",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",

@@ -164,6 +164,14 @@ method (`PM/Found9`) has a ledger, `data/star9f_ledger.json`, which these counts
 - ✱10·28 or ✱10·281 (with ✱10·11) to carry a step under (∃b) where PM does not cite them, and ✱10·11
   before an uncited ✱10·23.
 
+Where PM prints only "Proof as in" an earlier number (14 propositions of ✱21, after ✱20; ✱14·112, after
+✱14·111; ✱20·702, after ✱20·701), the proof follows that analogue's, with its citations translated, and the
+row's `pm_text` is `analogue`, as in ✱23 and ✱25 below ([data/README.md](../data/README.md) defines the
+value). These rows said `hint` before the maintainer's ruling 63 (2026-10-14); only the value changed.
+✱11·13 and ✱11·311 ("Proof as in ✱10·13") keep `hint`: their proofs apply the rule ✱10·13 rather than
+follow its proof. ✱22 and ✱24 print no such reference; ✱22·391, ✱22·392 ("[Similar proof]") and ✱22·69
+("[Similar proof, by ✱4·41]") name no earlier number and keep `hint`, as ✱9·361, ✱9·37 and ✱9·371 do.
+
 **✱22** (72 propositions; `star22_ledger.json`), as recorded: ✱22 19 / 53 of 72. Most of PM's hints for ✱22
 cite a single proposition of ✱3–✱5, to be carried under (x); the proof also needs the steps that PM's own
 Dem. of ✱22·5, ✱22·68 and ✱22·91 print, so they are listed as extras where the hint leaves them out:

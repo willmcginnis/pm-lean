@@ -256,7 +256,7 @@
   ],
   "note": "[Proof as in *20.14]; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1311,7 +1311,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.6]; the analogue of *10.01",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1337,7 +1337,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.61]; S of the form x y psi!(x, y)",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1363,7 +1363,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.62]; rule; the analogue of *10.11",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1391,7 +1391,7 @@
   ],
   "note": "[Proof as in *20.63]",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1416,7 +1416,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.633]; rule; the analogue of *11.07",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1444,7 +1444,7 @@
   ],
   "note": "[Proof as in *20.64]",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1469,7 +1469,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.7]; by *21.07 the statement is *21.112; takes [Reducibility S]",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1505,7 +1505,7 @@
   ],
   "note": "[Proof as in *20.701]; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1555,7 +1555,7 @@
   ],
   "note": "[Proof as in *20.702]; as printed, g!(R, x) with R first (*20.702 has g!{x, z(phi!z)}); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1607,7 +1607,7 @@
   ],
   "note": "[Proof as in *20.703]; R has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1654,7 +1654,7 @@
   ],
   "note": "[Proof as in *20.703]; R has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1701,7 +1701,7 @@
   ],
   "note": "[Proof as in *20.703]; alpha has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
@@ -1734,7 +1734,7 @@
   "cited_unused": [],
   "note": "[Proof as in *20.71]; R, S real: the statement is *21.19; the analogue of *13.01; takes [Reducibility S]",
   "fidelity": "pm-lines",
-  "pm_text": "hint",
+  "pm_text": "analogue",
   "tacit": [
    "Syll",
    "*3.2",
