@@ -32,21 +32,28 @@
 --            at the root and then, recursively, in every argument, under every binder and in every
 --            binder type, memoized per statement.
 --   both     both, every verdict recorded twice (`mutate.py --compare-methods`); `direct` decides.
--- Why `normal` gives `direct`'s verdict. (1) Every step of `nf` replaces a subterm by the kernel's own
--- weak head normal form of it, which the kernel reaches by its reductions (β, δ, ι, ζ, projections,
--- literals), so the two are definitionally equal; definitional equality is a congruence, so
--- `nf t ≡ t`. (2) If `≡` is an equivalence on these terms, then `pty ≡ mty` iff `nf pty ≡ nf mty`, and
--- the kernel, deciding `≡` on both pairs, gives both the same verdict. The assumption fails in general
--- only through proof irrelevance and the eta rules for structures and unit-like types; these need a
--- proof, a constructor of a structure, or a term of a unit-like type in the terms compared. `auditHead`
--- checks every head of every normal form for the three; when any is found in a statement's normal
--- forms, its comparisons fall back to `direct` (the ✱9 statements of PM/Found9/Star9.lean: their
--- normal forms contain `Reading.mk`, `PProd.mk` and `PUnit.unit`). A comparison also falls back when a
--- normal form needs more than the bound of steps, or the kernel reports an error, so no verdict
--- depends on the bound. `nfSelfTest` plants a case of each kind; the run fails if one is missed.
--- The two methods were run side by side (`--compare-methods`) on every statement of ✱1–✱25 but
--- ✱25·431 and ✱25·432 (an hour each for `direct`): identical verdicts on every mutant and control;
--- and a full run of each gave identical verdicts on all 16,512 mutants, those two included.
+-- Why `normal` should give `direct`'s verdict, and how far that is shown (docs/STATEMENT_MUTATION.md
+-- has the argument in full). (1) Every step of `nf` replaces a subterm by the kernel's own weak head
+-- normal form of it, so `nf t ≡ t`. (2) If `≡` were transitive on the four terms, `pty ≡ mty` iff
+-- `nf pty ≡ nf mty`. It is not transitive in general. In the kernel of Lean v4.34.1
+-- (src/kernel/type_checker.cpp, inductive.h) the rules that break it, or that compare anything but the
+-- two trees, are: proof irrelevance and K-like reduction, which need a proof; eta for structures, which
+-- needs an application of a structure's constructor; eta for unit-like types, which needs a term of a
+-- unit-like type (after eta for functions, a function into one); and string-literal expansion, which
+-- needs an application of `String`'s constructor. `auditNode` checks every subterm of both normal
+-- forms for these, projections included; a flagged statement is decided by `direct` (the ✱9 statements
+-- of PM/Found9/Star9.lean, whose normal forms contain `Reading.mk`, `PProd.mk` and `PUnit.unit`). A
+-- comparison also falls back when a normal form needs more than the bound of steps or the kernel
+-- reports an error. With a clean audit the kernel compares the two normal forms as trees, up to eta
+-- for functions, universe levels and Nat literals against `Nat.zero`/`Nat.succ`. Not shown: that a
+-- proof (or constructor, or unit-like term) that `direct` meets only inside a reduction that removes it
+-- from both normal forms cannot change its verdict, nor that the kernel's algorithm finds every
+-- equality. So this is a conservative syntactic check with a fallback, not a proof of transitivity.
+-- `nfSelfTest` plants a case of each kind, the case it once missed among them (a proof-valued
+-- projection); the run fails if one is missed. The evidence for the rest: the two methods run side by
+-- side (`--compare-methods`) on every statement but ✱25·431 and ✱25·432 (an hour each for `direct`)
+-- with identical verdicts on every mutant and control, and a full run of each with identical verdicts
+-- on all 16,512 mutants, those two included.
 import Lean
 import PM
 import Checks.PinnedStatements
@@ -79,6 +86,26 @@ private theorem privateUnusedPremise (p : F) (h : Thm (.neg p)) : Thm (F.imp p p
 /-- used: the control -/
 theorem usedPremise (p q : F) (h : Thm p) (hpq : Thm (F.imp p q)) : Thm q := Thm.mp h hpq
 end PMMutationTest
+
+/-! Planted terms for the audit of normal forms (`PMMutation.nfSelfTest`). `witnessLeft` and
+    `witnessRight` are equal for the direct comparison: unfolding `pick` on both sides, the two
+    proofs of `Acc accRel 0` are equal by proof irrelevance. Their normal forms are not: the
+    recursor on the projection `b.proof` is stuck, the one on `Acc.intro` computes `0`. The audit
+    must flag the projection, a proof, so that `direct` decides. `unitProjection` is a projection of
+    a unit-like type. -/
+namespace PMNfTest
+def accRel (_ _ : Nat) : Prop := False
+structure ProofBox : Type where
+  proof : Acc accRel 0
+noncomputable def pick (h : Acc accRel 0) : Nat :=
+  @Acc.rec Nat accRel (fun _ _ => Nat) (fun _ _ _ => 0) 0 h
+def witnessLeft : Prop := ∀ b : ProofBox, pick b.proof = 0
+def witnessRight : Prop := ∀ _b : ProofBox, pick (Acc.intro 0 (fun _ h => False.elim h)) = 0
+structure UnitBox : Type where
+  unit : PUnit.{1}
+  n : Nat
+def unitProjection : UnitBox → PUnit.{1} := fun b => b.unit
+end PMNfTest
 
 namespace PMMutation
 
@@ -483,35 +510,39 @@ def Method.str : Method → String
   | .direct => "direct" | .normal => "normal" | .both => "both"
 
 /-- What the normal forms contain that could make the kernel's comparison more than a comparison of
-    trees: a proof (a constant or variable whose type ends in a proposition: proof irrelevance), a
-    constructor of a structure (structure eta), a term of a type with one constructor and no fields
-    (unit eta). Checked on every head of every normal form; docs/STATEMENT_MUTATION.md. -/
+    trees: a proof (a subterm whose type is a proposition: proof irrelevance, and the K-like
+    reduction of `Eq.rec`), an application of a constructor of a structure (structure eta), a term of
+    a type with one constructor and no fields, or a function into one (unit eta). Checked on every
+    subterm of every normal form; docs/STATEMENT_MUTATION.md. -/
 structure Audit where
   proofs : NameSet := {}
   structCtors : NameSet := {}
   unitLike : NameSet := {}
-  heads : Nat := 0
+  nodes : Nat := 0
 
 def Audit.clean (a : Audit) : Bool := a.proofs.isEmpty && a.structCtors.isEmpty && a.unitLike.isEmpty
+
+/-- What the audit flagged, sorted, as written (`projection PMNfTest.ProofBox.1`, not escaped). -/
+def namesJson (s : NameSet) : Json := toJson ((s.toArray.map (·.toString (escape := false))).qsort (· < ·))
 
 def Audit.merge (a b : Audit) : Audit :=
   { proofs := b.proofs.foldl (·.insert ·) a.proofs
     structCtors := b.structCtors.foldl (·.insert ·) a.structCtors
     unitLike := b.unitLike.foldl (·.insert ·) a.unitLike
-    heads := a.heads + b.heads }
+    nodes := a.nodes + b.nodes }
 
 structure NfState where
   /-- the bound on the steps of one normal form -/
   budget : Nat
   cache : Std.HashMap Expr Expr := {}
   canon : Std.HashMap Expr Expr := {}
-  headSeen : Std.HashMap Expr Unit := {}
+  seen : Std.HashMap Expr Unit := {}
   steps : Nat := 0
   /-- the bound was reached, or the kernel failed: this term's comparison falls back to `direct` -/
   over : Bool := false
-  /-- the heads of the normal forms of the current statement -/
+  /-- the subterms of the normal forms of the current statement -/
   audit : Audit := {}
-  /-- the heads of all normal forms of the run -/
+  /-- the subterms of all normal forms of the run -/
   runAudit : Audit := {}
 
 abbrev NfM := StateRefT NfState MetaM
@@ -522,21 +553,42 @@ def canonical (e : Expr) : NfM Expr := do
   | some r => return r
   | none => modify fun s => { s with canon := s.canon.insert e e }; return e
 
-/-- Record what a head of a normal form is (each distinct head once). -/
-def auditHead (h : Expr) : NfM Unit := do
-  unless h.isConst || h.isFVar do return
-  if (← get).headSeen.contains h then return
-  modify fun s => { s with headSeen := s.headSeen.insert h () }
+/-- How a flagged subterm is reported: a constant or a variable by its name, an application by its
+    head, a projection by its structure and field (counted from 1), anything else by its kind. -/
+partial def nodeName (e : Expr) : MetaM Name := do
+  match e with
+  | .const c _ => return c
+  | .fvar f =>
+    let n := match (← getLCtx).find? f with | some d => d.userName | none => f.name
+    return .str .anonymous s!"variable {n}"
+  | .proj sn i _ => return .str .anonymous s!"projection {sn}.{i + 1}"
+  | .app .. => nodeName e.getAppFn
+  | .lam .. => return .str .anonymous "fun"
+  | _ => return .str .anonymous e.ctorName
+
+/-- Record what a subterm of a normal form is (each distinct subterm once):
+    - a proof: its type is a proposition, the level of the type's sort zero up to normalization (as
+      the kernel's `is_prop` tests it);
+    - unit-like: its type, or the result of its type under `∀`s (a function, which the kernel's eta
+      for functions compares at an argument), is a structure with one constructor, no indices and no
+      fields (the kernel's eta for unit-like types);
+    - an application of a constructor of a structure (one constructor, no indices, not recursive:
+      the kernel's eta for structures).
+    A sort or a `∀` is a type: its type is a sort, so it is neither a proof nor unit-like, and it is
+    not an application. After the bound is reached the comparison falls back anyway. -/
+def auditNode (e : Expr) : NfM Unit := do
+  if e.isSort || e.isForall then return
+  let s ← get
+  if s.over || s.seen.contains e then return
+  set { s with seen := s.seen.insert e () }
   let env ← getEnv
-  let ty ← inferType h
-  let nm := match h with
-    | .const c _ => c
-    | .fvar f => .str .anonymous s!"variable {f.name}"
-    | _ => .anonymous
-  let (isPf, unit) ← forallTelescopeReducing ty fun _ r => do
-    let isPf ← isProp r
+  let ty ← inferType e
+  let isPf ← match ← whnfD (← inferType ty) with
+    | .sort u => pure u.normalize.isZero
+    | _ => pure false
+  let unit ← forallTelescopeReducing ty fun _ r => do
     let r ← whnfD r
-    let unit := match r.getAppFn.constName? with
+    return match r.getAppFn.constName? with
       | some i => match env.find? i with
         | some (.inductInfo v) => v.ctors.length == 1 && v.numIndices == 0 &&
             (match env.find? v.ctors[0]! with
@@ -544,18 +596,16 @@ def auditHead (h : Expr) : NfM Unit := do
              | _ => false)
         | _ => false
       | none => false
-    return (isPf, unit)
-  let ctorOfStruct := match h with
+  let ctorOfStruct := match e.getAppFn with
     | .const c _ => match env.find? c with
-      -- structure-like as the kernel's eta for structures takes it: one constructor, no indices,
-      -- not recursive
       | some (.ctorInfo v) => match env.find? v.induct with
         | some (.inductInfo i) => i.ctors.length == 1 && i.numIndices == 0 && !i.isRec
         | _ => false
       | _ => false
     | _ => false
+  let nm ← nodeName e
   modify fun s => { s with audit := { s.audit with
-    heads := s.audit.heads + 1
+    nodes := s.audit.nodes + 1
     proofs := if isPf then s.audit.proofs.insert nm else s.audit.proofs
     unitLike := if unit then s.audit.unitLike.insert nm else s.audit.unitLike
     structCtors := if ctorOfStruct then s.audit.structCtors.insert nm else s.audit.structCtors } }
@@ -564,7 +614,20 @@ def auditHead (h : Expr) : NfM Unit := do
     every argument, under every binder and in every binder type. Memoized on the term, so a subterm
     met again (a definition's parameter used twice) is normalized once and its result shared. Each
     call that is not a cache hit is a step; past `budget` steps, or if the kernel reports an error,
-    `over` is set and the comparison of this term falls back to `direct`. -/
+    `over` is set and the comparison of this term falls back to `direct`.
+
+    Every subterm of the result is audited (`auditNode`), by the constructor of `Expr` it has after
+    `Kernel.whnf`:
+    - `app`: the application, and its head. The head is a constructor, a variable, a constant
+      without a definition (an inductive type, an axiom, a stuck recursor) or a stuck projection,
+      whose structure argument is normalized (and audited) in turn; each argument is normalized.
+    - `lam`: the function; its binder type and its body (under a fresh variable) are normalized.
+    - `forallE`: a type, not audited itself; its binder type and body are normalized.
+    - `proj`: a stuck projection, audited; its structure argument is normalized.
+    - `const`, `fvar`, `lit`: audited. `sort`: a type, not audited.
+    - `mdata`, `letE`: `Kernel.whnf` removes metadata and reduces a `let` at the root, so neither is
+      met; `bvar`, `mvar`: a closed term under fresh variables has neither. If one were met, the
+      comparison would fall back to `direct`. -/
 partial def nf (e : Expr) : NfM Expr := do
   let s ← get
   if s.over then return e
@@ -580,12 +643,11 @@ partial def nf (e : Expr) : NfM Expr := do
       return e
   let r ← match w with
     | .app .. =>
-      let h := w.getAppFn
-      -- the head after `whnf` is a constructor, a variable, a stuck recursor or projection: only a
-      -- projection's structure argument can reduce further
-      let h' ← match h with
+      -- only a projection's structure argument can reduce further in the head
+      let h' ← match w.getAppFn with
         | .proj sn i b => pure (.proj sn i (← nf b))
-        | _ => auditHead h; pure h
+        | h => pure h
+      auditNode h'
       let args ← w.getAppArgs.mapM nf
       pure (mkAppN h' args)
     | .lam n t b bi =>
@@ -599,12 +661,22 @@ partial def nf (e : Expr) : NfM Expr := do
         let b' ← nf (b.instantiate1 x)
         pure (.forallE n t' (b'.abstract #[x]) bi)
     | .proj sn i b => pure (.proj sn i (← nf b))
-    | .const .. | .fvar .. => auditHead w; pure w
-    | _ => pure w
+    | .const .. | .fvar .. | .lit .. | .sort .. => pure w
+    | .mdata .. | .letE .. | .bvar .. | .mvar .. =>
+      modify fun s => { s with over := true }
+      pure w
   let r ← canonical r
+  auditNode r
   -- after the bound is reached the results are not normal forms: nothing more is cached
   unless (← get).over do modify fun s => { s with cache := s.cache.insert e r }
   return r
+
+/-- The verdict on two normal forms, or none when it is not to be relied on: the mutant's normal form
+    was not reached, the kernel reports an error, or the audit of the statement's normal forms is not
+    clean. Then `direct` decides. -/
+def verdictOnNormalForms (env : Environment) (clean : Bool) (np : Expr) (nm : Option Expr) : Option Bool :=
+  if !clean then none else
+    nm.bind fun nm => match Kernel.isDefEq env {} np nm with | .ok b => some b | .error _ => none
 
 /-- The normal form of a closed term, or none if the bound is reached or the kernel fails; and the
     steps it took. The cache is kept across calls (the proof's type and all mutants of one statement),
@@ -617,17 +689,23 @@ def nfTop (e : Expr) : NfM (Option Expr × Nat) := do
 
 /-- Start a statement: a fresh cache and audit (the run's audit keeps what the last one found). -/
 def NfState.next (s : NfState) : NfState :=
-  { s with cache := {}, canon := {}, headSeen := {}, audit := {}, runAudit := s.runAudit.merge s.audit }
+  { s with cache := {}, canon := {}, seen := {}, audit := {}, runAudit := s.runAudit.merge s.audit }
 
 /-- The default bound on the steps of one normal form (`PM_MUTATION_NF_BUDGET` sets another). The
     largest normal form of the full run takes a few hundred steps (MEASURED,
     docs/STATEMENT_MUTATION.md): the bound only stops a pathological term. -/
 def nfBudgetDefault : Nat := 200000
 
-/-- The planted cases of the comparison, which the run fails without: the audit must flag a proof
-    (`rfl`, which normalizes to `Eq.refl`), a constructor of a structure (`Subtype.mk`) and a term of a
-    unit-like type (`PUnit.unit`), and a bound of three steps must stop a normal form that needs more. -/
-def nfSelfTest : MetaM Unit := do
+/-- The planted cases of the comparison, which the run fails without, and its record (`selfTest`):
+    - the audit must flag a proof (`rfl`, which normalizes to `Eq.refl`), a constructor of a
+      structure (`Subtype.mk`) and a term of a unit-like type (`PUnit.unit`);
+    - the witness `PMNfTest.witnessLeft`/`witnessRight`: the audit must flag the projection
+      `b.proof` as a proof, and the verdict of the comparison as `normal` makes it (the audit routes
+      it to `direct`) must be `direct`'s. The record also gives the verdict on the normal forms with
+      the audit bypassed, which differs (tests/test_statement_mutation.py checks both);
+    - the audit must flag the projection `b.unit` of `PMNfTest.unitProjection` as unit-like;
+    - a bound of three steps must stop a normal form that needs more. -/
+def nfSelfTest : MetaM Json := do
   let nat := Expr.const ``Nat []
   let planted := mkApp4 (.const ``Prod.mk [Level.zero, Level.zero]) (.const ``PUnit [Level.one]) nat
     (.const ``PUnit.unit [Level.one]) (mkNatLit 1)
@@ -639,8 +717,33 @@ def nfSelfTest : MetaM Unit := do
       s.audit.unitLike.contains ``PUnit.unit do
     throwError "the audit of normal forms misses a planted case: proofs {s.audit.proofs.toList}, \
       structure constructors {s.audit.structCtors.toList}, unit-like {s.audit.unitLike.toList}"
+  -- the witness, as `analyse` compares a statement with a mutant: one state for both normal forms
+  let env ← getEnv
+  let l := (← getConstInfo ``PMNfTest.witnessLeft).value!
+  let r := (← getConstInfo ``PMNfTest.witnessRight).value!
+  let ((nl, _), sw) ← (nfTop l).run { budget := 1000 }
+  let ((nr, _), sw) ← (nfTop r).run sw
+  let some nl := nl | throwError "the witness's normal form is not reached"
+  let direct := match Kernel.isDefEq env {} l r with | .ok b => b | .error _ => false
+  let bypassed := verdictOnNormalForms env true nl nr
+  let routed := verdictOnNormalForms env sw.audit.clean nl nr
+  let verdict := routed.getD direct
+  let pf : Name := .str .anonymous s!"projection {``PMNfTest.ProofBox}.1"
+  unless sw.audit.proofs.contains pf && verdict == direct do
+    throwError "the audit of normal forms misses the planted proof-valued projection: proofs \
+      {sw.audit.proofs.toList}; verdict {verdict}, direct {direct}"
+  let ((_, _), su) ← (nfTop (← getConstInfo ``PMNfTest.unitProjection).value!).run { budget := 1000 }
+  let up : Name := .str .anonymous s!"projection {``PMNfTest.UnitBox}.1"
+  unless su.audit.unitLike.contains up do
+    throwError "the audit of normal forms misses the planted unit-like projection: unit-like \
+      {su.audit.unitLike.toList}"
   let ((r2, n), _) ← (nfTop sub).run { budget := 3 }
   unless r2.isNone && n == 3 do throwError "the bound on normal forms does not stop a planted term"
+  return Json.mkObj [("part", jstr "selfTest"),
+    ("witness", Json.mkObj [("direct", toJson direct), ("normalAuditBypassed", toJson bypassed),
+      ("auditClean", toJson sw.audit.clean), ("proofs", namesJson sw.audit.proofs),
+      ("verdict", toJson verdict)]),
+    ("unitProjection", namesJson su.audit.unitLike)]
 
 /-- Replace the `k`-th occurrence of the variable `x` by `y` (the state counts occurrences; binder
     types are left alone). -/
@@ -685,11 +788,11 @@ def analyse (out : IO.FS.Handle) (label : Name) (pmNum : String) (stmtTy proof :
      statement's normal forms is not clean (then `direct` decides) -/
   let normalOf (mty : Expr) : MetaM (Option Bool × Nat × Nat) := do
     let some np := npty | return (none, 0, 0)
+    -- once the audit has flagged something in this statement, `direct` decides all its comparisons
+    unless (← nfs.get).audit.clean do return (none, 0, 0)
     let a ← IO.monoMsNow
     let (r, n) ← runNf mty
-    let clean := (← nfs.get).audit.clean
-    let v := if !clean then none else
-      r.bind fun nm => match Kernel.isDefEq env {} np nm with | .ok b => some b | .error _ => none
+    let v := verdictOnNormalForms env (← nfs.get).audit.clean np r
     return (v, n, (← IO.monoMsNow) - a)
   forallTelescope stmtTy fun xs concl => do
     let f0 := concl.appArg!
@@ -873,7 +976,7 @@ open PMMutation in
     let env ← getEnv
     let keep (c : Name) : Bool :=
       modules.all (·.contains (modOf env c)) && only.all (·.contains c) && !skip.contains c
-    nfSelfTest
+    h.putStrLn (← nfSelfTest).compress
     let nfs ← IO.mkRef ({ budget } : NfState)
     if mode == "full" || mode == "quick" || mode == "hyp" then
       let (nt, nh, nu) ← part1 h
@@ -898,11 +1001,10 @@ open PMMutation in
       logInfo m!"from ✱9 on: {tq.size} statements, {qm} mutants, {qs} survivors"
     let t3 ← IO.monoMsNow
     let au := (← nfs.get).next.runAudit
-    let names (s : NameSet) : Json := toJson ((s.toArray.map toString).qsort (· < ·))
     let j := Json.mkObj [("part", jstr "timing"), ("hypMs", toJson (t1 - t0)),
       ("fMs", toJson (t2 - t1)), ("qMs", toJson (t3 - t2)),
-      ("method", jstr meth.str), ("nfBudget", toJson budget), ("auditHeads", toJson au.heads),
-      ("auditProofs", names au.proofs), ("auditStructCtors", names au.structCtors),
-      ("auditUnitLike", names au.unitLike)]
+      ("method", jstr meth.str), ("nfBudget", toJson budget), ("auditNodes", toJson au.nodes),
+      ("auditProofs", namesJson au.proofs), ("auditStructCtors", namesJson au.structCtors),
+      ("auditUnitLike", namesJson au.unitLike)]
     h.putStrLn j.compress
   h.flush

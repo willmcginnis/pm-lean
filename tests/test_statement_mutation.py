@@ -214,9 +214,32 @@ class MethodsAgree(unittest.TestCase):
         self.assertEqual(len(problems), 2)
         self.assertIn("2 disagreements, 1 fallbacks", out.getvalue())
 
+    recs = None
+
+    @classmethod
+    def sample_run(cls):
+        if cls.recs is None:
+            with contextlib.redirect_stdout(io.StringIO()):
+                cls.recs = mutate.run_meta("part2", "both", only=",".join(cls.SAMPLE), name="compare-test")
+        return cls.recs
+
+    def test_witness_routed_to_direct(self):
+        """The case the audit once missed (docs/STATEMENT_MUTATION.md, "How a mutant is compared"): two
+        statements equal for the direct comparison by proof irrelevance, whose normal forms differ
+        because a recursor on a proof-valued projection is stuck. With the audit bypassed the two
+        comparisons disagree; the audit flags the projection, so `direct` decides and they agree. The
+        meta-program fails if the projection is not flagged; this pins the record."""
+        w = next(r for r in self.sample_run() if r["part"] == "selfTest")["witness"]
+        self.assertEqual((w["direct"], w["normalAuditBypassed"]), (True, False))
+        self.assertFalse(w["auditClean"])
+        self.assertIn("projection PMNfTest.ProofBox.1", w["proofs"])
+        self.assertEqual(w["verdict"], w["direct"])
+        unit = next(r for r in self.sample_run() if r["part"] == "selfTest")["unitProjection"]
+        self.assertIn("projection PMNfTest.UnitBox.1", unit)
+
     def test_identical_verdicts(self):
+        recs = self.sample_run()
         with contextlib.redirect_stdout(io.StringIO()):
-            recs = mutate.run_meta("part2", "both", only=",".join(self.SAMPLE), name="compare-test")
             problems = mutate.compare_report(recs)
         self.assertEqual(problems, [])
         stmts = {r["decl"]: r for r in recs if r["part"] == "stmt"}
