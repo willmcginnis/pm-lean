@@ -6,7 +6,9 @@ Guards against a new axiom user going unnoticed (e.g. a PM derivation picking up
 tests/expected_axiom_users.txt, and every declaration AxiomCheck.lean prints as depending on axioms
 must be one of them, with the same axioms. When the ✱9 foundation added eight `injEq` lemmas, the count
 cited in README.md, CONTRIBUTING.md and docs/ stayed at 25: each place that gives it is read here and
-compared with the list. Runs `lake env lean`, so the project must be built.
+compared with the list. A release review later found README.md still giving 8 `injEq` lemmas for the
+syntax of ✱9's method after there were 14, so that number is read and compared too. Runs `lake env lean`,
+so the project must be built.
 """
 import os
 import re
@@ -29,6 +31,11 @@ COUNT_CITED = [
 INJEQ_CITED = [
     ("docs/VERIFICATION.md", r"(\d+) `injEq` lemmas"),
     ("docs/TYPES_DESIGN.md", r"`injEq` lemmas of [^|]*\((\d+)\)"),
+]
+# ... and of those, the lemmas for the syntax of ✱9's method (`PM.F9.…`).
+NINE_SYNTAX_CITED = [
+    ("README.md", r"\((\d+) of them for the syntax of ✱9's method\)"),
+    ("docs/VERIFICATION.md", r"(\d+) of them are for the syntax of ✱9's method"),
 ]
 
 
@@ -66,7 +73,8 @@ class AxiomUsers(unittest.TestCase):
     def test_docs_cite_the_count(self):
         exp = expected()
         injeq = sum(1 for n in exp if n.endswith(".injEq"))
-        for cited, n in [(COUNT_CITED, len(exp)), (INJEQ_CITED, injeq)]:
+        nine = sum(1 for n in exp if n.startswith("PM.F9.") and n.endswith(".injEq"))
+        for cited, n in [(COUNT_CITED, len(exp)), (INJEQ_CITED, injeq), (NINE_SYNTAX_CITED, nine)]:
             for f, pat in cited:
                 with self.subTest(file=f, pattern=pat):
                     text = " ".join((ROOT / f).read_text(encoding="utf-8").split())

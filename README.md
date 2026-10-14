@@ -86,7 +86,7 @@ Not yet done:
 - Every PM theorem, and the ✱1–✱5 completeness theorem, reports
   "does not depend on any axioms" under `#print axioms`.
 - An exhaustive check finds 39 declarations that use Lean's standard axioms.
-  None is a PM derivation: they are compiler-generated lemmas (8 of them
+  None is a PM derivation: they are compiler-generated lemmas (14 of them
   for the syntax of ✱9's method), three propositional metatheorems, and a
   general classical model.
   Details: [docs/VERIFICATION.md](docs/VERIFICATION.md).

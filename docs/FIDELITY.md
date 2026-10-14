@@ -101,7 +101,7 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
-- The strict count differs from the recorded one only at ✱14·25, whose displayed chain under
+- In ✱11–✱23 the strict count differs from the recorded one only at ✱14·25, whose displayed chain under
   φx ≡ₓ x = b needs ✱3·43 and ✱2·02, which its Dem. does not cite. (✱20·11 and ✱21·11 also have such a
   chain, for a ✱4·86 step, but their ✱10·21 makes them `pm-lines+extra` in both readings.)
 - In ✱20 and ✱21 the last column differs from the recorded one at ✱20·11, ✱21·11 and ✱21·21, whose only

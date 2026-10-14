@@ -598,8 +598,9 @@ theorems and the golden theorems are axiom-free.
 | `PM.sound`, `PM.not_thm_of_countermodel`, `PM.star1_4_variant_not_a_theorem` | propext, Quot.sound | propositional metatheorems (unchanged from before) |
 | `injEq` lemmas of `F`, `QF`, `Ty`, `Sh`, `Style`, `Sys`, `QModel`, and of ✱9's syntax `F9.EF`, `F9.PF`, `F9.PE`, `F9.Reading` (29), `instReprF`, `instReprF.repr` | propext | compiler-generated |
 
-No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` anywhere (checked by
-search).
+No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern` in the library (checked by
+search). The one exception outside it, the export tool's `unsafe def main`, is described in
+[VERIFICATION.md](VERIFICATION.md).
 
 ## 5. Decisions log and open questions
 

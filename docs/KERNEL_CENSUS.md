@@ -148,7 +148,8 @@ The dynamic part depends on the Lean version. The figures are for the toolchain 
 The figures, read as requirements:
 
 - **It must implement:** inductive families with indices; reflexive and recursive inductive types; the one
-  nested type `Lean.Syntax`, as long as the auto-param of `PM.Pf.hy` stays (the only route to it);
+  nested type `Lean.Syntax`, as long as the auto-params of `PM.Pf.hy` and `PM.qclsEqCongr` stay (the two
+  routes to it);
   recursors with iota reduction and K; large elimination out of `Prop`; structure-like types and
   primitive projections; universe polymorphism with `max` and `imax`; `Prop`; structure eta and
   definitional proof irrelevance unless they are shown to be unused (this census cannot tell); delta
