@@ -26,12 +26,13 @@ import PM.Systems
 -- semantics: the general (classical collapse) model and the finite coded model
 import PM.Models.Collapse
 import PM.Models.Finite
--- ✱12–✱21
+-- ✱12–✱22
 import PM.Star12
 import PM.Star13
 import PM.Star14
 import PM.Star20
 import PM.Star21
+import PM.Star22
 -- order checker, golden tests, degenerate families
 import PM.Orders
 import PM.Trap
