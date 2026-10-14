@@ -46,7 +46,7 @@ python3 scripts/parse_vol1.py path/to/pg78050-images.html   # data/vol1.jsonl: r
 python3 scripts/vol1_items.py                               # data/vol1_items.json: items 3449
 python3 scripts/gen_lean.py                                 # PM/Statements.lean: statements 193
 python3 scripts/gen_quant_lift.py                           # PM/QuantLift.lean: 188 theorems lifted
-python3 scripts/gen_axiomcheck.py                           # AxiomCheck.lean: 1017 names
+python3 scripts/gen_axiomcheck.py                           # AxiomCheck.lean: 1286 names
 git diff --stat                                             # expect no change
 lake build
 ```

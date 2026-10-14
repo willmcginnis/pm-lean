@@ -54,7 +54,7 @@ carry over "by merely repeating previous proofs"), the assertion is checked in L
 two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
 axiom of reducibility they derive the same theorems (row B4). What comes next is in the [roadmap](#roadmap) below and in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Status at a glance (2026-10-12, commit `27b4f85`)
+## Status at a glance (2026-10-14, commit `f69cb3f`)
 
 | Part of Vol I | Chapters | Numbered assertions proved |
 |---|---|---|
@@ -63,7 +63,8 @@ axiom of reducibility they derive the same theorems (row B4). What comes next is
 | Types and reducibility | ✱12 | no assertions: ✱12·1, ✱12·11 are rules |
 | Identity, descriptions | ✱13, ✱14 | 25 of 25; 47 of 47 (✱14·3 as a schema) |
 | Classes, relations | ✱20, ✱21 | 53 of 55; 46 of 48 |
-| **Vol I** | ✱1–✱97 | **460 of 3,230 (14.2%)** |
+| Calculus of classes, of relations | ✱22, ✱23 | 72 of 72; 72 of 72 |
+| **Vol I** | ✱1–✱97 | **604 of 3,230 (18.7%)** |
 
 Vols II and III are not started.
 Per-chapter tables, milestones and the units counted: [docs/PROGRESS.md](docs/PROGRESS.md).
@@ -76,7 +77,7 @@ Not yet done:
   one theorem per instance;
 - apparent classes of classes and their identity, needed from ✱40 on
   ([docs/CLASSES_OF_CLASSES.md](docs/CLASSES_OF_CLASSES.md));
-- ✱22 onward; functions of three or more arguments; the 1925 second edition.
+- ✱24 onward; functions of three or more arguments; the 1925 second edition.
 
 ## What the proofs establish
 
@@ -246,7 +247,7 @@ Install the Lean toolchain named in `lean-toolchain` with
 
 ```
 lake build                      # builds and checks every file
-lake env lean AxiomCheck.lean   # 1010 of 1017 theorems and models use no axioms
+lake env lean AxiomCheck.lean   # 1279 of 1286 theorems and models use no axioms
 lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
