@@ -74,7 +74,7 @@ same Lean statement as the line before, and the proof uses nothing for it. Such 
 definition itself (✱14·01) is listed in `cited_used` only where the proof states or uses the Lean
 declaration that realizes it (`QF.desc`).
 
-`Checks/LedgerCheck.lean` applies these rules to every row of the ✱11–✱23 ledgers, and of ✱9's own ledger,
+`Checks/LedgerCheck.lean` applies these rules to every row of the ✱11–✱24 ledgers, and of ✱9's own ledger,
 in both directions: each proposition a proof uses is listed in its row, and each proposition a row claims
 as used (`cited_used`, `extra_used`, `glue`) is used by its proof, through helpers; a definition counts as
 used where its realizing declaration is referenced, and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11

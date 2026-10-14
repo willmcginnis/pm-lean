@@ -238,7 +238,8 @@ def realizers : List (String × List Name) := [
   ("*22.71", [`PM.QF.clsUnion3]),
   ("*23.01", [`PM.QF.relSubset]), ("*23.02", [`PM.QF.relInter]), ("*23.03", [`PM.QF.relUnion]),
   ("*23.04", [`PM.QF.relCompl]), ("*23.05", [`PM.QF.relDiff]), ("*23.53", [`PM.QF.relInter3]),
-  ("*23.71", [`PM.QF.relUnion3])]
+  ("*23.71", [`PM.QF.relUnion3]),
+  ("*24.01", [`PM.QF.clsUniv]), ("*24.02", [`PM.QF.clsEmpty]), ("*24.03", [`PM.QF.clsNonempty])]
 where
   /-- ✱9·03–✱9·08 are computed by the reading's disjunction. -/
   disj9 : List Name := [`PM.F9.Reading.or, `PM.F9.PF.disj, `PM.F9.PF.or, `PM.F9.PF.orPrinted,

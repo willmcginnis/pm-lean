@@ -2873,7 +2873,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*13.191",
    "*24.54",
    "*2.03"
   ],
@@ -2903,7 +2902,9 @@
    "*20.15",
    "*2.04"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*13.191"
+  ],
   "note": "kappa a class of classes; alpha apparent (*20.07); Transp is *2.03; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -2915,7 +2916,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "[*13.191] is its class analogue *20.53 for the extensional expression alpha ~in kappa (qcls20_53, as *22.54 lists *20.18): the class analogue of *10.1 (qclsAllAt: *12.1, *10.32, *10.1, *10.11, *10.23), the occurrences carried by *20.11 and the expression's extensionality (clsExpr_ext) and joined by *4.84, *4.85, *20.2 detached by *2.27, and *20.18 for the expression (qcls20_18: *20.15) with *20.21, Comm (*2.04), *10.11.21. [*24.54] acts on the consequent (*4.85), under (alpha). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "reason": "[*13.191] is its class analogue *20.53 for the extensional expression alpha ~in kappa (qcls20_53, as *22.54 lists *20.18): the class analogue of *10.1 (qclsAllAt: *12.1, *10.32, *10.1, *10.11, *10.23), the occurrences carried by *20.11 and the expression's extensionality (clsExpr_ext) and joined by *4.84, *4.85, *20.2 detached by *2.27, and *20.18 for the expression (qcls20_18: *20.15) with *20.21, Comm (*2.04), *10.11.21. [*24.54] acts on the consequent (*4.85), under (alpha). Inside helpers, steps carried under an apparent variable are under-exists glue. *13.191 is not used: its class analogue *20.53 for the extensional expression alpha ~in kappa is proved by *20.53's lines (qcls20_53), not from *13.191.",
   "glue": [
    "*10.11",
    "*10.21",
