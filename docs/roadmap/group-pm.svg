@@ -156,10 +156,8 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="610.0" y="461.2" font-size="12" class="t2">needs: Rep</text>
 <text x="42.0" y="533.2" font-size="13" font-weight="700" class="t1">✱20–✱24: classes and</text>
 <text x="42.0" y="550.9" font-size="13" font-weight="700" class="t1">relations</text>
-<circle cx="47.0" cy="567.5" r="5" class="sto"/>
-<path d="M47.0,562.5 A5,5 0 0 0 47.0,572.5 Z" class="st"/>
-<text x="58.0" y="571.5" font-size="12" class="t2">in progress · size M</text>
-<text x="42.0" y="589.5" font-size="12" class="t2">needs: nothing</text>
+<circle cx="47.0" cy="567.5" r="5" class="st"/>
+<text x="58.0" y="571.5" font-size="12" class="t2">done · size M</text>
 <text x="326.0" y="533.2" font-size="13" font-weight="700" class="t1">✱25: the universal</text>
 <text x="326.0" y="550.9" font-size="13" font-weight="700" class="t1">relation, the null relation,</text>
 <text x="326.0" y="568.5" font-size="13" font-weight="700" class="t1">and the existence of</text>

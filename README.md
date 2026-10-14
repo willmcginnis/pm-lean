@@ -110,7 +110,7 @@ The limits matter as much
 The work is split into four groups that run side by side. Each group is split into subgroups, and each subgroup into chapter-sized or stage-sized tasks. Every task starts with a search for prior work. Open a group below to see its tasks. The full plan, including the reason each task waits (a dependency or a choice), the prior work found for it and the tasks that moved, is in [docs/ROADMAP.md](docs/ROADMAP.md), with the [dependency view](docs/ROADMAP.md#dependency-view).
 
 <details>
-<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (3 done, 13 in progress, 21 not started)</summary>
+<summary><b>1. PM itself</b>: Vol I, Vol II, Vol III, the 1925 second edition (4 done, 12 in progress, 21 not started)</summary>
 
 ![Group 1, PM itself: its subgroups and tasks](docs/roadmap/group-pm.svg)
 
@@ -121,7 +121,7 @@ The work is split into four groups that run side by side. Each group is split in
   - ✱9·31 and the one-variable cases of p. 142: derived by ✱9's method, or shown underivable: *in progress*
   - A normal-form proof of Rep: ✱1·2–✱1·6 for every proposition of ✱9's method (p. 142): *not started*
   - Every theorem checked under both foundations, ✱9's and ✱10's: *not started*
-  - ✱20–✱24: classes and relations: *in progress*
+  - ✱20–✱24: classes and relations: *done*
   - ✱25: the universal relation, the null relation, and the existence of relations: *not started*
   - Apparent classes of classes and their identity, needed from ✱40 on: *in progress*
   - Extensionality of every class and relation expression, proved once (pp. 200, 213): *done*
@@ -188,7 +188,7 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text, formalization platforms (6 in progress, 4 not started)</summary>
+<summary><b>3. Comparing across</b>: other readings of PM, Mathlib, the printed text, formalization platforms (1 done, 5 in progress, 4 not started)</summary>
 
 ![Group 3, Comparing across: its subgroups and tasks](docs/roadmap/group-across.svg)
 
@@ -203,7 +203,7 @@ The work is split into four groups that run side by side. Each group is split in
   - Vol I and Vol II transcriptions checked against scans; errata reported: *in progress*
   - Vol III transcription proofread and checked against scans: *in progress*
   - ✱1–✱5 as transcribed: every formula parses with the printed dots and is derivable: *in progress*
-  - Statement mutation: are statements tied to their proofs and to PM?: *in progress*
+  - Statement mutation: are statements tied to their proofs and to PM?: *done*
 - **Formalization platforms**
   - Export to formalization platforms, with a private pilot on Prove2Me (✱1–✱5): *in progress*
 

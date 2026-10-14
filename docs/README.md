@@ -9,7 +9,7 @@
 | [FIDELITY.md](FIDELITY.md) | how closely the proofs follow PM: labels, glue, the three counts, findings in the text |
 | [VERIFICATION.md](VERIFICATION.md) | the check files and their expected output; Lean's axioms; which theorem uses which rule |
 | [KERNEL_CENSUS.md](KERNEL_CENSUS.md) | what of Lean's kernel the repository relies on, per feature, with how each figure is measured and what it implies for a restricted checker |
-| [STATEMENT_MUTATION.md](STATEMENT_MUTATION.md) | a trial: unused hypotheses, and one-change mutants of each statement against its proof term and proof script; results, survivors by category, the two tiers, a recommendation |
+| [STATEMENT_MUTATION.md](STATEMENT_MUTATION.md) | unused hypotheses, and one-change mutants of each statement against its proof term and proof script; results, survivors by category, the two tiers and where each runs |
 | [SEMANTICS.md](SEMANTICS.md) | what soundness and consistency show and do not show; what is not formalized |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | the files, chapter by chapter |
 | [FORMALIZATION_COMPARISON.md](FORMALIZATION_COMPARISON.md) | a dated survey of the formalizations of PM (CC0) |

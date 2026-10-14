@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1155" viewBox="0 0 900 1155" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1139" viewBox="0 0 900 1139" role="img" aria-labelledby="title desc">
 <title id="title">Group 3: Comparing across</title>
 <desc id="desc">The subgroups and tasks of the group Comparing across, with status, size, hard dependencies and placements by choice.</desc>
 <style>
@@ -51,7 +51,7 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 }
 </style>
 <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ah"/></marker><marker id="ahc" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="ahc"/></marker></defs>
-<rect x="0" y="0" width="900" height="1155" class="bg"/>
+<rect x="0" y="0" width="900" height="1139" class="bg"/>
 <rect x="16.0" y="195.8" width="868.0" height="172.4" rx="8" class="band"/>
 <rect x="16.0" y="195.8" width="5.0" height="172.4" rx="2" class="g2"/>
 <rect x="30.0" y="235.8" width="272.0" height="116.4" rx="6" class="card"/>
@@ -61,15 +61,15 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <rect x="30.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
 <rect x="314.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
 <rect x="598.0" y="424.1" width="272.0" height="168.0" rx="6" class="card"/>
-<rect x="16.0" y="624.2" width="868.0" height="318.4" rx="8" class="band"/>
-<rect x="16.0" y="624.2" width="5.0" height="318.4" rx="2" class="g2"/>
+<rect x="16.0" y="624.2" width="868.0" height="302.1" rx="8" class="band"/>
+<rect x="16.0" y="624.2" width="5.0" height="302.1" rx="2" class="g2"/>
 <rect x="30.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
 <rect x="314.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
 <rect x="598.0" y="664.2" width="272.0" height="134.0" rx="6" class="card"/>
-<rect x="30.0" y="810.2" width="272.0" height="116.4" rx="6" class="card"/>
-<rect x="16.0" y="958.6" width="868.0" height="172.4" rx="8" class="band"/>
-<rect x="16.0" y="958.6" width="5.0" height="172.4" rx="2" class="g2"/>
-<rect x="30.0" y="998.6" width="272.0" height="116.4" rx="6" class="card"/>
+<rect x="30.0" y="810.2" width="272.0" height="100.0" rx="6" class="card"/>
+<rect x="16.0" y="942.3" width="868.0" height="172.4" rx="8" class="band"/>
+<rect x="16.0" y="942.3" width="5.0" height="172.4" rx="2" class="g2"/>
+<rect x="30.0" y="982.3" width="272.0" height="116.4" rx="6" class="card"/>
 <text x="24.0" y="30.0" font-size="12.5" class="t3">Group 3 of 4</text>
 <text x="40.0" y="60.0" font-size="22" font-weight="700" class="t1">Comparing across</text>
 <rect x="24.0" y="42.0" width="6.0" height="24.0" rx="2" class="g2"/>
@@ -149,16 +149,14 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="42.0" y="833.2" font-size="13" font-weight="700" class="t1">Statement mutation: are</text>
 <text x="42.0" y="850.9" font-size="13" font-weight="700" class="t1">statements tied to their</text>
 <text x="42.0" y="868.6" font-size="13" font-weight="700" class="t1">proofs and to PM?</text>
-<circle cx="47.0" cy="885.3" r="5" class="sto"/>
-<path d="M47.0,880.3 A5,5 0 0 0 47.0,890.3 Z" class="st"/>
-<text x="58.0" y="889.3" font-size="12" class="t2">in progress · size S</text>
-<text x="42.0" y="907.3" font-size="12" class="t2">needs: nothing</text>
-<text x="30.0" y="981.6" font-size="15" font-weight="700" class="t1">Formalization platforms</text>
-<text x="42.0" y="1021.6" font-size="13" font-weight="700" class="t1">Export to formalization</text>
-<text x="42.0" y="1039.3" font-size="13" font-weight="700" class="t1">platforms, with a private</text>
-<text x="42.0" y="1056.9" font-size="13" font-weight="700" class="t1">pilot on Prove2Me (✱1–✱5)</text>
-<circle cx="47.0" cy="1073.6" r="5" class="sto"/>
-<path d="M47.0,1068.6 A5,5 0 0 0 47.0,1078.6 Z" class="st"/>
-<text x="58.0" y="1077.6" font-size="12" class="t2">in progress · size S</text>
-<text x="42.0" y="1095.6" font-size="12" class="t2">needs: ✱1–✱5</text>
+<circle cx="47.0" cy="885.3" r="5" class="st"/>
+<text x="58.0" y="889.3" font-size="12" class="t2">done · size S</text>
+<text x="30.0" y="965.3" font-size="15" font-weight="700" class="t1">Formalization platforms</text>
+<text x="42.0" y="1005.3" font-size="13" font-weight="700" class="t1">Export to formalization</text>
+<text x="42.0" y="1022.9" font-size="13" font-weight="700" class="t1">platforms, with a private</text>
+<text x="42.0" y="1040.6" font-size="13" font-weight="700" class="t1">pilot on Prove2Me (✱1–✱5)</text>
+<circle cx="47.0" cy="1057.3" r="5" class="sto"/>
+<path d="M47.0,1052.3 A5,5 0 0 0 47.0,1062.3 Z" class="st"/>
+<text x="58.0" y="1061.3" font-size="12" class="t2">in progress · size S</text>
+<text x="42.0" y="1079.3" font-size="12" class="t2">needs: ✱1–✱5</text>
 </svg>

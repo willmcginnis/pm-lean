@@ -32,29 +32,47 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     follows it. The statement follows the print. The equivalence is proved as a variant, `q23_45_iff`
     (not exported, and not counted as an assertion), because ✱23·74's proof uses it, as ✱22·74's uses
     ✱22·45. A first version proved the equivalence under the number ✱23·45 without recording the change.
+- **✱24, the universal class, the null-class and the existence of classes** (`PM/Star24.lean`,
+  pp. 229–240). The definitions ✱24·01–✱24·03 are macros: V is `clsUniv`, with the notation `𝐕` (`V`
+  names the variable family, so it cannot be a token); Λ is `clsEmpty`, with `Λ`; ∃!α is `clsNonempty α`
+  (`∃!` is Lean's unique existence). All 70 numbered propositions ✱24·1–✱24·63 are proved along PM's Dem.
+  lines or hints. Ledger `data/star24_ledger.json`, checked by LedgerCheck in both directions: as
+  recorded 16 `pm-lines`, 54 `pm-lines+extra` (strict 14 / 56).
+  - A chain of identities of classes, "α = β = γ", is a `calc` block of `≐` lines joined by ✱20·22.
+    ✱20·22 is counted as chain glue, as ✱4·22 is for ≡; docs/FIDELITY.md says why.
+  - **✱24·51 is added to Vol I's list of items.** The 1910 print has ✱24·51, `⊢ : ∼∃!α . ≡ . α = Λ`
+    (p. 239), with its own Dem. The Gutenberg transcription leaves it out and prints that Dem. under
+    ✱24·5. `scripts/vol1_items.py` now adds it, from a table of items missing from the transcription
+    kept beside its page corrections. So `data/vol1_items.json` has 3,450 items and 3,231 assertions
+    (3,449 and 3,230 before), and ✱24 counts 70 of 70.
+  - The statements follow the 1910 print where the transcription differs: ✱24·21, ✱24·311, ✱24·41,
+    ✱24·411, ✱24·431, ✱24·45, ✱24·55, ✱24·58 and ✱24·6 (docs/FIDELITY.md).
+  - ✱24·63's "[✱13·191]" is its class analogue ✱20·53 for the expression α ∼∈ κ, proved by ✱20·53's
+    lines (`qcls20_53`); the row lists ✱13·191 as cited, not used (below, LedgerCheck).
 - **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
   report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
   core rely on. Each is measured three ways: statically, over every declaration and its closure; from the
   kernel's own record of a re-check of each theorem, definition and opaque constant (inductive types,
   constructors, recursors and `partial` or `unsafe` definitions are not re-checked); and by probes of the
   Nat operations it computes on literals. The `example`s are included.
-  - The closure of the 1120 derivation theorems (✱22 and ✱23 included) needs no mutual inductive,
-    quotient, axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives
-    only through the auto-param of `PM.Pf.hy`. `Nat.log2` is not computed on literals in Lean 4.34.1,
-    though it is commonly listed as one of the operations that are.
+  - The closure of the 1205 derivation theorems (✱22–✱24 included) needs no mutual inductive, quotient,
+    axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives only through
+    two auto-params, those of `PM.Pf.hy` and of ✱24's `PM.qclsEqCongr`. `Nat.log2` is not computed on
+    literals in Lean 4.34.1, though it is commonly listed as one of the operations that are.
   - A ratchet (`tests/test_kernel_census.py`, `tests/expected_kernel_features.txt`): a new kernel feature
     reaching the PM derivations, or a new axiom user, fails the tests until it is accepted deliberately.
-    ✱22 and ✱23 added none.
+    ✱22–✱24 added none.
 - **LedgerCheck checks claimed uses too.** Before, it checked only that every proposition a proof uses is
   listed in its row; a release review found that a fabricated citation (✱5·19 added to ✱22·1) passed.
-  Checks 2 and 3 now also check the converse: every entry a row claims as used (`cited_used`,
-  `extra_used`, `glue`) is used by the row's proof, through helpers. A definition counts as used only
-  where a declaration realizing it is referenced (✱22·01 by `QF.clsSubset`, …), and ✱1·2–✱1·6, ✱10·1,
-  ✱10·11, ✱10·12, ✱12·1, ✱12·11 and the rule where their constructor is applied. Suffix forms of a row's
-  own proposition (`f9_31_dem`) are followed in both directions. `tests/ledger_negative.sh`, a new step of
-  `tests/run_all.sh`, checks that a fabricated claim, a fabricated definition and a removed use each make
-  it fail; `tests/ledger_unused_claims.txt`, for claims awaiting a decision, is empty.
-  - 82 claimed uses in 71 rows were not uses, and are corrected. Moved to `cited_unused`, with the reason
+  Checks 2 and 3 now also check the converse, over the ledgers of ✱11–✱24 and ✱9's own: every entry a row
+  claims as used (`cited_used`, `extra_used`, `glue`) is used by the row's proof, through helpers. A
+  definition counts as used only where a declaration realizing it is referenced (✱22·01 by
+  `QF.clsSubset`, ✱24·01 by `QF.clsUniv`, …), and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11 and
+  the rule where their constructor is applied. Suffix forms of a row's own proposition (`f9_31_dem`) are
+  followed in both directions. `tests/ledger_negative.sh`, a new step of `tests/run_all.sh`, checks that a
+  fabricated claim, a fabricated definition and a removed use each make it fail;
+  `tests/ledger_unused_claims.txt`, for claims awaiting a decision, is empty.
+  - 83 claimed uses in 72 rows were not uses, and are corrected. Moved to `cited_unused`, with the reason
     in the row:
     - lines that are a definition, taken in Lean by the macro: ✱13·1 in ✱13·11, ✱13·15, ✱13·17, ✱13·101;
       ✱14·1 in ✱14·13, ✱14·15, ✱14·16, ✱14·18, ✱14·28, ✱14·34, ✱14·111, ✱14·112, ✱14·142, ✱14·145,
@@ -66,24 +84,46 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     - a proposition whose analogue or whose proof is used instead: ✱20·3 in ✱20·4 and ✱21·4; ✱20·54 in
       ✱20·55, ✱20·58; ✱21·54 in ✱21·55, ✱21·58; ✱14·21 in ✱20·56, ✱21·56; ✱20·111 in ✱20·701, ✱20·702;
       ✱21·111 in ✱21·701, ✱21·702; ✱20·18 in ✱22·54, ✱22·55, ✱22·94 (as ✱21·18 already was in ✱23);
+      ✱13·191 in ✱24·63 (its class analogue ✱20·53, `qcls20_53`);
     - in ✱9's own ledger, a proposition proved for elementary functions where the proof uses its form for
       every function: ✱9·21 in ✱9·3, ✱9·2 in ✱10·1, ✱9·25 in ✱10·12; and ✱9·2, listed as an extra of
       ✱9·3, is dropped.
   - No row's `fidelity` changes, since no row lost its last extra: the counts of docs/FIDELITY.md stand.
-- **Supporting changes.** Export names for ✱22 and ✱23, 72 each and none locked (667 in all). One
-  descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
-  relations. `scripts/progress.py` lists chapters not started in runs, so a gap is not printed as a range
-  across a done chapter. The supersede test no longer pins the total number of exports.
-- **Counts recounted** from the checks with both chapters in: 630 PM propositions, 270 of them using
-  reducibility; AxiomCheck 1287 names, 1280 axiom-free; AllAxioms 2585 declarations, 39 using an axiom;
-  LedgerCheck 372 rows; `lake build` 52 jobs. The AxiomCheck and AllAxioms totals and the job count
-  were already stale before these chapters, and are corrected with them.
+- **Statement mutation is standing** (docs/STATEMENT_MUTATION.md, "Where it runs").
+  - `mutate.py --quick` is a step of `tests/run_all.sh`. It is also check 0 of
+    `scripts/prove2me/verify.py`, which an export must pass before upload; there it runs on the commit
+    exported, with the platform's Lean.
+  - `verify.py --no-mutation` skips check 0 for a commit that predates the tool, such as the 1.0.0
+    export, and `verify_report.json` records that the check was skipped and why. For a commit that has
+    the tool, the option fails the check.
+  - `mutate.py --full` runs before a release. The tool takes every numbered proposition from ✱9 on, so
+    its output no longer calls that group ✱9–✱21.
+- **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
+  "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
+  counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the
+  standing checks, `mutate.py --quick` among them; not `census.py --check` or `mutate.py --full`.
+- **The 14 Mathlib counterparts are compiled against Mathlib 0df444a** (`Checks/MathlibCounterparts/`, a
+  Lake project of its own; the repository's build stays free of Mathlib). All 14 state PM's formula
+  exactly, and their `classical` flags match their axioms. The records now say `checked: "lean-mathlib"`.
+- **Regeneration test** (`tests/test_regeneration.py`). Every generated file must be its generator's
+  output, byte for byte. That includes `PM/Statements.lean` from `data/vol1.jsonl`, the tie to PM's text
+  that no proof checks. `PM/Statements.lean` now says on its first line that it is generated.
 - **docs/PROGRESS.md's paragraph on the checks' unit is generated.** Written by hand, it kept the counts
   of an earlier revision (485 PM propositions; 276 numbered assertions from ✱9 on, 272 proved; 460 proved
   in all) under tables of a later one, while saying that its figures were for the tables' commit.
-  `scripts/progress.py` now generates it with the tables, from the same files at the same commit: 630
-  (with the variant `q23_45_iff`; 629 before it), 420, 416 and 604. `tests/test_progress_units.py` checks
-  that both regions are their regeneration and that the total is the count RedCheck and StyleCheck print.
+  `scripts/progress.py` now generates it with the tables, from the same files at the same commit: 700
+  (with the variant `q23_45_iff`), 490, 486 and 674. `tests/test_progress_units.py` checks that both
+  regions are their regeneration and that the total is the count RedCheck and StyleCheck print.
+- **Supporting changes.** Export names for ✱22, ✱23 and ✱24 (72, 72 and 70), none locked (737 in all).
+  One descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
+  relations; univ, empty and nonempty for ✱24. `scripts/progress.py` lists chapters not started in runs,
+  so a gap is not printed as a range across a done chapter. The supersede test no longer pins the total
+  number of exports.
+- **Counts recounted** from the checks with ✱22–✱24 in: 700 PM propositions, 338 of them using
+  reducibility; AxiomCheck 1368 names, 1361 axiom-free; AllAxioms 2681 declarations, 39 using an axiom;
+  LedgerCheck 442 rows; `lake build` 53 jobs. Vol I: 674 of 3,231 assertions proved. The AxiomCheck and
+  AllAxioms totals and the job count were already stale before these chapters, and are corrected with
+  them.
 
 ## 2026-10-13
 
