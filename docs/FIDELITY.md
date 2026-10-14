@@ -230,12 +230,11 @@ Following PM's lines line by line turned up these points. The errata themselves 
 - **✱24** (pp. 229–240), checked against the 1910 scan item by item. The statements follow the print where
   the transcription differs: ✱24·21 and ✱24·311 (`= Λ`; as transcribed, `= V`, ✱24·21 is false in any non-empty type), ✱24·41 and
   ✱24·411 (a bracket), ✱24·45 (`β ⊂ γ . γ ⊂ −α`), ✱24·55, ✱24·58 and ✱24·6 (`α ⊂ β`; the transcription's
-  `α ⊃ β` between classes is not a formula), all on the text audit's Vol I list (entries 11–18). Two more are not on its
-  list: ✱24·431, where the transcription has (α ∩ γ) for the print's (α ∩ β) (false as transcribed; the
-  audit holds this entry, H15, unresolved), and ✱24·51 (`⊢ : ∼∃!α . ≡ . α = Λ`, p. 239), which the
-  transcription omits, printing its Dem. under ✱24·5; it is proved here and counted (`scripts/vol1_items.py`).
-  In the Dem. lines the transcription also differs from the print at ✱24·3, ✱24·42 (✱24·411 for ✱24·41),
-  ✱24·431, ✱24·48, ✱24·493 and ✱24·6; the proofs follow the print.
+  `α ⊃ β` between classes is not a formula), all on the text audit's Vol I list (entries 11–18); ✱24·431,
+  where the transcription has (α ∩ γ) for the print's (α ∩ β) (false as transcribed); and ✱24·51
+  (`⊢ : ∼∃!α . ≡ . α = Λ`, p. 239), which the transcription omits, printing its Dem. under ✱24·5; it is
+  proved here and counted (`scripts/vol1_items.py`). Where a Dem. line is transcribed differently, the
+  proofs follow the print, and the docstring says so.
 - **✱24·141** (p. 232), in the print itself: the statement is `V ⊂ α . ≡ . V = α`, the Dem.'s last line
   α = V; ✱20·21 joins them.
 - **✱22·84, ✱22·85** (p. 224). Gutenberg #78050 has `−α ∨ −β`, the sign of disjunction between two

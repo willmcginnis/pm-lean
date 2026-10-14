@@ -24,8 +24,8 @@ import PM.Star22
   checked against the scan of the print for every item of this number. Where they differ, the print is
   followed, and the docstring says so: ✱24·21 and ✱24·311 (`= Λ`, not `= V`), ✱24·41 and ✱24·411 (a closing
   bracket), ✱24·45 (`β ⊂ γ . γ ⊂ −α`), ✱24·55, ✱24·58 and ✱24·6 (`α ⊂ β`, not `α ⊃ β`), all on the text
-  audit's list of errors for Vol I (entries 11–18); ✱24·431 ((α ∩ β), not (α ∩ γ); held by the audit, read
-  here from the scan, p. 235); and ✱24·51, which the transcription omits (its Dem. stands under ✱24·5).
+  audit's list of errors for Vol I (entries 11–18); ✱24·431 ((α ∩ β), not (α ∩ γ); read here from the scan,
+  p. 235); and ✱24·51, which the transcription omits (its Dem. stands under ✱24·5).
 
   Each proof follows PM's Dem. line by line, or uses the propositions of PM's bracketed hint in PM's order;
   the comment on each Lean line gives PM's line or hint. `data/star24_ledger.json` records, per proposition,
@@ -606,8 +606,8 @@ theorem q24_43 [Reducibility S] (α β γ : V a → QF V) : QThm S (iff (α − 
 
 /-- ✱24·431 `⊢ . (α ∪ γ) ∩ (β ∪ −γ) = (α ∩ β) ∪ (α − γ) ∪ (β ∩ γ)`, as printed (p. 235). The Gutenberg
     transcription has (α ∩ γ) for the first term, here and in the last line of the Dem., and (α ∩ γ) for
-    (α ∩ β) in the second line; with (α ∩ γ) the statement is false (α = γ = {a}, β = Λ). The text audit
-    holds this entry (H15, unresolved); the scan, p. 235, reads (α ∩ β). PM's first line is ✱22·68 from right to
+    (α ∩ β) in the second line; with (α ∩ γ) the statement is false (α = γ = {a}, β = Λ). The scan, p. 235,
+    reads (α ∩ β). PM's first line is ✱22·68 from right to
     left; its second is ✱22·68 with the common factor second (`qclsDistribRight`) on both terms, the four
     terms regrouped by ✱22·7 (PM writes them without brackets, ✱22·71); "[✱22·51·57]" also needs ✱22·7. -/
 theorem q24_431 [Reducibility S] (α β γ : V a → QF V) :
