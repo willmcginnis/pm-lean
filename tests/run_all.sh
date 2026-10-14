@@ -7,7 +7,8 @@
 # core counterparts of ✱1–✱5 (Checks/Counterparts.lean), the quick tier of the statement mutation
 # (scripts/mutation/mutate.py --quick), and the Python tests in tests/ (which also run AllAxioms.lean,
 # AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet, scripts/kernel_census/census.py
-# --ratchet). Exits nonzero if any of them fails. The long checks run before a release are in
+# --ratchet). Exits nonzero if any of them fails. Not here: scripts/kernel_census/census.py --check and
+# mutate.py --full; the long checks run before a release are in
 # scripts/release_check.sh.
 #
 #   tests/run_all.sh            everything (ClauseSearch takes about a minute)

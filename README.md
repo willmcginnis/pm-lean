@@ -252,7 +252,7 @@ lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
 python3 data/fidelity_counts.py # fidelity counts from the ledgers
-tests/run_all.sh                # the standing checks and the regression tests (not census.py --check or mutate.py)
+tests/run_all.sh                # the standing checks and the regression tests (not census.py --check or mutate.py --full)
 ```
 
 The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION.md).
