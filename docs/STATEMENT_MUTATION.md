@@ -69,7 +69,7 @@ after the theorem and compiled. A tactic proof can find another route where the 
 
 - **✱1–✱5:** every `t…` and `pm2_7…` theorem with a statement `Thm (s… p q …)`, and ✱1·2–✱1·6 against
   `Thm`'s constructors. The definition `s…` is unfolded, and its formula is mutated.
-- **From ✱9 on** (✱9–✱24 so far): the numbered propositions `q…`, `QL.t…` and `F9.f…`.
+- **From ✱9 on** (✱9–✱25 so far): the numbered propositions `q…`, `QL.t…` and `F9.f…`.
 
 Each statement gets a fixed family of one-change mutants:
 

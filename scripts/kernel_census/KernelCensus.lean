@@ -34,10 +34,10 @@ namespace KernelCensus
 
 /-! ## The groups -/
 
-/-- (a) PM's derivations: the statements, the replays, ✱9–✱24 and ✱9 by its own method. -/
+/-- (a) PM's derivations: the statements, the replays, ✱9–✱25 and ✱9 by its own method. -/
 def derivationModules : List Name := [`PM.Statements, `PM.Replay, `PM.Replay2, `PM.Derived,
   `PM.QuantLift, `PM.Star10, `PM.Star11, `PM.Star12, `PM.Star13, `PM.Star14, `PM.Star20, `PM.Star21,
-  `PM.Star22, `PM.Star23, `PM.Star24,
+  `PM.Star22, `PM.Star23, `PM.Star24, `PM.Star25,
   `PM.Chain, `PM.Found9.Base, `PM.Found9.Star9, `PM.Found9.Switch, `PM.Found9.Exch, `PM.Found9.Simul]
 
 /-- (f) The foundations: the syntaxes and the proof systems the derivations are built in (with their

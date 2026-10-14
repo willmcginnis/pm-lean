@@ -32,11 +32,13 @@ derivations true (see [The ratchet](#the-ratchet)).
   kernel's Nat operations on them, and String literals.
 - **They do not need** mutual inductive types, quotients, any axiom, opaque constants, `partial` or
   `unsafe` declarations, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and `Lean.trustCompiler`.
-- **One nested inductive type, `Lean.Syntax`, reaches the derivations, by two routes, both auto-params.**
+- **One nested inductive type, `Lean.Syntax`, reaches the derivations, by three routes, all auto-params.**
   The premise `n < Γ.length` of `PM.Pf.hy` (PM/Derived.lean) is an auto-param: the tactic that proves it is
   stored in the statement as a value of type `Lean.Syntax`, the declaration `PM.Pf.hy._auto_1`. The premise
   of ✱24's `PM.qclsEqCongr` (PM/Star24.lean) that its expression is a `ClsExpr`, proved by the tactic
-  `cls_expr`, is stored the same way, as `PM.qclsEqCongr._auto_1`. These values bring `Lean.Syntax`,
+  `cls_expr`, is stored the same way, as `PM.qclsEqCongr._auto_1`, and so is the premise of ✱25's
+  `PM.qrelEqCongr` (PM/Star25.lean) that its expression is a `RelExpr`, proved by the tactic `rel_expr`, as
+  `PM.qrelEqCongr._auto_1`. These values bring `Lean.Syntax`,
   `Lean.Name` (whose constructors carry `@[implemented_by]`) and `Array` into the closure. They are the only
   declarations of the meta code (m) that any declaration of (a), (f) or (b) reaches.
 - **Strings come with the formulas.** ✱1–✱5's variables are named by strings (`F.var "p"`). The type
@@ -71,7 +73,7 @@ compiler's `_unsafe_rec` copies). Each module is in exactly one group. The lists
 `scripts/kernel_census/KernelCensus.lean`, and a module in none of them stops the run.
 
 - **(a) The PM derivations:** PM/Statements.lean, the replays (Replay, Replay2, Derived, QuantLift),
-  ✱9–✱24 (Star10–Star24, Chain) and ✱9 by its own method (Found9/Base, Star9, Switch, Exch, Simul).
+  ✱9–✱25 (Star10–Star25, Chain) and ✱9 by its own method (Found9/Base, Star9, Switch, Exch, Simul).
 - **(f) The foundations:** the syntaxes and proof systems the derivations are built in (Basic, Quant,
   Rules/Reducibility, Rules/Comprehension, Found9/Syntax, Found9/System). These files also hold soundness
   theorems, which is why they are neither (a) nor (b).
@@ -148,8 +150,8 @@ The dynamic part depends on the Lean version. The figures are for the toolchain 
 The figures, read as requirements:
 
 - **It must implement:** inductive families with indices; reflexive and recursive inductive types; the one
-  nested type `Lean.Syntax`, as long as the auto-params of `PM.Pf.hy` and `PM.qclsEqCongr` stay (the two
-  routes to it);
+  nested type `Lean.Syntax`, as long as the auto-params of `PM.Pf.hy`, `PM.qclsEqCongr` and `PM.qrelEqCongr`
+  stay (the three routes to it);
   recursors with iota reduction and K; large elimination out of `Prop`; structure-like types and
   primitive projections; universe polymorphism with `max` and `imax`; `Prop`; structure eta and
   definitional proof irrelevance unless they are shown to be unused (this census cannot tell); delta

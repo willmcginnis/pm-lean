@@ -58,4 +58,4 @@ What the soundness and consistency theorems show, and what they do not. These li
   ✱21·03–✱21·083), with the extensionality of a class's defining expression as an explicit premise of the
   analogue of ✱20·3, where PM asserts it in general (p. 200). The premise is proved for every expression
   PM's notation forms (`clsExpr_ext`; [PM_CLAIMS.md](PM_CLAIMS.md), D1).
-- ✱25 onward; functions of three or more arguments; the 1925 second edition's system.
+- ✱30 onward; functions of three or more arguments; the 1925 second edition's system.

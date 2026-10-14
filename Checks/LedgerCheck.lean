@@ -12,7 +12,7 @@
 --    means ✱A·B (✱A·B·C is ✱A·B and ✱A·C), "Syll" (✱2·05 or ✱2·06) and "Comp" (✱3·43), except in
 --    the warrant after "tacit:" up to the next ";" or ")" (e.g. "tacit: ✱2·31, pp. 109–110"), which
 --    names the passage where PM leaves the step tacit, not a step of the proof.
--- 2. The ledgers data/star11–24_ledger.json: every PM proposition the proof of a row's theorem uses
+-- 2. The ledgers data/star11–25_ledger.json: every PM proposition the proof of a row's theorem uses
 --    is listed in the row, in cited_used, extra_used, tacit or glue ("Syll" in tacit is ✱2·05 and
 --    ✱2·06; "✱10·27/271/28/281" is ✱10·27, ✱10·271, ✱10·28, ✱10·281). A review found ✱10·281
 --    missing from two rows (✱14·18, ✱14·203): there a helper carried a step under (∃x) by ✱10·281.
@@ -239,7 +239,8 @@ def realizers : List (String × List Name) := [
   ("*23.01", [`PM.QF.relSubset]), ("*23.02", [`PM.QF.relInter]), ("*23.03", [`PM.QF.relUnion]),
   ("*23.04", [`PM.QF.relCompl]), ("*23.05", [`PM.QF.relDiff]), ("*23.53", [`PM.QF.relInter3]),
   ("*23.71", [`PM.QF.relUnion3]),
-  ("*24.01", [`PM.QF.clsUniv]), ("*24.02", [`PM.QF.clsEmpty]), ("*24.03", [`PM.QF.clsNonempty])]
+  ("*24.01", [`PM.QF.clsUniv]), ("*24.02", [`PM.QF.clsEmpty]), ("*24.03", [`PM.QF.clsNonempty]),
+  ("*25.01", [`PM.QF.relUniv]), ("*25.02", [`PM.QF.relEmpty]), ("*25.03", [`PM.QF.relNonempty])]
 where
   /-- ✱9·03–✱9·08 are computed by the reading's disjunction. -/
   disj9 : List Name := [`PM.F9.Reading.or, `PM.F9.PF.disj, `PM.F9.PF.or, `PM.F9.PF.orPrinted,
@@ -352,7 +353,7 @@ open LedgerCheck
   for (_, rs) in realizers do
     for n in rs do
       unless env.contains n do throwError "LedgerCheck.realizers: no declaration {n}"
-  for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22", "star23", "star24"] do
+  for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22", "star23", "star24", "star25"] do
     let path := s!"data/{ch}_ledger.json"
     let j ← match Json.parse (← IO.FS.readFile path) with
       | .ok j => pure j

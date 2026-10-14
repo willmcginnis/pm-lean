@@ -209,6 +209,9 @@ Later numbers write their classes of classes as defining expressions and use `α
 - ✱24·63: Λ ∼∈ κ . ≡ : α ∈ κ . ⊃_α . ∃!α, κ a class of classes written by its defining expression
   (PM/Star24.lean). Its "[✱13·191]" is the class analogue ✱20·53 for the extensional expression α ∼∈ κ
   (`qcls20_53`, with `ClsExpr.clsClsMem`).
+- ✱25·63: Λ̇ ∼∈ κ . ≡ : R ∈ κ . ⊃_R . ∃̇!R, κ a class of relations written by its defining expression
+  (PM/Star25.lean). Its "[✱13·191]" is ✱21·53 for the extensional expression R ∼∈ κ (`qrel21_53`, with
+  `RelExpr.relClsMem`).
 - ✱54·02: 2 = α̂{(∃x, y) . x ≠ y . α = ι'x ∪ ι'y}, the same way, with ✱22's ∪ (`clsUnion`, PM/Star22.lean).
 - ✱60·01: Cl = κ̂α̂{κ = β̂(β ⊂ α)}, a relation of a class of classes to a class. β̂(β ⊂ α) is a defining
   expression as above; κ = β̂(β ⊂ α) needs identity of classes of classes (below), and κ̂ a relation

@@ -30,21 +30,23 @@ it combines with `replay2_ledger.json`.
 
 ## Glue
 
-`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23 and ✱24 ledgers. It leaves `fidelity` unchanged and
+`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23, ✱24 and ✱25 ledgers. It leaves `fidelity` unchanged and
 lists the propositions a proof uses only for structural moves PM leaves unstated, each with its kind
 (`glue_kind`):
 
 - **`chain`**: joining the lines of a displayed chain. These are the `Trans` instances of `PM/Chain.lean`:
   ✱4·22 for two ≡ lines; ✱3·43, ✱2·02, ✱2·83 or ✱2·05 under a hypothesis; ✱3·26 where a ≡ line is followed
   by a ⊃ line. In ✱24, a chain of identities of classes, "α = β [✱x] = γ", is joined the same way by
-  ✱20·22, the transitivity of identity of classes (the `Trans` instances of PM/Star24.lean); PM states no
-  warrant for leaving it tacit beyond that for ✱4·22 ("The principle is the same", p. 123), so the strict
-  count below counts it as extra.
+  ✱20·22, the transitivity of identity of classes (the `Trans` instances of PM/Star24.lean), and in ✱25 a
+  chain of identities of relations by ✱21·22 (PM/Star25.lean); PM states no warrant for leaving it tacit
+  beyond that for ✱4·22 ("The principle is the same", p. 123), so the strict count below counts it as
+  extra.
 - **`order`**: putting factors, disjuncts, members, antecedents or apparent variables in the order the next
   cited proposition needs (✱4·3, ✱3·22, ✱4·31, ✱4·32, ✱2·04, ✱4·21, ✱11·2, ✱11·23, with ✱4·36 or ✱4·38
   inside such a permutation).
 - **`under-exists`**: carrying a step under an apparent variable, (x) or (∃x): ✱10·11 with ✱10·21, ✱10·27,
-  ✱10·271, ✱10·28 or ✱10·281, and ✱11·11·34·341. The steps ✱10·11 + ✱10·27/271/28/281 are tacit where a
+  ✱10·271, ✱10·28 or ✱10·281, and their forms for two variables, ✱11·11·32·33·34·341 (✱11·32 and ✱11·33,
+  the forms of ✱10·27 and ✱10·271, first used so in ✱25). The steps ✱10·11 + ✱10·27/271/28/281 are tacit where a
   row's own proof takes them (pp. 161–162, below); taken inside a helper lemma, or with ✱10·21, which that
   passage does not cover, they are listed as `under-exists` glue.
 
@@ -74,7 +76,7 @@ same Lean statement as the line before, and the proof uses nothing for it. Such 
 definition itself (✱14·01) is listed in `cited_used` only where the proof states or uses the Lean
 declaration that realizes it (`QF.desc`).
 
-`Checks/LedgerCheck.lean` applies these rules to every row of the ✱11–✱24 ledgers, and of ✱9's own ledger,
+`Checks/LedgerCheck.lean` applies these rules to every row of the ✱11–✱25 ledgers, and of ✱9's own ledger,
 in both directions: each proposition a proof uses is listed in its row, and each proposition a row claims
 as used (`cited_used`, `extra_used`, `glue`) is used by its proof, through helpers; a definition counts as
 used where its realizing declaration is referenced, and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11
@@ -98,6 +100,7 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 | ✱22 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
 | ✱23 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
 | ✱24 (70) | 14 / 56 | 16 / 54 | 16 / 54 |
+| ✱25 (70) | 14 / 56 | 15 / 55 | 17 / 53 |
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
@@ -113,6 +116,10 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
   only extras put factors in order (✱3·22, ✱4·3).
 - In ✱24 the strict count differs from the recorded one at ✱24·33 and ✱24·561, whose chains need only chain
   glue (✱20·22 with ✱3·43 and ✱2·02 under Hp; ✱3·26 where a ≡ line is followed by a ⊃ line).
+- In ✱25 the strict count differs from the recorded one at ✱25·33, whose chain needs only chain glue
+  (✱21·22 with ✱3·43 and ✱2·02 under Hp), and the last column at ✱25·56 and ✱25·561, whose only extras
+  carry a step under (∃x, y) (✱11·11, ✱11·341), where ✱24·56 and ✱24·561 carry it under (∃x) by the tacit
+  ✱10·11·281.
 
 ## By chapter
 
@@ -194,6 +201,18 @@ classes, proved by chains of identities, and the extras are the steps of that al
   another order, ✱22·68 with the common factor second, and turning an identity (✱20·21);
 - using ✱24·11 or ✱24·12, about an apparent class, at a real one (the class analogue of ✱10·1, p. 206).
 
+**✱25** (70 propositions; `star25_ledger.json`), as recorded: ✱25 15 / 55 of 70. PM prints no proof in ✱25:
+"Proofs will not be given, as they proceed precisely as in ✱24" (p. 241). As for ✱23, the rows' `pm_text`
+is `analogue`: the proof followed is that of the analogous ✱24 proposition (its Dem. lines or its hint,
+named in each row's `note`), with ✱21 for ✱20, ✱23 for ✱22, ✱25 for ✱24 and the forms of ✱10's
+propositions for two variables in ✱11 (and ✱13·21 for ✱13·191), and `cited_used`, `cited_unused` are its
+citations so translated. The extras are ✱24's, for relations: putting a relation for an identical one
+inside an expression (✱21·18 for the expression with ✱21·2, `qrelEqCongr`, with `relExpr_ext`, p. 213),
+commuting and regrouping (✱23·51, ✱23·52, ✱23·57, ✱23·7), turning an identity (✱21·21), and using ✱25·11
+or ✱25·12 at a real relation (`qrelAllAt`); and, where ✱24's proofs carry a step under (x) by the tacit
+✱10·11·271 or ✱10·11·281, its form for two variables, ✱11·11 with ✱11·33 or ✱11·341, listed as
+`under-exists` glue.
+
 **Where the print is unclear,** the docstring says so. For example, ✱14·144 and ✱14·145 cite ✱14·111 where
 the unmarked form is ✱14·112, and ✱14·272 cites ✱10·414 for a ✱10·271 step. [ARCHITECTURE.md](ARCHITECTURE.md)
 lists these per file.
@@ -208,6 +227,9 @@ Of the 172 formalized ✱13, ✱14, ✱20 and ✱21 propositions (counting one v
 - The class analogues of ✱10·1 and ✱10·24 (✱20·25, ✱20·53, ✱20·54) and their analogues for relations
   (✱21·53, ✱21·54) also use ✱12·1 or ✱12·11.
 - The others depend on it through these and ✱13·101.
+
+Of ✱25's 70 propositions, 68 take `[Reducibility S]`, as ✱24's do; the two that do not are ✱25·5 and
+✱25·58.
 
 Of ✱23's 72 propositions, 66 take `[Reducibility S]`, through ✱21 (✱21·3 reads xRy, ✱21·43 and ✱21·15
 relate identity and formal equivalence); the six that do not are ✱23·1, ✱23·4, ✱23·42, ✱23·44, ✱23·441 and
@@ -264,3 +286,12 @@ Following PM's lines line by line turned up these points. The errata themselves 
   a transcription error. The statement follows the print (`q23_45`). The equivalence is proved as a variant,
   `q23_45_iff` (not exported, and not counted among the assertions of PROGRESS.md), because ✱23·74's proof
   uses it, as ✱22·74's uses ✱22·45; the implication is its ⊃ half.
+- **✱25** (pp. 241–243), checked against the 1910 scan item by item, and each statement against its ✱24
+  analogue. The transcription leaves out none of the 70 propositions. The statements follow the print at
+  ✱25·47 (the transcription's brackets `(P ∩̇ Q)` are not printed; no change to the statement) and ✱25·56
+  (`∃̇!(R ⊍ S)`, bracketed), entries 19 and 20 of the text audit's Vol I list. At ✱25·37 and ✱25·412 the
+  ebook applies the published Errata (the audit says so): the 1910 print has `xRy . zRw` in ✱25·37 and the
+  hypothesis `R ⪽ Q` in ✱25·412, neither a theorem (✱25·37 fails when S = Λ̇ and R is not null; ✱25·412's
+  printed hypothesis does not mention the S of its conclusion); the corrected statements, the analogues of
+  ✱24·37 and ✱24·412, are proved, as at ✱23·81. ✱25·313 is printed `R ∩̇ S = Λ̇ . ≡ . R ∸ S = R`, the
+  identity turned from ✱24·313's α = α − β; it is formalized as printed.

@@ -232,6 +232,19 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   - ✱24·1 (Λ ≠ V) and ✱24·52 (∃!V) take a real variable, as ✱22·351 does; PM says so (p. 239).
   - Where the print is unclear: ✱24·141's last line is α = V, its statement V = α (✱20·21 joins them);
     ✱24·492 cites ✱22·481 for a replacement in the second factor, which ✱22·481 does not give.
+- `PM/Star25.lean`: the universal relation, the null relation and the existence of relations. ✱25·01–✱25·03
+  are macros: V̇ is the relation x̂ŷ(x = x . y = y), Λ̇ is ∸V̇, and ∃̇!R is (∃x, y) . xRy, with the notation
+  `𝐕̇` and `Λ̇` scoped to `PM`.
+  - All 70 numbered propositions ✱25·1–✱25·63 are proved. PM prints no proofs (p. 241); each follows the
+    proof of its ✱24 analogue, translated as ✱23's follow ✱22's. Statements follow the 1910 print where the
+    transcription differs (✱25·47, ✱25·56), and the published Errata where the print is not a theorem
+    (✱25·37, ✱25·412; docs/FIDELITY.md).
+  - A chain of identities of relations is a `calc` block of `≑` lines joined by ✱21·22. Putting a relation
+    for an identical one inside an expression is ✱21·18 for the expression with ✱21·2 (`qrelEqCongr`, with
+    `RelExpr.relOf` and the tactic `rel_expr`); ✱25·11 and ✱25·12 are used at a real relation by
+    `qrelAllAtExt`; ✱25·37's [✱13·191] is its form for two variables, ✱13·21, and ✱25·63's is ✱21·53 for
+    the expression R ∼∈ κ (`qrel21_53`).
+  - ✱25·1 (Λ̇ ≠ V̇) and ✱25·52 (∃̇!V̇) take real variables x, y, as ✱23·351 does.
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
   ([SEMANTICS.md](SEMANTICS.md)), with ✱12·1, and at the one-element family also with comprehension alone
   (`trap_unit_compr`).
