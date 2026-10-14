@@ -115,15 +115,17 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   - `verify.py --no-mutation` skips check 0 for a commit that predates the tool, such as the 1.0.0
     export, and `verify_report.json` records that the check was skipped and why. For a commit that has
     the tool, the option fails the check.
-  - `mutate.py --full` runs before a release. Its run with ✱22–✱24 in found nothing unexpected: no
-    unused hypothesis in 1389 theorems, none of 15,458 mutants accepted by a proof term, and only the 14
-    known renamings surviving re-elaboration. It took 1708 s with 8 jobs on a shared machine (524 s
-    before ✱22–✱24): the meta-program 1277 s, 1206 s of it for the statements from ✱9 on;
-    re-elaboration 74 s; hypothesis recompilation 356 s. The tool takes every numbered proposition from
-    ✱9 on, so its output no longer calls that group ✱9–✱21.
-    With ✱25 a full run has not yet completed: in the one attempt, stopped after two hours, the kernel's
-    comparisons of ✱25·431's proof with its mutants alone took 58 minutes (4 for ✱24·431); nothing
-    unexpected had been found by then.
+  - `mutate.py --full` runs before a release. Its run with ✱1–✱25, on the Lean code and scripts of
+    `07f82e0`, found nothing unexpected: no unused hypothesis in 1471 theorems (1009 hypotheses), none of
+    16,512 mutants of 999 statements accepted by a proof term (4668 of ✱1–✱5, 11,844 from ✱9 on), none
+    of 190 hypotheses replaced by `True` compiling, and only the 14 known renamings surviving
+    re-elaboration. It took 9142 s, 2 h 32 min, measured on 2026-10-14 on a shared machine (1708 s
+    with ✱1–✱24): the meta-program 8763 s, 8691 s of it for the statements from ✱9 on; re-elaboration
+    72 s; hypothesis recompilation 307 s. The kernel's comparisons of proofs with their mutants take
+    8519 s, and grow steeply with the nesting of the class and relation definitions: ✱22 70 s, ✱23
+    276 s, ✱24 689 s, ✱25 7482 s, of which ✱25·431 3452 s and ✱25·432 3282 s. The meta-program is a
+    single process with a maximum resident set of about 22 GiB. The tool takes every numbered
+    proposition from ✱9 on, so its output no longer calls that group ✱9–✱21.
 - **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
   "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
   counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the

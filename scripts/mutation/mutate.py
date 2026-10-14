@@ -2,7 +2,8 @@
 """Statement mutation: is each statement tied to its proof? (docs/STATEMENT_MUTATION.md)
 
     python3 scripts/mutation/mutate.py --quick   the export-path tier, well under a minute
-    python3 scripts/mutation/mutate.py --full    everything; with ✱25, more than two hours
+    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 2 h 32 min and about 22 GiB of
+                                                 memory (measured 2026-10-14, a shared machine)
 
 Both first run `lake build` on the modules the meta-program imports, so that what is analysed is the
 proofs in the sources; then scripts/mutation/StatementMutation.lean (Part 1, unused hypotheses, on every
