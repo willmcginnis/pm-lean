@@ -1,0 +1,3000 @@
+[
+ {
+  "id": "*25.1",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.351",
+   "*25.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.1 (hint), translated; x, y are the real variables of *23.351 (the statement needs non-empty types); takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.101",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.831",
+   "*25.02"
+  ],
+  "extra_used": [
+   "*21.2"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.101 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Λ̇ = ∸V̇, which *23.831 turns, is *21.2 by *25.02 (the definition's own step).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.102",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*13.15",
+   "*5.501",
+   "*11.11",
+   "*11.33",
+   "*21.15",
+   "*25.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.102 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.103",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.102",
+   "*23.392",
+   "*23.831",
+   "*25.02"
+  ],
+  "extra_used": [
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*21.21",
+   "*4.2"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.103 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*23.392] line an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL); *23.831 has ∸V̇ second, so its first member is turned by *21.21; the last line is the definition *25.02, written as *4.2.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.104",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.3",
+   "*13.15",
+   "*11.11",
+   "*11.33"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.104 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.105",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.35",
+   "*4.12",
+   "*11.11",
+   "*11.33",
+   "*25.104"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.105 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.11",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.104",
+   "*11.1",
+   "*10.11",
+   "*11.11",
+   "*2.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.1"
+  ],
+  "note": "PM prints no proof; as *24.11 (dem), translated; R apparent (*21.07); Simp is *2.02; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.1 is not used: it is cited for R ⪽ V̇, which is the formal implication xRy . ⊃_{x,y} . xV̇y by *23.01 itself (a macro in Lean).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.12",
+  "page": 241,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.105",
+   "*11.1",
+   "*2.21",
+   "*10.11",
+   "*11.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.1"
+  ],
+  "note": "PM prints no proof; as *24.12 (dem), translated; R apparent (*21.07); takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.1 is not used: it is cited for Λ̇ ⪽ R, which is the formal implication by *23.01 itself (a macro in Lean).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.13",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.12",
+   "*4.73",
+   "*23.41"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.13 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.12 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression Λ̇ ⪽ R being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.14",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.102",
+   "*21.32"
+  ],
+  "extra_used": [
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.14 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*21.32] line an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.141",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.11",
+   "*4.73",
+   "*23.41"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.141 (dem), translated; the last line of *24.141 is alpha = V; the statement has V̇ = R; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.11 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression R ⪽ V̇ being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). *4.73's product has its factors in the other order from the line (*4.3). The last line of *24.141 is alpha = V; the statement's V̇ = R is its turn by *21.21. Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.15",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.103",
+   "*21.32"
+  ],
+  "extra_used": [
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.15 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In the [*21.32] line an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.17",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.83",
+   "*25.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.17 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.21",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.103",
+   "*23.89"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*4.11",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.21 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.103 is used at the defining function of R ∩̇ ∸R, and *23.89's ∼{x(R ∸ R)y} is written ∼(xRy . x∸Ry) by *23.33, inside the negation (*4.11), under (x, y) by *11.11 and *11.33 (*10.11.271 for two variables).",
+  "glue": [
+   "*11.11",
+   "*11.33"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.22",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.88",
+   "*25.102"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.22 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.102 is used at the defining function of R ⊍ ∸R, and *23.88's x(R ⊍ ∸R)y is written xRy . v . x∸Ry by *23.34, under (x, y) by *11.11 and *11.33 (*10.11.271 for two variables).",
+  "glue": [
+   "*11.11",
+   "*11.33"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.23",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.12",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.23 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.621 gives Λ̇ ∩̇ R = Λ̇, commuted by *23.51. *25.12 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression Λ̇ ⪽ R being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.24",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.12",
+   "*23.62"
+  ],
+  "extra_used": [
+   "*23.57",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.24 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.62 gives Λ̇ ⊍ R = R, commuted by *23.57. *25.12 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression Λ̇ ⪽ R being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.26",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.621",
+   "*25.11"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.26 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.11 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression R ⪽ V̇ being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.27",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.62",
+   "*25.11"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.27 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.11 is used at a real relation by the analogue for relations of *10.1 (qrelAllAt, PM/Star21.lean: *12.11 turned by *10.32, *10.1, *10.11, *10.23), the expression R ⪽ V̇ being extensional (relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281, *10.28). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.3",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.53",
+   "*4.6",
+   "*23.35",
+   "*23.33",
+   "*11.11",
+   "*11.33",
+   "*25.15"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.36",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.3 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.35 acts on the second factor (*4.36 with *4.3, qandCongrR) and *23.33 on the product, each inside the negation (*4.11).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.31",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.6",
+   "*11.11",
+   "*11.33",
+   "*23.35",
+   "*23.34",
+   "*25.14"
+  ],
+  "extra_used": [
+   "*4.37"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.31 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.35 acts on the first disjunct (*4.37), under (x, y).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.311",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.35",
+   "*4.51",
+   "*4.62",
+   "*23.33",
+   "*11.11",
+   "*11.33",
+   "*25.15"
+  ],
+  "extra_used": [
+   "*4.85",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.311 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.35 acts on the consequent (*4.85); *23.33 acts inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.312",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.35",
+   "*4.64",
+   "*23.34",
+   "*25.14"
+  ],
+  "extra_used": [
+   "*4.84",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.312 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.35 acts on the antecedent (*4.84), under (x, y) by *11.11 and *11.33 (*10.11.271 for two variables), which *24.312's lines leave tacit for one variable.",
+  "glue": [
+   "*11.11",
+   "*11.33"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.313",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.311",
+   "*23.621"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.313 (hint), translated; as printed in 1910 (p. 242): R ∸ S = R, where *24.313 has alpha = alpha - beta; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.32",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.13",
+   "*23.59"
+  ],
+  "extra_used": [
+   "*4.38"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.32 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.13 is used for both factors, joined by *4.38.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.33",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.551",
+   "*25.27",
+   "*23.57"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.33 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*21.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.34",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.481",
+   "*25.23"
+  ],
+  "extra_used": [
+   "*23.51"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.34 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.23 gives S ∩̇ Λ̇ = Λ̇; the line has Λ̇ ∩̇ S (*23.51).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*21.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.35",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.481",
+   "*25.26"
+  ],
+  "extra_used": [
+   "*23.51"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.35 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.26 gives S ∩̇ V̇ = S; the line has V̇ ∩̇ S (*23.51).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*21.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.36",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.551",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*23.57"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.36 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.24 gives S ⊍ Λ̇ = S; the line has Λ̇ ⊍ S (*23.57).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*21.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.37",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.15",
+   "*23.33",
+   "*2.03"
+  ],
+  "extra_used": [
+   "*13.16",
+   "*4.38",
+   "*4.84",
+   "*11.11",
+   "*11.33",
+   "*13.21",
+   "*4.11",
+   "*4.51",
+   "*4.85"
+  ],
+  "cited_unused": [
+   "*13.191"
+  ],
+  "note": "PM prints no proof; as *24.37 (dem), translated; as corrected by the published Errata (zSw), which the transcription applies; the 1910 print has zRw (p. 242), not a theorem; (x, y, z, w) is (x, y) : (z, w); Transp is *2.03; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.33 acts inside the negation (*4.11), under (x, y) by *11.11 and *11.33 (*10.11.271 for two variables). [*13.191] is used in its form for two variables, *13.21, at (z, w) for each x, y, whose z = x . w = y is written x = z . y = w by *13.16 for each factor (*4.38, with *4.84, under (z, w)). The consequent ∼(x = z . y = w) is written x ≠ z . v . y ≠ w by *4.51 (*4.85, under (x, y, z, w)). *13.191 is not used: the statement has two pairs of variables, so its form for two variables, *13.21, is used instead, as *11.1 is for *10.1.",
+  "glue": [
+   "*11.11",
+   "*11.33"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.38",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.481",
+   "*23.5",
+   "*21.23",
+   "*4.6",
+   "*3.3"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*21.22",
+   "*3.27",
+   "*23.51",
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.38 (dem), translated; Exp is *3.3; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first line (qrelInterSelfNull): *23.481 gives R ∩̇ R = S ∩̇ R, and S ∩̇ R = R ∩̇ S (*23.51) = Λ̇ from Hp (*3.26, *3.27), joined by *21.22 under Hp (Comp *3.43). [*23.5]: an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL). [*21.23] takes R = S from Hp (*3.27), joined by Comp (*3.43).",
+  "glue": [
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.39",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.311",
+   "*23.35"
+  ],
+  "extra_used": [
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.39 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.35 acts on the consequent (*4.85), under (x, y) by *11.11 and *11.33 (*10.11.271 for two variables).",
+  "glue": [
+   "*11.11",
+   "*11.33"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.4",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.311",
+   "*23.621",
+   "*23.9",
+   "*23.51",
+   "*23.57"
+  ],
+  "extra_used": [
+   "*21.22",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*21.23",
+   "*3.3"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.4 (dem), translated; the chain A == B == C stated as A == B . B == C, as *24.4; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1), *25.311 at Q, P has Q ∩̇ P, written P ∩̇ Q by *23.51 (an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)), and *23.9 at Q, P has (Q ⊍ P) ∸ P, written (P ⊍ Q) ∸ P by *23.57 inside a relation. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). (2) rewrites (1) at Q, P the same way. The two halves are joined by *4.21, *4.22 (tacit). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.401",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.68",
+   "*25.3",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*23.51",
+   "*21.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*23.551",
+   "*23.57"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.401 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(1) is *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum). In (1).(2), Q ∸ P = Λ̇ is put in the sum by *23.551, under Hp (*2.02, *3.43), and [*25.24] has the sum in the other order (*23.57). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.402",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.49",
+   "*23.55",
+   "*25.13"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*3.43",
+   "*3.35"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.402 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The factors of Hp are taken by Simp (*3.26, *3.27) and joined by Comp (*3.43); the [*23.55] line uses Hp's P ∩̇ Q = Λ̇, joined by Ass (*3.35, qimpMpH).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.41",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.68",
+   "*25.22",
+   "*25.26"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.41 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.41's lines prove (alpha cap beta) cup (alpha - beta) = alpha, so these prove (R ∩̇ S) ⊍ (R ∸ S) = R, turned by *21.21. [*25.22] puts V̇ for S ⊍ ∸S inside R ∩̇ (S ⊍ ∸S). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.411",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.633",
+   "*25.41"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*23.551",
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.411 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.633 gives (S ∩̇ R) ⊍ (R ∸ S); the line has (R ∩̇ S) (*23.51, put in the sum by *23.551). *25.41 is turned by *21.21, and so is the result.",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*21.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.412",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.41",
+   "*25.3",
+   "*25.23",
+   "*23.68",
+   "*25.411"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*23.52",
+   "*23.51",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*3.27",
+   "*23.57",
+   "*3.26",
+   "*21.21",
+   "*23.551",
+   "*25.24",
+   "*23.481"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.412 (dem), translated; as corrected by the published Errata (S ⪽ Q), which the transcription applies; the 1910 print has R ⪽ Q (p. 242), not a theorem; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first line is *25.41 at P ∸ Q, S, put in the sum by *23.551. [*25.3.23]: (P ∸ Q) ∩̇ S is P ∩̇ (S ∸ Q) (*23.52, *23.51), P ∩̇ Λ̇ by *25.3 and Hp (*3.27), and Λ̇ by *25.23; the term Λ̇ is dropped by *23.57 and *25.24. [*23.68] is *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum), from right to left (*21.21). [*25.411] has (P ∸ Q) ⊍ Q in the other order (*23.57), *25.411 turned by *21.21 and taken from Hp (*3.26), and is put in the difference by *23.481. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.42",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.59",
+   "*25.41"
+  ],
+  "extra_used": [
+   "*21.21",
+   "*23.54"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.42 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*25.41] puts P for (P ∩̇ Q) ⊍ (P ∸ Q) by *23.54, with *25.41 turned by *21.21 (as the print's *24.42 does with *22.54).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.43",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*5.6",
+   "*23.35",
+   "*23.33",
+   "*23.34",
+   "*11.11",
+   "*11.33"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.36",
+   "*4.84",
+   "*4.85"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.43 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The line of *5.6 is written from its first member: *23.33 and *23.35 (on the second factor, *4.36 with *4.3) act on the antecedent (*4.84), *23.34 on the consequent (*4.85).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.431",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.68",
+   "*25.21",
+   "*25.24",
+   "*23.51",
+   "*23.57"
+  ],
+  "extra_used": [
+   "*21.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*23.551",
+   "*23.7"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.431 (dem), translated; as printed in 1910 (p. 242), (P ∩̇ Q) first, as *24.431; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.431's first line is *23.68 from right to left (*21.21); its second is *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum) on both terms (*23.551 and inside a relation), the four terms regrouped by *23.7 (written without brackets, *23.71); [*23.51.57] also needs *23.7. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.432",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.22",
+   "*25.35",
+   "*23.68",
+   "*23.51",
+   "*23.551",
+   "*23.63",
+   "*23.57"
+  ],
+  "extra_used": [
+   "*21.21",
+   "*23.52",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*23.7"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.432 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*24.432's lines prove the identity from right to left (turned by *21.21). *25.22.35 is *25.35 with R ⊍ ∸R = V̇, its product commuted (*23.51); [*23.51] also needs *23.52; each [*23.63] is *23.63 for a term absorbed by the term beside it, after *23.7, *23.57 (and *23.51, *23.52 for P ∩̇ Q ∩̇ R). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.44",
+  "page": 242,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.431",
+   "*25.432"
+  ],
+  "extra_used": [
+   "*21.24"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.44 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The two identities are joined by *21.24.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.45",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.32",
+   "*25.3",
+   "*25.311"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*4.38",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.45 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*25.3.311]: *25.311 at R, P has R ∩̇ P, written P ∩̇ R by *23.51 (an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)), and the two are joined by *4.38; *24.45's last line has the factors in the other order from the statement (*4.3).",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
+ },
+ {
+  "id": "*25.46",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.45",
+   "*23.44",
+   "*23.811",
+   "*25.311"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.46 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.47",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.311",
+   "*23.41",
+   "*23.59",
+   "*25.43",
+   "*4.3",
+   "*23.45"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*4.38",
+   "*4.32",
+   "*4.36"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.47 (dem), translated; as printed in 1910; the transcription has brackets (P ∩̇ Q) the print does not have (text audit, Vol I entry 19); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (1), *25.311 at Q, P has Q ∩̇ P (*23.51; an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)); *23.59 and *25.43 are joined by *4.38, and (1).(2) by *4.38. [*4.3] is *4.3 with *4.32 (and *4.36).",
+  "glue": [
+   "*4.32",
+   "*2.02"
+  ],
+  "glue_kind": [
+   "order",
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.48",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.73",
+   "*23.481",
+   "*23.68",
+   "*23.621",
+   "*3.47",
+   "*23.48",
+   "*23.55",
+   "*25.13",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*21.22",
+   "*23.51",
+   "*21.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*21.23",
+   "*3.3",
+   "*3.22",
+   "*21.24",
+   "*3.35",
+   "*23.57"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.48 (dem), translated; Hp grouped from the left; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(8) is qline25_48: in (2), [*23.68] is *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum) in both members (an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL), and qrelEqR: *21.22, *21.24 with *3.22, Exp *3.3, Comm *2.04, Comp *3.43); in (4), *23.48 gives S ∩̇ P ⪽ Q ∩̇ P, written P ∩̇ Q by *23.51 with *23.55, and the [*23.55] line uses Hp (Ass *3.35, qimpMpH); in (6), (7) the two identities are put in the sum by *23.73; (8) is *21.22 under Hp with *21.21, and Exp (*3.3). 'Similarly' (9) is (8) at S, S', R, R', Q, P, its Hp got from this one by Simp and Comp (Q ∩̇ P by *23.51) and R ⊍ S, R' ⊍ S' commuted by *23.57. The factors of Hp are taken by *3.26, *3.27, joined by *3.43; (1) is put under Hp by *2.02. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04",
+   "*3.22"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.481",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.48",
+   "*23.42",
+   "*25.21",
+   "*25.311",
+   "*21.2",
+   "*4.73"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*4.32",
+   "*3.27",
+   "*4.38",
+   "*4.3",
+   "*2.02"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.481 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "In (2), the asserted factors P ⪽ P (*23.42) and P ∸ P = Λ̇ (*25.21) are dropped (*4.73, *4.32, and *3.2, *3.27), and *25.311 at Q, P and R, P has Q ∩̇ P, R ∩̇ P (*23.51; an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)), joined by *4.38. (3): *4.73 has P = P second (*4.3). (1).(2).(3): (3) replaces the second member under Hp (*2.02, *3.43).",
+  "glue": [
+   "*4.32",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.482",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.48",
+   "*23.42"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*2.02",
+   "*3.43",
+   "*3.27"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.482 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.48's Hp is got from this one by Simp (*3.26, *3.27) and Comp (*3.43), with P ⪽ P and Q ⪽ Q (*23.42) put under it by *2.02.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.49",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.621",
+   "*23.68",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*21.22",
+   "*23.551",
+   "*23.57",
+   "*21.21",
+   "*3.3",
+   "*2.04",
+   "*3.22",
+   "*21.24"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.49 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.621's identities are turned by *21.21; (1) puts (P ∩̇ Q) ⊍ (P ∩̇ R) for P ∩̇ (Q ⊍ R) by *23.68 (qrelEqR: *21.22, *21.24 with *3.22, Exp *3.3, Comm *2.04, Comp *3.43); in (2), Hp is put for P ∩̇ Q (*23.551) and *25.24 has the sum in the other order (*23.57).",
+  "glue": [
+   "*2.02",
+   "*2.04",
+   "*3.22"
+  ],
+  "glue_kind": [
+   "chain",
+   "order",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.491",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.621",
+   "*23.481",
+   "*25.4",
+   "*23.68"
+  ],
+  "extra_used": [
+   "*3.27",
+   "*21.21",
+   "*3.26",
+   "*3.43",
+   "*2.02",
+   "*23.52",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*23.73",
+   "*23.57"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.491 (dem), translated; the conclusion grouped from the left; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*25.4]: P ∩̇ (Q ⊍ R) ∸ R is P ∩̇ ((Q ⊍ R) ∸ R) (*23.52), and *25.4 at Q, R gives (Q ⊍ R) ∸ R = Q from Hp (its halves by *3.26, *3.27); 'Similarly' (2) uses its first half. In (3), (1).(2) are joined by *23.73, and *23.621 needs R ⊍ Q written Q ⊍ R (*23.57). Hp's factors are taken by *3.26, *3.27, joined by *3.43; identities are turned by *21.21. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.492",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.8",
+   "*23.86",
+   "*23.9",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*21.21",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*3.27",
+   "*23.51",
+   "*23.57",
+   "*3.26"
+  ],
+  "cited_unused": [
+   "*23.481"
+  ],
+  "note": "PM prints no proof; as *24.492 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*23.8.86]: ∸(P ∸ Q) is ∸(∸(∸P) ∩̇ ∸Q) (*23.8), which is ∸P ⊍ Q by *23.86. [*23.8.9]: P ∩̇ (∸P ⊍ Q) is (Q ⊍ ∸P) ∸ (∸P) by *23.51, *23.8, *23.57, Q ∸ (∸P) by *23.9, and P ∩̇ Q by *23.8, *23.51. [*23.621] gives Q ∩̇ P = Q (*23.51), from Hp (*3.26). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). *23.481 is not used: the [*22.481] step puts P ∸ Q for R in P ∸ R, R being in the converse (∸) of the second factor, where *23.481 (for a first factor) does not apply; it is *21.18 for the expression P ∸ X (qrelEqCongr), with Hp turned by *21.21 (*3.27). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.493",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.84",
+   "*25.17",
+   "*25.26",
+   "*23.68"
+  ],
+  "extra_used": [
+   "*23.8",
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*2.02",
+   "*21.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.493 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.84 . *25.17: *25.17 at ∸(Q ∩̇ R), whose ∸(∸(Q ∩̇ R)) is Q ∩̇ R by *23.8, and *23.84, each identity replaced in its first member (an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)). [*25.26]: P = P ∩̇ V̇ (*21.21), V̇ replaced inside the relation under Hp (*2.02, *3.43). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.494",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.3",
+   "*25.311",
+   "*23.44",
+   "*23.621",
+   "*23.68",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.27",
+   "*23.51",
+   "*21.23",
+   "*3.3",
+   "*21.22",
+   "*3.43",
+   "*2.02",
+   "*21.21",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*23.73",
+   "*23.57"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.494 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.311 at Q, P has Q ∩̇ P (*23.51; an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL)); (3) is *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum); in (4), (1) and (2) are put in the sum by *23.73, and *25.24 has it in the other order (*23.57). 'Similarly' (5) is written out. Hp's factors are taken by *3.26, *3.27, joined by *3.43. Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.495",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.87",
+   "*23.68",
+   "*25.21",
+   "*25.311",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*23.51",
+   "*23.481",
+   "*23.52",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04",
+   "*25.23",
+   "*21.21",
+   "*23.73",
+   "*25.24"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.495 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.87.68: ∸(Q ⊍ R) is ∸Q ∩̇ ∸R (*23.87 turned by *21.21), and *23.68 with the common factor second (qrelDistribRight: *23.68 turned by *21.21, the products commuted by *23.51 inside the sum), each product regrouped by *23.52 (both at once by *23.73). [*25.21]: (R ∸ Q) ∸ R is ∸Q ∩̇ (R ∩̇ ∸R) (*23.51 by *23.481, *23.52), so ∸Q ∩̇ Λ̇, which is Λ̇ by *25.23, dropped by *25.24. (1).(2): (P ∸ Q) ∸ R is (P ∸ R) ∸ Q (*23.52, *23.51), and (2) is put for P ∸ R (*23.481). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.5",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*25.03"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.5 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.51",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.5",
+   "*11.25",
+   "*25.15"
+  ],
+  "extra_used": [
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.51 (dem), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.5 is used inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.52",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.51",
+   "*25.1",
+   "*2.15"
+  ],
+  "extra_used": [
+   "*21.21",
+   "*4.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.52 (hint), translated; x, y are the real variables of *25.1; Transp is *2.15; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.1's Λ̇ ≠ V̇ is written V̇ ≠ Λ̇ by *21.21, inside the negation (*4.11).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.53",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.51",
+   "*21.2"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.53 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.54",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.51",
+   "*4.11"
+  ],
+  "extra_used": [
+   "*4.13"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.54 (hint), translated; Transp is *4.11; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Transp is *4.11, with *4.13 for ∃̇!R . == . ~~∃̇!R.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.55",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.3",
+   "*25.54",
+   "*4.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.55 (hint), translated; Transp is *4.11; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.56",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.41",
+   "*23.34"
+  ],
+  "extra_used": [
+   "*11.11",
+   "*11.341"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.56 (hint), translated; as printed in 1910: ∃̇!(R ⊍ S) (text audit, Vol I entry 20); takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.34 acts under (∃x, y) by *11.11 and *11.341 (*10.11.281 for two variables, which *24.56's hint leaves tacit for one variable).",
+  "glue": [
+   "*11.11",
+   "*11.341"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.561",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.42",
+   "*23.33"
+  ],
+  "extra_used": [
+   "*11.11",
+   "*11.341"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.561 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.33 acts under (∃x, y) by *11.11 and *11.341 (*10.11.281 for two variables, which *24.561's hint leaves tacit for one variable).",
+  "glue": [
+   "*3.26",
+   "*11.11",
+   "*11.341"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*25.57",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.481",
+   "*23.5",
+   "*25.51",
+   "*2.03",
+   "*3.3"
+  ],
+  "extra_used": [
+   "*3.43",
+   "*21.22",
+   "*3.27",
+   "*23.51",
+   "*3.26",
+   "*21.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.57 (dem), translated; Transp is *2.03; Exp is *3.3; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "The first two lines are those of *25.38 (qrelInterSelfNull: *23.481, *23.51, Hp's factors by *3.26, *3.27, joined by *21.22 under Hp, Comp *3.43); [*23.5]: an identity is replaced in its first member by *21.22 and *21.23, each with Exp (*3.3), joined by Comp (*3.43) (qrelEqL).",
+  "glue": [
+   "*2.02"
+  ],
+  "glue_kind": [
+   "chain"
+  ]
+ },
+ {
+  "id": "*25.571",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.57",
+   "*25.54",
+   "*2.03",
+   "*2.04",
+   "*3.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.571 (dem), translated; Transp is *2.03; Comm is *2.04; Imp is *3.31; takes [Reducibility S]",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.58",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.34"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.58 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*25.6",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.41",
+   "*25.55",
+   "*25.21",
+   "*25.54",
+   "*2.16"
+  ],
+  "extra_used": [
+   "*3.3",
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.6 (dem), translated; Transp is *2.16; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.41 is used with Exp (*3.3). (2): R = S puts S ∸ S for S ∸ R (qrelEqCongr), which is Λ̇ by *25.21. (1).(3): (3) is put under Hp by *2.02, and joined by Comp (*3.43). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.61",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.51",
+   "*25.24"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.61 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.51's S = Λ̇ is put for S in R ⊍ S, under Hp (*2.02, *3.43). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.62",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.51",
+   "*25.23"
+  ],
+  "extra_used": [
+   "*2.02",
+   "*3.43",
+   "*4.2",
+   "*4.11",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*21.15",
+   "*21.2",
+   "*2.04"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *24.62 (hint), translated; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*25.51's S = Λ̇ is put for S in R ∩̇ S, under Hp (*2.02, *3.43). Putting a relation for an identical one inside an expression is *21.18 for the expression with *21.2 (qrelEqCongr: qrel21_18, *21.15, and the expression's extensionality, relExpr_ext, p. 213: *4.2, *2.02, *4.11, *3.43, *4.39, *10.11, *10.21, *10.271, *21.11, *4.3, *4.36, *10.281; qiffElimOf: *3.27, *2.04). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*21.22",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "chain",
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "order"
+  ]
+ },
+ {
+  "id": "*25.63",
+  "page": 243,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*25.54",
+   "*2.03"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*4.84",
+   "*4.85",
+   "*10.1",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*21.2",
+   "*2.27",
+   "*21.21",
+   "*21.15",
+   "*2.04"
+  ],
+  "cited_unused": [
+   "*13.191"
+  ],
+  "note": "PM prints no proof; as *24.63 (dem), translated; kappa a class of relations; R apparent (*21.07); Transp is *2.03; takes [Reducibility S]",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "[*13.191] is, as in *24.63, used through its analogue for the apparent variable: here *21.53 for the extensional expression R ∼∈ kappa (qrel21_53, as qcls20_53 is *20.53 in *24.63): the analogue for relations of *10.1 (qrelAllAt: *12.11, *10.32, *10.1, *10.11, *10.23), the occurrences carried by *21.11 and the expression's extensionality (relExpr_ext) and joined by *4.84, *4.85, *21.2 detached by *2.27, and *21.18 for the expression (qrel21_18: *21.15) with *21.21, Comm (*2.04), *10.11.21. [*25.54] acts on the consequent (*4.85), under (R). *13.191 is not used: the step is about an apparent relation, so its analogue for relations, *21.53 for the expression R ∼∈ kappa, is used by its proof (qrel21_53). Inside helpers, steps carried under an apparent variable are under-exists glue.",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28",
+   "*2.04"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists",
+   "order"
+  ]
+ }
+]
