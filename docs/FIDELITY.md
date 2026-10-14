@@ -162,8 +162,9 @@ listed instead. As recorded, 19 / 53. Typical extras:
   (for classes, x ∈ α ∩ β is read as x ∈ α . x ∈ β);
 - ✱4·36–✱4·39 and ✱4·84–✱4·86 to replace a part of a formula by an equivalent, and ✱11·33 to do so under
   (x, y);
-- ✱21·18 for an expression of R that is not a generic context f{R} (R ⪽ T, and fR in ✱23·94), by its
-  proof with `relExpr_ext` (PM/Star21.lean).
+- ✱21·18 for an extensional expression of R that is not a generic context f{R} (R ⪽ T, T ⪽ R, and fR in
+  ✱23·94), by its proof (`qrel21_18`, as `qcls20_18` in ✱22), with `relExpr_ext` (PM/Star21.lean) for the
+  expressions PM's notation forms.
 
 **Where the print is unclear,** the docstring says so. For example, ✱14·144 and ✱14·145 cite ✱14·111 where
 the unmarked form is ✱14·112, and ✱14·272 cites ✱10·414 for a ✱10·271 step. [ARCHITECTURE.md](ARCHITECTURE.md)

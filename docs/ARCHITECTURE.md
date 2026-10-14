@@ -214,7 +214,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   - All 72 numbered propositions ✱23·1–✱23·95 are proved. PM's relation S is `S'` in Lean, as `S` names
     the system.
   - ✱23·02 follows the 1910 print, which the transcription misreads (FIDELITY.md). ✱23·54, ✱23·55 and
-    ✱23·94 use ✱21·18 for an expression of R that PM's notation forms (`qrel18`, by `relExpr_ext`).
+    ✱23·94 use ✱21·18 for an extensional expression of R (`qrel21_18`; `relExpr_ext` for R ⪽ T); fR in
+    ✱23·94 and ✱23·95 is extensional (`RelExt`), as fα is in ✱22 (`ClsExt`).
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
   ([SEMANTICS.md](SEMANTICS.md)), with ✱12·1, and at the one-element family also with comprehension alone
   (`trap_unit_compr`).

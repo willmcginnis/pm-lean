@@ -27,7 +27,7 @@ import PM.Star21
   `S'` in Lean statements; the docstrings keep PM's letters.
 
   The definitions are macros, each a relation (a formula with two holes) or a formula:
-    ✱23·01  R ⪽ S . = : xRy . ⊃_{x,y} . xSy                Df   (`QF.relIncl`, `R ⪽ S`)
+    ✱23·01  R ⪽ S . = : xRy . ⊃_{x,y} . xSy                Df   (`QF.relSubset`, `R ⪽ S`)
     ✱23·02  R ∩̇ S = x̂ŷ(xRy . xSy)                          Df   (`QF.relInter`, `R ∩̇ S`)
     ✱23·03  R ⊍ S = x̂ŷ(xRy . ∨ . xSy)                      Df   (`QF.relUnion`, `R ⊍ S`)
     ✱23·04  ∸R = x̂ŷ{∼(xRy)}                                Df   (`QF.relCompl`, `∸R`)
@@ -40,13 +40,15 @@ import PM.Star21
   the transcription applies the published Errata (the audit says so and leaves it out of its list);
   the statement is the corrected one, which is the analogue of ✱22·81.
 
-  An expression fR of a relation, in ✱23·94 and ✱23·95, is one that PM's notation forms (`RelExpr`,
-  PM/Star21.lean), so that ✱21·18, which the proofs use for it, holds for it ("every proposition about
-  a relation expresses an extensional property of the determining function", p. 213): `qrel18` is
-  ✱21·18 for such an expression, by ✱21·18's proof (✱21·11·15) with `relExpr_ext` for ✱21·11. The same
-  step replaces R by S in R ⪽ T and T ⪽ R (✱23·54, ✱23·55). Where ✱22's proof uses ✱10·1 at a class
+  An expression fR of a relation, in ✱23·94 and ✱23·95, is an extensional one (`RelExt`, PM/Star21.lean:
+  "every proposition about a relation expresses an extensional property of the determining function",
+  p. 213), so that ✱21·18, which the proofs use for it, holds for it: `qrel21_18` is ✱21·18 for such an
+  expression, by ✱21·18's proof (✱21·11·15) with the premise for ✱21·11. A generic f{R} (`rel R f`) is
+  extensional by ✱21·11 (`relExt_rel`), and every expression PM's notation forms by `relExpr_ext`; so the
+  same step replaces R by S in R ⪽ T and T ⪽ R (✱23·54, ✱23·55). Where ✱22's proof uses ✱10·1 at a class
   such as −α, whose defining function need not be predicative, the step is the analogue for relations
-  (`qrelAllAt`: ✱12·11 and ✱21·11), as in PM/Star21.lean.
+  (`qrelAllAt`: ✱12·11 and ✱21·11), as in PM/Star21.lean. These are the choices of PM/Star22.lean for
+  classes (`ClsExt`, `qcls20_18`, `clsExt_neg`, `clsExt_compl`), made for relations.
 
   ✱23·351 (∸R ≠ R) takes real variables x, y, as ✱10·25 does: ✱22·351's proof uses ✱10·251, which
   instantiates at a real variable, and in an empty domain ∸R and R would both be empty and equal.
@@ -66,7 +68,7 @@ open QF
 namespace QF
 variable {V : Ty → Type}
 /-- ✱23·01 `R ⪽ S . = : xRy . ⊃_{x,y} . xSy` Df -/
-@[reducible] def relIncl {a b : Ty} (R S' : V a → V b → QF V) : QF V :=
+@[reducible] def relSubset {a b : Ty} (R S' : V a → V b → QF V) : QF V :=
   fimp2 (fun x y => relHolds x R y) (fun x y => relHolds x S' y)
 /-- ✱23·02 `R ∩̇ S = x̂ŷ(xRy . xSy)` Df, as printed in 1910 (p. 226; the Gutenberg transcription drops
     the R of R ∩̇ S). -/
@@ -91,8 +93,8 @@ end QF
 
 /-! PM's signs for the definitions (scoped to `PM`). Each unfolds to the macro it names, so a statement
     written with them is the same Lean statement. -/
-/-- `R ⪽ S`: `relIncl R S` (✱23·01). -/
-scoped infix:50 " ⪽ " => QF.relIncl
+/-- `R ⪽ S`: `relSubset R S` (✱23·01). -/
+scoped infix:50 " ⪽ " => QF.relSubset
 /-- `R ∩̇ S`: `relInter R S` (✱23·02). -/
 scoped infixl:70 " ∩̇ " => QF.relInter
 /-- `R ⊍ S`: `relUnion R S` (✱23·03). -/
@@ -135,25 +137,30 @@ theorem qfiff2Congr {A A' B B' : V a → V b → QF V} (h1 : ∀ x y, QThm S (if
     (h2 : ∀ x y, QThm S (iff (B x y) (B' x y))) : QThm S (iff (fiff2 A B) (fiff2 A' B')) :=
   QThm.mp (q11_11 fun x y => qiffIffCongr (h1 x y) (h2 x y)) (q11_33 _ _)
 
-/-- ✱21·18 for an expression ΨR that PM's notation forms: `⊢ :. R = S . ⊃ : ΨR . ≡ . ΨS`, by ✱21·18's proof
-    (✱21·11·15), with `relExpr_ext` (✱21·11 for every such expression) for ✱21·11. -/
-theorem qrel18 [Reducibility S] {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExpr Ψ) (R T : V a → V b → QF V) :
+/-- ✱21·18 for an extensional expression ΨR (`RelExt`, p. 213): `⊢ :. R = S . ⊃ : ΨR . ≡ . ΨS`, by ✱21·18's
+    proof (✱21·11·15), with Ψ's extensionality (✱21·11 for Ψ) for ✱21·11. As `qcls20_18` (PM/Star22.lean). -/
+theorem qrel21_18 [Reducibility S] (Ψ : (V a → V b → QF V) → QF V) (hΨ : RelExt S Ψ) (R T : V a → V b → QF V) :
     QThm S (imp (relEq R T) (iff (Ψ R) (Ψ T))) :=
-  qsyl (qiffMpr (q21_15 R T)) (relExpr_ext hΨ R T)
+  qsyl (qiffMpr (q21_15 R T)) (hΨ R T)
 
-/-- ∸ preserves formal equivalence: `⊢ :. ψ(x, y) . ≡_{x,y} . χ(x, y) : ⊃ : x{∸x̂ŷψ(x, y)}y . ≡_{x,y} .
-    x{∸x̂ŷχ(x, y)}y` as defining functions, i.e. ∼{x(x̂ŷψ(x, y))y} ≡_{x,y} ∼{x(x̂ŷχ(x, y))y}: ✱21·11 for
-    the context of xRy, ✱4·11, under (x, y) by ✱10·11·21. -/
-theorem qfiff2Compl (ψ χ : V a → V b → QF V) : QThm S (imp (fiff2 ψ χ) (fiff2 (∸ψ) (∸χ))) :=
-  q10_11_21 fun x => q10_11_21 fun y =>
-    qsyl (q21_11 ψ χ fun φ => .app2 φ x y) (qiffMp (QL.t4_11 _ _))
+/-- ∼ΨR is extensional when ΨR is (✱4·11). -/
+theorem relExt_neg {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExt S Ψ) : RelExt S fun R => .neg (Ψ R) :=
+  fun ψ χ => qsyl (hΨ ψ χ) (qiffMp (QL.t4_11 _ _))
+
+/-- Ψ(∸R) is extensional when ΨR is: from ψ(x, y) ≡_{x,y} χ(x, y), x ∸x̂ŷψ(x, y) y . ≡_{x,y} . x ∸x̂ŷχ(x, y) y
+    as defining functions, i.e. ∼{x(x̂ŷψ(x, y))y} ≡_{x,y} ∼{x(x̂ŷχ(x, y))y}, by ✱21·11 (context of xRy) and ✱4·11,
+    under (x, y) by ✱10·11·21. -/
+theorem relExt_compl {Ψ : (V a → V b → QF V) → QF V} (hΨ : RelExt S Ψ) : RelExt S fun R => Ψ (∸R) :=
+  fun ψ χ => qsyl (q10_11_21 fun x => q10_11_21 fun y =>
+      qsyl (q21_11 ψ χ fun φ => .app2 φ x y) (qiffMp (QL.t4_11 _ _)))
+    (hΨ (∸ψ) (∸χ))
 
 namespace RelExpr
 /-- R ⪽ T as an expression of R (✱23·01). -/
-theorem relIncl_left (T : V a → V b → QF V) : RelExpr fun R => R ⪽ T :=
+theorem relSubset_left (T : V a → V b → QF V) : RelExpr fun R => R ⪽ T :=
   .all fun x => .all fun y => .or (.neg (relHolds x y)) (.const _)
 /-- T ⪽ R as an expression of R (✱23·01). -/
-theorem relIncl_right (T : V a → V b → QF V) : RelExpr fun R => T ⪽ R :=
+theorem relSubset_right (T : V a → V b → QF V) : RelExpr fun R => T ⪽ R :=
   .all fun x => .all fun y => .or (.neg (.const _)) (relHolds x y)
 end RelExpr
 
@@ -386,15 +393,15 @@ theorem q23_52 [Reducibility S] (R S' T : V a → V b → QF V) :
 /-! ## ✱23·54–✱23·74 -/
 
 /-- ✱23·54 `⊢ :. R = S . ⊃ : R ⪽ T . ≡ . S ⪽ T` [as ✱22·54: ✱21·18], ✱21·18 for the expression R ⪽ T
-    (`qrel18`). -/
+    (`qrel21_18`, `relExpr_ext`). -/
 theorem q23_54 [Reducibility S] (R S' T : V a → V b → QF V) :
     QThm S (imp (relEq R S') (iff (R ⪽ T) (S' ⪽ T))) :=
-  qrel18 (RelExpr.relIncl_left T) R S'                                             -- ✱21·18
+  qrel21_18 _ (relExpr_ext (RelExpr.relSubset_left T)) R S'                       -- ✱21·18
 
 /-- ✱23·55 `⊢ :. R = S . ⊃ : T ⪽ R . ≡ . T ⪽ S` [as ✱22·55: ✱21·18], for the expression T ⪽ R. -/
 theorem q23_55 [Reducibility S] (R S' T : V a → V b → QF V) :
     QThm S (imp (relEq R S') (iff (T ⪽ R) (T ⪽ S'))) :=
-  qrel18 (RelExpr.relIncl_right T) R S'                                            -- ✱21·18
+  qrel21_18 _ (relExpr_ext (RelExpr.relSubset_right T)) R S'                      -- ✱21·18
 
 /-- ✱23·551 `⊢ : R = S . ⊃ . R ⊍ T = S ⊍ T` [as ✱22·551: ✱10·411]. R = S is read by ✱21·43 (both ways),
     and x(R ⊍ T)y, x(S ⊍ T)y by ✱23·34. ✱10·411 for two variables with the second disjunct unchanged is
@@ -451,7 +458,7 @@ theorem q23_6 [Reducibility S] (R S' : V a → V b → QF V) (x : V a) (y : V b)
       (relAll fun T => imp (QF.and (R ⪽ T) (S' ⪽ T)) (relHolds x T y))) :=
   let G : (V a → V b → QF V) → QF V := fun T => imp (QF.and (R ⪽ T) (S' ⪽ T)) (relHolds x T y)
   have hG : RelExpr G :=
-    .or (.neg (.and (RelExpr.relIncl_right R) (RelExpr.relIncl_right S'))) (RelExpr.relHolds x y)
+    .or (.neg (.and (RelExpr.relSubset_right R) (RelExpr.relSubset_right S'))) (RelExpr.relHolds x y)
   have h1 : QThm S (imp (relHolds x (R ⊍ S') y) (relAll G)) :=
     q10_11_21 fun θ =>                                                            -- [✱10·11·21]
       QThm.mp (qsyl (qiffMp (q23_59 R S' (pf2 θ))) (q11_1 _ x y)) (QL.t2_04 _ _ _)  -- ✱23·59 [Comm] (1)
@@ -800,30 +807,32 @@ theorem q23_93 [Reducibility S] (R S' : V a → V b → QF V) : QThm S (relEq (R
           QThm.mp h1 (qiffMp (QL.t5_32 _ _ _))                                     -- [✱5·32]
       _ ≡ relHolds x (R ∸ (R ∩̇ S')) y := qiffSymm (q23_33 R _ x y)                    -- [✱23·35·33]
 
-/-- ✱23·94 `⊢ : (R) . fR . ≡ . (R) . f(∸R)`, fR an expression of R that PM's notation forms. As ✱22·94:
-    `✱10·1 . ⊃ ⊢ : (R) . fR . ⊃ . f(∸R)`, ✱10·1 at ∸R, whose defining function is not predicative, being
-    its analogue for relations (`qrelAllAt`: ✱12·11, ✱21·11 by `relExpr_ext`); `[✱10·11·21]` (1);
-    `✱10·1 . ⊃ ⊢ : (R) . f(∸R) . ⊃ . f{∸(∸R)} .`, again at ∸R (`qrelAllAt`, f(∸R) carried by `qfiff2Compl`
-    and `relExpr_ext`); `[✱23·8 . ✱21·18] ⊃ . fR` (✱21·18 for fR, `qrel18`, its ≡ read as ⊃);
-    `[✱10·11·21]` (2); `(1) . (2) . ⊃ ⊢ . Prop`. -/
-theorem q23_94 [Reducibility S] {F : (V a → V b → QF V) → QF V} (hF : RelExpr F) :
+/-- ✱23·94 `⊢ : (R) . fR . ≡ . (R) . f(∸R)`, R apparent (✱21·07), fR an extensional expression of R (`RelExt`;
+    p. 213). As ✱22·94: `✱10·1 . ⊃ ⊢ : (R) . fR . ⊃ . f(∸R)`, ✱10·1 at ∸R, whose defining function is not
+    predicative, being its analogue for relations (`qrelAllAt`: ✱12·11, and the premise for ✱21·11);
+    `[✱10·11·21]` (1); `✱10·1 . ⊃ ⊢ : (R) . f(∸R) . ⊃ . f{∸(∸R)} .`, again at ∸R (`qrelAllAt`, f(∸R) being
+    extensional by `relExt_compl`); `[✱23·8 . ✱21·18] ⊃ . fR` (✱21·18 for fR, `qrel21_18`, its ≡ read as ⊃);
+    `[✱10·11·21]` (2); `(1) . (2) . ⊃ ⊢ . Prop`. For a generic f{R} (`rel R f`) the premise is ✱21·11
+    (`relExt_rel`), and for an expression PM's notation forms it is `relExpr_ext`. -/
+theorem q23_94 [Reducibility S] (F : (V a → V b → QF V) → QF V) (hF : RelExt S F) :
     QThm S (iff (relAll F) (relAll fun R => F (∸R))) :=
   have h1 : QThm S (imp (relAll F) (relAll fun R => F (∸R))) :=
     q10_11_21 fun φ =>                                                            -- [✱10·11·21] (1)
-      qrelAllAt F (∸(pf2 φ)) fun θ => qsyl (relExpr_ext hF (pf2 θ) _) (QL.t3_26 _ _)  -- ✱10·1
+      qrelAllAt F (∸(pf2 φ)) fun θ => qsyl (hF (pf2 θ) _) (QL.t3_26 _ _)          -- ✱10·1
   have h2 : QThm S (imp (relAll fun R => F (∸R)) (relAll F)) :=
     q10_11_21 fun φ =>                                                            -- [✱10·11·21] (2)
-      qsyl (qrelAllAt (fun R => F (∸R)) (∸(pf2 φ)) fun _ =>
-          qsyl (qfiff2Compl _ _) (qsyl (relExpr_ext hF _ _) (QL.t3_26 _ _)))       -- ✱10·1
-        (qiffMp (QThm.mp (q23_8 (pf2 φ)) (qrel18 hF _ _)))                         -- [✱23·8 . ✱21·18]
+      qsyl (qrelAllAt (fun R => F (∸R)) (∸(pf2 φ)) fun θ =>
+          qsyl (relExt_compl hF (pf2 θ) _) (QL.t3_26 _ _))                        -- ✱10·1
+        (qiffMp (QThm.mp (q23_8 (pf2 φ)) (qrel21_18 F hF _ _)))                    -- [✱23·8 . ✱21·18]
   qiffI h1 h2                                                                     -- (1) . (2)
 
-/-- ✱23·95 `⊢ : (∃R) . fR . ≡ . (∃R) . f(∸R)`. As ✱22·95: `✱23·94 . ⊃ ⊢ : (R) . ∼fR . ≡ . (R) . ∼f(∸R)` (1),
-    ∼fR being an expression of R too; `(1) . Transp . ✱21·6 . ⊃ ⊢ . Prop`, Transp being ✱4·11. -/
-theorem q23_95 [Reducibility S] {F : (V a → V b → QF V) → QF V} (hF : RelExpr F) :
+/-- ✱23·95 `⊢ : (∃R) . fR . ≡ . (∃R) . f(∸R)`, fR as in ✱23·94. As ✱22·95: `✱23·94 . ⊃ ⊢ : (R) . ∼fR . ≡ .
+    (R) . ∼f(∸R)` (1), ∼fR being extensional too (✱4·11, `relExt_neg`); `(1) . Transp . ✱21·6 . ⊃ ⊢ . Prop`,
+    Transp being ✱4·11. -/
+theorem q23_95 [Reducibility S] (F : (V a → V b → QF V) → QF V) (hF : RelExt S F) :
     QThm S (iff (relEx F) (relEx fun R => F (∸R))) :=
   qiffTrans (q21_6 F)
-    (qiffTrans (qiffNeg (q23_94 (F := fun R => .neg (F R)) (.neg hF)))            -- ✱23·94 (1) . Transp
+    (qiffTrans (qiffNeg (q23_94 (fun R => .neg (F R)) (relExt_neg hF)))           -- ✱23·94 (1) . Transp
       (qiffSymm (q21_6 _)))                                                       -- ✱21·6
 
 end PM

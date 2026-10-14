@@ -1199,10 +1199,11 @@ import PM
 #print axioms PM.qorIffCongr
 #print axioms PM.qfimp2Congr
 #print axioms PM.qfiff2Congr
-#print axioms PM.qrel18
-#print axioms PM.qfiff2Compl
-#print axioms PM.RelExpr.relIncl_left
-#print axioms PM.RelExpr.relIncl_right
+#print axioms PM.qrel21_18
+#print axioms PM.relExt_neg
+#print axioms PM.relExt_compl
+#print axioms PM.RelExpr.relSubset_left
+#print axioms PM.RelExpr.relSubset_right
 #print axioms PM.q23_1
 #print axioms PM.q23_2
 #print axioms PM.q23_3

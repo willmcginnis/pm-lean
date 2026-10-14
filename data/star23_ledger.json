@@ -870,7 +870,6 @@
   "method": "explicit",
   "cited_used": [],
   "extra_used": [
-   "*21.15",
    "*4.2",
    "*2.02",
    "*4.11",
@@ -882,7 +881,8 @@
    "*21.11",
    "*4.3",
    "*4.36",
-   "*10.281"
+   "*10.281",
+   "*21.15"
   ],
   "cited_unused": [
    "*21.18"
@@ -898,7 +898,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; R ⪽ T contains R in several places, so *21.18 is used by its proof (qrel18).",
+  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; R ⪽ T contains R in several places, so *21.18 is used by its proof (qrel21_18 with relExpr_ext).",
   "glue": [
    "*10.11",
    "*10.21",
@@ -921,7 +921,6 @@
   "method": "explicit",
   "cited_used": [],
   "extra_used": [
-   "*21.15",
    "*4.2",
    "*2.02",
    "*4.11",
@@ -933,7 +932,8 @@
    "*21.11",
    "*4.3",
    "*4.36",
-   "*10.281"
+   "*10.281",
+   "*21.15"
   ],
   "cited_unused": [
    "*21.18"
@@ -949,7 +949,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; T ⪽ R contains R in several places, so *21.18 is used by its proof (qrel18).",
+  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; T ⪽ R contains R in several places, so *21.18 is used by its proof (qrel21_18 with relExpr_ext).",
   "glue": [
    "*10.11",
    "*10.21",
@@ -1168,7 +1168,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by relExpr_ext (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23. The expression is carried by *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation). *23.59 read as ⊃ and then *11.1 at (x, y) (*10.1, tacit in *22.6's first line); *23.58 is detached under the hypothesis by *2.27.",
+  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by its extensionality (below) (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23. The expression is carried by *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation). *23.59 read as ⊃ and then *11.1 at (x, y) (*10.1, tacit in *22.6's first line); *23.58 is detached under the hypothesis by *2.27.",
   "glue": [
    "*10.271",
    "*4.3",
@@ -2304,26 +2304,19 @@
    "*23.8"
   ],
   "extra_used": [
-   "*4.2",
-   "*2.02",
-   "*4.11",
-   "*3.43",
-   "*4.39",
-   "*10.271",
-   "*21.11",
-   "*4.3",
-   "*4.36",
-   "*10.281",
    "*12.11",
    "*10.32",
+   "*10.271",
    "*10.28",
    "*10.23",
+   "*21.11",
+   "*4.11",
    "*21.15"
   ],
   "cited_unused": [
    "*21.18"
   ],
-  "note": "PM prints no proof; as *22.94 (dem), translated; fR an expression of R that PM's notation forms (RelExpr)",
+  "note": "PM prints no proof; as *22.94 (dem), translated; fR an extensional expression of R (RelExt, p. 213), as ClsExt in *22.94",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [
@@ -2334,16 +2327,12 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by relExpr_ext (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23 (at ∸R, twice; the second time ∸ is carried by qfiff2Compl: *21.11 under (x, y) with *4.11). *21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; for fR it is used by its proof (qrel18).",
+  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by the premise (at ∸R, twice; the second time f(∸R) by relExt_compl: *21.11 under (x, y) with *4.11) (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23. *21.15 in *21.18's proof (qrel21_18). *21.18 is not used: *21.18 is for a generic context f{R}; for fR it is used by its proof, *21.11.15, with the premise for *21.11 (qrel21_18).",
   "glue": [
    "*10.271",
-   "*4.3",
-   "*10.281",
    "*10.28"
   ],
   "glue_kind": [
-   "under-exists",
-   "order",
    "under-exists",
    "under-exists"
   ]
@@ -2360,7 +2349,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "PM prints no proof; as *22.95 (dem), translated; Transp is *4.11; fR as in *23.94",
+  "note": "PM prints no proof; as *22.95 (dem), translated; Transp is *4.11; fR as in *23.94; ∼fR extensional by *4.11 (relExt_neg)",
   "fidelity": "pm-lines",
   "pm_text": "analogue",
   "tacit": [
