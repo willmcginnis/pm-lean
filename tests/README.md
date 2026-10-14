@@ -33,10 +33,25 @@ request. Each test was checked to fail when its mistake is put back.
 | The search for forbidden keywords exempted `unsafe def main` in any Lean file under scripts/, not only in scripts/prove2me/extract_commands.lean | `test_forbidden_keywords.py`: on scratch trees outside the repository, `tests/forbidden_keywords.sh` (the step of run_all.sh) passes the exempt line in its own file and finds the same line in four other files under scripts/ and one outside it, and any other `unsafe` line in the exempt file; the repository passes |
 
 `test_statement_mutation.py` guards a tool rather than a past mistake: the source editor of the
-statement-mutation trial (`scripts/mutation/mutate.py`, [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md)),
+statement mutation (`scripts/mutation/mutate.py`, [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md)),
 which replaces one hypothesis by `True` on each binder form the repository uses; the driver's `lake build`
 before any analysis, without which it would read proofs older than the sources; and the classes of the
-findings listed in `scripts/mutation/expected.json`. The trial itself is not part of `run_all.sh`.
+findings listed in `scripts/mutation/expected.json`; and where the tiers run: `--quick` as a step of
+`run_all.sh` and as check 0 of `scripts/prove2me/verify.py`, which fails an export if the tool fails or is
+missing (shown with stand-in tools), and `--full` in `scripts/release_check.sh`.
+
+`test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
+generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
+a scratch copy, and each file they write must be the committed one, byte for byte; every Lean file whose
+head says it is generated must be listed with its generator. It fails on a line added by hand to each
+generated file, and on ✱2·02 changed in `data/vol1.jsonl` without regenerating.
+
+`test_counterparts.py` also checks the Mathlib counterparts' file against its generator, and that the
+repository's own Lake project requires nothing. When Mathlib has been fetched into
+`Checks/MathlibCounterparts/` (by `scripts/release_check.sh`), it compiles that file against the pinned
+Mathlib and requires four false matches, recorded on Mathlib records, to fail it: an equivalence reversed
+without the record saying so, another declaration of the same file, a wrong `classical` flag, and two
+variables identified. Without Mathlib that part is skipped.
 
 `test_kernel_census.py` is a ratchet rather than a guard against a past mistake: the features of Lean's
 kernel that the PM derivations rely on ([docs/KERNEL_CENSUS.md](../docs/KERNEL_CENSUS.md)) must equal
@@ -45,4 +60,8 @@ a compiled-only constant reaching a derivation) fails until it is accepted on pu
 the driver's copy of `example`s into theorems and the ratchet's comparison on synthetic input.
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
-only the Python tests with `python3 -m unittest discover -s tests` once the project is built.
+only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
+checks run before a release are `scripts/release_check.sh`
+([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
+`scripts/mutation/mutate.py --full` (about 10 minutes on 8 cores) and the Mathlib counterparts. Run it on
+your own machine before an export or a release, not on a time-limited remote.

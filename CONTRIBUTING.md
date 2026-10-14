@@ -65,13 +65,17 @@ lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of al
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines
 lake env lean Checks/LedgerCheck.lean  # every proposition a proof uses is listed in its ledger row, and every claimed use is made
 lake env lean Checks/Star9Readings.lean  # ✱9 under its four readings (scripts/star9_readings.py writes docs/STAR9_READINGS.md)
-tests/run_all.sh                 # all of the above, ClauseSearch and the regression tests
+tests/run_all.sh                 # all of the above, ClauseSearch, the quick statement mutation and the regression tests
 ```
+
+Before a release, the maintainer also runs `scripts/release_check.sh` ([docs/VERIFICATION.md](docs/VERIFICATION.md#before-a-release)):
+the full statement mutation and the Mathlib counterparts, which take longer and download Mathlib.
 
 If you add theorems, also run `python3 scripts/gen_axiomcheck.py`, so that `AxiomCheck.lean` covers them.
 After committing, run `python3 scripts/progress.py --update` to refresh `docs/PROGRESS.md`. Update the counts
 in `README.md` and `docs/FIDELITY.md` if they change, and add a line to `CHANGELOG.md`. Do not edit
-generated files (`PM/Statements.lean`, `PM/QuantLift.lean`, `AxiomCheck.lean`) by hand; see
+generated files (`PM/Statements.lean`, `PM/QuantLift.lean`, `AxiomCheck.lean`, the counterpart checks) by
+hand; `tests/test_regeneration.py` fails if one differs from its generator's output. See
 [scripts/README.md](scripts/README.md).
 
 ## Questions, corrections and proposals

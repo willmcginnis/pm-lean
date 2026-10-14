@@ -191,16 +191,25 @@ only the record's account of it:
   runs in `tests/run_all.sh` with this repository's Lean, and was also run with the pinned Lean v4.33.1
   (`819816b`), with the same result; `tests/test_counterparts.py` reruns it with v4.33.1 when that
   toolchain is installed.
-- **The 14 Mathlib counterparts are checked from their source** (`checked: "source"`): this repository does
-  not depend on Mathlib, and they have not been compiled. `scripts/export_names.py --check` reads each
+- **The 14 Mathlib counterparts are checked by Lean against the pinned Mathlib** (`checked:
+  "lean-mathlib"`), and from their source. The repository's own Lake project does not depend on Mathlib;
+  [Checks/MathlibCounterparts/](../Checks/MathlibCounterparts/MathlibCounterparts.lean) is a Lake project
+  of its own, requiring Mathlib `0df444a` with its Lean v4.33.1, and the default `lake build` does not
+  build it. Its one file is generated like Checks/Counterparts.lean and makes the same checks, with two
+  differences. A Mathlib record's signature is the header in the source, not the printed type, so it is
+  checked against the source (below), not against Lean's printing. And `#classical` checks the record's
+  `classical` against the axioms the proof uses, so these records say `classical_from: "axioms"`. All 14
+  typecheck. It runs before a release, in `scripts/release_check.sh`
+  ([VERIFICATION.md](VERIFICATION.md#before-a-release)), since it needs Mathlib's build (`lake exe cache
+  get`, a few GB). Without Mathlib, `scripts/export_names.py --check` still reads each
   recorded signature, the declaration's header as written at the pin, with a strict parser of the
   propositional fragment (Lean's precedences; anything that is not a type over `Prop` variables is
   rejected). For the variables it takes from its section, the record also gives the section's `variable`
   line. The check then instantiates the variables as recorded and compares the result with PM's formula
-  under the criterion. `--verify-counterparts DIR`, run by hand against checkouts of the pins, checks that
-  the header at the recorded line is the recorded signature, and the `variable` line the recorded one, up
-  to whitespace. Compiling them against Mathlib `0df444a` is a follow-up; a record so checked would say
-  `checked: "lean-mathlib"`.
+  under the criterion. `--verify-counterparts DIR`, run against checkouts of the pins (by
+  `scripts/release_check.sh` with `COUNTERPART_SOURCES=DIR`), checks that the header at the recorded line
+  is the recorded signature, and the `variable` line the recorded one, up to whitespace. `checked:
+  "source"` remains for a Mathlib record that is not compiled; none is.
 
 The same strict parser also reads the 54 Lean core signatures, so without Lean the Python check already
 rejects a signature that is not a type, or a declaration that does not state PM's formula.
@@ -251,9 +260,10 @@ mutations in `tests/test_export_names.py`):
   PM formula equal to the statement exported now; and a signature that, read strictly and instantiated as
   recorded, states that formula under the criterion. No network is needed: `--verify-counterparts DIR`
   checks the files, lines and source headers in local checkouts, by hand. The Lean core ones are also
-  checked by Lean (`Checks/Counterparts.lean`, above);
-- data/export_names.json and Checks/Counterparts.lean are what the generator produces from the current
-  statements and records.
+  checked by Lean (`Checks/Counterparts.lean`, above), and the Mathlib ones against the pinned Mathlib
+  before a release (`Checks/MathlibCounterparts/`, above);
+- data/export_names.json, Checks/Counterparts.lean and Checks/MathlibCounterparts/MathlibCounterparts.lean
+  are what the generator produces from the current statements and records.
 
 ## Why
 

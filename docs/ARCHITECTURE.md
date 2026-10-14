@@ -254,10 +254,12 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   L uses Switch;
   docs/STAR9_READINGS.md) and `ExportStatements.lean` (each PM proposition's statement as a tree, from
   which `scripts/export_names.py` generates export names; [NAMING.md](NAMING.md)).
-- `tests/`: the regression tests and `run_all.sh`, which runs every check
+  `Checks/MathlibCounterparts/` is a Lake project of its own, which `lake build` does not build: the
+  Mathlib counterparts of ✱1–✱5 compiled against the pinned Mathlib, before a release.
+- `tests/`: the regression tests and `run_all.sh`, which runs every standing check
   ([tests/README.md](../tests/README.md)).
-- `scripts/`: the statement parser and generators, and the progress counter
-  ([scripts/README.md](../scripts/README.md)). `scripts/mutation/` is the statement-mutation trial, a Lean
-  meta-program and its driver ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)).
+- `scripts/`: the statement parser and generators, the progress counter, and `release_check.sh`, the
+  checks run before a release ([scripts/README.md](../scripts/README.md)). `scripts/mutation/` is the
+  statement mutation, a Lean meta-program and its driver ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)).
 - `data/`: the fidelity ledgers, the parsed Vol I text and the item lists
   ([data/README.md](../data/README.md)).

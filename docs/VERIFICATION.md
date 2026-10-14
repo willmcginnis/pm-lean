@@ -20,16 +20,19 @@ Requires the Lean toolchain named in `lean-toolchain` (install it with
 | `python3 data/fidelity_counts.py` | the three fidelity counts per chapter ([FIDELITY.md](FIDELITY.md)); any other line it prints is an inconsistency in a ledger |
 | `lake env lean Checks/LedgerCheck.lean` | citations against proof terms: every proposition a `PM/Chain.lean` docstring cites is used by its proof (15 declarations), every PM proposition the proof of a ✱11–✱23 ledger row uses is listed in the row (372 rows), and, conversely, every proposition the row claims as used (`cited_used`, `extra_used`, `glue`) is used by the proof, through helpers (a definition counts where a declaration realizing it is referenced, a primitive proposition where its constructor is applied); the same both ways for the ledger of ✱9's own method, `data/star9f_ledger.json` (36 rows with a proof, for the working reading C and, for ✱9·31, also L and the cross-check B; 7 more are built into the syntax); 0 disagreements, and nothing left unresolved in `tests/ledger_unlisted_uses.txt` or `tests/ledger_unused_claims.txt`. `tests/ledger_negative.sh` (a step of run_all.sh) checks that a fabricated claim, a fabricated definition and a removed use each make it fail. The ✱2–✱5 ledgers are not checked against the proofs |
 | `lake env lean Checks/Star9Readings.lean` | ✱9 under its four readings (A as printed; C as printed + ✱8·13, the working reading; L, Landini's ✱9+, a cross-check; B, the cross-check): for each ✱9 proposition the readings under which it is derived, read from the Lean statements, the cases of p. 142 each leaves open, and where C's proofs use ✱8·13 and L's use Switch (occurrences of `Thm9.exch` and `Thm9.switch` in the proof terms, ✱8·13's by the kinds of the quantifiers it exchanges; each combination of p. 142 searched again without and with the rule); `scripts/star9_readings.py` writes them to [STAR9_READINGS.md](STAR9_READINGS.md), and `tests/test_star9_readings.py` pins them |
-| `python3 scripts/mutation/mutate.py --quick` | a trial, not part of `run_all.sh` ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)); runs `lake build` first: no unused hypothesis in the 1308 theorems written in the source, the seven planted cases flagged; no proof term of 13 sampled ✱1–✱5 statements accepts any of their 469 one-change mutants; about 10 s |
-| `python3 scripts/mutation/mutate.py --full` | the same for all 198 ✱1–✱5 and 517 ✱9–✱21 statements (12,711 mutants), with hypotheses replaced by `True` and recompiled, and the proof scripts re-elaborated against every tautological mutant of the ✱1–✱5 statements proved in the replay files (all but ✱1·2–✱1·6, `Thm`'s constructors, which have no script); only the 14 renamings listed in `scripts/mutation/expected.json` survive; about 10 min |
+| `python3 scripts/mutation/mutate.py --quick` | the quick tier of the statement mutation ([STATEMENT_MUTATION.md](STATEMENT_MUTATION.md)), a step of `run_all.sh` and a check an export must pass before upload; runs `lake build` first: no unused hypothesis in the 1308 theorems written in the source, the seven planted cases flagged; no proof term of 13 sampled ✱1–✱5 statements accepts any of their 469 one-change mutants; about 10 s on an idle machine |
+| `python3 scripts/mutation/mutate.py --full` | before a release (below): the same for all 198 ✱1–✱5 and 517 ✱9–✱21 statements (12,711 mutants), with hypotheses replaced by `True` and recompiled, and the proof scripts re-elaborated against every tautological mutant of the ✱1–✱5 statements proved in the replay files (all but ✱1·2–✱1·6, `Thm`'s constructors, which have no script); only the 14 renamings listed in `scripts/mutation/expected.json` survive; about 10 min |
 | `python3 scripts/kernel_census/census.py --ratchet` | the features of Lean's kernel that the PM derivations and their closure use equal `tests/expected_kernel_features.txt`, and the axiom users equal `tests/expected_axiom_users.txt` ([KERNEL_CENSUS.md](KERNEL_CENSUS.md)); about 15 s, run by `tests/test_kernel_census.py` |
 | `python3 scripts/kernel_census/census.py --check` | the full kernel census (the static walk of every declaration and its closure; the kernel's re-check of each theorem, definition and opaque constant, with its unfoldings recorded, inductive types, constructors, recursors and `partial` or `unsafe` definitions excepted; the examples included) agrees with the tables of [KERNEL_CENSUS.md](KERNEL_CENSUS.md); about 80 s, not part of `run_all.sh` |
-| `tests/run_all.sh` | the regression tests of [tests/](../tests/README.md) and all of the above but the statement-mutation trial (`SKIP_SLOW=1` leaves out ClauseSearch); ends with "all checks passed" |
+| `tests/run_all.sh` | the regression tests of [tests/](../tests/README.md) and all of the above but `mutate.py --full` and `census.py --check` (`SKIP_SLOW=1` leaves out ClauseSearch); ends with "all checks passed" |
+| `scripts/release_check.sh` | before a release (below): `tests/run_all.sh`, then the checks that run only before a release; ends with "all release checks passed" |
 
 `AxiomCheck.lean` is generated by `scripts/gen_axiomcheck.py` ([scripts/README.md](../scripts/README.md)).
 It covers every public theorem of every file under `PM/`, found by globbing, with its namespace (the ✱2–✱5
 theorems, `complete`, ✱9–✱24, ✱9's own foundation in `PM/Found9/`, the rule, style and model modules), and
-the definitions of the models; `tests/test_axiomcheck_coverage.py` checks that it is up to date. The "630 PM
+the definitions of the models; `tests/test_axiomcheck_coverage.py` checks that it is up to date, and
+`tests/test_regeneration.py` that it and every other generated file are their generator's output, byte
+for byte. The "630 PM
 propositions" of RedCheck and StyleCheck are the `q…` theorems of ✱9–✱24 by ✱10's method and the 188
 lifted copies of ✱2–✱5 (`PM.QL.t…`; ✱9's own method, `PM.F9.f…`, is not among them), a different unit from
 the assertions counted in [PROGRESS.md](PROGRESS.md); that page defines both and sorts the 630 into its units.
@@ -39,6 +42,23 @@ The repository contains no `sorry`, no `native_decide`, no `axiom` declaration, 
 `scripts/prove2me/extract_commands.lean`, which no Lean file imports, declares `unsafe def main`, because
 Lean requires unsafe code to enable initializers before it re-elaborates a file. `tests/run_all.sh`
 allows exactly that line.
+
+### Before a release
+
+Checks that take long, or need what the repository does not depend on, run on our own machines before a
+release (an export to Prove2Me, or a release of the repository), not on every push.
+`scripts/release_check.sh` runs them all, after every standing check of `tests/run_all.sh`
+(`SKIP_STANDING=1` leaves those out):
+
+| Check | Expected result |
+|---|---|
+| `python3 scripts/mutation/mutate.py --full` | as above; about 10 minutes on 8 cores |
+| `lake exe cache get`, then `lake env lean MathlibCounterparts.lean`, in `Checks/MathlibCounterparts/` | the 14 Mathlib counterparts of ✱1–✱5 (data/naming/counterparts.json) compiled against Mathlib `0df444a` with its Lean v4.33.1: each states PM's formula exactly, by the criterion of [NAMING.md](NAMING.md#counterparts), and its `classical` flag matches the axioms its proof uses; prints "Mathlib counterparts: 14 checked by Lean against Mathlib 0df444a". A Lake project of its own, so the repository's `lake build` needs no Mathlib; the first `lake exe cache get` downloads Mathlib's build, a few GB |
+| with `COUNTERPART_SOURCES=DIR`: `python3 scripts/export_names.py --check --verify-counterparts DIR` | each counterpart's file and line, and a Mathlib one's header and `variable` line, in checkouts of the pins at `DIR/<repository>-<commit>` |
+
+An export also runs its own checks before upload, with the platform's Lean
+([scripts/prove2me/README.md](../scripts/prove2me/README.md)); the quick tier of the statement mutation is
+the first of them.
 
 ## Lean's axioms
 

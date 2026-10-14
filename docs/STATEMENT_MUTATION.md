@@ -1,7 +1,10 @@
 # Statement mutation: are statements tied to their proofs and to PM?
 
-A trial (rulings of 2026-10-13: tiered checks; the statement-mutation trial). Its results decide which
-parts become standing checks; none is in `tests/run_all.sh` yet.
+A trial (rulings of 2026-10-13: tiered checks; the statement-mutation trial), now standing in two tiers
+(the maintainer's ruling on checks: the full suite runs on our own machines, a small fast subset on
+time-limited remotes and on the export path). `--quick` is a step of `tests/run_all.sh` and a check an
+export must pass before upload; `--full` is part of `scripts/release_check.sh` ([Where it
+runs](#where-it-runs)).
 
 Lean's kernel checks every proof, so mutating a proof teaches nothing. What a kernel check does not show is
 that the statement says what it should. A statement can be weaker than intended (a premise it does not
@@ -193,9 +196,11 @@ The other 23 are mutants of the primitive propositions ✱1·2–✱1·6. They h
 check is their only check here. That check ties each constructor to the definition `s1_…` it is declared
 with, and to nothing more: no replay derives a primitive proposition.
 
-What ties the statement to the printed text itself is the generator from `data/vol1.jsonl`. The committed
-files are reproduced byte for byte ([scripts/README.md](../scripts/README.md)), but no test checks that.
-Mutation cannot check it either.
+What ties the statement to the printed text itself is the generator from `data/vol1.jsonl`. Mutation
+cannot check that. `tests/test_regeneration.py` does: it runs the generators in a scratch copy and
+requires `PM/Statements.lean`, `PM/QuantLift.lean` and every other generated file to come out byte for
+byte as committed. It fails on a line added by hand to any of them, and on a formula of `data/vol1.jsonl`
+changed without regenerating.
 
 For ✱9–✱21 the statements are written by hand, with PM's formula quoted in each docstring. This trial
 does not compare them with the text.
@@ -205,8 +210,8 @@ No fidelity problem was found.
 ## How to run
 
 ```
-python3 scripts/mutation/mutate.py --quick   # about 10 s
-python3 scripts/mutation/mutate.py --full    # about 10 min on 8 cores (--jobs N)
+python3 scripts/mutation/mutate.py --quick   # about 10 s idle, under a minute loaded; in tests/run_all.sh
+python3 scripts/mutation/mutate.py --full    # about 10 min on 8 cores (--jobs N); in scripts/release_check.sh
 ```
 
 Both modes first run `lake build` on the modules the meta-program imports (`PM`, `Checks.PinnedStatements`).
@@ -240,14 +245,28 @@ under heavier load):
 Both modes exit 1 on any finding not in `expected.json`, or if a control, a planted case or the seeded
 case fails. Working files go to `.lake/mutation/`.
 
-## Recommendation (for a ruling)
+## Where it runs
 
-- **Standing in `--quick`**, on the export path before an upload, and possibly in `tests/run_all.sh`:
-  Part 1 on every theorem (self-checking through its planted cases) and the 13 sampled statements. It
-  takes 8 s, and it fails on a new unused hypothesis.
-- **Standing in `--full`**, run locally before an export release: all of Part 2 and the re-elaboration.
-  The re-elaboration is the part that can tell a proof by PM's derivation from a proof by decision.
-- **Hypothesis recompilation: optional.** It found nothing beyond the term analysis, at about 5 minutes.
-  It could be kept for tactic proofs only, or dropped.
-- **Separately:** a test that `gen_lean.py` and `gen_quant_lift.py` reproduce `PM/Statements.lean` and
-  `PM/QuantLift.lean`. This is the link to PM's text that mutation cannot check.
+The trial ended with a recommendation. The maintainer's ruling on checks settles where each tier runs:
+long checks on our own machines, a small, fast subset on time-limited remotes and on the export path.
+What is wired now:
+
+- **`--quick` is standing**, in two places.
+  - It is a step of `tests/run_all.sh`, so it runs on every push in CI. It covers
+    Part 1 on every theorem (self-checking through its planted cases) and the 13 sampled statements, and
+    it fails on a new unused hypothesis. It measured 8 s on an idle machine and 30–40 s on a loaded
+    shared one, nearly all of it in the build step and Lean's start-up.
+  - It is check 0 of `scripts/prove2me/verify.py`, the checks an export must pass before upload
+    ([scripts/prove2me/README.md](../scripts/prove2me/README.md)). It runs on the copy of the commit
+    exported, built with the platform's Lean v4.33.1, with that commit's own tool. It gives the same
+    counts there as with the repository's Lean, and it fails on the planted unused hypothesis above. A
+    commit older than the tool fails the check rather than skipping it.
+- **`--full` runs before a release**, in `scripts/release_check.sh`, with the other long checks
+  ([VERIFICATION.md](VERIFICATION.md#before-a-release)). That means all of Part 2 and the
+  re-elaboration. The re-elaboration is the part that can tell a proof by PM's derivation from a proof by
+  decision.
+- **Hypothesis recompilation is still part of `--full`.** The recommendation called it optional: it
+  found nothing beyond the term analysis, at about 5 minutes. Keeping it for tactic proofs only, or
+  dropping it, awaits a ruling. Until then it stays in, since it costs only time on our own machines.
+- **The link to PM's text** that mutation cannot check is now `tests/test_regeneration.py`, a test in
+  `tests/run_all.sh` ([above](#what-this-says-about-the-tie-to-pms-text)).
