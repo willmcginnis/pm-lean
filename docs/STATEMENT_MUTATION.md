@@ -260,10 +260,9 @@ A few statements take most of it, each with 6 to 52 mutants: ✱25·431 3452 s a
 (together 77% of the meta-program), ✱24·431 260 s, ✱24·432 241 s, ✱25·491 206 s, ✱25·493 166 s,
 ✱25·44 94 s, ✱23·93 71 s. The skeleton tautology tests of the statements from ✱9 on take 142 s.
 
-The meta-program is a single process (`--jobs` applies only to the recompilations), and it is bound by
-memory: `/usr/bin/time` gave a maximum resident set of 23,093,504 kB (about 22 GiB) on a machine with
-24 GB of RAM, which swapped (247 million major page faults); 118% CPU over the run. A faster comparison
-with the same meaning is planned.
+The meta-program is a single process (`--jobs` applies only to the recompilations). For the whole run,
+`/usr/bin/time -v` reported a maximum resident set of 23,093,504 kB (about 22 GiB), 247 million major page
+faults and 118% CPU. A faster comparison with the same meaning is planned.
 
 Before ✱25 the same run took 1708 s with ✱1–✱24 on a shared machine (2026-10-14), and 524 s before
 ✱22–✱24 on a less loaded one.
