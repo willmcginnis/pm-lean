@@ -128,9 +128,9 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   Skipped: neither the collapse model nor the finite model sees orders, and an order-aware model of the
   whole hierarchy (restricted ranges at every type, closed under comprehension) is not cheap. Only the
   syntactic half is proved: the matrix style admits less (`QThm.matrix_to_lowestOrder`, golden tests).
-- "Both must pass": every PM theorem (✱1–✱23 so far) is stated for an arbitrary system, so for both
-  styles; `StyleCheck.lean` instantiates each of the 630 PM propositions under each style and named
-  system and reports the result (§3, test S1). Consistency is proved for both styles in both models
+- "Both must pass": every PM theorem of ✱10's method (✱9–✱23 so far, and the lifted copies of ✱2–✱5) is
+  stated for an arbitrary system, so for both styles; `StyleCheck.lean` instantiates each of these 630 PM
+  propositions under each style and named system and reports the result (§3, test S1). Consistency is proved for both styles in both models
   (`consistent_of_style`, `consistent_collapse_of_style`).
 
 **Arguments of a predicative function need not be predicative.** p. 174: "Let φx̂ be a function, of

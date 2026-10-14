@@ -203,8 +203,8 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   - All 72 numbered propositions ✱22·1–✱22·95 are proved. Most hints cite one proposition of ✱3–✱5;
     the proof carries it under (x), rewrites the memberships by ✱22·33–✱22·35 and gets the identity by
     ✱20·43, as the printed Dem. of ✱22·5 does.
-  - ✱22·54, ✱22·55 (and ✱22·94's last step) use ✱20·18 for an expression such as α ⊂ γ (`qcls20_18`),
-    extensional by `clsExpr_ext` (p. 200); ✱22·6 and ✱22·94 instantiate an apparent class at α ∪ β or
+  - ✱22·54, ✱22·55 (and ✱22·94's last step) use ✱20·18's proof for an expression such as α ⊂ γ
+    (`qcls20_18`), extensional by `clsExpr_ext` (p. 200); ✱22·6 and ✱22·94 instantiate an apparent class at α ∪ β or
     −α by the class analogue of ✱10·1 (`qclsAllAt`). ✱22·94, ✱22·95 take fα as an extensional
     expression (`ClsExt`).
   - ✱22·351 (−α ≠ α) takes a real variable for ✱10·251, as `q10_251` does: it fails for an empty type.
@@ -213,8 +213,10 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   macros, with PM's signs as scoped notation (`R ⪽ S`, `R ∩̇ S`, `R ⊍ S`, `∸R`, `R ∸ S`).
   - All 72 numbered propositions ✱23·1–✱23·95 are proved. PM's relation S is `S'` in Lean, as `S` names
     the system.
-  - ✱23·02 follows the 1910 print, which the transcription misreads (FIDELITY.md). ✱23·54, ✱23·55 and
-    ✱23·94 use ✱21·18 for an extensional expression of R (`qrel21_18`; `relExpr_ext` for R ⪽ T); fR in
+  - ✱23·02 follows the 1910 print, which the transcription misreads (FIDELITY.md). ✱23·45 follows the
+    print too, an implication where ✱22·45 has ≡; the equivalence, which ✱23·74 uses, is the variant
+    `q23_45_iff`. ✱23·54, ✱23·55 and ✱23·94 use ✱21·18's proof for an extensional expression of R
+    (`qrel21_18`; `relExpr_ext` for R ⪽ T); fR in
     ✱23·94 and ✱23·95 is extensional (`RelExt`), as fα is in ✱22 (`ClsExt`).
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
   ([SEMANTICS.md](SEMANTICS.md)), with ✱12·1, and at the one-element family also with comprehension alone

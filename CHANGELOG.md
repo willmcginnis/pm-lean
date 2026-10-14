@@ -32,9 +32,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     ✱22·45. A first version proved the equivalence under the number ✱23·45 without recording the change.
 - **Kernel census** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py` and `KernelCensus.lean`
   report which features of Lean's kernel the PM derivations, the metatheory and their closure in Lean
-  core rely on. Each is measured three ways: statically, from the kernel's own record of a re-check of
-  every declaration, and by probes of the Nat operations it computes on literals. The `example`s are
-  included.
+  core rely on. Each is measured three ways: statically, over every declaration and its closure; from the
+  kernel's own record of a re-check of each theorem, definition and opaque constant (inductive types,
+  constructors, recursors and `partial` or `unsafe` definitions are not re-checked); and by probes of the
+  Nat operations it computes on literals. The `example`s are included.
   - The closure of the 1120 derivation theorems (✱22 and ✱23 included) needs no mutual inductive,
     quotient, axiom, opaque or partial/unsafe declaration. Its one nested type, `Lean.Syntax`, arrives
     only through the auto-param of `PM.Pf.hy`. `Nat.log2` is not computed on literals in Lean 4.34.1,
