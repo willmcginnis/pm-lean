@@ -2,8 +2,8 @@
 # The checks run before a release, from the repository's root: the long ones, which do not run on every
 # push (docs/VERIFICATION.md, "Before a release"). First every standing check (tests/run_all.sh), then
 #   - the full statement mutation (scripts/mutation/mutate.py --full, docs/STATEMENT_MUTATION.md): all
-#     statements of ✱1–✱5 and from ✱9 on, the proof scripts re-elaborated, hypotheses recompiled; tens
-#     of minutes on 8 cores;
+#     statements of ✱1–✱5 and from ✱9 on, the proof scripts re-elaborated, hypotheses recompiled; with
+#     ✱25, more than two hours;
 #   - the Mathlib counterparts compiled against the pinned Mathlib (Checks/MathlibCounterparts/, a Lake
 #     project of its own; `lake exe cache get` downloads Mathlib's build, a few GB, the first time);
 #   - with COUNTERPART_SOURCES=DIR, each counterpart's file, line and source header in checkouts of the

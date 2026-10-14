@@ -108,6 +108,7 @@ therefore exactly the ones a proof by decision procedure could still prove.
 ## Results
 
 Results are from the full run of 2026-10-14 (`scripts/release_check.sh`), with ✱22, ✱23 and ✱24 included.
+✱25 is not in them: a full run with ✱25 has not yet completed (below, under `--full`'s timings).
 
 **Part 1.** No unused hypotheses: 1389 theorems, 919 hypotheses (494 premises, 390 class arguments, 35
 unreferenced variables), and 0 unused, by both the plain and the refined test. The seven planted cases
@@ -211,7 +212,7 @@ No fidelity problem was found.
 
 ```
 python3 scripts/mutation/mutate.py --quick   # about 10 s idle, under a minute loaded; in tests/run_all.sh
-python3 scripts/mutation/mutate.py --full    # tens of minutes on 8 cores (--jobs N); in scripts/release_check.sh
+python3 scripts/mutation/mutate.py --full    # hours with ✱25, see the timings below (--jobs N); in scripts/release_check.sh
 ```
 
 Both modes first run `lake build` on the modules the meta-program imports (`PM`, `Checks.PinnedStatements`).
@@ -242,6 +243,12 @@ shared with other jobs (before ✱22–✱24, 524 s on a less loaded machine):
   (175 s for the whole meta-program before);
 - re-elaboration, 74 s (54 s);
 - hypothesis recompilation, 356 s (295 s).
+
+With ✱25 the statements from ✱9 on take much longer, and a full run has not yet completed. In the one
+attempt (2026-10-14), stopped after two hours inside ✱25·432, the kernel's comparison of each proof's type
+with its mutants (`Kernel.isDefEq`) took 3666 s for the first 41 of ✱25's 70 statements, 3513 s of it for
+✱25·431 alone (238 s for its analogue ✱24·431). Up to that point nothing unexpected was found: 1009
+hypotheses, none unused; 736 statements and 10,888 mutants, none accepted by a proof term.
 
 Both modes exit 1 on any finding not in `expected.json`, or if a control, a planted case or the seeded
 case fails. Working files go to `.lake/mutation/`.

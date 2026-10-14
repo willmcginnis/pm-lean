@@ -121,6 +121,9 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     before ✱22–✱24): the meta-program 1277 s, 1206 s of it for the statements from ✱9 on;
     re-elaboration 74 s; hypothesis recompilation 356 s. The tool takes every numbered proposition from
     ✱9 on, so its output no longer calls that group ✱9–✱21.
+    With ✱25 a full run has not yet completed: in the one attempt, stopped after two hours, the kernel's
+    comparisons of ✱25·431's proof with its mutants alone took 58 minutes (4 for ✱24·431); nothing
+    unexpected had been found by then.
 - **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
   "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
   counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the

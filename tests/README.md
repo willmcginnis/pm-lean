@@ -68,5 +68,5 @@ Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, a
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
-`scripts/mutation/mutate.py --full` (tens of minutes on 8 cores) and the Mathlib counterparts. Run it on
+`scripts/mutation/mutate.py --full` (with ✱25, more than two hours) and the Mathlib counterparts. Run it on
 your own machine before an export or a release, not on a time-limited remote.
