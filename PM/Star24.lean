@@ -778,7 +778,7 @@ theorem qline24_48 [Reducibility S] (α β ξ ξ' η η' : V a → QF V) :
     this one by Simp and Comp (with ✱22·51 for β ∩ α) and its ξ ∪ η, ξ' ∪ η' commuted by ✱22·57 (✱20·22·23,
     Syll ✱2·06). (1).(8).(9): the halves joined by ✱3·43, (1) put under Hp by ✱2·02. -/
 theorem q24_48 [Reducibility S] (α β ξ ξ' η η' : V a → QF V) :
-    QThm S (imp (hyp24_48 α β ξ ξ' η η')
+    QThm S (imp (QF.and (QF.and (QF.and (QF.and (ξ ⊂ α) (ξ' ⊂ α)) (η ⊂ β)) (η' ⊂ β)) (clsEq (α ∩ β) Λ))
       (iff (clsEq (ξ ∪ η) (ξ' ∪ η')) (QF.and (clsEq ξ ξ') (clsEq η η')))) :=
   let H := hyp24_48 α β ξ ξ' η η'
   let E := clsEq (ξ ∪ η) (ξ' ∪ η')

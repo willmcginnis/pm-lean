@@ -37,7 +37,8 @@ SUBJECT = {2: "immediate consequences of the primitive propositions", 3: "the lo
            4: "equivalence and formal rules", 5: "miscellaneous propositions", 9: "extension of the theory of deduction from lower "
            "to higher types of propositions", 10: "theory of propositions containing one apparent variable",
            11: "theory of two apparent variables", 13: "identity", 14: "descriptions", 20: "general theory of classes",
-           21: "general theory of relations", 22: "calculus of classes", 23: "calculus of relations"}
+           21: "general theory of relations", 22: "calculus of classes", 23: "calculus of relations",
+           24: "the universal class, the null-class, and the existence of classes"}
 
 
 def git(*a):

@@ -21,6 +21,9 @@ def rng(c):
 
 # vol1.jsonl flags that are wrong against the printed page
 FORCE_PP = {"*1.11", "*3.03"}   # rules stated as Pp in PM
+# items printed in 1910 that the transcription omits, each placed after the item it follows in the print:
+# ✱24·51 (p. 239), whose Dem. the transcription prints under ✱24·5
+MISSING = {"*24.5": {"id": "*24.51", "range": "20-56", "chapter": 24, "page": 239, "cat": "assertion"}}
 
 out = []
 for line in open(root / "data/vol1.jsonl", encoding="utf-8"):
@@ -31,6 +34,8 @@ for line in open(root / "data/vol1.jsonl", encoding="utf-8"):
     elif "vdash" not in s and r["chapter"] <= 14: cat = "rule/prose"
     else: cat = "assertion"
     out.append({"id": i, "range": rng(r["chapter"]), "chapter": r["chapter"], "page": r["page"], "cat": cat})
+    if i in MISSING:
+        out.append(MISSING[i])
 
 with open(root / "data/vol1_items.json", "w", encoding="utf-8") as f:
     f.write("[\n" + ",\n".join(json.dumps(o, ensure_ascii=False) for o in out) + "\n]\n")

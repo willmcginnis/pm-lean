@@ -218,6 +218,20 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
     `q23_45_iff`. ✱23·54, ✱23·55 and ✱23·94 use ✱21·18's proof for an extensional expression of R
     (`qrel21_18`; `relExpr_ext` for R ⪽ T); fR in
     ✱23·94 and ✱23·95 is extensional (`RelExt`), as fα is in ✱22 (`ClsExt`).
+- `PM/Star24.lean`: the universal class, the null-class and the existence of classes. ✱24·01–✱24·03 are
+  macros: V is the class x̂(x = x), Λ is −V, and ∃!α is (∃x) . x ∈ α, with the notation `𝐕` (V cannot
+  be a token: it names the variable family) and `Λ` scoped to `PM`.
+  - All 70 numbered propositions ✱24·1–✱24·63 are proved, ✱24·51 included (printed on p. 239, omitted by
+    the transcription). Statements follow the 1910 print where the transcription differs (✱24·21,
+    ✱24·311, ✱24·41, ✱24·411, ✱24·431, ✱24·45, ✱24·55, ✱24·58, ✱24·6; docs/FIDELITY.md).
+  - A chain of identities of classes "α = β = γ" is a `calc` block of `≐` lines joined by ✱20·22.
+    Putting a class for an identical one inside an expression is ✱20·18 for the expression with ✱20·2
+    (`qclsEqCongr`); ✱24·11 and ✱24·12, about an apparent class, are used at a real one by the class
+    analogue of ✱10·1 (`qclsAllAtExt`); ✱24·63's [✱13·191] is its class analogue ✱20·53 for the
+    expression α ∼∈ κ (`qcls20_53`).
+  - ✱24·1 (Λ ≠ V) and ✱24·52 (∃!V) take a real variable, as ✱22·351 does; PM says so (p. 239).
+  - Where the print is unclear: ✱24·141's last line is α = V, its statement V = α (✱20·21 joins them);
+    ✱24·492 cites ✱22·481 for a replacement in the second factor, which ✱22·481 does not give.
 - `PM/Trap.lean`: two degenerate variable families at which every formula is a theorem
   ([SEMANTICS.md](SEMANTICS.md)), with ✱12·1, and at the one-element family also with comprehension alone
   (`trap_unit_compr`).

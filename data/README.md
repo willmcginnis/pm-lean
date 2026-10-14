@@ -3,11 +3,11 @@
 | File | What it is | Made by |
 |---|---|---|
 | `vol1.jsonl` | PM Vol I parsed from Project Gutenberg eBook #78050: one record per numbered item | `scripts/parse_vol1.py` |
-| `vol1_items.json` | Vol I's 3,449 numbered items with range, chapter, page and category: the denominators | `scripts/vol1_items.py` |
+| `vol1_items.json` | Vol I's 3,450 numbered items with range, chapter, page and category: the denominators | `scripts/vol1_items.py` |
 | `vol2_labels.json` | the distinct ✱100–✱234 labels printed in bold in Project Gutenberg eBook #78255 (Vol II): an upper bound | `scripts/progress.py --vol2-html` |
 | `replay_ledger.json` | ✱2–✱5, first ledger: all 188 propositions | by hand, with the proofs |
 | `replay2_ledger.json` | ✱2–✱5, second ledger: the 85 proofs of `PM/Replay2.lean` | by hand, with the proofs |
-| `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json`, `star22_ledger.json`, `star23_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
+| `star11_ledger.json`, `star12_ledger.json`, `star13_ledger.json`, `star14_ledger.json`, `star20_ledger.json`, `star21_ledger.json`, `star22_ledger.json`, `star23_ledger.json`, `star24_ledger.json` | one row per numbered item formalized in that chapter | by hand, with the proofs |
 | `roadmap.json` | the roadmap: groups, subgroups and tasks, each with status, size, dependencies, order, prior work and the rows of `docs/PM_CLAIMS.md` it checks, and the repositories whose source the prior work was read in, each at a full commit ([docs/ROADMAP.md](../docs/ROADMAP.md)) | by hand; drawn and listed by `scripts/roadmap_chart.py` |
 | `star9f_ledger.json` | ✱9 by its own method (PM/Found9): one row per ✱9 number, and for ✱10·01, ✱10·1, ✱10·11, ✱10·12 proved in ✱9 ([docs/STAR9_FOUNDATION.md](../docs/STAR9_FOUNDATION.md)) | by hand, with the proofs |
 | `export_names.json` | the export name of every PM proposition the repository states, with its PM number, PM's name, slot, reading, the digests of its statement and of the definitions it uses, a descriptor for titles and search, and its source ([docs/NAMING.md](../docs/NAMING.md)) | `scripts/export_names.py` |
@@ -52,9 +52,10 @@ in 1970. If you are outside the USA, check the laws of your country before using
 | `is_def`, `is_pp` | flagged as a definition (Df) or primitive proposition (Pp) by the parser |
 | `pos`, `occurrences` | offset of the label in the HTML; how many times the label occurs (the record kept is the one with a proof, hint or flag) |
 
-`vol1_items.json` corrects two of the parser's flags (✱1·11 and ✱3·03 are rules that PM marks Pp) and puts
-each item in one category: `assertion`, `Df`, `Pp` or `rule/prose` (a rule stated in words, ✱1–✱14 only).
-Counts: 3,230 assertions, 186 Df, 19 Pp, 14 rules in words. These counts are "from the Gutenberg text with a
+`vol1_items.json` corrects two of the parser's flags (✱1·11 and ✱3·03 are rules that PM marks Pp), adds ✱24·51
+(printed on p. 239; the transcription omits it and prints its Dem. under ✱24·5), and puts each item in one
+category: `assertion`, `Df`, `Pp` or `rule/prose` (a rule stated in words, ✱1–✱14 only).
+Counts: 3,231 assertions, 186 Df, 19 Pp, 14 rules in words. These counts are "from the Gutenberg text with a
 few corrections" in [docs/FORMALIZATION_COMPARISON.md](../docs/FORMALIZATION_COMPARISON.md).
 
 `vol2_labels.json` has 3,901 rows `{chapter, number, page}`: each distinct label in bold, with the page of
@@ -95,12 +96,12 @@ Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103
 | `tacit` | the steps PM leaves tacit throughout that the proof may use silently |
 | `fidelity` | `pm-lines`, `pm-lines+extra` or `unchanged` ([docs/FIDELITY.md](../docs/FIDELITY.md)) |
 | `reason`, `note` | why each extra is needed; other remarks |
-| `glue`, `glue_kind` | propositions used only for structural moves PM leaves unstated, and their kinds (`chain`, `order`, `under-exists`); ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23 only |
+| `glue`, `glue_kind` | propositions used only for structural moves PM leaves unstated, and their kinds (`chain`, `order`, `under-exists`); ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23, ✱24 only |
 | `scan_check` | the result of checking the 1910 print (3 rows of `replay2_ledger.json`) |
 
 Rows per file: `replay2` 85; `star11` 55 (51 assertions, 4 rules); `star12` 2 (the primitive propositions
 ✱12·1, ✱12·11); `star13` 25; `star14` 47; `star20` 53 (51 assertions, 2 rules); `star21` 46 (44
-assertions, 2 rules); `star22` 72; `star23` 72; `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) The 32 assertions of `star9f` are
+assertions, 2 rules); `star22` 72; `star23` 72; `star24` 70; `star9f` 43 (32 assertions, 6 primitive propositions, 5 rows on types). (`tests/test_data_readme.py` checks these counts against the files.) The 32 assertions of `star9f` are
 the 28 numbered ✱9 propositions and four of ✱10, all proved under the working reading C, the definitions
 as printed with Russell's ✱8·13 carried over: 32 of 32 (also under Landini's ✱9+, L; under the
 definitions as printed alone, ✱9·31 is not; the row says so, and
@@ -118,7 +119,7 @@ definitions as printed alone, ✱9·31 is not; the row says so, and
   - only PM's citations: 72 (`FAITHFUL`, in `PM/Replay.lean`) + 40 (`pm-lines`) = 112;
   - PM's lines plus extras: 31 (`REPAIRED`, in `PM/Replay.lean`) + 34 (`pm-lines+extra`) = 65;
   - no PM proof to follow: 11 (`unchanged`). 112 + 65 + 11 = 188.
-- **✱11, ✱20, ✱21, ✱22.** Count rows with `category` = `assertion` for the assertion tables. The rule rows
+- **✱11, ✱20, ✱21, ✱22, ✱24.** Count rows with `category` = `assertion` for the assertion tables. The rule rows
   (✱11·07, ✱11·11, ✱11·13, ✱11·311; ✱20·62, ✱20·633; ✱21·62, ✱21·633) are proved too. PM prints ✱11's
   rules in words. ✱20's and ✱21's are numbered with ⊢, so [docs/PROGRESS.md](../docs/PROGRESS.md) counts
   them as assertions, but `data/fidelity_counts.py` leaves them out.

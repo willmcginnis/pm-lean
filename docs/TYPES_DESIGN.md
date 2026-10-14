@@ -128,7 +128,7 @@ to say that values of matrices cannot form a quantified range; the types `pred1 
   Skipped: neither the collapse model nor the finite model sees orders, and an order-aware model of the
   whole hierarchy (restricted ranges at every type, closed under comprehension) is not cheap. Only the
   syntactic half is proved: the matrix style admits less (`QThm.matrix_to_lowestOrder`, golden tests).
-- "Both must pass": every PM theorem of ✱10's method (✱9–✱23 so far, and the lifted copies of ✱2–✱5) is
+- "Both must pass": every PM theorem of ✱10's method (✱9–✱24 so far, and the lifted copies of ✱2–✱5) is
   stated for an arbitrary system, so for both styles; `StyleCheck.lean` instantiates each of these 630 PM
   propositions under each style and named system and reports the result (§3, test S1). Consistency is proved for both styles in both models
   (`consistent_of_style`, `consistent_collapse_of_style`).
@@ -476,6 +476,7 @@ occurs in the declaration's type. Result: 270 PM propositions use reducibility, 
 | `PM/Star21.lean` | 903 | ✱21·01, ✱21·02, ✱21·03, ✱21·07–✱21·083 (macros), identity of relations, relations of relations and classes of relations; 46 of the 48 numbered propositions ✱21·1–✱21·71 (all but ✱21·631, ✱21·632); two-variable forms of ✱10·32, ✱10·321, ✱10·43; `qelim1_2`, `qelim2` (✱21·701–✱21·705); `qrelCls20_3`; `RelExpr`, `relExpr_ext` (p. 213) |
 | `PM/Star22.lean` | 731 | ✱22·01–✱22·05, ✱22·53, ✱22·71 (macros, with the notation ⊂, ∩, ∪, −); all 72 numbered propositions ✱22·1–✱22·95; ✱20·18 for an extensional expression (`qcls20_18`); `clsExt_neg`, `clsExt_compl`; `ClsExpr.clsSubset_left`, `ClsExpr.clsSubset_right` |
 | `PM/Star23.lean` | 850 | ✱23·01–✱23·05, ✱23·53, ✱23·71 (macros, with the notation ⪽, ∩̇, ⊍, ∸); all 72 numbered propositions ✱23·1–✱23·95, each proved as the analogous ✱22 proposition; ✱21·18 for an extensional expression (`qrel21_18`); `relExt_neg`, `relExt_compl`; `RelExpr.relSubset_left`, `RelExpr.relSubset_right` |
+| `PM/Star24.lean` | 1126 | ✱24·01–✱24·03 (macros, with the notation 𝐕, Λ); all 70 numbered propositions ✱24·1–✱24·63; chains of identities of classes (`≐`, joined by ✱20·22); ✱20·18 for an expression whose value is a class (`qclsEqCongr`); ✱20·53 for an extensional expression (`qcls20_53`); ✱22·68 with the common factor second (`qclsDistribRight`) |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
 | `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
 | `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
@@ -580,7 +581,7 @@ itself. The per-proposition ledgers are `data/star12_ledger.json`, `star13_ledge
 
 `AxiomCheck.lean`: 1287 names, every public theorem under `PM/`; 1280 report no axioms. The other 7 are the
 three propositional metatheorems and four declarations of the classical collapse model (below). Every PM
-theorem (✱2–✱5, the ✱9–✱23 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
+theorem (✱2–✱5, the ✱9–✱24 `q…` theorems, and ✱9 by its own method, `PM.F9.f…`), `complete`, `qsound`, `QThm.mono`,
 `consistent`, `consistent_all`, `consistent_of_style`, the five counter-models, the finite model,
 `restyle`, `styles_equiv` (and `styles_equiv_full`, `styles_equiv_real`), `curry_order`,
 `second_clause_iff_lowestOrder`, `anyLe_iff_le_maxL`, `lvl_iff_order`, `lvlArg_iff_orderArg`, the trap
@@ -727,7 +728,7 @@ search).
 
 ## 6. Not done
 
-- ✱14·3 as printed, with propositions as apparent variables (it is proved as a schema; §5, Q8); ✱24
+- ✱14·3 as printed, with propositions as apparent variables (it is proved as a schema; §5, Q8); ✱25
   onward.
 - Apparent classes of classes ((κ) . fκ) and identity of classes of classes, needed from ✱40 and ✱60 on
   ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).

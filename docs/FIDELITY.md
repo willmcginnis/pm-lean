@@ -30,13 +30,16 @@ it combines with `replay2_ledger.json`.
 
 ## Glue
 
-`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21, ✱22 and ✱23 ledgers. It leaves `fidelity` unchanged and
+`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21, ✱22, ✱23 and ✱24 ledgers. It leaves `fidelity` unchanged and
 lists the propositions a proof uses only for structural moves PM leaves unstated, each with its kind
 (`glue_kind`):
 
 - **`chain`**: joining the lines of a displayed chain. These are the `Trans` instances of `PM/Chain.lean`:
   ✱4·22 for two ≡ lines; ✱3·43, ✱2·02, ✱2·83 or ✱2·05 under a hypothesis; ✱3·26 where a ≡ line is followed
-  by a ⊃ line.
+  by a ⊃ line. In ✱24, a chain of identities of classes, "α = β [✱x] = γ", is joined the same way by
+  ✱20·22, the transitivity of identity of classes (the `Trans` instances of PM/Star24.lean); PM states no
+  warrant for leaving it tacit beyond that for ✱4·22 ("The principle is the same", p. 123), so the strict
+  count below counts it as extra.
 - **`order`**: putting factors, disjuncts, members, antecedents or apparent variables in the order the next
   cited proposition needs (✱4·3, ✱3·22, ✱4·31, ✱4·32, ✱2·04, ✱4·21, ✱11·2, ✱11·23, with ✱4·36 or ✱4·38
   inside such a permutation).
@@ -94,6 +97,7 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 | ✱21 (44) | 12 / 32 | 12 / 32 | 14 / 30 |
 | ✱22 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
 | ✱23 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
+| ✱24 (70) | 14 / 56 | 16 / 54 | 16 / 54 |
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
@@ -107,6 +111,8 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
   ✱4·3).
 - ✱23 has no numbered rules. Its last column differs from the recorded one at ✱23·46 and ✱23·74, whose
   only extras put factors in order (✱3·22, ✱4·3).
+- In ✱24 the strict count differs from the recorded one at ✱24·33 and ✱24·561, whose chains need only chain
+  glue (✱20·22 with ✱3·43 and ✱2·02 under Hp; ✱3·26 where a ≡ line is followed by a ⊃ line).
 
 ## By chapter
 
@@ -179,6 +185,15 @@ listed instead. As recorded, 19 / 53. Typical extras:
   ✱23·94), by its proof (`qrel21_18`, as `qcls20_18` in ✱22), with `relExpr_ext` (PM/Star21.lean) for the
   expressions PM's notation forms.
 
+**✱24** (70 propositions; `star24_ledger.json`), as recorded: ✱24 16 / 54 of 70. Most of ✱24 is the algebra of
+classes, proved by chains of identities, and the extras are the steps of that algebra PM leaves out:
+- putting a class for an identical one inside an expression (✱20·18 for the expression with ✱20·2,
+  `qclsEqCongr`, whose extensionality, p. 200, brings ✱4·2, ✱4·11, ✱4·39, ✱20·11 and steps under (x)), or
+  ✱22·481, ✱22·551 where PM's lines do so;
+- commuting and regrouping products and sums (✱22·51, ✱22·52, ✱22·57, ✱22·7) where PM's line has them in
+  another order, ✱22·68 with the common factor second, and turning an identity (✱20·21);
+- using ✱24·11 or ✱24·12, about an apparent class, at a real one (the class analogue of ✱10·1, p. 206).
+
 **Where the print is unclear,** the docstring says so. For example, ✱14·144 and ✱14·145 cite ✱14·111 where
 the unmarked form is ✱14·112, and ✱14·272 cites ✱10·414 for a ✱10·271 step. [ARCHITECTURE.md](ARCHITECTURE.md)
 lists these per file.
@@ -212,6 +227,17 @@ Following PM's lines line by line turned up these points. The errata themselves 
 - **✱4·42** (p. 124). The print cites `⊢ . ✱3·26 .` on line (2); the ebook omits it, so ✱3·26 is PM's
   citation here, not an extra (`replay2_ledger.json`). The text audit's human check confirmed this
   transcription error (2026-10-11); it is in its errata list for Vol I, §4.
+- **✱24** (pp. 229–240), checked against the 1910 scan item by item. The statements follow the print where
+  the transcription differs: ✱24·21 and ✱24·311 (`= Λ`; as transcribed, `= V`, ✱24·21 is false in any non-empty type), ✱24·41 and
+  ✱24·411 (a bracket), ✱24·45 (`β ⊂ γ . γ ⊂ −α`), ✱24·55, ✱24·58 and ✱24·6 (`α ⊂ β`; the transcription's
+  `α ⊃ β` between classes is not a formula), all on the text audit's Vol I list (entries 11–18). Two more are not on its
+  list: ✱24·431, where the transcription has (α ∩ γ) for the print's (α ∩ β) (false as transcribed; the
+  audit holds this entry, H15, unresolved), and ✱24·51 (`⊢ : ∼∃!α . ≡ . α = Λ`, p. 239), which the
+  transcription omits, printing its Dem. under ✱24·5; it is proved here and counted (`scripts/vol1_items.py`).
+  In the Dem. lines the transcription also differs from the print at ✱24·3, ✱24·42 (✱24·411 for ✱24·41),
+  ✱24·431, ✱24·48, ✱24·493 and ✱24·6; the proofs follow the print.
+- **✱24·141** (p. 232), in the print itself: the statement is `V ⊂ α . ≡ . V = α`, the Dem.'s last line
+  α = V; ✱20·21 joins them.
 - **✱22·84, ✱22·85** (p. 224). Gutenberg #78050 has `−α ∨ −β`, the sign of disjunction between two
   classes, where ✱22·03's sum of classes `−α ∪ −β` is the only reading that is a formula; ✱22·86 and
   ✱22·87 on the same page have ∪. Checked against the scan (2026-10-14): the 1910 print itself has the
