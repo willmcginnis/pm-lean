@@ -6,7 +6,8 @@ each particular case", that a notation is always eliminable, that a formula is n
 treats each such assertion as a claim to check in Lean, not an assumption to adopt
 ([PRINCIPLES.md](PRINCIPLES.md), principle 5). This page lists them, with their status.
 
-**Scope.** The Introduction and ✱1–✱21 of Vol. I (1910), pp. 1–216, read in full for this list; one later remark of the same kind as D10, ✱25's (p. 241), is added as D15. Claims that
+**Scope.** The Introduction and ✱1–✱21 of Vol. I (1910), pp. 1–216, read in full for this list; two later remarks of the same kind as D10 are added, ✱25's (p. 241) as D15 and
+✱23's (p. 226) as D16. The rest of ✱22–✱25, pp. 217–243, has not been read for this list. Claims that
 merely restate a numbered proposition proved in the body are not listed one by one (row F3).
 
 **Quotations** are PM's words, checked against Project Gutenberg eBook #78050 (the transcription this
@@ -114,6 +115,7 @@ and A29 give what it shows about the two methods.
 | D13 | Scope of class symbols: "the truth-value of any proposition in which ẑ(φz) occurs is the same whatever scope we may give to ẑ(φz), provided the proposition is an extensional function of whatever functions it may contain"; with two class symbols "all choices give equivalent results, as it is easy to prove" | 83, 84 | not attempted | here the scope follows PM's convention (p. 201, `clsEq`); the analogue of ✱14·113 for classes is not stated |
 | D14 | "Most of the formulae concerning p . q, p ∨ q, ∼p, p ⊃ q remain true if we substitute α ∩ β, α ∪ β, −α, α ⊂ β"; "For relations, we have precisely analogous definitions and propositions."; "the properties of negation, addition, multiplication and inclusion are exactly analogous for classes and relations" | 28, 29, 92 | not attempted | ✱22 is built (PM/Star22.lean): its 72 propositions are such analogues for classes, most proved by carrying a proposition of ✱3–✱5 under (x); ✱23 (PM/Star23.lean) does the same for relations, and ✱24 and ✱25 are built too; the general claim is not stated as a theorem |
 | D15 | "This number contains the analogues, for relations, of the definitions and propositions of ✱24. Proofs will not be given, as they proceed precisely as in ✱24." | 241 | checked | all 70 of ✱25's numbered propositions are proved, each with its proof written out along its ✱24 analogue's (`PM/Star25.lean`; the ledger's rows name the analogue, `pm_text` "analogue"); where the analogy needed more (✱11's two-variable forms for ✱10's pattern, ✱13·21 for ✱13·191 in ✱25·37, ✱21·53 for an extensional expression in ✱25·63, the variant of ✱23·45 in ✱25·47), the ledger row says so. Two printed statements are not theorems (✱25·37, ✱25·412); the corrected ones are proved ([FIDELITY.md](FIDELITY.md)) |
+| D16 | "Proofs will be omitted in the present number, as they are precisely analogous to those of analogous propositions in ✱22." | 226 | checked | all 72 of ✱23's numbered propositions are proved, each with its proof written out along its ✱22 analogue's (`PM/Star23.lean`; the ledger's rows name the analogue, `pm_text` "analogue"); where the analogy needed more (✱11's forms for two variables, where ✱10·251, ✱10·411 and ✱10·413 have no counterpart in ✱11; ✱21·18 for an extensional expression of R that is not a generic context; the equivalence `q23_45_iff` in ✱23·74, since the print states ✱23·45 with ⊃), the ledger row says so. One printed statement is not a theorem (✱23·81); the corrected one is proved ([FIDELITY.md](FIDELITY.md)) |
 
 ## E. Formulas PM says are not theorems
 
@@ -149,7 +151,7 @@ large rather than PM's system:
 
 ## Counts
 
-Of the 78 rows: 29 checked (C2 as a schema, D1 for the expressions PM's notation forms, A10 under the working
+Of the 79 rows: 30 checked (C2 as a schema, D1 for the expressions PM's notation forms, A10 under the working
 reading C); 3 checked for ✱10's method, with ✱9's in progress; 21 partly checked, and 2 more partly checked with the rest in progress;
 1 does not hold as stated (B4); 3 assumed; 1 checked for one part and not attempted for the other (A11); 18
 not attempted. (`tests/test_pm_claims_counts.py` recounts the rows.)

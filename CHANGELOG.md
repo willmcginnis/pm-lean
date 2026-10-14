@@ -17,9 +17,9 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     ✱22·86·87 on the same page do; this repair of a slip in the print is recorded in docs/FIDELITY.md.
 - **✱23, the calculus of relations** (`PM/Star23.lean`, pp. 226–228). The 7 definitions are macros with
   PM's relational signs (⪽, ∩̇, ⊍, ∸), and all 72 propositions are proved. PM prints no proofs here
-  ("precisely analogous to those of analogous propositions in ✱22", p. 226), so each proof follows the
-  analogous ✱22 proof, with ✱21 for ✱20 and ✱11 for ✱10. Names and representations mirror ✱22
-  (`relSubset` … `relDiff`, `RelExt`, `qrel21_18`). Ledger `data/star23_ledger.json`: 19 / 53.
+  ("precisely analogous to those of analogous propositions in ✱22", p. 226, now PM_CLAIMS D16, checked), so
+  each proof follows the analogous ✱22 proof, with ✱21 for ✱20 and ✱11 for ✱10. Names and representations
+  mirror ✱22 (`relSubset` … `relDiff`, `RelExt`, `qrel21_18`). Ledger `data/star23_ledger.json`: 19 / 53.
   - The ledger's rows have a new `pm_text` value, `analogue`: PM omits the proposition's proof and refers
     to analogous propositions, and the proof followed is the analogue's, here the analogous ✱22 proof,
     which each row's note names. The maintainer adopted the value (ruling 63, 2026-10-14);

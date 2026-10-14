@@ -632,12 +632,15 @@
               "size": "M",
               "size_reason": "317 assertions, ✱24·51 included (the transcription omits it); ✱20–✱24 are done, ✱22 and ✱23 being the calculus of classes and of relations, ✱24 the universal class, the null-class and the existence of classes.",
               "status": "done",
-              "status_note": "✱20 {progress:✱20}, ✱21 {progress:✱21}, ✱22 {progress:✱22}, ✱23 {progress:✱23} and ✱24 {progress:✱24} proved: done, the rest being ✱20·631·632 and ✱21·631·632, about significance, which are built into the syntax. ✱23's proofs follow the analogous ✱22 proofs, as PM directs (p. 226). ✱24's statements follow the 1910 print where the transcription differs, and ✱24·51, which the transcription omits, is proved and counted (docs/FIDELITY.md).",
+              "status_note": "✱20 {progress:✱20}, ✱21 {progress:✱21}, ✱22 {progress:✱22}, ✱23 {progress:✱23} and ✱24 {progress:✱24} proved: done, the rest being ✱20·631·632 and ✱21·631·632, about significance, which are built into the syntax. ✱23's proofs follow the analogous ✱22 proofs, as PM directs (p. 226; PM_CLAIMS D16: {claims:D16}). ✱24's statements follow the 1910 print where the transcription differs, and ✱24·51, which the transcription omits, is proved and counted (docs/FIDELITY.md).",
               "hard_deps": [],
               "soft_deps": [
                 "v1-9-14"
               ],
               "order": "by dependency",
+              "claims": [
+                "D16"
+              ],
               "prior_work": {
                 "effect": [
                   "ideas",
