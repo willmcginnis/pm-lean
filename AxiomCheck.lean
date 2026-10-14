@@ -1120,6 +1120,8 @@ import PM
 #print axioms PM.qcls20_18
 #print axioms PM.clsExt_neg
 #print axioms PM.clsExt_compl
+#print axioms PM.ClsExpr.clsSubset_left
+#print axioms PM.ClsExpr.clsSubset_right
 #print axioms PM.q22_1
 #print axioms PM.q22_2
 #print axioms PM.q22_3

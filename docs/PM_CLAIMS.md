@@ -112,7 +112,7 @@ and A29 give what it shows about the two methods.
 | D11 | ✱21·112: "It is ✱12·1, not ✱12·11, which is required in this proposition"; ✱21·3: "Note that the primitive proposition ✱12·11 is again required here." | 214, 215 | checked | `q21_112` uses ✱12·1, `q21_3` ✱12·11 (ledger rows; `RedCheck.lean`) |
 | D12 | "The two following propositions (✱20·8·81) are consequences of ✱13·3." | 209 | checked | `q20_8` uses ✱13·3, and `q20_81` uses ✱20·8 |
 | D13 | Scope of class symbols: "the truth-value of any proposition in which ẑ(φz) occurs is the same whatever scope we may give to ẑ(φz), provided the proposition is an extensional function of whatever functions it may contain"; with two class symbols "all choices give equivalent results, as it is easy to prove" | 83, 84 | not attempted | here the scope follows PM's convention (p. 201, `clsEq`); the analogue of ✱14·113 for classes is not stated |
-| D14 | "Most of the formulae concerning p . q, p ∨ q, ∼p, p ⊃ q remain true if we substitute α ∩ β, α ∪ β, −α, α ⊂ β"; "For relations, we have precisely analogous definitions and propositions."; "the properties of negation, addition, multiplication and inclusion are exactly analogous for classes and relations" | 28, 29, 92 | not attempted | ✱22–✱25 are not built |
+| D14 | "Most of the formulae concerning p . q, p ∨ q, ∼p, p ⊃ q remain true if we substitute α ∩ β, α ∪ β, −α, α ⊂ β"; "For relations, we have precisely analogous definitions and propositions."; "the properties of negation, addition, multiplication and inclusion are exactly analogous for classes and relations" | 28, 29, 92 | not attempted | ✱22 is built (PM/Star22.lean): its 72 propositions are such analogues for classes, most proved by carrying a proposition of ✱3–✱5 under (x); the general claim is not stated as a theorem, and ✱23–✱25 are not built |
 
 ## E. Formulas PM says are not theorems
 
@@ -124,7 +124,7 @@ and A29 give what it shows about the two methods.
 | E4 | ✱11·26: "Note that the converse of this proposition is false." | 161 | checked | `not_qthm_converse_11_26` (`PM/Star11.lean`) |
 | E5 | ✱14·17: "It should be observed that we do not have (℩x)(φx) = b . ≡ : ψ!(℩x)(φx) . ⊃_ψ . ψ!b" | 188 | not attempted | |
 | E6 | "we may have ẑ(φz) = ψ!ẑ . ẑ(φz) = χ!ẑ without having ψ!ẑ = χ!ẑ" | 87 | not attempted | |
-| E7 | "The analogues, for classes, of ✱4·78·79 are false." | 127 | not attempted | ✱22 is not built |
+| E7 | "The analogues, for classes, of ✱4·78·79 are false." | 127 | not attempted | ✱22 is built (PM/Star22.lean), and ✱22·65 is the half of ✱4·78's analogue that holds; no counter-model for the other half, or for ✱4·79's analogue, is built |
 
 ## F. Remarks of a recurring kind
 

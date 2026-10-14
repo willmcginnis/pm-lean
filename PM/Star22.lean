@@ -104,6 +104,15 @@ theorem clsExt_compl {G : (V a → QF V) → QF V} (hG : ClsExt S G) : ClsExt S 
   fun ψ χ => qsyl (q10_11_21 fun x => qsyl (q20_11 ψ χ fun φ => mem x φ) (qiffMp (QL.t4_11 _ _)))
     (hG (−ψ) (−χ))
 
+namespace ClsExpr
+/-- α ⊂ γ as an expression of α (✱22·01). -/
+theorem clsSubset_left (γ : V a → QF V) : ClsExpr fun α => α ⊂ γ :=
+  .all fun x => .imp (clsMem x) (.const _)
+/-- γ ⊂ α as an expression of α (✱22·01). -/
+theorem clsSubset_right (γ : V a → QF V) : ClsExpr fun α => γ ⊂ α :=
+  .all fun x => .imp (.const _) (clsMem x)
+end ClsExpr
+
 /-! ## ✱22·1–✱22·392 -/
 
 /-- ✱22·1 `⊢ :. α ⊂ β . ≡ : x ∈ α . ⊃ₓ . x ∈ β` [✱4·2 . (✱22·01)] -/
@@ -303,11 +312,11 @@ theorem q22_52 [Reducibility S] (α β γ : V a → QF V) : QThm S (clsEq ((α �
 /-- ✱22·54 `⊢ :. α = β . ⊃ : α ⊂ γ . ≡ . β ⊂ γ` [✱20·18]: ✱20·18 for the expression α ⊂ γ (`qcls20_18`), which is
     extensional as every expression of a class that PM forms is (`clsExpr_ext`, p. 200). -/
 theorem q22_54 [Reducibility S] (α β γ : V a → QF V) : QThm S (imp (clsEq α β) (iff (α ⊂ γ) (β ⊂ γ))) :=
-  qcls20_18 (fun α => α ⊂ γ) (clsExpr_ext (.all fun x => .imp (ClsExpr.clsMem x) (.const _))) α β  -- [✱20·18]
+  qcls20_18 _ (clsExpr_ext (ClsExpr.clsSubset_left γ)) α β                        -- [✱20·18]
 
 /-- ✱22·55 `⊢ :. α = β . ⊃ : γ ⊂ α . ≡ . γ ⊂ β` [✱20·18], as ✱22·54. -/
 theorem q22_55 [Reducibility S] (α β γ : V a → QF V) : QThm S (imp (clsEq α β) (iff (γ ⊂ α) (γ ⊂ β))) :=
-  qcls20_18 (fun α => γ ⊂ α) (clsExpr_ext (.all fun x => .imp (.const _) (ClsExpr.clsMem x))) α β  -- [✱20·18]
+  qcls20_18 _ (clsExpr_ext (ClsExpr.clsSubset_right γ)) α β                       -- [✱20·18]
 
 /-- ✱22·551 `⊢ : α = β . ⊃ . α ∪ γ = β ∪ γ` [✱10·11]: α = β is x ∈ α . ≡ₓ . x ∈ β by ✱20·43; with x ∈ γ . ≡ₓ .
     x ∈ γ (✱4·2 under (x), joined by ✱3·2 and Comm), ✱10·411 gives the formal equivalence of the sums, which
@@ -368,8 +377,7 @@ theorem q22_6 [Reducibility S] (α β : V a → QF V) (x : V a) :
     QThm S (iff (x ∈ α ∪ β) (clsAll fun γ => imp (QF.and (α ⊂ γ) (β ⊂ γ)) (x ∈ γ))) :=
   let G : (V a → QF V) → QF V := fun γ => imp (QF.and (α ⊂ γ) (β ⊂ γ)) (x ∈ γ)
   have hG : ClsExpr G :=
-    .imp (.and (.all fun y => .imp (.const _) (ClsExpr.clsMem y)) (.all fun y => .imp (.const _) (ClsExpr.clsMem y)))
-      (ClsExpr.clsMem x)
+    .imp (.and (ClsExpr.clsSubset_right α) (ClsExpr.clsSubset_right β)) (ClsExpr.clsMem x)
   have h1 : QThm S (imp (x ∈ α ∪ β) (clsAll G)) :=
     q10_11_21 fun θ =>
       have k := qsyl (qiffMp (q22_59 α β (pf θ))) (q10_1 (fun y => imp (y ∈ α ∪ β) (y ∈ pf θ)) x)  -- ✱22·59
