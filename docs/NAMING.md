@@ -52,7 +52,7 @@ ASCII snake_case throughout, one component under `PM.`. Results about PM's syste
 | ✱9·31, reading L, superseded once | the same, corrected | `PM.star9_31_reading_landini_v2` | |
 
 The full list, with each name's Lean declaration, source file, digests and descriptor, is
-[data/export_names.json](../data/export_names.json): 667 names, the longest
+[data/export_names.json](../data/export_names.json): 737 names, the longest
 `PM.star10_11_rule_reading_russell` (33 characters).
 
 A definition of PM uploaded to a platform as a definition rather than as a card may need a name without

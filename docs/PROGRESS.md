@@ -11,8 +11,8 @@ Different files count different things. These are the units, and how they relate
 
 - **Numbered assertion.** A numbered item (✱N·M) that PM prints with the assertion sign ⊢ and that is not a
   definition (Df), a primitive proposition (Pp) or a rule stated in words. This is the unit of the tables
-  below and of the [formalization comparison](FORMALIZATION_COMPARISON.md). Vol I has 3,230 of them among
-  3,449 numbered items (`data/vol1_items.json`).
+  below and of the [formalization comparison](FORMALIZATION_COMPARISON.md). Vol I has 3,231 of them among
+  3,450 numbered items (`data/vol1_items.json`).
   - **Stated**: a theorem is named for its PM number (`t<c>_<d>` for ✱2–✱5, `q<c>_<d>` from ✱9 on).
   - **Proved**: stated, in a file with no `sorry`, `axiom` or `native_decide`, and not merely a primitive
     rule restated.

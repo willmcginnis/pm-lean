@@ -54,7 +54,7 @@ carry over "by merely repeating previous proofs"), the assertion is checked in L
 two definitions of "predicative" (p. 56 and p. 172) disagree on some functions PM writes, though with the
 axiom of reducibility they derive the same theorems (row B4). What comes next is in the [roadmap](#roadmap) below and in [docs/ROADMAP.md](docs/ROADMAP.md).
 
-## Status at a glance (2026-10-14, commit `f69cb3f`)
+## Status at a glance (2026-10-14, commit `0d7c190`)
 
 | Part of Vol I | Chapters | Numbered assertions proved |
 |---|---|---|
@@ -64,7 +64,8 @@ axiom of reducibility they derive the same theorems (row B4). What comes next is
 | Identity, descriptions | ✱13, ✱14 | 25 of 25; 47 of 47 (✱14·3 as a schema) |
 | Classes, relations | ✱20, ✱21 | 53 of 55; 46 of 48 |
 | Calculus of classes, of relations | ✱22, ✱23 | 72 of 72; 72 of 72 |
-| **Vol I** | ✱1–✱97 | **604 of 3,230 (18.7%)** |
+| Universal class, null-class, existence of classes | ✱24 | 70 of 70 |
+| **Vol I** | ✱1–✱97 | **674 of 3,231 (20.9%)** |
 
 Vols II and III are not started.
 Per-chapter tables, milestones and the units counted: [docs/PROGRESS.md](docs/PROGRESS.md).
@@ -77,7 +78,7 @@ Not yet done:
   one theorem per instance;
 - apparent classes of classes and their identity, needed from ✱40 on
   ([docs/CLASSES_OF_CLASSES.md](docs/CLASSES_OF_CLASSES.md));
-- ✱24 onward; functions of three or more arguments; the 1925 second edition.
+- ✱25 onward; functions of three or more arguments; the 1925 second edition.
 
 ## What the proofs establish
 
@@ -247,7 +248,7 @@ Install the Lean toolchain named in `lean-toolchain` with
 
 ```
 lake build                      # builds and checks every file
-lake env lean AxiomCheck.lean   # 1280 of 1287 theorems and models use no axioms
+lake env lean AxiomCheck.lean   # 1361 of 1368 theorems and models use no axioms
 lake env lean AllAxioms.lean    # every declaration; lists the 39 that use one
 lake env lean RedCheck.lean     # which rules each theorem uses, vs its signature
 lake env lean StyleCheck.lean   # every PM proposition, every style and system
@@ -265,7 +266,7 @@ The expected output of each check is in [docs/VERIFICATION.md](docs/VERIFICATION
 | `PM/Basic.lean`, `PM/Replay*.lean` | ✱1–✱5 |
 | `PM/Quant.lean`, `PM/Star10.lean`, `PM/Star11.lean` | ✱9–✱11 |
 | `PM/Found9/` | ✱9 by its own method, and its agreement with ✱10 |
-| `PM/Star12.lean` … `PM/Star21.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱21, rules, styles of predicativity |
+| `PM/Star12.lean` … `PM/Star24.lean`, `PM/Rules/`, `PM/Pred/` | ✱12–✱24, rules, styles of predicativity |
 | `PM/Models/` | the models: soundness, consistency, counter-models |
 | `*.lean` at the root, `Checks/` | the checks |
 | `tests/` | regression tests and `run_all.sh` ([tests/README.md](tests/README.md)) |
@@ -283,7 +284,7 @@ Each ledgered proof is labelled `pm-lines` (only PM's citations and the steps
 PM leaves tacit) or `pm-lines+extra` (at least one more proposition, listed
 with the reason). Of the 188 ✱2–✱5 proofs, 112 are `pm-lines`, 65 are `pm-lines+extra`, and 11 have
 no PM proof to follow. Structural steps PM leaves unstated ("glue")
-can be counted either way, so three counts are given for ✱11, ✱13, ✱14, ✱20 and ✱21.
+can be counted either way, so three counts are given for ✱11, ✱13, ✱14 and ✱20–✱24.
 See [docs/FIDELITY.md](docs/FIDELITY.md).
 
 Following PM line by line also found things in the text, among them a

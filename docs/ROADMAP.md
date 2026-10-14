@@ -669,7 +669,7 @@ specification of the fragment, or, for an existing checker, an audit of its proo
 cover. Stage (c) needs only the census, and stage (d) needs stage (c).
 <!-- deps: gates lk-census > lk-restricted lk-proof; lk-restricted > lk-proof -->
 
-Two things can be re-checked, and they differ. The PM theorems (✱2–✱5 and ✱9–✱23, ✱9 by its own method, and
+Two things can be re-checked, and they differ. The PM theorems (✱2–✱5 and ✱9–✱24, ✱9 by its own method, and
 the completeness theorem for ✱1–✱5) use none of Lean's axioms. The whole build does: 39 declarations use
 `propext`, and some also `Quot.sound` or `Classical.choice`. They are compiler-generated `injEq` lemmas and
 a `Repr` instance, propositional metatheorems such as `PM.sound`, and the classical collapse model
