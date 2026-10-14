@@ -120,6 +120,7 @@ class TestSupersede(unittest.TestCase):
         code, out = self.export("--check", "--write-lock")
         self.assertEqual(code, 0, out)
         lock = (r / "data" / "export_names.lock").read_text(encoding="utf-8")
+        n_entries = len(self.entries())   # the exports before any change; each superseding adds one
         before = next(e for e in self.entries() if e["lean"] == "PM.q21_71")
         self.assertEqual(before["export"], "PM.star21_71")
         self.assertIn("PM.star21_71\tPM.q21_71\t\t" + before["statement_digest"], lock)
@@ -166,8 +167,7 @@ class TestSupersede(unittest.TestCase):
         self.assertEqual(new["supersedes"], "PM.star21_71")
         self.assertNotIn("deprecated", new)
         self.assertNotEqual(new["statement_digest"], old["statement_digest"])
-        # one more than the repository exports: the replacement, beside the unchanged original
-        self.assertEqual(len(es), len(json.loads((ROOT / "data" / "export_names.json").read_text(encoding="utf-8"))) + 1)
+        self.assertEqual(len(es), n_entries + 1)
 
         # without the row of data/changes.tsv: fails
         with_row = changes.read_text(encoding="utf-8")
@@ -200,7 +200,7 @@ class TestSupersede(unittest.TestCase):
         # three generations, each deprecated one pointing to its direct replacement
         es = {e["export"]: e for e in self.entries()}
         v1, v2, v3 = es["PM.star21_71"], es["PM.star21_71_v2"], es["PM.star21_71_v3"]
-        self.assertEqual(len(es), len(json.loads((ROOT / "data" / "export_names.json").read_text(encoding="utf-8"))) + 2)
+        self.assertEqual(len(es), n_entries + 2)
         self.assertEqual([e["lean"] for e in (v1, v2, v3)], ["PM.q21_71", "PM.q21_71_v2", "PM.q21_71_v3"])
         self.assertEqual([e.get("supersedes") for e in (v1, v2, v3)], [None, "PM.star21_71", "PM.star21_71_v2"])
         self.assertEqual([e.get("superseded_by") for e in (v1, v2, v3)],
