@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Fidelity counts per chapter from the ledgers (star11/13/14/20/21), in the three readings of
+"""Fidelity counts per chapter from the ledgers (star11/13/14/20/21/22), in the three readings of
 docs/FIDELITY.md: `strict` counts every glue proposition as extra; `as recorded` is the ledger's `fidelity` field
 (chaining under a hypothesis tacit, other glue extra); `glue tacit` counts no glue as extra. A proof is
 `pm-lines` in a reading when nothing it needs beyond PM's citations and the tacit steps is counted as
-extra. The numbered rules (four in ✱11, two each in ✱20 and ✱21) are left out, as in docs/FIDELITY.md."""
+extra. The numbered rules (four in ✱11, two each in ✱20 and ✱21; ✱22 has none) are left out, as in docs/FIDELITY.md."""
 import json, pathlib
 
 root = pathlib.Path(__file__).resolve().parent

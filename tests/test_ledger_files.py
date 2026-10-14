@@ -29,6 +29,7 @@ SCHEMA = {
     "star14": ({**STAR, **GLUE}, {}),
     "star20": ({**STAR, **GLUE}, {}),
     "star21": ({**STAR, **GLUE}, {}),
+    "star22": ({**STAR, **GLUE}, {}),
     "star9f": ({**STAR, **GLUE}, {}),
 }
 VALUES = {"fidelity": {"pm-lines", "pm-lines+extra", "unchanged"},

@@ -43,6 +43,7 @@ def claims():
         ("✱14 fidelity", r"✱14\s+(\d+) / (\d+) of (\d+)", fidelity("star14") + (proved("star14"),)),
         ("✱20 fidelity", r"✱20 (\d+) / (\d+) of (\d+)", fidelity("star20") + (proved("star20"),)),
         ("✱21 fidelity", r"✱21 (\d+) / (\d+) of (\d+)", fidelity("star21") + (proved("star21"),)),
+        ("✱22 fidelity", r"✱22 (\d+) / (\d+) of (\d+)", fidelity("star22") + (proved("star22"),)),
         ("Replay2 follows PM", r"The other (\d+) were first proved with derived rules \(`PM/Derived\.lean`\)\. (\d+) of these",
          (sum(r2.values()), r2["pm-lines"] + r2["pm-lines+extra"])),
         ("Replay2 pm-lines", r"Of the (\d+) that are `pm-lines`", (r2["pm-lines"],)),

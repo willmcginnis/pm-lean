@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Generate AxiomCheck.lean: `#print axioms` for every public theorem of every file under PM/ (✱1–✱5,
-`complete`, ✱9–✱21, ✱9's own foundation in PM/Found9, the rule and style modules, the models, the order
+`complete`, ✱9–✱22, ✱9's own foundation in PM/Found9, the rule and style modules, the models, the order
 checker and the degenerate-family examples), and for the definitions of the models. Run
 `lake env lean AxiomCheck.lean`; every line should say "does not depend on any axioms", except the
 declarations listed in tests/expected_axiom_users.txt (docs/VERIFICATION.md says why).

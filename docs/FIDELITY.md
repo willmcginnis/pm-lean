@@ -30,7 +30,7 @@ it combines with `replay2_ledger.json`.
 
 ## Glue
 
-`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20 and ✱21 ledgers. It leaves `fidelity` unchanged and
+`glue` is a separate field of the ✱11, ✱13, ✱14, ✱20, ✱21 and ✱22 ledgers. It leaves `fidelity` unchanged and
 lists the propositions a proof uses only for structural moves PM leaves unstated, each with its kind
 (`glue_kind`):
 
@@ -80,6 +80,7 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 | ✱14 (47) | 8 / 39 | 9 / 38 | 13 / 34 |
 | ✱20 (51) | 18 / 33 | 18 / 33 | 19 / 32 |
 | ✱21 (44) | 12 / 32 | 12 / 32 | 14 / 30 |
+| ✱22 (72) | 19 / 53 | 19 / 53 | 21 / 51 |
 
 - ✱11 is counted without its four numbered rules (✱11·07, ✱11·11, ✱11·13, ✱11·311). ✱20 and ✱21 are
   counted without their two rules each (✱20·62, ✱20·633, ✱21·62, ✱21·633, all `pm-lines`).
@@ -89,6 +90,8 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 - In ✱20 and ✱21 the last column differs from the recorded one at ✱20·11, ✱21·11 and ✱21·21, whose only
   extras are steps carried under an apparent variable (✱10·21, or ✱10·11 with ✱10·27 or ✱10·271 inside a
   helper).
+- In ✱22 it differs at ✱22·46 and ✱22·74, whose only extras put factors in order (✱3·22 for PM's "Perm",
+  ✱4·3).
 
 ## By chapter
 
@@ -132,6 +135,16 @@ method (`PM/Found9`) has a ledger, `data/star9f_ledger.json`, which these counts
 - ✱13·16 to turn y = x into x = y; ✱10·32 for the orientation of ≡ₓ in ✱20;
 - ✱10·28 or ✱10·281 (with ✱10·11) to carry a step under (∃b) where PM does not cite them, and ✱10·11
   before an uncited ✱10·23.
+
+**✱22** (72 propositions; `star22_ledger.json`), as recorded: ✱22 19 / 53 of 72. Most of PM's hints for ✱22
+cite a single proposition of ✱3–✱5, to be carried under (x); the proof also needs the steps that PM's own
+Dem. of ✱22·5, ✱22·68 and ✱22·91 print, so they are listed as extras where the hint leaves them out:
+- ✱22·33, ✱22·34, ✱22·35 to write a membership in α ∩ β, α ∪ β or −α as a product, sum or negation of
+  memberships, and ✱20·43 to get the identity of classes;
+- a ✱4 proposition to rewrite inside a product, sum or negation (✱4·36–✱4·39, ✱4·11, ✱4·84–✱4·86);
+- ✱20·18 for an expression such as α ⊂ γ (✱22·54, ✱22·55), and ✱10·1 at a class whose defining function is
+  not predicative (✱22·6, ✱22·94), each through the expression's extensionality (p. 200;
+  [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).
 
 **Where the print is unclear,** the docstring says so. For example, ✱14·144 and ✱14·145 cite ✱14·111 where
 the unmarked form is ✱14·112, and ✱14·272 cites ✱10·414 for a ✱10·271 step. [ARCHITECTURE.md](ARCHITECTURE.md)
