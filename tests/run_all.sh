@@ -4,7 +4,8 @@
 # (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), ✱9's
 # readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), the Lean
 # core counterparts of ✱1–✱5 (Checks/Counterparts.lean), and the Python tests in tests/ (which also run
-# AllAxioms.lean, AxiomCheck.lean and fidelity_counts.py). Exits nonzero if any of them fails.
+# AllAxioms.lean, AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet,
+# scripts/kernel_census/census.py --ratchet). Exits nonzero if any of them fails.
 #
 #   tests/run_all.sh            everything (ClauseSearch takes about a minute)
 #   SKIP_SLOW=1 tests/run_all.sh  without ClauseSearch

@@ -35,5 +35,11 @@ which replaces one hypothesis by `True` on each binder form the repository uses;
 before any analysis, without which it would read proofs older than the sources; and the classes of the
 findings listed in `scripts/mutation/expected.json`. The trial itself is not part of `run_all.sh`.
 
+`test_kernel_census.py` is a ratchet rather than a guard against a past mistake: the features of Lean's
+kernel that the PM derivations rely on ([docs/KERNEL_CENSUS.md](../docs/KERNEL_CENSUS.md)) must equal
+`expected_kernel_features.txt`, so a new one (a quotient, an axiom, a mutual or nested inductive type,
+a compiled-only constant reaching a derivation) fails until it is accepted on purpose. The test also checks
+the driver's copy of `example`s into theorems and the ratchet's comparison on synthetic input.
+
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built.
