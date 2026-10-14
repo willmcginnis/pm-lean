@@ -79,6 +79,21 @@ def sha256(s):
     return "sha256:" + hashlib.sha256(s.encode("utf-8")).hexdigest()
 
 
+def mutation_check(repo):
+    """Check 0: `scripts/mutation/mutate.py --quick` of the copy `repo` of the commit exported, run with that
+    commit's own tool (docs/STATEMENT_MUTATION.md). Returns (report, passed); a commit without the tool fails."""
+    mut = os.path.join(repo, "scripts", "mutation", "mutate.py")
+    if not os.path.exists(mut):
+        print("mutation: FAILED, the commit exported has no scripts/mutation/mutate.py")
+        return {"rc": None, "error": "the commit exported has no scripts/mutation/mutate.py"}, False
+    r, dt = sh([sys.executable, mut, "--quick"], repo)
+    lines = (r.stdout + r.stderr).strip().splitlines()
+    print(f"mutation: --quick rc {r.returncode} in {dt:.0f}s: {lines[-1] if lines else 'no output'}")
+    if r.returncode:
+        print("\n".join(lines[-40:]))
+    return {"rc": r.returncode, "seconds": round(dt, 1), "output": lines[-40:]}, r.returncode == 0
+
+
 def main(argv):
     cfg = load_config()
     work = os.path.join(ROOT, ".lake", "prove2me")
@@ -95,20 +110,10 @@ def main(argv):
     rep = {"tree": os.path.relpath(tree, work), "commit": man["commit"], "environment": cfg["environment"]}
     failed = []
 
-    # 0. the quick tier of the statement mutation, on the commit exported, with its own tool
-    mut = os.path.join(P["repo"], "scripts", "mutation", "mutate.py")
-    if not os.path.exists(mut):
-        rep["mutation"] = {"rc": None, "error": "the commit exported has no scripts/mutation/mutate.py"}
-        print("mutation: FAILED, the commit exported has no scripts/mutation/mutate.py")
+    # 0. the quick tier of the statement mutation, on the commit exported
+    rep["mutation"], ok = mutation_check(P["repo"])
+    if not ok:
         failed.append("mutation")
-    else:
-        r, dt = sh([sys.executable, mut, "--quick"], P["repo"])
-        lines = (r.stdout + r.stderr).strip().splitlines()
-        rep["mutation"] = {"rc": r.returncode, "seconds": round(dt, 1), "output": lines[-40:]}
-        print(f"mutation: --quick rc {r.returncode} in {dt:.0f}s: {lines[-1] if lines else 'no output'}")
-        if r.returncode:
-            print("\n".join(lines[-40:]))
-            failed.append("mutation")
 
     # 1. workspace and build
     shutil.rmtree(ws, ignore_errors=True)

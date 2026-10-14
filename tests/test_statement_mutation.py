@@ -4,16 +4,20 @@
 editing a copy of the source file (docs/STATEMENT_MUTATION.md). An edit that hit the wrong binder, or
 none, would make a needed hypothesis look needed for the wrong reason, or skip it silently. These tests
 pin the edit on each binder form the repository uses, without running Lean; the driver runs `lake build`
-before it analyses anything, and stops if the build fails; and every finding listed in
-scripts/mutation/expected.json has a class the file explains.
+before it analyses anything, and stops if the build fails; the quick tier is a step of tests/run_all.sh
+and a check an export must pass before upload, the full tier a step of scripts/release_check.sh; and every
+finding listed in scripts/mutation/expected.json has a class the file explains.
 """
 import contextlib
 import importlib.util
+import inspect
 import io
 import json
 import os
+import pathlib
 import subprocess
 import sys
+import tempfile
 import unittest
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # for `common`, however the tests are run
@@ -127,6 +131,36 @@ class BuildFirst(unittest.TestCase):
         self.assertEqual(len(calls), 1)
         self.assertIsInstance(e, SystemExit)
         self.assertIn("lake build failed", str(e.code))
+
+
+class Wiring(unittest.TestCase):
+    """Where the tiers run (docs/STATEMENT_MUTATION.md, "Where it runs"): --quick in tests/run_all.sh and
+    as check 0 of scripts/prove2me/verify.py, which an export must pass before upload; --full in
+    scripts/release_check.sh. Check 0 runs with stand-in tools, so no Lean runs."""
+
+    def test_run_all_and_release_check(self):
+        run_all = (ROOT / "tests" / "run_all.sh").read_text(encoding="utf-8")
+        self.assertRegex(run_all, r"\npython3 scripts/mutation/mutate\.py --quick \|\| fail ")
+        release = (ROOT / "scripts" / "release_check.sh").read_text(encoding="utf-8")
+        self.assertRegex(release, r"\npython3 scripts/mutation/mutate\.py --full \|\| fail ")
+
+    def test_export_check_fails_with_the_tool(self):
+        spec = importlib.util.spec_from_file_location("verify", ROOT / "scripts" / "prove2me" / "verify.py")
+        verify = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(verify)
+        self.assertIn('rep["mutation"], ok = mutation_check(P["repo"])', inspect.getsource(verify.main))
+        self.assertIn('failed.append("mutation")', inspect.getsource(verify.main))
+        with tempfile.TemporaryDirectory() as d:
+            with contextlib.redirect_stdout(io.StringIO()):
+                self.assertFalse(verify.mutation_check(d)[1], "a commit without the tool passed")
+            tool = pathlib.Path(d) / "scripts" / "mutation" / "mutate.py"
+            tool.parent.mkdir(parents=True)
+            for rc, passes in ((0, True), (1, False)):
+                tool.write_text("import sys\nassert sys.argv[1:] == ['--quick']\n"
+                                f"print('statement mutation: stand-in')\nsys.exit({rc})\n")
+                with contextlib.redirect_stdout(io.StringIO()):
+                    rep, ok = verify.mutation_check(d)
+                self.assertEqual((ok, rep["rc"]), (passes, rc))
 
 
 class Expected(unittest.TestCase):
