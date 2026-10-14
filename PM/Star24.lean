@@ -1028,8 +1028,9 @@ theorem q24_53 [Reducibility S] : QThm S (.neg (clsNonempty (Λ : V a → QF V))
 theorem q24_54 [Reducibility S] (α : V a → QF V) : QThm S (iff (clsNonempty α) (.neg (clsEq α Λ))) :=
   qiffTrans (QL.t4_13 _) (qiffNeg (q24_51 α))                                      -- ✱24·51 . Transp
 
-/-- ✱24·55 `⊢ : ∼(α ⊂ β) . ≡ . ∃!(α − β)` [✱24·3 . Transp . ✱24·54], as printed (p. 240; the transcription has
-    `α ⊃ β`, the text audit's Vol I list, entry 16). Transp is ✱4·11. -/
+/-- ✱24·55 `⊢ : ∼(α ⊂ β) . ≡ . ∃!α − β` [✱24·3 . Transp . ✱24·54], as printed (p. 240; the transcription has
+    `α ⊃ β`, the text audit's Vol I list, entry 16). `∃!α − β` is read as ∃!(α − β): ∃! applies to the class
+    α − β, as in ✱24·54's ∃!α. Transp is ✱4·11. -/
 theorem q24_55 [Reducibility S] (α β : V a → QF V) : QThm S (iff (.neg (α ⊂ β)) (clsNonempty (α − β))) :=
   qiffTrans (qiffNeg (q24_3 α β)) (qiffSymm (q24_54 _))                            -- ✱24·3 . Transp . ✱24·54
 
@@ -1074,8 +1075,8 @@ theorem q24_571 [Reducibility S] (α β : V a → QF V) :
 theorem q24_58 (α β : V a → QF V) : QThm S (imp (α ⊂ β) (imp (clsNonempty α) (clsNonempty β))) :=
   q10_28 _ _                                                                      -- [✱10·28]
 
-/-- ✱24·6 `⊢ :. α ⊂ β . ⊃ : α ≠ β . ≡ . ∃!(β − α)`, as printed (p. 240; the transcription has `α ⊃ β`, the text
-    audit's Vol I list, entry 18). "✱22·41 . Transp": ✱22·41 with Exp (✱3·3), and Transp (✱2·16); the Dem.'s
+/-- ✱24·6 `⊢ :. α ⊂ β . ⊃ : α ≠ β . ≡ . ∃!β − α`, as printed (p. 240; the transcription has `α ⊃ β`, the text
+    audit's Vol I list, entry 18); `∃!β − α` is read as ∃!(β − α), as in ✱24·55. "✱22·41 . Transp": ✱22·41 with Exp (✱3·3), and Transp (✱2·16); the Dem.'s
     ∼(β ⊂ α) is printed so (the transcription has ∼(β ⊃ α)). (2): α = β puts β − β for β − α (`qclsEqCongr`),
     which is Λ by ✱24·21. (1).(3): (3) put under Hp by ✱2·02, joined by Comp (✱3·43). -/
 theorem q24_6 [Reducibility S] (α β : V a → QF V) :
