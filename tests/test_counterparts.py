@@ -60,6 +60,34 @@ MUTATIONS = [or_inl_for_or_inr, signature_not_a_type, iff_swapped_unflagged, spe
              instantiation_identifies]
 
 
+def mathlib_iff_swapped_unflagged(ctx):
+    # not_imp_not states ¬a → ¬b ↔ b → a; ✱4·1 is p ⊃ q . ≡ . ∼q ⊃ ∼p, the other way round
+    r = record(ctx, "*4.1")
+    r.update(iff_reversed=False, iff_reversed_at=[], statement=r["pm_formula"])
+
+
+def mathlib_other_declaration(ctx):
+    # not_iff_not, a real Mathlib declaration of the same file, for ✱4·1
+    record(ctx, "*4.1").update(declaration="not_iff_not")
+
+
+def mathlib_classical_wrong(ctx):
+    # contrapose₃'s proof is constructive
+    record(ctx, "*2.03")["classical"] = True
+
+
+def mathlib_instantiation_identifies(ctx):
+    record(ctx, "*4.12")["instantiation"] = ["p", "p"]
+
+
+MATHLIB_MUTATIONS = [(mathlib_iff_swapped_unflagged, "instantiated, it states"),
+                     (mathlib_other_declaration, "instantiated, it states"),
+                     (mathlib_classical_wrong, "so classical is false"),
+                     (mathlib_instantiation_identifies, "the same variable")]
+MATHLIB_DIR = ROOT / "Checks" / "MathlibCounterparts"
+MATHLIB_FILE = MATHLIB_DIR / "MathlibCounterparts.lean"
+
+
 def context():
     ctx = export_names.context()
     ctx["counterparts"] = copy.deepcopy(ctx["counterparts"])
@@ -76,6 +104,18 @@ def lean(text):
         f.write(text)
     try:
         return run(["lake", "env", "lean", f.name])
+    finally:
+        os.unlink(f.name)
+
+
+def mathlib_lean(text):
+    """(exit code, output) of Lean on `text` in the Mathlib project, with its toolchain."""
+    with tempfile.NamedTemporaryFile("w", suffix=".lean", encoding="utf-8", delete=False) as f:
+        f.write(text)
+    try:
+        p = subprocess.run(["lake", "env", "lean", f.name], cwd=MATHLIB_DIR, capture_output=True, text=True,
+                           timeout=1800)
+        return p.returncode, p.stdout + p.stderr
     finally:
         os.unlink(f.name)
 
@@ -185,6 +225,40 @@ class TestCounterparts(unittest.TestCase):
         self.assertEqual({r["checked"] for r in cps if r["repository"] == "lean4"}, {"lean"})
         text = (ROOT / "Checks" / "Counterparts.lean").read_text(encoding="utf-8")
         self.assertEqual(text.count("\n#counterpart "), sum(r["repository"] == "lean4" for r in cps))
+
+    def test_every_mathlib_counterpart_is_compiled(self):
+        cps = context()["counterparts"]["counterparts"]
+        self.assertEqual({r["checked"] for r in cps if r["repository"] == "mathlib4"}, {"lean-mathlib"})
+        text = MATHLIB_FILE.read_text(encoding="utf-8")
+        self.assertEqual(text.count("\n#counterpart "), sum(r["repository"] == "mathlib4" for r in cps))
+        self.assertEqual(text.count("\n#classical "), sum(r["repository"] == "mathlib4" for r in cps))
+        self.assertEqual(export_names.mathlib_counterparts_lean(entries(), context()), text)
+
+    def test_the_main_project_needs_no_mathlib(self):
+        # the Mathlib check is a Lake project of its own; the repository's own requires nothing
+        self.assertNotIn("require", (ROOT / "lakefile.toml").read_text(encoding="utf-8"))
+        self.assertEqual(json.loads((ROOT / "lake-manifest.json").read_text(encoding="utf-8"))["packages"], [])
+        pin = context()["counterparts"]["repositories"]["mathlib4"]
+        manifest = json.loads((MATHLIB_DIR / "lake-manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(next(p["rev"] for p in manifest["packages"] if p["name"] == "mathlib"), pin["commit"])
+        self.assertEqual((MATHLIB_DIR / "lean-toolchain").read_text().strip(), f"leanprover/lean4:{pin['lean']}")
+
+    def test_against_the_pinned_mathlib(self):
+        # with Mathlib fetched (scripts/release_check.sh), the committed file passes and each false match,
+        # recorded on a Mathlib record, fails it
+        if not (MATHLIB_DIR / ".lake" / "packages" / "mathlib" / ".lake" / "build").is_dir():
+            self.skipTest("Mathlib is not fetched in Checks/MathlibCounterparts (scripts/release_check.sh)")
+        code, out = mathlib_lean(MATHLIB_FILE.read_text(encoding="utf-8"))
+        self.assertEqual(code, 0, out)
+        self.assertIn("Mathlib counterparts: 14 checked by Lean against Mathlib 0df444a", out)
+        es = entries()
+        for mutate, says in MATHLIB_MUTATIONS:
+            with self.subTest(mutation=mutate.__name__):
+                ctx = context()
+                mutate(ctx)
+                code, out = mathlib_lean(export_names.mathlib_counterparts_lean(es, ctx))
+                self.assertNotEqual(code, 0, f"Lean accepted {mutate.__name__}:\n{out}")
+                self.assertIn(says, out)
 
     def test_at_the_pinned_lean(self):
         # the pins are the platform's Lean; run the same check with it when it is installed

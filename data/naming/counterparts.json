@@ -1,5 +1,5 @@
 {
- "about": "Exact Lean and Mathlib counterparts of PM's propositions *1-*5 (docs/NAMING.md, 'Counterparts'): metadata for card titles and descriptions, never part of a name. A counterpart is listed only if it is an exact propositional schema counterpart under the criterion of docs/NAMING.md. signature is the declaration's type as Lean prints it (Lean core) or its header as written at the pin (Mathlib; section_variables is then the section's variable line it takes variables from, at section_variables_source); instantiation is the PM variable given to each of its propositional variables, in the order of its binders; statement is the counterpart's type so instantiated (a Sort parameter specialized to Prop where specialized is true); pm_formula is PM's statement as exported, connective for connective; iff_reversed_at lists the equivalences whose two sides the counterpart states the other way round (root, or operand positions such as 2 or 2.1). classical: the counterpart's proof uses Classical.choice at the pin, from #print axioms (classical_from axioms) or read from its proof (classical_from source). checked: lean if Lean checks it (Checks/Counterparts.lean: the kernel checks @declaration applied to the instantiation as a proof of PM's formula, and the instantiated type is that formula exactly), source if its signature is read from the pinned source only (strictly, by scripts/export_names.py), lean-mathlib if compiled against the pinned Mathlib. No counterpart listed for an item is a search result, not a proof that none exists.",
+ "about": "Exact Lean and Mathlib counterparts of PM's propositions *1-*5 (docs/NAMING.md, 'Counterparts'): metadata for card titles and descriptions, never part of a name. A counterpart is listed only if it is an exact propositional schema counterpart under the criterion of docs/NAMING.md. signature is the declaration's type as Lean prints it (Lean core) or its header as written at the pin (Mathlib; section_variables is then the section's variable line it takes variables from, at section_variables_source); instantiation is the PM variable given to each of its propositional variables, in the order of its binders; statement is the counterpart's type so instantiated (a Sort parameter specialized to Prop where specialized is true); pm_formula is PM's statement as exported, connective for connective; iff_reversed_at lists the equivalences whose two sides the counterpart states the other way round (root, or operand positions such as 2 or 2.1). classical: the counterpart's proof uses Classical.choice at the pin, from #print axioms (classical_from axioms) or read from its proof (classical_from source). checked: lean if Lean checks it (Checks/Counterparts.lean: the kernel checks @declaration applied to the instantiation as a proof of PM's formula, and the instantiated type is that formula exactly), source if its signature is read from the pinned source only (strictly, by scripts/export_names.py), lean-mathlib if compiled against the pinned Mathlib (Checks/MathlibCounterparts/MathlibCounterparts.lean: the same checks as Checks/Counterparts.lean but for the printed signature, which for Mathlib is the header in the source, and classical checked against the axioms of the proof). No counterpart listed for an item is a search result, not a proof that none exists.",
  "criterion_version": 1,
  "reviewed": "2026-10-13",
  "repositories": {
@@ -115,11 +115,11 @@
    "source": "Mathlib/Tactic/Contrapose.lean:38",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": false,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "note": "a helper lemma of the contrapose tactic, declared in a meta section"
   },
   {
@@ -200,11 +200,11 @@
    "source": "Mathlib/Logic/Basic.lean:211",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source"
+   "checked": "lean-mathlib"
   },
   {
    "pm": "*2.11",
@@ -260,11 +260,11 @@
    "source": "Mathlib/Logic/Basic.lean:260",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -283,11 +283,11 @@
    "source": "Mathlib/Logic/Basic.lean:268",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -327,11 +327,11 @@
    "source": "Mathlib/Logic/Basic.lean:366",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -646,13 +646,13 @@
    "source": "Mathlib/Logic/Basic.lean:359",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": true,
    "iff_reversed_at": [
     "root"
    ],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -671,13 +671,13 @@
    "source": "Mathlib/Logic/Basic.lean:393",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": true,
    "iff_reversed_at": [
     "root"
    ],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -696,11 +696,11 @@
    "source": "Mathlib/Logic/Basic.lean:399",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1000,11 +1000,11 @@
    "source": "Mathlib/Logic/Basic.lean:419",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1067,13 +1067,13 @@
    "source": "Mathlib/Logic/Basic.lean:416",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": true,
    "iff_reversed_at": [
     "root"
    ],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1092,11 +1092,11 @@
    "source": "Mathlib/Logic/Basic.lean:354",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1300,13 +1300,13 @@
    "source": "Mathlib/Logic/Basic.lean:383",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": true,
    "iff_reversed_at": [
     "root"
    ],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1344,11 +1344,11 @@
    "source": "Mathlib/Logic/Basic.lean:272",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },
@@ -1431,11 +1431,11 @@
    "source": "Mathlib/Logic/Basic.lean:401",
    "commit": "0df444a360eaa60ab8c11dca51a86af692955474",
    "classical": true,
-   "classical_from": "source",
+   "classical_from": "axioms",
    "iff_reversed": false,
    "iff_reversed_at": [],
    "specialized": false,
-   "checked": "source",
+   "checked": "lean-mathlib",
    "section_variables": "variable {a b : Prop}",
    "section_variables_source": "Mathlib/Logic/Basic.lean:258"
   },

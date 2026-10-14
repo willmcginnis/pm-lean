@@ -34,10 +34,12 @@ same Lean name with `_v<N>`, exported as the old one's name with `_v<N>`; data/c
 pair and renames nothing (docs/VERSIONING.md).
 
 Checks/Counterparts.lean, which has Lean check the Lean core counterparts, is also written from
-data/naming/counterparts.json and the statements.
+data/naming/counterparts.json and the statements; so is Checks/MathlibCounterparts/MathlibCounterparts.lean,
+which does the same for the Mathlib ones against the pinned Mathlib, in a Lake project of its own.
 
 Usage (from the repository root, after `lake build`):
-  python3 scripts/export_names.py                    write data/export_names.json, Checks/Counterparts.lean
+  python3 scripts/export_names.py                    write data/export_names.json, Checks/Counterparts.lean,
+                                                     Checks/MathlibCounterparts/MathlibCounterparts.lean
   python3 scripts/export_names.py --check            exit 1 if they are not up to date or break a rule
   python3 scripts/export_names.py --tsv PATH [--chapters 1-5]   also write a review table
   python3 scripts/export_names.py --write-lock       at a release: lock every name and reading meaning
@@ -73,6 +75,7 @@ PM_NAMES = NAMING / "pm_names.json"
 SLOTS = NAMING / "slots.json"
 COUNTERPARTS = NAMING / "counterparts.json"
 COUNTERPARTS_LEAN = ROOT / "Checks" / "Counterparts.lean"
+MATHLIB_COUNTERPARTS_LEAN = ROOT / "Checks" / "MathlibCounterparts" / "MathlibCounterparts.lean"
 BUNDLES = NAMING / "definition_bundles.json"
 MAX_WORDS = 6
 WORKING_READING = "C"   # a ✱9 statement for every reading is exported under the working reading
@@ -1038,7 +1041,8 @@ def check_counterparts(entries, ctx):
         if r.get("checked") not in CHECKED.get(r.get("repository"), ()):
             bad.append(f"{where}: checked must be {' or '.join(CHECKED.get(r.get('repository'), ('?',)))} for "
                        f"{r.get('repository')}: a Lean core counterpart is checked by Lean "
-                       "(Checks/Counterparts.lean), a Mathlib one from its source unless compiled")
+                       "(Checks/Counterparts.lean), a Mathlib one from its source unless compiled "
+                       "(Checks/MathlibCounterparts/)")
         sv, svs = r.get("section_variables"), r.get("section_variables_source")
         if bool(sv) != bool(svs) or (svs and (not SOURCE_RE.fullmatch(svs)
                                                or svs.rsplit(":", 1)[0] != src.rsplit(":", 1)[0])):
@@ -1151,19 +1155,27 @@ end
 '''
 
 
-def counterparts_lean(entries, ctx):
-    """The text of Checks/Counterparts.lean: every counterpart checked "lean" (docs/NAMING.md)."""
+def counterpart_blocks(entries, ctx, checked):
+    """For each counterpart checked `checked`: (record, PM's formula as a Lean schema with the recorded iff
+    reversals, its variables)."""
     rows_by = {r["name"]: r for r in ctx["rows"]}
     by = {e["export"]: e for e in entries}
-    recs = [r for r in ctx["counterparts"]["counterparts"] if r.get("checked") == "lean"]
-    blocks, names = [], set()
-    for r in recs:
+    out = []
+    for r in ctx["counterparts"]["counterparts"]:
         e = by.get(r.get("export"))
-        if e is None:
+        if r.get("checked") != checked or e is None:
             continue
         schema = reverse_iffs(parse_formula(render(rows_by[e["lean"]], ctx["vocab"])), r.get("iff_reversed_at", []))
-        names |= leaves(schema)
-        f, vs = lean_formula(schema), " ".join(r.get("instantiation") or [])
+        out.append((r, lean_formula(schema), leaves(schema)))
+    return out
+
+
+def counterparts_lean(entries, ctx):
+    """The text of Checks/Counterparts.lean: every counterpart checked "lean" (docs/NAMING.md)."""
+    blocks, names = [], set()
+    for r, f, vs_used in counterpart_blocks(entries, ctx, "lean"):
+        names |= vs_used
+        vs = " ".join(r.get("instantiation") or [])
         sig = json.dumps(r.get("signature", ""), ensure_ascii=False)
         spec = "(specialized) " if r.get("specialized") else ""
         blocks.append(f"-- {r['pm'].replace('*', '✱').replace('.', '·')} {r['export']}: {r['declaration']}, "
@@ -1172,6 +1184,86 @@ def counterparts_lean(entries, ctx):
                       f"#counterpart {spec}{r['declaration']} [{', '.join(r.get('instantiation') or [])}] {sig} : {f}")
     return (LEAN_CHECK_HEAD + f"\nvariable ({' '.join(sorted(names))} : Prop)\n\n" + "\n\n".join(blocks)
             + f'\n\n#eval IO.println "counterparts: {len(blocks)} checked by Lean"\n')
+
+
+# The Mathlib counterparts' check: the same `#counterpart` as Checks/Counterparts.lean but for the printed
+# signature (a Mathlib record's signature is its header in the source, checked by --verify-counterparts),
+# and `#classical`, which checks the record's `classical` against the axioms the proof uses.
+MATHLIB_CHECK_HEAD = '''\
+-- Lean decides whether each Mathlib counterpart of data/naming/counterparts.json checked "lean-mathlib"
+-- states PM's formula (docs/NAMING.md, "Counterparts"), against Mathlib at the commit the records pin.
+-- Written by scripts/export_names.py from that file and the statements exported now;
+-- `python3 scripts/export_names.py --check` fails if it is out of date. A Lake project of its own, so the
+-- repository's `lake build` needs no Mathlib: run by scripts/release_check.sh, or by hand from
+-- Checks/MathlibCounterparts/ with `lake exe cache get` and then `lake env lean MathlibCounterparts.lean`.
+--
+-- As in Checks/Counterparts.lean, PM's formula is a schema over propositional variables, translated
+-- connective for connective, with the sides of an equivalence swapped only where the record says so. Then
+--   `example : <schema> := @<declaration> <variables>`
+-- is checked by the kernel, and
+--   `#counterpart <declaration> [<variables>] : <schema>`
+-- checks that its first binders, one per listed variable, are propositional variables (`Prop`, or
+-- `Sort u` only when marked `(specialized)`); that the variables listed are distinct; and that its type
+-- so instantiated is the schema exactly, up to the names of bound variables and `A → False` read as `¬A`.
+-- The recorded signature is the declaration's header in Mathlib's source, which
+-- `scripts/export_names.py --verify-counterparts` compares with the pinned file. Last,
+--   `#classical <declaration> <true|false>`
+-- checks the record's `classical`: whether the axioms of the declaration's proof include
+-- `Classical.choice`.
+'''
+
+ELAB_TAIL = LEAN_CHECK_HEAD[LEAN_CHECK_HEAD.index("  runTermElabM fun _ => do"):LEAN_CHECK_HEAD.index("\nend\n")]
+
+MATHLIB_ELABS = '''
+section
+open Lean Elab Command Term Meta
+
+/-- `e` with each `A → False` written `¬A`. -/
+partial def Counterparts.normNot (e : Expr) : Expr :=
+  e.replace fun
+    | .forallE _ a (.const ``False []) _ => some (mkApp (.const ``Not []) (Counterparts.normNot a))
+    | _ => none
+
+/-- See the head of this file. -/
+elab "#counterpart " spec:("(specialized) ")? d:ident " [" vs:ident,* "]" " : " s:term : command => do
+  -- the record's name is the full name, so it is not resolved against open namespaces (`not_imp_self`,
+  -- not `Decidable.not_imp_self`)
+  let c := d.getId
+  let info ← getConstInfo c
+  let d := mkIdent (rootNamespace ++ c)
+''' + ELAB_TAIL + '''
+/-- See the head of this file. -/
+elab "#classical " d:ident b:ident : command => do
+  let c := d.getId
+  discard <| getConstInfo c
+  let axs ← liftCoreM <| collectAxioms c
+  let uses := axs.contains ``Classical.choice
+  unless b.getId == (if uses then `true else `false) do
+    throwError "{c}: its proof uses the axioms {axs.toList}, so classical is {uses}, not {b.getId}"
+
+end
+'''
+
+
+def mathlib_counterparts_lean(entries, ctx):
+    """The text of Checks/MathlibCounterparts/MathlibCounterparts.lean: every counterpart checked
+    "lean-mathlib" (docs/NAMING.md), with the Mathlib modules that declare them."""
+    blocks, names, mods = [], set(), set()
+    for r, f, vs_used in counterpart_blocks(entries, ctx, "lean-mathlib"):
+        names |= vs_used
+        mods.add(r["source"].rsplit(":", 1)[0].removesuffix(".lean").replace("/", "."))
+        vs = " ".join(r.get("instantiation") or [])
+        spec = "(specialized) " if r.get("specialized") else ""
+        blocks.append(f"-- {r['pm'].replace('*', '✱').replace('.', '·')} {r['export']}: {r['declaration']}, "
+                      f"{r['source']}\n"
+                      f"example : {f} := @{r['declaration']} {vs}\n"
+                      f"#counterpart {spec}{r['declaration']} [{', '.join(r.get('instantiation') or [])}] : {f}\n"
+                      f"#classical {r['declaration']} {'true' if r['classical'] else 'false'}")
+    commit = ctx["counterparts"]["repositories"]["mathlib4"]["commit"]
+    return (MATHLIB_CHECK_HEAD + "".join(f"import {m}\n" for m in sorted(mods)) + MATHLIB_ELABS
+            + f"\nvariable ({' '.join(sorted(names))} : Prop)\n\n" + "\n\n".join(blocks)
+            + f'\n\n#eval IO.println "Mathlib counterparts: {len(blocks)} checked by Lean against Mathlib '
+            f'{commit[:7]}"\n')
 
 
 def signature_problems(r, schema):
@@ -1283,9 +1375,9 @@ def merkle_tree_hash(leaves):
 def verify_counterparts(ctx, base):
     """Each counterpart's file:line, in a checkout `base/<repository>-<commit>`, names the declaration (or,
     for a structure's constructor such as And.intro, declares the structure, as Lean's declaration
-    ranges do). For a counterpart checked from its source, the declaration's header there (from its line
-    to `:=`) is the recorded signature, and its section's `variable` line the recorded one, up to
-    whitespace."""
+    ranges do). For a Mathlib counterpart (checked from its source, or compiled), the declaration's header
+    there (from its line to `:=`) is the recorded signature, and its section's `variable` line the recorded
+    one, up to whitespace."""
     def ws(s):
         return " ".join(s.split())
 
@@ -1303,7 +1395,7 @@ def verify_counterparts(ctx, base):
         if int(line) > len(text) or not re.search(pat, text[int(line) - 1]):
             bad.append(f"{r['pm']} {r['declaration']}: {r['source']} does not name {last}")
             continue
-        if r["checked"] != "source":
+        if r["checked"] not in ("source", "lean-mathlib"):
             continue
         header = "\n".join(text[int(line) - 1:int(line) + 20]).split(":=", 1)[0]
         if ws(header) != ws(r["signature"]):
@@ -1361,17 +1453,19 @@ def main(args):
     rows, defs = lean_output()
     entries, unknown = build(rows, defs, ctx)
     text = json.dumps(entries, ensure_ascii=False, indent=1) + "\n"
-    lean_text = counterparts_lean(entries, ctx)
+    generated = ((OUT, text), (COUNTERPARTS_LEAN, counterparts_lean(entries, ctx)),
+                 (MATHLIB_COUNTERPARTS_LEAN, mathlib_counterparts_lean(entries, ctx)))
     failed = False
     if "--check" in args:
-        for path, want in ((OUT, text), (COUNTERPARTS_LEAN, lean_text)):
+        for path, want in generated:
             if not path.exists() or path.read_text(encoding="utf-8") != want:
                 print(f"{path.relative_to(ROOT)} is not up to date: run python3 scripts/export_names.py")
                 failed = True
         checked = json.loads(OUT.read_text(encoding="utf-8")) if OUT.exists() else []
     else:
-        OUT.write_text(text, encoding="utf-8")
-        COUNTERPARTS_LEAN.write_text(lean_text, encoding="utf-8")
+        for path, want in generated:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(want, encoding="utf-8")
         checked = entries
     problems = check(checked, ctx)
     problems["heads"] = [f"no word for {c} in data/naming/vocabulary.json" for c in unknown]
