@@ -85,7 +85,8 @@ Each statement gets a fixed family of one-change mutants:
 Each mutant gets two results:
 
 - **Does the original proof term check against it?** `Kernel.check` infers the proof's type once, and
-  `Kernel.isDefEq` compares it with the mutant.
+  the kernel's `Kernel.isDefEq` compares it with the mutant, after both are brought to normal form by
+  the kernel's own reductions ([below](#how-a-mutant-is-compared)).
 - **Is it a tautology?** This uses the repository's own test `F.isTaut`, evaluated by the kernel. From
   ✱9 on the test is run on the propositional skeleton: each subformula not built by a connective
   (`(x).φx`, `φx`, …) becomes an atom.
@@ -93,6 +94,106 @@ Each mutant gets two results:
 The control for each statement is the unchanged formula, rebuilt the way mutants are. The proof must check
 against it. A second seeded case is the ebook's ✱1·4: it must turn up among ✱1·4's mutants, not be a
 tautology, and be rejected.
+
+### How a mutant is compared
+
+The question for each mutant is whether the proof's type and the mutant are definitionally equal. The
+kernel decides it. There are two ways to ask it (`--method`; `normal` is the default):
+
+- **`direct`**: `Kernel.isDefEq` on the two terms as they are, the tool's only method until 2026-10-14. On
+  the class and relation statements of ✱22–✱25 it is slow and memory-hungry: the statement and the
+  mutant differ at one place deep inside nested definitions, and the kernel's lazy unfolding tries
+  many unfoldings before it concludes "not equal". The full run with ✱25 that compared this way, on the
+  Lean code of `07f82e0`, took 9142 s, 8519 s of it in these comparisons, and `/usr/bin/time` reported a
+  maximum resident set of about 22 GiB (MEASURED, 2026-10-14; [below](#how-to-run)). ✱25·431 alone
+  spent 3452 s comparing its 24 mutants.
+- **`normal`**: each term is first brought to its normal form, and `Kernel.isDefEq` compares the two
+  normal forms. The normal form is computed by the kernel's own `Kernel.whnf`, applied at the root and
+  then, recursively, in every argument, under every binder (with a fresh local variable, abstracted
+  again afterwards) and in every binder type. The work is memoized for each statement: a subterm met
+  again, such as a definition's parameter used twice, is normalized once, and equal results are kept
+  as one shared copy. The proof's type is normalized once for all of its mutants.
+
+**Why the verdicts are the same.**
+
+1. Every step replaces a subterm by its weak head normal form, which the kernel reaches from it by
+   its own reductions (β, δ, ι, ζ, projections, literals). So the two are definitionally equal.
+   Definitional equality is a congruence (it holds under application and under binders), so each
+   normal form is definitionally equal to its term.
+2. Therefore, if definitional equality is an equivalence on these terms, the proof's type equals the
+   mutant exactly when their normal forms are equal. The kernel decides both questions, so it gives
+   both the same verdict.
+
+The assumption in step 2 is not automatic in Lean. Its definitional equality is known to fail
+transitivity in general, but only through proof irrelevance (any two proofs of a proposition are
+equal) and the eta rules for structures and for unit-like types (a type with one constructor and no
+fields). Each rule needs one of three things among the terms compared: a proof, a constructor of a
+structure, or a term of a unit-like type. So the run checks for them:
+
+- **The audit.** Every head of every normal form (the constant or variable at the head of an
+  application, or standing alone) is checked. Is it a proof, that is, does its type end in a
+  proposition? Is it a constructor of a structure-like type (one constructor, no indices, not
+  recursive: what the kernel's eta for structures applies to)? Does its type end in a unit-like type?
+- **The response.** If anything in a statement's normal forms is flagged, every comparison of that
+  statement is decided by `direct` instead. Such a finding costs time, never the verdict.
+- **The result** (MEASURED, the full run of 2026-10-14 under [How to run](#how-to-run)). Nothing is
+  flagged from ✱10 on, nor in ✱1–✱5. The 36 statements of ✱9 (`F9.f…`, PM/Found9/Star9.lean) are
+  flagged: their normal forms contain `Reading.mk` (a reading of ✱9 is a structure) and `PProd.mk` and
+  `PUnit.unit` (from Lean's compilation of the recursive definitions they unfold to). All 488 of their
+  mutants, and 34 of their 36 controls, are decided by `direct`, which takes 0.3 s for them.
+- **The planted cases.** The run fails unless the audit flags a proof (`rfl`, which normalizes to
+  `Eq.refl`), a structure constructor (`Subtype.mk`) and a unit-like term (`PUnit.unit`).
+
+**The bound.** A comparison also falls back to `direct` in two other cases. One is a normal form that
+needs more than 200,000 steps, where a step is a call of `Kernel.whnf` on a term not met before in the
+statement. The other is a kernel error. No verdict therefore depends on the bound. The bound counts
+steps rather than seconds, so the fallbacks are the same from run to run. The largest normal form of
+the full run needs 968 steps (✱25·491), and no comparison reaches the bound. A planted case checks that a
+bound of three steps stops a term needing more. `PM_MUTATION_NF_BUDGET` sets another bound.
+
+**The check that the verdicts are the same** (MEASURED, 2026-10-14, with the code of the full run under
+[How to run](#how-to-run)). `mutate.py --compare-methods` runs both methods on every mutant and records
+both verdicts. It fails if they differ anywhere. It ran in three parts:
+
+| Statements | Mutants | Disagreements | Decided by `direct` (audit) | `direct` | `normal` | Memory |
+|---|---|---|---|---|---|---|
+| ✱1–✱22 (787 statements) | 13,556 | 0 | 522 (✱9) | 97.0 s | 20.7 s | 1.32 GiB |
+| ✱23–✱24 (142) | 1,902 | 0 | 0 | 965.6 s | 11.1 s | 5.27 GiB |
+| ✱25, all but ✱25·431 and ✱25·432 (68) | 1,006 | 0 | 0 | 750.4 s | 7.8 s | 3.09 GiB |
+
+The columns `direct` and `normal` give each method's comparison time in the same run; memory is the
+run's maximum resident set (`/usr/bin/time -v`), nearly all of it `direct`'s. The controls agree too. All
+of ✱1–✱24 was compared: 929 statements and 15,458 mutants. ✱25·431 and ✱25·432 were left out of this
+check (`--skip`) because `direct` takes about an hour on each.
+
+They are covered by the records of the two full runs instead. One is the earlier full run on the Lean
+code of `07f82e0`, which compared by `direct`. The other is the full run by `normal` described under
+[How to run](#how-to-run). The two give the same verdict on every mutant: 16,512 mutants of 999
+statements, the 48 of ✱25·431 and ✱25·432 among them. They also agree on every control, every tautology
+result and every printed mutant.
+
+Every mutant compared in these checks is rejected by both methods, and every control is accepted by
+both. So the agreement on "accepted" rests on the 999 controls, since no mutant is accepted.
+
+`tests/test_statement_mutation.py` reruns the side-by-side check on a fixed sample of 16 statements, one
+from each module with mutants (about 20 s). That test is part of `tests/run_all.sh`.
+
+**Time by chapter** (MEASURED, 2026-10-14). The time spent comparing, normal forms included:
+
+| | `direct` | `normal` |
+|---|---|---|
+| ✱22 | 95 s | 4.0 s |
+| ✱23 | 302 s | 4.6 s |
+| ✱24 | 663 s | 6.5 s |
+| ✱25, all but ✱25·431 and ✱25·432 | 750 s | 7.8 s |
+| ✱25·431 | 3452 s | 0.28 s |
+| ✱25·432 | 3282 s | 0.26 s |
+
+The rows for ✱22–✱25 come from the side-by-side check above. Those for ✱25·431 and ✱25·432 come from
+the records of the two full runs, `direct` from the earlier one (Lean code of `07f82e0`) and `normal`
+from the latest. With `normal`, the statements from ✱9 on spend most of their time in the tautology
+test (`F.isTaut` in the kernel) rather than in the comparison: in the latest full run 186 s against
+43 s.
 
 **Part 2, re-elaborated (`--full`, ✱1–✱5).** A proof *term* is tied to its statement almost by
 construction. A proof *script* is not: `by decide`, a decision procedure or `complete` would prove any
@@ -107,16 +208,18 @@ therefore exactly the ones a proof by decision procedure could still prove.
 
 ## Results
 
-Results are from the full run (`mutate.py --full`) of 2026-10-14, on the Lean code and scripts of commit
-`07f82e0`, with ✱1–✱25 included. It ran to completion and exited 0: "statement mutation: no unexpected
-finding". It took 2 h 32 min on a shared machine ([below](#how-to-run)).
+Results are from the latest full run (`mutate.py --full`, 2026-10-14), comparing on normal forms, with
+✱1–✱25 included. It ran to completion and exited 0: "statement mutation: no unexpected finding". It
+took 16 min 19 s with 8 jobs ([below](#how-to-run)). The earlier full run, which compared by `direct` on
+the Lean code of `07f82e0`, found the same in Part 2 and in the re-elaboration, record for record; in
+Part 1 it counted fewer theorems and recompiled a slightly different set of hypotheses (below).
 
-**Part 1.** No unused hypotheses: 1471 theorems, 1009 hypotheses (502 premises, 468 class arguments, 39
-unreferenced variables), and 0 unused, by both the plain and the refined test (the check theorems were
-`example`s at that commit, so the next full run will count them too). The seven planted cases
-are flagged. Left out as generated by Lean: 183 theorems, each with one of Lean's marks (101 lemmas of
-constructors, 17 of inductive types, 7 equations of auxiliary recursors, 4 reserved equation-lemma names,
-54 internal names).
+**Part 1.** No unused hypotheses: 1784 theorems, 1039 hypotheses (520 premises, 478 class arguments, 41
+unreferenced variables), and 0 unused, by both the plain and the refined test. The 313 check theorems are
+among them; they were `example`s in the earlier run, which counted 1471 theorems and 1009 hypotheses, the
+30 more hypotheses being those of the check theorems. The seven planted cases are flagged. Left out as
+generated by Lean: 183 theorems, each with one of Lean's marks (101 lemmas of constructors, 17 of
+inductive types, 7 equations of auxiliary recursors, 4 reserved equation-lemma names, 54 internal names).
 
 A first version of the check told generated theorems apart by name, and it was wrong both ways. It
 left out 22 theorems written in the source: 10 private theorems and 12 Prop-valued structure fields. It
@@ -124,16 +227,20 @@ also counted 9 generated ones (`brecOn.eq`, `ofNat_ctorIdx`). It reported 1134 t
 hypotheses. Before publication, a release review found a handwritten `eq_…` theorem with an unused premise
 that the check passed over, and the fix found the rest. None of the 22 has an unused hypothesis.
 
-Recompiled: 190 hypotheses were replaced by `True` (158 in tactic proofs, 32 sampled from term proofs),
+Recompiled: 188 hypotheses were replaced by `True` (153 in tactic proofs, 35 sampled from term proofs),
 and none of the copies compiles. In an earlier run a sample of the failures was read, to make sure each
-fails for the expected reason inside the theorem.
+fails for the expected reason inside the theorem. The earlier full run recompiled 190 (158 and 32): five
+hypotheses of `PM.Pf.hy`, `qclsEqCongr` and `qrelEqCongr` counted as in tactic proofs while their premise
+was filled in by a tactic (`:= by …`), which it no longer is ([KERNEL_CENSUS.md](KERNEL_CENSUS.md)), and
+the longer list of term-proof hypotheses moves the every-25th sample.
 
-27 of the hypotheses chosen cannot be edited in the source, so the term analysis is their only check:
+26 of the hypotheses chosen cannot be edited in the source, so the term analysis is their only check:
 
 - 11 anonymous premises of an arrow type `A → B`: 7 in `PM/Complete.lean`, 4 in `PM/Found9/Base.lean`;
-- 15 hygienic names that a macro generates, in `PM/Found9/Simul.lean`;
-- 1 structure argument `self` of a Prop-valued field, `PM.F9.Rep.assoc` in `PM/Found9/FromStar10.lean`
-  (a sampled term proof).
+- 15 hygienic names that a macro generates, in `PM/Found9/Simul.lean`.
+
+The earlier run's sample also took the structure argument `self` of a Prop-valued field,
+`PM.F9.Rep.assoc` in `PM/Found9/FromStar10.lean`, which cannot be edited either (27 in all).
 
 **Part 2, against the original proof term.**
 
@@ -216,8 +323,14 @@ No fidelity problem was found.
 
 ```
 python3 scripts/mutation/mutate.py --quick   # about 10 s idle, under a minute loaded; in tests/run_all.sh
-python3 scripts/mutation/mutate.py --full    # 2 h 32 min measured with ✱25, see below (--jobs N); in scripts/release_check.sh
+python3 scripts/mutation/mutate.py --full    # about 16 minutes with 8 jobs, see below (--jobs N); in scripts/release_check.sh
+python3 scripts/mutation/mutate.py --compare-methods [--modules M,…] [--only D,…] [--skip D,…]
 ```
+
+`--method direct` makes `--quick` or `--full` compare the old way ([How a mutant is
+compared](#how-a-mutant-is-compared)). `--compare-methods` runs Part 2 with both comparisons on every
+mutant and exits 1 if they differ anywhere. It runs on all of Part 2 or on the given modules or
+declarations, and it takes as long as `direct` does (see the table there).
 
 Both modes first run `lake build` on the modules the meta-program imports (`PM`, `Checks.PinnedStatements`).
 The meta-program reads proofs from the build, so without that step a run after an edit would analyse the
@@ -240,34 +353,55 @@ These are explicit terms and natural-deduction scripts from both replay files, p
 Here `F.isTaut` runs as compiled code rather than in the kernel. It is the same definition, and on the
 sample it gives the same verdict on all 469 mutants. The run measured 8 s: Part 1 took 4.6 s, the sample
 0.2 s, the build step under a second, and the rest is Lean's start-up. The sample could grow at little cost.
+With the comparison by normal forms the output of `--quick` is unchanged: run with `--method normal` and
+with `--method direct`, it gives the same 1522 records apart from the fields that record the method and
+the times (2026-10-14; 11 s and 9 s).
 
-`--full` runs everything above. With ✱1–✱25 it measured 9142 s, 2 h 32 min, on 2026-10-14, on the Lean
-code and scripts of commit `07f82e0`. The machine was shared with other jobs for part of the run, so the
-figures are those of one run, not a bound:
+`--full` runs everything above. With ✱1–✱25, comparing on normal forms, it measured 979 s, 16 min 19 s,
+on 2026-10-14 with `--jobs 8` (the default on an 8-core machine). These are the figures of one run, not
+a bound:
+
+- the meta-program, 360 s: Part 1 6 s, the ✱1–✱5 statements 84 s, the statements from ✱9 on 265 s;
+- re-elaboration, 98 s;
+- hypothesis recompilation, 521 s.
+
+The kernel's comparisons of each proof's type with its mutants, normal forms included, took 45 s (2 s for
+✱1–✱5, 43 s from ✱9 on), and the tautology tests 251 s (65 s and 186 s). The meta-program is a single
+process; `--jobs` applies only to the recompilations, which take most of the time now. For the whole run
+`/usr/bin/time -v` reported a maximum resident set of 1,204,916 kB (about 1.15 GiB) and 318% CPU.
+
+The earlier full run compared by `direct` ([How a mutant is compared](#how-a-mutant-is-compared)). With
+✱1–✱25 it measured 9142 s, 2 h 32 min, on 2026-10-14, on the Lean code and scripts of commit `07f82e0`.
+The machine was shared with other jobs for part of the run, so the figures are those of one run, not a
+bound:
 
 - the meta-program, 8763 s: Part 1 5 s, the ✱1–✱5 statements 64 s, the statements from ✱9 on 8691 s
   (99% of the meta-program);
 - re-elaboration, 72 s;
 - hypothesis recompilation, 307 s.
 
-Nearly all of the time goes to the kernel's definitional-equality comparisons of each proof's type with
+Nearly all of that time went to the kernel's definitional-equality comparisons of each proof's type with
 its mutants (`Kernel.isDefEq`): 8519 s, 97% of the meta-program. That time grows steeply with the nesting
-of the class and relation definitions the statements are built from. By chapter:
+of the class and relation definitions the statements are built from. By chapter, with the latest run's
+comparisons on normal forms for contrast:
 
 | | ✱1–✱21 | ✱22 | ✱23 | ✱24 | ✱25 |
 |---|---|---|---|---|---|
-| comparisons (`isDefEq`) | under 2 s | 70 s | 276 s | 689 s | 7482 s |
+| comparisons by `direct` (earlier run) | under 2 s | 70 s | 276 s | 689 s | 7482 s |
+| comparisons on normal forms (latest run) | 18 s | 3.7 s | 4.5 s | 9.0 s | 9.8 s |
 
-A few statements take most of it, each with 6 to 52 mutants: ✱25·431 3452 s and ✱25·432 3282 s
+On the small statements of ✱1–✱21 computing the normal forms costs more than the direct comparison
+saves; 8 s of the 18 s are ✱9's normal forms, computed for the audit before its comparisons fall back.
+
+A few statements took most of it, each with 6 to 52 mutants: ✱25·431 3452 s and ✱25·432 3282 s
 (together 77% of the meta-program), ✱24·431 260 s, ✱24·432 241 s, ✱25·491 206 s, ✱25·493 166 s,
-✱25·44 94 s, ✱23·93 71 s. The skeleton tautology tests of the statements from ✱9 on take 142 s.
+✱25·44 94 s, ✱23·93 71 s. The skeleton tautology tests of the statements from ✱9 on took 142 s.
 
-The meta-program is a single process (`--jobs` applies only to the recompilations). For the whole run,
-`/usr/bin/time -v` reported a maximum resident set of 23,093,504 kB (about 22 GiB), 247 million major page
-faults and 118% CPU. A faster comparison with the same meaning is planned.
+For that whole run, `/usr/bin/time -v` reported a maximum resident set of 23,093,504 kB (about 22 GiB),
+247 million major page faults and 118% CPU.
 
-Before ✱25 the same run took 1708 s with ✱1–✱24 on a shared machine (2026-10-14), and 524 s before
-✱22–✱24 on a less loaded one.
+Before ✱25 the run comparing by `direct` took 1708 s with ✱1–✱24 on a shared machine (2026-10-14), and
+524 s before ✱22–✱24 on a less loaded one.
 
 Both modes exit 1 on any finding not in `expected.json`, or if a control, a planted case or the seeded
 case fails. Working files go to `.lake/mutation/`.
@@ -293,10 +427,11 @@ What is wired now:
 - **`--full` runs before a release**, in `scripts/release_check.sh`, with the other long checks
   ([VERIFICATION.md](VERIFICATION.md#before-a-release)). That means all of Part 2 and the
   re-elaboration. The re-elaboration is the part that can tell a proof by PM's derivation from a proof by
-  decision. With ✱25 it measured 2 h 32 min (2026-10-14, above), nearly all of it in the kernel's
-  comparisons for ✱24 and ✱25, so it runs on our own machines only.
+  decision. With ✱25 it measured 16 min 19 s with 8 jobs, comparing on normal forms (2 h 32 min the
+  earlier way; 2026-10-14, above), and it runs on our own machines only.
 - **Hypothesis recompilation is still part of `--full`.** The recommendation called it optional: it
-  found nothing beyond the term analysis, at 5 to 8 minutes (307 s in the run with ✱25). Keeping it for
+  found nothing beyond the term analysis, at 5 to 9 minutes (521 s in the latest run with ✱25), now the
+  larger part of `--full`. Keeping it for
   tactic proofs only, or dropping it, awaits a ruling. Until then it stays in, since it costs only time on our own machines.
 - **The link to PM's text** that mutation cannot check is now `tests/test_regeneration.py`, a test in
   `tests/run_all.sh` ([above](#what-this-says-about-the-tie-to-pms-text)).

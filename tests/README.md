@@ -43,7 +43,9 @@ findings listed in `scripts/mutation/expected.json`; and where the tiers run: `-
 `run_all.sh` and as check 0 of `scripts/prove2me/verify.py`, which fails an export if the tool fails or is
 missing (shown with stand-in tools) unless `--no-mutation` skips it for a commit without the tool, recorded
 as skipped with the reason (and refused for a commit with the tool), and `--full` in
-`scripts/release_check.sh`.
+`scripts/release_check.sh`. It also runs Lean once (about 20 s): on a fixed sample of 16 statements, the
+kernel's comparison of each mutant on normal forms must give the same verdict as its direct comparison
+(the full side-by-side check is `mutate.py --compare-methods`).
 
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
@@ -69,6 +71,6 @@ Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, a
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
-`scripts/mutation/mutate.py --full` (with ✱25, 2 h 32 min and about 22 GiB of memory, measured on
-2026-10-14) and the Mathlib counterparts. Run it on
+`scripts/mutation/mutate.py --full` (with ✱25, 16 min 19 s with 8 jobs and about 1.15 GiB of memory per
+process, measured on 2026-10-14) and the Mathlib counterparts. Run it on
 your own machine before an export or a release, not on a time-limited remote.
