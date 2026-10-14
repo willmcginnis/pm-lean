@@ -758,7 +758,9 @@ theorem q25_46 [Reducibility S] (P Q R : V a → V b → QF V) :
 /-- ✱25·47 `⊢ : P ∩̇ Q = Λ̇ . P ⊍ Q = R . ≡ . P ⪽ R . Q = R ∸ P`, as printed (p. 243; the transcription has
     `(P ∩̇ Q) = Λ̇`, brackets the print does not have, the text audit's Vol I list, entry 19; they do not change
     the statement). As ✱24·47: in (1), ✱25·311 at Q, P has Q ∩̇ P (✱23·51); ✱23·59 and ✱25·43 (at R, P, Q) are
-    joined by ✱4·38, and (1).(2) by ✱4·38. "[✱4·3]" is ✱4·3 with ✱4·32 (and ✱4·36). -/
+    joined by ✱4·38, and (1).(2) by ✱4·38. "[✱4·3]" is ✱4·3 with ✱4·32 (and ✱4·36). The step "[✱23·45]"
+    needs ✱23·45 as an equivalence, as ✱24·47's "[✱22·45]" uses ✱22·45; the print states ✱23·45 with ⊃,
+    so the step uses its variant `q23_45_iff`, as ✱23·74 does. -/
 theorem q25_47 [Reducibility S] (P Q R : V a → V b → QF V) :
     QThm S (iff (QF.and (relEq (P ∩̇ Q) Λ̇) (relEq (P ⊍ Q) R)) (QF.and (P ⪽ R) (relEq Q (R ∸ P)))) :=
   have h1 : QThm S (iff (relEq (P ∩̇ Q) Λ̇) (Q ⪽ ∸P)) :=
@@ -778,7 +780,7 @@ theorem q25_47 [Reducibility S] (P Q R : V a → V b → QF V) :
     _ ≡ QF.and (P ⪽ R) (QF.and (QF.and (Q ⪽ R) (Q ⪽ ∸P)) (R ∸ P ⪽ Q)) :=
         qandCongrR _ (qandCongrL _ (QL.t4_3 _ _))                                  -- [✱4·3]
     _ ≡ QF.and (P ⪽ R) (QF.and (Q ⪽ R ∸ P) (R ∸ P ⪽ Q)) :=
-        qandCongrR _ (qandCongrL _ (q23_45 Q R (∸P)))                              -- [✱23·45]
+        qandCongrR _ (qandCongrL _ (q23_45_iff Q R (∸P)))                          -- [✱23·45]
     _ ≡ QF.and (P ⪽ R) (relEq Q (R ∸ P)) := qandCongrR _ (q23_41 Q (R ∸ P))         -- [✱23·41]
 
 /-- The hypothesis of ✱25·48: R ⪽ P . R' ⪽ P . S ⪽ Q . S' ⪽ Q . P ∩̇ Q = Λ̇, a product grouped from the left. -/

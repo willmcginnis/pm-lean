@@ -1865,7 +1865,7 @@
    "*4.36"
   ],
   "cited_unused": [],
-  "note": "PM prints no proof; as *24.47 (dem), translated; as printed in 1910; the transcription has brackets (P ∩̇ Q) the print does not have (text audit, Vol I entry 19); takes [Reducibility S]",
+  "note": "PM prints no proof; as *24.47 (dem), translated; as printed in 1910; the transcription has brackets (P ∩̇ Q) the print does not have (text audit, Vol I entry 19); [*23.45] is used as an equivalence, as *24.47 uses *22.45: the variant q23_45_iff (the print states *23.45 with ⊃); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "analogue",
   "tacit": [
