@@ -316,7 +316,12 @@ def markdown(d):
                 rest = [c for c in m["proved_by_chapter"] if not m["proved_by_chapter"][c]]
                 s += " (" + ", ".join(f"{lbl(c)} {m['proved_by_chapter'][c]} of {m['total_by_chapter'][c]}"
                                       for c in started)
-                if rest: s += f"; {lbl(rest[0])}–{lbl(rest[-1])} not started" if len(rest) > 1 else f"; {lbl(rest[0])} not started"
+                runs = []   # the chapters not started, in runs of consecutive numbers
+                for c in rest:
+                    if runs and int(c[1:]) == int(runs[-1][-1][1:]) + 1: runs[-1].append(c)
+                    else: runs.append([c])
+                if rest: s += "; " + ", ".join(f"{lbl(r[0])}–{lbl(r[-1])}" if len(r) > 1 else lbl(r[0])
+                                               for r in runs) + " not started"
                 s += ")"
                 # the reasons are the ones PM/Star20.lean and PM/Star21.lean give; fail rather than print stale ones
                 why = {("*20.631", "*20.632", "*21.631", "*21.632"): "about significance, built into the syntax "
