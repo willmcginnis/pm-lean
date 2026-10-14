@@ -464,7 +464,9 @@ variable (`hV`) and `Rep S R V`. **[MEAS]** No axioms.
   **[MEAS]**
 - `Checks/LedgerCheck.lean`, check 3, checks data/star9f_ledger.json against the proofs: every ✱9
   proposition, ✱2–✱5 theorem (through `elift`) and primitive of `Thm9` a row's proof uses is listed in
-  the row. 36 rows, 0 disagreements, none open. The 7 rows of ✱9·14, ✱9·15, ✱9·131, ✱9·6–✱9·63 have
+  the row, and every proposition the row claims as used is used by the proof of one of its readings
+  (✱9·12 and ✱1·11 where `Thm9.mp` is applied; ✱9·01–✱9·08 where the reading's ∼ or ∨ is referenced).
+  36 rows, 0 disagreements, none open. The 7 rows of ✱9·14, ✱9·15, ✱9·131, ✱9·6–✱9·63 have
   no declaration. **[MEAS]**
 - `Checks/Star9Readings.lean` and `tests/test_star9_readings.py`: the results of each reading, read
   from the statements; the 48 definitional steps of PM/Found9/Star9.lean; and where C uses ✱8·13 and

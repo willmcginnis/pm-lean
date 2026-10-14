@@ -1,0 +1,8 @@
+# Baseline of the reverse checks of Checks/LedgerCheck.lean (checks 2 and 3): entries that a row of
+# data/star*_ledger.json claims as used (cited_used, extra_used, glue) and that the row's proof does not
+# use, while a decision on the row is awaited. Lines here are reported, not failed. Any unused claim
+# not in this file fails the check, and so does a line here that no longer occurs.
+#
+# Format: ledger row claim  # why it awaits a decision
+#
+# Empty: every claimed use is used by its row's proof.

@@ -386,14 +386,14 @@
    "*9.05",
    "*9.01",
    "*9.04",
-   "*9.21",
    "*9.03"
   ],
   "extra_used": [
-   "*9.2",
    "*2.08"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*9.21"
+  ],
   "note": "one Lean step per Dem. line; definitional lines checked as the same proposition",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -402,7 +402,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp, PM/Found9/Base.lean), whose premiss is line (4) with x real, taken from (2) by the same definitions. Under the alternative convention B, allImp uses *9.2 for every function (allE, through ai), which uses Id (*2.08) for its elementary matrix; as printed (A and C) and in *9+ (L) it does not.",
+  "reason": "Line (5) applies *9.21 to the function 'phi x . v . (y) . phi y', which contains an apparent variable; *9.21 is proved for elementary functions. The Lean line uses *9.21 as a rule for every function (allImp, PM/Found9/Base.lean), whose premiss is line (4) with x real, taken from (2) by the same definitions. Under the alternative convention B, allImp uses the argument of *9.2 for every function (allE, through ai), not *9.2 itself (f9_2, for elementary functions), and Id (*2.08) for its elementary matrix; as printed (A and C) and in *9+ (L) it does not. *9.21 is not used: the Lean line is its rule form for every function (allImp), which does not use *9.21 (proved for elementary functions).",
   "glue": [],
   "glue_kind": []
  },
@@ -999,15 +999,15 @@
   "page": 145,
   "category": "assertion",
   "method": "explicit",
-  "cited_used": [
-   "*9.2"
-  ],
+  "cited_used": [],
   "extra_used": [
    "*2.08",
    "*9.1",
    "*9.13"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*9.2"
+  ],
   "note": "for every function phi",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1016,7 +1016,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "*9.2 is proved in *9 for elementary phi (f9_2). The alternative method needs it for every function: as printed (A and C) and under B, Lean's proof (ai) goes by the prefix of the function, with *9.13 for each (x), *9.1 for each (Ex) (applied to a function that may contain apparent variables), and Id for the elementary matrix; C does not use *8.13 for it. In *9+ (L) the same steps, with Switch where *9.zz puts an existential quantifier of phi y before the universal one whose variable it needs (inst_plus, exDrinker_plus).",
+  "reason": "*9.2 is proved in *9 for elementary phi (f9_2). The alternative method needs it for every function: as printed (A and C) and under B, Lean's proof (ai) goes by the prefix of the function, with *9.13 for each (x), *9.1 for each (Ex) (applied to a function that may contain apparent variables), and Id for the elementary matrix; C does not use *8.13 for it. In *9+ (L) the same steps, with Switch where *9.zz puts an existential quantifier of phi y before the universal one whose variable it needs (inst_plus, exDrinker_plus). *9.2 is not used: f9_2 is for elementary phi; the proof for every function (inst, by ai) is its own.",
   "glue": [],
   "glue_kind": []
  },
@@ -1047,15 +1047,15 @@
   "page": 146,
   "category": "assertion",
   "method": "explicit",
-  "cited_used": [
-   "*9.25"
-  ],
+  "cited_used": [],
   "extra_used": [
    "*2.08",
    "*9.1",
    "*9.13"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*9.25"
+  ],
   "note": "for an elementary p and every phi, under every reading; for every p: in A, C and L given Rep and a variable of every type (Rep.distrib, PM/Found9/FromStar10.lean), under B distrib_convention, with the prenex Switch distrib_switch. Those are assumptions of the proof for every p: an instance whose two sides are the same proposition, as for p = (Eu).chi u with phi elementary, is Id",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1064,7 +1064,7 @@
    "*1.11",
    "*9.13 before *9.21 or *9.22"
   ],
-  "reason": "For elementary p it is 'a mere example of q ⊃ q' (p. 146; f9_25): by *9.04 the two sides are the same proposition, and Lean's proof (distribEl) is Id for every proposition (idt), which uses *9.1 and *9.13 as for *10.1.",
+  "reason": "For elementary p it is 'a mere example of q ⊃ q' (p. 146; f9_25): by *9.04 the two sides are the same proposition, and Lean's proof (distribEl) is Id for every proposition (idt), which uses *9.1 and *9.13 as for *10.1. *9.25 is not used: f9_25 is for elementary functions; for every phi, distribEl is Id (idt), the two sides being the same proposition by *9.04.",
   "glue": [],
   "glue_kind": []
  }

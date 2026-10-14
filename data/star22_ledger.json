@@ -852,9 +852,7 @@
   "page": 221,
   "category": "assertion",
   "method": "explicit",
-  "cited_used": [
-   "*20.18"
-  ],
+  "cited_used": [],
   "extra_used": [
    "*4.2",
    "*2.02",
@@ -870,8 +868,10 @@
    "*10.281",
    "*20.15"
   ],
-  "cited_unused": [],
-  "note": "*20.18 for the expression alpha c gamma (qcls20_18); takes [Reducibility S]",
+  "cited_unused": [
+   "*20.18"
+  ],
+  "note": "*20.18's proof for the expression alpha c gamma (qcls20_18); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -882,7 +882,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.18 is used for the expression (qcls20_18: *20.18's proof [*20.11.15], with *20.15, and the expression's extensionality for *20.11). The expression is extensional as every expression of a class that PM forms is (p. 200; clsExpr_ext, by induction: *4.2 and Simp *2.02 for a formula without the class, *4.11 for ~, Comp *3.43 and *4.39 for v, *10.11.21 and *10.271 for (x), *20.11 for an elimination of the class, carried under (Ephi) by *4.36 (with *4.3), *10.11.21 and *10.281). The steps inside the helpers carried under an apparent variable are under-exists glue.",
+  "reason": "*20.18's proof is used for the expression (qcls20_18: *20.18's proof [*20.11.15], with *20.15, and the expression's extensionality for *20.11). The expression is extensional as every expression of a class that PM forms is (p. 200; clsExpr_ext, by induction: *4.2 and Simp *2.02 for a formula without the class, *4.11 for ~, Comp *3.43 and *4.39 for v, *10.11.21 and *10.271 for (x), *20.11 for an elimination of the class, carried under (Ephi) by *4.36 (with *4.3), *10.11.21 and *10.281). The steps inside the helpers carried under an apparent variable are under-exists glue. *20.18 is not used: *20.18 is for a generic context f{z(psi z)}; alpha c gamma contains alpha in several places, so *20.18 is used by its proof (qcls20_18 with clsExpr_ext).",
   "glue": [
    "*10.11",
    "*10.21",
@@ -903,9 +903,7 @@
   "page": 221,
   "category": "assertion",
   "method": "explicit",
-  "cited_used": [
-   "*20.18"
-  ],
+  "cited_used": [],
   "extra_used": [
    "*4.2",
    "*2.02",
@@ -921,8 +919,10 @@
    "*10.281",
    "*20.15"
   ],
-  "cited_unused": [],
-  "note": "*20.18 for the expression gamma c alpha (qcls20_18); takes [Reducibility S]",
+  "cited_unused": [
+   "*20.18"
+  ],
+  "note": "*20.18's proof for the expression gamma c alpha (qcls20_18); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -933,7 +933,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.18 is used for the expression (qcls20_18: *20.18's proof [*20.11.15], with *20.15, and the expression's extensionality for *20.11). The expression is extensional as every expression of a class that PM forms is (p. 200; clsExpr_ext, by induction: *4.2 and Simp *2.02 for a formula without the class, *4.11 for ~, Comp *3.43 and *4.39 for v, *10.11.21 and *10.271 for (x), *20.11 for an elimination of the class, carried under (Ephi) by *4.36 (with *4.3), *10.11.21 and *10.281). The steps inside the helpers carried under an apparent variable are under-exists glue.",
+  "reason": "*20.18's proof is used for the expression (qcls20_18: *20.18's proof [*20.11.15], with *20.15, and the expression's extensionality for *20.11). The expression is extensional as every expression of a class that PM forms is (p. 200; clsExpr_ext, by induction: *4.2 and Simp *2.02 for a formula without the class, *4.11 for ~, Comp *3.43 and *4.39 for v, *10.11.21 and *10.271 for (x), *20.11 for an elimination of the class, carried under (Ephi) by *4.36 (with *4.3), *10.11.21 and *10.281). The steps inside the helpers carried under an apparent variable are under-exists glue. *20.18 is not used: *20.18 is for a generic context f{z(psi z)}; gamma c alpha contains alpha in several places, so *20.18 is used by its proof (qcls20_18 with clsExpr_ext).",
   "glue": [
    "*10.11",
    "*10.21",
@@ -1059,7 +1059,7 @@
    "*22.34"
   ],
   "cited_unused": [],
-  "note": "*1.3 (Add) is the constructor QThm.add, which LedgerCheck does not see; takes [Reducibility S]",
+  "note": "*1.3 (Add) is the constructor QThm.add; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -2255,8 +2255,7 @@
    "*10.1",
    "*10.11",
    "*10.21",
-   "*22.8",
-   "*20.18"
+   "*22.8"
   ],
   "extra_used": [
    "*12.1",
@@ -2267,7 +2266,9 @@
    "*4.11",
    "*20.15"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*20.18"
+  ],
   "note": "alpha apparent (*20.07); f alpha an extensional expression of alpha (ClsExt, p. 200); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -2279,7 +2280,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM's *10.1 instantiates the apparent alpha at -alpha, whose defining function is not predicative: the class analogue of *10.1 (p. 206, *20.17; qclsAllAt: *12.1 turned by *10.32, *10.1, *2.06, *10.11, *10.23). f(-alpha) is extensional when f alpha is (clsExt_compl: *20.11 at the context x in phi!z, and *4.11, under (x) by *10.11.21). '[*22.8 . *20.18]' is *20.18 for the expression (qcls20_18, with *20.15). Inside helpers, *10.28 carries a step under an apparent variable (under-exists glue).",
+  "reason": "PM's *10.1 instantiates the apparent alpha at -alpha, whose defining function is not predicative: the class analogue of *10.1 (p. 206, *20.17; qclsAllAt: *12.1 turned by *10.32, *10.1, *2.06, *10.11, *10.23). f(-alpha) is extensional when f alpha is (clsExt_compl: *20.11 at the context x in phi!z, and *4.11, under (x) by *10.11.21). '[*22.8 . *20.18]' is *20.18's proof for the expression (qcls20_18, with *20.15). Inside helpers, *10.28 carries a step under an apparent variable (under-exists glue). *20.18 is not used: *20.18 is for a generic context f{z(psi z)}; for the extensional f, *20.18 is used by its proof (qcls20_18).",
   "glue": [
    "*10.28"
   ],

@@ -33,8 +33,7 @@
   "cited_used": [
    "*4.86",
    "*4.36",
-   "*10.281",
-   "*21.1"
+   "*10.281"
   ],
   "extra_used": [
    "*10.21",
@@ -42,7 +41,9 @@
    "*10.27",
    "*10.271"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*21.1"
+  ],
   "note": "*4.86 (with *4.21 for the second member) carried under (x, y) by the *10.11.27.271 pattern",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -54,7 +55,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*4.86 for the second member is carried under (x, y) by *10.11.27 and *10.271 (qfiff2CongrR), and the result under (phi) by *10.11.21 (q10_11_21). *10.21 is not among the steps PM leaves tacit (*10.11 + *10.27/271/28/281, pp. 161-162), and the others are taken inside a helper, so all four are listed as under-exists glue.",
+  "reason": "*4.86 for the second member is carried under (x, y) by *10.11.27 and *10.271 (qfiff2CongrR), and the result under (phi) by *10.11.21 (q10_11_21). *10.21 is not among the steps PM leaves tacit (*10.11 + *10.27/271/28/281, pp. 161-162), and the others are taken inside a helper, so all four are listed as under-exists glue. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -80,8 +81,7 @@
   "cited_used": [
    "*11.11",
    "*11.3",
-   "*10.281",
-   "*21.1"
+   "*10.281"
   ],
   "extra_used": [
    "*10.1",
@@ -89,7 +89,8 @@
    "*4.3"
   ],
   "cited_unused": [
-   "Fact (*3.45)"
+   "Fact (*3.45)",
+   "*21.1"
   ],
   "note": "",
   "fidelity": "pm-lines+extra",
@@ -102,7 +103,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As in *20.111: f(psi!(x, y)) == g(psi!(x, y)) is *10.1 at psi, and 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), on the second factor, so with *4.3 (qandCongrRImp).",
+  "reason": "As in *20.111: f(psi!(x, y)) == g(psi!(x, y)) is *10.1 at psi, and 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃), on the second factor, so with *4.3 (qandCongrRImp). *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -183,7 +184,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*21.1",
    "*12.11"
   ],
   "extra_used": [
@@ -202,7 +202,8 @@
    "*10.271"
   ],
   "cited_unused": [
-   "*13.195"
+   "*13.195",
+   "*21.1"
   ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -215,7 +216,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.13's Dem. with *12.11: psi ==_{x,y} phi! is turned by *10.32 under (x); with Hp, *10.321 for two variables (its proof with *11.371 for *10.301: qfiff2_321, Fact *3.45) gives phi! ==_{x,y} chi; the step taken by *13.195 is its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04); the hypotheses are joined by Comp and Exp (*3.43, *3.3, with *3.27) and carried under (Ephi) by *10.11.21 and *10.28. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2Symm and qfiff2_321.",
+  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.13's Dem. with *12.11: psi ==_{x,y} phi! is turned by *10.32 under (x); with Hp, *10.321 for two variables (its proof with *11.371 for *10.301: qfiff2_321, Fact *3.45) gives phi! ==_{x,y} chi; the step taken by *13.195 is its proof's first line, *3.2 . *13.15 . *10.24, with theta = phi written phi = theta as *13.01 needs (Comm, *2.04); the hypotheses are joined by Comp and Exp (*3.43, *3.3, with *3.27) and carried under (Ephi) by *10.11.21 and *10.28. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2Symm and qfiff2_321. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*2.04",
    "*10.28",
@@ -233,7 +234,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*21.1",
    "*13.195"
   ],
   "extra_used": [
@@ -251,7 +251,8 @@
    "*10.271"
   ],
   "cited_unused": [
-   "*10.322"
+   "*10.322",
+   "*21.1"
   ],
   "note": "[Proof as in *20.14]; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -264,7 +265,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.14's Dem. (*20.1, *13.195, *10.322): *13.195 needs theta = phi . F theta where *21.01 gives F theta : phi = theta, so the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi ==_{x,y} phi!; with *21.01's it is *10.321, for two variables (qfiff2_321: *10.32 under (x), Fact *3.45, *11.371). (Ephi) is removed by *10.11 and *10.23. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2_321.",
+  "reason": "*20.14's Dem. (*20.1, *13.195, *10.322): *13.195 needs theta = phi . F theta where *21.01 gives F theta : phi = theta, so the factors are commuted (*4.3) and phi = theta turned by *13.16 (with *4.36), under (Etheta) by *10.11.281, and used on the second factor (*3.47 with Id, *2.08). PM's *10.322 is for the orientation psi ==_{x,y} phi!; with *21.01's it is *10.321, for two variables (qfiff2_321: *10.32 under (x), Fact *3.45, *11.371). (Ephi) is removed by *10.11 and *10.23. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2_321. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*4.3",
    "*10.281",
@@ -420,7 +421,6 @@
    "*21.18",
    "*10.11",
    "*10.21",
-   "*21.1",
    "*13.01",
    "*21.112"
   ],
@@ -450,7 +450,8 @@
   ],
   "cited_unused": [
    "*10.35",
-   "*10.301"
+   "*10.301",
+   "*21.1"
   ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -463,7 +464,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.19's Dem. with *21 for *20 and *12.11 for *12.1 (see that row): (1) *21.18 under (f) (*3.26); (2) *21.15 and *21.18 for each factor of Hp (*3.26, *3.27), joined by *4.84, *4.85, the converse half by *3.27; carried under (f) by *10.11.21 and *10.27; the step [*21.112 . *10.1] is qrelIndisc (*10.1 at g, phi, theta; *2.06; *10.11, *10.23; the class-form of the context at phi by *4.2 under *11.11, *10.13, *10.24, detached by *2.27; *11.371 with *3.22 under (Echi)). *10.301 for two variables is *11.371, used twice with *10.32 under (x), Exp (*3.3) and Comm (*2.04); *21.15 gives the identity. The two existentials of *12.11 are used one after the other (*10.11, *10.23), not combined by *10.35. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2Symm and qred2rel; *10.28 in qred2rel.",
+  "reason": "PM omits the proofs of *21 as 'exactly analogous to those of *20, merely substituting *12.11 for *12.1, and propositions in *11 for propositions in *10' (p. 212). *20.19's Dem. with *21 for *20 and *12.11 for *12.1 (see that row): (1) *21.18 under (f) (*3.26); (2) *21.15 and *21.18 for each factor of Hp (*3.26, *3.27), joined by *4.84, *4.85, the converse half by *3.27; carried under (f) by *10.11.21 and *10.27; the step [*21.112 . *10.1] is qrelIndisc (*10.1 at g, phi, theta; *2.06; *10.11, *10.23; the class-form of the context at phi by *4.2 under *11.11, *10.13, *10.24, detached by *2.27; *11.371 with *3.22 under (Echi)). *10.301 for two variables is *11.371, used twice with *10.32 under (x), Exp (*3.3) and Comm (*2.04); *21.15 gives the identity. The two existentials of *12.11 are used one after the other (*10.11, *10.23), not combined by *10.35. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.271 in qfiff2Symm and qred2rel; *10.28 in qred2rel. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*3.43",
    "*2.83",
@@ -670,7 +671,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*21.1",
    "*21.02",
    "*10.35",
    "*12.11"
@@ -686,7 +686,8 @@
    "*10.271"
   ],
   "cited_unused": [
-   "*10.43"
+   "*10.43",
+   "*21.1"
   ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -699,7 +700,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.43 for two variables is its proof with *11.1 for *10.1 (*5.32; qfiff2_43), under (Ephi). *10.35 is used with p second (*4.3, qex_and_perm). *12.11, turned by *10.32 under (x), drops the asserted factor (*3.27, *3.2). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.11 and *10.28 and *10.271 in qred2rel.",
+  "reason": "*10.43 for two variables is its proof with *11.1 for *10.1 (*5.32; qfiff2_43), under (Ephi). *10.35 is used with p second (*4.3, qex_and_perm). *12.11, turned by *10.32 under (x), drops the asserted factor (*3.27, *3.2). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.11 and *10.28 and *10.271 in qred2rel. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*4.3",
    "*10.11",
@@ -815,7 +816,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*20.3",
    "*21.03"
   ],
   "extra_used": [
@@ -842,7 +842,9 @@
    "*10.271",
    "*10.28"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*20.3"
+  ],
   "note": "R real (an expression x y psi(x, y)); *20.3 is its analogue for classes of relations, proved by *20.3's Dem. with *21.082, *21.083 for *20.01, *20.02 and *21.7 for *12.1 (qrelCls20_3); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -854,7 +856,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.4, for relations: *10.43 is used at R, whose defining function need not be predicative (qrelAllAt: *12.11 turned by *10.32 under (x), *10.1, *2.06, *10.11, *10.23), the members carried by *21.11 and joined by *4.86 (the ⊃ half: == read as ⊃, tacit), then *5.32. The defining expression of Rel is extensional by *21.11 under (Ephi) (*10.11.21, *10.281; relExt_Rel). *21.7 is joined with the expression's generic form (qrelGen: *4.2, *11.11, *10.24, an == read as ⊃ (tacit) with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 with p second (*4.3); '[*12.1]' (here *21.7) drops the asserted factor by *3.27 and *3.2. The steps of *20.3's Dem. repeated in the analogue are listed as well: *10.35 and *21.7 (for *12.1) as extra, the chain under Hp (*2.02, *3.43) as chain glue, and *10.27, *10.271, *10.28 (with *10.11), taken inside the analogue, as under-exists glue.",
+  "reason": "As *20.4, for relations: *10.43 is used at R, whose defining function need not be predicative (qrelAllAt: *12.11 turned by *10.32 under (x), *10.1, *2.06, *10.11, *10.23), the members carried by *21.11 and joined by *4.86 (the ⊃ half: == read as ⊃, tacit), then *5.32. The defining expression of Rel is extensional by *21.11 under (Ephi) (*10.11.21, *10.281; relExt_Rel). *21.7 is joined with the expression's generic form (qrelGen: *4.2, *11.11, *10.24, an == read as ⊃ (tacit) with Imp *3.31, *10.11, *10.23). *10.43 is carried under (Ephi) by *10.11.281; *10.35 with p second (*4.3); '[*12.1]' (here *21.7) drops the asserted factor by *3.27 and *3.2. The steps of *20.3's Dem. repeated in the analogue are listed as well: *10.35 and *21.7 (for *12.1) as extra, the chain under Hp (*2.02, *3.43) as chain glue, and *10.27, *10.271, *10.28 (with *10.11), taken inside the analogue, as under-exists glue. *20.3 is not used: its analogue for classes of relations, which PM quotes by the number of *20.3 (p. 206), is proved by *20.3's Dem. (qrelCls20_3), not from *20.3.",
   "glue": [
    "*4.3",
    "*10.281",
@@ -1065,9 +1067,7 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*21.33",
-   "*21.54",
-   "*14.1"
+   "*21.33"
   ],
   "extra_used": [
    "*10.11",
@@ -1097,7 +1097,10 @@
    "*10.23",
    "*10.28"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*21.54",
+   "*14.1"
+  ],
   "note": "the description has the larger scope (as in *20, p. 204); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1109,7 +1112,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.55: *21.33 is generalized over R by *10.11 and read from right to left. *21.54 is applied to phi S = (xRy ==_{x,y} phi(x, y) . ==_R . R = S), in which S occurs under (R): *21.54's argument (qrel54, with the extras listed for *21.54), its analogue of *21.18 got from *21.22 and *21.24 (Exp, Comm, *3.22, Comp *3.43) under (R) by *4.86, *10.11.21 and *10.271 (qrelEqR, qdescRelEq); the factors are commuted (*4.3) and x y phi(x, y) = S turned by *21.21 (*4.36) under (ES), *10.11.281. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq.",
+  "reason": "As *20.55: *21.33 is generalized over R by *10.11 and read from right to left. *21.54 is applied to phi S = (xRy ==_{x,y} phi(x, y) . ==_R . R = S), in which S occurs under (R): *21.54's argument (qrel54, with the extras listed for *21.54), its analogue of *21.18 got from *21.22 and *21.24 (Exp, Comm, *3.22, Comp *3.43) under (R) by *4.86, *10.11.21 and *10.271 (qrelEqR, qdescRelEq); the factors are commuted (*4.3) and x y phi(x, y) = S turned by *21.21 (*4.36) under (ES), *10.11.281. Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq. *21.54 is not used: PM's [*21.54] is *21.54's argument (qrel54) for the condition, in qdescRelEq, not *21.54 itself, which is for a generic context. *14.1 is not used: for a description of a relation, the *14.1 line is the definition (*21.072, a macro in Lean).",
   "glue": [
    "*2.04",
    "*3.22",
@@ -1131,14 +1134,15 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*21.55",
-   "*14.21"
+   "*21.55"
   ],
   "extra_used": [
    "*10.5",
    "*3.26"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.21"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1150,7 +1154,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*14.21 for descriptions of relations (qdescRelE) is proved as *14.21 is, by *10.5 and *3.26. E!(iR)(phi R) is the analogue of *14.02 (exists1Rel), which *21 does not print.",
+  "reason": "*14.21 for descriptions of relations (qdescRelE) is proved as *14.21 is, by *10.5 and *3.26. E!(iR)(phi R) is the analogue of *14.02 (exists1Rel), which *21 does not print. *14.21 is not used: *14.21 for descriptions of relations is proved as *14.21 is (qdescRelE: *10.5, *3.26), not from *14.21.",
   "glue": [],
   "glue_kind": []
  },
@@ -1160,7 +1164,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*21.54"
   ],
   "extra_used": [
@@ -1196,7 +1199,8 @@
    "*10.28"
   ],
   "cited_unused": [
-   "*13.183"
+   "*13.183",
+   "*14.1"
   ],
   "note": "f R any expression containing R; g generic; the descriptions have the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -1209,7 +1213,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.57: (1) is qdescRelEq (*21.54's argument, see *21.55); f R is replaced by R = x y phi(x, y) under (R) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (ES) by *10.11.21 and *10.281. *13.183's analogue for relations, R = phi ==_R R = psi . == . phi = psi, is not printed in *21; it is proved by *20.25's argument (qrel183: qrelAllAt with *21.11, *4.86, *21.2, *2.27, qrelEqR), and S = x y phi(x, y) is turned by *21.21 for *21.54 (*4.36). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq and qrel183.",
+  "reason": "As *20.57: (1) is qdescRelEq (*21.54's argument, see *21.55); f R is replaced by R = x y phi(x, y) under (R) by *4.86 (*10.11.27, *10.271), Fact as *4.36, under (ES) by *10.11.21 and *10.281. *13.183's analogue for relations, R = phi ==_R R = psi . == . phi = psi, is not printed in *21; it is proved by *20.25's argument (qrel183: qrelAllAt with *21.11, *4.86, *21.2, *2.27, qrelEqR), and S = x y phi(x, y) is turned by *21.21 for *21.54 (*4.36). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq and qrel183. *14.1 is not used: for a description of a relation, the *14.1 line is the definition (*21.072, a macro in Lean).",
   "glue": [
    "*2.04",
    "*3.22",
@@ -1232,9 +1236,7 @@
   "method": "explicit",
   "cited_used": [
    "*4.2",
-   "*10.11",
-   "*21.54",
-   "*14.1"
+   "*10.11"
   ],
   "extra_used": [
    "*21.22",
@@ -1263,7 +1265,10 @@
    "*10.23",
    "*10.28"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*21.54",
+   "*14.1"
+  ],
   "note": "the description has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1275,7 +1280,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "'*21.54 . *14.1' is the step of *21.55 (qdescRelEq: *21.54's argument for R = x y phi(x, y) . ==_R . R = S, with the extras listed for *21.54 and *21.55). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq.",
+  "reason": "'*21.54 . *14.1' is the step of *21.55 (qdescRelEq: *21.54's argument for R = x y phi(x, y) . ==_R . R = S, with the extras listed for *21.54 and *21.55). Inside helpers, steps carried under an apparent variable (under-exists glue): *10.28 in qdescRelEq. *21.54 is not used: PM's [*21.54] is *21.54's argument (qrel54) for the condition, in qdescRelEq, not *21.54 itself, which is for a generic context. *14.1 is not used: for a description of a relation, the *14.1 line is the definition (*21.072, a macro in Lean).",
   "glue": [
    "*2.04",
    "*3.22",
@@ -1377,12 +1382,13 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*4.2",
    "*21.07",
    "*10.12"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*4.2"
+  ],
   "note": "[Proof as in *20.63]",
   "fidelity": "pm-lines",
   "pm_text": "hint",
@@ -1394,7 +1400,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
+  "reason": "*4.2 is not used: the *4.2 . (*21.07) line is the definition (a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1429,12 +1435,13 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*4.2",
    "*21.07",
    "*10.14"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*4.2"
+  ],
   "note": "[Proof as in *20.64]",
   "fidelity": "pm-lines",
   "pm_text": "hint",
@@ -1446,7 +1453,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
+  "reason": "*4.2 is not used: the *4.2 . (*21.07) line is the definition (a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1481,8 +1488,7 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*12.11",
-   "*21.111"
+   "*12.11"
   ],
   "extra_used": [
    "*11.1",
@@ -1494,7 +1500,9 @@
    "*10.11",
    "*10.281"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*21.111"
+  ],
   "note": "[Proof as in *20.701]; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1506,7 +1514,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *20.701: *21.111's lines repeated for two arguments (qelim1_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), *11.11.3 for the generalization over (R, x).",
+  "reason": "As *20.701: *21.111's lines repeated for two arguments (qelim1_2): *11.1 for *10.1, Fact as *4.36 on the second factor (*4.3), *10.11.21 and *10.281 under (psi), *11.11.3 for the generalization over (R, x). *21.111 is not used: *21.111 for two arguments is taken by its lines (qelim1_2), not from *21.111.",
   "glue": [
    "*2.02",
    "*3.43",
@@ -1530,8 +1538,7 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*12.11",
-   "*21.111"
+   "*12.11"
   ],
   "extra_used": [
    "*11.1",
@@ -1543,7 +1550,9 @@
    "*10.11",
    "*10.281"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*21.111"
+  ],
   "note": "[Proof as in *20.702]; as printed, g!(R, x) with R first (*20.702 has g!{x, z(phi!z)}); takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1555,7 +1564,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.701, with *12.11 applied to f(x, R) as a function of (R, x). *10.11.21 and *10.281 under (psi), inside qelim1_2, as in *21.701.",
+  "reason": "As *21.701, with *12.11 applied to f(x, R) as a function of (R, x). *10.11.21 and *10.281 under (psi), inside qelim1_2, as in *21.701. *21.111 is not used: *21.111 for two arguments is taken by its lines (qelim1_2), not from *21.111.",
   "glue": [
    "*2.02",
    "*3.43",
@@ -1582,7 +1591,6 @@
    "*11.11",
    "*11.3",
    "*11.341",
-   "*21.1",
    "*10.35",
    "*10.11",
    "*10.281",
@@ -1594,7 +1602,8 @@
    "*4.3"
   ],
   "cited_unused": [
-   "*10.311"
+   "*10.311",
+   "*21.1"
   ],
   "note": "[Proof as in *20.703]; R has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -1607,7 +1616,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*20.703's lines (qelim2): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice. (2) is an implication, carried under (Eg) by *10.11.28.",
+  "reason": "*20.703's lines (qelim2): *10.311 (one variable, the added factor second) is not used; the two added factors are put on both sides by *11.1 at (chi, theta) and *4.36 with *4.3 twice. (2) is an implication, carried under (Eg) by *10.11.28. *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -1628,8 +1637,6 @@
    "*11.11",
    "*11.3",
    "*11.341",
-   "*21.1",
-   "*20.1",
    "*10.35",
    "*10.11",
    "*10.281",
@@ -1641,7 +1648,9 @@
    "*4.3"
   ],
   "cited_unused": [
-   "*10.311"
+   "*10.311",
+   "*21.1",
+   "*20.1"
   ],
   "note": "[Proof as in *20.703]; R has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -1654,7 +1663,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.703, with *21.01 for R and *20.01 for alpha (qelim2).",
+  "reason": "As *21.703, with *21.01 for R and *20.01 for alpha (qelim2). *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean). *20.1 is not used: the *20.1 line is the definition (*20.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -1675,8 +1684,6 @@
    "*11.11",
    "*11.3",
    "*11.341",
-   "*20.1",
-   "*21.1",
    "*10.35",
    "*10.11",
    "*10.281",
@@ -1688,7 +1695,9 @@
    "*4.3"
   ],
   "cited_unused": [
-   "*10.311"
+   "*10.311",
+   "*20.1",
+   "*21.1"
   ],
   "note": "[Proof as in *20.703]; alpha has the larger scope; takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -1701,7 +1710,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "As *21.703, with *20.01 for alpha and *21.01 for R (qelim2).",
+  "reason": "As *21.703, with *20.01 for alpha and *21.01 for R (qelim2). *20.1 is not used: the *20.1 line is the definition (*20.01, a macro in Lean). *21.1 is not used: the *21.1 line is the definition (*21.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",

@@ -30,6 +30,32 @@
 --    the file that no longer occurs (remove it when the row is fixed).
 -- 3. The ledger data/star9f_ledger.json of ✱9's own method (PM/Found9), as check 2 with ✱9's names
 --    (below, before the third `#eval`).
+-- In checks 2 and 3, a suffix form of the row's own proposition that its proof uses (`q23_45_iff` in
+-- ✱23·45's, `f9_31_dem` in ✱9·31's) is followed as part of that proof, not stopped at.
+--
+-- Checks 2 and 3 also run the converse (the reverse check): every entry a row claims as used, in
+-- cited_used, extra_used or glue, is used by the proof of the row's theorem (for ✱9, of any of its
+-- reading variants). A review found that a fabricated claim (✱5·19 added to ✱22·1) passed. A claim
+-- is used when one of these holds:
+--  - Helpers. The proof term uses the proposition, directly or through helper declarations, followed
+--    as `reachProps` follows them, the tacit-rule helpers (`qiffMp`, `qiffMpr`) included; chain glue
+--    (the `Trans` instances `chainIffReads`, for ✱3·26) counts as in check 2; suffix forms of the
+--    row's own proposition are followed as above.
+--  - "Syll" is used when ✱2·05 or ✱2·06 is, "Comp" when ✱3·43 is, as in check 1.
+--  - The propositions of the tacit pattern (✱10·11, ✱10·27, ✱10·271, ✱10·28, ✱10·281): claimed in
+--    those fields, they are used wherever the proof uses them, directly or through a helper (check 2
+--    asks for them to be listed only where a helper brings them in).
+--  - Constructors. ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11 are constructors of `QThm`, and
+--    the rule of inference (✱1·1, ✱1·11; ✱9·12 in ✱9's method) is `QThm.mp` (`Thm9.mp`): a claim of
+--    one is used where the proof applies the constructor (`ctorIds`).
+--  - Definitions. A definition is a macro, so a proof term cannot use it. A claimed definition is
+--    used only where the statement or proof of the row's theorem, or of a declaration its proof
+--    reaches, references a Lean declaration that realizes it, listed in `realizers` (✱22·01 by
+--    `QF.clsSubset`, ✱9·03–✱9·08 by the reading's disjunction, ...); otherwise it is an error.
+-- A claim the proof does not use fails, unless it is in tests/ledger_unused_claims.txt (empty now:
+-- reported, not failed, while a decision on the row is awaited); so does a line of that file that no
+-- longer occurs. tests/ledger_negative.sh checks that a fabricated claim and a removed use fail.
+-- The ledgers of ✱1–✱5 (data/replay_ledger.json, data/replay2_ledger.json) are not read here.
 -- Each check fails (an error) on any disagreement.
 import Lean
 import PM
@@ -99,8 +125,10 @@ def chainIffReads : Array Name := #[`PM.transIffImp, `PM.transImpIff]
 /-- The PM propositions `c`'s value reaches through helpers (not through other PM propositions),
     except those in `skip`; with `within := some r`, only through `r`'s own auxiliary declarations.
     With `iffTacit` (check 2), an equivalence read as an implication is not a use of ✱3·26 or
-    ✱3·27, except in the chain instances `chainIffReads`, which count as ✱3·26. -/
-partial def reachProps (skip : Array Name) (within : Option Name) (c : Name) (iffTacit := false) :
+    ✱3·27, except in the chain instances `chainIffReads`, which count as ✱3·26. With `own := some id`,
+    the PM propositions that are forms of ledger id `id` (`starsOf` gives just `id`) are also followed. -/
+partial def reachProps (skip : Array Name) (within : Option Name) (c : Name) (iffTacit := false)
+    (own : Option String := none) :
     StateT (Std.HashMap Name (Array Name)) CoreM (Array Name) := do
   if let some r := (← get).get? c then return r
   modify (·.insert c #[])   -- in progress
@@ -112,10 +140,13 @@ partial def reachProps (skip : Array Name) (within : Option Name) (c : Name) (if
     if let some v := ci.value? (allowOpaque := true) then
       for d in constsOf iffTacit v #[] do
         if d == c then continue
+        -- a suffix form of the row's own proposition `own` is part of its proof: followed
+        let ownForm := isPMProp d && own.any (starsOf d == #[·])
         if isPMProp d then
           unless out.contains d do out := out.push d
-        else if underPM d && !isAux env d && !skip.contains d && (within.all (·.isPrefixOf d)) then
-          for e in ← reachProps skip within d iffTacit do
+        if (!isPMProp d || ownForm) && underPM d && !isAux env d && !skip.contains d &&
+            (within.all (·.isPrefixOf d)) then
+          for e in ← reachProps skip within d iffTacit own do
             unless out.contains e do out := out.push e
   modify (·.insert c out)
   return out
@@ -186,6 +217,102 @@ def isPattern (e : String) : Bool := (e.splitOn "pattern").length > 1
 def strs (j : Json) (k : String) : Array String :=
   (j.getObjValAs? (Array String) k).toOption.getD #[]
 
+/-- The Lean declarations that realize PM's definitions (macros). A proof term cannot use a
+    definition; a row may claim one as used where the statement or proof of its theorem, or of a
+    helper its proof reaches, references one of these (`reachConsts`). -/
+def realizers : List (String × List Name) := [
+  ("*1.01", [`PM.QF.imp, `PM.F.imp, `PM.F9.EF.imp, `PM.F9.PF.imp, `PM.F9.PE.imp, `PM.F9.Reading.imp]),
+  ("*9.01", [`PM.F9.PF.neg]), ("*9.02", [`PM.F9.PF.neg]),
+  ("*9.03", disj9), ("*9.04", disj9), ("*9.05", disj9), ("*9.06", disj9), ("*9.07", disj9),
+  ("*9.08", disj9),
+  ("*10.01", [`PM.QF.ex]), ("*10.02", [`PM.QF.fimp]),
+  ("*13.01", [`PM.QF.ident]),
+  ("*14.01", [`PM.QF.desc]), ("*14.02", [`PM.QF.exists1]), ("*14.03", [`PM.QF.desc2]),
+  ("*14.04", [`PM.QF.desc2r]),
+  ("*20.01", [`PM.QF.cls]), ("*20.02", [`PM.QF.mem]), ("*20.03", [`PM.QF.Cls]),
+  ("*20.07", [`PM.QF.clsAll]), ("*20.071", [`PM.QF.clsEx]),
+  ("*21.01", [`PM.QF.rel]), ("*21.02", [`PM.QF.relApp]), ("*21.03", [`PM.QF.Rel]),
+  ("*21.07", [`PM.QF.relAll]), ("*21.071", [`PM.QF.relEx]),
+  ("*22.01", [`PM.QF.clsSubset]), ("*22.02", [`PM.QF.clsInter]), ("*22.03", [`PM.QF.clsUnion]),
+  ("*22.04", [`PM.QF.clsCompl]), ("*22.05", [`PM.QF.clsDiff]), ("*22.53", [`PM.QF.clsInter3]),
+  ("*22.71", [`PM.QF.clsUnion3]),
+  ("*23.01", [`PM.QF.relSubset]), ("*23.02", [`PM.QF.relInter]), ("*23.03", [`PM.QF.relUnion]),
+  ("*23.04", [`PM.QF.relCompl]), ("*23.05", [`PM.QF.relDiff]), ("*23.53", [`PM.QF.relInter3]),
+  ("*23.71", [`PM.QF.relUnion3])]
+where
+  /-- ✱9·03–✱9·08 are computed by the reading's disjunction. -/
+  disj9 : List Name := [`PM.F9.Reading.or, `PM.F9.PF.disj, `PM.F9.PF.or, `PM.F9.PF.orPrinted,
+    `PM.F9.PF.orPlus, `PM.F9.PF.orEl]
+
+/-- The constants of the statements and values of `c` and of every declaration its value reaches,
+    following value constants as `reachProps` does (`follow`), not through PM propositions. -/
+def reachConsts (follow : Name → Bool) (c : Name) : CoreM (Array Name) := do
+  let env ← getEnv
+  let mut seen : Std.HashSet Name := {}
+  let mut todo := #[c]
+  let mut out : Array Name := #[]
+  while !todo.isEmpty do
+    let d := todo.back!
+    todo := todo.pop
+    if seen.contains d then continue
+    seen := seen.insert d
+    let some ci := env.find? d | continue
+    let vs := ((ci.value? (allowOpaque := true)).map (·.getUsedConstants)).getD #[]
+    for e in ci.type.getUsedConstants ++ vs do
+      unless out.contains e do out := out.push e
+    for e in vs do
+      if e != d && follow e then todo := todo.push e
+  return out
+
+/-- The primitive propositions and the rule of inference that are constructors of `QThm` and `Thm9`
+    (✱9's primitive propositions are already ✱9 propositions to `stars9Of`): a claim of one is used
+    where the proof applies the constructor. -/
+def ctorIds : List (Name × Array String) := [
+  (`PM.QThm.mp, #["*1.1", "*1.11"]), (`PM.QThm.taut, #["*1.2"]), (`PM.QThm.add, #["*1.3"]),
+  (`PM.QThm.perm, #["*1.4"]), (`PM.QThm.assoc, #["*1.5"]), (`PM.QThm.sum, #["*1.6"]),
+  (`PM.QThm.inst, #["*10.1"]), (`PM.QThm.gen, #["*10.11"]), (`PM.QThm.distrib, #["*10.12"]),
+  (`PM.QThm.red1, #["*12.1"]), (`PM.QThm.red2, #["*12.11"]),
+  (`PM.F9.Thm9.mp, #["*9.12", "*1.1", "*1.11"])]
+
+/-- A claimed entry as alternatives, each satisfied by one ledger id: "Syll" is ✱2·05 or ✱2·06,
+    "Comp" is ✱3·43, and each id of `idsOfEntry` is a claim of its own. -/
+def claimsOfEntry (e : String) : Array (Array String) :=
+  if e == "Syll" then #[#["*2.05", "*2.06"]]
+  else if e == "Comp" then #[#["*3.43"]]
+  else (idsOfEntry e).map (#[·])
+
+/-- Is the claim (alternatives `alts`) used: some alternative is an id of `usedIds`, or is a
+    definition whose realizer is in `consts`? -/
+def claimUsed (usedIds : Array String) (consts : Array Name) (alts : Array String) : Bool :=
+  alts.any fun u => usedIds.contains u ||
+    match realizers.lookup u with
+    | some rs => rs.any consts.contains
+    | none => false
+
+/-- The baseline of the reverse checks: lines "ledger row claim …" of tests/ledger_unused_claims.txt,
+    `#` starting a comment. -/
+def readUnusedKnown (path : System.FilePath) : IO (Array (String × String × String)) := do
+  let mut out := #[]
+  for l in ← IO.FS.lines path do
+    match (((l.splitOn "#").head!.splitOn " ").filter (!·.isEmpty)) with
+    | lg :: id :: u :: _ => out := out.push (lg, id, u)
+    | _ => pure ()
+  return out
+
+/-- Report the claimed uses that the proofs do not make (`unused`, with the field of each): an error
+    for each one not in `known` (the baseline lines of these ledgers), and for each line of `known`
+    that no longer occurs. -/
+def reportUnused (what : String) (known unused : Array (String × String × String))
+    (fields : Array String) : CommandElabM Unit := do
+  let n := (unused.filter known.contains).size
+  logInfo m!"{what}: {unused.size} claimed uses not used by the proof, of which {n} in tests/ledger_unused_claims.txt"
+  for i in [:unused.size] do
+    let (lg, id, u) := unused[i]!
+    unless known.contains (lg, id, u) do
+      logError m!"claimed in {fields[i]!} of its ledger row but not used by the proof: {lg} {id} {u}"
+  for (lg, id, u) in known.filter (!unused.contains ·) do
+    logError m!"{lg} {id} {u} is in tests/ledger_unused_claims.txt but no longer found; remove the line"
+
 end LedgerCheck
 open LedgerCheck
 
@@ -218,6 +345,12 @@ open LedgerCheck
   let mut via : Array (List Name) := #[]          -- the helpers of the row's proof that bring it in
   let mut missing : Array String := #[]
   let mut iffListed : Array String := #[]          -- ✱3·26 / ✱3·27 listed for a ≡ read as ⊃
+  let knownUnused ← readUnusedKnown "tests/ledger_unused_claims.txt"
+  let mut unused : Array (String × String × String) := #[]   -- (ledger, row, claim not used)
+  let mut unusedField : Array String := #[]
+  for (_, rs) in realizers do
+    for n in rs do
+      unless env.contains n do throwError "LedgerCheck.realizers: no declaration {n}"
   for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22", "star23"] do
     let path := s!"data/{ch}_ledger.json"
     let j ← match Json.parse (← IO.FS.readFile path) with
@@ -233,8 +366,22 @@ open LedgerCheck
       let listed := (["cited_used", "extra_used", "glue"].toArray.flatMap (strs r ·) ++ tacit).flatMap
         idsOfEntry |>.push id
       let pattern := ((strs r "tacit").filter isPattern).flatMap idsOfEntry
-      let used ← liftCoreM ((reachProps tacitRules none c true).run' {})
+      let used ← liftCoreM ((reachProps tacitRules none c true id).run' {})
       let direct ← liftCoreM ((reachProps tacitRules (some c) c true).run' {})
+      -- the converse: each claimed use is used by the proof, through helpers (all of them, the
+      -- tacit-rule helpers included), or, for a definition, its realizer is referenced
+      let full ← liftCoreM ((reachProps #[] none c false id).run' {})
+      let consts ← liftCoreM (reachConsts (fun d => (!isPMProp d || starsOf d == #[id]) && underPM d &&
+        !isAux env d) c)
+      let usedIds := (used ++ full ++ consts.filter isPMProp).flatMap starsOf ++
+        consts.flatMap fun k => (ctorIds.lookup k).getD #[]
+      for f in ["cited_used", "extra_used", "glue"] do
+        for e in strs r f do
+          for alts in claimsOfEntry e do
+            unless alts.contains id || claimUsed usedIds consts alts do
+              let u := if alts.size == 1 then alts[0]! else e
+              unless unused.contains (ch, id, u) do
+                unused := unused.push (ch, id, u); unusedField := unusedField.push f
       -- ✱3·26 and ✱3·27 listed as extra or glue must be used other than to read a ≡ as ⊃
       for u in ["*3.26", "*3.27"] do
         if (["extra_used", "glue"].toArray.flatMap (strs r ·)).contains u &&
@@ -264,6 +411,7 @@ open LedgerCheck
     logError m!"{x}: listed in extra_used or glue, but the proof uses it only to read a ≡ as ⊃ outside a chain (tacit)"
   for (id, u) in stale do
     logError m!"{id} {u} is in tests/ledger_unlisted_uses.txt but no longer found; remove the line"
+  reportUnused "ledgers" (knownUnused.filter (·.1 != "star9f")) unused unusedField
 
 /-! 3. The ledger of ✱9's own method, data/star9f_ledger.json (PM/Found9): the same check as 2, with
   ✱9's names. A row `*9.N` (`*10.N`) is `PM.F9.f9_N` (`PM.F9.f10_N`), and also `PM.F9.f9_N_russell`
@@ -296,8 +444,10 @@ def declOf9 (id : String) : Name :=
   | [a, b] => (`PM.F9).str s!"f{a}_{b}"
   | _ => .anonymous
 
-/-- The ✱9 propositions `c`'s value reaches through helpers, as `reachProps` does for check 2. -/
-partial def reachProps9 (c : Name) : StateT (Std.HashMap Name (Array Name)) CoreM (Array Name) := do
+/-- The ✱9 propositions `c`'s value reaches through helpers, as `reachProps` does for check 2 (`own`
+    likewise). -/
+partial def reachProps9 (c : Name) (own : Option String := none) :
+    StateT (Std.HashMap Name (Array Name)) CoreM (Array Name) := do
   if let some r := (← get).get? c then return r
   modify (·.insert c #[])
   let env ← getEnv
@@ -306,10 +456,13 @@ partial def reachProps9 (c : Name) : StateT (Std.HashMap Name (Array Name)) Core
     if let some v := ci.value? (allowOpaque := true) then
       for d in v.getUsedConstants do
         if d == c then continue
-        if !(stars9Of d).isEmpty then
+        let isProp := !(stars9Of d).isEmpty
+        if isProp then
           unless out.contains d do out := out.push d
-        else if underPM d && !isAux env d && d != `PM.F9.elift then
-          for e in ← reachProps9 d do
+        -- a suffix form of the row's own proposition (`f9_31_dem`) is part of its proof: followed
+        if (!isProp || own.any (stars9Of d == #[·])) && underPM d && !isAux env d &&
+            d != `PM.F9.elift then
+          for e in ← reachProps9 d own do
             unless out.contains e do out := out.push e
   modify (·.insert c out)
   return out
@@ -328,6 +481,9 @@ end LedgerCheck
   let mut missing : Array String := #[]
   let mut notStated : Nat := 0
   let mut opens : Array String := #[]
+  let knownUnused ← readUnusedKnown "tests/ledger_unused_claims.txt"
+  let mut unused : Array (String × String × String) := #[]
+  let mut unusedField : Array String := #[]
   for r in arr do
     let some id := (r.getObjValAs? String "id").toOption | throwError "{path}: row without id"
     let c := declOf9 id
@@ -349,12 +505,27 @@ end LedgerCheck
       idsOfEntry |>.push id
     let variants := #[c] ++ (#["_russell", "_switch"].map (Name.str c.getPrefix <| c.getString! ++ ·)
       |>.filter env.contains)
+    let mut usedIds : Array String := #[]
+    let mut consts : Array Name := #[]
     for c' in variants do
-      let used ← liftCoreM ((reachProps9 c').run' {})
+      let used ← liftCoreM ((reachProps9 c' id).run' {})
+      let cs ← liftCoreM (reachConsts (fun d => ((stars9Of d).isEmpty || stars9Of d == #[id]) &&
+        underPM d && !isAux env d && d != `PM.F9.elift) c')
+      usedIds := usedIds ++ (used ++ cs).flatMap stars9Of ++ cs.flatMap fun k => (ctorIds.lookup k).getD #[]
+      consts := consts ++ cs
       for d in used do
         for u in (stars9Of d).filter (!listed.contains ·) do
           let line := s!"{id} {u}  # {d}"
           unless bad.contains line do bad := bad.push line
+    -- the converse, over the proofs of all the variants
+    for f in ["cited_used", "extra_used", "glue"] do
+      for e in strs r f do
+        for alts in claimsOfEntry e do
+          unless alts.contains id || claimUsed usedIds consts alts do
+            let u := if alts.size == 1 then alts[0]! else e
+            unless unused.contains ("star9f", id, u) do
+              unused := unused.push ("star9f", id, u); unusedField := unusedField.push f
   logInfo m!"✱9 ledger: {rows} rows checked against their proofs ({notStated} rows not stated, built into the syntax; {opens.size} open: {opens}); {bad.size} propositions used but not listed"
   unless missing.isEmpty do logError m!"{path}: rows with no declaration of that name: {missing}"
   for b in bad do logError m!"not listed in its ledger row: {b}"
+  reportUnused "✱9 ledger" (knownUnused.filter (·.1 == "star9f")) unused unusedField

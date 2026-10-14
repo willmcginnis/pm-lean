@@ -64,8 +64,20 @@ ledgers count this step as follows.
   ordinary step, listed in `extra_used` unless PM cites it. If a proof uses ✱3·26 both ways, it is listed
   once, in `extra_used` (✱14·142).
 
-`Checks/LedgerCheck.lean` applies these rules to every row: each proposition a proof uses is listed in its
-row, and a row lists ✱3·26 or ✱3·27 as extra or glue only if its proof uses it in one of the listed ways.
+**A line that is a definition.** A definition is a macro in Lean, so a line PM takes by a proposition that
+only restates a definition (✱13·1, ✱14·1, ✱14·11, ✱20·1, ✱21·1, or ✱4·2 with a definition) is often the
+same Lean statement as the line before, and the proof uses nothing for it. Such a citation is listed in
+`cited_unused`, with the reason "the ✱14·1 line is the definition (✱14·01, a macro in Lean)". A
+definition itself (✱14·01) is listed in `cited_used` only where the proof states or uses the Lean
+declaration that realizes it (`QF.desc`).
+
+`Checks/LedgerCheck.lean` applies these rules to every row of the ✱11–✱23 ledgers, and of ✱9's own ledger,
+in both directions: each proposition a proof uses is listed in its row, and each proposition a row claims
+as used (`cited_used`, `extra_used`, `glue`) is used by its proof, through helpers; a definition counts as
+used where its realizing declaration is referenced, and ✱1·2–✱1·6, ✱10·1, ✱10·11, ✱10·12, ✱12·1, ✱12·11
+and the rule (✱1·1, ✱1·11) where their constructor is applied. A row lists ✱3·26 or ✱3·27 as extra or
+glue only if its proof uses it in one of the listed ways. The ✱2–✱5 ledgers are not checked against the
+proofs this way.
 
 ## The three counts
 
@@ -145,8 +157,9 @@ Dem. of ✱22·5, ✱22·68 and ✱22·91 print, so they are listed as extras wh
 - ✱22·33, ✱22·34, ✱22·35 to write a membership in α ∩ β, α ∪ β or −α as a product, sum or negation of
   memberships, and ✱20·43 to get the identity of classes;
 - a ✱4 proposition to rewrite inside a product, sum or negation (✱4·36–✱4·39, ✱4·11, ✱4·84–✱4·86);
-- ✱20·18 for an expression such as α ⊂ γ (✱22·54, ✱22·55), and ✱10·1 at a class whose defining function is
-  not predicative (✱22·6, ✱22·94), each through the expression's extensionality (p. 200;
+- ✱20·18's proof (✱20·11·15, `qcls20_18`) for an expression such as α ⊂ γ (✱22·54, ✱22·55, ✱22·94),
+  where ✱20·18 itself, for a generic context, is cited and unused; and ✱10·1 at a class whose defining
+  function is not predicative (✱22·6, ✱22·94); each through the expression's extensionality (p. 200;
   [CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).
 
 **✱23** (`star23_ledger.json`; 72 propositions). PM prints no proof in ✱23: "Proofs will be omitted in the

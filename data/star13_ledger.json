@@ -33,7 +33,6 @@
   "method": "explicit",
   "cited_used": [
    "*12.1",
-   "*13.1",
    "*4.84",
    "*4.85",
    "*10.27",
@@ -46,7 +45,9 @@
    "*3.47",
    "*2.04"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*13.1"
+  ],
   "note": "cites *12.1; takes [Reducibility S]; *13.1 is definitional",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -58,7 +59,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken (== read as ⊃, tacit); Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2).",
+  "reason": "Line (1) gets psi x == phi!x : psi y == phi!y from *12.1 by *10.1 at x and at y, joined by Comp (*3.43) and carried under (Ephi) by *10.11.28. In (2), *4.84 and *4.85 are joined by *3.47 and *4.22, and the converse half taken (== read as ⊃, tacit); Comm (*2.04) puts phi!x ⊃ phi!y first, and again in (1).(2). *13.1 is not used: the *13.1 line is the definition (*13.01, a macro in Lean).",
   "glue": [
    "*10.28",
    "*2.04"
@@ -75,7 +76,6 @@
   "method": "explicit",
   "cited_used": [
    "*10.22",
-   "*13.1",
    "*13.101",
    "*2.17",
    "*3.43",
@@ -86,7 +86,8 @@
    "*3.26"
   ],
   "cited_unused": [
-   "*1.7"
+   "*1.7",
+   "*13.1"
   ],
   "note": "Transp read as *2.17; Comp = *3.43",
   "fidelity": "pm-lines+extra",
@@ -99,7 +100,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "Line (1) takes the ⊃ half of *10.22's product by Simp (*3.26, in qfiffMp). *1.7 (that ~p is elementary when p is) has no proof step: negation is a constructor of the syntax.",
+  "reason": "Line (1) takes the ⊃ half of *10.22's product by Simp (*3.26, in qfiffMp). *1.7 (that ~p is elementary when p is) has no proof step: negation is a constructor of the syntax. *13.1 is not used: the *13.1 line is the definition (*13.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -190,11 +191,12 @@
   "method": "explicit",
   "cited_used": [
    "*2.08",
-   "*10.11",
-   "*13.1"
+   "*10.11"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*13.1"
+  ],
   "note": "Id = *2.08; *13.1 is definitional",
   "fidelity": "pm-lines",
   "pm_text": "hint",
@@ -206,7 +208,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
+  "reason": "*13.1 is not used: the *13.1 line is the definition (*13.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -242,11 +244,12 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*13.1",
    "*10.3"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*13.1"
+  ],
   "note": "*13.1 is definitional; phi replaces the x of *10.3 (p. 178)",
   "fidelity": "pm-lines",
   "pm_text": "dem",
@@ -258,7 +261,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "",
+  "reason": "*13.1 is not used: the *13.1 line is the definition (*13.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },

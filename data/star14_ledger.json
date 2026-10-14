@@ -85,7 +85,6 @@
    "*4.2",
    "*14.04",
    "*14.03",
-   "*14.1",
    "*11.55"
   ],
   "extra_used": [
@@ -96,7 +95,9 @@
    "*11.11",
    "*11.341"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "the first three lines are definitional (*14.04, *14.03, *14.1 twice); the two descriptions may have different types",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -109,7 +110,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*11.55 gives (Ec, b) . psi x ==_x x = c . phi x ==_x x = b . f(b, c); PM's last line (whose transcription has 'x = c' twice) has (Eb, c) and the factors in the order of the statement: the variables are interchanged by *11.23 and the factors permuted by *4.32, *4.3 (with *4.36), under (b, c) by *11.11.341.",
+  "reason": "*11.55 gives (Ec, b) . psi x ==_x x = c . phi x ==_x x = b . f(b, c); PM's last line (whose transcription has 'x = c' twice) has (Eb, c) and the factors in the order of the statement: the variables are interchanged by *11.23 and the factors permuted by *4.32, *4.3 (with *4.36), under (b, c) by *11.11.341. *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*11.23",
    "*4.32",
@@ -133,13 +134,14 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*4.2",
    "*14.03",
-   "*14.1",
    "*11.55"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*4.2",
+   "*14.1"
+  ],
   "note": "[Proof as in *14.111]; the unmarked f{(ix)(phi x), (ix)(psi x)} gives the first description the larger scope (p. 182), i.e. *14.03; the definitional lines, then *11.55",
   "fidelity": "pm-lines",
   "pm_text": "hint",
@@ -152,7 +154,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "",
+  "reason": "*4.2 is not used: the *4.2 lines are the definitions (*14.03, *14.01, macros in Lean). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -413,7 +415,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.16",
    "*4.36",
    "*10.11",
@@ -422,7 +423,9 @@
   "extra_used": [
    "*4.3"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -435,7 +438,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.36 acts on the first factor; a = b is the second, so the factors are commuted (*4.3) (qandCongrR).",
+  "reason": "*4.36 acts on the first factor; a = b is the second, so the factors are commuted (*4.3) (qandCongrR). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -530,7 +533,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.195",
    "*10.35",
    "*14.121",
@@ -547,7 +549,9 @@
    "*3.45",
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -560,7 +564,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'[*13.195]' in the second line takes (Eb) : phi x ==_x x = b : a = b to phi x ==_x x = a, which needs b = a . F b: the factors are commuted (*4.3) and a = b turned by *13.16 (with *4.36) under (Eb) by *10.11.281 (qidentDesc), and the result used on the first factor of Hp (*4.36). '[*14.121]' picks out the two formal equivalences by *3.26, *3.27 and joins them by Comp (*3.43); it and the last line act under (Ec) by *10.11.28. In the last line *13.195 needs c = a, got from a = c by *13.16 with Fact (*3.45).",
+  "reason": "'[*13.195]' in the second line takes (Eb) : phi x ==_x x = b : a = b to phi x ==_x x = a, which needs b = a . F b: the factors are commuted (*4.3) and a = b turned by *13.16 (with *4.36) under (Eb) by *10.11.281 (qidentDesc), and the result used on the first factor of Hp (*4.36). '[*14.121]' picks out the two formal equivalences by *3.26, *3.27 and joins them by Comp (*3.43); it and the last line act under (Ec) by *10.11.28. In the last line *13.195 needs c = a, got from a = c by *13.16 with Fact (*3.45). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*4.3",
    "*10.281",
@@ -639,7 +643,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.195",
    "*10.35"
   ],
@@ -653,7 +656,8 @@
    "*10.11"
   ],
   "cited_unused": [
-   "*14.111"
+   "*14.111",
+   "*14.1"
   ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -667,7 +671,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "Line (1) is qidentDesc (*13.195 needs b = a . F b: *4.3, *13.16 with *4.36, under (Eb) by *10.11.281), used on the first factor of Hp by *4.36. The last line takes (Eb) : phi x ==_x x = a : psi x ==_x x = b : a = b to (Ea, b) . ... by *10.24 and, as in *14.144, PM's *14.111 is *14.112 for the unmarked descriptions.",
+  "reason": "Line (1) is qidentDesc (*13.195 needs b = a . F b: *4.3, *13.16 with *4.36, under (Eb) by *10.11.281), used on the first factor of Hp by *4.36. The last line takes (Eb) : phi x ==_x x = a : psi x ==_x x = b : a = b to (Ea, b) . ... by *10.24 and, as in *14.144, PM's *14.111 is *14.112 for the unmarked descriptions. *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*3.26",
    "*4.3",
@@ -687,7 +691,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.195",
    "*13.192"
   ],
@@ -701,7 +704,9 @@
    "*10.21",
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "takes [Reducibility S]; Dem. (1) of the transcription has 'x ≡ b' for 'x = b'",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -714,7 +719,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. Between *14.1 and *13.192 in (2), PM leaves tacit the step from phi x ==_x x = b to psi{(ix)(phi x)} == (Ec) : x = b ==_x x = c : psi c; it is the argument of *14.272's Dem. (*4.86 under (x) by *10.11.27 and *10.271, *4.36, *10.11.21, *10.281; qdescCongr).",
+  "reason": "In (1), *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. Between *14.1 and *13.192 in (2), PM leaves tacit the step from phi x ==_x x = b to psi{(ix)(phi x)} == (Ec) : x = b ==_x x = c : psi c; it is the argument of *14.272's Dem. (*4.86 under (x) by *10.11.27 and *10.271, *4.36, *10.11.21, *10.281; qdescCongr). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -736,7 +741,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.192",
    "*14.13",
    "*14.15",
@@ -753,7 +757,8 @@
    "*10.281"
   ],
   "cited_unused": [
-   "*10.1"
+   "*10.1",
+   "*14.1"
   ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
@@ -767,7 +772,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "(2) is line (2) of *14.15 (qdescAt), with the same tacit step (*14.272's argument: *4.86, *10.27, *10.271, *4.36, *10.21, *10.281). In (4), (2) and (3) are joined on the product by *3.47 (and *4.22). The last line's '*10.1.23' is done by *10.11 and *10.23; *10.1 is not needed (probably *10.11.23 is meant).",
+  "reason": "(2) is line (2) of *14.15 (qdescAt), with the same tacit step (*14.272's argument: *4.86, *10.27, *10.271, *4.36, *10.21, *10.281). In (4), (2) and (3) are joined on the product by *3.47 (and *4.22). The last line's '*10.1.23' is done by *10.11 and *10.23; *10.1 is not needed (probably *10.11.23 is meant). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -894,9 +899,7 @@
    "*10.1",
    "*10.11",
    "*10.28",
-   "*10.35",
-   "*14.1",
-   "*14.11"
+   "*10.35"
   ],
   "extra_used": [
    "*3.47",
@@ -906,7 +909,9 @@
    "*3.3"
   ],
   "cited_unused": [
-   "Fact (*3.45)"
+   "Fact (*3.45)",
+   "*14.1",
+   "*14.11"
   ],
   "note": "",
   "fidelity": "pm-lines+extra",
@@ -920,7 +925,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3).",
+  "reason": "'Fact' acts on the second factor ((x) . psi x); *3.45 acts on the first, so it is *3.47 with Id (*2.08) (qandR). *10.35 is used with p as the second factor: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). The last line's E! : (x) . psi x : ⊃ is exported by Exp (*3.3). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*4.3",
    "*10.281"
@@ -1009,7 +1014,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*13.195"
   ],
   "extra_used": [
@@ -1020,7 +1024,9 @@
    "*4.86",
    "*10.271"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "takes [Reducibility S]; the chain A == B == C == D is stated as A == B . B == C . C == D",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1033,7 +1039,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "First half (A == B): *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. 'The second half is proved in the same way': D == A by qidentDesc (*13.195 with *13.16, *4.3, *4.36). The links through C need A == C, which PM does not print: *13.16 under (x) (*4.86 with *4.21, *10.11.271).",
+  "reason": "First half (A == B): *13.195 needs c = b . F c, so the factors are commuted (*4.3) under (Ec) by *10.11.281. 'The second half is proved in the same way': D == A by qidentDesc (*13.195 with *13.16, *4.3, *4.36). The links through C need A == C, which PM does not print: *13.16 under (x) (*4.86 with *4.21, *10.11.271). *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*2.02",
    "*3.43",
@@ -1062,8 +1068,7 @@
    "*13.191",
    "*10.22",
    "*10.28",
-   "*10.35",
-   "*14.11"
+   "*10.35"
   ],
   "extra_used": [
    "*3.43",
@@ -1082,7 +1087,9 @@
    "*4.3",
    "*10.281"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1095,7 +1102,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm).",
+  "reason": "(1) joins *14.12 and *14.201 by Comp (*3.43). In (2), *10.1 (at x and at b) is generalized over x by *10.11.21 and applied to the second factor (*3.47 with Id, *2.08); '[*5.33]' is *5.33 with the factors phi x . phi b commuted (*3.22, *2.06), exported by *3.27 and Exp (*3.3), carried under (x) by *10.11.21 and *10.27, and joined back by *3.31, *3.26 and Comp; '[*13.191]' acts on the first factor (Fact, *3.45); '[*10.22]' needs the factors in the other order (*3.22). In (3), PM's '*10.1.28' is *10.11.28 ((2) is the premise), and *10.35 is used with p second: the factors are commuted (*4.3) under (Ex) by *10.11.281 (qex_and_perm). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.22",
    "*2.06",
@@ -1117,13 +1124,14 @@
   "cited_used": [
    "*14.202",
    "*10.11",
-   "*10.281",
-   "*14.11"
+   "*10.281"
   ],
   "extra_used": [
    "*3.26"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1136,7 +1144,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The first link of *14.202's chain is taken by *3.26.",
+  "reason": "The first link of *14.202's chain is taken by *3.26. *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1146,8 +1154,7 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.202",
-   "*14.1"
+   "*14.202"
   ],
   "extra_used": [
    "*3.26",
@@ -1155,7 +1162,9 @@
    "*4.36",
    "*10.281"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1168,7 +1177,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*14.202 is used end to end (its links taken by *3.26, *3.27; qfiffDescEq), on the first factor (*4.36), under (Eb) by *10.11.281.",
+  "reason": "*14.202 is used end to end (its links taken by *3.26, *3.27; qfiffDescEq), on the first factor (*4.36), under (Eb) by *10.11.281. *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*10.281"
   ],
@@ -1183,13 +1192,14 @@
   "method": "explicit",
   "cited_used": [
    "*14.1",
-   "*10.5",
-   "*14.11"
+   "*10.5"
   ],
   "extra_used": [
    "*3.26"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "the description in psi has the scope psi; the variant q14_21_neg (scope wider than the negation) is an instance",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1201,7 +1211,7 @@
    "definitions",
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
   ],
-  "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191).",
+  "reason": "*10.5 gives the product of the two existentials; its first factor is taken by *3.26 (PM says so in the note after *14.23, p. 191). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1214,15 +1224,16 @@
    "*14.122",
    "*4.71",
    "*10.11",
-   "*10.281",
-   "*14.11",
-   "*14.101"
+   "*10.281"
   ],
   "extra_used": [
    "*3.26",
    "*3.27"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11",
+   "*14.101"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1235,7 +1246,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "In (1), the first link of *14.122's chain is taken by *3.26 and its second factor phi b by *3.27.",
+  "reason": "In (1), the first link of *14.122's chain is taken by *3.26 and its second factor phi b by *3.27. *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean). *14.101 is not used: with the scope explicit it is *14.1, whose line is the definition (*14.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1396,11 +1407,12 @@
    "*13.191",
    "*14.242",
    "*10.11",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]; one Lean step per Dem. line",
   "fidelity": "pm-lines",
   "pm_text": "dem",
@@ -1413,7 +1425,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "",
+  "reason": "*14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43",
    "*2.02"
@@ -1429,7 +1441,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.11",
    "*10.311",
    "*10.281",
    "*13.195",
@@ -1441,7 +1452,9 @@
   "extra_used": [
    "*3.43"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]; the chain A == B == C is stated as A == B . B == C",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1454,7 +1467,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The last line joins (3) with *14.25 (read from right to left) by Comp (*3.43).",
+  "reason": "The last line joins (3) with *14.25 (read from right to left) by Comp (*3.43). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*2.02"
   ],
@@ -1475,14 +1488,15 @@
    "*10.271",
    "*14.202",
    "*14.242",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*3.26",
    "*3.27"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1495,7 +1509,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "'[*14.202]' is used end to end (its links taken by *3.26, *3.27; qfiffDescEq).",
+  "reason": "'[*14.202]' is used end to end (its links taken by *3.26, *3.27; qfiffDescEq). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43",
    "*2.02"
@@ -1545,8 +1559,7 @@
    "*4.86",
    "*10.11",
    "*10.21",
-   "*10.281",
-   "*14.101"
+   "*10.281"
   ],
   "extra_used": [
    "*10.27",
@@ -1555,7 +1568,8 @@
   ],
   "cited_unused": [
    "*10.414",
-   "Fact (*3.45)"
+   "Fact (*3.45)",
+   "*14.101"
   ],
   "note": "",
   "fidelity": "pm-lines+extra",
@@ -1569,7 +1583,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "The second line's '[*10.11.414]' takes (x) : phi x == x = b . == . psi x == x = b to phi x ==_x x = b . == . psi x ==_x x = b, which is *10.11.27 with *10.271 (as in *14.271's Dem.), not *10.414 (a formal equivalence ==_x, not an equivalence of the two (x)'s). 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃).",
+  "reason": "The second line's '[*10.11.414]' takes (x) : phi x == x = b . == . psi x == x = b to phi x ==_x x = b . == . psi x ==_x x = b, which is *10.11.27 with *10.271 (as in *14.271's Dem.), not *10.414 (a formal equivalence ==_x, not an equivalence of the two (x)'s). 'Fact' for the == of the products is *4.36 (*3.45 gives only ⊃). *14.101 is not used: with the scope explicit it is *14.1, whose line is the definition (*14.01, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1582,12 +1596,13 @@
    "*13.15",
    "*4.73",
    "*10.11",
-   "*10.281",
+   "*10.281"
+  ],
+  "extra_used": [],
+  "cited_unused": [
    "*14.1",
    "*14.11"
   ],
-  "extra_used": [],
-  "cited_unused": [],
   "note": "one Lean step per Dem. line; PM's Dem. eliminates the description once, with scope z = z, so the statement does too",
   "fidelity": "pm-lines",
   "pm_text": "dem",
@@ -1600,7 +1615,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "",
+  "reason": "*14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [],
   "glue_kind": []
  },
@@ -1611,13 +1626,14 @@
   "method": "explicit",
   "cited_used": [
    "*14.242",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]; one Lean step per Dem. line; stated as a schema, not as printed: PM's p, q are apparent variables and f is a function of propositions, which need a type of propositions (p. 172). The antecedent p == q . ⊃_{p,q} . f(p) == f(q) is the premise hf, with p, q real and asserted for every p, q; one Lean theorem per f, phi, chi. Line (2) uses hf at p := [(ix)(phi x)] . chi(ix)(phi x), q := chi b. qtfnCongr proves hf for every truth-function generated by *1-*11's processes (p. 193); the proof does not use it.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1630,7 +1646,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11), as in *14.31.",
+  "reason": "*10.23 needs (b) first (*10.11), as in *14.31. *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43"
   ],
@@ -1646,14 +1662,15 @@
   "cited_used": [
    "*14.242",
    "*4.37",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*4.31",
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1666,7 +1683,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.37 has the varied disjunct first; here it is second (*4.31). *10.23 needs (b) first (*10.11).",
+  "reason": "*4.37 has the varied disjunct first; here it is second (*4.31). *10.23 needs (b) first (*10.11). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43",
    "*2.02",
@@ -1686,8 +1703,7 @@
   "cited_used": [
    "*14.242",
    "*4.11",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*10.11",
@@ -1695,7 +1711,9 @@
    "*14.21",
    "*3.44"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1708,7 +1726,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): the right-hand side, its == read as ⊃ (tacit), gives ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x).",
+  "reason": "*10.23 needs (b) first (*10.11). The hint gives E!(ix)(phi x) . ⊃ of the printed ==; the converse, which it does not cover, is the remark of pp. 194-195 that without E! both descriptions are false (*14.21): the right-hand side, its == read as ⊃ (tacit), gives ~{[(ix)(phi x)] . chi(ix)(phi x)} ⊃ [(ix)(phi x)] . ~chi(ix)(phi x), *2.54 turns it into the disjunction of the two, and *14.21 for each, joined by *3.44, gives E!(ix)(phi x). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43"
   ],
@@ -1724,13 +1742,14 @@
   "cited_used": [
    "*14.242",
    "*4.85",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1743,7 +1762,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11).",
+  "reason": "*10.23 needs (b) first (*10.11). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43"
   ],
@@ -1759,13 +1778,14 @@
   "cited_used": [
    "*4.84",
    "*14.242",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1778,7 +1798,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*10.23 needs (b) first (*10.11).",
+  "reason": "*10.23 needs (b) first (*10.11). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43"
   ],
@@ -1794,13 +1814,14 @@
   "cited_used": [
    "*4.86",
    "*14.242",
-   "*10.23",
-   "*14.11"
+   "*10.23"
   ],
   "extra_used": [
    "*10.11"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.11"
+  ],
   "note": "takes [Reducibility S]",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
@@ -1813,7 +1834,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "*4.86 has the varied member first; here it is second (*4.21, qiffCongrRImp). *10.23 needs (b) first (*10.11).",
+  "reason": "*4.86 has the varied member first; here it is second (*4.21, qiffCongrRImp). *10.23 needs (b) first (*10.11). *14.11 is not used: the *14.11 line is the definition (*14.02, a macro in Lean).",
   "glue": [
    "*3.43",
    "*2.02",
@@ -1831,7 +1852,6 @@
   "category": "assertion",
   "method": "explicit",
   "cited_used": [
-   "*14.1",
    "*10.35"
   ],
   "extra_used": [
@@ -1840,7 +1860,9 @@
    "*4.36",
    "*10.281"
   ],
-  "cited_unused": [],
+  "cited_unused": [
+   "*14.1"
+  ],
   "note": "without E!(ix)(phi x)",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
@@ -1853,7 +1875,7 @@
    "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)",
    "chaining ⊃ and ≡ lines under a hypothesis, as in 'Hp . ⊃ : A . ≡ . B . [*x] ≡ . C' (a calc block with PM/Chain.lean's Trans instances; the propositions they use beyond Syll and *4.22 are listed in glue)"
   ],
-  "reason": "PM's middle line (Eb) : p : phi x ==_x x = b : chi b is rearranged to the scope p . chi b of the last line by *4.32, *4.3 (with *4.36), under (Eb) by *10.11.281.",
+  "reason": "PM's middle line (Eb) : p : phi x ==_x x = b : chi b is rearranged to the scope p . chi b of the last line by *4.32, *4.3 (with *4.36), under (Eb) by *10.11.281. *14.1 is not used: the *14.1 line is the definition (*14.01, a macro in Lean).",
   "glue": [
    "*4.32",
    "*4.3",

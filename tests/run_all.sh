@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Every check of the repository, from its root: the build (with the pinned statements of
 # Checks/PinnedStatements.lean), a search for sorry / native_decide / added axioms, the root checks
-# (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean), ✱9's
+# (RedCheck, StyleCheck, ClauseSearch), the citation and ledger check (Checks/LedgerCheck.lean) with its
+# negative tests (tests/ledger_negative.sh: a fabricated claim and a removed use must fail it), ✱9's
 # readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), the Lean
 # core counterparts of ✱1–✱5 (Checks/Counterparts.lean), and the Python tests in tests/ (which also run
 # AllAxioms.lean, AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet,
@@ -44,7 +45,12 @@ if [ -z "${SKIP_SLOW:-}" ]; then
 fi
 lean_check Checks/LedgerCheck.lean '; 0 citations not used by the proof' \
   'ledgers: [0-9]+ rows checked against their proofs; 0 propositions used but not listed' \
-  '✱9 ledger: [0-9]+ rows checked .*; 0 propositions used but not listed'
+  'ledgers: [0-9]+ claimed uses not used by the proof' \
+  '✱9 ledger: [0-9]+ rows checked .*; 0 propositions used but not listed' \
+  '✱9 ledger: [0-9]+ claimed uses not used by the proof'
+
+step "LedgerCheck negative tests (a fabricated claim and a removed use must fail it)"
+bash tests/ledger_negative.sh || fail "LedgerCheck negative tests"
 
 lean_check Checks/Star9Readings.lean '"kind": "simul", "reading": "C"'
 

@@ -24,7 +24,8 @@ a named lemma or a `calc` chain, so that it is stated once and visible wherever 
 
 - Every PM proposition a proof uses is listed in its ledger row: PM's citations, the steps PM leaves tacit
   (named in each row and in the file headers), glue, and every other proposition with the reason.
-  `Checks/LedgerCheck.lean` checks this against the proof terms ([FIDELITY.md](FIDELITY.md)).
+  `Checks/LedgerCheck.lean` checks this against the proof terms, and the converse: what a row claims as
+  used, its proof uses ([FIDELITY.md](FIDELITY.md)). The ✱2–✱5 ledgers are not yet checked this way.
 - Displayed chains are `calc` blocks, one line per PM line, joined by `Trans` instances proved once
   (`PM/Chain.lean`). Each layer of eliminating a class of classes is one named lemma
   ([CLASSES_OF_CLASSES.md](CLASSES_OF_CLASSES.md)).

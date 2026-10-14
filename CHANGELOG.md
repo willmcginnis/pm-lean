@@ -9,7 +9,7 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   ✱22·53 and ✱22·71 are macros with PM's notation (⊂, ∩, ∪, −), and all 72 numbered propositions
   ✱22·1–✱22·95 are proved along PM's Dem. lines or hints. Ledger `data/star22_ledger.json`, checked by
   LedgerCheck: as recorded 19 `pm-lines`, 53 `pm-lines+extra`.
-  - ✱20·18 for an extensional expression (`qcls20_18`) is used for ✱22·54, ✱22·55 and ✱22·94.
+  - ✱20·18's proof, for an extensional expression (`qcls20_18`), is used for ✱22·54, ✱22·55 and ✱22·94.
     ✱22·94·95 are stated for an extensional expression fα (`ClsExt`); the generic form follows as an
     example.
   - ✱22·84·85, checked against the 1910 scan: the print itself has `−α ∨ −β`, a disjunction between two
@@ -42,6 +42,31 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   - A ratchet (`tests/test_kernel_census.py`, `tests/expected_kernel_features.txt`): a new kernel feature
     reaching the PM derivations, or a new axiom user, fails the tests until it is accepted deliberately.
     ✱22 and ✱23 added none.
+- **LedgerCheck checks claimed uses too.** Before, it checked only that every proposition a proof uses is
+  listed in its row; a release review found that a fabricated citation (✱5·19 added to ✱22·1) passed.
+  Checks 2 and 3 now also check the converse: every entry a row claims as used (`cited_used`,
+  `extra_used`, `glue`) is used by the row's proof, through helpers. A definition counts as used only
+  where a declaration realizing it is referenced (✱22·01 by `QF.clsSubset`, …), and ✱1·2–✱1·6, ✱10·1,
+  ✱10·11, ✱10·12, ✱12·1, ✱12·11 and the rule where their constructor is applied. Suffix forms of a row's
+  own proposition (`f9_31_dem`) are followed in both directions. `tests/ledger_negative.sh`, a new step of
+  `tests/run_all.sh`, checks that a fabricated claim, a fabricated definition and a removed use each make
+  it fail; `tests/ledger_unused_claims.txt`, for claims awaiting a decision, is empty.
+  - 82 claimed uses in 71 rows were not uses, and are corrected. Moved to `cited_unused`, with the reason
+    in the row:
+    - lines that are a definition, taken in Lean by the macro: ✱13·1 in ✱13·11, ✱13·15, ✱13·17, ✱13·101;
+      ✱14·1 in ✱14·13, ✱14·15, ✱14·16, ✱14·18, ✱14·28, ✱14·34, ✱14·111, ✱14·112, ✱14·142, ✱14·145,
+      ✱14·202, ✱14·205, ✱20·5, ✱20·55, ✱20·57, ✱20·58, ✱21·55, ✱21·57, ✱21·58; ✱14·11 in ✱14·3, ✱14·18,
+      ✱14·21, ✱14·22, ✱14·25–✱14·28, ✱14·31–✱14·33, ✱14·203, ✱14·204, ✱14·331, ✱14·332; ✱14·101 in
+      ✱14·22, ✱14·272; ✱20·1 in ✱20·3, ✱20·11, ✱20·13, ✱20·14, ✱20·111, ✱20·703, ✱21·704, ✱21·705;
+      ✱21·1 in ✱21·3, ✱21·11, ✱21·13, ✱21·14, ✱21·19, ✱21·111, ✱21·703–✱21·705; ✱4·2 with a definition
+      in ✱14·112, ✱20·34, ✱20·63, ✱20·64, ✱21·63, ✱21·64;
+    - a proposition whose analogue or whose proof is used instead: ✱20·3 in ✱20·4 and ✱21·4; ✱20·54 in
+      ✱20·55, ✱20·58; ✱21·54 in ✱21·55, ✱21·58; ✱14·21 in ✱20·56, ✱21·56; ✱20·111 in ✱20·701, ✱20·702;
+      ✱21·111 in ✱21·701, ✱21·702; ✱20·18 in ✱22·54, ✱22·55, ✱22·94 (as ✱21·18 already was in ✱23);
+    - in ✱9's own ledger, a proposition proved for elementary functions where the proof uses its form for
+      every function: ✱9·21 in ✱9·3, ✱9·2 in ✱10·1, ✱9·25 in ✱10·12; and ✱9·2, listed as an extra of
+      ✱9·3, is dropped.
+  - No row's `fidelity` changes, since no row lost its last extra: the counts of docs/FIDELITY.md stand.
 - **Supporting changes.** Export names for ✱22 and ✱23, 72 each and none locked (667 in all). One
   descriptor word each for subset, inter, union, compl and sdiff, whose meaning covers classes and
   relations. `scripts/progress.py` lists chapters not started in runs, so a gap is not printed as a range

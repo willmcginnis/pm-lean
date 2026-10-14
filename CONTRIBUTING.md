@@ -63,7 +63,7 @@ lake env lean AllAxioms.lean     # still 39 declarations using an axiom, none of
 lake env lean RedCheck.lean      # 0 disagreements between signatures and proofs
 lake env lean StyleCheck.lean    # every PM proposition passes in Sys.full of all four styles
 python3 data/fidelity_counts.py  # only the count lines, no inconsistency lines
-lake env lean Checks/LedgerCheck.lean  # every proposition a proof uses is listed in its ledger row
+lake env lean Checks/LedgerCheck.lean  # every proposition a proof uses is listed in its ledger row, and every claimed use is made
 lake env lean Checks/Star9Readings.lean  # ✱9 under its four readings (scripts/star9_readings.py writes docs/STAR9_READINGS.md)
 tests/run_all.sh                 # all of the above, ClauseSearch and the regression tests
 ```

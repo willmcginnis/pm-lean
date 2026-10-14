@@ -129,7 +129,7 @@ definitions as printed alone, ✱9·31 is not; the row says so, and
   use; its 4 rows for ✱10 are ✱10's propositions proved in ✱9. Its primitive rows (✱9·1–✱9·15) and its
   rows on types (✱9·131, ✱9·6–✱9·63, built into the syntax and not stated) are not assertions, and
   [docs/PROGRESS.md](../docs/PROGRESS.md) does not count it (it counts ✱9 by ✱10's method).
-  `Checks/LedgerCheck.lean`, check 3, checks its rows against the proofs; `data/fidelity_counts.py` does not
+  `Checks/LedgerCheck.lean`, check 3, checks its rows against the proofs, in both directions; `data/fidelity_counts.py` does not
   read it.
 - Each `star*` file covers one chapter, and the files do not overlap.
 
