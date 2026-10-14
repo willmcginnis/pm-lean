@@ -38,6 +38,7 @@ import PM.Star21
   audit's Vol I list, entry 9, checked against the scan). The transcription writes the sign of ✱23·04
   as ∸ there and as a dotted minus from ✱23·392 on; they are one sign, read as ∸ throughout. At ✱23·81
   the transcription applies the published Errata (the audit says so and leaves it out of its list);
+  the 1910 print has `∸R ⪽ ∸S` on the right (checked against the scan, p. 228), which is not a theorem;
   the statement is the corrected one, which is the analogue of ✱22·81.
 
   An expression fR of a relation, in ✱23·94 and ✱23·95, is an extensional one (`RelExt`, PM/Star21.lean:
@@ -655,7 +656,7 @@ theorem q23_8 [Reducibility S] (R : V a → V b → QF V) : QThm S (relEq (∸(�
 
 /-- ✱23·81 `⊢ : R ⪽ S . ≡ . ∸S ⪽ ∸R` [as ✱22·81: ✱4·1], under (x, y) by ✱11·11·33, with ✱23·35 for both
     members (✱4·84, ✱4·85). The statement is the Gutenberg transcription's, which applies the published
-    Errata here. -/
+    Errata here: the 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S` (scan, p. 228), false when R is empty and S is not. -/
 theorem q23_81 [Reducibility S] (R S' : V a → V b → QF V) : QThm S (iff (R ⪽ S') (∸S' ⪽ ∸R)) :=
   QThm.mp (q11_11 fun x y => qiffTrans (QL.t4_1 _ _)
       (qimpIffCongr (qiffSymm (q23_35 S' x y)) (qiffSymm (q23_35 R x y))))          -- ✱4·1

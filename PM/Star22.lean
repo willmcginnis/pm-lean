@@ -593,8 +593,8 @@ theorem q22_831 [Reducibility S] (α β : V a → QF V) : QThm S (iff (clsEq α 
     _ ≡ clsEq β (−α) := qiffSymm (q20_43 _ _)
 
 /-- ✱22·84 `⊢ . −(α ∩ β) = −α ∪ −β` [✱4·51], with ✱22·35, ✱22·33 (inside the negation: ✱4·11), ✱22·35 on each
-    disjunct (✱4·39), ✱22·34, ✱10·11 and ✱20·43. The transcription prints `−α ∨ −β`; a sum of classes is ∪
-    (✱22·03), as in ✱22·86. -/
+    disjunct (✱4·39), ✱22·34, ✱10·11 and ✱20·43. The 1910 print has `−α ∨ −β` (checked against the scan, p. 224),
+    and the transcription follows it; a sum of classes is ∪ (✱22·03), as in ✱22·86, so ∪ is read. -/
 theorem q22_84 [Reducibility S] (α β : V a → QF V) : QThm S (clsEq (−(α ∩ β)) (−α ∪ −β)) :=
   have h1 : ∀ x, QThm S (iff (x ∈ −(α ∩ β)) (x ∈ −α ∪ −β)) := fun x =>
     calc (x ∈ −(α ∩ β))
@@ -606,8 +606,8 @@ theorem q22_84 [Reducibility S] (α β : V a → QF V) : QThm S (clsEq (−(α �
       _ ≡ (x ∈ −α ∪ −β) := qiffSymm (q22_34 _ _ x)
   QThm.mp (q10_11 h1) (qiffMpr (q20_43 _ _))
 
-/-- ✱22·85 `⊢ . α ∩ β = −(−α ∪ −β)` [✱22·84·831]. ✱22·84 is turned by ✱20·21 for ✱22·831. The transcription
-    prints `−α ∨ −β`, as in ✱22·84. -/
+/-- ✱22·85 `⊢ . α ∩ β = −(−α ∪ −β)` [✱22·84·831]. ✱22·84 is turned by ✱20·21 for ✱22·831. The print
+    has `−α ∨ −β`, as in ✱22·84, read as ∪. -/
 theorem q22_85 [Reducibility S] (α β : V a → QF V) : QThm S (clsEq (α ∩ β) (−(−α ∪ −β))) :=
   QThm.mp (QThm.mp (q22_84 α β) (qiffMp (q20_21 _ _))) (qiffMp (q22_831 _ _))      -- ✱22·84·831
 

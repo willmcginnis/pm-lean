@@ -201,8 +201,11 @@ Following PM's lines line by line turned up these points. The errata themselves 
   transcription error (2026-10-11); it is in its errata list for Vol I, §4.
 - **✱22·84, ✱22·85** (p. 224). Gutenberg #78050 has `−α ∨ −β`, the sign of disjunction between two
   classes, where ✱22·03's sum of classes `−α ∪ −β` is the only reading that is a formula; ✱22·86 and
-  ✱22·87 on the same page have ∪. The statements are formalized with ∪ (`PM/Star22.lean`). This is not on
-  the text audit's list; it awaits a check against the scan.
+  ✱22·87 on the same page have ∪. Checked against the scan (2026-10-14): the 1910 print itself has the
+  pointed ∨ in both, distinct from the rounded ∪ of ✱22·86 and ✱22·87, so the transcription follows the
+  print and this is a slip of the print, not of the transcription. The statements are formalized with ∪
+  (`PM/Star22.lean`), a repair recorded in their docstrings and ledger rows: a disjunction of two classes
+  is not a formula. The 1925 second edition has not been checked.
 - **Apparent slips in the 1910 print itself** (the ebook follows the print):
   - ✱4·32 (p. 123): line (1) cites ✱4·12 for a step that is in fact ✱2·03 taken both ways. Awaiting a
     human check.
@@ -214,5 +217,7 @@ Following PM's lines line by line turned up these points. The errata themselves 
   No published erratum touches pp. 123–125. The 1925 second edition has not been checked.
 - **✱23·02** (p. 226). The print has `R ∩̇ S = x̂ŷ(xRy . xSy)`; Gutenberg #78050 drops the R. The print is
   followed (`QF.relInter`, PM/Star23.lean). This is entry 9 of the text audit's Vol I list, checked against
-  the scan. At ✱23·81 the ebook applies the published Errata (the audit says so); its statement, the analogue
-  of ✱22·81, is the one proved.
+  the scan. At ✱23·81 the ebook applies the published Errata (the audit says so); its statement,
+  `R ⪽ S . ≡ . ∸S ⪽ ∸R`, the analogue of ✱22·81, is the one proved. Checked against the scan (2026-10-14):
+  the 1910 print has `R ⪽ S . ≡ . ∸R ⪽ ∸S`, which is not a theorem (it fails when R is empty and S is
+  not), so the Errata's correction is followed, as the authors' own repair.
