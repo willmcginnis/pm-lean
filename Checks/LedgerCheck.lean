@@ -12,7 +12,7 @@
 --    means ✱A·B (✱A·B·C is ✱A·B and ✱A·C), "Syll" (✱2·05 or ✱2·06) and "Comp" (✱3·43), except in
 --    the warrant after "tacit:" up to the next ";" or ")" (e.g. "tacit: ✱2·31, pp. 109–110"), which
 --    names the passage where PM leaves the step tacit, not a step of the proof.
--- 2. The ledgers data/star11–22_ledger.json: every PM proposition the proof of a row's theorem uses
+-- 2. The ledgers data/star11–23_ledger.json: every PM proposition the proof of a row's theorem uses
 --    is listed in the row, in cited_used, extra_used, tacit or glue ("Syll" in tacit is ✱2·05 and
 --    ✱2·06; "✱10·27/271/28/281" is ✱10·27, ✱10·271, ✱10·28, ✱10·281). A review found ✱10·281
 --    missing from two rows (✱14·18, ✱14·203): there a helper carried a step under (∃x) by ✱10·281.
@@ -218,7 +218,7 @@ open LedgerCheck
   let mut via : Array (List Name) := #[]          -- the helpers of the row's proof that bring it in
   let mut missing : Array String := #[]
   let mut iffListed : Array String := #[]          -- ✱3·26 / ✱3·27 listed for a ≡ read as ⊃
-  for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22"] do
+  for ch in ["star11", "star12", "star13", "star14", "star20", "star21", "star22", "star23"] do
     let path := s!"data/{ch}_ledger.json"
     let j ← match Json.parse (← IO.FS.readFile path) with
       | .ok j => pure j

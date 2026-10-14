@@ -6,9 +6,9 @@ import subprocess
 ROOT = pathlib.Path(__file__).resolve().parent.parent
 DATA = ROOT / "data"
 
-# The ledgers with a per-proposition row for ✱11–✱22, and the chapters fidelity_counts.py reads.
-STAR_LEDGERS = ["star11", "star12", "star13", "star14", "star20", "star21", "star22"]
-COUNTED = ["star11", "star13", "star14", "star20", "star21", "star22"]
+# The ledgers with a per-proposition row for ✱11–✱23, and the chapters fidelity_counts.py reads.
+STAR_LEDGERS = ["star11", "star12", "star13", "star14", "star20", "star21", "star22", "star23"]
+COUNTED = ["star11", "star13", "star14", "star20", "star21", "star22", "star23"]
 
 
 def ledger(name):

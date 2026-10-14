@@ -83,7 +83,7 @@ WORKING_READING = "C"   # a ✱9 statement for every reading is exported under t
 LEAN_VERSION = r"(?:_v(?P<v>[2-9]|[1-9][0-9]+))?"
 SOURCES = [
     ("PM.Replay", r"PM\.t(\d+)_(\d+)"), ("PM.Replay2", r"PM\.t(\d+)_(\d+)"),
-    *[(f"PM.Star{c}", r"PM\.q(\d+)_(\d+)") for c in (10, 11, 12, 13, 14, 20, 21, 22)],
+    *[(f"PM.Star{c}", r"PM\.q(\d+)_(\d+)") for c in (10, 11, 12, 13, 14, 20, 21, 22, 23)],
     ("PM.Found9.Star9", r"PM\.F9\.f(\d+)_(\d+)(?:_(?:russell|switch|prenex))?"),
 ]
 DEPRECATED = "PM.Deprecated."

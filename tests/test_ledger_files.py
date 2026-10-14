@@ -30,11 +30,12 @@ SCHEMA = {
     "star20": ({**STAR, **GLUE}, {}),
     "star21": ({**STAR, **GLUE}, {}),
     "star22": ({**STAR, **GLUE}, {}),
+    "star23": ({**STAR, **GLUE}, {}),
     "star9f": ({**STAR, **GLUE}, {}),
 }
 VALUES = {"fidelity": {"pm-lines", "pm-lines+extra", "unchanged"},
           "category": {"assertion", "rule/prose", "primitive", "type"},
-          "pm_text": {"dem", "hint", "none"},
+          "pm_text": {"dem", "hint", "none", "analogue"},
           "tag": {"FAITHFUL", "REPAIRED", "UNRESOLVED"}}
 GLUE_KINDS = {"chain", "order", "under-exists"}
 

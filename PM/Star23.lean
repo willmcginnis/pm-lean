@@ -179,14 +179,17 @@ theorem q23_31 [Reducibility S] (R : V a → V b → QF V) :
     QThm S (relEq (∸R) fun x y => .neg (relHolds x R y)) :=
   q21_2 _                                                                         -- ✱21·2 . (✱23·04)
 
-/-- ✱23·32 `⊢ . R ∸ S = x̂ŷ{xRy . ∼(xSy)}` [as ✱22·32: ✱21·2 . (✱23·05) . ✱23·2 . ✱21·32]. By (✱23·05) and
-    ✱23·2, R ∸ S is x̂ŷ{xRy . x(∸S)y}; the step from x(∸S)y to ∼(xSy) inside the product, which PM takes
-    by ✱20·32, is taken by ✱20·32's proof: ✱21·3 (with ✱4·36, `qandCongrR`) under (x, y) by ✱11·11, and
-    ✱21·15. -/
+/-- ✱23·32 `⊢ . R ∸ S = x̂ŷ{xRy . ∼(xSy)}` [as ✱22·32: ✱21·2 . (✱23·05) . ✱23·2 . ✱21·32]. By (✱23·05),
+    R ∸ S is R ∩̇ ∸S (a macro: the same relation), and ✱23·2 gives R ∩̇ ∸S = x̂ŷ{xRy . x(∸S)y}. The step from
+    x(∸S)y to ∼(xSy) inside the product, which PM takes by ✱21·32 (✱20·32), is taken by ✱21·32's proof:
+    ✱21·3 (with ✱4·36's form for the second factor, `qandCongrR`) under (x, y) by ✱11·11, and ✱21·15. The
+    two identities are joined by ✱21·22. -/
 theorem q23_32 [Reducibility S] (R S' : V a → V b → QF V) :
     QThm S (relEq (R ∸ S') fun x y => QF.and (relHolds x R y) (.neg (relHolds x S' y))) :=
-  QThm.mp (q11_11 fun x y => qandCongrR (relHolds x R y) (q21_3 (∸S') x y))        -- ✱21·3
-    (qiffMp (q21_15 _ _))                                                         -- ✱21·15
+  have h1 := q23_2 R (∸S')                                                         -- (✱23·05) . ✱23·2
+  have h2 := QThm.mp (q11_11 fun x y => qandCongrR (relHolds x R y) (q21_3 (∸S') x y))  -- ✱21·32
+    (qiffMp (q21_15 _ (fun x y => QF.and (relHolds x R y) (.neg (relHolds x S' y)))))
+  QThm.mp (qandI h1 h2) (q21_22 _ _ _)
 
 /-- ✱23·33 `⊢ : x(R ∩̇ S)y . ≡ . xRy . xSy` [as ✱22·33: ✱21·3 . ✱23·2]. By (✱23·02), ✱23·2 is ✱21·2, and
     ✱21·3 is used at the relation x̂ŷ(xRy . xSy) itself. -/

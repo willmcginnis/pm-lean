@@ -1,0 +1,2378 @@
+[
+ {
+  "id": "*23.1",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.2",
+   "*23.01"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.1 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.2",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.2",
+   "*23.02"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.2 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.3",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.2",
+   "*23.03"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.3 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.31",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.2",
+   "*23.04"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.31 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.32",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.05",
+   "*23.2"
+  ],
+  "extra_used": [
+   "*21.3",
+   "*4.3",
+   "*4.36",
+   "*11.11",
+   "*21.15",
+   "*21.22"
+  ],
+  "cited_unused": [
+   "*21.2",
+   "*21.32"
+  ],
+  "note": "PM prints no proof; as *22.32 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*21.3 for x(∸S)y (the proof of *21.32); factors are commuted (*4.3); a factor is replaced by an equivalent (*4.36); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); *21.15 turns formal equivalence into identity; the two identities are joined by *21.22. *21.2 is not used: (*23.05) with *21.2 gives R ∸ S = R ∩̇ ∸S; in Lean *23.05 is a macro, so the two are the same relation and *21.2 is used only inside *23.2. *21.32 is not used: the step from x(∸S)y to ∼(xSy) inside the product is taken by *21.32's proof (*21.3 under (x, y), *21.15).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.33",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.3"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.2"
+  ],
+  "note": "PM prints no proof; as *22.33 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.2 is not used: by the definition, *23.2 is *21.2 at the relation it names, and *21.3 is used at that relation directly.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.34",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.3"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.3"
+  ],
+  "note": "PM prints no proof; as *22.34 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.3 is not used: by the definition, *23.3 is *21.2 at the relation it names, and *21.3 is used at that relation directly.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.35",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.3"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.31"
+  ],
+  "note": "PM prints no proof; as *22.35 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.31 is not used: by the definition, *23.31 is *21.2 at the relation it names, and *21.3 is used at that relation directly.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.351",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.35",
+   "*5.19",
+   "*11.11",
+   "*21.43",
+   "*2.16"
+  ],
+  "extra_used": [
+   "*3.3",
+   "*11.1"
+  ],
+  "cited_unused": [
+   "*10.251"
+  ],
+  "note": "PM prints no proof; as *22.351 (dem), translated; Transp is *2.16; takes real variables x, y (*10.25)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "the left member of an equivalence is replaced through Exp (*3.3, qiffLeft); *11.1 at (x, y), twice, in *10.251's proof for two variables. *10.251 is not used: *10.251 for two variables is taken by its proof (*10.25 . Transp) with *11.1 for *10.1 (qall2_251).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.36",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.41"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.36 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.37",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.41"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.37 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.38",
+  "page": 226,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*21.41"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.38 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.39",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.33",
+   "*21.3",
+   "*21.33"
+  ],
+  "extra_used": [
+   "*4.38",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.39 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "both factors are replaced by equivalents (*4.38); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.391",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.34",
+   "*21.3",
+   "*21.33"
+  ],
+  "extra_used": [
+   "*4.39",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.391 (hint), translated; [Similar proof]: the citations of *22.39's proof, with *23.34",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "both disjuncts are replaced by equivalents (*4.39); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.392",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.35",
+   "*21.3",
+   "*21.33"
+  ],
+  "extra_used": [
+   "*4.11",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.392 (hint), translated; [Similar proof]: the citations of *22.39's proof, with *23.35",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "∼ is put on both members of an equivalence (*4.11); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.4",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [
+   "*23.1",
+   "*4.38"
+  ],
+  "note": "PM prints no proof; as *22.4 (dem), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.1 is not used: R ⪽ S is its definiens (*23.01, a macro), so the *23.1 line is the definition (a macro in Lean). *4.38 is not used: the line joining the two *23.1 lines is the definition (a macro in Lean).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.41",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.4",
+   "*21.43"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.41 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.42",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.08",
+   "*11.11"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.42 (hint), translated; Id is *2.08",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.43",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*3.26",
+   "*11.11"
+  ],
+  "extra_used": [
+   "*23.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.43 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.44",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.37"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.44 (hint), translated; *10.3 for two variables is *11.37",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.441",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.1",
+   "*3.31"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.441 (hint), translated; Imp is *3.31",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.45",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.391",
+   "*23.33"
+  ],
+  "extra_used": [
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [
+   "*23.1",
+   "*10.413"
+  ],
+  "note": "PM prints no proof; as *22.45 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "a consequent is replaced by an equivalent (*4.85); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables). *23.1 is not used: the *23.1 line is the definition (a macro in Lean). *10.413 is not used: *10.413 for two variables, with the antecedent unchanged, is *4.85 under (x, y) (*11.11.33).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.46",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.441"
+  ],
+  "extra_used": [
+   "*3.22"
+  ],
+  "cited_unused": [
+   "Perm (*1.4)"
+  ],
+  "note": "PM prints no proof; as *22.46 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "Perm, for the factors of a product, is *3.22. Perm (*1.4) is not used: Perm, for the factors of a product, is *3.22.",
+  "glue": [
+   "*3.22"
+  ],
+  "glue_kind": [
+   "order"
+  ]
+ },
+ {
+  "id": "*23.47",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.43",
+   "*23.44"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.47 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.48",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.38"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*4.84",
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.48 (hint), translated; *10.31 for two variables is *11.38",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); a consequent is replaced by an equivalent (*4.85); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.481",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.41",
+   "*23.48"
+  ],
+  "extra_used": [
+   "*3.47"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.481 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "a step is applied to both factors of the hypothesis (*3.47).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.49",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.39"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*4.84",
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.49 (hint), translated; *10.39 for two variables is *11.39",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); a consequent is replaced by an equivalent (*4.85); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.5",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.33",
+   "*4.24",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.5 (dem), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.51",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.33",
+   "*4.3",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.51 (hint), translated",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.52",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.33",
+   "*4.32",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.36",
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.52 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "a factor is replaced by an equivalent (*4.36); factors are commuted (*4.3).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.54",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*21.15",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281"
+  ],
+  "cited_unused": [
+   "*21.18"
+  ],
+  "note": "PM prints no proof; as *22.54 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; R ⪽ T contains R in several places, so *21.18 is used by its proof (qrel18).",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*23.55",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*21.15",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281"
+  ],
+  "cited_unused": [
+   "*21.18"
+  ],
+  "note": "PM prints no proof; as *22.55 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; T ⪽ R contains R in several places, so *21.18 is used by its proof (qrel18).",
+  "glue": [
+   "*10.11",
+   "*10.21",
+   "*10.271",
+   "*4.3",
+   "*10.281"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "under-exists",
+   "under-exists",
+   "order",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*23.551",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*21.43",
+   "*4.37",
+   "*11.11",
+   "*11.32",
+   "*23.34",
+   "*4.86",
+   "*11.33"
+  ],
+  "cited_unused": [
+   "*10.411"
+  ],
+  "note": "PM prints no proof; as *22.551 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here); a disjunct is replaced by an equivalent (*4.37); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an implication is carried under (x, y) by *11.32 (*10.27 for two variables); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; a member of an equivalence is replaced by an equivalent (*4.86); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables). *10.411 is not used: *10.411 for two variables, with the second disjunct unchanged, is *4.37 under (x, y) (*11.11, *11.32).",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.56",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.25",
+   "*11.11"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.56 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.57",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.31",
+   "*11.11"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.57 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.58",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*1.3",
+   "*2.2"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.58 (hint), translated; *1.3 is the primitive proposition QThm.add",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.59",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*11.31",
+   "*4.77",
+   "*11.33",
+   "*23.34"
+  ],
+  "extra_used": [
+   "*11.11",
+   "*4.84"
+  ],
+  "cited_unused": [
+   "*23.1",
+   "*10.413"
+  ],
+  "note": "PM prints no proof; as *22.59 (dem), translated; *10.22 for two variables is *11.31, *10.271 is *11.33",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an antecedent is replaced by an equivalent (*4.84). *23.1 is not used: the *23.1 line is the definition (a macro in Lean). *10.413 is not used: *10.413 for two variables, with the consequent unchanged, is *4.84 under (x, y) (*11.11.33).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.6",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.59",
+   "*2.04",
+   "*10.11",
+   "*10.21",
+   "*10.1",
+   "*23.58"
+  ],
+  "extra_used": [
+   "*11.1",
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*2.27"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.6 (dem), translated; Comm is *2.04; T apparent",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by relExpr_ext (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23. The expression is carried by *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation). *23.59 read as ⊃ and then *11.1 at (x, y) (*10.1, tacit in *22.6's first line); *23.58 is detached under the hypothesis by *2.27.",
+  "glue": [
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*23.61",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.44",
+   "*23.58"
+  ],
+  "extra_used": [
+   "*3.26",
+   "*3.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.61 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.58's first factor (S, T for R, S) is taken by Simp (*3.26); and joined to the hypothesis as the second factor of *23.44's hypothesis (*3.21).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.62",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.72",
+   "*23.34",
+   "*11.33",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.86",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.62 (dem), translated; *10.271 for two variables is *11.33",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "a member of an equivalence is replaced by an equivalent (*4.86); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.621",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.71"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*4.86",
+   "*11.11",
+   "*11.33",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.621 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; a member of an equivalence is replaced by an equivalent (*4.86); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.63",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.44"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*23.33",
+   "*4.31",
+   "*4.37",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.63 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; disjuncts are commuted (*4.31); a disjunct is replaced by an equivalent (*4.37); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.631",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.58",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*3.26"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.631 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "one factor of an asserted product is taken by Simp (*3.26).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.632",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.42",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*23.55",
+   "*2.27",
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.632 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "from R = S, R ⪽ S is got by *23.55 with T = R (its == read as ⊃) and *23.42; an asserted antecedent is detached under a hypothesis (*2.27); R ∩̇ S = R is turned by *21.21.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.633",
+  "page": 227,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.551",
+   "*23.621"
+  ],
+  "extra_used": [
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.633 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "R ∩̇ S = R is turned by *21.21.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.64",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.47",
+   "*23.51",
+   "*4.77"
+  ],
+  "extra_used": [
+   "*23.54"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.64 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.51 replaces S ∩̇ R by R ∩̇ S through *23.54 (*21.18 for the expression; its == read as ⊃).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.65",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.61",
+   "*23.57",
+   "*4.77"
+  ],
+  "extra_used": [
+   "*23.55"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.65 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.57 replaces T ⊍ S by S ⊍ T through *23.55 (*21.18 for the expression; its == read as ⊃).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.66",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.38"
+  ],
+  "extra_used": [
+   "*11.11",
+   "*11.32",
+   "*23.34",
+   "*4.84",
+   "*4.85",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.66 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an implication is carried under (x, y) by *11.32 (*10.27 for two variables); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); a consequent is replaced by an equivalent (*4.85); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.68",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.34",
+   "*23.33",
+   "*4.4",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.39",
+   "*4.3",
+   "*4.36"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.68 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "both disjuncts are replaced by equivalents (*4.39); factors are commuted (*4.3); a factor is replaced by an equivalent (*4.36).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.69",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.33",
+   "*23.34",
+   "*4.41",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.38",
+   "*4.31",
+   "*4.37"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.69 (hint), translated; [Similar proof, by *4.41]: the citations of *22.68's proof, with *4.41 for *4.4",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "both factors are replaced by equivalents (*4.38); disjuncts are commuted (*4.31); a disjunct is replaced by an equivalent (*4.37).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.7",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.33"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*4.37",
+   "*4.31",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.7 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; a disjunct is replaced by an equivalent (*4.37); disjuncts are commuted (*4.31); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.72",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*3.48"
+  ],
+  "extra_used": [
+   "*11.31",
+   "*11.11",
+   "*11.32",
+   "*23.34",
+   "*4.84",
+   "*4.85",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.72 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "(x, y) is distributed over the product by *11.31 (*10.22 for two variables); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an implication is carried under (x, y) by *11.32 (*10.27 for two variables); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); a consequent is replaced by an equivalent (*4.85); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.73",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [],
+  "extra_used": [
+   "*21.43",
+   "*3.47",
+   "*11.31",
+   "*4.39",
+   "*11.11",
+   "*11.32",
+   "*23.34",
+   "*4.86",
+   "*11.33"
+  ],
+  "cited_unused": [
+   "*10.411"
+  ],
+  "note": "PM prints no proof; as *22.73 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here); a step is applied to both factors of the hypothesis (*3.47); (x, y) is distributed over the product by *11.31 (*10.22 for two variables); both disjuncts are replaced by equivalents (*4.39); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an implication is carried under (x, y) by *11.32 (*10.27 for two variables); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; a member of an equivalence is replaced by an equivalent (*4.86); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables). *10.411 is not used: *10.411 for two variables is *4.39 under (x, y) as in *11.39's proof (*11.31, *11.11, *11.32).",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.74",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.43",
+   "*4.73",
+   "*23.45",
+   "*4.38",
+   "*23.41"
+  ],
+  "extra_used": [
+   "*4.3"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.74 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "factors are commuted (*4.3).",
+  "glue": [
+   "*4.3"
+  ],
+  "glue_kind": [
+   "order"
+  ]
+ },
+ {
+  "id": "*23.8",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.13"
+  ],
+  "extra_used": [
+   "*23.35",
+   "*4.11",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.8 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; ∼ is put on both members of an equivalence (*4.11); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.81",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.1"
+  ],
+  "extra_used": [
+   "*23.35",
+   "*4.84",
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.81 (hint), translated; the statement as the transcription has it, with the published Errata applied",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); a consequent is replaced by an equivalent (*4.85); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.811",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.8"
+  ],
+  "extra_used": [
+   "*23.81",
+   "*23.54"
+  ],
+  "cited_unused": [
+   "*4.1"
+  ],
+  "note": "PM prints no proof; as *22.811 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*23.81 (*4.1 under (x, y)) with ∸S for S; ∸(∸S) is replaced by S by *23.8 through *23.54 (*21.18 for the expression). *4.1 is not used: *4.1 is used through *23.81, whose proof it is.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.82",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.14"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*4.84",
+   "*23.35",
+   "*4.3",
+   "*4.36",
+   "*4.85",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.82 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; an antecedent is replaced by an equivalent (*4.84); x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; factors are commuted (*4.3); a factor is replaced by an equivalent (*4.36); a consequent is replaced by an equivalent (*4.85); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.83",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.11"
+  ],
+  "extra_used": [
+   "*21.43",
+   "*11.11",
+   "*11.33",
+   "*23.35",
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.83 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables); x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; a member of an equivalence is replaced by an equivalent (*4.86).",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.831",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.12"
+  ],
+  "extra_used": [
+   "*21.43",
+   "*4.2",
+   "*23.35",
+   "*4.86",
+   "*11.11",
+   "*11.33"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.831 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here); *4.2 for the member left unchanged; x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; a member of an equivalence is replaced by an equivalent (*4.86); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); an equivalence is carried under (x, y) by *11.33 (*10.271 for two variables).",
+  "glue": [
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.84",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.51"
+  ],
+  "extra_used": [
+   "*23.35",
+   "*23.33",
+   "*4.11",
+   "*4.39",
+   "*23.34",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.84 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; ∼ is put on both members of an equivalence (*4.11); both disjuncts are replaced by equivalents (*4.39); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.85",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.84",
+   "*23.831"
+  ],
+  "extra_used": [
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.85 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "an identity of relations is turned by *21.21.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.86",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.57"
+  ],
+  "extra_used": [
+   "*23.35",
+   "*23.33",
+   "*4.11",
+   "*4.38",
+   "*23.34",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.86 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; ∼ is put on both members of an equivalence (*4.11); both factors are replaced by equivalents (*4.38); x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.87",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.86",
+   "*23.831"
+  ],
+  "extra_used": [
+   "*21.21"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.87 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "an identity of relations is turned by *21.21.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.88",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*2.11"
+  ],
+  "extra_used": [
+   "*23.34",
+   "*23.35",
+   "*4.31",
+   "*4.37",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.88 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; disjuncts are commuted (*4.31); a disjunct is replaced by an equivalent (*4.37); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.89",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*3.24"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*23.35",
+   "*4.3",
+   "*4.36",
+   "*4.11",
+   "*11.11"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.89 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; factors are commuted (*4.3); a factor is replaced by an equivalent (*4.36); ∼ is put on both members of an equivalence (*4.11); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.9",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*5.61"
+  ],
+  "extra_used": [
+   "*23.33",
+   "*23.34",
+   "*23.35",
+   "*4.38",
+   "*4.3",
+   "*4.36",
+   "*11.11",
+   "*21.43"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.9 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "x(R ∩̇ S)y is read as xRy . xSy by *23.33 (*22.33), which *22's proof leaves tacit here; x(R ⊍ S)y is read as xRy . ∨ . xSy by *23.34 (*22.34), which *22's proof leaves tacit here; x ∸R y is read as ∼(xRy) by *23.35 (*22.35), which *22's proof leaves tacit here; both factors are replaced by equivalents (*4.38); factors are commuted (*4.3); a factor is replaced by an equivalent (*4.36); the step is generalized over (x, y) by *11.11 (*10.11 for two variables, tacit in *22's proof here); R = S is read as xRy ==_{x,y} xSy by *21.43 (*20.43, tacit in *22's proof here).",
+  "glue": [
+   "*2.02",
+   "*3.43",
+   "*4.3"
+  ],
+  "glue_kind": [
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.91",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*5.63",
+   "*23.33",
+   "*23.34",
+   "*23.35",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.31",
+   "*4.37",
+   "*4.36"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.91 (dem), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "factors are commuted (*4.3); disjuncts are commuted (*4.31); a disjunct is replaced by an equivalent (*4.37); a factor is replaced by an equivalent (*4.36).",
+  "glue": [
+   "*4.3",
+   "*2.02",
+   "*3.43",
+   "*4.31"
+  ],
+  "glue_kind": [
+   "order",
+   "chain",
+   "chain",
+   "order"
+  ]
+ },
+ {
+  "id": "*23.92",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.91",
+   "*23.62"
+  ],
+  "extra_used": [
+   "*3.21",
+   "*21.23"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.92 (hint), translated",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "an asserted proposition is joined to the hypothesis as a factor (*3.21); R ⊍ S = S and R ⊍ S = R ⊍ (S ∸ R) give S = R ⊍ (S ∸ R) by *21.23.",
+  "glue": [],
+  "glue_kind": []
+ },
+ {
+  "id": "*23.93",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*4.73",
+   "*4.11",
+   "*23.33",
+   "*5.32",
+   "*23.35",
+   "*11.11",
+   "*21.43"
+  ],
+  "extra_used": [
+   "*4.3",
+   "*4.86"
+  ],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.93 (dem), translated; Transp is *4.11",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "factors are commuted (*4.3); a member of an equivalence is replaced by an equivalent (*4.86).",
+  "glue": [
+   "*4.3",
+   "*2.02",
+   "*3.43"
+  ],
+  "glue_kind": [
+   "order",
+   "chain",
+   "chain"
+  ]
+ },
+ {
+  "id": "*23.94",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*10.1",
+   "*10.11",
+   "*10.21",
+   "*23.8"
+  ],
+  "extra_used": [
+   "*4.2",
+   "*2.02",
+   "*4.11",
+   "*3.43",
+   "*4.39",
+   "*10.271",
+   "*21.11",
+   "*4.3",
+   "*4.36",
+   "*10.281",
+   "*12.11",
+   "*10.32",
+   "*10.28",
+   "*10.23",
+   "*21.15"
+  ],
+  "cited_unused": [
+   "*21.18"
+  ],
+  "note": "PM prints no proof; as *22.94 (dem), translated; fR an expression of R that PM's notation forms (RelExpr)",
+  "fidelity": "pm-lines+extra",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "*10.1 at a relation whose defining function need not be predicative is the analogue for relations of *20.17's argument (qrelAllAt): *12.11 gives a predicative theta with theta!(x, y) ==_{x,y} the defining function (turned by *10.32 under (x)), *10.1 is used at theta, the expression is carried by relExpr_ext (its == read as ⊃, tacit), chained by *2.06, and (Etheta) removed by *10.11, *10.23 (at ∸R, twice; the second time ∸ is carried by qfiff2Compl: *21.11 under (x, y) with *4.11). *21.18 for an expression that is not a generic context f{R} is taken by its proof, *21.11.15, with *21.11 for every expression PM's notation forms (relExpr_ext, p. 213: *4.2 and Simp *2.02 for a constant, *4.11 under ∼, Comp *3.43 with *4.39 for ∨, *10.11.21.271 under (x), *21.11 with *4.36 (and *4.3) and *10.11.21.281 for an occurrence of the relation).  *21.18 is not used: *21.18 is for a generic context f{R}; for fR it is used by its proof (qrel18).",
+  "glue": [
+   "*10.271",
+   "*4.3",
+   "*10.281",
+   "*10.28"
+  ],
+  "glue_kind": [
+   "under-exists",
+   "order",
+   "under-exists",
+   "under-exists"
+  ]
+ },
+ {
+  "id": "*23.95",
+  "page": 228,
+  "category": "assertion",
+  "method": "explicit",
+  "cited_used": [
+   "*23.94",
+   "*4.11",
+   "*21.6"
+  ],
+  "extra_used": [],
+  "cited_unused": [],
+  "note": "PM prints no proof; as *22.95 (dem), translated; Transp is *4.11; fR as in *23.94",
+  "fidelity": "pm-lines",
+  "pm_text": "analogue",
+  "tacit": [
+   "Syll",
+   "*3.2",
+   "*4.21",
+   "*4.22",
+   "definitions",
+   "*10.11 + *10.27/271/28/281 pattern (pp. 161-162)"
+  ],
+  "reason": "",
+  "glue": [],
+  "glue_kind": []
+ }
+]
