@@ -49,6 +49,24 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 - **Statement mutation docs**: the load at the end of the full run of `608ba9d` is given as about 27, as
   its record shows. For the direct run of `07f82e0`, the docs now give only what its record shows.
 
+- **The style of predicativity takes the family of variables as a parameter** (the maintainer's ruling 74;
+  docs/TYPES_DESIGN.md, decision 13). `Style`'s fields quantified over the family V, so `Style`, `Sys`
+  and `OrderCheck` lived in `Type 1`, and an external measurement of the exported environment found
+  `Style.mk` to be the one statement in the closure of the derivations that quantified over V below the
+  top. Now `Style V`, `Sys V` and `OrderCheck V` take V as a parameter; `QThm {V} (S : Sys V)`,
+  `Thm9 {V} (S : Sys V) R`, the classes `Comprehension S` and `Reducibility S`, the four styles and the
+  named systems follow, each still defined once for every V. A theorem takes `{S : Sys V}` at the V it
+  already quantifies over; one stated at a structure's variables takes its system there
+  (`consistent (S : Sys twoModel.den)`); the counter-models that quantify over every family inside the
+  statement take a system at every family (`S : (V : Ty → Type) → Sys V`); `Rep S R V` is now `Rep S R`.
+  No theorem's meaning changes, and none of the 196 locked ✱1–✱5 export entries does (the lock check
+  passes); the statement digests of the 611 unreleased ✱9–✱25 entries change. Measured after the change:
+  no statement in the closure of the derivations quantifies over V below the top (also with `OrderCheck`
+  unfolded, and also for the kernel census's wider set of derivation theorems), no inductive type there
+  has a field that holds a type, and the census's closure of D mentions no `Type 1`, which the ratchet
+  now keeps (`proofClosure sort.TypeN` left tests/expected_kernel_features.txt). StyleCheck's table,
+  RedCheck's report and the statement mutation's verdicts (`--quick`: its 469 mutants, 13 statements and
+  1039 hypotheses) are unchanged.
 - **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
   review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
   transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as
