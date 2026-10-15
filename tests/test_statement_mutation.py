@@ -228,14 +228,19 @@ class MethodsAgree(unittest.TestCase):
         statements equal for the direct comparison by proof irrelevance, whose normal forms differ
         because a recursor on a proof-valued projection is stuck. With the audit bypassed the two
         comparisons disagree; the audit flags the projection, so `direct` decides and they agree. The
-        meta-program fails if the projection is not flagged; this pins the record."""
-        w = next(r for r in self.sample_run() if r["part"] == "selfTest")["witness"]
-        self.assertEqual((w["direct"], w["normalAuditBypassed"]), (True, False))
-        self.assertFalse(w["auditClean"])
-        self.assertIn("projection PMNfTest.ProofBox.1", w["proofs"])
-        self.assertEqual(w["verdict"], w["direct"])
-        unit = next(r for r in self.sample_run() if r["part"] == "selfTest")["unitProjection"]
-        self.assertIn("projection PMNfTest.UnitBox.1", unit)
+        meta-program fails if the projection is not flagged; this pins the record. The same for the
+        second witness, whose proof is a variable of a type that is a proposition only behind an
+        irreducible definition (the kernel unfolds it), and for the two unit-like projections, the
+        second of a type that is `PUnit` behind an irreducible definition."""
+        st = next(r for r in self.sample_run() if r["part"] == "selfTest")
+        for key, proof in (("witness", "projection PMNfTest.ProofBox.1"), ("hiddenProofWitness", "variable h")):
+            w = st[key]
+            self.assertEqual((w["direct"], w["normalAuditBypassed"]), (True, False), key)
+            self.assertFalse(w["auditClean"], key)
+            self.assertIn(proof, w["proofs"], key)
+            self.assertEqual(w["verdict"], w["direct"], key)
+        self.assertIn("projection PMNfTest.UnitBox.1", st["unitProjection"])
+        self.assertIn("projection PMNfTest.HiddenUnitBox.1", st["hiddenUnitProjection"])
 
     def test_identical_verdicts(self):
         recs = self.sample_run()

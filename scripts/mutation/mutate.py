@@ -301,9 +301,12 @@ def audit_report(recs):
     of two normal forms more than a comparison of trees. Every comparison of a statement whose normal
     forms are flagged falls back to the direct one, so a finding here costs time, not correctness."""
     t = next(r for r in recs if r["part"] == "timing")
-    w = next(r for r in recs if r["part"] == "selfTest")["witness"]
-    print(f"Planted witness (a proof-valued projection): direct {w['direct']}, normal forms with the audit "
-          f"bypassed {w['normalAuditBypassed']}; flagged {w['proofs']}, so decided by direct: {w['verdict']}")
+    st = next(r for r in recs if r["part"] == "selfTest")
+    for key, what in (("witness", "a proof-valued projection"),
+                      ("hiddenProofWitness", "a proof whose type is Prop behind an irreducible definition")):
+        w = st[key]
+        print(f"Planted witness ({what}): direct {w['direct']}, normal forms with the audit "
+              f"bypassed {w['normalAuditBypassed']}; flagged {w['proofs']}, so decided by direct: {w['verdict']}")
     if t["method"] == "direct":
         print("Comparison by direct: the proof's type and each mutant as they are")
         return
