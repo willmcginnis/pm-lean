@@ -113,7 +113,7 @@ kernel decides it. There are two ways to ask it (`--method`; `normal` is the def
   the class and relation statements of ✱22–✱25 it is slow and memory-hungry: the statement and the
   mutant differ at one place deep inside nested definitions, and the kernel's lazy unfolding tries
   many unfoldings before it concludes "not equal". The full run with ✱25 that compared this way, on the
-  Lean code of `07f82e0`, took 9142 s, 8519 s of it in these comparisons, and `/usr/bin/time` reported a
+  Lean code and scripts of `07f82e0`, took 9142 s, 8519 s of it in these comparisons, and `/usr/bin/time` reported a
   maximum resident set of about 22 GiB (MEASURED, 2026-10-14; [below](#how-to-run)). ✱25·431 alone
   spent 3452 s comparing its 24 mutants.
 - **`normal`**: each term is first brought to its normal form, and `Kernel.isDefEq` compares the two

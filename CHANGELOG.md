@@ -3,6 +3,18 @@
 Coverage and semantic changes, newest first, from the git history. Commit hashes are given where a change is
 one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## 2026-10-15
+
+- **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
+  review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
+  transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as
+  above"), ✱9·361, ✱9·37, ✱9·371 ("Similar proof"), ✱9·401, ✱9·41, ✱9·411, ✱9·42, ✱9·421, ✱9·501, ✱9·511,
+  ✱9·521 ("As above") and ✱22·391, ✱22·392, ✱22·69 ("[Similar proof]"). Ruling 63's `analogue` is a proof
+  that follows an analogous earlier number, and these name none; the maintainer has been asked. Each row's
+  note now says so, docs/FIDELITY.md lists them with the other exceptions, and `tests/test_ledger_files.py`
+  requires every row whose hint is such a reference to be `analogue` or to carry the reason. Only the notes
+  changed.
+
 ## 2026-10-14
 
 - **✱22, the calculus of classes** (`PM/Star22.lean`, pp. 219–225). The definitions ✱22·01–✱22·05,
@@ -75,7 +87,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     the same kind that said `hint`: the 14 propositions of ✱21 where PM prints "Proof as in ✱20·…", ✱14·112
     and ✱20·702. Only the value changed. ✱11·13 and ✱11·311 keep `hint`, since their proofs apply ✱10·13
     rather than follow its proof; ✱22 and ✱24 print no such reference, and their "[Similar proof]" rows
-    (✱22·391, ✱22·392, ✱22·69) keep `hint` (docs/FIDELITY.md).
+    (✱22·391, ✱22·392, ✱22·69) keep `hint`, as do the rows of ✱9 whose hint names no number (above,
+    2026-10-15; docs/FIDELITY.md).
   - Ruling 64: `Lean.Syntax` and `Lean.Name` left the closure of the PM derivations. The three auto-params
     that brought them in are explicit arguments: `PM.Pf.hy n rfl` (the bound, by evaluation),
     `qclsEqCongr F _ _ (by cls_expr)` at each of its 38 uses and `qrelEqCongr F _ _ (by rel_expr)` at each
@@ -93,7 +106,7 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     statements, 3097 declarations, 40 using an axiom (the new one, `PM.check_pinned_star1_4_variant`, pins
     `PM.star1_4_variant_not_a_theorem`). The statement mutation's Part 1 now counts the check theorems
     too: `--quick` and `--full` find 1784 theorems and 1039 hypotheses, none unused (1471 and 1009 in the
-    earlier full run, on the Lean code of `07f82e0`, when the checks were `example`s).
+    earlier full run, on the Lean code and scripts of `07f82e0`, when the checks were `example`s).
   - Ruling 66: the roadmap has a subtask under lk-l4l, lk-l4l-count: an instrumented independent checker
     that counts what a static census cannot (proof irrelevance, eta, unit-like types, K versus iota,
     literal to constructor).
@@ -147,29 +160,39 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   - `mutate.py --full` runs before a release. Its run with ✱1–✱25 found nothing unexpected: no unused
     hypothesis in 1784 theorems (1039 hypotheses, the check theorems' included), none of 16,512 mutants of
     999 statements accepted by a proof term (4668 of ✱1–✱5, 11,844 from ✱9 on), none of 188 hypotheses
-    replaced by `True` compiling, and only the 14 known renamings surviving re-elaboration. It took
-    979 s, 16 min 19 s, with 8 jobs (2026-10-14): the meta-program 360 s, of which 45 s the kernel's
-    comparisons and 251 s the tautology tests; re-elaboration 98 s; hypothesis recompilation 521 s; a
-    maximum resident set of about 1.15 GiB for any one process. The tool takes every numbered
-    proposition from ✱9 on, so its output no longer calls that group ✱9–✱21.
-  - Hypothesis recompilation stays in `--full` (the maintainer's ruling 68): at 5 to 9 minutes it is now
-    the larger part of the run, and it costs only time on our own machines.
+    replaced by `True` compiling, and only the 14 known renamings surviving re-elaboration. On the Lean
+    code and scripts of `10fb7d0` (2026-10-14; docs/STATEMENT_MUTATION.md, "Measured code") it took
+    899 s, 14 min 59 s, with 8 jobs: the meta-program 531 s, of which 276 s the kernel's comparisons
+    (most of it the audit of the normal forms, below) and 200 s the tautology tests; re-elaboration 60 s;
+    hypothesis recompilation 308 s; a maximum resident set of about 1.48 GiB for any one process. The
+    tool takes every numbered proposition from ✱9 on, so its output no longer calls that group ✱9–✱21.
+  - Hypothesis recompilation stays in `--full` (the maintainer's ruling 68): at 5 to 9 minutes it costs
+    only time on our own machines.
   - The kernel now compares each proof's type with each mutant after bringing both to normal form by
     its own reductions (`Kernel.whnf` everywhere, memoized), instead of directly. The earlier full run,
-    comparing directly on the Lean code of `07f82e0`, took 9142 s, 2 h 32 min (1708 s with ✱1–✱24),
+    comparing directly on the Lean code and scripts of `07f82e0`, took 9142 s, 2 h 32 min (1708 s with ✱1–✱24),
     8519 s of it in the comparisons, which grow steeply with the nesting of the class and relation
     definitions (✱22 70 s, ✱23 276 s, ✱24 689 s, ✱25 7482 s, of which ✱25·431 3452 s and ✱25·432
     3282 s), with a maximum resident set of about 22 GiB; on normal forms ✱25·431's comparisons take
-    0.28 s. The verdicts are the same: checked side by side (`mutate.py --compare-methods`, 0
-    disagreements) on every mutant of ✱1–✱24 and of ✱25 but ✱25·431 and ✱25·432 (997 statements,
-    16,464 mutants), and on all 16,512 mutants by the two full runs' records (docs/STATEMENT_MUTATION.md,
-    "How a mutant is compared", with the argument why).
-  - An audit of the normal forms (proofs, structure constructors, unit-like terms, the three things
-    through which Lean's definitional equality can fail to be transitive) with planted cases; a
-    statement it flags (the 36 of ✱9) is compared directly, as is any normal form past a bound of
-    200,000 steps (none reached; the largest needs 968). `--method direct` keeps the old comparison.
-    `tests/test_statement_mutation.py` checks on a sample of 16 statements that the two comparisons
-    agree (it runs Lean, about 20 s).
+    1.7 s. The verdicts are the same: checked side by side (`mutate.py --compare-methods`, 0
+    disagreements, on `10fb7d0`) on every mutant of ✱1–✱24 and of ✱25 but ✱25·431 and ✱25·432 (997
+    statements, 16,464 mutants), and on all 16,512 mutants by the two full runs' records
+    (docs/STATEMENT_MUTATION.md, "How a mutant is compared", with the argument and its limits).
+  - An audit of every subterm of the normal forms for what the kernel's rules that can break
+    transitivity need: a proof (proof irrelevance, K-like reduction), an application of a structure's
+    constructor (eta for structures, string literals) and a term of a unit-like type (eta for unit-like
+    types). A statement it flags (the 36 of ✱9) is compared directly, as is any normal form past a bound
+    of 200,000 steps (none reached; the largest needs 968). `--method direct` keeps the old comparison.
+    It is a conservative syntactic check with a fallback, not a proof of transitivity.
+  - A release review found that the audit's first version checked only the heads of applications and
+    the constants and variables standing alone. A proof-valued projection passed it: a recursor stuck on
+    `b.proof`, for `b` in a structure holding a proof of `Acc`, on which the comparison on normal forms
+    says "not equal" and the direct one "equal". The audit now checks every subterm, projections
+    included (`10fb7d0`). The witness is a planted case: the run fails unless the audit flags its
+    projection and its comparison takes the direct verdict; a unit-like projection is planted too. The
+    run records the witness, and `tests/test_statement_mutation.py` pins the record (the two comparisons
+    disagree with the audit bypassed, agree with it) and checks on a sample of 16 statements that the
+    two comparisons agree (it runs Lean, about 20 s).
 - **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
   "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
   counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the
