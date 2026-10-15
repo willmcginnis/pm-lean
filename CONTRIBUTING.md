@@ -15,7 +15,7 @@ proved in each particular case"), add it to [docs/PM_CLAIMS.md](docs/PM_CLAIMS.m
 - No `sorry`, `native_decide`, `axiom`, `unsafe`, `implemented_by` or `extern`.
 - PM theorems are derived in the embedded system (`Thm` for ✱1–✱5, `QThm S` from ✱9 on), from PM's own
   primitive propositions. They must report "does not depend on any axioms".
-- State every theorem for an arbitrary system `S : Sys` (and family `V`). If it uses ✱12·1 or ✱12·11, take
+- State every theorem for an arbitrary family `V` and system `S : Sys V`. If it uses ✱12·1 or ✱12·11, take
   `[Reducibility S]` in its signature; if it uses comprehension, take `[Comprehension S]`. Do not pass the
   evidence any other way (for example as `h : S.red = true`): `RedCheck.lean` flags that.
 - Follow PM's proof. Write one Lean line per *Dem.* line, or one step per proposition of PM's bracketed hint,

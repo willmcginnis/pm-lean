@@ -409,10 +409,10 @@ not help. `trap_unit_compr` (from an external review) does the same at `U` with 
 **Rejected:** an eigenvariable form of ✱10·11 over explicit contexts. It would change the statement or
 proof of every ✱10–✱11 theorem.
 
-### 13. Rules as opt-in capabilities (revised 2026-10-11, the maintainer's decision on Q2)
+### 13. Rules as opt-in capabilities (revised 2026-10-11, the maintainer's decision on Q2; revised 2026-10-15, ruling 74)
 
-The proof system is `QThm S` for a system `S : Sys` (PM/Quant.lean): two flags, `compr` and `red`, and a
-style of predicativity (decision 3). The constructors `compr1`/`compr2` need a proof of `S.compr = true`,
+The proof system is `QThm S` for a system `S : Sys V` over the family of variables `V` (PM/Quant.lean):
+two flags, `compr` and `red`, and a style of predicativity (decision 3). The constructors `compr1`/`compr2` need a proof of `S.compr = true`,
 and `red1`/`red2` a proof of `S.red = true`. Each rule is its own module with its PM warrant in the
 header, and a class that supplies the proof:
 - `PM/Rules/Reducibility.lean`: `class Reducibility S` (✱12·1, ✱12·11, p. 174);
@@ -457,11 +457,32 @@ occurs in the declaration's type. Result: 406 PM propositions use reducibility, 
 - a second inductive per system: it would duplicate every rule-lemma of ✱10–✱11 (`qsyl`, `q10_11_27`, …).
   With one parameterised inductive, those lemmas are stated once for every `S`.
 
+**Revision (2026-10-15, the maintainer's ruling 74): the system takes the family of variables.** The
+style's fields quantified over the family (`adm1 : {V : Ty → Type} → {a : Ty} → Nat → (V a → QF V) →
+Prop`), so `Style`, `Sys` and `OrderCheck` lived in `Type 1`, and `Style.mk` was the one statement in the
+closure of the derivations that quantified over V below the top (measured by an external run on the
+exported environment). Now `Style V`, `Sys V` and `OrderCheck V` take V as a parameter, with the fields
+at that V (`adm1 : {a : Ty} → Nat → (V a → QF V) → Prop`, `style : Style V`, `OrderCheck V := QF V →
+Nat → Prop`), and `QThm {V} (S : Sys V)`, `Thm9 {V} (S : Sys V) R`, the classes, the four styles
+(`Style.of P R : Style V`) and the named systems follow. The styles and systems are still defined once
+for every V, as V-implicit definitions, so `Sys.full (Style.of .matrix R)` reads as before; a theorem
+still quantifies over V at the top and takes `{S : Sys V}` at that V. Nothing PM states changes: a
+derivation uses its system at one family only, so a system at that family is all it ever used. The
+statements whose system is used at a family other than the one they quantify over take it there
+(`consistent (S : Sys twoModel.den)`, the traps at `Sys U` and `Sys Vbad`); those that quantify over
+every family inside the statement (`consistent_all`, the counter-models `not_qthm_…`) take a system at
+every family, `S : (V : Ty → Type) → Sys V`, which says at least as much, since any system of the old
+kind gives one at every family. Measured after the change: no statement in the closure of the
+derivations quantifies over V below the top, also with `OrderCheck` unfolded, no inductive type there has
+a constructor field that holds a type, and the closure mentions no constant universe level above `Type`
+(docs/KERNEL_CENSUS.md, whose ratchet keeps it so). The theorems derived, StyleCheck's table and
+RedCheck's report are unchanged.
+
 ## 2. What was built
 
 | File | Lines | Contents |
 |---|---|---|
-| `PM/Quant.lean` | 315 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Style`, `OrderCheck`, `Sys`; `QThm S` with gated `compr1`, `compr2`, `red1`, `red2`; `QThm.mono`; `QModel` (values, application, abstraction), `qsound` |
+| `PM/Quant.lean` | 316 | `Ty` with `fn1`/`fn2` and `Ty.ord`, `pred1`/`pred2`; `QF.app1`/`app2`; `Style V`, `OrderCheck V`, `Sys V`; `QThm S` with gated `compr1`, `compr2`, `red1`, `red2`; `QThm.mono`; `QModel` (values, application, abstraction), `qsound` |
 | `PM/Rules/Reducibility.lean`, `PM/Rules/Comprehension.lean` | 25, 41 | the classes `Reducibility S`, `Comprehension S` with their PM warrants; `comprehension1`, `comprehension2` |
 | `PM/Systems.lean` | 33 | `Sys.full`, `Sys.reducibility`, `Sys.predicative`, `Sys.base` and their instances |
 | `PM/Pred/RealOwnOrder.lean`, `PM/Pred/RealAsArgument.lean` | 29, 72 | `Lvl` (p. 55), `LvlArg` (p. 54) with its decision procedure at `U` |
@@ -480,8 +501,8 @@ occurs in the declaration's type. Result: 406 PM propositions use reducibility, 
 | `PM/Star24.lean` | 1128 | ✱24·01–✱24·03 (macros, with the notation 𝐕, Λ); all 70 numbered propositions ✱24·1–✱24·63; chains of identities of classes (`≐`, joined by ✱20·22); ✱20·18 for an expression whose value is a class (`qclsEqCongr`); ✱20·53 for an extensional expression (`qcls20_53`); ✱22·68 with the common factor second (`qclsDistribRight`) |
 | `PM/Star25.lean` | 1222 | ✱25·01–✱25·03 (macros, with the notation 𝐕̇, Λ̇); all 70 numbered propositions ✱25·1–✱25·63, each proved as the analogous ✱24 proposition; chains of identities of relations (`≑`, joined by ✱21·22); ✱21·18 for an expression whose value is a relation (`qrelEqCongr`, `RelExpr.relOf`, `rel_expr`); ✱21·53 for an extensional expression (`qrel21_53`); ✱23·68 with the common factor second (`qrelDistribRight`) |
 | `PM/Orders.lean` | 166 | decidable order checker; order tests |
-| `PM/Trap.lean` | 96 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
-| `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 73, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
+| `PM/Trap.lean` | 94 | `trap_empty`, `trap_unit`, `trap_unit_compr`, `trap_unit_compr_of` |
+| `RedCheck.lean`, `StyleCheck.lean`, `ClauseSearch.lean` | 122, 76, 47 | rule use vs signatures; every PM proposition under every style and system; the p. 56 search |
 
 ✱13·3 (p. 180) concerns significance, and its proof turns on ✱10·221 (identifying the types of two
 variables), which is built into the Lean typing: x and a have one type, so ✱10·13 joins the lines.

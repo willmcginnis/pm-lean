@@ -29,7 +29,12 @@ derivations true (see [The ratchet](#the-ratchet)).
   `Eq.rec`, `HEq.rec` and `True.rec`,
   structure-like types with primitive projections, universe polymorphism with `max` and `imax`,
   definitional unfolding of definitions with the hints `abbrev` and `regular`, `let`, Nat literals and the
-  kernel's Nat operations on them, and String literals.
+  kernel's Nat operations on them, and String literals. No constant universe level above `Type` occurs
+  in the closure of D (the row "`Type 1` or higher" is empty there): since the style of predicativity
+  takes the family of variables as a parameter (`Style V`, `Sys V`, `OrderCheck V`;
+  [TYPES_DESIGN.md](TYPES_DESIGN.md), decision 13), no structure of the proof systems lives in
+  `Type 1`. The closure of (a) still has one, `PM.QModel`, the structures of the soundness proof,
+  reached from a semantic lemma and from no derivation theorem.
 - **They do not need** mutual or nested inductive types, quotients, any axiom, opaque constants, `partial`
   or `unsafe` declarations, `@[implemented_by]`, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and
   `Lean.trustCompiler`.
@@ -205,14 +210,14 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | Structure-like types (eta for structures applies) | 46 | 45 | 6 | 2 | 45 | · | 48 | static; structure eta itself: n/d |
 | Primitive projections (`Expr.proj`) | 148 | 141 | 60 | 35 | 87 | · | 165 | static |
 | Universe-polymorphic declarations | 393 | 372 | 185 | 59 | 391 | · | 427 | static |
-| … `Prop` (`Sort 0`) | 247 | 261 | 168 | 141 | 219 | 3 | 298 | static |
-| … `Type` (`Sort 1`) | 1563 | 1530 | 461 | 201 | 16 | 71 | 739 | static |
-| … `Type 1` or higher | 3 | 3 | 4 | · | · | · | 4 | static |
+| … `Prop` (`Sort 0`) | 246 | 261 | 168 | 140 | 219 | 3 | 297 | static |
+| … `Type` (`Sort 1`) | 1580 | 1545 | 496 | 212 | 16 | 66 | 752 | static |
+| … `Type 1` or higher | · | 1 | 1 | · | · | · | 1 | static |
 | … `Sort u` | 392 | 371 | 185 | 59 | 390 | · | 426 | static |
 | … `imax` | 3 | 2 | · | · | 6 | · | 5 | static |
 | Definitional proof irrelevance | n/d | n/d | n/d | n/d | n/d | n/d | n/d | n/d |
 | Eta for functions; unit-like types | n/d | n/d | n/d | n/d | n/d | n/d | n/d | n/d |
-| Delta: checks that unfold a definition | 1481 | 1433 | 222 | 236 | 273 | 286 | 1032 | dynamic |
+| Delta: checks that unfold a definition | 1480 | 1433 | 222 | 235 | 273 | 286 | 1031 | dynamic |
 | … a theorem unfolded | · | · | · | · | · | · | · | dynamic |
 | Opaque constants | · | · | · | · | 4 | · | · | static |
 | … unfolded | · | · | · | · | · | · | · | dynamic |
@@ -233,8 +238,8 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | `Lean.ofReduceBool`, `Lean.ofReduceNat`, `Lean.trustCompiler` | · | · | · | · | · | · | · | static |
 | Quot primitives (in the closure) | · | · | · | · | 4 | · | 4 | static |
 | Axioms (in the closure; who uses which: the last table) | · | · | · | · | 3 | · | 2 | static |
-| `Eq` | 252 | 235 | 293 | 141 | 203 | 279 | 580 | static |
-| `HEq` | 84 | 77 | 62 | 40 | 37 | · | 77 | static |
+| `Eq` | 252 | 235 | 292 | 141 | 203 | 279 | 580 | static |
+| `HEq` | 84 | 77 | 70 | 40 | 37 | · | 77 | static |
 
 ### Static: the declarations with each feature
 
@@ -266,9 +271,9 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | uses one at a motive sort other than `Prop` | · | 4 | 4 | 8 | 8 | 8 | · | 8 |
 | **Universes** | | | | | | | | |
 | universe-polymorphic declarations | 10 | 185 | 59 | 391 | 372 | 393 | · | 427 |
-| mentions `Prop` (`Sort 0`) | 88 | 168 | 141 | 219 | 261 | 247 | 3 | 298 |
-| mentions `Type` (`Sort 1`) | 1324 | 461 | 201 | 16 | 1530 | 1563 | 71 | 739 |
-| mentions `Type 1` or higher, a constant level | · | 4 | · | · | 3 | 3 | · | 4 |
+| mentions `Prop` (`Sort 0`) | 88 | 168 | 140 | 219 | 261 | 246 | 3 | 297 |
+| mentions `Type` (`Sort 1`) | 1324 | 496 | 212 | 16 | 1545 | 1580 | 66 | 752 |
+| mentions `Type 1` or higher, a constant level | · | 1 | · | · | 1 | · | · | 1 |
 | mentions `Sort u`, a level with a parameter | 10 | 185 | 59 | 390 | 371 | 392 | · | 426 |
 | a universe parameter anywhere | 10 | 185 | 59 | 391 | 372 | 393 | · | 427 |
 | `max` in a level | · | 28 | 8 | 34 | 43 | 42 | · | 47 |
@@ -290,7 +295,7 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | **Literals and kernel computation** | | | | | | | | |
 | Nat literals | 112 | 139 | 110 | 132 | 238 | 257 | 51 | 264 |
 | String literals | 198 | 4 | 27 | 5 | 199 | 207 | 209 | 269 |
-| names `Nat` | 109 | 265 | 202 | 295 | 395 | 429 | 51 | 493 |
+| names `Nat` | 109 | 265 | 201 | 295 | 395 | 428 | 51 | 492 |
 | names `Nat.zero` | 1 | · | · | 41 | 39 | 39 | · | 41 |
 | names `Nat.succ` | 3 | · | 5 | 110 | 89 | 89 | · | 115 |
 | names `String` | 9 | 128 | 98 | 27 | 45 | 100 | · | 123 |
@@ -328,8 +333,8 @@ Declarations with each feature (static rows), or re-checks that show it (dynamic
 | names `Quot.sound` | · | · | · | 1 | · | · | · | 1 |
 | names `Classical.choice` | · | · | · | 2 | · | · | · | · |
 | **Equality** | | | | | | | | |
-| names `Eq` | 67 | 293 | 141 | 203 | 235 | 252 | 279 | 580 |
-| names `HEq` | 40 | 62 | 40 | 37 | 77 | 84 | · | 77 |
+| names `Eq` | 67 | 292 | 141 | 203 | 235 | 252 | 279 | 580 |
+| names `HEq` | 40 | 70 | 40 | 37 | 77 | 84 | · | 77 |
 | **Other** | | | | | | | | |
 | named `…._unsafe_rec` | 7 | 22 | 14 | · | 7 | · | · | · |
 | a free variable or metavariable (never expected) | · | · | · | · | · | · | · | · |
@@ -358,9 +363,8 @@ The first declarations with the feature, and a shortest chain of uses from a der
 | recursor of a `Prop` type into every sort (large elimination) | 9 | `And.rec`, `Eq.rec`, `False.rec` | `PM.F9.exch_imp_prenex` → `And` → `And.rec` |
 | uses one at a motive sort other than `Prop` | 8 | `And.casesOn`, `Eq.casesOn`, `Eq.mp` | `PM.F9.exch_imp_prenex` → `And.casesOn` |
 | universe-polymorphic declarations | 393 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
-| mentions `Prop` (`Sort 0`) | 247 | `And`, `And.casesOn`, `And.intro` | `PM.F9.exch_imp_prenex` → `And` |
-| mentions `Type` (`Sort 1`) | 1563 | `BitVec`, `Bool`, `ByteArray` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `UInt32` → `UInt32.ofBitVec` → `BitVec` |
-| mentions `Type 1` or higher, a constant level | 3 | `PM.OrderCheck`, `PM.Style`, `PM.Sys` | `PM.trap_unit_compr_of` → `PM.RealReading.check` → `PM.OrderCheck` |
+| mentions `Prop` (`Sort 0`) | 246 | `And`, `And.casesOn`, `And.intro` | `PM.F9.exch_imp_prenex` → `And` |
+| mentions `Type` (`Sort 1`) | 1580 | `BitVec`, `Bool`, `ByteArray` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `UInt32` → `UInt32.ofBitVec` → `BitVec` |
 | mentions `Sort u`, a level with a parameter | 392 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
 | a universe parameter anywhere | 393 | `Add`, `Add.add`, `Add.mk` | `PM.t4_72` → `instAddNat` → `Add` |
 | `max` in a level | 42 | `DecidableEq`, `DecidableRel`, `HAdd` | `PM.F9.PrenexSwitch.t1_3` → `instBEqOfDecidableEq` → `DecidableEq` |
@@ -374,7 +378,7 @@ The first declarations with the feature, and a shortest chain of uses from a der
 | uses `let` | 386 | `List.eraseDupsBy.loop.eq_def`, `Nat.ble_eq_true_of_le`, `Nat.le_trans` | `PM.complete` → `PM.mem_eraseDups'` → `PM.mem_loop` → `PM.mem_loop._f` → `List.eraseDupsBy.loop.eq_def` |
 | Nat literals | 257 | `Array.empty`, `BitVec.casesOn`, `BitVec.decEq` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
 | String literals | 207 | `PM.F9.Rep.distrib`, `PM.F9.Rep.exIn`, `PM.F9.Rep.exNegNeg` | `PM.F9.Rep.distrib` |
-| names `Nat` | 429 | `Array.empty`, `Array.emptyWithCapacity`, `BitVec` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
+| names `Nat` | 428 | `Array.empty`, `Array.emptyWithCapacity`, `BitVec` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `List.toByteArray` → `ByteArray.empty` → `ByteArray.emptyWithCapacity` → `Array.empty` |
 | names `Nat.zero` | 39 | `Nat.add_pos_right`, `Nat.brecOn.go`, `Nat.casesOn` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
 | names `Nat.succ` | 89 | `Nat.add_pos_right`, `Nat.ble_succ_eq_true`, `Nat.brecOn.go` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `Nat.add_pos_right` |
 | names `String` | 100 | `PM.F.below`, `PM.F.brecOn.go`, `PM.F.casesOn` | `PM.F9.f10_01` → `PM.F.toE` → `PM.F.brecOn` → `PM.F.below` |
@@ -401,11 +405,11 @@ Declarations re-checked, and among them those whose check unfolded a constant of
 | re-checked | 1752 | 519 | 377 | 591 | 2326 | 2366 | 313 | 1778 |
 | not re-checked (inductive types, constructors, recursors, partial or unsafe) | 62 | 221 | 90 | 206 | 365 | 361 | 0 | 379 |
 | rejected | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
-| unfolded something | 1192 | 222 | 236 | 273 | 1433 | 1481 | 286 | 1032 |
-| unfoldings in all | 342289 | 5215 | 20937 | 2998 | 346961 | 355966 | 425609 | 489631 |
-| unfolded a constant of the repository | 1178 (431) | 191 (167) | 160 (238) | · | 1244 (453) | 1248 (463) | 286 (311) | 759 (462) |
+| unfolded something | 1192 | 222 | 235 | 273 | 1433 | 1480 | 286 | 1031 |
+| unfoldings in all | 342289 | 5215 | 20934 | 2998 | 346961 | 355967 | 425608 | 489631 |
+| unfolded a constant of the repository | 1178 (431) | 191 (167) | 159 (238) | · | 1244 (453) | 1247 (463) | 286 (311) | 758 (462) |
 | unfolded a constant of Lean core | 524 (165) | 155 (36) | 173 (180) | 273 (172) | 717 (214) | 762 (224) | 241 (145) | 669 (222) |
-| unfolded a definition with hint `abbrev` | 428 (159) | 201 (147) | 204 (217) | 192 (88) | 627 (210) | 670 (216) | 266 (111) | 728 (237) |
+| unfolded a definition with hint `abbrev` | 428 (159) | 201 (147) | 203 (217) | 192 (88) | 627 (210) | 669 (216) | 266 (111) | 727 (237) |
 | unfolded a definition with hint `regular` | 1158 (418) | 163 (40) | 204 (180) | 209 (73) | 1323 (437) | 1362 (449) | 281 (329) | 914 (425) |
 | unfolded a definition with hint `opaque` | · | · | · | · | · | · | · | · |
 | unfolded a theorem | · | · | · | · | · | · | · | · |

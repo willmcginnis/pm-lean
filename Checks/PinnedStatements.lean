@@ -70,7 +70,7 @@ theorem check_pinned_trap_unit_compr {S : Sys U} [Comprehension S]
 /-- The matrix test is conjoined with the order check, not put in its place (after a review: φ!x
     with φ of order 2 is a matrix but not of order 1); so the matrix style admits no more than the
     lowest-order style. -/
-theorem check_pinned_matrix_adm_def (L : OrderCheck) {V : Ty → Type} {a : Ty} (k : Nat) (ψ : V a → QF V) :
+theorem check_pinned_matrix_adm_def {V : Ty → Type} (L : OrderCheck V) {a : Ty} (k : Nat) (ψ : V a → QF V) :
     (Style.matrix L).adm1 k ψ = ∀ x, L (ψ x) (Ty.fn1 a k).ord ∧ (k = 0 → IsMatrix (ψ x)) :=
   rfl
 theorem check_pinned_matrix_to_lowest {V : Ty → Type} {c r : Bool} (R : RealReading) {p : QF V}

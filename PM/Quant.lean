@@ -105,10 +105,10 @@ structure Style (V : Ty → Type) where
   adm1 : {a : Ty} → Nat → (V a → QF V) → Prop
   adm2 : {a b : Ty} → Nat → (V a → V b → QF V) → Prop
 
-/-- An order check: `L p n` when p may be a value of a function of order n. Two readings of how a
-    real function variable counts (p. 55, p. 54) are the modules PM/Pred/RealOwnOrder.lean and
-    PM/Pred/RealAsArgument.lean. -/
-abbrev OrderCheck : Type 1 := {V : Ty → Type} → QF V → Nat → Prop
+/-- An order check over the variables `V`: `L p n` when p may be a value of a function of order n.
+    Two readings of how a real function variable counts (p. 55, p. 54) are the modules
+    PM/Pred/RealOwnOrder.lean and PM/Pred/RealAsArgument.lean, each defined for every `V`. -/
+abbrev OrderCheck (V : Ty → Type) : Type := QF V → Nat → Prop
 
 /-- A proof system over the variables `V`: which rules beyond ✱1–✱11 it has, and its style of
     predicativity. The rules are opt-in capabilities, each its own module with its PM warrant (PM/Rules/):

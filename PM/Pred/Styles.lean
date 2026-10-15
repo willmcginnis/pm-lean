@@ -48,7 +48,7 @@ inductive RealReading where
   deriving DecidableEq
 
 /-- The order check of a reading. -/
-@[reducible] def RealReading.check : RealReading → OrderCheck
+@[reducible] def RealReading.check {V : Ty → Type} : RealReading → OrderCheck V
   | .ownOrder => Lvl
   | .asArgument => LvlArg
 

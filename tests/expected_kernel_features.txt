@@ -141,5 +141,4 @@ proofClosure rec.largeElimFromProp
 proofClosure rec.largeElimFromProp.used
 proofClosure sort.Prop
 proofClosure sort.Type
-proofClosure sort.TypeN
 proofClosure sort.poly

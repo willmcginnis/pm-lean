@@ -91,7 +91,7 @@ with or without apparent variables, and ✱1's primitive propositions hold for a
   `PM/Pred/RealAsArgument.lean`, also decided at `U`). `PM/Orders.lean` decides the condition for formulas
   over the one-element variable family `U` only, and checks 32 order facts taken from the Introduction
   (pp. 54–56) and ✱12 (pp. 170–171). See [SEMANTICS.md](SEMANTICS.md) for what this does not cover.
-- *Rules as opt-in modules.* The proof system is `QThm S`, for a system `S : Sys` that says which rules
+- *Rules as opt-in modules.* The proof system is `QThm S`, for a system `S : Sys V` that says which rules
   beyond ✱1–✱11 it has and its style of predicativity. Each rule is its own module with its PM warrant in
   the header:
   - `PM/Rules/Reducibility.lean`: ✱12·1 `red1` and ✱12·11 `red2` (p. 174), for φ of any order and f
