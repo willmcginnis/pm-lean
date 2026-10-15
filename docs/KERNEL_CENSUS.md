@@ -44,17 +44,17 @@ used at, which only `census.py --check` compares (see [The ratchet](#the-ratchet
   declarations of the closure of D use a constant at a universe level of 2 or more (`Sort 2` is
   `Type 1`). All 48 were there before `Style` took the family as a parameter, which removed four:
   `PM.Style`, `PM.Sys` and `PM.OrderCheck` (sorts `Type 1`) and `PM.Style.of` (a `match` at level 2,
-  which the row did not see). 24 are Lean core's classes with an argument
-  `outParam (Type w)` (`HAdd`, `HSub`, `HMul`, `HDiv`, `HMod`, `HPow`, `HAppend`, `Membership`, their
-  constructors and projections), which is `outParam.{w+2}`. 13 compare types for equality: Lean's
+  which the row did not see). 24 are Lean core's classes with an argument `outParam (Type w)` (`HAdd`,
+  `HSub`, `HMul`, `HDiv`, `HMod`, `HPow`, `HAppend`, `Membership`, their constructors and
+  projections), which is `outParam.{w+2}`. 13 compare types for equality: Lean's
   no-confusion constructions and core's decidable equality of `List` and `Prod`, among them
   `PM.F9.PF.noConfusion` and `PM.F9.PF.all.noConfusion`, which compare the parameter `V : Ty → Type`
   (`Eq.{2} V V'`). 10 are auxiliaries Lean generates with a recursor or `cond` whose motive or result is
   a type: the `.below` of structural recursion (`PM.Ty.below`, `PM.F.below`, `PM.QF.below`,
   `PM.F9.EF.below`, `PM.F9.PE.below`, `PM.F9.PF.below`, `Nat.below`, `List.below`), an equation lemma
-  (`List.eraseDupsBy.loop.eq_def`) and `PM.F9.PF.ctorElimType`. One is `PM.Vbad`, the degenerate family of the trap
-  `PM.trap_empty` (PM/Trap.lean), defined by cases into `Type` (`PM.Ty.casesOn.{2}`,
-  `Nat.casesOn.{2}`). So a checker of the derivations still needs the universe `Type 1`, through these
+  (`List.eraseDupsBy.loop.eq_def`) and `PM.F9.PF.ctorElimType`. One is `PM.Vbad`, the degenerate
+  family of the trap `PM.trap_empty` (PM/Trap.lean), defined by cases into `Type`
+  (`PM.Ty.casesOn.{2}`, `Nat.casesOn.{2}`). So a checker of the derivations still needs the universe `Type 1`, through these
   universe arguments.
 - **They do not need** mutual or nested inductive types, quotients, any axiom, opaque constants, `partial`
   or `unsafe` declarations, `@[implemented_by]`, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and
