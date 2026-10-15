@@ -24,7 +24,7 @@ times by chapter, the audit's cost, and `--quick` by both methods) were measured
 Lean code and scripts of commit `608ba9d`, whose audit decides by the kernel's own reduction, visits
 every node of the normal forms, and remembers a subterm as audited only once its classification has
 succeeded. Nothing else ran on the machine (8 cores, 24 GiB): the load average was 1.2 before the full
-run; the 25 at its end was the run's own, its recompilations running eight Lean processes at once. The
+run; the load of about 27 at its end was the run's own, its recompilations running eight Lean processes at once. The
 times are still those of one run, not bounds. Figures kept from earlier runs are labelled with the code
 they were measured on. The earlier full run, which compared by `direct`, is that of the Lean code and
 scripts of `07f82e0`.
@@ -566,8 +566,10 @@ same run measured 899 s, of which 531 s in the meta-program and 276 s in the com
 
 The earlier full run compared by `direct` ([How a mutant is compared](#how-a-mutant-is-compared)). With
 ✱1–✱25 it measured 9142 s, 2 h 32 min, on 2026-10-14, on the Lean code and scripts of commit `07f82e0`.
-The machine was shared with other jobs for part of the run, so the figures are those of one run, not a
-bound:
+Other work of this project ran on the machine during part of the run (a rebase with the standing checks,
+then the verification of a fresh clone, then the Python tests). The run's own Lean process reached a
+maximum resident set of 23,093,504 kB, about 22 GiB, on a machine with 24 GiB, with 247,331,127 major page
+faults. The load average was not recorded. The figures are those of one run, not a bound:
 
 - the meta-program, 8763 s: Part 1 5 s, the ✱1–✱5 statements 64 s, the statements from ✱9 on 8691 s
   (99% of the meta-program);
