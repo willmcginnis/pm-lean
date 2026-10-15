@@ -19,10 +19,17 @@ Steps, each of which must pass for exit 0:
              no typechecker error
   scan       of the export (scan_export): the only axioms declared are Lean core's seven; no declaration
              names sorryAx, Lean.ofReduceBool or Lean.ofReduceNat; only Lean.reduceBool and
-             Lean.reduceNat name Lean.trustCompiler
-  controls   seeded faults, one for each rule (CONTROLS): each small module is compiled, the closure of
-             its one theorem exported, and each checker named for it must reject it, the scan for the
-             reason it plants
+             Lean.reduceNat name Lean.trustCompiler. Names are compared as the export structures them,
+             component by component (N, read_names), never as printed
+  counts     con-leche's count must be the export's declaration records; nanoda's, its constants with
+             an inductive declaration's types, constructors and recursors counted separately, less the
+             axioms nanoda skips (reconcile)
+  attributes no declaration of a module under PM or Checks has an implementation attribute, which the
+             export leaves out (scripts/implementation_attributes.lean, on the built environment)
+  controls   seeded faults, one or more for each rule (CONTROLS): each small module is compiled, the
+             closure of its one theorem exported, and each checker named for it must reject it, the
+             scan for the reason it plants; and one module for each implementation attribute
+             (ATTRIBUTE_CONTROLS), which the attribute check must find
 
 Exit 0 if all pass, 1 if a check fails, 2 if a tool cannot be fetched or built. Working files (clones,
 builds, logs, summary.json) go to .lake/external-checkers/ (--work); the export is deleted after a run
@@ -58,12 +65,31 @@ TOOLS = {
                    "target/release/nanoda_bin"),
 }
 
+
+def N(*parts):
+    """A Lean name as the scan compares names: the tuple of its components, each ("str", text) or
+    ("num", n), never a dotted string. So «Lean.reduceBool», one component, is not Lean.reduceBool, two,
+    and the string component "1" is not the numeric component 1."""
+    return tuple(("num", p) if isinstance(p, int) else ("str", p) for p in parts)
+
+
+IDENT_RE = re.compile(r"[^\W\d][\w'!?]*")
+
+
+def show(name):
+    """A name as Lean prints it, a string component that is not a plain identifier in «»: for messages
+    only; no rule compares printed names."""
+    return ".".join(str(v) if k == "num" else v if IDENT_RE.fullmatch(v) else f"«{v}»" for k, v in name)
+
+
 # Lean core declares these seven axioms in every export, used or not.
-CORE_AXIOMS = {"propext", "Quot.sound", "Classical.choice", "sorryAx", "Lean.trustCompiler",
-               "Lean.ofReduceBool", "Lean.ofReduceNat"}
-NEVER_NAMED = {"sorryAx", "Lean.ofReduceBool", "Lean.ofReduceNat"}
+STANDARD_AXIOMS = {N("propext"), N("Quot", "sound"), N("Classical", "choice")}
+TRUST_COMPILER = N("Lean", "trustCompiler")
+NEVER_NAMED = {N("sorryAx"), N("Lean", "ofReduceBool"), N("Lean", "ofReduceNat")}
+CORE_AXIOMS = STANDARD_AXIOMS | NEVER_NAMED | {TRUST_COMPILER}
+WATCHED = NEVER_NAMED | {TRUST_COMPILER}
 # The bodies of these two core opaque constants name Lean.trustCompiler; an opaque body never unfolds.
-TRUST_COMPILER_USERS = {"Lean.reduceBool", "Lean.reduceNat"}
+TRUST_COMPILER_USERS = {N("Lean", "reduceBool"), N("Lean", "reduceNat")}
 
 # nanoda: the three standard axioms and Lean.trustCompiler permitted, unpermitted axioms skipped rather
 # than a hard error. With the hard error, nanoda stops on the presence of sorryAx, which Lean core
@@ -71,6 +97,9 @@ TRUST_COMPILER_USERS = {"Lean.reduceBool", "Lean.reduceNat"}
 # Lean.reduceBool and Lean.reduceNat, which name it (upstream issue ammkrn/nanoda_lib#53). A skipped
 # axiom is an error only where a declaration uses it; the scan checks that nothing but those two bodies
 # names Lean.trustCompiler.
+# nanoda takes the permitted axioms as printed names: it admitted an axiom «Classical.choice», one
+# component (MEASURED); the scan, which compares structured names, rejects one.
+NANODA_PERMITTED = STANDARD_AXIOMS | {TRUST_COMPILER}
 NANODA_CONFIG = {
     "permitted_axioms": ["propext", "Classical.choice", "Quot.sound", "Lean.trustCompiler"],
     "unpermitted_axiom_hard_error": False,
@@ -101,7 +130,26 @@ CONTROLS = [
     ("NegTrustCompiler", "set_option linter.deprecated false\n"
      "theorem bad_trust_compiler : True := Lean.trustCompiler\n", "bad_trust_compiler",
      {"scan"}, "Lean.trustCompiler"),
+    # Names quoted into one component that print like core's of two: a scan comparing printed names
+    # passed both, and nanoda admits the first (it permits axioms by printed name).
+    ("NegQuotedAxiom", "axiom «Classical.choice» : False\n"
+     "theorem bad_quoted_axiom : False := «Classical.choice»\n", "bad_quoted_axiom",
+     {"con-leche", "scan"}, "axiom"),
+    ("NegQuotedCoreUser", "set_option linter.deprecated false\n"
+     "opaque «Lean.reduceBool» : True := Lean.trustCompiler\n"
+     "theorem bad_quoted_core_user : True := «Lean.reduceBool»\n", "bad_quoted_core_user",
+     {"scan"}, "Lean.trustCompiler"),
 ]
+
+# Implementation attributes, which a logical export leaves out: (module, its source, the declaration
+# scripts/implementation_attributes.lean must find with one). Each is a valid logical definition; the
+# check is that the repository's declarations carry no such attribute.
+ATTRIBUTE_CONTROLS = [
+    ("NegImplementedBy", "def runtime : Bool := false\n@[implemented_by runtime] def logical : Bool := true\n",
+     "logical"),
+    ("NegExtern", "@[extern \"pm_external\"] def external : Bool := true\n", "external"),
+]
+REPO_PREFIXES = ["PM", "Checks"]
 
 NICE = 10
 STEPS = []   # one record per step, written to summary.json
@@ -223,11 +271,26 @@ def nanoda(binary, export, jobs, label, logs):
             "declarations": int(m.group(1)) if m else None, "message": msg[:300]}
 
 
-NAME_RE = re.compile(r'\{"in":(\d+),"(str|num)":\{(?:"i":(\d+),"pre":(\d+)|"pre":(\d+),"str":"((?:[^"\\]|\\.)*)")')
 CONST_RE = re.compile(r'"const":\{"name":(\d+)')
 CHILD_RE = re.compile(r'"(?:body|type|fn|arg|value|struct|expr|rhs)":(\d+)')
 EXPR_ID_RE = re.compile(r'"ie":(\d+)')
 DECL_KINDS = ('{"axiom"', '{"def"', '{"thm"', '{"opaque"', '{"quot"', '{"inductive"')
+
+
+def read_names(path):
+    """The export's names, by index, each as the tuple of its components (N above). Each name record
+    is parsed as JSON, so a string component is taken whole and unescaped, whatever it contains;
+    lean4export writes a name's prefix before the name. Index 0 is the anonymous name."""
+    names = {0: ()}
+    with open(path) as f:
+        for line in f:
+            if line.startswith('{"in"'):
+                d = json.loads(line)
+                if "str" in d:
+                    names[d["in"]] = names[d["str"]["pre"]] + (("str", d["str"]["str"]),)
+                else:
+                    names[d["in"]] = names[d["num"]["pre"]] + (("num", d["num"]["i"]),)
+    return names
 
 
 def scan_export(path):
@@ -235,38 +298,34 @@ def scan_export(path):
     first use). Returns (passes, report): the axioms declared, and the declarations whose type, value
     or recursor rules name each of Lean core's four non-standard axioms, directly or through an
     expression. Because every declaration of the export is scanned, a declaration that reaches one of
-    them through another constant is caught at that constant."""
-    names = {}
-    with open(path) as f:
-        for line in f:
-            if line.startswith('{"in"'):
-                m = NAME_RE.match(line)
-                if m:
-                    i = int(m.group(1))
-                    names[i] = (int(m.group(4)), m.group(3)) if m.group(2) == "num" \
-                        else (int(m.group(5)), m.group(6))
-
-    def full(i):
-        parts = []
-        while i and i in names:
-            i, s = names[i][0], names[i][1]
-            parts.append(s)
-        return ".".join(reversed(parts))
-
-    watched = {i: full(i) for i in names if full(i) in CORE_AXIOMS - {"propext", "Quot.sound",
-                                                                      "Classical.choice"}}
-    tainted, users, axioms, decls = {}, {}, [], 0
+    them through another constant is caught at that constant. Every rule compares structured names
+    (read_names), never printed ones. The report also gives the counts the checkers' are reconciled
+    with (reconcile): declaration records, and constants with an inductive declaration's types,
+    constructors and recursors counted separately, both also by first name component."""
+    names = read_names(path)
+    watched = {i: n for i, n in names.items() if n in WATCHED}
+    tainted, users, axioms, records, expanded = {}, {}, [], 0, 0
+    by_namespace = {}
     with open(path) as f:
         for line in f:
             if line.startswith(('{"in"', '{"il"', '{"meta"')):
                 continue
             is_decl = line.startswith(DECL_KINDS)
             if is_decl:
-                decls += 1
+                records += 1
                 d = json.loads(line)
                 kind, body = next(iter(d.items()))
-                decl_names = [full(t["name"]) for t in body["types"]] if kind == "inductive" \
-                    else [full(body["name"])]
+                if kind == "inductive":
+                    decl_names = [names[t["name"]] for t in body["types"]]
+                    constants = decl_names + [names[c["name"]] for c in body["ctors"] + body["recs"]]
+                else:
+                    decl_names = constants = [names[body["name"]]]
+                expanded += len(constants)
+                # a record under its (first) type's first component, a constant under its own: a
+                # private constructor of a public structure is under _private
+                by_namespace.setdefault(show(decl_names[0][:1]), [0, 0])[0] += 1
+                for n in constants:
+                    by_namespace.setdefault(show(n[:1]), [0, 0])[1] += 1
                 if kind == "axiom":
                     axioms.append(decl_names[0])
             hit = {watched[int(c)] for c in CONST_RE.findall(line) if int(c) in watched}
@@ -281,20 +340,46 @@ def scan_export(path):
                 m = EXPR_ID_RE.search(line)
                 if m:
                     tainted[int(m.group(1))] = hit
+    def listed(ns):
+        return sorted(show(n) for n in ns)
+
     reasons = []
-    stray = sorted(set(axioms) - CORE_AXIOMS)
+    stray = set(axioms) - CORE_AXIOMS
     if stray:
-        reasons.append(f"axiom: declared, not one of Lean core's seven: {stray}")
+        reasons.append(f"axiom: declared, not one of Lean core's seven: {listed(stray)}")
     for w in sorted(NEVER_NAMED):
         if users.get(w):
-            reasons.append(f"{w}: named by {sorted(users[w])[:10]}")
-    extra = users.get("Lean.trustCompiler", set()) - TRUST_COMPILER_USERS
+            reasons.append(f"{show(w)}: named by {listed(users[w])[:10]}")
+    extra = users.get(TRUST_COMPILER, set()) - TRUST_COMPILER_USERS
     if extra:
-        reasons.append(f"Lean.trustCompiler: named by {sorted(extra)[:10]}, not only by "
-                       f"{sorted(TRUST_COMPILER_USERS)}")
-    report = {"passes": not reasons, "declarations": decls, "axioms": sorted(axioms),
-              "users": {w: sorted(u) for w, u in sorted(users.items())}, "reasons": reasons}
+        reasons.append(f"{show(TRUST_COMPILER)}: named by {listed(extra)[:10]}, not only by "
+                       f"{listed(TRUST_COMPILER_USERS)}")
+    nanoda_skipped = [a for a in axioms if a not in NANODA_PERMITTED]
+    report = {"passes": not reasons, "declarations": records, "expanded": expanded,
+              "nanoda_skipped": listed(nanoda_skipped), "nanoda_expected": expanded - len(nanoda_skipped),
+              "axioms": listed(axioms),
+              "users": {show(w): listed(users.get(w, ())) for w in sorted(WATCHED)},
+              "namespaces": {k: {"records": v[0], "constants": v[1]}
+                             for k, v in sorted(by_namespace.items(), key=lambda kv: -kv[1][1])},
+              "reasons": reasons}
     return not reasons, report
+
+
+def reconcile(cl, nd, rep):
+    """The checkers' counts against the export's: con-leche counts one per declaration record; nanoda
+    counts an inductive declaration's types, constructors and recursors separately and leaves out the
+    axioms it skips (those it does not permit). Returns the disagreements; a checker that gave no count
+    disagrees."""
+    out = []
+    if cl["declarations"] != rep["declarations"]:
+        out.append(f"con-leche count: {cl['declarations']} declarations accepted, the export has "
+                   f"{rep['declarations']} declaration records")
+    if nd["declarations"] != rep["nanoda_expected"]:
+        out.append(f"nanoda count: {nd['declarations']} declarations checked, expected "
+                   f"{rep['nanoda_expected']} (the export's {rep['expanded']} constants, an inductive "
+                   f"declaration's types, constructors and recursors counted separately, less the "
+                   f"{len(rep['nanoda_skipped'])} axioms it skips: {', '.join(rep['nanoda_skipped'])})")
+    return out
 
 
 def timed_scan(label, export, logs):
@@ -306,6 +391,42 @@ def timed_scan(label, export, logs):
         setup_failure(f"the scan did not finish: {err[-500:]}")
     rep = json.loads(report.read_text())
     return rc == 0 and rep["passes"], rep
+
+
+def attribute_scan(label, prefixes, modules, env, logs):
+    """scripts/implementation_attributes.lean on MODULES: passes if no declaration of a module under
+    one of PREFIXES has an implementation attribute. Returns (passes, its report)."""
+    cmd = ["lean", "--run", ROOT / "scripts" / "implementation_attributes.lean"] + prefixes + ["--"] + modules
+    rc, out, err = run(label, (["lake", "env"] if env is None else []) + cmd, env=env, logs=logs)
+    lines = [x for x in out.splitlines() if x.startswith("{")]
+    if not lines:
+        return False, {"rc": rc, "error": " ".join((err or out).split())[:500]}
+    rep = json.loads(lines[-1])
+    rep["rc"] = rc
+    return rc == 0 and not rep["attributed"], rep
+
+
+def run_attribute_controls(work, logs):
+    """Each module of ATTRIBUTE_CONTROLS must be found to carry the attribute it plants."""
+    cdir = work / "controls"
+    cdir.mkdir(parents=True, exist_ok=True)
+    env = dict(os.environ, LEAN_PATH=str(cdir))
+    results, ok = [], True
+    for module, source, decl in ATTRIBUTE_CONTROLS:
+        log(f"control {module}: {source.strip().splitlines()[-1]}")
+        (cdir / f"{module}.lean").write_text(source)
+        rc, _, err = run(f"{module}-compile", ["lean", "-o", cdir / f"{module}.olean", cdir / f"{module}.lean"],
+                         logs=logs)
+        if rc:
+            setup_failure(f"control {module} does not compile: {err[:500]}")
+        passes, rep = attribute_scan(f"{module}-attributes", [module], [module], env, logs)
+        good = not passes and decl in rep.get("attributed", [])
+        log(f"  found with an implementation attribute: {rep.get('attributed', rep.get('error'))}")
+        log(f"  control {module}: {'rejected as required' if good else 'FAILED'}")
+        ok = ok and good
+        results.append({"module": module, "source": source, "declaration": decl, "report": rep,
+                        "passes": good})
+    return ok, results
 
 
 def run_controls(bins, work, jobs, logs):
@@ -410,18 +531,42 @@ def main():
     log("scan of the export")
     scan_ok, rep = timed_scan("scan", export, logs)
     summary["scan"] = rep
-    log(f"  {rep['declarations']:,} declarations; axioms declared: {', '.join(rep['axioms'])}")
-    for w in sorted(CORE_AXIOMS - {"propext", "Quot.sound", "Classical.choice"}):
-        log(f"  {w}: named by {rep['users'].get(w, [])}")
+    log(f"  {rep['declarations']:,} declaration records ({rep['expanded']:,} constants with an inductive "
+        f"declaration's types, constructors and recursors counted separately); axioms declared: "
+        f"{', '.join(rep['axioms'])}")
+    for w, us in rep["users"].items():
+        log(f"  {w}: named by {us}")
     for r in rep["reasons"]:
         log(f"  FAILS: {r}")
     if not scan_ok:
         failed.append("scan")
 
+    counts = reconcile(cl, nd, rep)
+    summary["counts"] = {"con-leche": cl["declarations"], "records": rep["declarations"],
+                         "nanoda": nd["declarations"], "nanoda_expected": rep["nanoda_expected"],
+                         "disagreements": counts}
+    log(f"counts: con-leche {cl['declarations']} = {rep['declarations']} records; nanoda "
+        f"{nd['declarations']} = {rep['expanded']} constants - {len(rep['nanoda_skipped'])} skipped axioms "
+        f"= {rep['nanoda_expected']}")
+    for c in counts:
+        log(f"  FAILS: {c}")
+    if counts:
+        failed.append("counts")
+
+    log(f"implementation attributes of {', '.join(REPO_PREFIXES)} declarations")
+    attr_ok, attrs = attribute_scan("attributes", REPO_PREFIXES, TARGETS, None, logs)
+    summary["attributes"] = attrs
+    log(f"  {attrs.get('declarations')} declarations; with an implementation attribute: "
+        f"{attrs.get('attributed')}; unsafe or partial, so not exported: {attrs.get('excludedCount')}")
+    if not attr_ok:
+        failed.append("implementation attributes")
+
     log("negative controls")
     ctl_ok, ctl = run_controls(bins, work, args.jobs, logs)
+    actl_ok, actl = run_attribute_controls(work, logs)
+    ctl += actl
     summary["controls"] = ctl
-    if not ctl_ok:
+    if not (ctl_ok and actl_ok):
         failed.append("negative controls")
 
     summary.update(steps=STEPS, failed=failed, wall_s=round(time.monotonic() - t_start, 1),
@@ -434,7 +579,8 @@ def main():
     if not args.keep_export:
         export.unlink()
     log(f"external checkers: con-leche accepted {cl['declarations']} declarations, nanoda checked "
-        f"{nd['declarations']}, the scan passed, {len(ctl)} negative controls rejected")
+        f"{nd['declarations']}, both as the export's counts require, the scan passed, no implementation "
+        f"attribute, {len(ctl)} negative controls rejected")
 
 
 if __name__ == "__main__":

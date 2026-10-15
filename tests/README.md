@@ -60,10 +60,18 @@ runs beside con-leche and nanoda ([docs/VERIFICATION.md](../docs/VERIFICATION.md
 small hand-written exports, one seeded fault per rule (a stray axiom; `sorryAx` named in a value, a type,
 a recursor rule or under a numeric name; `Lean.ofReduceBool`, `Lean.ofReduceNat`; `Lean.trustCompiler`
 named outside the two core constants allowed) must each fail it, naming the declaration, and Lean core's
-seven axioms alone must pass. It also pins the tools' commits to those docs/VERIFICATION.md names, nanoda's
-configuration, a negative control for each rule, and where the step runs: in `run_all.sh`
-(behind `SKIP_EXTERNAL`) and in `scripts/release_check.sh`, which runs the standing checks without it and
-then the step once, failing on a nonzero exit.
+seven axioms alone must pass. Names are compared as structured names: a one-component «Lean.reduceBool»
+naming `Lean.trustCompiler` and an axiom «Classical.choice» must fail the scan, a definition
+«Lean.ofReduceBool» must not, numeric and string components must differ, a component written with JSON
+escapes must be read whole, and every rule's names must be tuples of components; a scan that flattened
+names into dotted strings fails three of these. With the tools, the build, the export and the scan
+replaced, `main()` is run on injected checker output: a count of either checker that disagrees with the
+export's, and a crash of either (a signal after its success line, no output, a panic), must each make it
+exit 1. It also pins the tools' commits to those docs/VERIFICATION.md names, nanoda's configuration and
+its permitted axioms, the negative controls (one or more for each rule, the two quoted lookalikes, one for
+each implementation attribute), and where the step runs: in `run_all.sh` (behind `SKIP_EXTERNAL`) and in
+`scripts/release_check.sh`, which runs the standing checks without it and then the step once, failing on a
+nonzero exit.
 
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
