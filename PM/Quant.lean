@@ -97,36 +97,37 @@ variable {V : Ty → Type}
 @[reducible] def fiff {τ : Ty} (φ ψ : V τ → QF V) : QF V := .all fun x => QF.iff (φ x) (ψ x)  -- ✱10·03
 end QF
 
-/-- A style of predicativity: what comprehension accepts. `adm1 k ψ` holds when the formula ψx (x of
-    type `a`) may be taken as the values of a function variable of type `fn1 a k`; `adm2 k ψ` likewise
-    for `fn2 a b k`. Each reading of PM's text is its own module under PM/Pred/ (docs/TYPES_DESIGN.md,
-    decisions 3 and 5). -/
-structure Style where
-  adm1 : {V : Ty → Type} → {a : Ty} → Nat → (V a → QF V) → Prop
-  adm2 : {V : Ty → Type} → {a b : Ty} → Nat → (V a → V b → QF V) → Prop
+/-- A style of predicativity over the variables `V`: what comprehension accepts. `adm1 k ψ` holds when
+    the formula ψx (x of type `a`) may be taken as the values of a function variable of type `fn1 a k`;
+    `adm2 k ψ` likewise for `fn2 a b k`. Each reading of PM's text is its own module under PM/Pred/,
+    defined for every `V` (docs/TYPES_DESIGN.md, decisions 3, 5 and 13). -/
+structure Style (V : Ty → Type) where
+  adm1 : {a : Ty} → Nat → (V a → QF V) → Prop
+  adm2 : {a b : Ty} → Nat → (V a → V b → QF V) → Prop
 
 /-- An order check: `L p n` when p may be a value of a function of order n. Two readings of how a
     real function variable counts (p. 55, p. 54) are the modules PM/Pred/RealOwnOrder.lean and
     PM/Pred/RealAsArgument.lean. -/
 abbrev OrderCheck : Type 1 := {V : Ty → Type} → QF V → Nat → Prop
 
-/-- A proof system: which rules beyond ✱1–✱11 it has, and its style of predicativity. The rules are
-    opt-in capabilities, each its own module with its PM warrant (PM/Rules/): `compr` is comprehension
-    (class `Comprehension S`), `red` the axiom of reducibility ✱12·1, ✱12·11 (class `Reducibility S`).
+/-- A proof system over the variables `V`: which rules beyond ✱1–✱11 it has, and its style of
+    predicativity. The rules are opt-in capabilities, each its own module with its PM warrant (PM/Rules/):
+    `compr` is comprehension (class `Comprehension S`), `red` the axiom of reducibility ✱12·1, ✱12·11
+    (class `Reducibility S`).
     Lean enforces that a rule is enabled: its constructors need a proof of `S.red = true` (resp.
     `S.compr = true`). By convention a theorem that uses a rule gets that proof from the class in its
     signature, which shows the dependency; RedCheck.lean checks the convention. A theorem that uses no
     rule holds in every system. -/
-structure Sys where
+structure Sys (V : Ty → Type) where
   compr : Bool
   red : Bool
-  style : Style
+  style : Style V
 
 open QF in
 /-- Asserted propositions of ✱10's alternative method in the system `S`: ✱1·1–✱1·6, ✱10·1, ✱10·11,
     ✱10·12 always; comprehension at function types if `S.compr`; the axiom of reducibility (✱12·1,
     ✱12·11) if `S.red`. -/
-inductive QThm {V : Ty → Type} (S : Sys) : QF V → Prop where
+inductive QThm {V : Ty → Type} (S : Sys V) : QF V → Prop where
   | mp      {p q : QF V} : QThm S p → QThm S (imp p q) → QThm S q                 -- ✱1·1, ✱9·12
   | taut    (p : QF V)     : QThm S (imp (.or p p) p)                              -- ✱1·2
   | add     (p q : QF V)   : QThm S (imp q (.or p q))                              -- ✱1·3
@@ -153,7 +154,7 @@ inductive QThm {V : Ty → Type} (S : Sys) : QF V → Prop where
       QThm S (ex (τ := Ty.pred2 a b) fun f => .all fun x => .all fun y => iff (φ x y) (.app2 f x y))
 
 /-- Monotonicity: a system with more rules, and a style that admits more, proves more. -/
-theorem QThm.mono {V : Ty → Type} {S S' : Sys} (hc : S.compr = true → S'.compr = true)
+theorem QThm.mono {V : Ty → Type} {S S' : Sys V} (hc : S.compr = true → S'.compr = true)
     (hr : S.red = true → S'.red = true)
     (h1 : ∀ {a : Ty} {k : Nat} (ψ : V a → QF V), S.style.adm1 k ψ → S'.style.adm1 k ψ)
     (h2 : ∀ {a b : Ty} {k : Nat} (ψ : V a → V b → QF V), S.style.adm2 k ψ → S'.style.adm2 k ψ)
@@ -222,7 +223,7 @@ private theorem iff_refl_bool (b : Bool) : (!(!(!b || b) || !(!b || b))) = true 
 
 /-- Soundness: every `QThm S` is true in every structure, at the structure's own variables, for every
     system `S` (every combination of rules and every style). -/
-theorem qsound (M : QModel) {S : Sys} {p : QF M.den} (h : QThm S p) : p.eval M = true := by
+theorem qsound (M : QModel) {S : Sys M.den} {p : QF M.den} (h : QThm S p) : p.eval M = true := by
   induction h with
   | @mp p q _ _ ih1 ih2 =>
     have h2 : (!(p.eval M) || q.eval M) = true := ih2
@@ -283,7 +284,7 @@ theorem qsound (M : QModel) {S : Sys} {p : QF M.den} (h : QThm S p) : p.eval M =
     rw [M.ap_lam2]; exact iff_refl_bool _
 
 /-- A formula false in some structure is not a theorem (at that structure's variables), in any system. -/
-theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) {S : Sys} : ¬ QThm S p :=
+theorem not_qthm_of_countermodel (M : QModel) {p : QF M.den} (hv : p.eval M = false) {S : Sys M.den} : ¬ QThm S p :=
   fun h => by have := qsound M h; rw [hv] at this; cases this
 
 /-! ## ✱1–✱5 apply to propositions containing apparent variables
@@ -299,7 +300,7 @@ def F.toQ {V : Ty → Type} (σ : String → QF V) : F → QF V
   | .neg p  => .neg (F.toQ σ p)
   | .or p q => .or (F.toQ σ p) (F.toQ σ q)
 
-theorem liftThm {V : Ty → Type} {S : Sys} {p : F} (h : Thm p) (σ : String → QF V) : QThm S (p.toQ σ) := by
+theorem liftThm {V : Ty → Type} {S : Sys V} {p : F} (h : Thm p) (σ : String → QF V) : QThm S (p.toQ σ) := by
   induction h with
   | mp _ _ ih1 ih2 => exact QThm.mp ih1 ih2
   | taut p => exact QThm.taut _

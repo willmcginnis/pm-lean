@@ -30,7 +30,7 @@ namespace PM
 open QF
 
 namespace QF
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 /-- ✱13·01 `x = y . = : (φ) : φ!x . ⊃ . φ!y` Df -/
 @[reducible] def ident {a : Ty} (x y : V a) : QF V :=
   .all (τ := Ty.pred1 a) fun φ => imp (.app1 φ x) (.app1 φ y)
@@ -40,7 +40,7 @@ variable {V : Ty → Type} {S : Sys}
 @[reducible] def ident3 {a : Ty} (x y z : V a) : QF V := QF.and (ident x y) (ident y z)
 end QF
 
-variable {V : Ty → Type} {S : Sys} {a b : Ty}
+variable {V : Ty → Type} {S : Sys V} {a b : Ty}
 
 /-- "Fact" with the factor on the left: from `⊢ . q ⊃ r`, `⊢ : p . q . ⊃ . p . r` (✱3·47 with Id). -/
 theorem qandR {p q r : QF V} (h : QThm S (imp q r)) : QThm S (imp (QF.and p q) (QF.and p r)) :=

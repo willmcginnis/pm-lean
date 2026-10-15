@@ -40,7 +40,7 @@ DEPRECATED_HEAD = """import PM.Star21
 
 namespace PM
 open QF
-variable {V : Ty → Type} {S : Sys} {a b : Ty}
+variable {V : Ty → Type} {S : Sys V} {a b : Ty}
 """
 
 

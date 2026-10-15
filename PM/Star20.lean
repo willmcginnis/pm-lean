@@ -83,7 +83,7 @@ namespace PM
 open QF
 
 namespace QF
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 /-- ✱20·01 `f{ẑ(ψz)} . = : (∃φ) : φ!x . ≡ₓ . ψx : f{φ!ẑ}` Df. `f` is the context of the class. -/
 @[reducible] def cls {a : Ty} (ψ : V a → QF V) (f : V (Ty.pred1 a) → QF V) : QF V :=
   ex (τ := Ty.pred1 a) fun φ => QF.and (fiff (fun x => .app1 φ x) ψ) (f φ)
@@ -144,7 +144,7 @@ scoped infix:50 " ∈ " => QF.clsMem
 /-- `α ∈ κ`, κ a class of classes: `clsClsMem α κ`. -/
 scoped infix:50 " ∈ " => QF.clsClsMem
 
-variable {V : Ty → Type} {S : Sys} {a : Ty}
+variable {V : Ty → Type} {S : Sys V} {a : Ty}
 
 /-- From `⊢ . p`, `⊢ : p . q . ≡ . q` (✱3·27, ✱3·2). -/
 theorem qand_true_left {p q : QF V} (hp : QThm S p) : QThm S (iff (QF.and p q) q) :=
@@ -821,7 +821,7 @@ theorem q20_81 [Reducibility S] {τ : Ty} (φ ψ : V τ → QF V) (a : V τ) :
 
 /-- `Ψ` is extensional: `⊢ :. ψx . ≡ₓ . χx : ⊃ : Ψ{ẑ(ψz)} . ≡ . Ψ{ẑ(χz)}` for all ψ, χ, i.e. ✱20·11 for the
     expression Ψα. -/
-def ClsExt (S : Sys) (Ψ : (V a → QF V) → QF V) : Prop :=
+def ClsExt (S : Sys V) (Ψ : (V a → QF V) → QF V) : Prop :=
   ∀ ψ χ : V a → QF V, QThm S (imp (fiff ψ χ) (iff (Ψ ψ) (Ψ χ)))
 
 /-- A generic expression f{α} (`cls α f`, p. 199) is extensional: ✱20·11. -/
@@ -1077,11 +1077,11 @@ theorem check_star52_1_unit_class [Reducibility S] (ψ : V a → QF V) :
   One Lean theorem is used at several types: ✱13·15 and ✱13·101 at individuals, at predicative
   functions of individuals, and at predicative functions of those. -/
 
-theorem check_star13_15_typical_ambiguity {V : Ty → Type} (x : V .ind) (φ : V (Ty.pred1 .ind)) (f : V (Ty.pred1 (Ty.pred1 .ind))) :
+theorem check_star13_15_typical_ambiguity (x : V .ind) (φ : V (Ty.pred1 .ind)) (f : V (Ty.pred1 (Ty.pred1 .ind))) :
     QThm S (ident x x) ∧ QThm S (ident φ φ) ∧ QThm S (ident f f) :=
   ⟨q13_15 x, q13_15 φ, q13_15 f⟩
 
-theorem check_star13_101_typical_ambiguity [Reducibility S] {V : Ty → Type} (x y : V .ind) (φ θ : V (Ty.pred1 .ind)) (ψ : V .ind → QF V)
+theorem check_star13_101_typical_ambiguity [Reducibility S] (x y : V .ind) (φ θ : V (Ty.pred1 .ind)) (ψ : V .ind → QF V)
     (χ : V (Ty.pred1 .ind) → QF V) :
     QThm S (imp (ident x y) (imp (ψ x) (ψ y))) ∧ QThm S (imp (ident φ θ) (imp (χ φ) (χ θ))) :=
   ⟨q13_101 ψ x y, q13_101 χ φ θ⟩

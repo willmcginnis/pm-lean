@@ -25,7 +25,7 @@ variable {V : Ty → Type}
 
 /-- ✱10 bookkeeping: from (∃g) . E g, (g) : (∃f) . T(g, f), and E g . ⊃ : T(g, f) . ⊃ . E' f for all g, f,
     infer (∃f) . E' f. The steps of `q12_1_of_var`: ✱10·11·21, ✱10·28, Comm, ✱10·11·23. -/
-theorem qex_chain {S : Sys} {σ ρ : Ty} {E : V σ → QF V} {T : V σ → V ρ → QF V} {E' : V ρ → QF V}
+theorem qex_chain {S : Sys V} {σ ρ : Ty} {E : V σ → QF V} {T : V σ → V ρ → QF V} {E' : V ρ → QF V}
     (hE : QThm S (ex E)) (hT : ∀ g, QThm S (ex (T g)))
     (hstep : ∀ g f, QThm S (imp (E g) (imp (T g f) (E' f)))) : QThm S (ex E') :=
   have step : ∀ g, QThm S (imp (E g) (ex E')) := fun g =>
@@ -35,14 +35,14 @@ theorem qex_chain {S : Sys} {σ ρ : Ty} {E : V σ → QF V} {T : V σ → V ρ 
 
 /-- A style admits g!x at every non-predicative type `fn1 a (k+1)` when g is predicative (and likewise
     for two arguments). Every style here does (`admitsPredApp_of`). -/
-structure Style.AdmitsPredApp (st : Style) : Prop where
-  app1 : ∀ {V : Ty → Type} {a : Ty} {k : Nat} (g : V (Ty.pred1 a)), st.adm1 (k + 1) fun x => .app1 g x
-  app2 : ∀ {V : Ty → Type} {a b : Ty} {k : Nat} (g : V (Ty.pred2 a b)),
+structure Style.AdmitsPredApp (st : Style V) : Prop where
+  app1 : ∀ {a : Ty} {k : Nat} (g : V (Ty.pred1 a)), st.adm1 (k + 1) fun x => .app1 g x
+  app2 : ∀ {a b : Ty} {k : Nat} (g : V (Ty.pred2 a b)),
     st.adm2 (k + 1) fun x y => .app2 g x y
 
 /-- Replay a derivation of one system in another that has reducibility, at least the same comprehension,
     and a style that admits predicative applications at non-predicative types. -/
-theorem restyle {S S' : Sys} [Reducibility S'] (hc : S.compr = true → S'.compr = true)
+theorem restyle {S S' : Sys V} [Reducibility S'] (hc : S.compr = true → S'.compr = true)
     (hst : S'.style.AdmitsPredApp) {p : QF V} (h : QThm S p) : QThm S' p := by
   induction h with
   | mp _ _ ih1 ih2 => exact .mp ih1 ih2
@@ -83,7 +83,7 @@ private theorem lt_succ_excess (n k : Nat) : n + 0 < n + (k + 1) :=
   Nat.add_lt_add_left (Nat.succ_pos k) n
 
 /-- Every style here admits predicative applications at non-predicative types. -/
-theorem admitsPredApp_of (P : PredReading) (R : RealReading) : (Style.of P R).AdmitsPredApp := by
+theorem admitsPredApp_of (P : PredReading) (R : RealReading) : (Style.of P R : Style V).AdmitsPredApp := by
   cases P <;> cases R
   · exact ⟨fun _ _ => ⟨.app1 (le_succ_excess _ _), fun h => nomatch h⟩,
       fun _ _ _ => ⟨.app2 (le_succ_excess _ _), fun h => nomatch h⟩⟩
@@ -97,7 +97,7 @@ theorem admitsPredApp_of (P : PredReading) (R : RealReading) : (Style.of P R).Ad
     order; a real function variable at its own order, p. 55, or as an argument, p. 54) have the same
     `QThm`. -/
 theorem styles_equiv (c : Bool) (P P' : PredReading) (R R' : RealReading) (p : QF V) :
-    QThm (⟨c, true, Style.of P R⟩ : Sys) p ↔ QThm (⟨c, true, Style.of P' R'⟩ : Sys) p :=
+    QThm (⟨c, true, Style.of P R⟩ : Sys V) p ↔ QThm (⟨c, true, Style.of P' R'⟩ : Sys V) p :=
   ⟨restyle (S := ⟨c, true, Style.of P R⟩) (S' := ⟨c, true, Style.of P' R'⟩) id (admitsPredApp_of P' R'),
    restyle (S := ⟨c, true, Style.of P' R'⟩) (S' := ⟨c, true, Style.of P R⟩) id (admitsPredApp_of P R)⟩
 

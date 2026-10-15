@@ -47,8 +47,8 @@ noncomputable def QModel.classical (D : Type) (R : String → List D → Bool) :
 /-- Consistency in the collapse model (two individuals, classical quantifiers): the letter `p` is not a
     theorem, in any system `S`. Uses the classical axioms of `QModel.classical`; the axiom-free proof is
     `consistent` (PM/Models/Finite.lean). -/
-theorem consistent_collapse (S : Sys) :
-    ¬ QThm (V := (QModel.classical Bool fun _ xs => xs.headD false).den) S (.atom "p" []) :=
+theorem consistent_collapse (S : Sys (QModel.classical Bool fun _ xs => xs.headD false).den) :
+    ¬ QThm S (.atom "p" []) :=
   not_qthm_of_countermodel _ rfl
 
 end PM

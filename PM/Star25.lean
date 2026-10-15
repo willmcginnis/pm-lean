@@ -85,7 +85,7 @@ scoped notation "𝐕̇" => QF.relUniv
 /-- `Λ̇`: `relEmpty` (✱25·02). -/
 scoped notation "Λ̇" => QF.relEmpty
 
-variable {V : Ty → Type} {S : Sys} {a b : Ty}
+variable {V : Ty → Type} {S : Sys V} {a b : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
 theorem check_notation_rel_univ : (𝐕̇ : V a → V b → QF V) = fun x y => QF.and (ident x x) (ident y y) := rfl
@@ -106,9 +106,9 @@ theorem check_notation_univ_cls_and_rel : (𝐕 : V a → QF V) = clsUniv ∧ (�
   of classes (`≐`). -/
 
 /-- `⊢ . R = S` between relations (`relEq`), as a relation between R and S. -/
-def QRelEq (S : Sys) (ψ χ : V a → V b → QF V) : Prop := QThm S (relEq ψ χ)
+def QRelEq (S : Sys V) (ψ χ : V a → V b → QF V) : Prop := QThm S (relEq ψ χ)
 /-- `⊢ : H . ⊃ . R = S` between relations, as a relation between R and S. -/
-def QRelEqH (S : Sys) (H : QF V) (ψ χ : V a → V b → QF V) : Prop := QThm S (imp H (relEq ψ χ))
+def QRelEqH (S : Sys V) (H : QF V) (ψ χ : V a → V b → QF V) : Prop := QThm S (imp H (relEq ψ χ))
 
 /-! The notations name the system `S` of the theorem they are used in, as those of PM/Chain.lean do. -/
 set_option hygiene false in

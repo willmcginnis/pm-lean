@@ -30,7 +30,7 @@ import PM.Star10
 namespace PM.F9
 open QF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-! ## Equivalences in ✱10 used as replacement rules (✱4·11, ✱4·39 and their consequences) -/
 

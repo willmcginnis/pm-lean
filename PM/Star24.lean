@@ -68,7 +68,7 @@ scoped notation "𝐕" => QF.clsUniv
 /-- `Λ`: `clsEmpty` (✱24·02). -/
 scoped notation "Λ" => QF.clsEmpty
 
-variable {V : Ty → Type} {S : Sys} {a : Ty}
+variable {V : Ty → Type} {S : Sys V} {a : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
 theorem check_notation_cls_univ : (𝐕 : V a → QF V) = fun x => ident x x := rfl
@@ -87,9 +87,9 @@ theorem check_notation_cls_nonempty (α : V a → QF V) : clsNonempty α = ex fu
   implication in ✱2·31", p. 123); the ledger lists ✱20·22 as `glue` of kind `chain` (docs/FIDELITY.md). -/
 
 /-- `⊢ . α = β` between classes (`clsEq`), as a relation between α and β. -/
-def QClsEq (S : Sys) (ψ χ : V a → QF V) : Prop := QThm S (clsEq ψ χ)
+def QClsEq (S : Sys V) (ψ χ : V a → QF V) : Prop := QThm S (clsEq ψ χ)
 /-- `⊢ : H . ⊃ . α = β` between classes, as a relation between α and β. -/
-def QClsEqH (S : Sys) (H : QF V) (ψ χ : V a → QF V) : Prop := QThm S (imp H (clsEq ψ χ))
+def QClsEqH (S : Sys V) (H : QF V) (ψ χ : V a → QF V) : Prop := QThm S (imp H (clsEq ψ χ))
 
 /-! The notations name the system `S` of the theorem they are used in, as those of PM/Chain.lean do. -/
 set_option hygiene false in

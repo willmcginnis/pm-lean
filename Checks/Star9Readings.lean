@@ -197,7 +197,7 @@ def letterStr (i : Nat) (f : Char) : String :=
 /-- The term `fun … => (by tac : Thm9 S R ((e1_k p q r).read d))` for a combination. -/
 def comboTerm (k : String) (forms : List Char) (reading defs tac : String) : String :=
   let args := " ".intercalate ((forms.zipIdx).map fun (f, i) => letterStr i f)
-  "fun (V : PM.Ty → Type) (S : PM.Sys) (τ₁ τ₂ τ₃ : PM.Ty) (φ : V τ₁ → PM.F9.EF V) " ++
+  "fun (V : PM.Ty → Type) (S : PM.Sys V) (τ₁ τ₂ τ₃ : PM.Ty) (φ : V τ₁ → PM.F9.EF V) " ++
   "(ψ : V τ₂ → PM.F9.EF V) (χ : V τ₃ → PM.F9.EF V) (a b c : PM.F9.EF V) (x₁ : V τ₁) (x₂ : V τ₂) " ++
   s!"(x₃ : V τ₃) => (by {tac} : PM.F9.Thm9 S PM.F9.Reading.{reading} ((PM.F9.{k} {args}).read .{defs}))"
 

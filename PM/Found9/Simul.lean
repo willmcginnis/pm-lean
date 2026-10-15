@@ -55,7 +55,7 @@ import PM.Found9.SearchTactic
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-- A letter of ✱9·3–✱9·52: an elementary proposition, (x) . φx or (∃x) . φx with φ elementary. -/
 inductive OneVar : PF V → Prop where

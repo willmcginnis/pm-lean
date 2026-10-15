@@ -53,14 +53,14 @@ inductive RealReading where
   | .asArgument => LvlArg
 
 /-- The style with a reading of "predicative" and a reading of real function variables. -/
-@[reducible] def Style.of : PredReading → RealReading → Style
+@[reducible] def Style.of {V : Ty → Type} : PredReading → RealReading → Style V
   | .matrix, R => Style.matrix R.check
   | .lowestOrder, R => Style.lowestOrder R.check
 
 /-- The primary style: matrix (✱12 p. 172), real variables at their own order (p. 55). -/
-abbrev Style.primary : Style := Style.of .matrix .ownOrder
+abbrev Style.primary {V : Ty → Type} : Style V := Style.of .matrix .ownOrder
 /-- The alternative style: lowest order (Introduction p. 56), real variables at their own order. -/
-abbrev Style.alternative : Style := Style.of .lowestOrder .ownOrder
+abbrev Style.alternative {V : Ty → Type} : Style V := Style.of .lowestOrder .ownOrder
 
 /-- The matrix style admits no more than the lowest-order style (the matrix test is conjoined with the
     same order check). -/
@@ -167,7 +167,7 @@ abbrev realPhi {V : Ty → Type} (φ : V (Ty.pred1 .ind)) : QF V :=
     differ in whether `realPhi` is derivable. They differ in whether the direct comprehension
     application (`compr1` at φ!x) is accepted: in the p. 55 styles (`realPhi_compr_ownOrder`), not in
     the p. 54 styles (`realPhi_compr_asArgument`). -/
-theorem realPhi_every_system {V : Ty → Type} (S : Sys) (φ : V (Ty.pred1 .ind)) :
+theorem realPhi_every_system {V : Ty → Type} (S : Sys V) (φ : V (Ty.pred1 .ind)) :
     QThm S (realPhi φ) :=
   QThm.mp (q10_11 fun x => QL.t4_2 (.app1 φ x))
     (q10_24 (fun g => fiff (fun x => .app1 φ x) (fun x => .app1 g x)) φ)
@@ -189,7 +189,7 @@ theorem p171_lowestOrder_predicative {V : Ty → Type} :
   comprehension1 _ (p171_compr_lowestOrder .ownOrder)
 
 /-- With reducibility, `p171` holds in every style (✱12·1), with or without comprehension. -/
-theorem p171_reducibility {V : Ty → Type} {S : Sys} [Reducibility S] : QThm (V := V) S p171 :=
+theorem p171_reducibility {V : Ty → Type} {S : Sys V} [Reducibility S] : QThm (V := V) S p171 :=
   q12_1 _
 
 /-! ## Consistency in every style

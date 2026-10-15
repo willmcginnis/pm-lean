@@ -107,7 +107,7 @@ scoped prefix:max "∸" => QF.relCompl
 /-- `R ∸ S`: `relDiff R S` (✱23·05). -/
 scoped infixl:65 " ∸ " => QF.relDiff
 
-variable {V : Ty → Type} {S : Sys} {a b : Ty}
+variable {V : Ty → Type} {S : Sys V} {a b : Ty}
 
 /-! ## Steps used by several proofs, each listed in the ledger where used -/
 

@@ -35,7 +35,7 @@ import PM.Found9.Star9
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-! ## Landini's Switch: its converse, and its relation to the prenex Switch -/
 

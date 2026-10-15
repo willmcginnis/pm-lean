@@ -19,8 +19,8 @@ namespace PM
 
 /-- Comprehension accepts ψ at `fn1 a k` (`fn2 a b k`) when every value of ψ passes the order check
     at the order of that type. -/
-def Style.lowestOrder (L : OrderCheck) : Style where
-  adm1 := fun {_ a} k ψ => ∀ x, L (ψ x) (Ty.fn1 a k).ord
-  adm2 := fun {_ a b} k ψ => ∀ x y, L (ψ x y) (Ty.fn2 a b k).ord
+def Style.lowestOrder {V : Ty → Type} (L : OrderCheck) : Style V where
+  adm1 := fun {a} k ψ => ∀ x, L (ψ x) (Ty.fn1 a k).ord
+  adm2 := fun {a b} k ψ => ∀ x y, L (ψ x y) (Ty.fn2 a b k).ord
 
 end PM

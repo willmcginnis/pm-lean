@@ -29,7 +29,7 @@ import PM.Found9.Base
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys} {R : Reading} {τ : Ty}
+variable {V : Ty → Type} {S : Sys V} {R : Reading} {τ : Ty}
 
 /-- (x) . φx, for an elementary function φ. -/
 abbrev Al (φ : V τ → EF V) : PF V := .all fun x => .el (φ x)

@@ -61,7 +61,7 @@ open PF
 
 /-- Asserted propositions of ✱9's method in the system `S`, under the reading `R` (its definitions of
     ∨, with which ✱9+ brings Switch, and the rule it adds: ✱8·13 carried over, or the prenex Switch). -/
-inductive Thm9 {V : Ty → Type} (S : Sys) (R : Reading) : PF V → Prop where
+inductive Thm9 {V : Ty → Type} (S : Sys V) (R : Reading) : PF V → Prop where
   | mp      {p q : PF V} : Thm9 S R p → Thm9 S R (R.imp p q) → Thm9 S R q                 -- ✱9·12, ✱1·1
   | taut    (p : EF V)     : Thm9 S R (.el (EF.imp (.or p p) p))                         -- ✱1·2
   | add     (p q : EF V)   : Thm9 S R (.el (EF.imp q (.or p q)))                         -- ✱1·3

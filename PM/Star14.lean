@@ -50,7 +50,7 @@ namespace PM
 open QF
 
 namespace QF
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 /-- ✱14·01 `[(ιx)(φx)] . ψ(ιx)(φx) . = : (∃b) : φx . ≡ₓ . x = b : ψb` Df. ψ is the scope. -/
 @[reducible] def desc {a : Ty} (φ ψ : V a → QF V) : QF V :=
   ex fun b => QF.and (fiff φ fun x => ident x b) (ψ b)
@@ -67,7 +67,7 @@ variable {V : Ty → Type} {S : Sys}
   desc2 ψ φ fun z y => f y z
 end QF
 
-variable {V : Ty → Type} {S : Sys} {α β : Ty}
+variable {V : Ty → Type} {S : Sys V} {α β : Ty}
 
 /-! ## Further steps, each listed in the ledger where used -/
 
@@ -964,8 +964,8 @@ def φ0 {V : Ty → Type} (x : V .ind) : QF V := QF.and (.atom "q" [x]) (.neg (.
     satisfies φ0, so (ιx)(φ0 x) does not exist: [(ιx)(φ0 x)] . φ0(ιx)(φ0 x) is false and its negation true.
     `twoModel` is the finite coded model (PM/Models/Finite.lean), so the formula is evaluated by
     computation, including the quantifier over the four predicative functions in ✱13·01. -/
-theorem not_qthm_neg_desc_imp_exists1 :
-    ¬ ∀ (V : Ty → Type) (φ χ : V .ind → QF V), QThm S (imp (.neg (desc φ χ)) (exists1 φ)) :=
+theorem not_qthm_neg_desc_imp_exists1 {S : (V : Ty → Type) → Sys V} :
+    ¬ ∀ (V : Ty → Type) (φ χ : V .ind → QF V), QThm (S V) (imp (.neg (desc φ χ)) (exists1 φ)) :=
   fun h => not_qthm_of_countermodel twoModel (p := imp (.neg (desc φ0 φ0)) (exists1 φ0)) rfl (h _ φ0 φ0)
 
 end PM

@@ -29,7 +29,7 @@ import PM.Found9.Switch
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-! ## A step at the front: two merges of the same parts -/
 

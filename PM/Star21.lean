@@ -62,7 +62,7 @@ namespace PM
 open QF
 
 namespace QF
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 /-- ✱21·01 `f{x̂ŷψ(x, y)} . = : (∃φ) : φ!(x, y) . ≡_{x,y} . ψ(x, y) : f{φ!(û, v̂)}` Df. `f` is the context. -/
 @[reducible] def rel {a b : Ty} (ψ : V a → V b → QF V) (f : V (Ty.pred2 a b) → QF V) : QF V :=
   ex (τ := Ty.pred2 a b) fun φ => QF.and (fiff2 (fun x y => .app2 φ x y) ψ) (f φ)
@@ -131,7 +131,7 @@ end QF
 /-- `R ∈ κ`, κ a class of relations: `relClsMem R κ` (scoped to `PM`, like `x ∈ α` and `α ∈ κ` of ✱20). -/
 scoped infix:50 " ∈ " => QF.relClsMem
 
-variable {V : Ty → Type} {S : Sys} {a b : Ty}
+variable {V : Ty → Type} {S : Sys V} {a b : Ty}
 
 /-! ## ✱10 propositions for two variables, each listed in the ledger where used -/
 
@@ -691,7 +691,7 @@ theorem q21_71 [Reducibility S] (ψ χ : V a → V b → QF V) :
 
 /-- `Ψ` is extensional: `⊢ :. ψ(x, y) . ≡_{x,y} . χ(x, y) : ⊃ : Ψ{x̂ŷψ(x, y)} . ≡ . Ψ{x̂ŷχ(x, y)}` for all ψ, χ,
     i.e. ✱21·11 for the expression ΨR. -/
-def RelExt (S : Sys) (Ψ : (V a → V b → QF V) → QF V) : Prop :=
+def RelExt (S : Sys V) (Ψ : (V a → V b → QF V) → QF V) : Prop :=
   ∀ ψ χ : V a → V b → QF V, QThm S (imp (fiff2 ψ χ) (iff (Ψ ψ) (Ψ χ)))
 
 /-- A generic expression f{R} (`rel R f`) is extensional: ✱21·11. -/

@@ -8,7 +8,7 @@ import PM.Found9.Switch
   merely repeating the proofs, we can show that any other of the propositions that occur in these
   propositions can be simultaneously replaced by (x) . ψx or (∃x) . ψx. ... It follows, by mere
   repetition of the proofs, that the propositions of ✱1—✱5 hold when p, q, r are replaced by
-  propositions containing any number of apparent variables." `Rep S R V` states the conclusion of this
+  propositions containing any number of apparent variables." `Rep S R` states the conclusion of this
   claim under the reading R: ✱1·2–✱1·6 for every ✱9 proposition. It is not proved here, under any
   reading (see docs/STAR9_FOUNDATION.md for what the proofs of ✱9·3–✱9·52 do and do not give); `Rep`
   for the alternative convention gives `Rep` for the definitions as printed with the prenex Switch
@@ -38,11 +38,11 @@ import PM.Found9.Switch
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys} {R : Reading}
+variable {V : Ty → Type} {S : Sys V} {R : Reading}
 
 /-- ✱1·2–✱1·6 for every proposition of ✱9 under the reading `R` (the conclusion of PM's claim on
     p. 142). -/
-structure Rep (S : Sys) (R : Reading) (V : Ty → Type) : Prop where
+structure Rep (S : Sys V) (R : Reading) : Prop where
   taut  : ∀ p : PF V, Thm9 S R (R.imp (R.or p p) p)                                -- ✱1·2
   add   : ∀ p q : PF V, Thm9 S R (R.imp q (R.or p q))                              -- ✱1·3
   perm  : ∀ p q : PF V, Thm9 S R (R.imp (R.or p q) (R.or q p))                     -- ✱1·4
@@ -58,7 +58,7 @@ def _root_.PM.F.toF9 (d : Defs) (σ : String → PF V) : F → PF V
 
 /-- Given `Rep`, every ✱1–✱5 theorem holds in ✱9 for any propositions: "the previous proofs of
     subsequent propositions in ✱2—✱5 become applicable" (p. 138). -/
-theorem Rep.lift (hR : Rep S R V) {t : F} (h : Thm t) (σ : String → PF V) :
+theorem Rep.lift (hR : Rep S R) {t : F} (h : Thm t) (σ : String → PF V) :
     Thm9 S R (t.toF9 R.defs σ) := by
   induction h with
   | mp _ _ ih1 ih2 => exact Thm9.mp ih1 ih2
@@ -97,7 +97,7 @@ theorem Thm9.addSwitch {d : Defs} {sw : Rule} (hE : sw ≠ .exch) {p : PF V} (h 
 /-- `Rep` for the alternative convention gives `Rep` for the definitions as printed with the prenex
     Switch (which carries each instance to the proposition the definitions as printed make of its
     expression). -/
-theorem Rep.toSwitch (hR : Rep S Reading.convention V) : Rep S Reading.prenexSwitch V where
+theorem Rep.toSwitch (hR : Rep S Reading.convention) : Rep S Reading.prenexSwitch where
   taut p := Thm9.reread (R := Reading.convention) nofun nofun (PE.imp (.or (.pf p) (.pf p)) (.pf p))
     (hR.taut p) .printed
   add p q := Thm9.reread (R := Reading.convention) nofun nofun (PE.imp (.pf q) (.or (.pf p) (.pf q)))
@@ -112,7 +112,7 @@ theorem Rep.toSwitch (hR : Rep S Reading.convention V) : Rep S Reading.prenexSwi
 /-! ## Tools given `Rep` -/
 
 /-- Given `Rep`, the syllogism (✱2·05). -/
-theorem Rep.syl (hR : Rep S R V) {a b c : PF V} (h1 : Thm9 S R (R.imp a b))
+theorem Rep.syl (hR : Rep S R) {a b c : PF V} (h1 : Thm9 S R (R.imp a b))
     (h2 : Thm9 S R (R.imp b c)) : Thm9 S R (R.imp a c) :=
   Thm9.mp h1 (Thm9.mp h2 (hR.lift (t2_05 (.var "p") (.var "q") (.var "r")) (psub a b c)))
 
@@ -120,7 +120,7 @@ theorem Rep.syl (hR : Rep S R V) {a b c : PF V} (h1 : Thm9 S R (R.imp a b))
     ⊢ (∃x) . φx . ⊃ . (∃x) . ψx. As printed and in ✱9+ it is direct (`exImp_printed`, `exImp_plus`);
     under the alternative convention the conclusion is (z) . φz ⊃ (∃x) . ψx, given by the syllogism
     with ✱9·1. -/
-theorem Rep.exImp (hR : Rep S R V) {τ : Ty} {φ ψ : V τ → PF V}
+theorem Rep.exImp (hR : Rep S R) {τ : Ty} {φ ψ : V τ → PF V}
     (h : ∀ x, Thm9 S R (R.imp (φ x) (ψ x))) : Thm9 S R (R.imp (.ex φ) (.ex ψ)) := by
   rcases R with ⟨_ | _ | _, sw⟩
   · exact exImp_printed h
@@ -128,14 +128,14 @@ theorem Rep.exImp (hR : Rep S R V) {τ : Ty} {φ ψ : V τ → PF V}
   · exact exImp_plus h
 
 /-- Given `Rep`: from ⊢ (∃x) . φx infer ⊢ (∃x) . ∼∼φx (✱2·12 and ✱9·22 as a rule). -/
-theorem Rep.exNegNeg (hR : Rep S R V) {τ : Ty} {φ : V τ → PF V} (h : Thm9 S R (.ex φ)) :
+theorem Rep.exNegNeg (hR : Rep S R) {τ : Ty} {φ : V τ → PF V} (h : Thm9 S R (.ex φ)) :
     Thm9 S R (.ex fun x => neg (neg (φ x))) :=
   Thm9.mp h (hR.exImp fun x => hR.lift (t2_12 (.var "p")) (psub (φ x) (φ x) (φ x)))
 
 /-! ## ✱9·25 for every p, given `Rep` -/
 
 /-- Given `Rep`: from ⊢ a ⊃ c and ⊢ b ⊃ c infer ⊢ a ∨ b . ⊃ . c (✱3·2, ✱3·44). -/
-theorem Rep.orElim (hR : Rep S R V) {a b c : PF V} (h1 : Thm9 S R (R.imp a c))
+theorem Rep.orElim (hR : Rep S R) {a b c : PF V} (h1 : Thm9 S R (R.imp a c))
     (h2 : Thm9 S R (R.imp b c)) : Thm9 S R (R.imp (R.or a b) c) :=
   Thm9.mp (Thm9.mp h2 (Thm9.mp h1
       (hR.lift (t3_2 (.var "p") (.var "q")) (psub (R.imp a c) (R.imp b c) c))))
@@ -143,7 +143,7 @@ theorem Rep.orElim (hR : Rep S R V) {a b c : PF V} (h1 : Thm9 S R (R.imp a c))
 
 /-- Given `Rep` and a value of w: from ⊢ b . ∨ . (∃w) . ρw infer ⊢ (∃w) . b ∨ ρw. By ✱2·2 and ✱9·1,
     b implies it; by ✱1·3 and ✱9·22 as a rule, (∃w) . ρw does. -/
-theorem Rep.exIn (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {b : PF V} {τ : Ty} {ρ : V τ → PF V}
+theorem Rep.exIn (hR : Rep S R) (hV : ∀ τ, Nonempty (V τ)) {b : PF V} {τ : Ty} {ρ : V τ → PF V}
     (h : Thm9 S R (R.or b (.ex ρ))) : Thm9 S R (.ex fun w => R.or b (ρ w)) :=
   (hV τ).elim fun w₀ =>
     Thm9.mp h (hR.orElim
@@ -156,7 +156,7 @@ theorem Rep.exIn (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {b : PF V} {τ 
     is that by ✱9·03 if d is elementary or begins with (y), and (x) : (∃w) . φx ∨ ρw by ✱9·07 if d is
     (∃w) . ρw (`Rep.exIn`). In ✱9+ it is the same, except that for d = (y) . ψy ✱9·yy makes it
     (x) : (y) . φx ∨ ψy, given by ✱9·2 and ✱1·6. -/
-theorem Rep.allOrL (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ : V τ → PF V}
+theorem Rep.allOrL (hR : Rep S R) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ : V τ → PF V}
     {d : PF V} (h : ∀ x, Thm9 S R (R.or (φ x) d)) : Thm9 S R (R.or (.all φ) d) := by
   rcases R with ⟨_ | _ | _, sw⟩
   · cases d with
@@ -171,7 +171,7 @@ theorem Rep.allOrL (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ
     | ex _ => exact Thm9.gen fun x => hR.exIn hV (h x)
 
 /-- `Rep.allOrL` on the right of the disjunction (✱1·4). -/
-theorem Rep.allOr (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ : V τ → PF V} {d : PF V}
+theorem Rep.allOr (hR : Rep S R) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ : V τ → PF V} {d : PF V}
     (h : ∀ x, Thm9 S R (R.or d (φ x))) : Thm9 S R (R.or d (.all φ)) :=
   Thm9.mp (hR.allOrL hV fun x => Thm9.mp (h x) (hR.perm d (φ x))) (hR.perm (.all φ) d)
 
@@ -180,7 +180,7 @@ theorem Rep.allOr (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) {τ : Ty} {φ 
     antecedent, ✱2·31 regroups it as (∼A ∨ p) ∨ φx, `Rep.allOr` gives (∼A ∨ p) ∨ (x) . φx, and ✱2·32
     regroups again. Under the alternative convention and with the prenex Switch it needs neither
     assumption (`distrib_convention`, `distrib_switch`). -/
-theorem Rep.distrib (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) (p : PF V) {τ : Ty}
+theorem Rep.distrib (hR : Rep S R) (hV : ∀ τ, Nonempty (V τ)) (p : PF V) {τ : Ty}
     (φ : V τ → PF V) : Thm9 S R (R.imp (.all fun x => R.or p (φ x)) (R.or p (.all φ))) :=
   let nA := neg (.all fun x => R.or p (φ x))
   have h1 : ∀ x, Thm9 S R (R.or nA (R.or p (φ x))) := fun x => inst (fun x => R.or p (φ x)) x
@@ -195,7 +195,7 @@ theorem Rep.distrib (hR : Rep S R V) (hV : ∀ τ, Nonempty (V τ)) (p : PF V) {
 
 /-- Given `Rep` and a variable of every type, every ✱10 theorem stands for a ✱9 theorem, in the same
     system, under every reading. -/
-theorem qthm_toF9 (hV : ∀ τ, Nonempty (V τ)) (hR : Rep S R V) {q : QF V} (h : QThm S q) :
+theorem qthm_toF9 (hV : ∀ τ, Nonempty (V τ)) (hR : Rep S R) {q : QF V} (h : QThm S q) :
     Thm9 S R (q.toF9 R.defs) := by
   induction h with
   | mp _ _ ih1 ih2 => exact Thm9.mp ih1 ih2

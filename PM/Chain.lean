@@ -29,7 +29,7 @@ import PM.Star10
 namespace PM
 open QF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-! ## Joining lines under a hypothesis -/
 
@@ -60,13 +60,13 @@ theorem qimpIffSymm {H A B : QF V} (h : QThm S (imp H (iff A B))) : QThm S (imp 
 /-! ## The lines of a chain as relations -/
 
 /-- `⊢ . A ≡ B`, as a relation between A and B. -/
-def QIff (S : Sys) (A B : QF V) : Prop := QThm S (iff A B)
+def QIff (S : Sys V) (A B : QF V) : Prop := QThm S (iff A B)
 /-- `⊢ . A ⊃ B`, as a relation between A and B. -/
-def QImp (S : Sys) (A B : QF V) : Prop := QThm S (imp A B)
+def QImp (S : Sys V) (A B : QF V) : Prop := QThm S (imp A B)
 /-- `⊢ : H . ⊃ : A . ≡ . B`, as a relation between A and B. -/
-def QImpIff (S : Sys) (H A B : QF V) : Prop := QThm S (imp H (iff A B))
+def QImpIff (S : Sys V) (H A B : QF V) : Prop := QThm S (imp H (iff A B))
 /-- `⊢ : H . ⊃ : A . ⊃ . B`, as a relation between A and B. -/
-def QImpImp (S : Sys) (H A B : QF V) : Prop := QThm S (imp H (imp A B))
+def QImpImp (S : Sys V) (H A B : QF V) : Prop := QThm S (imp H (imp A B))
 
 /-! The notations name the system `S` of the theorem they are used in (every PM theorem here calls
     it `S`), so that each `calc` line is checked in that system: `hygiene false` lets the `S` of the

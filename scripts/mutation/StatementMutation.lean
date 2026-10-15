@@ -86,10 +86,10 @@ theorem deadHave (p : F) (h : Thm p) : Thm (F.imp p p) :=
 /-- unused (deep only): the premise is passed to `unusedPremise`, which ignores it -/
 theorem passesToUnused (p : F) (h : Thm (.neg p)) : Thm (F.imp p p) := unusedPremise p h
 /-- unused: a variable that occurs neither in the statement nor in the proof -/
-theorem unusedVariable {V : Ty → Type} {S : Sys} {τ : Ty} (p : QF V) (y : V τ) :
+theorem unusedVariable {V : Ty → Type} {S : Sys V} {τ : Ty} (p : QF V) (y : V τ) :
     QThm S (QF.imp p p) := QL.t2_08 p
 /-- unused: a class of ours the proof does not need -/
-theorem unusedClass {V : Ty → Type} {S : Sys} [Reducibility S] (p : QF V) :
+theorem unusedClass {V : Ty → Type} {S : Sys V} [Reducibility S] (p : QF V) :
     QThm S (QF.imp p p) := QL.t2_08 p
 /-- unused: a premise the proof never mentions, in a theorem named like an equation lemma -/
 theorem eq_unusedPremise (n : Nat) (h : True) : n = n := rfl

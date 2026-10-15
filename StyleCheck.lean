@@ -3,7 +3,7 @@
 -- Run with `lake env lean StyleCheck.lean`.
 --
 -- For each PM proposition (`q…`, ✱9–✱20, and the lifted ✱2–✱5 `QL.t…`) and each pair (style, system),
--- the system is substituted for the proposition's parameter `S : Sys`, each class argument
+-- the system is substituted for the proposition's parameter `S : Sys V` (at that `V`), each class argument
 -- (`Reducibility S`, `Comprehension S`) is found by instance search, and the instance is type-checked.
 -- A proposition passes in a style when it instantiates in `Sys.full` of that style (PM 1910 as built
 -- here). The table also shows the other systems: a proposition that takes no class instantiates in all
@@ -21,14 +21,16 @@ def isPMProp (n : Name) : Bool :=
   | .str (.str (.str .anonymous "PM") "QL") _ => true
   | _ => false
 
-/-- Instantiate `c` at the system `sys`: `none` if `c` has no parameter of type `Sys`, else whether
+/-- Instantiate `c` at the system `sys V`: `none` if `c` has no parameter of type `Sys V`, else whether
     every class argument was found and the instance type-checks. -/
-partial def instAt (c : Name) (sys : Expr) : MetaM (Option Bool) := do
+partial def instAt (c : Name) (sys : Expr → Expr) : MetaM (Option Bool) := do
   let e ← mkConstWithFreshMVarLevels c
   let rec go (e ty : Expr) (seen : Bool) : MetaM (Option Bool) := do
     match ty with
     | .forallE _ d b bi =>
-      if d.isConstOf ``PM.Sys then go (.app e sys) (b.instantiate1 sys) true
+      if d.isAppOfArity ``PM.Sys 1 then
+        let s := sys (← instantiateMVars d.appArg!)
+        go (.app e s) (b.instantiate1 s) true
       else if bi.isInstImplicit then
         let d ← instantiateMVars d
         match ← (try some <$> synthInstance d catch _ => pure none) with
@@ -46,11 +48,12 @@ partial def instAt (c : Name) (sys : Expr) : MetaM (Option Bool) := do
   let env ← getEnv
   let props := (env.constants.fold (init := #[]) fun acc c _ =>
     if isPMProp c && !c.isInternal then acc.push c else acc).qsort Name.lt
-  let styles : List (String × Expr) := [
-    ("matrix, p. 55 (primary)", mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.matrix) (mkConst ``RealReading.ownOrder)),
-    ("lowest order, p. 55",     mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.lowestOrder) (mkConst ``RealReading.ownOrder)),
-    ("matrix, p. 54",           mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.matrix) (mkConst ``RealReading.asArgument)),
-    ("lowest order, p. 54",     mkApp2 (mkConst ``Style.of) (mkConst ``PredReading.lowestOrder) (mkConst ``RealReading.asArgument))]
+  let styleOf (P R : Name) (v : Expr) : Expr := mkApp3 (mkConst ``Style.of) v (mkConst P) (mkConst R)
+  let styles : List (String × (Expr → Expr)) := [
+    ("matrix, p. 55 (primary)", styleOf ``PredReading.matrix ``RealReading.ownOrder),
+    ("lowest order, p. 55",     styleOf ``PredReading.lowestOrder ``RealReading.ownOrder),
+    ("matrix, p. 54",           styleOf ``PredReading.matrix ``RealReading.asArgument),
+    ("lowest order, p. 54",     styleOf ``PredReading.lowestOrder ``RealReading.asArgument)]
   let systems : List (String × Name) :=
     [("full", ``Sys.full), ("reducibility", ``Sys.reducibility), ("predicative", ``Sys.predicative), ("base", ``Sys.base)]
   let mut noS : Array Name := #[]
@@ -59,7 +62,7 @@ partial def instAt (c : Name) (sys : Expr) : MetaM (Option Bool) := do
   for (sn, st) in styles do
     let mut row := s!"{sn}:"
     for (yn, y) in systems do
-      let sys := mkApp (mkConst y) st
+      let sys := fun v => mkApp2 (mkConst y) v (st v)
       let mut ok := 0
       for c in props do
         match ← liftTermElabM (instAt c sys) with

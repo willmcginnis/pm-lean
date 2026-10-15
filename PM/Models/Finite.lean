@@ -117,34 +117,34 @@ def emptyModel : QModel := finModel .empty fun _ _ => false
     family `V`: `QThm` at an arbitrary `V` can be degenerate (an empty or one-element type of functions
     makes ✱10·11 too strong, and ✱12·1 or comprehension then contradicts it; PM/Trap.lean), so a
     consistency claim must name a structure's own variables. Uses no axioms. -/
-theorem consistent (S : Sys) : ¬ QThm (V := twoModel.den) S (.atom "p" []) :=
+theorem consistent (S : Sys twoModel.den) : ¬ QThm S (.atom "p" []) :=
   not_qthm_of_countermodel twoModel rfl
 
 /-- Consistency of the theorems that hold for every family of variables (which is how every PM
-    theorem in this project is stated): `p` is not one of them. -/
-theorem consistent_all (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) :=
-  fun h => consistent S (h _)
+    theorem in this project is stated): `p` is not one of them, for a system given at every family. -/
+theorem consistent_all (S : (V : Ty → Type) → Sys V) : ¬ ∀ V : Ty → Type, QThm (S V) (.atom "p" []) :=
+  fun h => consistent (S _) (h _)
 
 /-- PM p. 137: "⊢ : φy . ⊃ . (x) . φx … means 'However y may be chosen, φy implies (x).φx,' which is in
     general false." It is not a theorem: `twoModel` falsifies it. This is why ✱9·13 / ✱10·11 is a rule
     of inference and not an implication. -/
-theorem not_qthm_phiy_imp_all {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V) (y : V .ind), QThm S (QF.imp (φ y) (.all φ)) :=
+theorem not_qthm_phiy_imp_all {S : (V : Ty → Type) → Sys V} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V) (y : V .ind), QThm (S V) (QF.imp (φ y) (.all φ)) :=
   fun h => not_qthm_of_countermodel twoModel
     (p := QF.imp (.atom "φ" [true]) (.all fun x => .atom "φ" [x])) rfl
     (h twoModel.den (fun x => .atom "φ" [x]) true)
 
 /-- ✱10·25 cannot be reversed: `(∃x).φx ⊃ (x).φx` is not a theorem. -/
-theorem not_qthm_ex_imp_all {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (QF.ex φ) (.all φ)) :=
+theorem not_qthm_ex_imp_all {S : (V : Ty → Type) → Sys V} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm (S V) (QF.imp (QF.ex φ) (.all φ)) :=
   fun h => not_qthm_of_countermodel twoModel
     (p := QF.imp (QF.ex fun x => .atom "φ" [x]) (.all fun x => .atom "φ" [x])) rfl
     (h twoModel.den (fun x => .atom "φ" [x]))
 
 /-- ✱10·25 `(x) . φx . ⊃ . (∃x) . φx` needs an individual: it is false in `emptyModel`. So the Lean
     statement of ✱10·25 (PM/Star10.lean) takes the real variable y that PM's proof uses. -/
-theorem not_qthm_all_imp_ex_empty {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm S (QF.imp (.all φ) (QF.ex φ)) :=
+theorem not_qthm_all_imp_ex_empty {S : (V : Ty → Type) → Sys V} :
+    ¬ ∀ (V : Ty → Type) (φ : V .ind → QF V), QThm (S V) (QF.imp (.all φ) (QF.ex φ)) :=
   fun h => not_qthm_of_countermodel emptyModel
     (p := QF.imp (.all fun x => .atom "φ" [x]) (QF.ex fun x => .atom "φ" [x])) rfl
     (h emptyModel.den (fun x => .atom "φ" [x]))

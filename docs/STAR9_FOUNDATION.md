@@ -45,7 +45,7 @@ judgement.
 | PM/Found9/SearchTactic.lean | `merge_split`, meta code for the proof search in C and L: it proposes the two parts of a merge for the side condition `Sep`; the proof is built from `Merge`'s constructors |
 | PM/Found9/Simul.lean | p. 142 for one apparent variable per letter, under A, C, L and B and with the prenex Switch (the `search9`, `search9r` and `search9s` tactics) |
 | PM/Found9/ToStar10.lean | every ✱9 theorem is a ✱10 theorem, under every reading (`thm9_toQ`); ✱8·13, Switch and the prenex Switch are derivable in ✱10 (`exchStep_q10`, `switchStep_q10`, `switch_q10`) |
-| PM/Found9/FromStar10.lean | `Rep S R V` (✱1·2–✱1·6 for every ✱9 proposition under R); given it and a variable of every type, ✱9·25 for every p (`Rep.distrib`) and every ✱10 theorem is a ✱9 theorem (`qthm_toF9`) |
+| PM/Found9/FromStar10.lean | `Rep S R` (✱1·2–✱1·6 for every ✱9 proposition under R); given it and a variable of every type, ✱9·25 for every p (`Rep.distrib`) and every ✱10 theorem is a ✱9 theorem (`qthm_toF9`) |
 | PM/Found9/Equiv.lean | `star9_iff_star10`; soundness, consistency, failure without individuals; neither ✱8·13 nor Switch is a general exchange, and their side condition needs our restriction (`switch_wide_unsound`) |
 | data/star9f_ledger.json | one row per ✱9 number (and ✱10·01, ✱10·1, ✱10·11, ✱10·12 in ✱9), in the format of the other ledgers; for ✱9·31 the check reads C's proof, L's and B's |
 | Checks/Star9Readings.lean, scripts/star9_readings.py | the results under each reading, read from the Lean statements, and where C uses ✱8·13 and L uses Switch; docs/STAR9_READINGS.md |
@@ -294,7 +294,7 @@ Names: `PM.F9.f9_21` is ✱9·21 by ✱9's method; `PM.q9_21` (PM/Star10.lean) i
 
 **Theorem `PM.F9.star9_iff_star10`** (PM/Found9/Equiv.lean): for every system `S`, every reading `R`
 and every ✱10 formula q, `QThm S q ↔ Thm9 S R (q.toF9 R.defs)`. It assumes that every type has a
-variable (`hV`) and `Rep S R V`. **[MEAS]** No axioms.
+variable (`hV`) and `Rep S R`. **[MEAS]** No axioms.
 
 - **✱9 ⊆ ✱10, unconditional apart from `hV`** (`thm9_toQ`), under every reading. Every ✱9 theorem,
   written with ✱10's primitive ideas, is a ✱10 theorem in the same `S`. ✱10 proves each of ✱9's prenex
@@ -303,7 +303,7 @@ variable (`hV`) and `Rep S R V`. **[MEAS]** No axioms.
   after it the proposition is a merge of the same two parts, and each merge is, in ✱10, their
   disjunction); a step of Switch (`switchStep_q10`); and the prenex Switch (`switch_q10`). Its own
   ✱9·1 and ✱9·11 (PM/Star10.lean) are reused. **[MEAS]**
-- **✱10 ⊆ ✱9, given `Rep` and `hV`** (`qthm_toF9`), under every reading. Here `Rep S R V` is
+- **✱10 ⊆ ✱9, given `Rep` and `hV`** (`qthm_toF9`), under every reading. Here `Rep S R` is
   ✱1·2–✱1·6 for every ✱9 proposition under R: the conclusion PM draws on p. 142 ("the propositions of
   ✱1—✱5 hold when p, q, r are replaced by propositions containing any number of apparent variables").
   Given it and a variable of every type, every primitive of the ✱10 system holds in ✱9:

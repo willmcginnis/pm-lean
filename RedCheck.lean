@@ -29,7 +29,7 @@ namespace RedCheckTest
 open QF in
 /-- The constructor takes equality evidence, not a class argument: this uses ✱12·1 without
     `[Reducibility S]`, and RedCheck must flag it. -/
-theorem red_with_explicit_evidence {V : Ty → Type} (S : Sys) (h : S.red = true)
+theorem red_with_explicit_evidence {V : Ty → Type} (S : Sys V) (h : S.red = true)
     {a : Ty} (φ : V a → QF V) :
     QThm S (ex (τ := Ty.pred1 a) fun f => fiff φ fun x => .app1 f x) :=
   QThm.red1 h φ

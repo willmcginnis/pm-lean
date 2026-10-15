@@ -32,7 +32,7 @@ import PM.Replay2
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys} {R : Reading}
+variable {V : Ty → Type} {S : Sys V} {R : Reading}
 
 /-! ## ✱1–✱5 for elementary propositions -/
 

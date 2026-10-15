@@ -73,7 +73,7 @@ scoped prefix:max "−" => QF.clsCompl
 /-- `α − β`: `clsDiff α β` (✱22·05). -/
 scoped infixl:65 " − " => QF.clsDiff
 
-variable {V : Ty → Type} {S : Sys} {a : Ty}
+variable {V : Ty → Type} {S : Sys V} {a : Ty}
 
 /-! Checks of the notation: each statement is the definition it names. -/
 theorem check_notation_cls_incl (α β : V a → QF V) : (α ⊂ β) = fimp (fun x => x ∈ α) (fun x => x ∈ β) := rfl

@@ -7,7 +7,7 @@ import PM.Models.Finite
   - `star9_iff_star10`: for every ✱10 formula q, `QThm S q ↔ Thm9 S R (q.toF9 R.defs)`, in every system
     `S` (every combination of comprehension and reducibility, every style) and under every reading R,
     given that every type has a variable (`hV`) and that ✱1·2–✱1·6 hold for every ✱9 proposition under
-    R (`Rep S R V`, PM's claim on p. 142).
+    R (`Rep S R`, PM's claim on p. 142).
     The direction from ✱9 to ✱10 needs only `hV` (`thm9_toQ`, PM/Found9/ToStar10.lean).
   - `thm9_sound`, `consistent9`: ✱9's method, under every reading, ✱8·13, Switch and the prenex Switch
     included, is sound in every structure with an individual, and does not assert the letter p.
@@ -29,14 +29,14 @@ import PM.Models.Finite
 namespace PM.F9
 open PF
 
-variable {V : Ty → Type} {S : Sys} {R : Reading}
+variable {V : Ty → Type} {S : Sys V} {R : Reading}
 
 /-- **✱9's method and ✱10's alternative method agree** (PM p. 144), in every system `S` and under every
     reading `R` of ✱9: a ✱10 formula is a ✱10 theorem exactly when the ✱9 proposition for which it
     stands under R's definitions is a ✱9 theorem under R. The assumptions: every type has a variable
     (PM's proofs take an individual for granted), and ✱1·2–✱1·6 hold in ✱9 under R for every
-    proposition (`Rep S R V`, PM's claim on p. 142, not proved here under any reading). -/
-theorem star9_iff_star10 (hV : ∀ τ, Nonempty (V τ)) (hR : Rep S R V) (q : QF V) :
+    proposition (`Rep S R`, PM's claim on p. 142, not proved here under any reading). -/
+theorem star9_iff_star10 (hV : ∀ τ, Nonempty (V τ)) (hR : Rep S R) (q : QF V) :
     QThm S q ↔ Thm9 S R (q.toF9 R.defs) :=
   ⟨qthm_toF9 hV hR, fun h => qiffMpRule (toQ_toF9 hV R.defs q) (thm9_toQ hV h)⟩
 
@@ -49,20 +49,20 @@ theorem den_nonempty (M : QModel) (h : Nonempty (M.den .ind)) : ∀ τ, Nonempty
 
 /-- Soundness of ✱9's method: in a structure with an individual, every ✱9 theorem is true (read
     through ✱10's primitive ideas, `PF.toQ`), in every system. -/
-theorem thm9_sound (M : QModel) (h : Nonempty (M.den .ind)) {p : PF M.den} (hp : Thm9 S R p) :
+theorem thm9_sound (M : QModel) (h : Nonempty (M.den .ind)) {S : Sys M.den} {p : PF M.den} (hp : Thm9 S R p) :
     p.toQ.eval M = true :=
   qsound M (thm9_toQ (den_nonempty M h) hp)
 
 /-- Consistency of ✱9's method: the letter p is not a ✱9 theorem (at the variables of `twoModel`), in
     any system. -/
-theorem consistent9 (S : Sys) (R : Reading) : ¬ Thm9 (V := twoModel.den) S R (.el (.atom "p" [])) :=
+theorem consistent9 (S : Sys twoModel.den) (R : Reading) : ¬ Thm9 S R (.el (.atom "p" [])) :=
   fun h => by have := thm9_sound twoModel ⟨true⟩ h; cases this
 
 /-- Without individuals ✱9's method is unsound: at the variables of `emptyModel` (no individual, one
     function of individuals), ✱9·1 with φf = (w) . Pw (w an individual) asserts a proposition that is
     false there. So it is not a ✱10 theorem: `thm9_toQ` fails without `hV`. -/
-theorem thm9_unsound_empty {S : Sys} :
-    ¬ ∀ (V : Ty → Type) (p : PF V), Thm9 S R p → QThm S p.toQ := by
+theorem thm9_unsound_empty {S : (V : Ty → Type) → Sys V} :
+    ¬ ∀ (V : Ty → Type) (p : PF V), Thm9 (S V) R p → QThm (S V) p.toQ := by
   intro h
   have := h emptyModel.den _
     (Thm9.ex1 (τ := Ty.pred1 .ind) (fun _ => .all (τ := .ind) fun w => .el (.atom "P" [w]))
@@ -76,8 +76,8 @@ def eqModel : QModel := finModel .bool fun _ xs => !(Bool.xor (xs.headD false) (
     not assert (x) : (∃y) . R(x, y) : ⊃ : (∃y) : (x) . R(x, y): it is false where R is identity and there
     are two individuals, and with ✱8·13 the method is sound (`thm9_sound`). No ∨ of the matrix R(x, y)
     separates x from y. -/
-theorem exch_not_general (S : Sys) :
-    ¬ Thm9 (V := eqModel.den) S Reading.russell
+theorem exch_not_general (S : Sys eqModel.den) :
+    ¬ Thm9 S Reading.russell
       (Reading.russell.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
         (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
   fun h => by have := thm9_sound eqModel ⟨true⟩ h; cases this
@@ -86,8 +86,8 @@ theorem exch_not_general (S : Sys) :
     assert (x) : (∃y) . R(x, y) : ⊃ : (∃y) : (x) . R(x, y): it is false where R is identity and there
     are two individuals, and with Switch the method is sound (`thm9_sound`). Here (∃y) stands in the
     scope of (x), and no connective of R(x, y) has x on one side and y on the other. -/
-theorem switch_not_general (S : Sys) :
-    ¬ Thm9 (V := eqModel.den) S Reading.withSwitch
+theorem switch_not_general (S : Sys eqModel.den) :
+    ¬ Thm9 S Reading.withSwitch
       (Reading.withSwitch.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
         (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
   fun h => by have := thm9_sound eqModel ⟨true⟩ h; cases this
@@ -108,7 +108,7 @@ inductive SepWide {V : Ty → Type} {τ σ : Ty} : (V τ → V σ → PF V) → 
     on two individuals (take z to be y and x the other). So Switch read with Landini's words alone is
     unsound, and `Sep`, which asks each quantifier of A to bind a variable of one side only, does not
     hold for this A (else L, which is sound, would assert it). -/
-theorem switch_wide_unsound (S : Sys) :
+theorem switch_wide_unsound (S : Sys eqModel.den) :
     ∃ Z : eqModel.den .ind → eqModel.den .ind → PF eqModel.den,
       SepWide Z ∧ (∀ R : Reading, Thm9 S R (.all fun x => .ex fun y => Z x y)) ∧
       (PF.ex fun y => .all fun x => Z x y).toQ.eval eqModel = false ∧ ¬ Sep Z := by

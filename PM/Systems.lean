@@ -15,19 +15,19 @@ import PM.Rules.Reducibility
 namespace PM
 
 /-- Comprehension and reducibility: PM 1910 as built here. -/
-abbrev Sys.full (st : Style) : Sys := ⟨true, true, st⟩
+abbrev Sys.full {V : Ty → Type} (st : Style V) : Sys V := ⟨true, true, st⟩
 /-- Reducibility without comprehension: PM's own route (its proofs form functions by ✱12·1). -/
-abbrev Sys.reducibility (st : Style) : Sys := ⟨false, true, st⟩
+abbrev Sys.reducibility {V : Ty → Type} (st : Style V) : Sys V := ⟨false, true, st⟩
 /-- Comprehension without reducibility: the predicative fragment. -/
-abbrev Sys.predicative (st : Style) : Sys := ⟨true, false, st⟩
+abbrev Sys.predicative {V : Ty → Type} (st : Style V) : Sys V := ⟨true, false, st⟩
 /-- Neither rule: ✱1–✱11. -/
-abbrev Sys.base (st : Style) : Sys := ⟨false, false, st⟩
+abbrev Sys.base {V : Ty → Type} (st : Style V) : Sys V := ⟨false, false, st⟩
 
-instance (st : Style) : Comprehension (Sys.full st) := ⟨rfl⟩
-instance (st : Style) : Reducibility (Sys.full st) := ⟨rfl⟩
-instance (st : Style) : Reducibility (Sys.reducibility st) := ⟨rfl⟩
-instance (st : Style) : Comprehension (Sys.predicative st) := ⟨rfl⟩
+instance {V : Ty → Type} (st : Style V) : Comprehension (Sys.full st) := ⟨rfl⟩
+instance {V : Ty → Type} (st : Style V) : Reducibility (Sys.full st) := ⟨rfl⟩
+instance {V : Ty → Type} (st : Style V) : Reducibility (Sys.reducibility st) := ⟨rfl⟩
+instance {V : Ty → Type} (st : Style V) : Comprehension (Sys.predicative st) := ⟨rfl⟩
 /-- Any system written out with `red := true`. -/
-instance (c : Bool) (st : Style) : Reducibility ⟨c, true, st⟩ := ⟨rfl⟩
+instance {V : Ty → Type} (c : Bool) (st : Style V) : Reducibility ⟨c, true, st⟩ := ⟨rfl⟩
 
 end PM

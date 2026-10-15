@@ -34,7 +34,7 @@ namespace PM
 open QF
 
 namespace QF
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 /-- ✱11·01 `(x, y) . φ(x, y) . = : (x) : (y) . φ(x, y)` Df -/
 @[reducible] def all2 {σ τ : Ty} (φ : V σ → V τ → QF V) : QF V := .all fun x => .all fun y => φ x y
 /-- ✱11·02 `(x, y, z) . φ(x, y, z) . = : (x) : (y, z) . φ(x, y, z)` Df -/
@@ -51,7 +51,7 @@ variable {V : Ty → Type} {S : Sys}
 @[reducible] def fiff2 {σ τ : Ty} (φ ψ : V σ → V τ → QF V) : QF V := all2 fun x y => iff (φ x y) (ψ x y)
 end QF
 
-variable {V : Ty → Type} {S : Sys} {ρ σ τ : Ty}
+variable {V : Ty → Type} {S : Sys V} {ρ σ τ : Ty}
 
 /-! ## Compound citations and transformed forms of ✱10 propositions -/
 
@@ -615,9 +615,9 @@ theorem q11_71 (φ ψ : V σ → QF V) (χ θ : V τ → QF V) :
 /-- PM p. 161, after ✱11·26: "Note that the converse of this proposition is false." It is not a theorem:
     in `twoModel`, with φ(x, y) the formula "φx ≡ φy" (true iff x and y are the same individual),
     `(y) : (∃x) . φ(x, y)` is true and `(∃x) : (y) . φ(x, y)` is false. -/
-theorem not_qthm_converse_11_26 :
+theorem not_qthm_converse_11_26 {S : (V : Ty → Type) → Sys V} :
     ¬ ∀ (V : Ty → Type) (φ : V .ind → V .ind → QF V),
-      QThm S (imp (.all fun y => ex fun x => φ x y) (ex fun x => .all (φ x))) :=
+      QThm (S V) (imp (.all fun y => ex fun x => φ x y) (ex fun x => .all (φ x))) :=
   fun h => not_qthm_of_countermodel twoModel
     (p := imp (.all fun y => ex fun x => iff (.atom "φ" [x]) (.atom "φ" [y]))
       (ex fun x => .all fun y => iff (.atom "φ" [x]) (.atom "φ" [y]))) rfl

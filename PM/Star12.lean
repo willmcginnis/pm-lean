@@ -33,7 +33,7 @@ import PM.Rules.Comprehension
 namespace PM
 open QF
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-- ✱12·1 `⊢ : (∃f) : φx . ≡ₓ . f!x` Pp. φ is a real variable of any order (any formula); f ranges over
     the predicative functions of x's type. -/

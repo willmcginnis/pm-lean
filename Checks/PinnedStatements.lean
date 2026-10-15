@@ -11,7 +11,7 @@ open QF
 
 /-- ✱14·32 is printed with ≡ after E!(ιx)(φx) (p. 194). A review found it had been weakened to ⊃,
     since the hint gives only the ⊃ half; it was restored as printed, the converse proved by ✱14·21. -/
-theorem check_pinned_star14_32_iff {V : Ty → Type} {S : Sys} [Reducibility S] {α : Ty} (φ χ : V α → QF V) :
+theorem check_pinned_star14_32_iff {V : Ty → Type} {S : Sys V} [Reducibility S] {α : Ty} (φ χ : V α → QF V) :
     QThm S (iff (exists1 φ) (iff (desc φ fun z => .neg (χ z)) (.neg (desc φ χ)))) :=
   q14_32 φ χ
 
@@ -25,7 +25,7 @@ theorem check_pinned_star1_4_variant : ¬ Thm (F.imp (.or (F.var "p") (F.var "q"
 /-- "Same theorems either way" was once an unproved remark (a review found it). With reducibility,
     any two of the four styles derive the same theorems, for either setting of comprehension. -/
 theorem check_pinned_styles_equiv {V : Ty → Type} (c : Bool) (P P' : PredReading) (R R' : RealReading) (p : QF V) :
-    QThm (⟨c, true, Style.of P R⟩ : Sys) p ↔ QThm (⟨c, true, Style.of P' R'⟩ : Sys) p :=
+    QThm (⟨c, true, Style.of P R⟩ : Sys V) p ↔ QThm (⟨c, true, Style.of P' R'⟩ : Sys V) p :=
   styles_equiv c P P' R R' p
 theorem check_pinned_styles_equiv_full {V : Ty → Type} (R : RealReading) (p : QF V) :
     QThm (Sys.full (Style.of .matrix R)) p ↔ QThm (Sys.full (Style.of .lowestOrder R)) p :=
@@ -36,7 +36,7 @@ theorem check_pinned_styles_equiv_real {V : Ty → Type} (P : PredReading) (p : 
 
 /-- A review found the styles had been said to differ in whether `realPhi` is derivable; it is a
     theorem of every system, with neither comprehension nor ✱12·1. -/
-theorem check_pinned_real_phi_every_system {V : Ty → Type} (S : Sys) (φ : V (Ty.pred1 .ind)) :
+theorem check_pinned_real_phi_every_system {V : Ty → Type} (S : Sys V) (φ : V (Ty.pred1 .ind)) :
     QThm S (ex (τ := Ty.pred1 .ind) fun g => fiff (fun x => .app1 φ x) fun x => .app1 g x) :=
   realPhi_every_system S φ
 
@@ -54,7 +54,7 @@ theorem check_pinned_lowest_order_def (a b : Ty) (ψ : U a → U b → QF U) :
 
 /-- The `q12_1_of_var` claim was limited, after a review, to comprehension and formulas admitted at
     one order k (uniformly order-bounded): the hypotheses `[Comprehension S]` and `hψ` stay. -/
-theorem check_pinned_star12_1_of_var {V : Ty → Type} {S : Sys} [Comprehension S] {a : Ty} {k : Nat}
+theorem check_pinned_star12_1_of_var {V : Ty → Type} {S : Sys V} [Comprehension S] {a : Ty} {k : Nat}
     (hvar : ∀ g : V (.fn1 a k),
       QThm S (ex (τ := Ty.pred1 a) fun f => fiff (fun x => .app1 g x) fun x => .app1 f x))
     (ψ : V a → QF V) (hψ : S.style.adm1 k ψ) :
@@ -62,7 +62,7 @@ theorem check_pinned_star12_1_of_var {V : Ty → Type} {S : Sys} [Comprehension 
   q12_1_of_var hvar ψ hψ
 
 /-- A review pointed out that the collapse at `U` needs no ✱12·1: comprehension alone gives it. -/
-theorem check_pinned_trap_unit_compr {S : Sys} [Comprehension S]
+theorem check_pinned_trap_unit_compr {S : Sys U} [Comprehension S]
     (hq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .atom "q" [x])
     (hnq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .neg (.atom "q" [x])) (p : QF U) : QThm S p :=
   trap_unit_compr hq hnq p
@@ -79,8 +79,8 @@ theorem check_pinned_matrix_to_lowest {V : Ty → Type} {c r : Bool} (R : RealRe
 
 /-- A consistency claim must name a structure's own variables (PM/Trap.lean): consistency is at the
     model's family, and for the theorems that hold for every family. -/
-theorem check_pinned_consistent (S : Sys) : ¬ QThm (V := twoModel.den) S (.atom "p" []) := consistent S
-theorem check_pinned_consistent_all (S : Sys) : ¬ ∀ V : Ty → Type, QThm (V := V) S (.atom "p" []) := consistent_all S
+theorem check_pinned_consistent (S : Sys twoModel.den) : ¬ QThm S (.atom "p" []) := consistent S
+theorem check_pinned_consistent_all (S : (V : Ty → Type) → Sys V) : ¬ ∀ V : Ty → Type, QThm (S V) (.atom "p" []) := consistent_all S
 
 /-! ## ✱9's definitions and the agreement of ✱9's method with ✱10's -/
 
@@ -156,7 +156,7 @@ theorem check_pinned_star9_25_convention {V : Ty → Type} {σ τ : Ty} (χ : V 
     (F9.PF.all fun x => F9.PF.or (.ex fun u => .el (χ u)) (.el (φ x))) =
       F9.PF.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)) :=
   rfl
-theorem check_pinned_star9_25_every_reading {V : Ty → Type} {S : Sys} {R : F9.Reading} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
+theorem check_pinned_star9_25_every_reading {V : Ty → Type} {S : Sys V} {R : F9.Reading} {σ τ : Ty} (χ : V σ → F9.EF V) (φ : V τ → F9.EF V) :
     F9.Thm9 S R (R.imp (.all fun x => R.or (.ex fun u => .el (χ u)) (.el (φ x)))
       (R.or (.ex fun u => .el (χ u)) (.all fun x => .el (φ x)))) := by
   rcases R with ⟨_ | _ | _, _⟩ <;> exact F9.idt _
@@ -175,7 +175,7 @@ theorem check_pinned_reading_rules : F9.Reading.printed.rule = .basic ∧ F9.Rea
     prefix ... and vice versa", carried over to ✱9: two adjacent quantifiers of the prefix, of any
     kinds, whose variables the ∨ of the matrix separates (`Sep`), inside the quantifiers in front; a
     primitive rule of C, both ways. -/
-theorem check_pinned_russell_exch_rule {V : Ty → Type} {S : Sys} {R : F9.Reading} (h : R.rule = .exch) {k₁ k₂ : Bool} {X Y : F9.PF V}
+theorem check_pinned_russell_exch_rule {V : Ty → Type} {S : Sys V} {R : F9.Reading} (h : R.rule = .exch) {k₁ k₂ : Bool} {X Y : F9.PF V}
     (hs : F9.ExchStep k₁ k₂ X Y) (hX : F9.Thm9 S R X) : F9.Thm9 S R Y :=
   F9.Thm9.exch h hs hX
 theorem check_pinned_exch_step_here {V : Ty → Type} (k₁ k₂ : Bool) {τ σ : Ty} (L : V τ → F9.PF V) (R : V σ → F9.PF V)
@@ -191,12 +191,12 @@ theorem check_pinned_exch_step_symm {V : Ty → Type} {k₁ k₂ : Bool} {X Y : 
     and every step of ✱8·13 is derivable in ✱9+. -/
 theorem check_pinned_switch_iff_exch {V : Ty → Type} {X Y : F9.PF V} : F9.SwitchStep X Y ↔ F9.ExchStep true false X Y :=
   ⟨F9.SwitchStep.toExch, F9.ExchStep.toSwitch⟩
-theorem check_pinned_landini_exch {V : Ty → Type} {S : Sys} (pr : F9.Rule) {k₁ k₂ : Bool} {X Y : F9.PF V}
+theorem check_pinned_landini_exch {V : Ty → Type} {S : Sys V} (pr : F9.Rule) {k₁ k₂ : Bool} {X Y : F9.PF V}
     (h : F9.ExchStep k₁ k₂ X Y) (hX : F9.Thm9 S ⟨.plus, pr⟩ X) : F9.Thm9 S ⟨.plus, pr⟩ Y :=
   F9.exch_plus pr h hX
 
 /-- ✱9·31 in C, along PM's Dem., the step (3)–(4) taken by ✱8·13. -/
-theorem check_pinned_star9_31_russell {V : Ty → Type} {S : Sys} {τ : Ty} (φ : V τ → F9.EF V) :
+theorem check_pinned_star9_31_russell {V : Ty → Type} {S : Sys V} {τ : Ty} (φ : V τ → F9.EF V) :
     F9.Thm9 S F9.Reading.russell (F9.Reading.russell.imp
       (F9.Reading.russell.or (.ex fun x => .el (φ x)) (.ex fun x => .el (φ x))) (.ex fun x => .el (φ x))) :=
   F9.f9_31_russell φ
@@ -204,7 +204,7 @@ theorem check_pinned_star9_31_russell {V : Ty → Type} {S : Sys} {τ : Ty} (φ 
 /-- Landini's Switch (2000, p. 64): "From B[(x)(∃y)Axy] infer B[(∃y)(x)Axy]", one way, inside the
     quantifiers in front, for A that `Sep` admits: a merge of a part with x and a part with y, joined
     by the ∨ of their matrices, in either order. -/
-theorem check_pinned_landini_switch_rule {V : Ty → Type} {S : Sys} {R : F9.Reading} (h : R.defs = .plus) {X Y : F9.PF V}
+theorem check_pinned_landini_switch_rule {V : Ty → Type} {S : Sys V} {R : F9.Reading} (h : R.defs = .plus) {X Y : F9.PF V}
     (hs : F9.SwitchStep X Y) (hX : F9.Thm9 S R X) : F9.Thm9 S R Y :=
   F9.Thm9.switch h hs hX
 theorem check_pinned_switch_step_here {V : Ty → Type} {τ σ : Ty} (L : V τ → F9.PF V) (R : V σ → F9.PF V) (Z : V τ → V σ → F9.PF V)
@@ -214,7 +214,7 @@ theorem check_pinned_switch_step_here {V : Ty → Type} {τ σ : Ty} (L : V τ �
 
 /-- Landini's side condition needs the restriction of `Sep` on the quantifiers of A: read without it,
     Switch takes a theorem to a proposition false where R is identity on two individuals. -/
-theorem check_pinned_switch_wide_unsound (S : Sys) :
+theorem check_pinned_switch_wide_unsound (S : Sys F9.eqModel.den) :
     ∃ Z : F9.eqModel.den .ind → F9.eqModel.den .ind → F9.PF F9.eqModel.den,
       F9.SepWide Z ∧ (∀ R : F9.Reading, F9.Thm9 S R (.all fun x => .ex fun y => Z x y)) ∧
       (F9.PF.ex fun y => .all fun x => Z x y).toQ.eval F9.eqModel = false ∧ ¬ F9.Sep Z :=
@@ -222,13 +222,13 @@ theorem check_pinned_switch_wide_unsound (S : Sys) :
 
 /-- Neither rule exchanges a quantifier with one in whose scope it stands unless a connective
     separates their variables: (x) : (∃y) . ⊃ . (∃y) : (x) is asserted neither in C nor in L. -/
-theorem check_pinned_russell_exch_not_general (S : Sys) :
-    ¬ F9.Thm9 (V := F9.eqModel.den) S F9.Reading.russell
+theorem check_pinned_russell_exch_not_general (S : Sys F9.eqModel.den) :
+    ¬ F9.Thm9 S F9.Reading.russell
       (F9.Reading.russell.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
         (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
   F9.exch_not_general S
-theorem check_pinned_landini_switch_not_general (S : Sys) :
-    ¬ F9.Thm9 (V := F9.eqModel.den) S F9.Reading.withSwitch
+theorem check_pinned_landini_switch_not_general (S : Sys F9.eqModel.den) :
+    ¬ F9.Thm9 S F9.Reading.withSwitch
       (F9.Reading.withSwitch.imp (.all fun x => .ex fun y => .el (.atom "R" [x, y]))
         (.ex fun y => .all fun x => .el (.atom "R" [x, y]))) :=
   F9.switch_not_general S
@@ -236,7 +236,7 @@ theorem check_pinned_landini_switch_not_general (S : Sys) :
 /-- The agreement of ✱9's method with ✱10's has two hypotheses, a variable of every type and ✱1·2–✱1·6
     for every ✱9 proposition (`Rep`); an external review asked that both be stated wherever it is
     cited. It holds under every reading, with `Rep` of that reading. -/
-theorem check_pinned_star9_iff_star10 {V : Ty → Type} {S : Sys} {R : F9.Reading} (hV : ∀ τ, Nonempty (V τ)) (hR : F9.Rep S R V)
+theorem check_pinned_star9_iff_star10 {V : Ty → Type} {S : Sys V} {R : F9.Reading} (hV : ∀ τ, Nonempty (V τ)) (hR : F9.Rep S R)
     (q : QF V) : QThm S q ↔ F9.Thm9 S R (q.toF9 R.defs) :=
   F9.star9_iff_star10 hV hR q
 

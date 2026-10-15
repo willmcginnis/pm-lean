@@ -33,8 +33,8 @@ inductive IsMatrix {V : Ty → Type} : QF V → Prop where
 
 /-- Comprehension accepts ψ at `fn1 a k` when every value of ψ passes the order check at the order of
     that type and, if the type is predicative (k = 0), is a matrix. Likewise for `fn2 a b k`. -/
-def Style.matrix (L : OrderCheck) : Style where
-  adm1 := fun {_ a} k ψ => ∀ x, L (ψ x) (Ty.fn1 a k).ord ∧ (k = 0 → IsMatrix (ψ x))
-  adm2 := fun {_ a b} k ψ => ∀ x y, L (ψ x y) (Ty.fn2 a b k).ord ∧ (k = 0 → IsMatrix (ψ x y))
+def Style.matrix {V : Ty → Type} (L : OrderCheck) : Style V where
+  adm1 := fun {a} k ψ => ∀ x, L (ψ x) (Ty.fn1 a k).ord ∧ (k = 0 → IsMatrix (ψ x))
+  adm2 := fun {a b} k ψ => ∀ x y, L (ψ x y) (Ty.fn2 a b k).ord ∧ (k = 0 → IsMatrix (ψ x y))
 
 end PM

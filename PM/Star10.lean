@@ -14,7 +14,7 @@ import PM.QuantLift
 namespace PM
 open QF
 
-variable {V : Ty → Type} {S : Sys} {τ : Ty}
+variable {V : Ty → Type} {S : Sys V} {τ : Ty}
 
 /-! ## Rules used tacitly by PM (as in PM/Derived.lean, now for ✱10 formulas) -/
 

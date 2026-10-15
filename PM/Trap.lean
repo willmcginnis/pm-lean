@@ -26,8 +26,6 @@ import PM.Pred.Styles
 namespace PM
 open QF
 
-variable {S : Sys}
-
 /-- A family in which (ι)/1, the predicative functions of individuals, is empty. (Written with
     `casesOn`: the equation compiler's version of this match uses `propext`.) -/
 def Vbad (τ : Ty) : Type :=
@@ -37,7 +35,7 @@ def Vbad (τ : Ty) : Type :=
     (fun _ _ _ => Unit)
 
 /-- At `Vbad` every formula is a theorem. -/
-theorem trap_empty [Reducibility S] (p : QF Vbad) : QThm S p :=
+theorem trap_empty {S : Sys Vbad} [Reducibility S] (p : QF Vbad) : QThm S p :=
   let φ : Vbad .ind → QF Vbad := fun x => .atom "q" [x]
   have h1 := q12_1 φ                                                       -- (∃f) : qx ≡ₓ f!x
   have h2 : QThm S (V := Vbad) (.all (τ := Ty.pred1 .ind) fun f =>
@@ -51,7 +49,7 @@ private def glue : F :=
 private theorem glue_thm : Thm glue := complete _ (by decide)
 
 /-- At the one-element family `U` every formula is a theorem. -/
-theorem trap_unit [Reducibility S] (p : QF U) : QThm S p :=
+theorem trap_unit {S : Sys U} [Reducibility S] (p : QF U) : QThm S p :=
   let q : QF U := .atom "q" [()]
   let A : QF U := .app1 (a := .ind) (k := 0) () ()
   -- from (∃f) . P f, P () (every f is ()): ✱10·11 and ✱10·23
@@ -68,7 +66,7 @@ theorem trap_unit [Reducibility S] (p : QF U) : QThm S p :=
     the limitation is not a matter of reducibility: it also affects the comprehension-only (predicative)
     fragment. The hypotheses say that the style admits the two matrices qx and ∼qx at the type of
     predicative functions of individuals; every style here does (PM/Pred/). -/
-theorem trap_unit_compr [Comprehension S]
+theorem trap_unit_compr {S : Sys U} [Comprehension S]
     (hq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .atom "q" [x])
     (hnq : S.style.adm1 (V := U) (a := .ind) 0 fun x => .neg (.atom "q" [x])) (p : QF U) : QThm S p :=
   let q : QF U := .atom "q" [()]

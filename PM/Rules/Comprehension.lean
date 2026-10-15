@@ -21,10 +21,10 @@ namespace PM
 open QF
 
 /-- The system `S` has comprehension at function types. -/
-class Comprehension (S : Sys) : Prop where
+class Comprehension {V : Ty → Type} (S : Sys V) : Prop where
   compr : S.compr = true
 
-variable {V : Ty → Type} {S : Sys}
+variable {V : Ty → Type} {S : Sys V}
 
 /-- Comprehension: `⊢ (∃f : fn1 a k) : ψx . ≡ₓ . f x` for ψ that the style admits at `fn1 a k`. -/
 theorem comprehension1 [Comprehension S] {a : Ty} {k : Nat} (ψ : V a → QF V)

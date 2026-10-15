@@ -19,7 +19,7 @@ import PM.Quant
 namespace PM
 
 /-- The system `S` has the axiom of reducibility (✱12·1, ✱12·11; p. 174). -/
-class Reducibility (S : Sys) : Prop where
+class Reducibility {V : Ty → Type} (S : Sys V) : Prop where
   red : S.red = true
 
 end PM
