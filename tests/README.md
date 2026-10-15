@@ -34,6 +34,7 @@ request. Each test was checked to fail when its mistake is put back.
 | Superseding a released card renamed the unchanged original to `_v2`, and declarations moved to `PM/Deprecated/` were not exported | `test_versioning.py`: in a scratch copy, after a release, ✱21·71 is superseded (old declaration to `PM/Deprecated/Star21.lean` with `@[deprecated]`, new one `PM.q21_71_v2`, a row of data/changes.tsv); both names are exported, the old with its locked digest, the new as `_v2`, and every check passes; without the row, or without the old declaration, the check fails. `test_export_names.py`: a row of data/changes.tsv renames nothing |
 | Locking a replacement (`_v2`) dropped its link to the card it replaces, so the next check failed with no change to the source | `test_versioning.py`: `_v2` is released, regenerated, locked again and checked, every generated file and the lock byte for byte the same; then superseded by `_v3`, released the same way, the chain of three linked in both directions. `test_export_names.py`: generate, `--write-lock`, generate is a fixed point for the repository under its current lock, and for a chain `_v2`, `_v3` locked in turn |
 | The statement mutation's audit of normal forms checked only the heads of applications, so a proof-valued projection, on which the comparison on normal forms and the direct one disagree, passed it | `scripts/mutation/StatementMutation.lean`'s planted cases (`nfSelfTest`, run by every `mutate.py` run): the run fails unless the audit flags the witness's projection as a proof and the witness's comparison takes the direct verdict, and unless it flags a unit-like projection; `test_statement_mutation.py` pins the run's record of the witness (the two comparisons disagree with the audit bypassed, agree with it) |
+| The audit then decided "a proof" and "unit-like" at the elaborator's default transparency, which does not unfold an irreducible definition, though the kernel does: a proof whose type is a proposition only behind one passed it, and the two comparisons disagreed | the same planted cases: a second witness (a proof variable whose type's type is `Prop` behind an irreducible definition) must be flagged and its comparison take the direct verdict, and a projection whose type is `PUnit` behind one must be flagged as unit-like; copies of the tool deciding either test the old way fail the run; `test_statement_mutation.py` pins both records |
 | Ledger rows whose PM text refers to an earlier proof without naming a number ("Proof as above", "As above", "[Similar proof]") kept `hint` with no recorded reason after ruling 63 | `test_ledger_files.py`: every row whose hint in `data/vol1.jsonl` is such a reference is `analogue` or records the reason in its note |
 | The search for forbidden keywords exempted `unsafe def main` in any Lean file under scripts/, not only in scripts/prove2me/extract_commands.lean | `test_forbidden_keywords.py`: on scratch trees outside the repository, `tests/forbidden_keywords.sh` (the step of run_all.sh) passes the exempt line in its own file and finds the same line in four other files under scripts/ and one outside it, and any other `unsafe` line in the exempt file; the repository passes |
 
@@ -47,9 +48,10 @@ missing (shown with stand-in tools) unless `--no-mutation` skips it for a commit
 as skipped with the reason (and refused for a commit with the tool), and `--full` in
 `scripts/release_check.sh`. It also runs Lean once (about 20 s): on a fixed sample of 16 statements, the
 kernel's comparison of each mutant on normal forms must give the same verdict as its direct comparison
-(the full side-by-side check is `mutate.py --compare-methods`); and the run's record of the planted witness,
-a proof-valued projection on which the two comparisons disagree when the audit of the normal forms is
-bypassed, must show the audit flagging it and the verdict taken from the direct comparison.
+(the full side-by-side check is `mutate.py --compare-methods`); and the run's record of the two planted
+witnesses, a proof-valued projection and a proof whose type is a proposition behind an irreducible
+definition, on each of which the two comparisons disagree when the audit of the normal forms is bypassed,
+must show the audit flagging it and the verdict taken from the direct comparison.
 
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
@@ -75,7 +77,7 @@ Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, a
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
-`scripts/mutation/mutate.py --full` (with ✱25, 14 min 59 s with 8 jobs and about 1.48 GiB of memory per
-process, measured on 2026-10-14 on the code of `10fb7d0`,
+`scripts/mutation/mutate.py --full` (with ✱25, 19 min 1 s with 8 jobs and about 1.10 GiB of memory per
+process, measured on 2026-10-15 on the code of `28757e6`,
 [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md#measured-code)) and the Mathlib counterparts. Run it on
 your own machine before an export or a release, not on a time-limited remote.
