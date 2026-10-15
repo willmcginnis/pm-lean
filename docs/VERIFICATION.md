@@ -141,18 +141,19 @@ that both scripts run the step.
 ### Figures
 
 MEASURED on 2026-10-15 on the code of `8dbf6e2` (the script as committed with this section), 4 threads
-for each checker, the commands niced; the machine (8 cores) also ran other jobs, so the load averages
-include them. Peak memory is the maximum resident set of the step's process tree.
+for each checker, the commands niced, on a machine with 8 cores: the last run started at a load average
+of 0.05, which the checkers' own threads raised to about 2.9. The builds are from the first run.
+Peak memory is the maximum resident set of the step's process tree.
 
 | Step | Result | Wall time | Peak memory |
 |---|---|---|---|
 | build lean4export, con-leche, nanoda (first run only) | built | 8 s, 2 min 47 s, 18 s | 0.97 GiB, 0.94 GiB, 0.31 GiB |
 | export | 167,603 declarations, sha256 above | 42 s | 1.71 GiB |
-| con-leche `--verified` | accepted 167,603 declarations | 40 s | 0.74 GiB |
+| con-leche `--verified` | accepted 167,603 declarations | 41 s | 0.74 GiB |
 | nanoda | 175,574 declarations, no typechecker error | 32 s | 0.93 GiB |
 | the scan | the seven axioms declared; `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat` named by none; `Lean.trustCompiler` only by `Lean.reduceBool` and `Lean.reduceNat` | 29 s | 0.22 GiB |
 | the six negative controls | each rejected as required | 8 s | 0.59 GiB |
-| the whole run, tools built | passes | 2 min 35 s (load 0.87 at the start, 2.49 at the end) | 1.71 GiB |
+| the whole run, tools built | passes | 2 min 34 s (load 0.05 at the start, 2.03 at the end) | 1.71 GiB |
 | the whole run, first (tools built in it) | passes but for one control, since changed | 5 min 56 s (load 0.08 at the start, 2.19 at the end) | 1.71 GiB |
 
 nanoda counts an inductive declaration's types, constructors and recursors separately and leaves out the
