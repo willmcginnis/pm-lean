@@ -161,12 +161,12 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (1 done, 15 not started)</summary>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (2 done, 1 in progress, 20 not started)</summary>
 
 ![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
 
 - **Independent Lean kernels**
-  - Independent Lean kernels re-check the build in CI, one checker per code family: *not started*
+  - Independent Lean kernels re-check the build in CI, one checker per code family: *in progress*
 - **Metamath and Rocq**
   - A small, readable independent checker written for this project (a Metamath verifier in a few hundred lines), chosen for clarity over speed: *not started*
   - pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers: *not started*
@@ -181,8 +181,15 @@ The work is split into four groups that run side by side. Each group is split in
   - (a) Census of the kernel features the project exercises: *done*
   - (b) Lean in Lean: Lean4Lean re-checks the build: *not started*
   - (b1) An instrumented independent checker that counts what a static census cannot (proof irrelevance, eta, unit-like types, K versus iota, literal to constructor): *not started*
-  - (c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed: *not started*
-  - (d) A formal proof that the checker used is correct against a specification of the fragment: *not started*
+  - (c) A restricted checker for that fragment, first step: existing verified checkers (con-leche) re-check the build: *done*
+  - (d) What the existing checker's correctness theorem covers: con-leche's specification and theorem audited: *not started*
+  - (e) The fragment the derivations use is consistent relative to plain ZF: a model of it in ZF: *not started*
+  - (f) Our restricted checker for that fragment: one checker, shared by every base below: *not started*
+  - (f1) Its soundness against plain ZF, proved in Lean: *not started*
+  - (f2) The same soundness proved in Metamath's set.mm: *not started*
+  - (f3) The same soundness against PM's own ramified theory, with reducibility: *not started*
+  - (f4) The same soundness against PM's own ramified theory, without reducibility: *not started*
+  - (g) Per-proof translation of the derivations from Lean to set.mm: *not started, later by choice*
 - **Lean and ZFC: relative consistency**
   - Lean proves Con(ZFC): existing mechanizations cited and re-checked: *not started*
   - ZFC with inaccessibles proves Con(Lean's type theory): existing mechanizations cited and re-checked: *not started*

@@ -94,6 +94,20 @@
         "lk-restricted",
         "lk-proof"
       ]
+    },
+    {
+      "id": "ms-fragment-zf",
+      "name": "The derivations' fragment of Lean grounded in ZF",
+      "short": "our restricted checker proved sound in ZF (Lean and set.mm) and in PM's ramified theory",
+      "true_when": "Our restricted checker for the fragment the derivations use re-checks them; its soundness is proved against plain ZF in Lean and in set.mm, and against PM's ramified theory with and without reducibility (or the attempt without it shows where it fails); so the fragment is consistent relative to ZF. Full Lean4Lean is not required.",
+      "reached_by": [
+        "lk-consistency",
+        "lk-checker",
+        "lk-zf-lean",
+        "lk-zf-setmm",
+        "lk-ram-red",
+        "lk-ram-nored"
+      ]
     }
   ],
   "sources": {
@@ -1709,8 +1723,8 @@
               "short": "kernels in CI",
               "size": "S",
               "size_reason": "Existing checkers on the pinned toolchain: the official kernel, one checker of the nanoda family, con-leche (with a machine-checked theorem about what it accepts), and Tenet or eink0rn (separately written).",
-              "status": "not started",
-              "status_note": "CI today builds and runs the project's own checks only.",
+              "status": "in progress",
+              "status_note": "Since 2026-10-15 tests/run_all.sh, which CI runs on every push, re-checks an export of the library and the pinned statements, Lean core included, with con-leche --verified and with nanoda, at pinned commits (scripts/external_checkers.py; docs/VERIFICATION.md, External checkers): 167,603 declarations accepted by each, measured on 8dbf6e2. Still to add: a separately written checker of another family (Tenet or eink0rn).",
               "hard_deps": [],
               "soft_deps": [],
               "order": "by dependency",
@@ -2216,7 +2230,7 @@
               "size": "M",
               "size_reason": "Others' implementation; our part is running it on this project and reading its scope.",
               "status": "not started",
-              "status_note": "Lean4Lean itself is others' work, in progress. Its README says it follows the C++ kernel closely and is not really an independent implementation.",
+              "status_note": "Lean4Lean itself is others' work, in progress. Its README says it follows the C++ kernel closely and is not really an independent implementation. Here it is a checker to run; proving all of Lean correct, the aim of the full Lean4Lean project, is not a goal of this roadmap (ruling 70): the soundness work below is for the fragment the derivations use.",
               "hard_deps": [],
               "soft_deps": [
                 "k-ci"
@@ -2281,11 +2295,11 @@
             },
             {
               "id": "lk-restricted",
-              "name": "(c) A restricted checker for that fragment: first existing verified checkers (con-leche), then our own only if needed",
-              "short": "restricted checker",
+              "name": "(c) A restricted checker for that fragment, first step: existing verified checkers (con-leche) re-check the build",
+              "short": "existing verified checker",
               "size": "M",
-              "size_reason": "First re-check the restricted export of the PM derivations, then the whole build, with con-leche, and with metalean's slow checker if our literals are acceptable to it. Our own restricted checker (for example over a literal-free re-encoding) only if they do not serve.",
-              "status": "not started",
+              "size_reason": "Run an existing checker with a machine-checked theorem on an export of the build: con-leche --verified accepts this development as it is; metalean's slow checker declines Nat and String literals, which the closure of the derivations uses. Our own restricted checker is task (f).",
+              "status": "done",
               "hard_deps": [
                 "lk-census"
               ],
@@ -2353,14 +2367,15 @@
                     ]
                   }
                 ]
-              }
+              },
+              "status_note": "scripts/external_checkers.py, a step of scripts/release_check.sh (and of tests/run_all.sh), which fails the release check if it fails: con-leche --verified (c26f793) accepts all 167,603 declarations of the export of PM and Checks.PinnedStatements, the whole library with Lean core, which contains the closure of the derivations; nanoda (e0d76f5) checks the same export; a scan of the export and six negative controls run with them (measured 2026-10-15 on 8dbf6e2; docs/VERIFICATION.md, External checkers). A separate export of the closure alone was not needed. metalean's slow checker was not run."
             },
             {
               "id": "lk-proof",
-              "name": "(d) A formal proof that the checker used is correct against a specification of the fragment",
-              "short": "checker correctness proof",
-              "size": "L",
-              "size_reason": "For an existing checker: read and audit its specification and theorem, and say what it does not cover (neither con-leche's nor metalean's covers the executable driver). For our own: a refinement proof, research-scale.",
+              "name": "(d) What the existing checker's correctness theorem covers: con-leche's specification and theorem audited",
+              "short": "audit of con-leche's theorem",
+              "size": "M",
+              "size_reason": "Read and audit its specification and theorem (`model_exists`, `no_False_declaration`) and say what it does not cover: the executable driver (neither con-leche's nor metalean's theorem covers it), the arithmetic on numerals done by Lean's runtime, and the set theory assumed (ZF without infinity or choice, with an ω-chain of Grothendieck universes). docs/VERIFICATION.md states these as documented, not checked. A proof about our own checker is task (f1) and the tasks beside it.",
               "status": "not started",
               "hard_deps": [
                 "lk-restricted"
@@ -2407,6 +2422,221 @@
                     "evidence": "from memory"
                   }
                 ]
+              }
+            },
+            {
+              "id": "lk-consistency",
+              "name": "(e) The fragment the derivations use is consistent relative to plain ZF: a model of it in ZF",
+              "short": "fragment consistent in ZF",
+              "size": "L",
+              "size_reason": "A model in ZF of the type theory the closure of the derivations uses. Measured on the code of 6b95af9, whose PM/ is that of 8dbf6e2, by a script not in this repository: the closure uses no axioms; apart from PM.Style, whose fields quantify over V (ruling 74 lets Style take V as a parameter), a type appears as a term only as the outermost schematic V : PM.Ty → Type; universe levels are at most 2. So a chain of two or three universes, which ZF provides, should do, not the ω-chain of Grothendieck universes of the general models.",
+              "status": "not started",
+              "status_note": "Ruling 69 (2); rulings 70–72 make plain ZF (ZFC if needed) the target. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-census"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "con-leche: `model_exists`, every environment it accepts has a model in ZF without infinity or choice with an ω-chain of Grothendieck universes",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "96"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "con-leche's README, future work: a stream that needs only k universes needs only a chain of k, which Lean proves to exist for each concrete k",
+                    "evidence": "documented"
+                  },
+                  {
+                    "work": "Carneiro, The Type Theory of Lean (2019): a model from ZFC with n inaccessibles",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-checker",
+              "name": "(f) Our restricted checker for that fragment: one checker, shared by every base below",
+              "short": "our restricted checker",
+              "size": "L",
+              "size_reason": "A small checker that accepts only the fragment the kernel census lists (no quotient, axiom, mutual or nested type; indexed and reflexive families, K, large elimination, projections, universe polymorphism up to level 2, Nat and String literals), run on the closure of the derivations. One implementation and one specification: the soundness proofs (f1)–(f4) are proofs about it.",
+              "status": "not started",
+              "status_note": "Rulings 71 and 72: one restricted checker, several bases. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-census"
+              ],
+              "soft_deps": [
+                "lk-restricted",
+                "lk-l4l-count"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas"
+                ],
+                "known": [
+                  {
+                    "work": "con-leche: a checker shaped so that its consistency proof is direct (extra comparisons, the 'certification tax')",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "110"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "metalean: a verified checker for an idealised Lean type theory",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "metalean",
+                        "path": "README.md",
+                        "lines": "5-7"
+                      }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-zf-lean",
+              "name": "(f1) Its soundness against plain ZF, proved in Lean",
+              "short": "soundness in ZF, in Lean",
+              "size": "L",
+              "size_reason": "Every environment the checker accepts holds in the model of (e). What is then trusted is Lean itself, for this one proof, and ZF.",
+              "status": "not started",
+              "status_note": "Rulings 70 and 71: ZF (ZFC if needed) plus Lean itself; full Lean4Lean is not the goal. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-checker",
+                "lk-consistency"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "ideas",
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "con-leche: `model_exists`, every environment it accepts has a model in ZF without infinity or choice with an ω-chain of Grothendieck universes",
+                    "evidence": "measured",
+                    "source": [
+                      {
+                        "in": "con-leche",
+                        "path": "ConLeche/MainTheorem.lean",
+                        "lines": "96"
+                      }
+                    ]
+                  },
+                  {
+                    "work": "Mathlib's ZFSet",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-zf-setmm",
+              "name": "(f2) The same soundness proved in Metamath's set.mm",
+              "short": "soundness in ZF, in set.mm",
+              "size": "L",
+              "size_reason": "The checker's soundness against ZF stated and proved in set.mm, whose ZFC is checked by small Metamath verifiers, so that this proof does not rest on Lean.",
+              "status": "not started",
+              "status_note": "Ruling 71. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-checker",
+                "lk-consistency"
+              ],
+              "soft_deps": [
+                "lk-zf-lean"
+              ],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "reuse"
+                ],
+                "known": [
+                  {
+                    "work": "set.mm: ZFC and its set theory, checked by several Metamath verifiers",
+                    "evidence": "documented"
+                  }
+                ]
+              }
+            },
+            {
+              "id": "lk-ram-red",
+              "name": "(f3) The same soundness against PM's own ramified theory, with reducibility",
+              "short": "soundness in PM, with reducibility",
+              "size": "L",
+              "size_reason": "A parallel base: the fragment interpreted in PM's ramified theory with the axioms of reducibility (✱12·1, ✱12·11), using only the part of PM it needs.",
+              "status": "not started",
+              "status_note": "Rulings 71 and 72: both forks, with and without reducibility, in parallel; either outcome is information. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-checker"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "lk-ram-nored",
+              "name": "(f4) The same soundness against PM's own ramified theory, without reducibility",
+              "short": "soundness in PM, without reducibility",
+              "size": "L",
+              "size_reason": "As (f3), without the axioms of reducibility; it may fail, which is a result too.",
+              "status": "not started",
+              "status_note": "Rulings 71 and 72. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [
+                "lk-checker"
+              ],
+              "soft_deps": [],
+              "order": "by dependency",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
+              }
+            },
+            {
+              "id": "lk-translate",
+              "name": "(g) Per-proof translation of the derivations from Lean to set.mm",
+              "short": "per-proof Lean → set.mm",
+              "size": "L",
+              "size_reason": "Each derivation's Lean proof term translated into a set.mm proof and checked there. Distinct from the transfer of PM's own derivations through pm.mm (sm-1 to sm-3).",
+              "status": "not started",
+              "status_note": "Ruling 71. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
+              "hard_deps": [],
+              "soft_deps": [],
+              "order": "by choice",
+              "placed_after": [
+                "lk-zf-lean",
+                "lk-zf-setmm"
+              ],
+              "order_reason": "Ruling 71: after the checker's soundness in ZF ('good, but to come after'). A choice, not a dependency: translating single proofs needs none of those proofs.",
+              "prior_work": {
+                "effect": [
+                  "not yet searched"
+                ],
+                "known": []
               }
             }
           ]
