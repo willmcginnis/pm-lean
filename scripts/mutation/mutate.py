@@ -2,8 +2,10 @@
 """Statement mutation: is each statement tied to its proof? (docs/STATEMENT_MUTATION.md)
 
     python3 scripts/mutation/mutate.py --quick   the export-path tier, well under a minute
-    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 16 min 19 s with 8 jobs and
-                                                 about 1.15 GiB of memory per process (measured 2026-10-14)
+    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 14 min 59 s with 8 jobs and
+                                                 about 1.48 GiB of memory per process (measured
+                                                 2026-10-14 on the code of 10fb7d0; docs/
+                                                 STATEMENT_MUTATION.md, "Measured code")
     python3 scripts/mutation/mutate.py --compare-methods   Part 2 compared both ways (see below)
 
 Both first run `lake build` on the modules the meta-program imports, so that what is analysed is the

@@ -3,7 +3,8 @@
 # push (docs/VERIFICATION.md, "Before a release"). First every standing check (tests/run_all.sh), then
 #   - the full statement mutation (scripts/mutation/mutate.py --full, docs/STATEMENT_MUTATION.md): all
 #     statements of ✱1–✱5 and from ✱9 on, the proof scripts re-elaborated, hypotheses recompiled; with
-#     ✱25, 16 min 19 s with 8 jobs and about 1.15 GiB of memory per process (measured 2026-10-14);
+#     ✱25, 14 min 59 s with 8 jobs and about 1.48 GiB of memory per process (measured 2026-10-14 on
+#     the code of 10fb7d0; docs/STATEMENT_MUTATION.md, "Measured code");
 #   - the Mathlib counterparts compiled against the pinned Mathlib (Checks/MathlibCounterparts/, a Lake
 #     project of its own; `lake exe cache get` downloads Mathlib's build, a few GB, the first time);
 #   - with COUNTERPART_SOURCES=DIR, each counterpart's file, line and source header in checkouts of the

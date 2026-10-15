@@ -17,6 +17,15 @@ questions:
   (`scripts/gen_lean.py`), and `PM/Statements.lean` checks each one with a truth table. A misreading that
   is still a tautology passes that check. The question is whether anything else would catch it.
 
+## Measured code
+
+The figures below of the comparison on normal forms (the latest full run, the side-by-side check, the
+times by chapter, and `--quick` by both methods) were measured on 2026-10-14 on the Lean code and
+scripts of commit `10fb7d0`, the audit of every subterm included. The full run and the first part of
+the side-by-side check finished that day; its other two parts, and `--quick` by both methods, after
+midnight, on 2026-10-15. The earlier full run, which compared by `direct`, is that of the Lean code and
+scripts of `07f82e0`.
+
 ## What it checks
 
 `scripts/mutation/StatementMutation.lean` is a Lean meta-program over the proof terms.
@@ -114,35 +123,101 @@ kernel decides it. There are two ways to ask it (`--method`; `normal` is the def
   again, such as a definition's parameter used twice, is normalized once, and equal results are kept
   as one shared copy. The proof's type is normalized once for all of its mutants.
 
-**Why the verdicts are the same.**
+**Why the verdicts should be the same, and how far this is shown.**
 
-1. Every step replaces a subterm by its weak head normal form, which the kernel reaches from it by
-   its own reductions (β, δ, ι, ζ, projections, literals). So the two are definitionally equal.
-   Definitional equality is a congruence (it holds under application and under binders), so each
-   normal form is definitionally equal to its term.
-2. Therefore, if definitional equality is an equivalence on these terms, the proof's type equals the
-   mutant exactly when their normal forms are equal. The kernel decides both questions, so it gives
-   both the same verdict.
+1. Every step replaces a subterm by its weak head normal form, which the kernel reaches from it by its
+   own reductions: β, δ, ι (with the K-like rule, and eta for structures on a recursor's major
+   premise), ζ, projections, quotients, and the rules for Nat and String literals. So the two are
+   definitionally equal. Definitional equality is a congruence (it holds under application and under
+   binders), so each normal form is definitionally equal to its term.
+2. If definitional equality were transitive on the four terms (the proof's type, the mutant, and their
+   normal forms), the proof's type would equal the mutant exactly when their normal forms are equal.
+   The kernel decides both questions, so it would give both the same verdict.
 
-The assumption in step 2 is not automatic in Lean. Its definitional equality is known to fail
-transitivity in general, but only through proof irrelevance (any two proofs of a proposition are
-equal) and the eta rules for structures and for unit-like types (a type with one constructor and no
-fields). Each rule needs one of three things among the terms compared: a proof, a constructor of a
-structure, or a term of a unit-like type. So the run checks for them:
+Lean's definitional equality is not transitive in general. These are the rules of its kernel (v4.34.1,
+`src/kernel/type_checker.cpp` and `src/kernel/inductive.h`) that can break transitivity, or that
+compare anything but the two trees, and what each needs in the terms compared:
 
-- **The audit.** Every head of every normal form (the constant or variable at the head of an
-  application, or standing alone) is checked. Is it a proof, that is, does its type end in a
-  proposition? Is it a constructor of a structure-like type (one constructor, no indices, not
-  recursive: what the kernel's eta for structures applies to)? Does its type end in a unit-like type?
+| Rule (kernel function) | What it does | Needs, in the terms compared |
+|---|---|---|
+| proof irrelevance (`is_def_eq_proof_irrel`) | any two proofs of the same proposition are equal | a proof: a term whose type is a proposition |
+| K-like reduction (`to_cnstr_when_K`) | a recursor of `Eq` (or any K-like type) computes on any proof of `a = a`, not only on `Eq.refl a` | a proof: the recursor's major premise (K-like types are propositions) |
+| eta for structures (`try_eta_struct`) | `S.mk t.1 … t.n` equals `t` | an application of the constructor of a structure (one constructor, no indices, not recursive) |
+| eta for unit-like types (`is_def_eq_unit_like`) | any two terms of a structure with no fields are equal | a term of a unit-like type, or, after eta for functions, a function into one |
+| string literals (`try_string_lit_expansion`) | a literal equals `String`'s constructor applied to its contents | an application of `String`'s constructor, a structure's constructor |
+
+The kernel's other rules are eta for functions, universe levels up to normalization, a Nat literal
+against `Nat.zero` and `Nat.succ` (`is_def_eq_offset`), the Nat operations on literals (`reduce_nat`),
+the shortcut that reduces a closed term compared with `Bool.true`, and lazy unfolding. Each identifies a
+term with one it reduces to, or decides by the same reductions `nf` performs. None is known to break
+transitivity, and the argument assumes that none does.
+
+The audit once missed a case. A release review found this witness, now one of the planted cases
+(`PMNfTest` in `scripts/mutation/StatementMutation.lean`):
+
+```
+def accRel (_ _ : Nat) : Prop := False
+structure ProofBox : Type where
+  proof : Acc accRel 0
+noncomputable def pick (h : Acc accRel 0) : Nat :=
+  @Acc.rec Nat accRel (fun _ _ => Nat) (fun _ _ _ => 0) 0 h
+def witnessLeft : Prop := ∀ b : ProofBox, pick b.proof = 0
+def witnessRight : Prop := ∀ _b : ProofBox, pick (Acc.intro 0 (fun _ h => False.elim h)) = 0
+```
+
+`direct` says the two are equal: it unfolds `pick` on both sides, and the two proofs of `Acc accRel 0`
+are equal by proof irrelevance. Their normal forms are not equal: the recursor on `b.proof`, a stuck
+projection, does not compute, and the one on `Acc.intro` computes `0`. So `pick b.proof ≡ pick
+(Acc.intro …)` by proof irrelevance and `pick (Acc.intro …) ≡ 0` by ι, but `pick b.proof ≢ 0`. The
+audit then checked only the heads of applications and the constants and variables standing alone. The
+proof `b.proof` is a projection, so the audit was clean, and the comparison on normal forms would have
+said "not equal" where `direct` says "equal". With the audit bypassed the two comparisons still
+disagree on it; with the audit, it flags the projection, `direct` decides, and they agree.
+
+So the run checks the normal forms for what the table needs:
+
+- **The audit.** Every subterm of both normal forms is checked, each distinct subterm once. Is it a
+  proof, that is, is its type a proposition (the level of the type's sort zero up to normalization, as
+  the kernel's `is_prop` tests it)? Is its type a unit-like type, or, under its `∀`s, the type of a
+  function into one? Is it an application of a constructor of a structure? By the constructor of
+  `Expr` a subterm has after `Kernel.whnf`:
+  - an application (`app`): the application and its head are checked. The head is a constructor, a
+    variable, a constant without a definition (an inductive type, an axiom, a stuck recursor) or a stuck
+    projection. A projection's structure argument and every argument are normalized and checked in turn;
+  - a function (`lam`): checked; its binder type and its body (under a fresh variable) in turn;
+  - a projection (`proj`), stuck because its structure argument is not a constructor application:
+    checked, the projection itself and then its structure argument;
+  - a constant (`const`), a variable (`fvar`), a literal (`lit`): checked;
+  - a `∀` (`forallE`) and a sort (`sort`): types, whose type is a sort, so neither a proof nor
+    unit-like nor an application; their binder types and bodies are checked;
+  - metadata (`mdata`) and `let` (`letE`): `Kernel.whnf` removes metadata and reduces a `let` at the
+    root, so neither survives; a loose bound variable (`bvar`) or a metavariable (`mvar`) cannot occur
+    in a closed term opened with fresh variables. If one were met, the comparison would fall back.
 - **The response.** If anything in a statement's normal forms is flagged, every comparison of that
-  statement is decided by `direct` instead. Such a finding costs time, never the verdict.
-- **The result** (MEASURED, the full run of 2026-10-14 under [How to run](#how-to-run)). Nothing is
-  flagged from ✱10 on, nor in ✱1–✱5. The 36 statements of ✱9 (`F9.f…`, PM/Found9/Star9.lean) are
-  flagged: their normal forms contain `Reading.mk` (a reading of ✱9 is a structure) and `PProd.mk` and
-  `PUnit.unit` (from Lean's compilation of the recursive definitions they unfold to). All 488 of their
-  mutants, and 34 of their 36 controls, are decided by `direct`, which takes 0.3 s for them.
+  statement is decided by `direct` instead, and the normal forms of its remaining mutants are not
+  computed. Such a finding costs time, never the verdict.
+- **What the audit shows, and what it does not.** With a clean audit the two normal forms contain
+  nothing the table needs, at any position, and every subterm is in weak head normal form. So the
+  kernel's comparison of the two normal forms takes the trees apart in step and compares them as
+  trees, up to the other rules above. Two things are not shown. First, that a proof, a constructor or a
+  unit-like term that `direct` meets only inside a reduction that removes it from both normal forms
+  (an ι step or a projection taken on both sides) cannot change `direct`'s verdict. Second, that the
+  kernel's algorithm finds every equality of its own relation; both methods rely on it. So this is a
+  conservative syntactic check with a fallback, not a proof of transitivity. The side-by-side check
+  below is the evidence for the rest.
+- **The result** (MEASURED, the full run under [How to run](#how-to-run), [measured
+  code](#measured-code)). Nothing is flagged from ✱10 on, nor in ✱1–✱5, among 1,767,312 subterms
+  checked. The 36 statements of ✱9 (`F9.f…`, PM/Found9/Star9.lean) are flagged: their normal forms
+  contain `Reading.mk` (a reading of ✱9 is a structure) and `PProd.mk` and `PUnit.unit` (from Lean's
+  compilation of the recursive definitions they unfold to). No proof is flagged anywhere. All 488 of
+  their mutants, and 34 of their 36 controls, are decided by `direct`, which takes 0.3 s for them.
 - **The planted cases.** The run fails unless the audit flags a proof (`rfl`, which normalizes to
-  `Eq.refl`), a structure constructor (`Subtype.mk`) and a unit-like term (`PUnit.unit`).
+  `Eq.refl`), a structure constructor (`Subtype.mk`), a unit-like term (`PUnit.unit`), the witness's
+  projection `b.proof` as a proof, and a projection of a unit-like type (`PMNfTest.unitProjection`), and
+  unless the comparison of the witness takes `direct`'s verdict. The run records the witness (record
+  `selfTest`: `direct` true, the normal forms with the audit bypassed false, the projection flagged, the
+  verdict true), the report prints it, and `tests/test_statement_mutation.py` pins the record. A copy of
+  the tool whose audit leaves out projections fails on the witness (checked 2026-10-14).
 
 **The bound.** A comparison also falls back to `direct` in two other cases. One is a normal form that
 needs more than 200,000 steps, where a step is a call of `Kernel.whnf` on a term not met before in the
@@ -151,26 +226,29 @@ steps rather than seconds, so the fallbacks are the same from run to run. The la
 the full run needs 968 steps (✱25·491), and no comparison reaches the bound. A planted case checks that a
 bound of three steps stops a term needing more. `PM_MUTATION_NF_BUDGET` sets another bound.
 
-**The check that the verdicts are the same** (MEASURED, 2026-10-14, with the code of the full run under
-[How to run](#how-to-run)). `mutate.py --compare-methods` runs both methods on every mutant and records
-both verdicts. It fails if they differ anywhere. It ran in three parts:
+**The check that the verdicts are the same** (MEASURED, on the Lean code and scripts of `10fb7d0`, the
+code of the full run under [How to run](#how-to-run); [measured code](#measured-code)).
+`mutate.py --compare-methods` runs both methods on every mutant and records both verdicts. It fails if
+they differ anywhere. It ran in three parts:
 
 | Statements | Mutants | Disagreements | Decided by `direct` (audit) | `direct` | `normal` | Memory |
 |---|---|---|---|---|---|---|
-| ✱1–✱22 (787 statements) | 13,556 | 0 | 522 (✱9) | 97.0 s | 20.7 s | 1.32 GiB |
-| ✱23–✱24 (142) | 1,902 | 0 | 0 | 965.6 s | 11.1 s | 5.27 GiB |
-| ✱25, all but ✱25·431 and ✱25·432 (68) | 1,006 | 0 | 0 | 750.4 s | 7.8 s | 3.09 GiB |
+| ✱1–✱22 (787 statements) | 13,556 | 0 | 522 (✱9) | 70.3 s | 28.2 s | 1.43 GiB |
+| ✱23–✱24 (142) | 1,902 | 0 | 0 | 945.8 s | 115.5 s | 5.36 GiB |
+| ✱25, all but ✱25·431 and ✱25·432 (68) | 1,006 | 0 | 0 | 755.9 s | 126.1 s | 3.20 GiB |
 
-The columns `direct` and `normal` give each method's comparison time in the same run; memory is the
-run's maximum resident set (`/usr/bin/time -v`), nearly all of it `direct`'s. The controls agree too. All
-of ✱1–✱24 was compared: 929 statements and 15,458 mutants. ✱25·431 and ✱25·432 were left out of this
-check (`--skip`) because `direct` takes about an hour on each.
+The columns `direct` and `normal` give each method's comparison time in the same run, `normal` with the
+audit of every subterm; memory is the run's maximum resident set (`/usr/bin/time -v`), nearly all of it
+`direct`'s. The controls agree too. All of ✱1–✱24 was compared: 929 statements and 15,458 mutants.
+✱25·431 and ✱25·432 were left out of this check (`--skip`) because `direct` takes about an hour on each.
 
 They are covered by the records of the two full runs instead. One is the earlier full run on the Lean
-code of `07f82e0`, which compared by `direct`. The other is the full run by `normal` described under
-[How to run](#how-to-run). The two give the same verdict on every mutant: 16,512 mutants of 999
-statements, the 48 of ✱25·431 and ✱25·432 among them. They also agree on every control, every tautology
-result and every printed mutant.
+code and scripts of `07f82e0`, which compared by `direct`. The other is the full run by `normal` on
+`10fb7d0` described under [How to run](#how-to-run). The two give the same verdict on every mutant:
+16,512 mutants of 999 statements, the 48 of ✱25·431 and ✱25·432 among them. They also agree on every
+control, every tautology result and every printed mutant. Their records differ only in Part 1: the
+later run has the 30 hypotheses of the check theorems, and three hypotheses whose types changed with
+ruling 64 ([Results](#results)).
 
 Every mutant compared in these checks is rejected by both methods, and every control is accepted by
 both. So the agreement on "accepted" rests on the 999 controls, since no mutant is accepted.
@@ -178,22 +256,25 @@ both. So the agreement on "accepted" rests on the 999 controls, since no mutant 
 `tests/test_statement_mutation.py` reruns the side-by-side check on a fixed sample of 16 statements, one
 from each module with mutants (about 20 s). That test is part of `tests/run_all.sh`.
 
-**Time by chapter** (MEASURED, 2026-10-14). The time spent comparing, normal forms included:
+**Time by chapter** (MEASURED, [measured code](#measured-code)). The time spent comparing, normal forms
+and their audit included:
 
 | | `direct` | `normal` |
 |---|---|---|
-| ✱22 | 95 s | 4.0 s |
-| ✱23 | 302 s | 4.6 s |
-| ✱24 | 663 s | 6.5 s |
-| ✱25, all but ✱25·431 and ✱25·432 | 750 s | 7.8 s |
-| ✱25·431 | 3452 s | 0.28 s |
-| ✱25·432 | 3282 s | 0.26 s |
+| ✱22 | 69 s | 11.3 s |
+| ✱23 | 262 s | 14.0 s |
+| ✱24 | 683 s | 101.6 s |
+| ✱25, all but ✱25·431 and ✱25·432 | 756 s | 126.1 s |
+| ✱25·431 | 3452 s | 1.7 s |
+| ✱25·432 | 3282 s | 1.8 s |
 
 The rows for ✱22–✱25 come from the side-by-side check above. Those for ✱25·431 and ✱25·432 come from
-the records of the two full runs, `direct` from the earlier one (Lean code of `07f82e0`) and `normal`
-from the latest. With `normal`, the statements from ✱9 on spend most of their time in the tautology
-test (`F.isTaut` in the kernel) rather than in the comparison: in the latest full run 186 s against
-43 s.
+the records of the two full runs, `direct` from the earlier one (Lean code and scripts of `07f82e0`) and
+`normal` from the latest (`10fb7d0`). Most of `normal`'s time is now the audit, which infers the type of
+every subterm of every normal form: before the audit covered every subterm (code of `6aba237`, the same
+day), the comparisons of the full run took 45 s in all, against 276 s now. In the latest full run the
+statements from ✱9 on spent 274 s in their comparisons and 151 s in the tautology test (`F.isTaut` in
+the kernel).
 
 **Part 2, re-elaborated (`--full`, ✱1–✱5).** A proof *term* is tied to its statement almost by
 construction. A proof *script* is not: `by decide`, a decision procedure or `complete` would prove any
@@ -208,11 +289,12 @@ therefore exactly the ones a proof by decision procedure could still prove.
 
 ## Results
 
-Results are from the latest full run (`mutate.py --full`, 2026-10-14), comparing on normal forms, with
-✱1–✱25 included. It ran to completion and exited 0: "statement mutation: no unexpected finding". It
-took 16 min 19 s with 8 jobs ([below](#how-to-run)). The earlier full run, which compared by `direct` on
-the Lean code of `07f82e0`, found the same in Part 2 and in the re-elaboration, record for record; in
-Part 1 it counted fewer theorems and recompiled a slightly different set of hypotheses (below).
+Results are from the latest full run (`mutate.py --full`, 2026-10-14, on the Lean code and scripts of
+`10fb7d0`; [measured code](#measured-code)), comparing on normal forms, with ✱1–✱25 included. It ran to
+completion and exited 0: "statement mutation: no unexpected finding". It took 14 min 59 s with 8 jobs
+([below](#how-to-run)). The earlier full run, which compared by `direct` on the Lean code and scripts of
+`07f82e0`, found the same in Part 2 and in the re-elaboration, record for record; in Part 1 it counted
+fewer theorems and recompiled a slightly different set of hypotheses (below).
 
 **Part 1.** No unused hypotheses: 1784 theorems, 1039 hypotheses (520 premises, 478 class arguments, 41
 unreferenced variables), and 0 unused, by both the plain and the refined test. The 313 check theorems are
@@ -323,7 +405,7 @@ No fidelity problem was found.
 
 ```
 python3 scripts/mutation/mutate.py --quick   # about 10 s idle, under a minute loaded; in tests/run_all.sh
-python3 scripts/mutation/mutate.py --full    # about 16 minutes with 8 jobs, see below (--jobs N); in scripts/release_check.sh
+python3 scripts/mutation/mutate.py --full    # about 15 minutes with 8 jobs, see below (--jobs N); in scripts/release_check.sh
 python3 scripts/mutation/mutate.py --compare-methods [--modules M,…] [--only D,…] [--skip D,…]
 ```
 
@@ -354,21 +436,23 @@ Here `F.isTaut` runs as compiled code rather than in the kernel. It is the same 
 sample it gives the same verdict on all 469 mutants. The run measured 8 s: Part 1 took 4.6 s, the sample
 0.2 s, the build step under a second, and the rest is Lean's start-up. The sample could grow at little cost.
 With the comparison by normal forms the output of `--quick` is unchanged: run with `--method normal` and
-with `--method direct`, it gives the same 1522 records apart from the fields that record the method and
-the times (2026-10-14; 11 s and 9 s).
+with `--method direct`, it gives the same 1523 records apart from the fields that record the method, the
+times and the fallbacks (10 s and 9 s; [measured code](#measured-code)).
 
-`--full` runs everything above. With ✱1–✱25, comparing on normal forms, it measured 979 s, 16 min 19 s,
-on 2026-10-14 with `--jobs 8` (the default on an 8-core machine). These are the figures of one run, not
-a bound:
+`--full` runs everything above. With ✱1–✱25, comparing on normal forms, it measured 899 s, 14 min 59 s,
+with `--jobs 8` (the default on an 8-core machine; [measured code](#measured-code)). These are the
+figures of one run, not a bound:
 
-- the meta-program, 360 s: Part 1 6 s, the ✱1–✱5 statements 84 s, the statements from ✱9 on 265 s;
-- re-elaboration, 98 s;
-- hypothesis recompilation, 521 s.
+- the meta-program, 531 s: Part 1 5 s, the ✱1–✱5 statements 65 s, the statements from ✱9 on 455 s;
+- re-elaboration, 60 s;
+- hypothesis recompilation, 308 s.
 
-The kernel's comparisons of each proof's type with its mutants, normal forms included, took 45 s (2 s for
-✱1–✱5, 43 s from ✱9 on), and the tautology tests 251 s (65 s and 186 s). The meta-program is a single
-process; `--jobs` applies only to the recompilations, which take most of the time now. For the whole run
-`/usr/bin/time -v` reported a maximum resident set of 1,204,916 kB (about 1.15 GiB) and 318% CPU.
+The kernel's comparisons of each proof's type with its mutants, normal forms and their audit included,
+took 276 s (3 s for ✱1–✱5, 274 s from ✱9 on), and the tautology tests 200 s (49 s and 151 s). The
+meta-program is a single process; `--jobs` applies only to the recompilations. For the whole run
+`/usr/bin/time -v` reported a maximum resident set of 1,551,856 kB (about 1.48 GiB) and 370% CPU.
+Before the audit covered every subterm, the same run on the code of `6aba237` measured 979 s, of which
+360 s in the meta-program and 45 s in the comparisons, and 1,204,916 kB.
 
 The earlier full run compared by `direct` ([How a mutant is compared](#how-a-mutant-is-compared)). With
 ✱1–✱25 it measured 9142 s, 2 h 32 min, on 2026-10-14, on the Lean code and scripts of commit `07f82e0`.
@@ -388,10 +472,11 @@ comparisons on normal forms for contrast:
 | | ✱1–✱21 | ✱22 | ✱23 | ✱24 | ✱25 |
 |---|---|---|---|---|---|
 | comparisons by `direct` (earlier run) | under 2 s | 70 s | 276 s | 689 s | 7482 s |
-| comparisons on normal forms (latest run) | 18 s | 3.7 s | 4.5 s | 9.0 s | 9.8 s |
+| comparisons on normal forms (latest run, `10fb7d0`) | 18 s | 11 s | 14 s | 102 s | 131 s |
 
-On the small statements of ✱1–✱21 computing the normal forms costs more than the direct comparison
-saves; 8 s of the 18 s are ✱9's normal forms, computed for the audit before its comparisons fall back.
+On the small statements of ✱1–✱21 computing and auditing the normal forms costs more than the direct
+comparison saves. ✱9 takes 1.3 s of the 18 s: once a statement's audit has flagged something, the normal
+forms of its remaining mutants are not computed.
 
 A few statements took most of it, each with 6 to 52 mutants: ✱25·431 3452 s and ✱25·432 3282 s
 (together 77% of the meta-program), ✱24·431 260 s, ✱24·432 241 s, ✱25·491 206 s, ✱25·493 166 s,
@@ -427,10 +512,10 @@ What is wired now:
 - **`--full` runs before a release**, in `scripts/release_check.sh`, with the other long checks
   ([VERIFICATION.md](VERIFICATION.md#before-a-release)). That means all of Part 2 and the
   re-elaboration. The re-elaboration is the part that can tell a proof by PM's derivation from a proof by
-  decision. With ✱25 it measured 16 min 19 s with 8 jobs, comparing on normal forms (2 h 32 min the
-  earlier way; 2026-10-14, above), and it runs on our own machines only.
+  decision. With ✱25 it measured 14 min 59 s with 8 jobs, comparing on normal forms (2 h 32 min the
+  earlier way; [measured code](#measured-code), above), and it runs on our own machines only.
 - **Hypothesis recompilation stays part of `--full`** (the maintainer's ruling 68, 2026-10-14). The
-  recommendation called it optional: it found nothing beyond the term analysis, at 5 to 9 minutes (521 s
-  in the latest run with ✱25), now the larger part of `--full`. It costs only time on our own machines.
+  recommendation called it optional: it found nothing beyond the term analysis, at 5 to 9 minutes (308 s
+  in the latest run with ✱25, 521 s in the one before it). It costs only time on our own machines.
 - **The link to PM's text** that mutation cannot check is now `tests/test_regeneration.py`, a test in
   `tests/run_all.sh` ([above](#what-this-says-about-the-tie-to-pms-text)).
