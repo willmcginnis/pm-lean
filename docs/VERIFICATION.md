@@ -185,26 +185,25 @@ crash, of either checker to fail the step; and it checks that both scripts run t
 
 ### Figures
 
-MEASURED on 2026-10-15 on the code of `8dbf6e2` (the script as committed with this section), 4 threads
-for each checker, the commands niced, on a machine with 8 cores: the last run started at a load average
-of 0.05, which the checkers' own threads raised to about 2.9. The builds are from the first run.
-Peak memory is the maximum resident set of the step's process tree.
+MEASURED on 2026-10-15 on the PM code of `8dbf6e2`, with the script as committed with this section, 4
+threads for each checker, the commands niced, on a machine with 8 cores: the run started at a load
+average of 1.36 (other work on the machine) and ended at 3.15, with a peak of about 4.5 while the checkers
+ran. The tools were built by an earlier run; their builds are those of the first run of the script
+(load 0.08 at its start). Peak memory is the maximum resident set of the step's process tree.
 
 | Step | Result | Wall time | Peak memory |
 |---|---|---|---|
 | build lean4export, con-leche, nanoda (first run only) | built | 8 s, 2 min 47 s, 18 s | 0.97 GiB, 0.94 GiB, 0.31 GiB |
-| export | 167,603 declarations, sha256 above | 42 s | 1.71 GiB |
-| con-leche `--verified` | accepted 167,603 declarations | 41 s | 0.74 GiB |
-| nanoda | 175,574 declarations, no typechecker error | 32 s | 0.93 GiB |
-| the scan | the seven axioms declared; `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat` named by none; `Lean.trustCompiler` only by `Lean.reduceBool` and `Lean.reduceNat` | 29 s | 0.22 GiB |
-| the six negative controls | each rejected as required | 8 s | 0.59 GiB |
-| the whole run, tools built | passes | 2 min 34 s (load 0.05 at the start, 2.03 at the end) | 1.71 GiB |
-| the whole run, first (tools built in it) | passes but for one control, since changed | 5 min 56 s (load 0.08 at the start, 2.19 at the end) | 1.71 GiB |
+| export | 167,603 declaration records, sha256 above | 44 s | 1.77 GiB |
+| con-leche `--verified` | accepted 167,603 declarations | 49 s | 0.74 GiB |
+| nanoda | 175,574 declarations, no typechecker error | 37 s | 0.93 GiB |
+| the scan | the seven axioms declared; `sorryAx`, `Lean.ofReduceBool`, `Lean.ofReduceNat` named by none; `Lean.trustCompiler` only by `Lean.reduceBool` and `Lean.reduceNat`; both counts agree | 31 s | 0.28 GiB |
+| the implementation attributes | none on the 3,444 declarations under `PM` and `Checks`; 44 `unsafe` or `partial` | 11 s | 3.01 GiB (two environments loaded, Lean's own and the repository's) |
+| the ten negative controls | each rejected as required | 13 s | 1.44 GiB |
+| the whole run, tools built | passes | 3 min 9 s (load 1.36 at the start, 3.15 at the end) | 3.01 GiB |
 
-nanoda counts an inductive declaration's types, constructors and recursors separately and leaves out the
-axioms it skips: the export has 175,577 declarations counted that way, less `sorryAx`,
-`Lean.ofReduceBool` and `Lean.ofReduceNat`. con-leche's count, like the scan's, is one per declaration
-of the export.
+The earlier code of the script, without the count reconciliation, the attribute check and the last four
+controls, took 2 min 34 s from a load of 0.05; its first run, the tools built in it, 5 min 56 s.
 
 ### What these checks show, and what they do not
 

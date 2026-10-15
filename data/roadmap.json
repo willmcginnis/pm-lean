@@ -2368,7 +2368,7 @@
                   }
                 ]
               },
-              "status_note": "scripts/external_checkers.py, a step of scripts/release_check.sh (and of tests/run_all.sh), which fails the release check if it fails: con-leche --verified (c26f793) accepts all 167,603 declarations of the export of PM and Checks.PinnedStatements, the whole library with Lean core, which contains the closure of the derivations; nanoda (e0d76f5) checks the same export; a scan of the export and six negative controls run with them (measured 2026-10-15 on 8dbf6e2; docs/VERIFICATION.md, External checkers). A separate export of the closure alone was not needed. metalean's slow checker was not run."
+              "status_note": "scripts/external_checkers.py, a step of scripts/release_check.sh (and of tests/run_all.sh), which fails the release check if it fails: con-leche --verified (c26f793) accepts all 167,603 declarations of the export of PM and Checks.PinnedStatements, the whole library with Lean core, which contains the closure of the derivations; nanoda (e0d76f5) checks the same export, each count reconciled with the export's; a scan of the export (names compared as structured names), a check that no declaration of the repository has an implementation attribute, and ten negative controls run with them (measured 2026-10-15 on 8dbf6e2; docs/VERIFICATION.md, External checkers). A separate export of the closure alone was not needed. metalean's slow checker was not run."
             },
             {
               "id": "lk-proof",
