@@ -14,6 +14,24 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   note now says so, docs/FIDELITY.md lists them with the other exceptions, and `tests/test_ledger_files.py`
   requires every row whose hint is such a reference to be `analogue` or to carry the reason. Only the notes
   changed.
+- **The statement mutation's audit no longer remembers a failed classification as a successful one**
+  (`608ba9d`; docs/STATEMENT_MUTATION.md, "How a mutant is compared"). A third release review found that
+  the audit entered a subterm in its set of subterms checked, which is kept for all mutants of a
+  statement, before classifying it, while the fallback a failure sets lasts for one normal form. So
+  after a failure a later mutant of the same statement skipped the subterm and could be decided on its
+  normal forms although they contain a proof. Its witness: `failedObserve failedProof`, then `… ∨ False`,
+  then `… ∧ True`, where the type of `failedProof`'s type is `Prop` behind an irreducible definition and
+  cannot be inferred; the first two fell back, the third audited clean. A subterm now enters the set only
+  once its classification has succeeded, together with what it found, so every normal form containing a
+  subterm whose classification fails falls back. The witness is a planted case: the run fails unless all
+  three propositions, normalized in one state in that order, fall back, and a copy of the tool that
+  enters the subterm first fails. The full run falls back on the same 522 comparisons as before (all of
+  ✱9), so the fault decided none of them. The insertion is now also made in place: before, it copied the
+  set each time (on Part 2 of ✱24 and ✱25, 378 s in the normal forms against 42 s in place, the same
+  verdicts); the comparisons of the full run take 74 s, against 469 s before on a loaded machine. Measured
+  again on this code, on an otherwise idle machine: the full run (703 s with 8 jobs, about 1.94 GiB; the
+  same verdicts on all 16,512 mutants and 999 statements), the side-by-side check (0 disagreements,
+  13,556 + 1,902 + 1,006 mutants) and `--quick` by both methods (1523 records the same).
 - **The statement mutation's audit decides as the kernel does** (`28757e6`; docs/STATEMENT_MUTATION.md,
   "How a mutant is compared"). A second release review found that the audit of the normal forms decided
   "a proof" and "unit-like" by reducing types at the elaborator's default transparency, which does not
@@ -26,10 +44,11 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   are planted cases: the run fails unless both are flagged and the witness's comparison takes the direct
   verdict, and copies of the tool that decide the old way fail. The audit also checks the partial
   applications of every application, so that it checks every node of the normal forms (2,321,447
-  subterms in the full run, 1,767,312 before; about half again the comparison time, minutes in all). The
-  full run, the side-by-side check (0 disagreements, 13,556 + 1,902 + 1,006 mutants) and `--quick` by
-  both methods (1523 records the same) were measured again on this code; the full run gives the same
-  verdicts as before on all 16,512 mutants and 999 statements.
+  subterms in the full run, 1,767,312 before; about a third more time in the normal forms, measured on
+  `608ba9d`). The full run, the side-by-side check (0 disagreements, 13,556 + 1,902 + 1,006 mutants) and
+  `--quick` by both methods (1523 records the same) were measured again on this code, and again on
+  `608ba9d` (above); the full run gives the same verdicts as before on all 16,512 mutants and 999
+  statements.
 
 ## 2026-10-14
 
@@ -177,11 +196,11 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     hypothesis in 1784 theorems (1039 hypotheses, the check theorems' included), none of 16,512 mutants of
     999 statements accepted by a proof term (4668 of ✱1–✱5, 11,844 from ✱9 on), none of 188 hypotheses
     replaced by `True` compiling, and only the 14 known renamings surviving re-elaboration. On the Lean
-    code and scripts of `28757e6` (2026-10-15, the audit as fixed then, below; docs/STATEMENT_MUTATION.md,
-    "Measured code") it took 1141 s, 19 min 1 s, with 8 jobs on a loaded machine: the meta-program
-    777 s, of which 469 s the kernel's comparisons (most of it the audit of the normal forms, below) and
-    221 s the tautology tests; re-elaboration 62 s; hypothesis recompilation 303 s; a maximum resident
-    set of about 1.10 GiB for any one process. The
+    code and scripts of `608ba9d` (2026-10-15, the audit as fixed then, above; docs/STATEMENT_MUTATION.md,
+    "Measured code") it took 703 s, 11 min 43 s, with 8 jobs on an otherwise idle machine: the
+    meta-program 329 s, of which 74 s the kernel's comparisons (the normal forms and their audit
+    included) and 199 s the tautology tests; re-elaboration 61 s; hypothesis recompilation 313 s; a
+    maximum resident set of about 1.94 GiB for any one process. The
     tool takes every numbered proposition from ✱9 on, so its output no longer calls that group ✱9–✱21.
   - Hypothesis recompilation stays in `--full` (the maintainer's ruling 68): at 5 to 9 minutes it costs
     only time on our own machines.
@@ -191,8 +210,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     8519 s of it in the comparisons, which grow steeply with the nesting of the class and relation
     definitions (✱22 70 s, ✱23 276 s, ✱24 689 s, ✱25 7482 s, of which ✱25·431 3452 s and ✱25·432
     3282 s), with a maximum resident set of about 22 GiB; on normal forms ✱25·431's comparisons take
-    3.2 s. The verdicts are the same: checked side by side (`mutate.py --compare-methods`, 0
-    disagreements, on `28757e6`) on every mutant of ✱1–✱24 and of ✱25 but ✱25·431 and ✱25·432 (997
+    0.6 s. The verdicts are the same: checked side by side (`mutate.py --compare-methods`, 0
+    disagreements, on `608ba9d`) on every mutant of ✱1–✱24 and of ✱25 but ✱25·431 and ✱25·432 (997
     statements, 16,464 mutants), and on all 16,512 mutants by the two full runs' records
     (docs/STATEMENT_MUTATION.md, "How a mutant is compared", with the argument and its limits).
   - An audit of every subterm of the normal forms for what the kernel's rules that can break
@@ -209,7 +228,7 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
     projection and its comparison takes the direct verdict; a unit-like projection is planted too. The
     run records the witness, and `tests/test_statement_mutation.py` pins the record (the two comparisons
     disagree with the audit bypassed, agree with it) and checks on a sample of 16 statements that the
-    two comparisons agree (it runs Lean, about 20 s). A second review found more (above, 2026-10-15).
+    two comparisons agree (it runs Lean, about 20 s). A second and a third review found more (above, 2026-10-15).
 - **`scripts/release_check.sh`** puts the checks before a release in one place (docs/VERIFICATION.md,
   "Before a release"). It runs `tests/run_all.sh`, the full statement mutation, the Mathlib
   counterparts, and, given checkouts of the pins, the counterparts' sources. `tests/run_all.sh` runs the

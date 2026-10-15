@@ -2,9 +2,9 @@
 """Statement mutation: is each statement tied to its proof? (docs/STATEMENT_MUTATION.md)
 
     python3 scripts/mutation/mutate.py --quick   the export-path tier, well under a minute
-    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 19 min 1 s with 8 jobs and
-                                                 about 1.10 GiB of memory per process (measured
-                                                 2026-10-15 on the code of 28757e6; docs/
+    python3 scripts/mutation/mutate.py --full    everything; with ✱25, 11 min 43 s with 8 jobs and
+                                                 about 1.94 GiB of memory per process (measured
+                                                 2026-10-15 on the code of 608ba9d; docs/
                                                  STATEMENT_MUTATION.md, "Measured code")
     python3 scripts/mutation/mutate.py --compare-methods   Part 2 compared both ways (see below)
 

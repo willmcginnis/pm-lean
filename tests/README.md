@@ -35,6 +35,7 @@ request. Each test was checked to fail when its mistake is put back.
 | Locking a replacement (`_v2`) dropped its link to the card it replaces, so the next check failed with no change to the source | `test_versioning.py`: `_v2` is released, regenerated, locked again and checked, every generated file and the lock byte for byte the same; then superseded by `_v3`, released the same way, the chain of three linked in both directions. `test_export_names.py`: generate, `--write-lock`, generate is a fixed point for the repository under its current lock, and for a chain `_v2`, `_v3` locked in turn |
 | The statement mutation's audit of normal forms checked only the heads of applications, so a proof-valued projection, on which the comparison on normal forms and the direct one disagree, passed it | `scripts/mutation/StatementMutation.lean`'s planted cases (`nfSelfTest`, run by every `mutate.py` run): the run fails unless the audit flags the witness's projection as a proof and the witness's comparison takes the direct verdict, and unless it flags a unit-like projection; `test_statement_mutation.py` pins the run's record of the witness (the two comparisons disagree with the audit bypassed, agree with it) |
 | The audit then decided "a proof" and "unit-like" at the elaborator's default transparency, which does not unfold an irreducible definition, though the kernel does: a proof whose type is a proposition only behind one passed it, and the two comparisons disagreed | the same planted cases: a second witness (a proof variable whose type's type is `Prop` behind an irreducible definition) must be flagged and its comparison take the direct verdict, and a projection whose type is `PUnit` behind one must be flagged as unit-like; copies of the tool deciding either test the old way fail the run; `test_statement_mutation.py` pins both records |
+| The audit then remembered a subterm as checked before classifying it, for all mutants of a statement, while a failed classification made only that normal form fall back: a later mutant containing the subterm skipped it and audited clean, its normal forms containing a proof | the same planted cases: three propositions containing a subterm whose type cannot be inferred, normalized in one state in that order, must each fall back to the direct comparison; a copy of the tool that remembers the subterm first fails the run; `test_statement_mutation.py` pins the record of all three |
 | Ledger rows whose PM text refers to an earlier proof without naming a number ("Proof as above", "As above", "[Similar proof]") kept `hint` with no recorded reason after ruling 63 | `test_ledger_files.py`: every row whose hint in `data/vol1.jsonl` is such a reference is `analogue` or records the reason in its note |
 | The search for forbidden keywords exempted `unsafe def main` in any Lean file under scripts/, not only in scripts/prove2me/extract_commands.lean | `test_forbidden_keywords.py`: on scratch trees outside the repository, `tests/forbidden_keywords.sh` (the step of run_all.sh) passes the exempt line in its own file and finds the same line in four other files under scripts/ and one outside it, and any other `unsafe` line in the exempt file; the repository passes |
 
@@ -51,7 +52,8 @@ kernel's comparison of each mutant on normal forms must give the same verdict as
 (the full side-by-side check is `mutate.py --compare-methods`); and the run's record of the two planted
 witnesses, a proof-valued projection and a proof whose type is a proposition behind an irreducible
 definition, on each of which the two comparisons disagree when the audit of the normal forms is bypassed,
-must show the audit flagging it and the verdict taken from the direct comparison.
+must show the audit flagging it and the verdict taken from the direct comparison; and the record of the
+planted failed classification must show all three of its propositions falling back.
 
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
@@ -77,7 +79,7 @@ Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, a
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
-`scripts/mutation/mutate.py --full` (with ✱25, 19 min 1 s with 8 jobs and about 1.10 GiB of memory per
-process, measured on 2026-10-15 on the code of `28757e6`,
+`scripts/mutation/mutate.py --full` (with ✱25, 11 min 43 s with 8 jobs and about 1.94 GiB of memory per
+process, measured on 2026-10-15 on the code of `608ba9d`,
 [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md#measured-code)) and the Mathlib counterparts. Run it on
 your own machine before an export or a release, not on a time-limited remote.
