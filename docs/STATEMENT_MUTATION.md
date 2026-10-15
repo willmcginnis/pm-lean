@@ -334,9 +334,12 @@ They are covered by the records of the two full runs instead. One is the earlier
 code and scripts of `07f82e0`, which compared by `direct`. The other is the full run by `normal` on
 `608ba9d` described under [How to run](#how-to-run). The two give the same verdict on every mutant:
 16,512 mutants of 999 statements, the 48 of ✱25·431 and ✱25·432 among them. They also agree on every
-control, every tautology result and every printed mutant. Their records differ only in Part 1: the
-later run has the 30 hypotheses of the check theorems, and three hypotheses whose types changed with
-ruling 64 ([Results](#results)).
+control, every tautology result and every printed mutant. Outside Part 1 their records differ only in
+the timings, in the line numbers of 140 statements, and in what only the later run writes (`method`,
+`fallbacks`, `normalMs`, `normalStepsMax` and `disagreements` for each statement, `fallback` for each
+mutant, the audit's counts in the timing record, and a self-test record). In Part 1 the later run has
+the 30 hypotheses of the check theorems, and three hypotheses whose types changed with ruling 64
+([Results](#results)); line numbers differ there too.
 
 Every mutant compared in these checks is rejected by both methods, and every control is accepted by
 both. So the agreement on "accepted" rests on the 999 controls, since no mutant is accepted.
@@ -397,8 +400,10 @@ Results are from the latest full run (`mutate.py --full`, 2026-10-15, on the Lea
 `608ba9d`; [measured code](#measured-code)), comparing on normal forms, with ✱1–✱25 included. It ran to
 completion and exited 0: "statement mutation: no unexpected finding". It took 11 min 43 s with 8 jobs
 ([below](#how-to-run)). The earlier full run, which compared by `direct` on the Lean code and scripts of
-`07f82e0`, found the same in Part 2 and in the re-elaboration, record for record; in Part 1 it counted
-fewer theorems and recompiled a slightly different set of hypotheses (below).
+`07f82e0`, found the same in Part 2, verdict for verdict (its records differ only in the timings, line
+numbers and what the later run adds; [How a mutant is compared](#how-a-mutant-is-compared)), and
+the same re-elaboration results, result for result; in Part 1 it counted fewer theorems and recompiled a
+slightly different set of hypotheses (below).
 
 **Part 1.** No unused hypotheses: 1784 theorems, 1039 hypotheses (520 premises, 478 class arguments, 41
 unreferenced variables), and 0 unused, by both the plain and the refined test. The 313 check theorems are
