@@ -76,7 +76,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   hypotheses' texts differ in `Rep S R V` → `Rep S R` (18). `--full`, compared with the earlier full run
   on `07f82e0`: the 16,512 mutants agree on their keys and on every field both records have, verdicts
   and printed source and mutant texts included; the 999 statements agree on their keys and on every
-  shared field, the variable lists of 403 of them after hygienic names are normalized; hypotheses go
+  shared field except the three timings (`checkMs`, `tautMs`, `defeqMs`) and the line numbers of 140 of
+  them, the variable lists of 403 of them after hygienic names are normalized; hypotheses go
   from 1,009 to 1,039, and among the common ones the types differ in 17 `Rep S R V` → `Rep S R`, from
   this change, and in 3 premises no longer auto-params, which with the 30 added hypotheses were already
   on `8dbf6e2`; line numbers, six binder positions and hygienic names differ too. The new records have
