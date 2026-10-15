@@ -2469,7 +2469,7 @@
               "name": "(f) Our restricted checker for that fragment: one checker, shared by every base below",
               "short": "our restricted checker",
               "size": "L",
-              "size_reason": "A small checker that accepts only the fragment the kernel census lists (no quotient, axiom, mutual or nested type; indexed and reflexive families, K, large elimination, projections, universe polymorphism up to level 2, Nat and String literals), run on the closure of the derivations. One implementation and one specification: the soundness proofs (f1)–(f4) are proofs about it.",
+              "size_reason": "A small checker that accepts only the fragment the kernel census lists (no quotient, axiom, mutual or nested type; indexed and reflexive families, K, large elimination, projections, universe polymorphism, its levels at most 2 as measured with every universe parameter set to zero (a syntactic measurement, not a bound on every instantiation), Nat and String literals), run on the closure of the derivations. One implementation and one specification: the soundness proofs (f1)–(f4) are proofs about it.",
               "status": "not started",
               "status_note": "Rulings 71 and 72: one restricted checker, several bases. The work lives in a separate repository, not yet public (rulings 72 and 75); this roadmap records its tasks and their status.",
               "hard_deps": [
