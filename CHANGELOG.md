@@ -65,8 +65,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   unfolded, and also for the kernel census's wider set of derivation theorems), no inductive type there
   has a field that holds a type, and the census's closure of D mentions no `Type 1`, which the ratchet
   now keeps (`proofClosure sort.TypeN` left tests/expected_kernel_features.txt). StyleCheck's table,
-  RedCheck's report and the statement mutation's verdicts (`--quick`: its 469 mutants, 13 statements and
-  1039 hypotheses) are unchanged.
+  RedCheck's report and the statement mutation's verdicts are unchanged: `--quick` on its 469 mutants,
+  13 statements and 1039 hypotheses, `--full` on all 16,512 mutants and 999 statements (the same 522
+  fallbacks to the direct comparison); in the records only `Rep S R V` (18 hypotheses), line numbers,
+  six binder positions and hygienic names differ.
 - **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
   review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
   transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as
