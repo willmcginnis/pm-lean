@@ -8,7 +8,11 @@
 #   - the Mathlib counterparts compiled against the pinned Mathlib (Checks/MathlibCounterparts/, a Lake
 #     project of its own; `lake exe cache get` downloads Mathlib's build, a few GB, the first time);
 #   - with COUNTERPART_SOURCES=DIR, each counterpart's file, line and source header in checkouts of the
-#     pins, DIR/<repository>-<commit> (scripts/export_names.py --verify-counterparts).
+#     pins, DIR/<repository>-<commit> (scripts/export_names.py --verify-counterparts);
+#   - the external checkers con-leche and nanoda on the export of the proofs, with their negative
+#     controls (scripts/external_checkers.py, docs/VERIFICATION.md, "External checkers"), here also
+#     requiring nanoda's pin to be upstream's head; tests/run_all.sh runs them too, so the standing
+#     checks are run without them (SKIP_EXTERNAL=1) and they run once, here.
 # Exits nonzero if any of them fails.
 #
 #   scripts/release_check.sh                    everything
@@ -22,8 +26,11 @@ fail() { echo "FAILED: $1"; failed+=("$1"); }
 
 if [ -z "${SKIP_STANDING:-}" ]; then
   step "standing checks (tests/run_all.sh)"
-  bash tests/run_all.sh || fail "tests/run_all.sh"
+  SKIP_EXTERNAL=1 bash tests/run_all.sh || fail "tests/run_all.sh"
 fi
+
+step "external checkers: con-leche and nanoda, nanoda's pin current (docs/VERIFICATION.md)"
+python3 scripts/external_checkers.py --nanoda-upstream require || fail "external checkers"
 
 step "statement mutation, full (docs/STATEMENT_MUTATION.md)"
 python3 scripts/mutation/mutate.py --full || fail "statement mutation --full"

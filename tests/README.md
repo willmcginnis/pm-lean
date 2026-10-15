@@ -55,6 +55,16 @@ definition, on each of which the two comparisons disagree when the audit of the 
 must show the audit flagging it and the verdict taken from the direct comparison; and the record of the
 planted failed classification must show all three of its propositions falling back.
 
+`test_external_checkers.py` also guards a tool: the scan of the export that `scripts/external_checkers.py`
+runs beside con-leche and nanoda ([docs/VERIFICATION.md](../docs/VERIFICATION.md#external-checkers)). On
+small hand-written exports, one seeded fault per rule (a stray axiom; `sorryAx` named in a value, a type,
+a recursor rule or under a numeric name; `Lean.ofReduceBool`, `Lean.ofReduceNat`; `Lean.trustCompiler`
+named outside the two core constants allowed) must each fail it, naming the declaration, and Lean core's
+seven axioms alone must pass. It also pins the tools' commits to those docs/VERIFICATION.md names, nanoda's
+configuration, a negative control for each rule, and where the step runs: in `run_all.sh`
+(behind `SKIP_EXTERNAL`) and in `scripts/release_check.sh`, which runs the standing checks without it and
+then the step once, failing on a nonzero exit.
+
 `test_regeneration.py` guards the tie of the statements to PM's text, which no proof checks: it runs every
 generator (`vol1_items.py`, `gen_lean.py`, `gen_quant_lift.py`, `gen_axiomcheck.py`, `export_names.py`) in
 a scratch copy, and each file they write must be the committed one, byte for byte; every Lean file whose
@@ -75,10 +85,12 @@ a compiled-only constant reaching a derivation) fails until it is accepted on pu
 that no library file has an `example` (every check is a theorem `check_…`, which the census reads) and the
 ratchet's comparison on synthetic input.
 
-Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute), or
+Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute;
+`SKIP_EXTERNAL=1` the external checkers, about 2.5 min once built), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then
+the external checkers (with nanoda's pin required to be current), then
 `scripts/mutation/mutate.py --full` (with ✱25, 11 min 43 s with 8 jobs and about 1.94 GiB of memory per
 process, measured on 2026-10-15 on the code of `608ba9d`,
 [docs/STATEMENT_MUTATION.md](../docs/STATEMENT_MUTATION.md#measured-code)) and the Mathlib counterparts. Run it on

@@ -5,14 +5,17 @@
 # negative tests (tests/ledger_negative.sh: a fabricated claim and a removed use must fail it), ✱9's
 # readings (Checks/Star9Readings.lean), the export names (scripts/export_names.py --check), the Lean
 # core counterparts of ✱1–✱5 (Checks/Counterparts.lean), the quick tier of the statement mutation
-# (scripts/mutation/mutate.py --quick), and the Python tests in tests/ (which also run AllAxioms.lean,
-# AxiomCheck.lean, fidelity_counts.py and the kernel census ratchet, scripts/kernel_census/census.py
-# --ratchet). Exits nonzero if any of them fails. Not here: scripts/kernel_census/census.py --check and
-# mutate.py --full; the long checks run before a release are in
-# scripts/release_check.sh.
+# (scripts/mutation/mutate.py --quick), the proofs re-checked by the external checkers con-leche and
+# nanoda (scripts/external_checkers.py; the first run fetches and builds them, about 3 min), and the
+# Python tests in tests/ (which also run AllAxioms.lean, AxiomCheck.lean, fidelity_counts.py and the
+# kernel census ratchet, scripts/kernel_census/census.py --ratchet). Exits nonzero if any of them fails.
+# Not here: scripts/kernel_census/census.py --check and mutate.py --full; the long checks run before a
+# release are in scripts/release_check.sh.
 #
-#   tests/run_all.sh            everything (ClauseSearch takes about a minute)
-#   SKIP_SLOW=1 tests/run_all.sh  without ClauseSearch
+#   tests/run_all.sh                  everything (ClauseSearch takes about a minute, the external
+#                                     checkers about 2.5 min once built)
+#   SKIP_SLOW=1 tests/run_all.sh      without ClauseSearch
+#   SKIP_EXTERNAL=1 tests/run_all.sh  without the external checkers
 set -uo pipefail
 cd "$(dirname "$0")/.."
 
@@ -64,6 +67,11 @@ lean_check Checks/Counterparts.lean 'counterparts: 54 checked by Lean'
 
 step "statement mutation, quick tier (docs/STATEMENT_MUTATION.md)"
 python3 scripts/mutation/mutate.py --quick || fail "statement mutation --quick"
+
+if [ -z "${SKIP_EXTERNAL:-}" ]; then
+  step "external checkers: con-leche and nanoda (docs/VERIFICATION.md)"
+  python3 scripts/external_checkers.py || fail "external checkers"
+fi
 
 step "Python tests"
 python3 -m unittest discover -s tests -v || fail "Python tests"
