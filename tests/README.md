@@ -94,7 +94,7 @@ that no library file has an `example` (every check is a theorem `check_…`, whi
 ratchet's comparison on synthetic input.
 
 Run everything with `tests/run_all.sh` (`SKIP_SLOW=1` leaves out ClauseSearch, about a minute;
-`SKIP_EXTERNAL=1` the external checkers, about 2.5 min once built), or
+`SKIP_EXTERNAL=1` the external checkers, about 3 min once built), or
 only the Python tests with `python3 -m unittest discover -s tests` once the project is built. The long
 checks run before a release are `scripts/release_check.sh`
 ([docs/VERIFICATION.md](../docs/VERIFICATION.md#before-a-release)): it runs `tests/run_all.sh` first, then

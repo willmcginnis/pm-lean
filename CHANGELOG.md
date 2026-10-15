@@ -23,12 +23,28 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   release check runs it once, failing on a nonzero exit, and also requires nanoda's pin to be upstream's
   head. `tests/test_external_checkers.py` checks the scan's rules on hand-written exports, the pins, the
   configuration and the wiring.
+- **The external checkers' scan compares structured names, and the checkers' counts must agree with the
+  export's.** The scan flattened Lean names into dotted strings, so a one-component `«Lean.reduceBool»`
+  passed as core's `Lean.reduceBool`: an opaque of that name whose body names `Lean.trustCompiler`, and
+  an axiom `«Classical.choice» : False`, both got past the scan, and the first past both checkers too.
+  Every rule now compares names component by component. con-leche's count must equal the export's
+  declaration records (167,603), and nanoda's the export's constants with an inductive's types,
+  constructors and recursors counted separately, less the axioms it skips (175,577 − 3); before, a checker
+  reporting zero declarations passed. A Lean-side check finds no `@[implemented_by]` or `@[extern]`, which
+  the export leaves out, on the repository's declarations. Four new negative controls (the two lookalikes,
+  one per attribute), ten in all; tests of the names, and fault injections of a wrong count and a crash of
+  each checker. The step takes about 3 min once built. docs/VERIFICATION.md states every exclusion of the
+  exporter (internal names, `unsafe` and `partial` declarations, the compiler's attributes) and both
+  counting conventions.
 - **Roadmap: Lean's own kernel, reshaped to rulings 69–72.** Item (c), its first step, is done: an existing
   verified checker, con-leche, re-checks the build in the release check. Independent kernels in CI are
   not yet there: CI leaves the external checkers out (SKIP_EXTERNAL=1) until their cost there is measured. (d) is the audit of con-leche's theorem. New items:
   (e) a model in plain ZF of the fragment the derivations use, which shows it consistent relative to ZF.
-  Its measured input: no axioms; a type as a term only as the outermost schematic `V`, apart from
-  `PM.Style`; universe levels at most 2. (f) is one restricted checker for that fragment, with its
+  Its measured input, over the kernel census's 1,289 derivation theorems and their closure
+  (`scripts/kernel_census/type_as_term.lean`): no axioms; universe levels at most 2; a type as a term
+  only as the outermost schematic `V`, apart from `PM.Style` and `PM.Style.AdmitsPredApp`, a few values
+  of the styles' machinery and the generated `.below` of the syntaxes. Building the model in ZF is the
+  research task: ZF does not supply even one uncountable Grothendieck universe. (f) is one restricted checker for that fragment, with its
   soundness proved against ZF in Lean (f1) and in set.mm (f2), and against PM's ramified theory with (f3)
   and without (f4) reducibility. (g) is a per-proof translation from Lean to set.mm, after (f1) and (f2)
   by choice. A new milestone covers the fragment grounded in ZF. Running Lean4Lean stays; proving all of

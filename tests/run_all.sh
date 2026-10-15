@@ -13,7 +13,7 @@
 # release are in scripts/release_check.sh.
 #
 #   tests/run_all.sh                  everything (ClauseSearch takes about a minute, the external
-#                                     checkers about 2.5 min once built)
+#                                     checkers about 3 min once built)
 #   SKIP_SLOW=1 tests/run_all.sh      without ClauseSearch
 #   SKIP_EXTERNAL=1 tests/run_all.sh  without the external checkers
 set -uo pipefail
