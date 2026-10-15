@@ -28,7 +28,7 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   enters the subterm first fails. The full run falls back on the same 522 comparisons as before (all of
   ✱9), so the fault decided none of them. The insertion is now also made in place: before, it copied the
   set each time (on Part 2 of ✱24 and ✱25, 378 s in the normal forms against 42 s in place, the same
-  verdicts); the comparisons of the full run take 74 s, against 469 s before on a loaded machine. Measured
+  verdicts); the comparisons of the full run take 74 s, against 469 s on `28757e6`. Measured
   again on this code, on an otherwise idle machine: the full run (703 s with 8 jobs, about 1.94 GiB; the
   same verdicts on all 16,512 mutants and 999 statements), the side-by-side check (0 disagreements,
   13,556 + 1,902 + 1,006 mutants) and `--quick` by both methods (1523 records the same).

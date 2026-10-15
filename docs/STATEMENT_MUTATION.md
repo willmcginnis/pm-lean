@@ -361,7 +361,7 @@ the records of the two full runs, `direct` from the earlier one (Lean code and s
 `normal` from the latest (`608ba9d`). `normal`'s time includes the audit, which infers the type of
 every subterm of every normal form. The comparisons of the full run took 45 s in all before the audit
 covered every subterm (code of `6aba237`, 2026-10-14), 276 s once it did (`10fb7d0`, the same day),
-469 s on `28757e6` (2026-10-15, loaded), and 74 s now. The fall is one line (measured below): from
+469 s on `28757e6` (2026-10-15), and 74 s now. The fall is one line (measured below): from
 `10fb7d0` to `28757e6` the audit added a subterm to its set of subterms checked through a copy of the
 state, so the set was shared and each insertion copied it; `608ba9d` inserts in place. The copying was
 part of the rise from 45 s too; by how much was not measured on `10fb7d0`. In
@@ -556,9 +556,9 @@ took 74 s (3 s for ✱1–✱5, 72 s from ✱9 on), and the tautology tests 199 
 meta-program is a single process; `--jobs` applies only to the recompilations. For the whole run
 `/usr/bin/time -v` reported a maximum resident set of 2,037,348 kB (about 1.94 GiB), 439% CPU and
 198,392 major page faults. On the code of `28757e6` (2026-10-15, the same audit, inserting into its set
-by copying it) the same run measured 1141 s while other work loaded the machine, of which 777 s in the
-meta-program and 469 s in the comparisons; its maximum resident set, 1,158,060 kB, was taken while the
-machine paged (1,426,772 major page faults), and a second run as loaded took 1386 s. On the code of
+by copying it) the same run measured 1141 s, of which 777 s in the meta-program and 469 s in the
+comparisons; its maximum resident set was 1,158,060 kB, with 1,426,772 major page faults, and a second
+run of the same code took 1386 s. On the code of
 `10fb7d0` (2026-10-14: the audit at the default transparency, partial applications not checked) the
 same run measured 899 s, of which 531 s in the meta-program and 276 s in the comparisons, and
 1,551,856 kB; before the audit covered every subterm, on the code of `6aba237`, 979 s, 360 s, 45 s and
