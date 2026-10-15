@@ -5,6 +5,37 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
 ## 2026-10-15
 
+- **The proofs are re-checked by two external kernels, con-leche and nanoda, in the standing checks and
+  the release check** (ruling 69; docs/VERIFICATION.md, "External checkers"). `scripts/external_checkers.py`
+  fetches and builds lean4export `076e8e5`, con-leche `c26f793` and nanoda `e0d76f5` at pinned commits and
+  exports `PM` and `Checks.PinnedStatements`, Lean's core library included (167,603 declarations;
+  sha256 `0ad60837…94df` at `8dbf6e2`, the same as an earlier export of `6b95af9`, whose proofs are the same). con-leche
+  `--verified` accepts every declaration, and so does nanoda (175,574, counted its way). nanoda runs with the
+  three standard axioms and `Lean.trustCompiler` permitted and the hard error off, since Lean core declares
+  `sorryAx` and the bodies of two opaque core constants name `Lean.trustCompiler`. A scan of the export
+  is therefore part of the check: only core's seven axioms are declared, and `sorryAx`,
+  `Lean.ofReduceBool` and `Lean.ofReduceNat` are named by nothing, `Lean.trustCompiler` only by those two
+  constants. Six seeded faults, one per rule, must each be rejected: a `sorry` and a stray axiom by both
+  checkers and the scan, and `native_decide` (which declares an axiom in Lean v4.34) and direct uses of
+  `Lean.ofReduceBool`, `Lean.ofReduceNat` and `Lean.trustCompiler` by the scan. con-leche and nanoda
+  accept the last; con-leche also accepts the two before it. The step is part of `tests/run_all.sh`
+  (`SKIP_EXTERNAL=1` leaves it out; about 2.5 min once the tools are built, 6 min with the builds). The
+  release check runs it once, failing on a nonzero exit, and also requires nanoda's pin to be upstream's
+  head. `tests/test_external_checkers.py` checks the scan's rules on hand-written exports, the pins, the
+  configuration and the wiring.
+- **Roadmap: Lean's own kernel, reshaped to rulings 69–72.** Item (c), its first step, is done: an existing
+  verified checker, con-leche, re-checks the build in the release check. Independent kernels in CI are in
+  progress (two code families of the four planned). (d) is the audit of con-leche's theorem. New items:
+  (e) a model in plain ZF of the fragment the derivations use, which shows it consistent relative to ZF.
+  Its measured input: no axioms; a type as a term only as the outermost schematic `V`, apart from
+  `PM.Style`; universe levels at most 2. (f) is one restricted checker for that fragment, with its
+  soundness proved against ZF in Lean (f1) and in set.mm (f2), and against PM's ramified theory with (f3)
+  and without (f4) reducibility. (g) is a per-proof translation from Lean to set.mm, after (f1) and (f2)
+  by choice. A new milestone covers the fragment grounded in ZF. Running Lean4Lean stays; proving all of
+  Lean correct is not a goal. The work of (e)–(g) lives in a separate repository, not yet public.
+- **Statement mutation docs**: the load at the end of the full run of `608ba9d` is given as about 27, as
+  its record shows. For the direct run of `07f82e0`, the docs now give only what its record shows.
+
 - **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
   review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
   transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as
