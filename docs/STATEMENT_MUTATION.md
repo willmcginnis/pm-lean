@@ -337,7 +337,8 @@ code and scripts of `07f82e0`, which compared by `direct`. The other is the full
 control, every tautology result and every printed mutant. Outside Part 1 their records differ only in
 the timings, in the line numbers of 140 statements, and in what only the later run writes (`method`,
 `fallbacks`, `normalMs`, `normalStepsMax` and `disagreements` for each statement, `fallback` for each
-mutant, the audit's counts in the timing record, and a self-test record). In Part 1 the later run has
+mutant, `method`, `nfBudget`, `auditNodes`, `auditProofs`, `auditStructCtors` and `auditUnitLike` in
+the timing record, and a self-test record). In Part 1 the later run has
 the 30 hypotheses of the check theorems, and three hypotheses whose types changed with ruling 64
 ([Results](#results)); line numbers differ there too.
 
@@ -544,9 +545,11 @@ These are explicit terms and natural-deduction scripts from both replay files, p
 Here `F.isTaut` runs as compiled code rather than in the kernel. It is the same definition, and on the
 sample it gives the same verdict on all 469 mutants. The run measured 8 s: Part 1 took 4.6 s, the sample
 0.2 s, the build step under a second, and the rest is Lean's start-up. The sample could grow at little cost.
-With the comparison by normal forms the output of `--quick` is unchanged: run with `--method normal` and
-with `--method direct`, it gives the same 1523 records apart from the fields that record the method, the
-times and the fallbacks (10 s and 9 s; [measured code](#measured-code)).
+With the comparison by normal forms the verdicts of `--quick` are unchanged: run with `--method normal`
+and with `--method direct`, it gives the same 1524 records apart from the method, the times and the
+normal forms' step counts (`normalStepsMax`) in the 13 statement records, and the method, the times and
+the audit's node count (`auditNodes`, 0 under `direct`) in the timing record (10 s and 9 s; [measured
+code](#measured-code)).
 
 `--full` runs everything above. With ✱1–✱25, comparing on normal forms, it measured 703 s, 11 min 43 s,
 with `--jobs 8` (the default on an 8-core machine; [measured code](#measured-code)), on a machine doing

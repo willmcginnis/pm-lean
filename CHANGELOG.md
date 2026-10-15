@@ -114,7 +114,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   verdicts); the comparisons of the full run take 74 s, against 469 s on `28757e6`. Measured
   again on this code, on an otherwise idle machine: the full run (703 s with 8 jobs, about 1.94 GiB; the
   same verdicts on all 16,512 mutants and 999 statements), the side-by-side check (0 disagreements,
-  13,556 + 1,902 + 1,006 mutants) and `--quick` by both methods (1523 records the same).
+  13,556 + 1,902 + 1,006 mutants) and `--quick` by both methods (the same records apart from the
+  method, the times, the normal forms' step counts and the audit's node count).
 - **The statement mutation's audit decides as the kernel does** (`28757e6`; docs/STATEMENT_MUTATION.md,
   "How a mutant is compared"). A second release review found that the audit of the normal forms decided
   "a proof" and "unit-like" by reducing types at the elaborator's default transparency, which does not
@@ -129,7 +130,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   applications of every application, so that it checks every node of the normal forms (2,321,447
   subterms in the full run, 1,767,312 before; about a third more time in the normal forms, measured on
   `608ba9d`). The full run, the side-by-side check (0 disagreements, 13,556 + 1,902 + 1,006 mutants) and
-  `--quick` by both methods (1523 records the same) were measured again on this code, and again on
+  `--quick` by both methods (the same records apart from the method, the times, the normal forms' step
+  counts and the audit's node count) were measured again on this code, and again on
   `608ba9d` (above); the full run gives the same verdicts as before on all 16,512 mutants and 999
   statements.
 
