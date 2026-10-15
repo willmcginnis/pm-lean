@@ -82,6 +82,11 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   on `8dbf6e2`; line numbers, six binder positions and hygienic names differ too. The new records have
   fields the earlier run's lack (the audit's, and a self-test record): their statements count 522
   fallbacks to the direct comparison, which the earlier run's records cannot be compared on.
+  The external checkers re-check this code with the same counts (con-leche 167,603 declaration records,
+  nanoda 175,574), and `scripts/kernel_census/type_as_term.lean`, on this code, finds no repository
+  statement in the census's closure that binds a type below its leading parameters, no inductive type
+  there with a constructor field that holds a type, and repository values that bind one only in the
+  generated `.below` of the syntaxes and `PM.F9.PF.noConfusion` (universe parameters set to zero).
 - **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
   review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
   transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as
