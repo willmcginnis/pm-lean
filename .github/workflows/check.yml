@@ -14,6 +14,10 @@ jobs:
     timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
+        with:
+          # the full history: tests/test_progress_units.py reads the tree of an earlier commit
+          # (the commit docs/PROGRESS.md's tables name), which a shallow checkout does not have
+          fetch-depth: 0
 
       - name: Install elan (the toolchain itself comes from lean-toolchain)
         run: |
