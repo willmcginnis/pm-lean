@@ -15,7 +15,9 @@
 -- reducibility attribute, the compiler's attributes) and every node of its type and value (sorts and
 -- levels, literals, projections, `let`, the constants named). A declaration has a feature when its
 -- own type or value shows it ("direct"); a column of the report counts the declarations of a set
--- that have it.
+-- that have it. Apart from the features, the declarations of the closures of D and of (a) with a node
+-- at a universe level of 2 or more, as a sort or as a universe argument of a constant, are listed
+-- with those nodes (`highLevels`).
 --
 -- Dynamic part (`full`). Each theorem, definition and opaque constant of the repository and of the
 -- core closure is checked again by the kernel, as a copy under a fresh name, with the kernel's
@@ -164,6 +166,36 @@ partial def walk (env : Environment) (e : Expr) : StateT (Std.HashSet Expr) (Sta
   | .mdata _ b => walk env b
   | .bvar _ => pure ()
   | .fvar _ | .mvar _ => add "expr.openTerm"
+
+/-! ## Universe levels above `Type` -/
+
+/-- The least value of a level: its parameters at 0. -/
+def leastLevel (l : Level) : Nat :=
+  ((l.substParams fun _ => some Level.zero).normalize.toNat).getD 0
+
+/-- The nodes of an expression at a universe level of 2 or more (`Sort 2` is `Type 1`), each shared
+    subterm once: a sort (`Type 1`, `Sort (u + 2)`), or a constant with such a universe argument
+    (`PM.Ty.casesOn.{2}`), which `sortFeat` does not see. -/
+partial def highLevels (e : Expr) : StateT (Std.HashSet Expr) (StateM (Std.HashSet String)) Unit := do
+  if (← get).contains e then return
+  modify (·.insert e)
+  match e with
+  | .sort l => if leastLevel l ≥ 2 then modifyThe (Std.HashSet String) (·.insert s!"{e}")
+  | .const _ us => if us.any (leastLevel · ≥ 2) then modifyThe (Std.HashSet String) (·.insert s!"{e}")
+  | .app f a => highLevels f; highLevels a
+  | .lam _ t b _ | .forallE _ t b _ => highLevels t; highLevels b
+  | .letE _ t v b _ => highLevels t; highLevels v; highLevels b
+  | .mdata _ b | .proj _ _ b => highLevels b
+  | _ => pure ()
+
+/-- The nodes at a level of 2 or more in a declaration's type, and in its value. -/
+def highLevelsOf (ci : ConstantInfo) : Array String × Array String :=
+  let run (e : Expr) : Array String :=
+    (((highLevels e).run {}).run {}).2.toArray.qsort (· < ·)
+  let value? : Option Expr := match ci with
+    | .defnInfo v => some v.value | .thmInfo v => some v.value | .opaqueInfo v => some v.value
+    | _ => none
+  (run ci.type, (value?.map run).getD #[])
 
 def structureLike (v : InductiveVal) : Bool :=
   v.all.length == 1 && v.ctors.length == 1 && v.numIndices == 0 && !v.isRec
@@ -558,6 +590,16 @@ open KernelCensus in
     ("meta", gM, none), ("metaCore", metaCore, some pM)]
   let colsJson := cols.map fun (k, ds, p) => (k, Json.mkObj [("declarations", toJson ds.size),
     ("kinds", kindCounts env ds), ("features", featureTable infos ds p)])
+  -- universe levels above `Type`, as sorts or as universe arguments of constants
+  let highJson (ds : Array Name) (p : Std.HashMap Name Name) : Json := toJson <| ds.filterMap fun c =>
+    match (env.find? c).map highLevelsOf with
+    | some (ty, val) =>
+      if ty.isEmpty && val.isEmpty then none
+      else some (Json.mkObj [("decl", toJson c.toString), ("type", toJson ty), ("value", toJson val),
+        ("path", toJson ((pathTo p c).map (·.toString)))])
+    | none => none
+  let highLevelsJson := Json.mkObj [("proofClosure", highJson (sorted clP) pP),
+    ("derivationClosure", highJson (sorted clA) pA)]
   let checksByModule : Std.HashMap String Nat := gC.foldl (init := {}) fun m c =>
     let k := (modOf env c).toString
     m.insert k (m.getD k 0 + 1)
@@ -581,7 +623,7 @@ open KernelCensus in
     ("closureCore", Json.mkObj [("derivationClosure", toJson ((sorted clA).filter (!isRepo ·)).size),
       ("proofClosure", toJson ((sorted clP).filter (!isRepo ·)).size)]),
     ("metaReached", toJson (metaReached.map (·.toString))),
-    ("columns", Json.mkObj colsJson), ("axiomUsers", axJson),
+    ("columns", Json.mkObj colsJson), ("highLevels", highLevelsJson), ("axiomUsers", axJson),
     ("recheck", recheckJson), ("natProbes", probes),
     ("timing", Json.mkObj [("staticMs", toJson (t1 - t0)), ("totalMs", toJson (t2 - t0))])]
   IO.FS.writeFile path (j.pretty 120 ++ "\n")

@@ -13,12 +13,14 @@ mechanically.
 python3 scripts/kernel_census/census.py --ratchet   # the static walk and the ratchet, about 15 s
 python3 scripts/kernel_census/census.py --check     # the full census, about 80 s; fails if the tables
                                                     # below differ from it (--write rewrites them)
+python3 scripts/kernel_census/census.py --levels    # the static walk; the universe levels above Type
 ```
 
 ## In brief
 
 These statements are read from the generated tables below. The ratchet keeps the ones about the
-derivations true (see [The ratchet](#the-ratchet)).
+features of the derivations true; it does not pin the universe levels above `Type` that constants are
+used at, which only `census.py --check` compares (see [The ratchet](#the-ratchet)).
 
 - **No dependencies besides Lean.** `lake-manifest.json` lists no packages, so Mathlib is not involved.
   The closure is the repository plus Lean core.
@@ -29,12 +31,31 @@ derivations true (see [The ratchet](#the-ratchet)).
   `Eq.rec`, `HEq.rec` and `True.rec`,
   structure-like types with primitive projections, universe polymorphism with `max` and `imax`,
   definitional unfolding of definitions with the hints `abbrev` and `regular`, `let`, Nat literals and the
-  kernel's Nat operations on them, and String literals. No constant universe level above `Type` occurs
-  in the closure of D (the row "`Type 1` or higher" is empty there): since the style of predicativity
-  takes the family of variables as a parameter (`Style V`, `Sys V`, `OrderCheck V`;
-  [TYPES_DESIGN.md](TYPES_DESIGN.md), decision 13), no structure of the proof systems lives in
-  `Type 1`. The closure of (a) still has one, `PM.QModel`, the structures of the soundness proof,
-  reached from a semantic lemma and from no derivation theorem.
+  kernel's Nat operations on them, and String literals.
+- **No sort `Type 1` or higher is written in the closure of D, but universe level 2 is used there.**
+  The row "`Type 1` or higher" reads sorts with a constant level, and it is empty for the closure of D;
+  the ratchet keeps it so (`proofClosure sort.TypeN` is not in tests/expected_kernel_features.txt).
+  Since the style of predicativity takes the family of variables as a parameter (`Style V`, `Sys V`,
+  `OrderCheck V`; [TYPES_DESIGN.md](TYPES_DESIGN.md), decision 13), no structure of the proof systems
+  lives in `Type 1`. The closure of (a) still has one such sort, `PM.QModel`, the structures of the
+  soundness proof, reached from a semantic lemma and from no derivation theorem. That row does not read
+  the universe arguments of constants. The table
+  [universe levels above `Type`](#static-universe-levels-above-type-in-the-closure-of-d) does: 48
+  declarations of the closure of D use a constant at a universe level of 2 or more (`Sort 2` is
+  `Type 1`). All 48 were there before `Style` took the family as a parameter, which removed four:
+  `PM.Style`, `PM.Sys` and `PM.OrderCheck` (sorts `Type 1`) and `PM.Style.of` (a `match` at level 2,
+  which the row did not see). 24 are Lean core's classes with an argument
+  `outParam (Type w)` (`HAdd`, `HSub`, `HMul`, `HDiv`, `HMod`, `HPow`, `HAppend`, `Membership`, their
+  constructors and projections), which is `outParam.{w+2}`. 13 compare types for equality: Lean's
+  no-confusion constructions and core's decidable equality of `List` and `Prod`, among them
+  `PM.F9.PF.noConfusion` and `PM.F9.PF.all.noConfusion`, which compare the parameter `V : Ty → Type`
+  (`Eq.{2} V V'`). 10 are auxiliaries Lean generates with a recursor or `cond` whose motive or result is
+  a type: the `.below` of structural recursion (`PM.Ty.below`, `PM.F.below`, `PM.QF.below`,
+  `PM.F9.EF.below`, `PM.F9.PE.below`, `PM.F9.PF.below`, `Nat.below`, `List.below`), an equation lemma
+  (`List.eraseDupsBy.loop.eq_def`) and `PM.F9.PF.ctorElimType`. One is `PM.Vbad`, the degenerate family of the trap
+  `PM.trap_empty` (PM/Trap.lean), defined by cases into `Type` (`PM.Ty.casesOn.{2}`,
+  `Nat.casesOn.{2}`). So a checker of the derivations still needs the universe `Type 1`, through these
+  universe arguments.
 - **They do not need** mutual or nested inductive types, quotients, any axiom, opaque constants, `partial`
   or `unsafe` declarations, `@[implemented_by]`, or `Lean.ofReduceBool`, `Lean.ofReduceNat` and
   `Lean.trustCompiler`.
@@ -120,7 +141,12 @@ From the nodes it takes the sorts and levels (`Prop`, `Type`, `Type 1` and highe
 elimination used* means a recursor of a `Prop` type applied at a motive universe other than `0`.
 *K-like recursor named* means a K-like recursor occurs. A row counts the declarations of a column that
 have the feature in their own type or value. The second static table gives, for each feature of the
-closure of D, a shortest chain of uses from a derivation theorem.
+closure of D, a shortest chain of uses from a derivation theorem. The rows on sorts read the sorts
+written in a type or value (`Type 1` is `Sort 2`); a universe argument of a constant (`Ty.casesOn.{2}`)
+only gives the rows on parameters, `max` and `imax`. The third static table reads both: it lists the
+declarations of the closure of D with a sort or a universe argument whose least value, with the
+parameters at 0, is 2 or more, each with those nodes and a shortest chain of uses (`census.py --levels`
+prints it, and the same for the closure of (a), from the static walk alone).
 
 **Dynamic (MEASURED).** Each theorem, definition and opaque constant of (a), (f), (b) and (c) is checked
 again by the kernel, as a copy under a fresh name, with the kernel's diagnostics on (`Kernel.enableDiag`).
@@ -158,7 +184,9 @@ The figures, read as requirements:
 
 - **It must implement:** inductive families with indices; reflexive and recursive inductive types;
   recursors with iota reduction and K; large elimination out of `Prop`; structure-like types and
-  primitive projections; universe polymorphism with `max` and `imax`; `Prop`; structure eta and
+  primitive projections; universe polymorphism with `max` and `imax`; `Prop`; the universe `Type 1`,
+  used by universe arguments though no sort `Type 1` is written in the closure of D (the table of
+  universe levels above `Type`); structure eta and
   definitional proof irrelevance unless they are shown to be unused (this census cannot tell); delta
   with the hints `abbrev` and `regular`;
   `let`; Nat literals with the operations named in the closure of D; and String literals with their
@@ -184,6 +212,12 @@ one is reported too. The second is when the declarations that depend on an axiom
 auxiliaries, differ from `tests/expected_axiom_users.txt`. The test runs with the other Python tests in
 `tests/run_all.sh`. To accept a new feature deliberately, run `census.py --ratchet --update` and say why
 in the commit.
+
+The ratchet compares sets of features, so it keeps the closure of D free of sorts `Type 1` or higher
+(the feature `proofClosure sort.TypeN` is not expected) but does not pin which constants are used at a
+universe level above `Type`: one more declaration with `outParam.{2}` or `Eq.{2}` adds no feature. That
+list is the table of universe levels above `Type`, in the generated section, which `census.py --check`
+compares with a new run; neither `tests/run_all.sh` nor `scripts/release_check.sh` runs `--check`.
 
 ## The census
 
@@ -395,6 +429,61 @@ The first declarations with the feature, and a shortest chain of uses from a der
 | names `of_decide_eq_true` (a proof by `decide`) | 9 | `PM.p171_compr_lowestOrder`, `PM.trap_unit_compr_of`, `PM.upd_other` | `PM.p171_lowestOrder_predicative` → `PM.p171_compr_lowestOrder` |
 | names `Eq` | 252 | `BitVec.decEq`, `BitVec.noConfusion`, `Bool.decEq` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `instDecidableEqUInt32` → `UInt32.decEq` → `instDecidableEqBitVec` → `BitVec.decEq` |
 | names `HEq` | 84 | `BitVec.noConfusion`, `BitVec.noConfusionType`, `HEq.rec` | `PM.F9.PrenexSwitch.t1_3` → `instDecidableEqChar` → `instDecidableEqUInt32` → `UInt32.decEq` → `instDecidableEqBitVec` → `BitVec.decEq` → `BitVec.decEq._proof_2` → `BitVec.noConfusion` |
+
+### Static: universe levels above `Type` in the closure of D
+
+Declarations of the closure of D with a node at a universe level of 2 or more (`Sort 2` is `Type 1`; a level with parameters counts by its least value, its parameters at 0): a sort, or a universe argument of a constant named, which the rows on sorts above do not read. With a shortest chain of uses from a derivation theorem.
+
+| Declaration | In its type | In its value | From a derivation theorem |
+|---|---|---|---|
+| `HAdd` | `outParam.{succ (succ w)}` |  | `PM.t4_72` → `instHAdd` → `HAdd` |
+| `HAppend` | `outParam.{succ (succ w)}` |  | `PM.t4_72` → `instHAppendOfAppend` → `HAppend` |
+| `HDiv` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `instHDiv` → `HDiv` |
+| `HMod` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `instHMod` → `HMod` |
+| `HMul` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `instHMul` → `HMul` |
+| `HPow` | `outParam.{succ (succ w)}` |  | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.form` → `Char.ofNat` → `BitVec.ofNatLT` → `instHPow` → `HPow` |
+| `HSub` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` → `Nat.div` → `Nat.div.go` → `Nat.div.go._f` → `instHSub` → `HSub` |
+| `Membership` | `outParam.{succ (succ u)}` |  | `PM.elim` → `List.instMembership` → `Membership` |
+| `HAdd.hAdd` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.t4_72` → `HAdd.hAdd` |
+| `HAdd.mk` | `outParam.{succ (succ w)}` |  | `PM.t4_72` → `instHAdd` → `HAdd.mk` |
+| `HAppend.hAppend` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.t4_72` → `HAppend.hAppend` |
+| `HAppend.mk` | `outParam.{succ (succ w)}` |  | `PM.t4_72` → `instHAppendOfAppend` → `HAppend.mk` |
+| `HDiv.hDiv` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `HDiv.hDiv` |
+| `HDiv.mk` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `instHDiv` → `HDiv.mk` |
+| `HMod.hMod` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `HMod.hMod` |
+| `HMod.mk` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `instHMod` → `HMod.mk` |
+| `HMul.hMul` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `HMul.hMul` |
+| `HMul.mk` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `UInt8.ofNat` → `BitVec.ofNat` → `BitVec.ofNat._proof_1` → `Nat.pow_pos` → `Nat.pow_pos._f` → `Nat.mul_pos` → `instHMul` → `HMul.mk` |
+| `HPow.hPow` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.form` → `Char.ofNat` → `BitVec.ofNatLT` → `HPow.hPow` |
+| `HPow.mk` | `outParam.{succ (succ w)}` |  | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.form` → `Char.ofNat` → `BitVec.ofNatLT` → `instHPow` → `HPow.mk` |
+| `HSub.hSub` | `outParam.{succ (succ w)}` | `outParam.{succ (succ w)}` | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` → `Nat.div` → `Nat.div.go` → `Nat.div.go._f` → `HSub.hSub` |
+| `HSub.mk` | `outParam.{succ (succ w)}` |  | `PM.F9.elift` → `String` → `String.ofByteArray` → `ByteArray.IsValidUTF8` → `ByteArray.IsValidUTF8.intro` → `List.utf8Encode` → `String.utf8EncodeChar` → `Nat.instDiv` → `Nat.div` → `Nat.div.go` → `Nat.div.go._f` → `instHSub` → `HSub.mk` |
+| `List.below` |  | `List.rec.{succ (max (succ u) u_1), u}` | `PM.elim` → `List.brecOn` → `List.below` |
+| `List.noConfusion` | `Eq.{succ (succ u)}` | `Eq.ndrec.{imax (succ u) u_1, succ (succ u)}`, `Eq.{succ (succ u)}` | `PM.complete` → `PM.all_mem` → `PM.all_mem.match_1_13` → `List.cons.noConfusion` → `List.noConfusion` |
+| `Membership.mem` | `outParam.{succ (succ u)}` | `outParam.{succ (succ u)}` | `PM.elim` → `Membership.mem` |
+| `Membership.mk` | `outParam.{succ (succ u)}` |  | `PM.elim` → `List.instMembership` → `Membership.mk` |
+| `Nat.below` |  | `Nat.rec.{succ (max 1 u)}` | `PM.t4_72` → `Nat.ble` → `Nat.brecOn` → `Nat.below` |
+| `PM.Vbad` |  | `Nat.casesOn.{2}`, `PM.Ty.casesOn.{2}` | `PM.trap_empty` → `PM.Vbad` |
+| `Prod.noConfusion` | `Eq.{succ (succ u)}`, `Eq.{succ (succ v)}` | `Eq.ndrec.{imax (max (succ u) (succ v)) u_1, succ (succ u)}`, `Eq.ndrec.{imax (max (succ u) (succ v)) u_1, succ (succ v)}`, `Eq.{succ (succ u)}`, `Eq.{succ (succ v)}` | `PM.F9.exch_plus` → `Prod.mk.noConfusion` → `Prod.noConfusion` |
+| `instDecidableEqProd._proof_2` |  | `rfl.{succ (succ u_1)}`, `rfl.{succ (succ u_2)}` | `PM.F9.exch_plus` → `instDecidableEqProd` → `instDecidableEqProd._proof_2` |
+| `instDecidableEqProd._proof_3` |  | `rfl.{succ (succ u_1)}`, `rfl.{succ (succ u_2)}` | `PM.F9.exch_plus` → `instDecidableEqProd` → `instDecidableEqProd._proof_3` |
+| `List.cons.noConfusion` |  | `Eq.refl.{succ (succ u)}` | `PM.complete` → `PM.all_mem` → `PM.all_mem.match_1_13` → `List.cons.noConfusion` |
+| `List.hasDecEq._f` |  | `rfl.{succ (succ u)}` | `PM.trap_unit_compr` → `instDecidableEqString` → `String.decEq` → `instDecidableEqList` → `List.hasDecEq` → `List.hasDecEq._f` |
+| `List.hasDecEq._proof_2` |  | `rfl.{succ (succ u_1)}` | `PM.trap_unit_compr` → `instDecidableEqString` → `String.decEq` → `instDecidableEqList` → `List.hasDecEq._proof_2` |
+| `List.hasDecEq._proof_3` |  | `rfl.{succ (succ u_1)}` | `PM.trap_unit_compr` → `instDecidableEqString` → `String.decEq` → `instDecidableEqList` → `List.hasDecEq._proof_3` |
+| `List.hasDecEq._proof_5` |  | `rfl.{succ (succ u_1)}` | `PM.trap_unit_compr` → `instDecidableEqString` → `String.decEq` → `instDecidableEqList` → `List.hasDecEq._proof_5` |
+| `List.hasDecEq._proof_6` |  | `rfl.{succ (succ u_1)}` | `PM.trap_unit_compr` → `instDecidableEqString` → `String.decEq` → `instDecidableEqList` → `List.hasDecEq._proof_6` |
+| `PM.F.below` |  | `PM.F.rec.{succ (max 1 u)}` | `PM.F9.f10_01` → `PM.F.toE` → `PM.F.brecOn` → `PM.F.below` |
+| `PM.QF.below` |  | `PM.QF.rec.{succ (max 1 u)}` | `PM.F9.toQ_toF9` → `PM.QF.brecOn` → `PM.QF.below` |
+| `PM.Ty.below` |  | `PM.Ty.rec.{succ (max 1 u)}` | `PM.trap_unit_compr_of` → `PM.Ty.ord` → `PM.Ty.brecOn` → `PM.Ty.below` |
+| `Prod.mk.noConfusion` |  | `Eq.refl.{succ (succ u)}`, `Eq.refl.{succ (succ v)}` | `PM.F9.exch_plus` → `Prod.mk.noConfusion` |
+| `List.eraseDupsBy.loop.eq_def` |  | `List.rec.{succ (succ u_1), u_1}` | `PM.complete` → `PM.mem_eraseDups'` → `PM.mem_loop` → `PM.mem_loop._f` → `List.eraseDupsBy.loop.eq_def` |
+| `PM.F9.EF.below` |  | `PM.F9.EF.rec.{succ (max 1 u)}` | `PM.F9.thm9_toQ` → `PM.F9.EF.toQ` → `PM.F9.EF.brecOn` → `PM.F9.EF.below` |
+| `PM.F9.PE.below` |  | `PM.F9.PE.rec.{succ (max 1 u)}` | `PM.F9.PrenexSwitch.t1_3` → `PM.F9.PE.readU` → `PM.F9.PE.below` |
+| `PM.F9.PF.below` |  | `PM.F9.PF.rec.{succ (max 1 u)}` | `PM.F9.ai_convention` → `PM.F9.PF.brecOn` → `PM.F9.PF.below` |
+| `PM.F9.PF.ctorElimType` |  | `cond.{succ (max 1 u)}` | `PM.F9.ai_convention` → `PM.F9.ai_convention._f` → `PM.F9.PF.all.noConfusion` → `PM.F9.PF.noConfusion` → `PM.F9.PF.noConfusionType` → `PM.F9.PF.all.elim` → `PM.F9.PF.ctorElim` → `PM.F9.PF.ctorElimType` |
+| `PM.F9.PF.noConfusion` | `Eq.{2}` | `Eq.ndrec.{u, 2}`, `Eq.{2}` | `PM.F9.ai_convention` → `PM.F9.ai_convention._f` → `PM.F9.PF.all.noConfusion` → `PM.F9.PF.noConfusion` |
+| `PM.F9.PF.all.noConfusion` |  | `Eq.refl.{2}` | `PM.F9.ai_convention` → `PM.F9.ai_convention._f` → `PM.F9.PF.all.noConfusion` |
 
 ### Dynamic: what the kernel unfolds when it checks each declaration again
 

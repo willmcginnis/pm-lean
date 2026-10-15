@@ -10,6 +10,10 @@
                                                        users from tests/expected_axiom_users.txt
     python3 scripts/kernel_census/census.py --ratchet --update   rewrites the expected features
     python3 scripts/kernel_census/census.py --write --reuse      the doc again from the last full run
+    python3 scripts/kernel_census/census.py --levels   the static walk only: the declarations of the
+                                                       closures of D and of (a) with a universe level
+                                                       of 2 or more, as a sort or as a universe
+                                                       argument of a constant
 
 Every mode first refuses a library file with an `example` (the kernel checks one during the build, but
 the environment does not keep it, so no census could see it; a check is a theorem named `check_…`,
@@ -366,9 +370,15 @@ def report(c):
         path = " → ".join(f"`{x}`" for x in v.get("path", []))
         out.append(f"| {labels.get(f, f)} | {v['count']} | "
                    + ", ".join(f"`{x}`" for x in v["examples"][:3]) + f" | {path} |")
+    out += ["", "### Static: universe levels above `Type` in the closure of D", "",
+            "Declarations of the closure of D with a node at a universe level of 2 or more (`Sort 2` is "
+            "`Type 1`; a level with parameters counts by its least value, its parameters at 0): a sort, "
+            "or a universe argument of a constant named, which the rows on sorts above do not read. "
+            "With a shortest chain of uses from a derivation theorem.", ""]
+    out += levels_table(c, "proofClosure")
     rc = c.get("recheck")
     if rc:
-        rcols = [(k, h) for k, h in COLUMNS if k in rc]
+        rcols =[(k, h) for k, h in COLUMNS if k in rc]
         out += ["", "### Dynamic: what the kernel unfolds when it checks each declaration again", "",
                 "Declarations re-checked, and among them those whose check unfolded a constant of each "
                 "kind (in brackets: how many distinct constants).", "",
@@ -426,6 +436,18 @@ def report(c):
                    + f" | {len(v['meta'])} |")
     out += ["", END]
     return "\n".join(out) + "\n"
+
+
+def levels_table(c, col):
+    """The declarations of a closure with a node at a universe level of 2 or more, as table lines."""
+    out = ["| Declaration | In its type | In its value | From a derivation theorem |", "|---|---|---|---|"]
+    for x in c["highLevels"][col]:
+        out.append(f"| `{x['decl']}` | " + ", ".join(f"`{n}`" for n in x["type"]) + " | "
+                   + ", ".join(f"`{n}`" for n in x["value"]) + " | "
+                   + " → ".join(f"`{p}`" for p in x["path"]) + " |")
+    if not c["highLevels"][col]:
+        out.append("| none | | | |")
+    return out
 
 
 def labels_unfold(f):
@@ -504,9 +526,18 @@ def main():
     ap.add_argument("--update", action="store_true")
     ap.add_argument("--reuse", action="store_true",
                     help="with --write or --check: the last full run's results, without running Lean")
+    ap.add_argument("--levels", action="store_true",
+                    help="the static walk only: print the universe levels above Type in the closures")
     a = ap.parse_args()
     if not a.reuse:
         build()
+    if a.levels:
+        c = run_census("ratchet")
+        for col, head in [("proofClosure", "closure of D"), ("derivationClosure", "closure of (a)")]:
+            print(f"{head}: {len(c['highLevels'][col])} declarations with a universe level above Type")
+            print("\n".join(levels_table(c, col)))
+            print()
+        sys.exit(0)
     if a.ratchet:
         c = run_census("ratchet")
         if a.update:
