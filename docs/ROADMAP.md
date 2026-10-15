@@ -229,7 +229,7 @@ One source, many checkers: the same derivations re-checked by independent kernel
 
 | Task | Status | Size | Needs | Helped by | Order |
 |---|---|---|---|---|---|
-| Independent Lean kernels re-check the build in CI, one checker per code family | in progress. Since 2026-10-15 tests/run_all.sh, which CI runs on every push, re-checks an export of the library and the pinned statements, Lean core included, with con-leche --verified and with nanoda, at pinned commits (scripts/external_checkers.py; docs/VERIFICATION.md, External checkers): 167,603 declarations accepted by each, measured on 8dbf6e2. Still to add: a separately written checker of another family (Tenet or eink0rn). | S: Existing checkers on the pinned toolchain: the official kernel, one checker of the nanoda family, con-leche (with a machine-checked theorem about what it accepts), and Tenet or eink0rn (separately written). | nothing | nothing | by dependency |
+| Independent Lean kernels re-check the build in CI, one checker per code family | not started. CI builds and runs the project's own checks; it leaves out the external checkers (SKIP_EXTERNAL=1). Since 2026-10-15 scripts/release_check.sh, before every release, and tests/run_all.sh on the maintainer's machine re-check an export of the library and the pinned statements, Lean core included, with con-leche --verified (167,603 declarations accepted, measured on 8dbf6e2) and with nanoda (175,574 declarations checked; it counts an inductive's parts separately), at pinned commits (scripts/external_checkers.py; docs/VERIFICATION.md, External checkers). Still to do: the same in CI, and a separately written checker. | S: Existing checkers on the pinned toolchain: the official kernel, one checker of the nanoda family, con-leche (with a machine-checked theorem about what it accepts), and Tenet or eink0rn (separately written). | nothing | nothing | by dependency |
 
 Prior work:
 
@@ -460,7 +460,7 @@ Every task under way, and every task whose gates are all done and that is not he
 
 <!-- generated:now:start -->
 - **PM itself.** Under way: ✱9–✱14; ✱9 beside ✱10; ✱9·31 and p. 142; classes of classes; ✱9 claims; metatheorems ✱1–✱11; reducibility claims; hierarchy claims; descriptions claims; class claims; non-theorems; whole-work claims. Can start: Rep; ✱30–✱38; order-seeing model; Vol II list; edition differences.
-- **Checking underneath.** Under way: kernels in CI. Can start: our Metamath verifier; Lean4Lean run; audit of con-leche's theorem; fragment consistent in ZF; our restricted checker; Lean proves Con(ZFC); ZFC + inaccessibles proves Con(Lean).
+- **Checking underneath.** Can start: kernels in CI; our Metamath verifier; Lean4Lean run; audit of con-leche's theorem; fragment consistent in ZF; our restricted checker; Lean proves Con(ZFC); ZFC + inaccessibles proves Con(Lean).
 - **Comparing across.** Under way: other formalizations; Vol I–II text; Vol III text; dots check; platform export. Can start: set.mm comparison.
 - **Results about PM.** Under way: assumption tags. Can start: adequacy ✱1–✱5; C complete.
 <!-- generated:now:end -->

@@ -35,5 +35,9 @@ jobs:
         with:
           python-version: "3.x"
 
+      # The external checkers (scripts/external_checkers.py) build two kernels and re-check an export of
+      # about 770 MB; they run in scripts/release_check.sh before every release, not here yet.
       - name: Run all checks
+        env:
+          SKIP_EXTERNAL: "1"
         run: bash tests/run_all.sh

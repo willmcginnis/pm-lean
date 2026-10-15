@@ -161,12 +161,12 @@ The work is split into four groups that run side by side. Each group is split in
 </details>
 
 <details>
-<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (2 done, 1 in progress, 20 not started)</summary>
+<summary><b>2. Checking underneath</b>: independent kernels, Metamath and Rocq, ZFC, Lean's own kernel (2 done, 21 not started)</summary>
 
 ![Group 2, Checking underneath: its subgroups and tasks](docs/roadmap/group-under.svg)
 
 - **Independent Lean kernels**
-  - Independent Lean kernels re-check the build in CI, one checker per code family: *in progress*
+  - Independent Lean kernels re-check the build in CI, one checker per code family: *not started*
 - **Metamath and Rocq**
   - A small, readable independent checker written for this project (a Metamath verifier in a few hundred lines), chosen for clarity over speed: *not started*
   - pm.mm for ✱1–✱5, from the finite propositional core, checked by several Metamath verifiers: *not started*
@@ -253,7 +253,9 @@ The work is split into four groups that run side by side. Each group is split in
 ## Build and check
 
 Install the Lean toolchain named in `lean-toolchain` with
-[elan](https://github.com/leanprover/elan). There are no other dependencies.
+[elan](https://github.com/leanprover/elan). The proofs need nothing else. `tests/run_all.sh` also runs the external
+checkers, which need git, network access on their first run and Rust's `cargo`; `SKIP_EXTERNAL=1` leaves them
+out, as CI does.
 
 ```
 lake build                      # builds and checks every file

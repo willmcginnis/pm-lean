@@ -24,8 +24,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   head. `tests/test_external_checkers.py` checks the scan's rules on hand-written exports, the pins, the
   configuration and the wiring.
 - **Roadmap: Lean's own kernel, reshaped to rulings 69–72.** Item (c), its first step, is done: an existing
-  verified checker, con-leche, re-checks the build in the release check. Independent kernels in CI are in
-  progress (two code families of the four planned). (d) is the audit of con-leche's theorem. New items:
+  verified checker, con-leche, re-checks the build in the release check. Independent kernels in CI are
+  not yet there: CI leaves the external checkers out (SKIP_EXTERNAL=1) until their cost there is measured. (d) is the audit of con-leche's theorem. New items:
   (e) a model in plain ZF of the fragment the derivations use, which shows it consistent relative to ZF.
   Its measured input: no axioms; a type as a term only as the outermost schematic `V`, apart from
   `PM.Style`; universe levels at most 2. (f) is one restricted checker for that fragment, with its

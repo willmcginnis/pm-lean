@@ -92,9 +92,9 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="492.0" y="327.8" font-size="12.5" class="t2">2 done</text>
 <circle cx="559.5" cy="323.7" r="5" class="sto"/>
 <path d="M559.5,318.7 A5,5 0 0 0 559.5,328.7 Z" class="st"/>
-<text x="568.5" y="327.8" font-size="12.5" class="t2">1 in progress</text>
+<text x="568.5" y="327.8" font-size="12.5" class="t2">0 in progress</text>
 <circle cx="690.2" cy="323.7" r="5" class="sto"/>
-<text x="699.2" y="327.8" font-size="12.5" class="t2">20 not started</text>
+<text x="699.2" y="327.8" font-size="12.5" class="t2">21 not started</text>
 <text x="44.0" y="391.8" font-size="18" font-weight="700" class="t1">3  Comparing across</text>
 <text x="44.0" y="415.8" font-size="13.5" class="t2">The same statements compared with other</text>
 <text x="44.0" y="433.6" font-size="13.5" class="t2">readings of PM, with mainstream</text>

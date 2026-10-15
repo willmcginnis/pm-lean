@@ -105,9 +105,8 @@ text{font-family:system-ui, -apple-system, 'Segoe UI', Helvetica, Arial, sans-se
 <text x="42.0" y="276.5" font-size="13" font-weight="700" class="t1">re-check the build in CI,</text>
 <text x="42.0" y="294.1" font-size="13" font-weight="700" class="t1">one checker per code family</text>
 <circle cx="47.0" cy="310.8" r="5" class="sto"/>
-<path d="M47.0,305.8 A5,5 0 0 0 47.0,315.8 Z" class="st"/>
-<text x="58.0" y="314.8" font-size="12" class="t2">in progress · size S</text>
-<text x="42.0" y="332.8" font-size="12" class="t2">needs: nothing</text>
+<text x="58.0" y="314.8" font-size="12" class="t2">not started · size S</text>
+<text x="42.0" y="332.8" font-size="12" class="t2">needs: nothing; can start now</text>
 <text x="30.0" y="407.1" font-size="15" font-weight="700" class="t1">Metamath and Rocq</text>
 <text x="42.0" y="447.1" font-size="13" font-weight="700" class="t1">A small, readable</text>
 <text x="42.0" y="464.8" font-size="13" font-weight="700" class="t1">independent checker written</text>
