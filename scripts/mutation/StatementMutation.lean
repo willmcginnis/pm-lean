@@ -49,14 +49,20 @@
 -- statement is decided by `direct` (the ✱9 statements of PM/Found9/Star9.lean, whose normal forms
 -- contain `Reading.mk`, `PProd.mk` and `PUnit.unit`). A comparison also falls back when a normal form
 -- needs more than the bound of steps, or the kernel or the inference of a type reports an error.
+-- What holds the audit together across the mutants of a statement, which share its state: a subterm
+-- is remembered as audited only once its classification has succeeded, with what it found, and what
+-- it found counts for every later comparison of the statement; a subterm whose classification failed
+-- is classified again wherever it is met, so every normal form containing it falls back.
 -- With a clean audit the kernel compares the two normal forms as trees, up to eta
 -- for functions, universe levels and Nat literals against `Nat.zero`/`Nat.succ`. Not shown: that a
 -- proof (or constructor, or unit-like term) that `direct` meets only inside a reduction that removes it
 -- from both normal forms cannot change its verdict, nor that the kernel's algorithm finds every
 -- equality. So this is a conservative syntactic check with a fallback, not a proof of transitivity.
--- `nfSelfTest` plants a case of each kind, the two cases it once missed among them (a proof-valued
--- projection; a proof whose type is a proposition only behind an irreducible definition), and a
--- projection whose type is `PUnit` behind one; the run fails if one is missed. The evidence for the rest: the two methods run side by
+-- `nfSelfTest` plants a case of each kind, the three cases it once missed among them (a proof-valued
+-- projection; a proof whose type is a proposition only behind an irreducible definition; a subterm
+-- whose classification failed, met again in a later normal form of the same state), and a
+-- projection whose type is `PUnit` behind one; the run fails if one is missed. The evidence for the
+-- rest: the two methods run side by
 -- side (`--compare-methods`) on every statement but ✱25·431 and ✱25·432 (an hour each for `direct`)
 -- with identical verdicts on every mutant and control, and a full run of each with identical verdicts
 -- on all 16,512 mutants, those two included.
@@ -125,6 +131,18 @@ structure HiddenUnitBox : Type where
   unit : HiddenUnit
   n : Nat
 def hiddenUnitProjection : HiddenUnitBox → HiddenUnit := fun b => b.unit
+/-! Three propositions whose normal forms contain a subterm the audit cannot classify: once
+    `FailedSort` (which is `Prop`) is irreducible, the type of the type of `failedProof` cannot be
+    inferred (Lean's `getLevel` reduces at the default transparency whatever the transparency asked
+    for), so each of their normal forms must fall back, the third too after the first two have been
+    normalized in the same state. The kernel unfolds `FailedSort`: `failedProof` is a proof. -/
+def FailedSort := Prop
+opaque failedProof : (p : FailedSort) → p → p := fun _ h => h
+opaque failedObserve : ((p : FailedSort) → p → p) → Prop := fun _ => True
+def failedFirst : Prop := failedObserve failedProof
+def failedSecond : Prop := failedObserve failedProof ∨ False
+def failedThird : Prop := failedObserve failedProof ∧ True
+attribute [irreducible] FailedSort
 end PMNfTest
 
 namespace PMMutation
@@ -556,6 +574,7 @@ structure NfState where
   budget : Nat
   cache : Std.HashMap Expr Expr := {}
   canon : Std.HashMap Expr Expr := {}
+  /-- the subterms whose classification succeeded, what it found being in `audit` -/
   seen : Std.HashMap Expr Unit := {}
   steps : Nat := 0
   /-- the bound was reached, or the kernel failed: this term's comparison falls back to `direct` -/
@@ -622,12 +641,16 @@ partial def unitLikeType? (ty : Expr) : MetaM (Option Bool) := do
     the decisions above are taken on the kernel's own reduction of it. If inference or the kernel
     fails, the comparison falls back to `direct`. A sort or a `∀` is a type: its type is a sort, so it
     is neither a proof nor unit-like, and it is not an application. After the bound is reached the
-    comparison falls back anyway. -/
+    comparison falls back anyway.
+
+    `seen` outlives a normal form (it is kept for all normal forms of a statement, `over` is not), so a
+    subterm enters it only together with what its classification found, at the end: a subterm whose
+    classification failed is classified again wherever it is met, and each normal form containing it
+    falls back. -/
 def auditNode (e : Expr) : NfM Unit := do
   if e.isSort || e.isForall then return
   let s ← get
   if s.over || s.seen.contains e then return
-  set { s with seen := s.seen.insert e () }
   let env ← getEnv
   let types ← try
       withTransparency .all do
@@ -648,7 +671,7 @@ def auditNode (e : Expr) : NfM Unit := do
       | _ => false
     | _ => false
   let nm ← nodeName e
-  modify fun s => { s with audit := { s.audit with
+  modify fun s => { s with seen := s.seen.insert e (), audit := { s.audit with
     nodes := s.audit.nodes + 1
     proofs := if isPf then s.audit.proofs.insert nm else s.audit.proofs
     unitLike := if unit then s.audit.unitLike.insert nm else s.audit.unitLike
@@ -775,6 +798,27 @@ def unitProjectionCheck (c up : Name) : MetaM Json := do
       {su.audit.unitLike.toList}"
   return namesJson su.audit.unitLike
 
+/-- The definitions `cs`, compared with `True` as `analyse` compares a statement's mutants: one state
+    for all normal forms, in this order. Each must fall back to `direct` (its normal form not reached,
+    or the audit not clean); the run fails otherwise. The record gives, for each, whether its normal
+    form was reached, whether the audit was clean and whether it fell back. -/
+def failedClassificationCheck (cs : List Name) : MetaM Json := do
+  let pty := Expr.const ``True []
+  let ((np, _), s0) ← (nfTop pty).run { budget := 1000 }
+  let some np := np | throwError "the normal form of True is not reached"
+  let mut s := s0
+  let mut rows := #[]
+  for c in cs do
+    let ((nm, _), s') ← (nfTop (← getConstInfo c).value!).run s
+    s := s'
+    let fellBack := (verdictOnNormalForms (← getEnv) s.audit.clean np nm).isNone
+    unless fellBack do
+      throwError "the audit of normal forms remembers a failed classification: {c} is decided by its \
+        normal form after {cs.takeWhile (· != c)}"
+    rows := rows.push (Json.mkObj [("decl", toJson (c.toString (escape := false))),("normalFormReached", toJson nm.isSome),
+      ("auditClean", toJson s.audit.clean), ("fellBack", toJson fellBack)])
+  return toJson rows
+
 /-- The planted cases of the comparison, which the run fails without, and its record (`selfTest`):
     - the audit must flag a proof (`rfl`, which normalizes to `Eq.refl`), a constructor of a
       structure (`Subtype.mk`) and a term of a unit-like type (`PUnit.unit`);
@@ -785,6 +829,9 @@ def unitProjectionCheck (c up : Name) : MetaM Json := do
     - the audit must flag the projections `b.unit` of `PMNfTest.unitProjection` and of
       `PMNfTest.hiddenUnitProjection` (a type that is `PUnit` behind an irreducible definition) as
       unit-like;
+    - `PMNfTest.failedFirst`, `failedSecond` and `failedThird`, normalized in one state in that order
+      (`failedClassificationCheck`): a subterm whose classification fails must make each of them
+      fall back, not only the first it is met in;
     - a bound of three steps must stop a normal form that needs more.
     tests/test_statement_mutation.py pins the record. -/
 def nfSelfTest : MetaM Json := do
@@ -809,7 +856,9 @@ def nfSelfTest : MetaM Json := do
     ("unitProjection", ← unitProjectionCheck ``PMNfTest.unitProjection
       (.str .anonymous s!"projection {``PMNfTest.UnitBox}.1")),
     ("hiddenUnitProjection", ← unitProjectionCheck ``PMNfTest.hiddenUnitProjection
-      (.str .anonymous s!"projection {``PMNfTest.HiddenUnitBox}.1"))]
+      (.str .anonymous s!"projection {``PMNfTest.HiddenUnitBox}.1")),
+    ("failedClassification", ← failedClassificationCheck
+      [``PMNfTest.failedFirst, ``PMNfTest.failedSecond, ``PMNfTest.failedThird])]
 
 /-- Replace the `k`-th occurrence of the variable `x` by `y` (the state counts occurrences; binder
     types are left alone). -/

@@ -231,7 +231,9 @@ class MethodsAgree(unittest.TestCase):
         meta-program fails if the projection is not flagged; this pins the record. The same for the
         second witness, whose proof is a variable of a type that is a proposition only behind an
         irreducible definition (the kernel unfolds it), and for the two unit-like projections, the
-        second of a type that is `PUnit` behind an irreducible definition."""
+        second of a type that is `PUnit` behind an irreducible definition. And the failed
+        classification: three propositions containing a subterm whose type cannot be inferred,
+        normalized in one state in that order, each falling back (the third once did not)."""
         st = next(r for r in self.sample_run() if r["part"] == "selfTest")
         for key, proof in (("witness", "projection PMNfTest.ProofBox.1"), ("hiddenProofWitness", "variable h")):
             w = st[key]
@@ -241,6 +243,9 @@ class MethodsAgree(unittest.TestCase):
             self.assertEqual(w["verdict"], w["direct"], key)
         self.assertIn("projection PMNfTest.UnitBox.1", st["unitProjection"])
         self.assertIn("projection PMNfTest.HiddenUnitBox.1", st["hiddenUnitProjection"])
+        self.assertEqual(st["failedClassification"],
+                         [{"decl": f"PMNfTest.failed{k}", "normalFormReached": False, "auditClean": True,
+                           "fellBack": True} for k in ("First", "Second", "Third")])
 
     def test_identical_verdicts(self):
         recs = self.sample_run()

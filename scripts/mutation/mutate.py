@@ -307,6 +307,9 @@ def audit_report(recs):
         w = st[key]
         print(f"Planted witness ({what}): direct {w['direct']}, normal forms with the audit "
               f"bypassed {w['normalAuditBypassed']}; flagged {w['proofs']}, so decided by direct: {w['verdict']}")
+    fc = st["failedClassification"]
+    print(f"Planted failed classification: {len(fc)} normal forms in one state, "
+          f"{sum(r['fellBack'] for r in fc)} fell back to direct")
     if t["method"] == "direct":
         print("Comparison by direct: the proof's type and each mutant as they are")
         return
