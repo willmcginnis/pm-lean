@@ -60,15 +60,28 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   (`consistent (S : Sys twoModel.den)`); the counter-models that quantify over every family inside the
   statement take a system at every family (`S : (V : Ty → Type) → Sys V`); `Rep S R V` is now `Rep S R`.
   No theorem's meaning changes, and none of the 196 locked ✱1–✱5 export entries does (the lock check
-  passes); the statement digests of the 611 unreleased ✱9–✱25 entries change. Measured after the change:
-  no statement in the closure of the derivations quantifies over V below the top (also with `OrderCheck`
-  unfolded, and also for the kernel census's wider set of derivation theorems), no inductive type there
-  has a field that holds a type, and the census's closure of D mentions no `Type 1`, which the ratchet
-  now keeps (`proofClosure sort.TypeN` left tests/expected_kernel_features.txt). StyleCheck's table,
-  RedCheck's report and the statement mutation's verdicts are unchanged: `--quick` on its 469 mutants,
-  13 statements and 1039 hypotheses, `--full` on all 16,512 mutants and 999 statements (the same 522
-  fallbacks to the direct comparison); in the records only `Rep S R V` (18 hypotheses), line numbers,
-  six binder positions and hygienic names differ.
+  passes); the statement digests of the 611 unreleased ✱9–✱25 entries change. Measured after the change,
+  on the kernel census's closure of the derivation theorems (1,289 theorems, 2,727 constants): no PM
+  statement there quantifies over a type below the top, also with type synonyms such as `OrderCheck`
+  unfolded; no constructor field there is a type or has a type that binds one; and no sort `Type 1` or
+  higher is written there, which the ratchet now keeps (`proofClosure sort.TypeN` left
+  tests/expected_kernel_features.txt). Constants are still used at universe level 2 (`Type 1`) there,
+  by 48 declarations that were all there before: Lean core's classes with an `outParam (Type w)`
+  argument (`HAdd` …), equalities of types in no-confusion constructions and decidable equality, what
+  Lean generates for structural recursion and constructor elimination (`PM.Ty.below` …), and the trap's
+  family `PM.Vbad`, defined by cases into `Type` (`PM.Ty.casesOn.{2}`). The census now lists them (`census.py --levels`, and a
+  generated table in docs/KERNEL_CENSUS.md); the ratchet does not pin them. StyleCheck's table and
+  RedCheck's report are unchanged. The statement mutation, compared with the branch base `8dbf6e2`
+  (`--quick` on both): the same verdicts on all 469 mutants, 13 statements and 1,039 hypotheses; the
+  hypotheses' texts differ in `Rep S R V` → `Rep S R` (18). `--full`, compared with the earlier full run
+  on `07f82e0`: the 16,512 mutants agree on their keys and on every field both records have, verdicts
+  and printed source and mutant texts included; the 999 statements agree on their keys and on every
+  shared field, the variable lists of 403 of them after hygienic names are normalized; hypotheses go
+  from 1,009 to 1,039, and among the common ones the types differ in 17 `Rep S R V` → `Rep S R`, from
+  this change, and in 3 premises no longer auto-params, which with the 30 added hypotheses were already
+  on `8dbf6e2`; line numbers, six binder positions and hygienic names differ too. The new records have
+  fields the earlier run's lack (the audit's, and a self-test record): their statements count 522
+  fallbacks to the direct comparison, which the earlier run's records cannot be compared on.
 - **References to an earlier proof that name no number keep `hint`, with the reason recorded.** A release
   review found ✱9·35 ("[Proof as above]", p. 141) still `hint` after ruling 63 with no reason given. The
   transcription's hints have 16 such references among the ledgers' rows: ✱9·33, ✱9·35 ("Proof as

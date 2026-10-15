@@ -461,7 +461,8 @@ occurs in the declaration's type. Result: 406 PM propositions use reducibility, 
 style's fields quantified over the family (`adm1 : {V : Ty → Type} → {a : Ty} → Nat → (V a → QF V) →
 Prop`), so `Style`, `Sys` and `OrderCheck` lived in `Type 1`, and `Style.mk` was the one statement in the
 closure of the derivations that quantified over V below the top (measured by an external run on the
-exported environment). Now `Style V`, `Sys V` and `OrderCheck V` take V as a parameter, with the fields
+exported environment, whose closure is smaller than the census's; on the census's, below, there were
+four). Now `Style V`, `Sys V` and `OrderCheck V` take V as a parameter, with the fields
 at that V (`adm1 : {a : Ty} → Nat → (V a → QF V) → Prop`, `style : Style V`, `OrderCheck V := QF V →
 Nat → Prop`), and `QThm {V} (S : Sys V)`, `Thm9 {V} (S : Sys V) R`, the classes, the four styles
 (`Style.of P R : Style V`) and the named systems follow. The styles and systems are still defined once
@@ -472,11 +473,23 @@ statements whose system is used at a family other than the one they quantify ove
 (`consistent (S : Sys twoModel.den)`, the traps at `Sys U` and `Sys Vbad`); those that quantify over
 every family inside the statement (`consistent_all`, the counter-models `not_qthm_…`) take a system at
 every family, `S : (V : Ty → Type) → Sys V`, which says at least as much, since any system of the old
-kind gives one at every family. Measured after the change: no statement in the closure of the
-derivations quantifies over V below the top, also with `OrderCheck` unfolded, no inductive type there has
-a constructor field that holds a type, and the closure mentions no constant universe level above `Type`
-(docs/KERNEL_CENSUS.md, whose ratchet keeps it so). The theorems derived, StyleCheck's table and
-RedCheck's report are unchanged.
+kind gives one at every family. Measured after the change, on the kernel census's closure of the
+derivation theorems (1,289 theorems, 2,727 constants): no PM statement there quantifies over a type
+below the top, also with type synonyms such as `OrderCheck` unfolded (before: `Style.mk`, `Style.rec`,
+`Style.AdmitsPredApp.mk` and `.rec`, and with synonyms unfolded also `Style.matrix` and
+`Style.lowestOrder`; of Lean core, `HEq.rec` does, over `Sort u`); no constructor field there is a type
+or has a type that binds one (before: `Style`'s `adm1`, `adm2` and `Style.AdmitsPredApp`'s `app1`,
+`app2`); and no sort
+`Type 1` or higher is written there (before: `Style`, `Sys`, `OrderCheck`), which the census's ratchet
+keeps so (docs/KERNEL_CENSUS.md). That is narrower than "nothing there needs `Type 1`": constants are
+still used at universe level 2 (`Type 1`) by 48 declarations of the closure, all of them there before
+the change. They are Lean core's classes with an `outParam (Type w)` argument (`HAdd` …), equalities of
+types in no-confusion constructions and decidable equality (`PM.F9.PF.noConfusion` compares the
+parameter V), what Lean generates for structural recursion and constructor elimination (`PM.Ty.below`,
+`PM.F.below` …), and the
+trap's degenerate family `PM.Vbad`, defined by cases into `Type` (`PM.Ty.casesOn.{2}`); the census
+lists them (docs/KERNEL_CENSUS.md, "universe levels above `Type`"), and its ratchet does not pin them.
+The theorems derived, StyleCheck's table and RedCheck's report are unchanged.
 
 ## 2. What was built
 
