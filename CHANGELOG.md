@@ -42,8 +42,9 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   (e) a model in plain ZF of the fragment the derivations use, which shows it consistent relative to ZF.
   Its measured input, over the kernel census's 1,289 derivation theorems and their closure
   (`scripts/kernel_census/type_as_term.lean`): no axioms; universe levels at most 2; a type as a term
-  only as the outermost schematic `V`, apart from `PM.Style` and `PM.Style.AdmitsPredApp`, a few values
-  of the styles' machinery and the generated `.below` of the syntaxes. Building the model in ZF is the
+  only as the outermost schematic `V`, apart from `PM.Style` and `PM.Style.AdmitsPredApp`, the values of
+  Style's definitions, `PM.OrderCheck` and three theorems about styles and the trap, and the generated
+  `.below` and `noConfusion` of the syntaxes. Building the model in ZF is the
   research task: ZF does not supply even one uncountable Grothendieck universe. (f) is one restricted checker for that fragment, with its
   soundness proved against ZF in Lean (f1) and in set.mm (f2), and against PM's ramified theory with (f3)
   and without (f4) reducibility. (g) is a per-proof translation from Lean to set.mm, after (f1) and (f2)
