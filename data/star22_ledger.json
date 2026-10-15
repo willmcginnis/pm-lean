@@ -375,7 +375,7 @@
    "*4.39"
   ],
   "cited_unused": [],
-  "note": "[Similar proof]: the lines of *22.39 with *22.34 for *22.33; takes [Reducibility S]",
+  "note": "[Similar proof]: the lines of *22.39 with *22.34 for *22.33; takes [Reducibility S]; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -404,7 +404,7 @@
    "*4.11"
   ],
   "cited_unused": [],
-  "note": "[Similar proof]: the lines of *22.39 with *22.35 for *22.33; takes [Reducibility S]",
+  "note": "[Similar proof]: the lines of *22.39 with *22.35 for *22.33; takes [Reducibility S]; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -1526,7 +1526,7 @@
    "*4.37"
   ],
   "cited_unused": [],
-  "note": "[Similar proof, by *4.41]: the lines of *22.68 with *4.41 for *4.4; takes [Reducibility S]",
+  "note": "[Similar proof, by *4.41]: the lines of *22.68 with *4.41 for *4.4; takes [Reducibility S]; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [

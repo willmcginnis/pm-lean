@@ -169,8 +169,21 @@ Where PM prints only "Proof as in" an earlier number (14 propositions of ✱21, 
 row's `pm_text` is `analogue`, as in ✱23 and ✱25 below ([data/README.md](../data/README.md) defines the
 value). These rows said `hint` before the maintainer's ruling 63 (2026-10-14); only the value changed.
 ✱11·13 and ✱11·311 ("Proof as in ✱10·13") keep `hint`: their proofs apply the rule ✱10·13 rather than
-follow its proof. ✱22 and ✱24 print no such reference; ✱22·391, ✱22·392 ("[Similar proof]") and ✱22·69
-("[Similar proof, by ✱4·41]") name no earlier number and keep `hint`, as ✱9·361, ✱9·37 and ✱9·371 do.
+follow its proof. ✱22 and ✱24 print no "Proof as in".
+
+A reference to an earlier proof that names no number keeps `hint`, and the row's note says why: the
+reference names no number, ruling 63's `analogue` is a proof that follows an analogous earlier number, and
+the maintainer has been asked whether such references count. There are 16 such rows, found in the
+transcription's hints (`data/vol1.jsonl`); `tests/test_ledger_files.py` checks that every row whose hint
+is such a reference is `analogue` or carries the reason:
+- ✱9 (`star9f_ledger.json`, pp. 140–142): ✱9·33 and ✱9·35 ("Proof as above"); ✱9·361, ✱9·37 and ✱9·371
+  ("Similar proof"); ✱9·401, ✱9·41, ✱9·411, ✱9·42, ✱9·421, ✱9·501, ✱9·511 and ✱9·521 ("As above"). Each
+  note names what changes from the proof above it (✱9·35: ✱9·34's proof, with ✱9·22, ✱9·06 for ✱9·21,
+  ✱9·04).
+- ✱22 (`star22_ledger.json`): ✱22·391, ✱22·392 ("[Similar proof]", p. 220) and ✱22·69 ("[Similar proof,
+  by ✱4·41]", p. 223), which follow the lines of ✱22·39 and ✱22·68.
+
+✱23·391, ✱23·392 and ✱23·69 are `analogue` for ✱23's own reason (below).
 
 **✱22** (72 propositions; `star22_ledger.json`), as recorded: ✱22 19 / 53 of 72. Most of PM's hints for ✱22
 cite a single proposition of ✱3–✱5, to be carried under (x); the proof also needs the steps that PM's own

@@ -472,7 +472,7 @@
    "*9.1"
   ],
   "cited_unused": [],
-  "note": "Proof as above",
+  "note": "Proof as above; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -522,7 +522,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "Proof as above, with *9.22, *9.06 for *9.21, *9.04",
+  "note": "Proof as above, with *9.22, *9.06 for *9.21, *9.04; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -574,7 +574,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "Similar proof",
+  "note": "Similar proof; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -600,7 +600,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "Similar proof, with *9.22",
+  "note": "Similar proof, with *9.22; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -626,7 +626,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "Similar proof, with *9.22",
+  "note": "Similar proof, with *9.22; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -674,7 +674,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "As above, with *9.22, *9.06",
+  "note": "As above, with *9.22, *9.06; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -699,7 +699,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "As above",
+  "note": "As above; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -724,7 +724,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "As above, with *9.22",
+  "note": "As above, with *9.22; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -749,7 +749,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "As above",
+  "note": "As above; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -774,7 +774,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "As above, with *9.22",
+  "note": "As above, with *9.22; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines",
   "pm_text": "hint",
   "tacit": [
@@ -836,7 +836,7 @@
   "cited_unused": [
    "*1.6"
   ],
-  "note": "As above, the two quantifiers' roles exchanged",
+  "note": "As above, the two quantifiers' roles exchanged; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -894,7 +894,7 @@
   "cited_unused": [
    "*1.6"
   ],
-  "note": "As above, with *9.22",
+  "note": "As above, with *9.22; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
@@ -954,7 +954,7 @@
   "cited_unused": [
    "*1.6"
   ],
-  "note": "As above, with *9.21",
+  "note": "As above, with *9.21; pm_text stays hint: PM's reference names no number, ruling 63's analogue is an analogous earlier number, and the maintainer has been asked (docs/FIDELITY.md)",
   "fidelity": "pm-lines+extra",
   "pm_text": "hint",
   "tacit": [
