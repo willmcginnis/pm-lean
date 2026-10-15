@@ -8,34 +8,27 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 - **The proofs are re-checked by two external kernels, con-leche and nanoda, in the standing checks and
   the release check** (ruling 69; docs/VERIFICATION.md, "External checkers"). `scripts/external_checkers.py`
   fetches and builds lean4export `076e8e5`, con-leche `c26f793` and nanoda `e0d76f5` at pinned commits and
-  exports `PM` and `Checks.PinnedStatements`, Lean's core library included (167,603 declarations;
-  sha256 `0ad60837…94df` at `8dbf6e2`, the same as an earlier export of `6b95af9`, whose proofs are the same). con-leche
-  `--verified` accepts every declaration, and so does nanoda (175,574, counted its way). nanoda runs with the
-  three standard axioms and `Lean.trustCompiler` permitted and the hard error off, since Lean core declares
-  `sorryAx` and the bodies of two opaque core constants name `Lean.trustCompiler`. A scan of the export
-  is therefore part of the check: only core's seven axioms are declared, and `sorryAx`,
-  `Lean.ofReduceBool` and `Lean.ofReduceNat` are named by nothing, `Lean.trustCompiler` only by those two
-  constants. Six seeded faults, one per rule, must each be rejected: a `sorry` and a stray axiom by both
-  checkers and the scan, and `native_decide` (which declares an axiom in Lean v4.34) and direct uses of
-  `Lean.ofReduceBool`, `Lean.ofReduceNat` and `Lean.trustCompiler` by the scan. con-leche and nanoda
-  accept the last; con-leche also accepts the two before it. The step is part of `tests/run_all.sh`
-  (`SKIP_EXTERNAL=1` leaves it out; about 2.5 min once the tools are built, 6 min with the builds). The
-  release check runs it once, failing on a nonzero exit, and also requires nanoda's pin to be upstream's
-  head. `tests/test_external_checkers.py` checks the scan's rules on hand-written exports, the pins, the
-  configuration and the wiring.
-- **The external checkers' scan compares structured names, and the checkers' counts must agree with the
-  export's.** The scan flattened Lean names into dotted strings, so a one-component `«Lean.reduceBool»`
-  passed as core's `Lean.reduceBool`: an opaque of that name whose body names `Lean.trustCompiler`, and
-  an axiom `«Classical.choice» : False`, both got past the scan, and the first past both checkers too.
-  Every rule now compares names component by component. con-leche's count must equal the export's
-  declaration records (167,603), and nanoda's the export's constants with an inductive's types,
-  constructors and recursors counted separately, less the axioms it skips (175,577 − 3); before, a checker
-  reporting zero declarations passed. A Lean-side check finds no `@[implemented_by]` or `@[extern]`, which
-  the export leaves out, on the repository's declarations. Four new negative controls (the two lookalikes,
-  one per attribute), ten in all; tests of the names, and fault injections of a wrong count and a crash of
-  each checker. The step takes about 3 min once built. docs/VERIFICATION.md states every exclusion of the
-  exporter (internal names, `unsafe` and `partial` declarations, the compiler's attributes) and both
-  counting conventions.
+  exports `PM` and `Checks.PinnedStatements`, Lean's core library included (167,603 declaration records,
+  175,577 constants when an inductive's types, constructors and recursors are counted separately; sha256
+  `0ad60837…94df` at `8dbf6e2`, the same as an earlier export of `6b95af9`, whose proofs are the same). The
+  exporter leaves out internal names, `unsafe` and `partial` declarations and the compiler's attributes.
+  con-leche `--verified` must accept every declaration record (167,603) and nanoda must check every constant
+  less the three axioms it skips (175,574); any other count, or a crash, fails the step. nanoda runs with
+  the three standard axioms and `Lean.trustCompiler` permitted and the hard error off, since Lean core
+  declares `sorryAx` and the bodies of two opaque core constants name `Lean.trustCompiler`. A scan of the
+  export is therefore part of the check, comparing names component by component: only core's seven axioms
+  are declared, and `sorryAx`, `Lean.ofReduceBool` and `Lean.ofReduceNat` are named by nothing,
+  `Lean.trustCompiler` only by those two constants. A Lean-side check finds no `@[implemented_by]` or
+  `@[extern]`, which the export leaves out, on the repository's 3,444 declarations. Ten negative controls
+  must each be rejected: a `sorry` and a stray axiom (by both checkers and the scan); `native_decide`
+  (which declares an axiom in Lean v4.34) and direct uses of `Lean.ofReduceBool`, `Lean.ofReduceNat` and
+  `Lean.trustCompiler` (by the scan; con-leche accepts the last three, nanoda the last); two names that
+  print like core's but are one component (`«Classical.choice»`, `«Lean.reduceBool»`); and one each of
+  the two attributes. The step is part of `tests/run_all.sh` (`SKIP_EXTERNAL=1` leaves it out; about
+  3 min once the tools are built). The release check runs it once, failing on a nonzero exit, and also
+  requires nanoda's pin to be upstream's head. `tests/test_external_checkers.py` checks the scan's rules on
+  hand-written exports, the names, the counts (wrong counts and crashes injected for each checker), the
+  pins, the configuration and the wiring.
 - **Roadmap: Lean's own kernel, reshaped to rulings 69–72.** Item (c), its first step, is done: an existing
   verified checker, con-leche, re-checks the build in the release check. Independent kernels in CI are
   not yet there: CI leaves the external checkers out (SKIP_EXTERNAL=1) until their cost there is measured. (d) is the audit of con-leche's theorem. New items:
