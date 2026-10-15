@@ -11,7 +11,8 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   exports `PM` and `Checks.PinnedStatements`, Lean's core library included (167,603 declaration records,
   175,577 constants when an inductive's types, constructors and recursors are counted separately; sha256
   `0ad60837…94df` at `8dbf6e2`, the same as an earlier export of `6b95af9`, whose proofs are the same). The
-  exporter leaves out internal names, `unsafe` and `partial` declarations and the compiler's attributes.
+  exporter takes no internal name as a root (one is exported where an exported declaration uses it), and
+  leaves out `unsafe` and `partial` declarations and the compiler's attributes.
   con-leche `--verified` must accept every declaration record (167,603) and nanoda must check every constant
   less the three axioms it skips (175,574); any other count, or a crash, fails the step. nanoda runs with
   the three standard axioms and `Lean.trustCompiler` permitted and the hard error off, since Lean core
@@ -34,10 +35,12 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
   not yet there: CI leaves the external checkers out (SKIP_EXTERNAL=1) until their cost there is measured. (d) is the audit of con-leche's theorem. New items:
   (e) a model in plain ZF of the fragment the derivations use, which shows it consistent relative to ZF.
   Its measured input, over the kernel census's 1,289 derivation theorems and their closure
-  (`scripts/kernel_census/type_as_term.lean`): no axioms; universe levels at most 2; a type as a term
-  only as the outermost schematic `V`, apart from `PM.Style` and `PM.Style.AdmitsPredApp`, the values of
-  Style's definitions, `PM.OrderCheck` and three theorems about styles and the trap, and the generated
-  `.below` and `noConfusion` of the syntaxes. Building the model in ZF is the
+  (`scripts/kernel_census/type_as_term.lean`, universe parameters set to zero): no axioms; universe levels
+  at most 2 as measured; among the repository's own declarations, a type as a term only as a leading
+  parameter (the schematic `V`, or a recursor's motive), apart from `PM.Style` and
+  `PM.Style.AdmitsPredApp`, the values of Style's definitions, `PM.OrderCheck` and three theorems about
+  styles and the trap, and the generated `.below` and `noConfusion` of the syntaxes; Lean's library
+  constants in the closure (`HEq.rec`, `cast`, `Eq.mp` and others) are not listed. Building the model in ZF is the
   research task: ZF does not supply even one uncountable Grothendieck universe. (f) is one restricted checker for that fragment, with its
   soundness proved against ZF in Lean (f1) and in set.mm (f2), and against PM's ramified theory with (f3)
   and without (f4) reducibility. (g) is a per-proof translation from Lean to set.mm, after (f1) and (f2)
