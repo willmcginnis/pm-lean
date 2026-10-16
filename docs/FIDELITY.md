@@ -25,7 +25,8 @@ Each ledger row has a `fidelity` field:
   primitive proposition), so the earlier proof is kept.
 
 The ✱2–✱5 ledger of `PM/Replay.lean` is older and uses tags instead: `FAITHFUL` (only the propositions PM
-cites) and `REPAIRED` (at least one more, listed in `extra`). See [data/README.md](../data/README.md) for how
+cites, and the tacit steps listed in the row's `tacit` where it has one) and `REPAIRED` (at least one more,
+listed in `extra`). See [data/README.md](../data/README.md) for how
 it combines with `replay2_ledger.json`.
 
 ## Glue
@@ -124,21 +125,29 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 ## By chapter
 
 **✱2–✱5** (188 propositions; `replay_ledger.json`, `replay2_ledger.json`).
-- 112 proofs use only the propositions PM cites: 72 in `PM/Replay.lean`, 40 in `PM/Replay2.lean`.
-- 65 follow PM's proof but need at least one further proposition, each listed: 31 + 34.
-- 11 are `unchanged`: the transcription has neither Dem. lines nor a hint for them.
+- 140 proofs use only the propositions PM cites: 94 in `PM/Replay.lean`, 46 in `PM/Replay2.lean`.
+- 48 follow PM's proof but need at least one further proposition, each listed: 9 + 39.
+- None is `unchanged`. Eleven rows were, because `data/vol1.jsonl` records no Dem. lines for them; PM
+  prints a Dem. for each (✱4·7, ✱4·71, ✱4·72, ✱4·78, ✱4·79, ✱5·15, ✱5·16, ✱5·17, ✱5·71, ✱5·74, ✱5·75), and
+  the proofs now follow it.
 
 `PM/Replay.lean` replays 103 propositions as explicit `Thm` terms built from PM's own cited propositions.
-The other 85 were first proved with derived rules (`PM/Derived.lean`). 74 of these have since been rewritten
-in `PM/Replay2.lean` to follow PM's own proof. Of the 40 that are `pm-lines`, 37 also use tacit steps, and 28
-follow only a bracketed hint, because PM prints no Dem. lines for them. The 34 `pm-lines+extra` proofs need,
-for example:
+Most were found by a search; 22 that the search could only prove with further propositions (`REPAIRED`)
+have since been rewritten to follow PM's Dem. or hint with its citations alone and the tacit steps below
+(`FAITHFUL`). The 9 still `REPAIRED` need a step PM leaves tacit (✱3·2, ✱4·54, ✱5·13, ✱5·14) or a
+proposition proved only in `PM/Replay2.lean` (✱2·85, ✱4·51, ✱4·55, ✱4·67, ✱5·62).
+The other 85 were first proved with derived rules (`PM/Derived.lean`). 85 of these, all of them, have since
+been rewritten in `PM/Replay2.lean` to follow PM's own proof. Of the 46 that are `pm-lines`, 43 also use
+tacit steps, and 28 follow only a bracketed hint, because PM prints no Dem. lines for them. The 39
+`pm-lines+extra` proofs need, for example:
 - Comp (✱3·43) to join two halves into a product or an equivalence;
 - Id (✱2·08) for the trivial half `p ⊃ p` of such a join or of a replacement;
 - ✱4·11 to remove a double negation inside a larger formula;
 - ✱3·22, ✱3·26 or ✱3·27 to swap the halves of an equivalence or take an implication out of it;
 - ✱2·31, ✱2·32 or Perm to move brackets or permute a sum, and ✱4·3 to commute a product;
-- ✱2·54 to turn `∼p ⊃ q` into `p ∨ q`, and ✱3·47 to replace one factor of a product.
+- ✱2·54 to turn `∼p ⊃ q` into `p ∨ q`, and ✱3·47 to replace one factor of a product;
+- ✱4·21 to turn an equivalence round inside a line, and ✱4·38, ✱4·39 or ✱4·86 to replace a part of a
+  product, a sum or an equivalence.
 
 **✱9–✱10.** The proofs follow PM's lines, and each docstring names the steps PM leaves tacit. There is no
 per-proposition ledger for ✱9–✱10 by ✱10's method, the method these counts and

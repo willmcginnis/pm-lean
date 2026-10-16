@@ -73,14 +73,16 @@ There are two schemas.
 | Field | Meaning |
 |---|---|
 | `id` | `*N.M` |
-| `tag` | result of the replay search: `FAITHFUL`, a proof from the propositions PM cites alone; `REPAIRED`, one that also needs those in `extra`; `UNRESOLVED`, none found |
+| `tag` | result of the replay search, or of a later rewrite after PM's lines: `FAITHFUL`, a proof from the propositions PM cites alone (and the steps in `tacit`); `REPAIRED`, one that also needs those in `extra`; `UNRESOLVED`, none found |
 | `in_lean` | whether that replay is a theorem of `PM/Replay.lean` (absent for `UNRESOLVED`) |
 | `cited` | the propositions PM cites |
 | `extra` | propositions used that PM does not cite |
+| `tacit` | for a proof rewritten after PM's lines: the steps PM leaves tacit that it uses (`Syll`, `*3.03`), as in `replay2_ledger.json` |
 | `uses_unresolved`, `repair_src` | bookkeeping of the search: cited propositions that were themselves unresolved, and where a repair came from |
 
-Counts: 78 `FAITHFUL`, 67 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103 rows (72 `FAITHFUL`,
-31 `REPAIRED`): the 103 theorems of `PM/Replay.lean`.
+Counts: 100 `FAITHFUL`, 45 `REPAIRED`, 43 `UNRESOLVED`. `in_lean` is true for 103 rows (94 `FAITHFUL`,
+9 `REPAIRED`): the 103 theorems of `PM/Replay.lean`. 22 of the 94 were `REPAIRED` by the search and were
+rewritten to follow PM's Dem. or hint (they have `tacit`).
 
 **`replay2_ledger.json` and `star*_ledger.json`** (the second schema):
 
@@ -116,9 +118,9 @@ definitions as printed alone, ✱9·31 is not; the row says so, and
   `PM/Replay.lean`, for example because they use an unresolved proposition). **For these 85,
   `replay2_ledger.json` takes precedence.** For the other 103 (the proofs of `PM/Replay.lean`), use
   `replay_ledger.json`'s `tag`. So:
-  - only PM's citations: 72 (`FAITHFUL`, in `PM/Replay.lean`) + 40 (`pm-lines`) = 112;
-  - PM's lines plus extras: 31 (`REPAIRED`, in `PM/Replay.lean`) + 34 (`pm-lines+extra`) = 65;
-  - no PM proof to follow: 11 (`unchanged`). 112 + 65 + 11 = 188.
+  - only PM's citations: 94 (`FAITHFUL`, in `PM/Replay.lean`) + 46 (`pm-lines`) = 140;
+  - PM's lines plus extras: 9 (`REPAIRED`, in `PM/Replay.lean`) + 39 (`pm-lines+extra`) = 48;
+  - no PM proof to follow: none (`unchanged`). 140 + 48 = 188.
 - **✱11, ✱20, ✱21, ✱22, ✱24, ✱25.** Count rows with `category` = `assertion` for the assertion tables. The rule rows
   (✱11·07, ✱11·11, ✱11·13, ✱11·311; ✱20·62, ✱20·633; ✱21·62, ✱21·633) are proved too. PM prints ✱11's
   rules in words. ✱20's and ✱21's are numbered with ⊢, so [docs/PROGRESS.md](../docs/PROGRESS.md) counts
