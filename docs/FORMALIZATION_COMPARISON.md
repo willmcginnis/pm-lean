@@ -70,8 +70,9 @@ source (not compiled) those admitted primitives are jointly inconsistent: its ad
 `∀ x : Prop, x`, so that stand-in alone is inconsistent. Treat these as unproved.
 
 ¹ ✱2–✱5 F = 177 proofs that our ledgers record as following PM's proof: 112 use only the propositions PM cites,
-and 65 also need at least one proposition PM does not cite (listed per proof in our ledgers). The other 11 have no
-PM proof to follow (the transcription has no Dem. or hint for them). 112 + 65 + 11 = 188.
+and 65 also need at least one proposition PM does not cite (listed per proof in our ledgers). The other 11 were
+then recorded as having no PM proof to follow, because our parsed transcription data had no Dem. lines for them;
+PM prints a Dem. for each, and since 2026-10-16 they follow it ([FIDELITY.md](FIDELITY.md)). 112 + 65 + 11 = 188.
 
 ² The two missing assertions, ✱4·8 and ✱4·81, are probably present under names that lack the chapter number;
 they are not counted.

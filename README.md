@@ -293,8 +293,8 @@ and the design notes are
 
 Each ledgered proof is labelled `pm-lines` (only PM's citations and the steps
 PM leaves tacit) or `pm-lines+extra` (at least one more proposition, listed
-with the reason). Of the 188 ✱2–✱5 proofs, 112 are `pm-lines`, 65 are `pm-lines+extra`, and 11 have
-no PM proof to follow. Structural steps PM leaves unstated ("glue")
+with the reason). Of the 188 ✱2–✱5 proofs, 140 are `pm-lines` (or `FAITHFUL`) and 48 are `pm-lines+extra`
+(or `REPAIRED`); PM gives a proof to follow for every one. Structural steps PM leaves unstated ("glue")
 can be counted either way, so three counts are given for ✱11, ✱13, ✱14 and ✱20–✱25.
 See [docs/FIDELITY.md](docs/FIDELITY.md).
 

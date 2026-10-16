@@ -473,8 +473,8 @@ statements whose system is used at a family other than the one they quantify ove
 (`consistent (S : Sys twoModel.den)`, the traps at `Sys U` and `Sys Vbad`); those that quantify over
 every family inside the statement (`consistent_all`, the counter-models `not_qthm_…`) take a system at
 every family, `S : (V : Ty → Type) → Sys V`, which says at least as much, since any system of the old
-kind gives one at every family. Measured after the change, on the kernel census's closure of the
-derivation theorems (1,289 theorems, 2,727 constants): no PM statement there quantifies over a type
+kind gives one at every family. Measured after the change, at `8b40786`, on the kernel census's closure
+of the derivation theorems (1,289 theorems, 2,727 constants there): no PM statement there quantifies over a type
 below the top, also with type synonyms such as `OrderCheck` unfolded (before: `Style.mk`, `Style.rec`,
 `Style.AdmitsPredApp.mk` and `.rec`, and with synonyms unfolded also `Style.matrix` and
 `Style.lowestOrder`; of Lean core, `HEq.rec` does, over `Sort u`); no constructor field there is a type

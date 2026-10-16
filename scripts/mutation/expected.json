@@ -5,63 +5,6 @@
   },
   "unusedHypotheses": [],
   "termSurvivors": [],
-  "scriptSurvivors": [
-    {
-      "id": "PM.t4_7:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t4_71:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t4_72:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t4_78:swap p r#1",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t4_79:swap p r#1",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_71:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_71:swap p r#1",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_71:swap q r#2",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_74:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_74:swap p r#1",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_74:swap q r#2",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_75:swap p q#0",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_75:swap p r#1",
-      "class": "equivalent (renaming)"
-    },
-    {
-      "id": "PM.t5_75:swap q r#2",
-      "class": "equivalent (renaming)"
-    }
-  ],
+  "scriptSurvivors": [],
   "droppableHypotheses": []
 }

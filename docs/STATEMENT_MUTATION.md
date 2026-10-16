@@ -461,6 +461,13 @@ unfold s…; split_iff; …`) name their hypotheses by position (`hy n rfl`) and
 statement under any renaming of its variables, which is the same proposition. Every other re-elaborated
 mutant of the same eight fails.
 
+**Since 2026-10-16** the eight are explicit terms that follow PM's Dem. lines ([FIDELITY.md](FIDELITY.md)).
+A full run on that code (2026-10-16, 11 min 36 s with 8 jobs, a maximum resident set of about 1.7 GiB) gives
+the same records as the full run on the Lean code of `8b40786`, apart from the timings and the line numbers
+of the 188 statements of `PM/Replay.lean` and `PM/Replay2.lean`; in the re-elaboration none of the 1155
+tautological mutants compiles, so the 14 renamings above no longer survive, and `scripts/mutation/expected.json`
+no longer lists them.
+
 Not re-elaborated: the 31 tautological mutants of the primitive propositions ✱1·2–✱1·6 (23 of them not
 renamings). These propositions are `Thm`'s constructors and have no script. The 1155 and the 31 make up
 all 1186 tautological mutants of ✱1–✱5.
@@ -473,7 +480,7 @@ all 1186 tautological mutants of ✱1–✱5.
 | our transcription weaker or stronger than PM | an unused hypothesis PM does not have, or a mutant accepted because our statement says less than PM's | none |
 | a proof that does not use what it claims | an unused hypothesis the docstring or ledger says is used | none |
 | decision procedure instead of PM's derivation | a tautological, non-renaming mutant whose proof script still compiles | none |
-| equivalent mutant | a renaming (`swap`), or a mutant definitionally equal to the statement | 14, all script-level `swap`s (above) |
+| equivalent mutant | a renaming (`swap`), or a mutant definitionally equal to the statement | 14 script-level `swap`s in the run above; none since 2026-10-16 |
 
 Findings that have been examined are listed, with their category, in `scripts/mutation/expected.json`.
 Anything else makes the run fail, and so does an entry that `--full` no longer finds.

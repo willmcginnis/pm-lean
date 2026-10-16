@@ -3,6 +3,22 @@
 Coverage and semantic changes, newest first, from the git history. Commit hashes are given where a change is
 one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## 2026-10-16
+
+- **✱2–✱5 closer to PM's own proofs** (docs/FIDELITY.md, "By chapter"). 22 proofs of `PM/Replay.lean` that
+  needed propositions PM does not cite now follow PM's Dem. or hint with its citations alone (`FAITHFUL`), and
+  the 11 proofs of `PM/Replay2.lean` recorded as having no PM proof to follow now follow the Dem. lines PM
+  prints for them (6 `pm-lines`, 5 `pm-lines+extra`); our parsed transcription data (`data/vol1.jsonl`) has no
+  lines for these Dems because they are set `\begin {array}`, which the parser does not read. ✱2–✱5 now: 140
+  proofs with PM's citations only, 48 with extras, none without a PM proof to follow (was 112 / 65 / 11). The
+  9 still `REPAIRED` need a step PM leaves tacit or a proposition proved only in `PM/Replay2.lean`. No
+  statement changed: the export lock and the export names are byte-identical. The replay ledger gains an
+  optional `tacit` field. No ✱2–✱5 proof uses the natural-deduction layer any more, so the kernel census's
+  closure of the derivation theorems is 2,719 declarations (was 2,727). The statement mutation's 14 renamings,
+  which those natural-deduction scripts accepted, no longer survive: a full run on this code finds no
+  tautological mutant that compiles, and they are removed from `scripts/mutation/expected.json`
+  (docs/STATEMENT_MUTATION.md, "Part 2, re-elaborated").
+
 ## 2026-10-15
 
 - **The proofs are re-checked by two external kernels, con-leche and nanoda, in the standing checks and
