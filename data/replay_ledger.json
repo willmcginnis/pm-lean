@@ -79,20 +79,17 @@
  },
  {
   "id": "*2.08",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.2",
-   "*2.05"
+   "*2.05",
+   "*2.07"
   ],
-  "extra": [
-   "*1.3",
-   "*1.5"
-  ],
+  "extra": [],
+  "tacit": [],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.1",
@@ -310,20 +307,19 @@
  },
  {
   "id": "*2.32",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.4",
    "*1.5",
    "*2.3"
   ],
-  "extra": [
-   "*2.06"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "elkind"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.36",
@@ -355,24 +351,18 @@
  },
  {
   "id": "*2.38",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.4",
    "*1.6",
    "*2.05",
    "*2.06"
   ],
-  "extra": [
-   "*2.3",
-   "*2.31",
-   "*2.32",
-   "*2.37"
-  ],
+  "extra": [],
+  "tacit": [],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.4",
@@ -529,36 +519,31 @@
  },
  {
   "id": "*2.521",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.17",
    "*2.52"
   ],
-  "extra": [
-   "*1.3",
-   "*1.5",
-   "*2.15",
-   "*2.2"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.53",
-  "tag": "REPAIRED",
-  "cited": [],
-  "extra": [
+  "tag": "FAITHFUL",
+  "cited": [
    "*2.12",
    "*2.38"
   ],
+  "extra": [],
+  "tacit": [],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "elkind"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.54",
@@ -586,21 +571,18 @@
  },
  {
   "id": "*2.56",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.4",
    "*2.55"
   ],
-  "extra": [
-   "*1.6",
-   "*2.11",
-   "*2.31"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.6",
@@ -702,21 +684,18 @@
  },
  {
   "id": "*2.68",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.54",
    "*2.67"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*2.06"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*2.69",
@@ -985,17 +964,16 @@
  },
  {
   "id": "*3.24",
-  "tag": "REPAIRED",
-  "cited": [],
-  "extra": [
+  "tag": "FAITHFUL",
+  "cited": [
    "*2.11",
    "*3.14"
   ],
+  "extra": [],
+  "tacit": [],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "elkind"
-  ]
+  "repair_src": []
  },
  {
   "id": "*3.26",
@@ -1012,22 +990,18 @@
  },
  {
   "id": "*3.27",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*3.22",
    "*3.26"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*1.4",
-   "*2.36"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*3.3",
@@ -1056,22 +1030,19 @@
  },
  {
   "id": "*3.31",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.08",
    "*2.31",
    "*2.53"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*1.6"
+  "extra": [],
+  "tacit": [
+   "Syll"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*3.33",
@@ -1254,21 +1225,18 @@
  },
  {
   "id": "*4.1",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.16",
    "*2.17"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.11",
@@ -1302,22 +1270,18 @@
  },
  {
   "id": "*4.13",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.12",
    "*2.14"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*2.11",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.14",
@@ -1350,20 +1314,17 @@
  },
  {
   "id": "*4.21",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*3.22"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.22",
@@ -1390,53 +1351,46 @@
  },
  {
   "id": "*4.25",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.2",
    "*1.3"
   ],
-  "extra": [
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.3",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*3.22"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.31",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*1.4"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.32",
@@ -1449,21 +1403,18 @@
  },
  {
   "id": "*4.33",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.31",
    "*2.32"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.36",
@@ -1868,21 +1819,18 @@
  },
  {
   "id": "*4.64",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.53",
    "*2.54"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.65",
@@ -2044,43 +1992,37 @@
  },
  {
   "id": "*4.8",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.01",
    "*2.02",
    "*3.26",
    "*3.27"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.81",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.02",
    "*2.18",
    "*3.26",
    "*3.27"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*4.82",
@@ -2376,21 +2318,18 @@
  },
  {
   "id": "*5.25",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.62",
    "*2.68"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*5.3",
@@ -2475,24 +2414,20 @@
  },
  {
   "id": "*5.4",
-  "tag": "REPAIRED",
+  "tag": "FAITHFUL",
   "cited": [
    "*2.02",
    "*2.43",
    "*3.26",
    "*3.27"
   ],
-  "extra": [
-   "*1.2",
-   "*1.3",
-   "*2.4",
-   "*3.2"
+  "extra": [],
+  "tacit": [
+   "*3.03"
   ],
   "uses_unresolved": [],
   "in_lean": true,
-  "repair_src": [
-   "search"
-  ]
+  "repair_src": []
  },
  {
   "id": "*5.41",

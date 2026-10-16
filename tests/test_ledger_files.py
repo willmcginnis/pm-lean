@@ -21,7 +21,7 @@ GLUE = {"glue": list, "glue_kind": list}
 # file stem: (required fields, optional fields)
 SCHEMA = {
     "replay": ({"id": str, "tag": str, "cited": list},
-               {"extra": list, "uses_unresolved": list, "in_lean": bool, "repair_src": list}),
+               {"extra": list, "tacit": list, "uses_unresolved": list, "in_lean": bool, "repair_src": list}),
     "replay2": ({k: STAR[k] for k in STAR if k not in ("page", "category", "tacit")},
                 {"tacit": list, "scan_check": dict}),
     "star11": ({**STAR, **GLUE}, {}),
