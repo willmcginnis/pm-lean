@@ -14,6 +14,7 @@ request. Each test was checked to fail when its mistake is put back.
 | ✱14·32 was weakened from ≡ to ⊃ | `Checks/PinnedStatements.lean` (part of `lake build`): the exact statements of the propositions whose statement was corrected |
 | Claims stated more strongly than proved (now `styles_equiv`, `realPhi_every_system`, `second_clause_iff_lowestOrder`, ...) | `Checks/PinnedStatements.lean` |
 | (the list of axiom users must change only deliberately) | `test_axiom_users.py` against `expected_axiom_users.txt` |
+| (the declarations used at a universe level above `Type` must change only deliberately) | `test_kernel_census.py` against `expected_levels.txt` |
 | A count of proved propositions included primitive propositions | `test_proved_counts.py`: the docs' counts per chapter equal the ledgers' |
 | data/README.md gave the ✱20 and ✱21 ledgers 51 and 44 rows; they have 53 and 46 | `test_data_readme.py`: the rows (and the rows per category) data/README.md gives for each ledger file equal the file's |
 | AxiomCheck.lean's generator listed its files by name, so `PM/Found9/` was not covered; and it ignored `namespace` blocks, printing `ClsExpr.and` as the nonexistent `PM.and` | `test_axiomcheck_coverage.py`: the generator reads every PM/**/*.lean file, every public theorem is printed under its full name, and AxiomCheck.lean is up to date |
@@ -89,7 +90,9 @@ variables identified. Without Mathlib that part is skipped.
 `test_kernel_census.py` is a ratchet rather than a guard against a past mistake: the features of Lean's
 kernel that the PM derivations rely on ([docs/KERNEL_CENSUS.md](../docs/KERNEL_CENSUS.md)) must equal
 `expected_kernel_features.txt`, so a new one (a quotient, an axiom, a mutual or nested inductive type,
-a compiled-only constant reaching a derivation) fails until it is accepted on purpose. The test also checks
+a compiled-only constant reaching a derivation) fails until it is accepted on purpose. The same goes for
+the declarations used at a universe level above `Type` (`census.py --levels`), which must equal
+`expected_levels.txt`, and for the axiom users in `expected_axiom_users.txt`. The test also checks
 that no library file has an `example` (every check is a theorem `check_…`, which the census reads) and the
 ratchet's comparison on synthetic input.
 

@@ -19,8 +19,8 @@ python3 scripts/kernel_census/census.py --levels    # the static walk; the unive
 ## In brief
 
 These statements are read from the generated tables below. The ratchet keeps the ones about the
-features of the derivations true; it does not pin the universe levels above `Type` that constants are
-used at, which only `census.py --check` compares (see [The ratchet](#the-ratchet)).
+features of the derivations true, and the list of declarations used at a universe level above `Type`
+(see [The ratchet](#the-ratchet)).
 
 - **No dependencies besides Lean.** `lake-manifest.json` lists no packages, so Mathlib is not involved.
   The closure is the repository plus Lean core.
@@ -205,19 +205,23 @@ The figures, read as requirements:
 ## The ratchet
 
 `tests/test_kernel_census.py` runs `census.py --ratchet`, which walks (a), (f), (b), the checks and their
-closures (not the meta code) in about 15 s. It fails in two cases. The first is when the set of features of the
+closures (not the meta code) in about 15 s. It fails in three cases. The first is when the set of features of the
 three columns *derivations*, *closure of (a)* and *closure of D* differs from
 `tests/expected_kernel_features.txt`. A new feature is reported with its chain of uses, and a vanished
 one is reported too. The second is when the declarations that depend on an axiom, excluding internal
-auxiliaries, differ from `tests/expected_axiom_users.txt`. The test runs with the other Python tests in
-`tests/run_all.sh`. To accept a new feature deliberately, run `census.py --ratchet --update` and say why
-in the commit.
+auxiliaries, differ from `tests/expected_axiom_users.txt`. The third is when the declarations of the
+closure of (a) and of the closure of D used at a universe level of 2 or more (what `census.py --levels`
+lists) differ from `tests/expected_levels.txt`. A new one is reported with the nodes at that level and
+its chain of uses, and a vanished one is reported too. The test runs with the other Python tests in
+`tests/run_all.sh`. To accept a new feature or level deliberately, run `census.py --ratchet --update`
+and say why in the commit.
 
-The ratchet compares sets of features, so it keeps the closure of D free of sorts `Type 1` or higher
-(the feature `proofClosure sort.TypeN` is not expected) but does not pin which constants are used at a
-universe level above `Type`: one more declaration with `outParam.{2}` or `Eq.{2}` adds no feature. That
-list is the table of universe levels above `Type`, in the generated section, which `census.py --check`
-compares with a new run; neither `tests/run_all.sh` nor `scripts/release_check.sh` runs `--check`.
+The features alone keep the closure of D free of sorts `Type 1` or higher (the feature
+`proofClosure sort.TypeN` is not expected), but not the list of constants used at a universe level above
+`Type`: one more declaration with `outParam.{2}` or `Eq.{2}` adds no feature. `tests/expected_levels.txt`
+pins that list (48 declarations in the closure of D, 49 in the closure of (a)). Its table in the
+generated section, with the nodes and chains, is compared only by `census.py --check`, which neither
+`tests/run_all.sh` nor `scripts/release_check.sh` runs.
 
 ## The census
 
