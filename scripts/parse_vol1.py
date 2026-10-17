@@ -37,6 +37,8 @@ def rows(tex):
         hint, rest = (parts[0].strip(), '&'.join(parts[1:])) if len(parts) > 1 else ('', parts[0])
         lab = re.search(r'\\text\{\((\d+)\)\}', rest)
         rest = re.sub(r'\\qquad\s*\\text\{\(\d+\)\}', '', rest).replace('&', ' ').strip()
+        if hint and not rest:  # the row's only `&` comes before its label: the first cell is the line itself
+            hint, rest = '', hint
         out.append({"hint": hint, "formula": rest, "label": lab.group(1) if lab else None})
     return out
 HINT = re.compile(r'\[.*\]|\\left\s*\[.*\\right\s*\]|\\text\{\[.*\]\}', re.S)
