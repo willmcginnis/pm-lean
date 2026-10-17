@@ -29,7 +29,7 @@ def inline_hint(stmt):
     m = re.search(r'\\quad\s*\\left\[(.*)\\right\]\s*$', stmt, re.S) or re.search(r'\\quad\s*\[(.*)\]\s*$', stmt, re.S)
     return (stmt[:m.start()].strip(), m.group(1).strip()) if m else (stmt, None)
 def rows(tex):
-    m = re.search(r'\\begin\{array\}\{[^}]*\}(.*)\\end\{array\}', tex, re.S)
+    m = re.search(r'\\begin\s*\{array\}\{[^}]*\}(.*)\\end\s*\{array\}', tex, re.S)  # some are set `\begin {array}`
     if not m: return []
     out = []
     for r in [x.strip() for x in re.split(r'\\\\', m.group(1)) if x.strip()]:
@@ -38,6 +38,23 @@ def rows(tex):
         lab = re.search(r'\\text\{\((\d+)\)\}', rest)
         rest = re.sub(r'\\qquad\s*\\text\{\(\d+\)\}', '', rest).replace('&', ' ').strip()
         out.append({"hint": hint, "formula": rest, "label": lab.group(1) if lab else None})
+    return out
+HINT = re.compile(r'\[.*\]|\\left\s*\[.*\\right\s*\]|\\text\{\[.*\]\}', re.S)
+def display_rows(tex):
+    """A Dem. set as align, align* or aligned, or as one displayed line. Their columns are placed for the eye,
+    so cells are not split by position: a first cell in brackets is the hint, a last cell (n) the label, and
+    the other cells joined are the formula."""
+    body = strip_delims(tex)
+    m = re.fullmatch(r'\\begin\{(align\*?|aligned)\}(.*)\\end\{\1\}', body, re.S)
+    if not m and '\\begin' in body: return []
+    out = []
+    for r in re.split(r'\\\\', m.group(2)) if m else [body]:
+        cells = [c.strip() for c in r.split('&') if c.strip()]
+        if not cells: continue
+        lab = re.fullmatch(r'(?:\\text\{)?\((\d+)\)\}?', cells[-1])
+        if lab: cells.pop()
+        hint = cells.pop(0) if len(cells) > 1 and HINT.fullmatch(cells[0]) else ''
+        out.append({"hint": hint, "formula": re.sub(r'\s*\\quad$', '', ' '.join(cells)), "label": lab.group(1) if lab else None})
     return out
 cands = collections.defaultdict(list)
 for i, m in enumerate(labels):
@@ -50,6 +67,9 @@ for i, m in enumerate(labels):
     stmt, ih = inline_hint(strip_delims(tx[0]))
     has_dem = bool(re.search(r'<i>Dem\.</i>', seg))
     proof = [r for x in tx[1:] for r in rows(x)] if has_dem else []
+    if has_dem and not proof:  # no array: read the display the Dem. opens with, if it opens with one
+        after = texs(seg[seg.find('<i>Dem.</i>'):])
+        proof = display_rows(after[0]) if after and after[0].lstrip().startswith('\\[') else []
     is_def = bool(re.search(r'\bDf\b', stmt)) or bool(re.search(r'\bDf\.?\s*</p>', seg[:600]))
     is_pp = bool(re.search(r'\bPp\b', seg[:800]))
     cands[f"*{m.group(1)}.{m.group(2)}"].append({
