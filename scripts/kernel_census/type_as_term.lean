@@ -8,7 +8,8 @@
 -- whose statement concludes `Thm`, `QThm` or `Thm9` (the census's `proofTheorems`); the closure follows
 -- the constants a declaration's type and value name, an inductive type's constructors and recursors,
 -- a constructor's type, a recursor's types (the census's `proofClosure`). The module lists below are
--- the census's and must be kept equal to them. For comparison it also gives the set an earlier
+-- the census's and must be kept equal to them (tests/test_type_as_term_modules.py checks they are).
+-- For comparison it also gives the set an earlier
 -- measurement used: the theorems with those conclusions in the derivation modules alone.
 --
 -- Measured over the closure: (1) constants whose type binds a type (a binder whose type ends in a sort

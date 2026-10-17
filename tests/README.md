@@ -15,6 +15,7 @@ request. Each test was checked to fail when its mistake is put back.
 | Claims stated more strongly than proved (now `styles_equiv`, `realPhi_every_system`, `second_clause_iff_lowestOrder`, ...) | `Checks/PinnedStatements.lean` |
 | (the list of axiom users must change only deliberately) | `test_axiom_users.py` against `expected_axiom_users.txt` |
 | (the declarations used at a universe level above `Type` must change only deliberately) | `test_kernel_census.py` against `expected_levels.txt` |
+| (`scripts/kernel_census/type_as_term.lean` copies the census's module groups, which must stay equal) | `test_type_as_term_modules.py`: its `derivationModules`, `foundationModules` and `metatheoryModules` equal `KernelCensus.lean`'s, read as text |
 | A count of proved propositions included primitive propositions | `test_proved_counts.py`: the docs' counts per chapter equal the ledgers' |
 | data/README.md gave the ✱20 and ✱21 ledgers 51 and 44 rows; they have 53 and 46 | `test_data_readme.py`: the rows (and the rows per category) data/README.md gives for each ledger file equal the file's |
 | AxiomCheck.lean's generator listed its files by name, so `PM/Found9/` was not covered; and it ignored `namespace` blocks, printing `ClsExpr.and` as the nonexistent `PM.and` | `test_axiomcheck_coverage.py`: the generator reads every PM/**/*.lean file, every public theorem is printed under its full name, and AxiomCheck.lean is up to date |
