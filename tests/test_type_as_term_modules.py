@@ -16,8 +16,29 @@ TYPE_AS_TERM = ROOT / "scripts" / "kernel_census" / "type_as_term.lean"
 GROUPS = ["derivationModules", "foundationModules", "metatheoryModules"]
 
 
+def strip_comments(text):
+    """The Lean text without its comments: `--` to the end of the line, and `/- … -/`, which nest."""
+    out, i, depth, n = [], 0, 0, len(text)
+    while i < n:
+        if depth == 0 and text.startswith("--", i):
+            j = text.find("\n", i)
+            i = n if j < 0 else j
+        elif text.startswith("/-", i):
+            depth, i = depth + 1, i + 2
+        elif depth and text.startswith("-/", i):
+            depth, i = depth - 1, i + 2
+        elif depth:
+            i += 1
+        else:
+            out.append(text[i])
+            i += 1
+    return "".join(out)
+
+
 def module_lists(text):
-    """Each `def <name>Modules : List Name := [...]` of a Lean file, as name → list of modules."""
+    """Each `def <name>Modules : List Name := [...]` of a Lean file, as name → list of modules. Comments are
+    removed first, so a module commented out of a list is not counted as listed."""
+    text = strip_comments(text)
     return {m.group(1): re.findall(r"`([\w.]+)", m.group(2))
             for m in re.finditer(r"^def (\w+Modules) : List Name := \[(.*?)\]", text, re.M | re.S)}
 
@@ -69,6 +90,14 @@ class ModuleLists(unittest.TestCase):
                       compare(self.census, added))
         moved = self.copy.replace("`PM.Trap,", "", 1).replace("`PM.Chain,", "`PM.Chain, `PM.Trap,", 1)
         self.assertEqual(len(compare(self.census, moved)), 2, compare(self.census, moved))
+
+    def test_a_module_commented_out_is_not_listed(self):
+        missing = "derivationModules: PM.Star25 is in KernelCensus.lean, not in type_as_term.lean"
+        for commented in (self.copy.replace("`PM.Star25,", "/- `PM.Star25, -/", 1),
+                          self.copy.replace("`PM.Star25,", "/- /- nested -/ `PM.Star25, -/", 1),
+                          self.copy.replace("`PM.Star25,", "-- `PM.Star25,\n", 1)):
+            self.assertNotEqual(commented, self.copy)
+            self.assertIn(missing, compare(self.census, commented))
 
 
 if __name__ == "__main__":
