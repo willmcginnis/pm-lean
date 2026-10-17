@@ -488,7 +488,8 @@ types in no-confusion constructions and decidable equality (`PM.F9.PF.noConfusio
 parameter V), what Lean generates for structural recursion and constructor elimination (`PM.Ty.below`,
 `PM.F.below` …), and the
 trap's degenerate family `PM.Vbad`, defined by cases into `Type` (`PM.Ty.casesOn.{2}`); the census
-lists them (docs/KERNEL_CENSUS.md, "universe levels above `Type`"), and its ratchet does not pin them.
+lists them (docs/KERNEL_CENSUS.md, "universe levels above `Type`"), and its ratchet now pins them
+(tests/expected_levels.txt).
 The theorems derived, StyleCheck's table and RedCheck's report are unchanged.
 
 ## 2. What was built

@@ -127,9 +127,10 @@ maintainer's decision of 2026-10-12 ([TYPES_DESIGN.md](TYPES_DESIGN.md) §5, Q7)
 **✱2–✱5** (188 propositions; `replay_ledger.json`, `replay2_ledger.json`).
 - 140 proofs use only the propositions PM cites: 94 in `PM/Replay.lean`, 46 in `PM/Replay2.lean`.
 - 48 follow PM's proof but need at least one further proposition, each listed: 9 + 39.
-- 0 are `unchanged`: the transcription's data (`data/vol1.jsonl`) records no Dem. lines for eleven rows,
+- 0 are `unchanged`: the transcription's data (`data/vol1.jsonl`) recorded no Dem. lines for eleven rows,
   which were `unchanged` for that reason, but PM prints a Dem. for each (✱4·7, ✱4·71, ✱4·72, ✱4·78,
-  ✱4·79, ✱5·15, ✱5·16, ✱5·17, ✱5·71, ✱5·74, ✱5·75), and the proofs now follow it.
+  ✱4·79, ✱5·15, ✱5·16, ✱5·17, ✱5·71, ✱5·74, ✱5·75), and the proofs now follow it. The parser now reads
+  these Dems, which are set `\begin {array}` (with a space).
 
 `PM/Replay.lean` replays 103 propositions as explicit `Thm` terms built from PM's own cited propositions.
 Most were found by a search; 22 that the search could only prove with further propositions (`REPAIRED`)

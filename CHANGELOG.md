@@ -3,6 +3,22 @@
 Coverage and semantic changes, newest first, from the git history. Commit hashes are given where a change is
 one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 
+## 2026-10-17
+
+- **Universe levels ratcheted** (docs/KERNEL_CENSUS.md). `scripts/kernel_census/census.py --ratchet` now also
+  compares the declarations used at a universe level above `Type` (48 in the closure of D, 49 in the closure
+  of (a)) with `tests/expected_levels.txt`, so a new one fails the census check like a new kernel feature,
+  and a vanished one fails too. A new test checks that `scripts/kernel_census/type_as_term.lean` measures
+  the census's own module groups.
+- **Transcription data: the Dem. lines of 34 more records.** `scripts/parse_vol1.py` now also reads Dems set
+  `\begin {array}` (with a space), `align`, `align*` or `aligned`, and a Dem. of one displayed line. In
+  `data/vol1.jsonl`, 34 of the 40 records with a Dem. and no lines gain them (✱2·53, ✱3·24, 11 of ✱4–✱5, 12
+  of ✱9, 4 of ✱20, ✱40·71, ✱73·28, ✱73·801, ✱73·81, ✱96·502); the other 6 give the Dem. in words. No other
+  field of any record changed, and `PM/Statements.lean` regenerates unchanged.
+- **The second edition prints the three apparent slips too** (docs/FIDELITY.md). ✱4·32, ✱4·43 and ✱10·27
+  read as in the 1910 print in a 1963 impression of Vol. I of the second edition, which has no list of
+  errata.
+
 ## 2026-10-16
 
 - **✱2–✱5 closer to PM's own proofs** (docs/FIDELITY.md, "By chapter"). 22 proofs of `PM/Replay.lean` that

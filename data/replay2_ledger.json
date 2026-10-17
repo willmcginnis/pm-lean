@@ -805,7 +805,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -824,7 +824,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -847,7 +847,7 @@
    "*4.38"
   ],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 126). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -943,7 +943,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 127). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 127). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -964,7 +964,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 127). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 127). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -1122,7 +1122,7 @@
    "*1.4"
   ],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -1151,7 +1151,7 @@
    "*3.22"
   ],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -1176,7 +1176,7 @@
    "*4.31"
   ],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 129). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -1722,7 +1722,7 @@
    "*4.86"
   ],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines+extra",
   "pm_text": "dem",
   "tacit": [
@@ -1743,7 +1743,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
@@ -1765,7 +1765,7 @@
   ],
   "extra_used": [],
   "cited_unused": [],
-  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl records no lines for it (scripts/parse_vol1.py reads Dem. lines set in `\\begin{array}`, and this Dem. is set in `\\begin {array}`, with a space); the row was `unchanged` for that reason until the text was re-checked.",
+  "note": "explicit Hilbert term, one Lean line per line of PM's Dem. (p. 131). The Dem. is in the Gutenberg text, but data/vol1.jsonl recorded no lines for it until scripts/parse_vol1.py read Dem. lines set in `\\begin {array}` (with a space), as this one is; the row was `unchanged` for that reason until the text was re-checked.",
   "fidelity": "pm-lines",
   "pm_text": "dem",
   "tacit": [
