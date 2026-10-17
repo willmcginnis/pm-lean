@@ -298,13 +298,15 @@ Following PM's lines line by line turned up these points. The errata themselves 
   is not a formula. The 1925 second edition has not been checked.
 - **Apparent slips in the 1910 print itself** (the ebook follows the print):
   - ✱4·32 (p. 123): line (1) cites ✱4·12 for a step that is in fact ✱2·03 taken both ways. Awaiting a
-    human check.
+    human check. The second edition prints the same line (p. 118).
   - ✱4·43 (p. 125): ✱2·65 (∼p/p) yields ∼(∼p), but the line prints p. PM drops the double negation
-    without citing ✱2·14. Awaiting a human check.
+    without citing ✱2·14. Awaiting a human check. The second edition prints the same (p. 119).
   - ✱10·27 (p. 150): the print cites ✱10·1 for the step that turns y into an apparent variable, which is
-    ✱10·11. This is possibly a citation slip. It has not been checked against the 1925 edition.
+    ✱10·11. This is possibly a citation slip. The second edition cites ✱10·1 there too (p. 144).
 
-  No published erratum touches pp. 123–125. The 1925 second edition has not been checked.
+  No published erratum touches pp. 123–125. The second edition was checked in a 1963 Cambridge University
+  Press impression of Vol. I (text of 1925; its printing history reads "Second Edition 1927"): it prints
+  all three places as the 1910 print does, and has no list of errata.
 - **✱23·02** (p. 226). The print has `R ∩̇ S = x̂ŷ(xRy . xSy)`; Gutenberg #78050 drops the R. The print is
   followed (`QF.relInter`, PM/Star23.lean). This is entry 9 of the text audit's Vol I list, checked against
   the scan.

@@ -137,7 +137,8 @@ later as a separate file that proves ✱9's claim for prefixes of fixed length.
 - ✱10·311: vol1.jsonl has "(x)φx.χx"; the print has "(x) : φx . χx". Same meaning here.
 - ✱10·542: the print omits the ✱ before the number.
 - ✱10·27 (p. 150): the print cites "[✱10·1]" for the line that turns y into an apparent variable. That
-  step is ✱10·11. The Lean proof uses ✱10·11. Possibly a PM slip; not checked against the 1925 edition.
+  step is ✱10·11. The Lean proof uses ✱10·11. Possibly a PM slip; the second edition cites ✱10·1 there
+  too (docs/FIDELITY.md).
 
 ## 7. Next
 
