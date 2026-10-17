@@ -13,8 +13,10 @@ one commit. Current counts are in [docs/PROGRESS.md](docs/PROGRESS.md).
 - **Transcription data: the Dem. lines of 34 more records.** `scripts/parse_vol1.py` now also reads Dems set
   `\begin {array}` (with a space), `align`, `align*` or `aligned`, and a Dem. of one displayed line. In
   `data/vol1.jsonl`, 34 of the 40 records with a Dem. and no lines gain them (✱2·53, ✱3·24, 11 of ✱4–✱5, 12
-  of ✱9, 4 of ✱20, ✱40·71, ✱73·28, ✱73·801, ✱73·81, ✱96·502); the other 6 give the Dem. in words. No other
-  field of any record changed, and `PM/Statements.lean` regenerates unchanged.
+  of ✱9, 4 of ✱20, ✱40·71, ✱73·28, ✱73·801, ✱73·81, ✱96·502); the other 6 give the Dem. in words. A line
+  whose only `&` comes before its label, which the parser recorded as hint with an empty formula, is now
+  the formula, as a line without `&` is: 251 lines of 115 records (114 that already had lines, and ✱5·16).
+  No other field of any record changed, and `PM/Statements.lean` regenerates unchanged.
 - **The second edition prints the three apparent slips too** (docs/FIDELITY.md). ✱4·32, ✱4·43 and ✱10·27
   read as in the 1910 print in a 1963 impression of Vol. I of the second edition, which has no list of
   errata.
